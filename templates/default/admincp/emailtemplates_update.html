@@ -1,0 +1,121 @@
+<div id="v3body4"> 
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+
+	<div id="content">
+
+		<h1>{_email_template_management}</h1><br />
+			<div class="tab-pane" id="updateemailtemplate">
+				<div class="tab-pane">
+
+					<loop name="email_languages">
+
+						<div class="tab-page">
+							<h2 class="tab">{language}</h2>
+
+							<form method="post" action="{ilpage[settings]}" name="updateemailtemplate" accept-charset="UTF-8" style="margin: 0px;">
+								<input type="hidden" name="cmd" value="emailtemplates" />
+								<input type="hidden" name="do" value="_update-email-template" />
+								<input type="hidden" name="return" value="{ilpage[settings]}?cmd=emailtemplates&amp;subcmd=_update-email-template&amp;id={id}&amp;page={page}" />
+								<input type="hidden" name="id" value="{id}" />
+								<input type="hidden" name="langshort" value="{langshort}" />
+
+								<div class="block-wrapper">
+									<div class="block">
+
+										<div class="block-top">
+											<div class="block-right">
+												<div class="block-left"></div>
+											</div>
+										</div>
+
+										<div class="block-header"><span class="blue" style="float:right">{language}</span>{_template}: <span class="blue">{name}</span></div>
+										<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_you_are_currently_modifying_an_existing_email_template}</div></div>
+										<div class="block-content" style="padding:0px">
+
+											<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+												<tr class="alt1"> 
+													<td><div style="padding-bottom:3px"><strong>{_product}</strong></div><div>{products_pulldown}</div></td>
+												</tr>
+												<tr>
+													<td class="alt1"><div style="padding-bottom:3px"><strong>{_department}</strong></div><div>{department_pulldown}</div>
+													</td>
+												</tr>
+
+												<tr class="alt1">
+													<td><div style="padding-bottom:3px"><strong>{_email_template_type}</strong></div>
+
+														<label for="global"><input name="type" id="global" type="radio" value="global" {typeglobal} />
+															<span class="gray">{_global_email_template_nonservice_or_product_related}</span></label><br />
+														<label for="service"><input name="type" id="service" type="radio" value="service" {typeservice} />
+															<span class="gray">{_service_related_email_template}</span></label><br />
+														<label for="product"><input name="type" id="product" type="radio" value="product" {typeproduct} />
+															<span class="gray">{_product_related_email_template}</span></label>
+													</td>
+												</tr>
+												<tr class="alt1">
+													<td><div style="padding-bottom:3px"><strong>{_specific_user_type}</strong></div>
+
+														<label for="general"><input name="usertype" id="usertype_general" type="checkbox" value="general" {usertypegeneral} onclick="if (fetch_js_object('usertype_general').checked==false){fetch_js_object('usertype_buyer').disabled=false;fetch_js_object('usertype_seller').disabled=false;fetch_js_object('usertype_admin').disabled=false;}else {fetch_js_object('usertype_buyer').checked=false;fetch_js_object('usertype_seller').checked=false;fetch_js_object('usertype_admin').checked=false;fetch_js_object('usertype_buyer').disabled=true;fetch_js_object('usertype_seller').disabled=true;fetch_js_object('usertype_admin').disabled=true;}" />
+															<span class="gray">{_general_specific_email}</span></label><br />
+														<label for="buyer"><input name="usertype" id="usertype_buyer" type="checkbox" value="buyer" {usertypebuyer} />
+															<span class="gray">{_buyer_specific_email}</span></label><br />
+														<label for="seller"><input name="usertype" id="usertype_seller" type="checkbox" value="seller" {usertypeseller} />
+															<span class="gray">{_seller_specific_email}</span></label>
+														<br />
+														<label for="admin"><input name="usertype" id="usertype_admin" type="checkbox" value="admin" {usertypeadmin} />
+															<span class="gray">{_admin_specific_email}</span></label>
+													</td>
+												</tr>
+												<tr class="alt1"> 
+													<td><div style="padding-bottom:3px"><strong>{_unique_email_identifier_connector_to_php}</strong></div><div><input type="text" name="varname" value="{varname}" style="width:98%" class="input" readonly="readonly" /></div></td>
+												</tr>
+												<tr class="alt1"> 
+													<td><div style="padding-bottom:3px"><strong>{_email_template_name}</strong></div><div><input type="text" name="name" value="{name}" style="width:98%" class="input" /></div></td>
+												</tr>
+												<tr class="alt1"> 
+													<td valign="top"><div style="padding-bottom:3px"><strong>{_email_subject}</strong></div><div><noparse><input type="text" name="subject" value="{subject}" style="width:98%" class="input" /></noparse></div></td>
+												</tr>
+												<tr class="alt1"> 
+													<td valign="top"><div style="padding-bottom:3px"><strong>{_email_objects_available_for_use_within_email_message_body} </strong></div><div><noparse><textarea name="objects" id="objects" style="font: 10pt consolas, 'courier new', courier, monospace; width: 98%; height: 100px; background-color: #fff; color:#222;" class="input" wrap="physical">{emailobjects}</textarea></noparse></div></td>
+												</tr>
+												<tr class="alt1"> 
+													<td valign="top"><div style="padding-bottom:3px"><strong>{_email_message_body}</strong></div><div><noparse>{message}</noparse></div>
+														
+													</td>
+												</tr>
+                                                <tr class="alt3"> 
+													<td valign="top"><input name="ishtml" id="ishtml" type="checkbox" value="1" {ishtml} /> <strong>{_this_email_is_formatted_as_html}</strong>
+														
+													</td>
+												</tr>
+												<tr class="alt2_top">
+													<td><input type="submit" name="save" style="font-size:15px" value=" {_save} " onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" />&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[settings]}?cmd=emailtemplates&amp;page={page}">{_cancel}</a></span></td>
+												</tr>
+											</table>
+
+										</div>
+
+										<div class="block-footer">
+											<div class="block-right">
+												<div class="block-left"></div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+
+							</form>
+
+						</div>
+					</loop name="email_languages">
+				</div>
+			</div>
+	</div>
+</div>

@@ -1,0 +1,70 @@
+<form method="post" action="{ilpage[invoicepayment]}" name="generateinvoice" accept-charset="UTF-8" onsubmit="return validatep2binvoice(this);" style="margin:0px">
+<input type="hidden" name="cmd" value="_do-generate-preview" />
+<input type="hidden" name="project_id" value="{project_id}" />
+<input type="hidden" name="buyer_id" value="{buyer_id}" />
+<input type="hidden" name="seller_id" value="{seller_id}" />
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_invoice_generation_to} {customer}</div>
+			
+			<div class="block-content-yellow"><div class="smaller">{_generating_invoices_cost_txnfee_of_the_total_invoice_cost_upon_payment}</div></div>
+			<div class="block-content">
+				
+				<table width="100%" border="0" cellspacing="0" cellpadding="12">
+				<tr> 
+					<td width="19%" align="right" class="alt1"><span class="gray">{_regarding_listing}</span></td>
+					<td width="81%" align="left" nowrap="nowrap" class="alt1">{project_title}</td>
+				</tr>
+				<tr> 
+					<td width="19%" align="right" class="alt1"><span class="gray">{_amount}</span></td>
+					<td width="81%" align="left" nowrap="nowrap" class="alt1"><span style="float:left; padding-top:3px; padding-right:3px">{currency}</span><input type="text" name="amount" value="{session_amount}" onkeypress="return noenter()" size="8" style="font-family: verdana" /> <img name="amounterror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></td>
+				</tr>
+				<tr> 
+					<td width="19%" align="right" class="alt1"><span class="gray">{_payment_status} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_payment_status'] + '</strong></div><div>' + phrase['_if_your_buyer_has_already_paid_for_additional_work_you_can_generate'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span></td>
+					<td width="81%" align="left" nowrap="nowrap" class="alt1">{paymentstatuspulldown}</td>
+				</tr>
+				<tr> 
+					<td width="19%" align="right" class="alt1"><span class="gray">{_my_payment_method} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_my_payment_method'] + '</strong></div><div>' + phrase['_for_convenience_we_can_provide_you_with_quick_and_easy_electronic_invoicing'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span></td>
+					<td width="81%" align="left" nowrap="nowrap" class="alt1">{paymentmethodpulldown}</td>
+				</tr>
+				<if condition="isset($show['p2b_transaction_fee']) AND $show['p2b_transaction_fee']">
+				<tr> 
+					<td align="right" class="alt1" valign="top"><span class="gray">{_transaction_fee}</span></td>
+					<td nowrap="nowrap" align="left" class="alt1"><span style="font-size:14px">{txnfee}</span>
+					<div style="padding-top:4px"><label for="instantpay"><input type="hidden" name="instantpay" value="1" /><input type="checkbox" id="instantpay" name="faker" value="1" checked="checked" disabled="disabled" /> <span class="gray">{_auto_pay_transaction_fee_for_the_generation_of_this_new_invoice_instantly}</span></label></div></td>
+				</tr>
+				</if>
+				<if condition="isset($show['other_invoices']) AND $show['other_invoices']"> 
+				<tr> 
+					<td align="right" class="alt1" nowrap="nowrap" valign="top"><span class="gray">{_invoices_associated_with_this_rfp} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_invoices_associated_with_this_rfp'] + '</strong></div><div>' + phrase['_when_you_become_awarded_for_a_project_and_the_buyer_scope_changes'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span></span></td>
+					<td nowrap="nowrap" align="left" class="alt1"><span class="blue">{invoiceassociation}</span></td>
+				</tr>
+				</if>
+				<tr> 
+					<td align="right" valign="top"><span class="gray">{_comments_to_buyer}</span></td>
+					<td align="left"><textarea name="comments" style="width: 450px; height: 84px; font-family: Verdana"></textarea>
+					<div style="padding-top:4px" class="gray">{_use_this_message_area_to_give_your_buyer_specific_instructions_on_how_you}</div></td>
+				</tr>
+				
+			  </table>
+			  
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div style="margin-top:3px"><input type="submit" value=" {_preview} " class="buttons" style="font-size:15px" /></div>
+</form>

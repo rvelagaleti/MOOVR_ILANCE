@@ -1,0 +1,131 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+<div class="bigtabsheader">
+<ul>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}">{_accounting}</a></li>
+    <if condition="empty($_SESSION['ilancedata']['user']['active']) OR $_SESSION['ilancedata']['user']['active'] == 'no' OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'deposit') == 'no'"><else />
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=deposit">{_deposit}</a></li>
+    </if>
+    <if condition="empty($_SESSION['ilancedata']['user']['active']) OR $_SESSION['ilancedata']['user']['active'] == 'no' OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'withdraw') == 'no'"><else />
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=withdraw">{_withdraw}</a></li>
+    </if>
+    <li title="" class="on"><a href="{https_server}{ilpage[accounting]}?cmd=transactions">{_transactions}</a></li>	
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=sch-transactions">{_scheduled_transactions}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<div class="block-wrapper">
+    
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header">{_transaction_history}</div>
+            <div class="block-content-yellow" style="padding:9px"><span>
+<form name="sortswitch" method="get" action="{https_server}{ilpage[accounting]}" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="transactions" />
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td class="smaller">{_period}:&nbsp;</td>
+    <td>
+    <select name="period" class="smaller" style="font-family: verdana">
+        <option value="-1" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == -1">selected="selected"</if>>{_any_date}</option>
+        <option value="7" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 7">selected="selected"</if>>{_last_24_hours}</option>
+        <option value="13" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 13">selected="selected"</if>>{_last_7_days}</option>
+        <option value="14" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 14">selected="selected"</if>>{_last_14_days}</option>
+        <option value="15" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 15">selected="selected"</if>>{_last_30_days}</option>
+        <option value="16" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 16">selected="selected"</if>>{_last_60_days}</option>
+        <option value="17" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 17">selected="selected"</if>>{_last_90_days}</option>
+    </select>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    
+    <td class="smaller">{_status}:&nbsp;</td>
+    <td>
+    <select name="status" class="smaller" style="font-family: verdana">
+        <option value="" <if condition="!isset($ilance->GPC['status']) OR empty($ilance->GPC['status'])">selected="selected"</if>>{_all}</option>
+        <option value="paid" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'paid'">selected="selected"</if>>{_paid}</option>
+        <option value="unpaid" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'unpaid'">selected="selected"</if>>{_unpaid}</option>
+        <option value="overdue" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'overdue'">selected="selected"</if>>{_over_due}</option>
+        <option value="cancelled" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'cancelled'">selected="selected"</if>>{_cancelled}</option>
+    </select>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    
+    <td class="smaller">{_type}:&nbsp;</td>
+    <td>
+    <select name="invoicetype" class="smaller" style="font-family: verdana">
+        <option value="" <if condition="!isset($ilance->GPC['invoicetype']) OR isset($ilance->GPC['invoicetype']) AND $ilance->GPC['invoicetype'] == ''">selected="selected"</if>>{_all}</option>
+        <option value="subscription" <if condition="isset($ilance->GPC['invoicetype']) AND $ilance->GPC['invoicetype'] == 'subscription'">selected="selected"</if>>{_subscription}</option>
+        <option value="commission" <if condition="isset($ilance->GPC['invoicetype']) AND $ilance->GPC['invoicetype'] == 'commission'">selected="selected"</if>>{_commission}</option>
+        <option value="p2b" <if condition="isset($ilance->GPC['invoicetype']) AND $ilance->GPC['invoicetype'] == 'p2b'">selected="selected"</if>>{_provider_generated}</option>
+        <option value="credential" <if condition="isset($ilance->GPC['invoicetype']) AND $ilance->GPC['invoicetype'] == 'credential'">selected="selected"</if>>{_credential}</option>
+        <option value="debit" <if condition="isset($ilance->GPC['invoicetype']) AND $ilance->GPC['invoicetype'] == 'debit'">selected="selected"</if>>{_debit}</option>
+        <option value="credit" <if condition="isset($ilance->GPC['invoicetype']) AND $ilance->GPC['invoicetype'] == 'credit'">selected="selected"</if>>{_credit}</option>
+    </select>&nbsp;&nbsp;&nbsp;</td>
+    <td class="smaller">{_per_page}:&nbsp;</td>
+    <td>
+    <select name="pp" class="smaller" style="font-family: verdana">
+        <option value="10" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '10'">selected="selected"</if>>10</option>
+        <option value="50" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '50'">selected="selected"</if>>50</option>
+        <option value="100" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '100'">selected="selected"</if>>100</option>
+        <option value="500" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '500'">selected="selected"</if>>500</option>
+        <option value="1000" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '1000'">selected="selected"</if>>1000</option>
+    </select>&nbsp;&nbsp;&nbsp;</td>
+    <td><input type="submit" value="{_go}" class="buttons_smaller" /></td>
+</tr>
+</table>
+</form>
+</span></div>
+<div class="block-content" style="padding:0px">
+<form method="post" action="{ilpage[accounting]}" name="transactionhistoryaction" accept-charset="UTF-8" style="margin: 0px;" id="masspayment">
+<input type="hidden" name="cmd" value="transactions" />
+<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+<tr class="alt2">
+    <td width="3%" nowrap="nowrap"><if condition="isset($show['no_rows_returned']) AND $show['no_rows_returned']"><input type="checkbox" name="checkall" onclick="check_uncheck_all('masspayment');" disabled="disabled" /><else /><input type="checkbox" name="checkall" onclick="check_uncheck_all('masspayment');" /></if></td>
+    <td colspan="2">{_description}</td> 
+    <td width="6%">{_status}</td>
+    <td width="6%">{_total}</td>
+    <td width="6%">{_paid}</td>
+    <td width="8%">{_action}</td>
+</tr>
+<loop name="transaction_rows"><tr class="alt1" valign="top">
+    <td align="center" class="alt2">{cb}</td>
+    <td colspan="2">
+        <div class="blue"><!--<span style="float:left; padding-right:6px"><a href="{https_server}{ilpage[invoicepayment]}?cmd=view&amp;txn={transactionid}">{icon}</a></span>--><a href="{https_server}{ilpage[invoicepayment]}?cmd=view&amp;txn={transactionid}">{description}</a></div>
+        <div class="smaller black" style="padding-top:9px"><strong>{_created}:</strong> <span>{createdate}</span></div>
+        <div class="smaller black" style="padding-top:3px"><strong>{_paid_date}:</strong> <span>{paiddate}</span></div>
+        <div class="smaller black" style="padding-top:3px"><strong>{invoicetype}:</strong> <span>{transactionid}</span></div>
+    </td> 
+    <td nowrap="nowrap"><div class="smaller black">{status}</div></td>
+    <td nowrap="nowrap" class="alt2"><div class="smaller black">{total}</div><!--<div class="smaller black" style="padding-top:4px">{_due}: <span class="gray">{duedate}</span></div>--></td>
+    <td nowrap="nowrap"><div class="smaller black">{paid}</div><!--<div class="smaller black" style="padding-top:4px">{_paid}: <span class="gray">{paiddate}</span></div>--></td>
+    <td nowrap="nowrap"><div class="smaller blue">{action}</div></td>
+</tr></loop name="transaction_rows"> 
+<if condition="isset($show['no_rows_returned']) AND $show['no_rows_returned']"><tr> 
+    <td colspan="8" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_transactions_recorded}</div></td>
+</tr><else /><tr class="alt2_top"> 
+	<td align="right" colspan="8"> 
+    <div style="padding-top:6px; padding-bottom:6px">
+    <select name="subcmd" style="font-family: verdana">
+        <option value="">{_select}:</option>
+        <option value="masspayment">{_mass_payment}</option>
+        <option value="request-csv">{_download_as_csv}</option>
+    </select> <input type="submit" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value=" {_go} "/>
+    </div></td>
+</tr>
+<tr> 
+	<td colspan="8">{prevnext}</td>
+</tr></if>
+</table>
+</form> 
+
+</div>
+<div class="block-footer">
+    <div class="block-right">
+            <div class="block-left"></div>
+    </div>
+</div>       
+    </div>
+</div>

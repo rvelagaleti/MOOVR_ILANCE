@@ -1,0 +1,67 @@
+<form name="masspay" action="{ilpage[accounting]}" method="post" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="transactions" />
+<input type="hidden" name="subcmd" value="masspayment" />
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_mass_payment_preview}</div>
+			<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_mass_payments_can_only_be_paid_through_funds_available_in_your_online_account_balance} <span class="blue"><a href="{https_server}{ilpage[accounting]}?cmd=deposit">{_deposit_funds_lower}</a></span>.</div></div>
+			<div class="block-content" style="padding:0px">
+				
+			<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+			<tr class="alt2"> 
+				<td nowrap="nowrap">{_transaction_id}</td>
+				<td>{_description}</td>
+				<td>{_tax}</td>
+				<td width="18%" nowrap="nowrap">{_amount}</td>
+				<td width="10%">{_total}</td>
+			  </tr>
+			<loop name="invoices">
+			<tr class="alt1" valign="top"> 
+				<td width="11%" class="alt1"><span class="smaller black">{txn}</span></td>
+				<td width="48%" class="alt1"><span class="blue"><a href="{https_server}{ilpage[invoicepayment]}?cmd=view&amp;txn={txn}">{description}</a></span></td>
+				<td width="13%" class="alt1"><span class="smaller black">{tax}</span></td>
+				<td nowrap="nowrap" class="alt1"><span class="smaller">{amount_formatted}</span></td>
+				<td class="alt1"><span class="smaller">{total_formatted}</span></td>
+			</tr>
+			</loop name="invoices">
+			<tr valign="top" class="alt3"> 
+			    <td colspan="2" align="right"><strong><span class="blue"><a href="{https_server}{ilpage[invoicepayment]}?cmd=view&amp;id={invoiceid}"></a></span></strong><strong>{_tax}</strong></td>
+			    <td align="right"><span style="float:left"><span class="smaller black">{taxtotal}</span></span><strong>{_sub_total}</strong></td>
+			    <td align="right"><span style="float:left"><span class="smaller black">{subtotal_formatted}</span></span><strong>{_total}</strong></td>
+			    <td><span class="smaller black"><strong>{total_formatted}</strong></span></td>
+			</tr>
+			<tr class="alt1_top"> 
+				<td align="left" colspan="6">
+				    <div style="padding-bottom:2px; font-size:13px"><strong>{_select_payment_method}</strong></div>
+				    <div style="padding-top:4px">{paymethod}</div>
+				</td>
+			</tr>
+			<tr> 
+				<td align="left" colspan="6" class="alt_top"><div><strong>{_authorize}</strong> <label for="agree"><input name="agreecheck" id="agree" type="checkbox" onclick="agreesubmit(this)" /> {_i_authorize_this_payment_from_my_preferred_payment_method_above}</label></div></td>
+			</tr>
+			<tr class="alt2_top"> 
+				<td align="left" colspan="6"><div style="padding-top:7px; padding-bottom:7px"><input type="submit" value="{_pay_now}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" disabled="disabled" />&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{https_server}{ilpage[accounting]}?cmd=transactions&amp;status=unpaid&amp;pp=50">{_back}</a></span></div></td>
+			</tr>
+			</table>
+
+</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+{hiddeninvoiceids}
+<input type="hidden" name="do" value="processmasspayment" />
+</form>

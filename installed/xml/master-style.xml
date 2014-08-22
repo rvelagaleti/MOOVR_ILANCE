@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+This xml document was exported for use with ILance 4.0.0.  Do not hand edit this document.
+-->
+
+<style name="Default Style" ilversion="4.0.0">
+	<template name="table_cellspacing" description="HTML Templates Table Cell Spacing Size" type="variable" product="ilance" sort="100"><![CDATA[0]]></template>
+	<template name="table_cellpadding" description="HTML Templates Table Cell Padding Size" type="variable" product="ilance" sort="200"><![CDATA[12]]></template>
+	<template name="template_table_width" description="Template Layout Width" type="variable" product="ilance" sort="300"><![CDATA[990]]></template>
+	<template name="template_table_width_wide" description="Template Layout Width (Widescreen)" type="variable" product="ilance" sort="400"><![CDATA[1224]]></template>
+	<template name="template_imagesfolder" description="Templates Images Folder Location" type="variable" product="ilance" sort="500"><![CDATA[images/default/]]></template>
+	<template name="template_folder" description="HTML Templates Folder Location" type="variable" product="ilance" sort="600"><![CDATA[templates/default/]]></template>
+	<template name="template_textalignment" description="Template Text Alignment (left, right, center)" type="variable" product="ilance" sort="700"><![CDATA[left]]></template>
+	<template name="template_textdirection" description="Template Text Direction (ltr or rtl)" type="variable" product="ilance" sort="800"><![CDATA[ltr]]></template>
+	<template name="template_logo" description="Template Variable to display the main logo header image" type="variable" product="ilance" sort="900"><![CDATA[images/default/logo.gif]]></template>
+	<template name="template_htmldoctype" description="Template Document Type" type="variable" product="ilance" sort="1000"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">]]></template>
+	<template name="template_htmlextra" description="Template Document Type Extra Bit" type="variable" product="ilance" sort="1100"><![CDATA[]]></template>
+</style>

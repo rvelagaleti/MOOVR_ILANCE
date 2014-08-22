@@ -1,0 +1,44 @@
+<form method="post" action="{ilpage[preferences]}" name="ilform" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="_do-timezone-change" />
+<div class="block-wrapper">
+
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header">{_time_zone_management}</div>
+            <div class="block-content-yellow" style="padding:{table_cellpadding}px">
+              <div class="smaller">{_some_areas_show_local_time}</div></div>
+            <div class="block-content" style="padding:0px">
+                
+                
+                <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center" style="background:url({template_relativeimagepath}{template_imagesfolder}world-map.png) no-repeat;min-width:700px;min-height:460px">
+                
+                  <tr valign="top">
+                    <td width="60%"><div><strong>{_my_local_time}</strong></div><div style="padding-top:6px">{user_time}</div></td>
+                    <td width="40%"><div style="padding-bottom:6px"><strong>{_time_zone}</strong></div><div>{timezone_pulldown}</div></td>
+                  </tr>
+                  <tr> 
+                    <td colspan="2"><div><strong>{_official_marketplace_time}</strong></div><div style="padding-top:6px">{mrkt_time}</div></td>
+                  </tr>
+                  <tr class="alt2_top"> 
+                    <td colspan="2"><input type="submit" class="buttons" value=" {_save} " accesskey="s" style="font-size:15px" /></td>
+                  </tr>
+    
+                </table>
+                
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>

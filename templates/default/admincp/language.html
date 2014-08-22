@@ -1,0 +1,1025 @@
+<div id="v3body4"> 
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+		<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+	
+<!-- start content -->
+<div id="content">
+<h1>{_language_manager}</h1><br />
+
+<!-- view phrases -->
+<div class="tab-pane" id="createlanguages">
+
+			<!-- create options -->
+			<div class="tab-page">
+    			
+				<h2 class="tab">{_create}</h2>
+
+				<!-- create new tab languages -->
+				<div class="tab-pane" id="createlanguages2">
+
+					<!-- create new language phrases -->
+					<div class="tab-page">
+					
+						<h2 class="tab">{_phrase}</h2>
+							
+							<form name="createphrase" method="post" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+							<input type="hidden" name="cmd" value="createphrase">
+							<input type="hidden" name="return" value="{ilpage[language]}">
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_create_new_language_phrase}</div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_create_new_language_phrases_and_call_them_as_variables}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt1">
+											<td width="36%"><span class="gray">1. {_choose_language}</span></td>
+											<td width="64%"> {language_pulldown}</td>
+										</tr>
+										<tr class="alt1">
+											<td nowrap="nowrap"><span class="gray">2. {_choose_phrase_group}</span></td>
+											<td> {phrasegroup_pulldown} </td>
+										</tr>
+										<tr class="alt1">
+											<td valign="top"><span class="gray">3. {_create_new_phrase}</span></td>
+											<td><textarea name="text" id="text" style="font-family: verdana; width: 490px; height: 80px;"></textarea></td>
+										</tr>
+										<tr>
+										  <td valign="top"><span class="gray">4. {_convert_into_template_variable}</span></td>
+										  <td><input type="button" value="{_convert_phrase_to_variable} &gt;&gt;" onclick="MakeProper()" class="buttons" style="font-size:15px" /></td>
+										  </tr>
+										<tr class="alt1">
+											<td valign="top"><span class="gray">5. {_template_variable}</span></td>
+											<td valign="top"> <input type="text" name="varname" id="varname" size="70" style="font-family: verdana; width: 500px;"><div class="smaller gray">{_start_with_an_underscore_replace_spaces_with_underscores}</div></td>
+										</tr>
+										<tr class="alt2_top">
+											<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value=" {_save} " class="buttons" disabled="disabled" /><else /><input type="submit" style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value=" {_save} " class="buttons" /></if></td>
+										</tr>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+						</form>
+						
+					</div>
+					<!-- /create new language phrases -->
+
+					<!-- create new languages -->
+					<div class="tab-page">
+						
+						<h2 class="tab">{_language}</h2>						
+							<form method="post" action="{ilpage[language]}" name="addlanguage" accept-charset="UTF-8" style="margin: 0px;">
+							<input type="hidden" name="cmd" value="addlanguage" />
+							<input type="hidden" name="return" value="{ilpage[language]}" />
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_create_new_language}</div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_a_new_language_within_the_marketplace_using_the_form_below}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt1"> 
+											<td width="31%"><span class="gray">{_title}</span></td>
+											<td width="69%" class="alt2">								
+											<select name="lng" style="font-family: verdana">
+												<option value="English" selected="selected">English</option>
+                                                <option value="Arabic">Arabic</option>
+												<option value="Bulgarian">Bulgarian</option>
+                                                <option value="Chinese">Chinese</option>
+												<option value="Czech">Czech</option>
+												<option value="Danish">Danish</option>
+                                                <option value="Finland">Finland</option>
+												<option value="French">French</option>
+												<option value="German">German</option>
+												<option value="Greek">Greek</option>
+												<option value="Hebrew">Hebrew</option>
+                                                <option value="Hindi">Hindi</option>
+												<option value="Hungary">Hungary</option>
+												<option value="Italian">Italian</option>
+												<option value="Japanese">Japanese</option>
+                                                <option value="Korean">Korean</option>
+												<option value="Lithuanian">Lithuanian</option>
+												<option value="Latvian">Latvian</option>
+												<option value="Netherlands">Netherlands</option>
+												<option value="Norwegian">Norwegian</option>
+												<option value="Polish">Polish</option>
+												<option value="Portuguese">Portuguese</option>
+												<option value="Romanian">Romanian</option>
+												<option value="Russian">Russian</option>
+												<option value="Swedish">Swedish</option>
+												<option value="Spanish">Spanish</option>
+												<option value="Turkish">Turkish</option>
+                                                <option value="Vietnamese">Vietnamese</option>
+										  </select></td>
+										</tr>
+										<tr class="alt1"> 
+											<td valign="middle" class="alt1"><span class="gray">{_base_new_language_from}</span></td>
+											<td width="69%" class="alt2"> {base_language_pulldown} </td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="31%" class="alt1"><span class="gray">{_language_iso_code}</span></td>
+											<td width="69%" class="alt2">								
+											<input type="text" name="languageiso" size="4" maxlength="10" class="input" value="en" />
+											<div class="smaller gray" style="padding-top:3px">{_learn_more_about_iso_codes}: <a href="http://www.loc.gov/standards/iso639-2/php/English_list.php" target="_blank">http://www.loc.gov/standards/iso639-2/php/English_list.php</a></div></td>
+										</tr>
+										<tr class="alt1"> 
+											<td class="alt1"><span class="gray">{_php_locale}</span></td>
+											<td class="alt2"><input type="text" name="locale" size="4" maxlength="20" class="input" value="en_US" />
+											<div class="smaller gray" style="padding-top:3px">{_learn_more_about_setlocale} <a href="http://ca3.php.net/manual/en/function.setlocale.php" target="_blank">http://ca3.php.net/manual/en/function.setlocale.php</a></div></td>
+										</tr>
+										<tr class="alt1"> 
+											<td class="alt1"><span class="gray">{_text_direction}</span></td>
+											<td class="alt2"><select name="textdirection" style="font-family: verdana">
+												
+												<option value="ltr">{_left_to_right}</option>
+												<option value="rtl">{_right_to_left}</option>
+										  </select></td>
+										</tr>
+										<tr class="alt1"> 
+											<td valign="middle" nowrap="nowrap"><span class="gray">{_character_set}</span></td>
+											<td class="alt2">
+												<select name="charset" style="font-family: verdana">
+													<option value="UTF-8">Universal - UTF-8</option>
+												</select>
+												<div class="smaller gray" style="padding-top:3px">{_used_like}: &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=<span style="color:red">ISO-8859-1</span>&quot;&gt;</div></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="31%"><span class="gray">{_language_author}</span></td>
+											<td width="31%" class="alt2"><input type="text" name="author" size="10" maxlength="100" class="input" value="{adminuser}" /></td>
+										</tr>
+										<tr class="alt1"> 
+											<td valign="middle"><span class="gray">{_can_users_select_this_language}</span></td>
+										  <td class="alt2">
+												<select name="canselect" style="font-family: verdana">
+													<option value="0">{_no}</option>
+													<option value="1" selected="selected">{_yes}</option>
+												</select>
+										  </td>
+										</tr>
+										<tr class="alt1"> 
+											<td valign="middle"><span class="gray">{_force_as_default_language}</span></td>
+										  <td class="alt2">
+												<select name="defaultlanguage" style="font-family: verdana">
+													<option value="0">{_no}</option>
+													<option value="1">{_yes}</option>
+												</select>
+										  </td>
+										</tr>
+										<tr class="alt2">
+											<td colspan="2">{_advanced_search_engine_optimization_character_replacements}</td>
+										</tr>
+										<tr class="alt1"> 
+											<td valign="middle">{_seo_replacement_list}<div class="smaller gray">{_you_should_update_this_list_if_you_discover_foreign_characters}</div></td>
+											<td class="alt2">
+												<textarea name="replacements" rows="3" cols="67" class="input"></textarea>
+												<div style="padding-top:3px">{_use_like}: <strong>&#468;|u, &#333;|o, é|e, etc|etc</strong></div>
+										  </td>
+										</tr>
+										<tr class="alt2_top">
+											<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" disabled="disabled" /><else /><input type="submit" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></if></td>
+										</tr>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+						</form>
+						
+					</div>
+					<!-- /create new languages -->
+
+					<!-- create new language groups -->
+					<div class="tab-page">
+        				
+						<h2 class="tab">{_groups}</h2>
+						
+							<form method="post" action="{ilpage[language]}" name="addphrasegroup" accept-charset="UTF-8" style="margin: 0px;">
+							<input type="hidden" name="cmd" value="addphrasegroup" />
+							<input type="hidden" name="return" value="{ilpage[language]}" />
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_create_phrase_group}</div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_create_new_language_phrase_groups_to_store_phrases_within_that_group_for_orgainzation_below}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt1">
+											<td width="28%"><span class="gray">{_new_phrase_group_name}</span></td>
+											<td width="72%">
+										  <input type="text" name="groupname" class="input" style="font-family: verdana"> (no spaces)</td>
+										</tr>
+										<tr class="alt1">
+											<td valign="top"><span class="gray">{_phrase_group_description}</span></td>
+											<td><textarea name="description" style="font: 9pt courier new; width: 100%; height: 80px; font-family: verdana"></textarea></td>
+										</tr>
+										<tr class="alt2_top">
+											<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" disabled="disabled" /><else /><input type="submit" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></if></td>
+										</tr>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+						</form>
+						
+					</div>
+					<!-- /create new language groups -->
+
+				</div>
+				<!-- create new tab languages -->
+
+			</div>
+			<!-- /create options -->
+
+			<!-- manage language options -->
+			<div class="tab-page">
+				<h2 class="tab">{_manage}</h2>
+					<div class="tab-pane">
+					
+						<if condition="isset($show['editlanguage']) AND $show['editlanguage']">
+						<form method="post" action="{ilpage[language]}" accept-charset="UTF-8" name="editlanguage" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="edit-language" />
+						<input type="hidden" name="subcmd" value="save" />
+						<input type="hidden" name="id" value="{id}" />
+						<input type="hidden" name="return" value="{ilpage[language]}" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_update_language}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_update_the_desired_settings_for_this_language_using_the_form_below}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td width="31%"><span class="gray">{_title}</span></td>
+										<td width="69%">								
+										<input type="text" name="title" size="20" maxlength="100" class="input" value="{title}" /></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="31%"><span class="gray">{_language_iso_code}</span></td>
+										<td width="69%">								
+										<input type="text" name="languageiso" size="4" maxlength="10" class="input" value="{languageiso}" />
+										<div class="smaller gray" style="padding-top:3px">{_learn_more_about_iso_codes}: <a href="http://www.loc.gov/standards/iso639-2/php/English_list.php" target="_blank">http://www.loc.gov/standards/iso639-2/php/English_list.php</a></div></td>
+									</tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_php_locale}</span></td>
+										<td><input type="text" name="locale" size="4" maxlength="20" class="input" value="{locale}" />
+										<div class="smaller gray" style="padding-top:3px">{_example}: <em><strong>en_US</strong></em></div></td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="middle" nowrap="nowrap"><span class="gray">{_character_set}</span></td>
+										<td>
+											<input type="text" name="charset" size="20" maxlength="100" class="input" value="{charset}" /><div class="smaller gray" style="padding-top:3px">{_example}: &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=<span style="color:red">ISO-8859-1</span>&quot;&gt;</div></td>
+									</tr>
+									<tr class="alt1"> 
+											<td><span class="gray">{_text_direction}</span></td>
+											<td><select name="textdirection" style="font-family: verdana">
+												
+												<option value="ltr" {textdirection0}>{_left_to_right}</option>
+												<option value="rtl" {textdirection1}>{_right_to_left}</option>
+										  </select></td>
+										</tr>
+									<tr class="alt1"> 
+										<td width="31%"><span class="gray">{_author}</span></td>
+										<td width="69%">								
+										<input type="text" name="author" size="20" maxlength="100" class="input" value="{author}" /></td>
+									</tr>
+									<tr class="alt1"> 
+											<td valign="middle"><span class="gray">{_can_users_select_this_language}</span></td>
+										  <td>
+												<select name="canselect" style="font-family: verdana">
+													<option value="0" {canselect0}>{_no}</option>
+													<option value="1" {canselect1}>{_yes}</option>
+												</select>
+										  </td>
+										</tr>
+									<tr class="alt1"> 
+										<td valign="middle"><span class="gray">{_is_default_language}</span></td>
+										<td>
+											<select name="defaultlanguage" style="font-family: verdana">
+												<option value="0" {defaultlanguage0}>{_no}</option>
+												<option value="1" {defaultlanguage1}>{_yes}</option>
+											</select>
+									  </td>
+									</tr>
+									<tr class="alt2">
+											<td colspan="2">{_advanced_search_engine_optimization_character_replacements}</td>
+										</tr>
+										<tr class="alt1"> 
+											<td valign="middle">{_seo_replacement_list}<div class="smaller gray">{_you_should_update_this_list_if_you_discover_foreign_characters}</div></td>
+											<td>
+												<textarea name="replacements" rows="3" cols="67" style="font-family: verdana">{replacements}</textarea>
+												<div style="padding-top:3px">{_use_like}: <strong>&#468;|u, &#333;|o, é|e, etc|etc</strong></div>
+										  </td>
+										</tr>
+									<tr class="alt2_top">
+										<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" disabled="disabled" /><else /><input type="submit" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></if> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back();">{_cancel}</a></span></td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+					
+					<else />
+						<form method="post" action="{ilpage[language]}" name="managelanguage" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="managelanguage" />
+						<input type="hidden" name="return" value="{ilpage[language]}" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_language_management}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_update_and_review_existing_languages_installed_within_the_marketplace}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt2">
+										<td width="35%">{_title}</td>
+										<td width="15%" align="center" nowrap="nowrap">{_character_set}</td>
+										<td width="11%" align="center" nowrap="nowrap">{_text_direction}</td>
+										<td width="8%" align="center">{_locale}</td>
+										<td width="9%" nowrap="nowrap">{_language_author}</td>
+										<td width="10%">{_install_date}</td>
+										<td width="12%" align="center">{_actions}</td>
+									</tr>
+									<loop name="installedlanguages">
+									<tr class="alt1">
+										<td><span style="float:right">[ <span class="blue"><a href="javascript:void(0)" onclick=Attach("{ilpage[language]}?cmd=phrase-reference&amp;languageid={languageid}") class="smaller">{_phrases}</a></span> ]</span>{title}</td>
+										<td align="center" class="alt2"><em>{charset}</em></td>
+										<td align="center">{textdirection}</td>
+										<td align="center" class="alt2">{locale}</td>
+										<td>{author}</td>
+										<td nowrap="nowrap" class="alt2"><div class="smaller">{installdate}</div></td>
+										<td align="center">{actions}</td>
+									</tr>
+									</loop name="installedlanguages">
+									</table>
+
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+							</div>
+						</div>
+						</form>
+						
+						
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_language_statistics}</div>
+								<div class="block-content" style="padding:0px">
+									
+									<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%">
+									<tr class="alt2">
+										<td>{_type}</td>
+										<td>{_value}</td>
+									</tr>
+									<tr class="alt1">
+										<td><strong>{_master}</strong><div class="gray">{_number_of_master_phrases_installed}</div></td>
+										<td><span style="font-size:16px"><strong>{masterphrases}</strong></span></td>
+									</tr>
+									<tr class="alt1">
+										<td><strong>{_new}</strong><div class="gray">{_new_phrases_added_after_a_master_language_install}</div></td>
+										<td><span style="font-size:16px">{customphrases}</span></td>
+									</tr>
+									<tr class="alt1">
+										<td><strong>{_changed}</strong>
+										<div class="gray">{_phrases_that_have_been_changed_or_moved_to_a_new_phrase_group_after}</div></td>
+										<td><span style="font-size:16px">{movedphrases}</span></td>
+									</tr>
+									<tr>
+										<td><strong>{_total}</strong>
+										<div class="gray">{_total_number_of_phrases_installed_including_master_and_new_phrases} </div></td>
+										<td><span style="font-size:16px">{totalphrases}</span></td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</if>
+						
+					</div>
+		  </div>
+		    <!-- /manage language options -->
+
+			<!-- delete options -->
+			<div class="tab-page">
+				
+				<h2 class="tab">{_delete}</h2>
+
+				<!-- delete tab options -->
+				<div class="tab-pane">
+
+					<!-- delete existing languages -->
+					<div class="tab-page">
+						
+						<h2 class="tab">{_languages}</h2>
+						<form method="post" action="{ilpage[language]}" name="removelanguage" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="removelanguage">
+						<input type="hidden" name="return" value="{ilpage[language]}">
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_remove_language}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_when_removing_languages_please_remember_to_select_a_different_language_to_set_as_the_new_default_language}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1">
+										<td width="33%"><strong>{_select_language_to_remove}</strong></td>
+										<td width="67%">{language_pulldown}</td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="middle"><em class="blue">{_set_this_language_as_new_default} </em></td>
+										<td width="57%"> {base_language_pulldown} </td>
+									</tr>
+									<tr class="alt2_top">
+										<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value=" {_remove} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" disabled="disabled" /><else /><input type="submit" value=" {_remove} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></if></td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+						
+					</div>
+					<!-- /delete existing languages -->
+
+					<!-- create new language groups -->
+					<div class="tab-page">
+						
+						<h2 class="tab">{_groups}</h2>
+						<form method="post" action="{ilpage[language]}" name="removegroup" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="removegroup">
+						<input type="hidden" name="return" value="{ilpage[language]}">
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_remove_phrase_group}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_when_removing_phrase_groups_please_remember_all_phrases_associated}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1">
+										<td width="33%">{_select_phrase_group_to_remove}</td>
+										<td width="67%">{phrasegroup_pulldown}</td>
+									</tr>
+									<tr class="alt2_top">
+										<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" style="font-size:15px" value=" {_remove} " onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" disabled="disabled" /><else /><input type="submit" style="font-size:15px" value=" {_remove} " onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></if></td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+
+					</div>
+					<!-- /create new language groups -->
+
+					<!-- delete phrases -->
+					<div class="tab-page">
+						
+						<h2 class="tab">{_phrases}</h2>
+						<form name="deletephrases" method="post" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="return" value="{ilpage[language]}" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_remove_phrases}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_when_removing_phrases_please_remember_that_phrase}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr>
+										<td class="alt1">
+										
+											<table width="100%" border="0" cellspacing="0" cellpadding="3">
+											<tr>
+												<td width="31%" valign="top">{_select_phrases_to_remove}</td>
+												<td width="69%">&nbsp; </td>
+											</tr>
+											<tr>
+												<td colspan="2" valign="top" align="left">{phrases_selectlist}</td>
+											</tr>
+											</table>
+											
+										</td>
+									</tr>
+									<tr class="alt2_top">
+										<td colspan="2"><if condition="isset($ilance->GPC['showphrases'])">
+													<if condition="$show['ADMINCP_TEST_MODE']"><input name="removevarnames" type="submit" style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" value="{_remove}" disabled="disabled" /><else /><input name="removevarnames" type="submit" style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" value="{_remove}" /></if>
+													<input type="hidden" name="cmd" value="deletephrases" />
+													<else />
+													<input name="showphrases" type="submit" style="font-size:15px" class="buttons" value=" {_show_phrase_list} " />
+													</if></td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+				  </form>
+							
+					</div>
+					<!-- /delete phrases -->
+
+				</div>
+    			<!-- /delete tab options -->
+
+			</div>
+			<!-- /delete options -->
+			
+		    <!-- view phrases tab -->
+			<div class="tab-page">
+				
+					<h2 class="tab">{_view}</h2>
+						<form name="searchlanguage" method="get" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="search" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_view_phrases}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_view_language_phrases_in_a_particular_phrase_group}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1">
+										<td width="29%"><span class="gray">{_choose_language}</span></td>
+										<td width="71%"> {language_pulldown}</td>
+									</tr>
+									<tr class="alt1">
+										<td><span class="gray">{_choose_phrase_group}</span></td>
+										<td> {phrasegroup_pulldown}</td>
+									</tr>
+									<tr class="alt1">
+										<td><span class="gray">{_results}</span></td>
+										<td>{limit_pulldown}</td>
+									</tr>
+									<tr class="alt2_top">
+										<td colspan="2"><input type="submit" style="font-size:15px" value=" {_view} " class="buttons" /></td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+					
+			</div>
+			<!-- /view phrases tab -->
+
+			<!-- search phrases -->
+			<div class="tab-page">
+				
+					<h2 class="tab">{_search}</h2>
+					<form name="searchlanguage" method="get" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+					<input type="hidden" name="cmd" value="search" />
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_search_phrases}</div>
+							<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_search_language_phrases_within_the_database_below}</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+								<tr class="alt1"> 
+									<td><span class="gray">{_choose_language}</span></td>
+									<td>{language_pulldown}</td>
+								</tr>
+								<tr class="alt1"> 
+									<td><span class="gray">{_choose_phrase_group}</span></td>
+									<td>{phrasegroup_pulldown}</td>
+								</tr>
+								<tr class="alt1"> 
+									<td><span class="gray"><em>{_search_all_phrase_groups}</em></span></td>
+									<td><input type="checkbox" name="allgroups" value="1" checked="checked" /></td>
+								</tr>
+								<tr class="alt1"> 
+									<td width="29%"><span class="gray">{_by_keyword}</span></td>
+									<td><input type='text' name='keyword' size='25' value="{keyword}" style="width:50%; font-family: verdana" /></td>
+								</tr>
+								<tr class="alt1"> 
+									<td><span class="gray"><em>{_find_exact_keyword_match}</em></span></td>
+									<td><input type="checkbox" name="exactmatch" value="1" /></td>
+								</tr>
+								<tr class="alt1"> 
+									<td><span class="gray">{_how_many_phrases_per_page}</span></td>
+									<td><strong>{limit_pulldown}</strong></td>
+								</tr>
+								<tr class="alt1"> 
+									<td nowrap="nowrap"><span class="gray">{_show_untranslated_phrases_only}</span></td>
+									<td><input type="checkbox" name="untranslated" value="1" /></td>
+								</tr>
+								<tr class="alt2_top"> 
+									<td colspan="2"><input type="submit" value=" {_search_phrases} " style="font-size:15px" class="buttons" /></td>
+								</tr>
+								</table>
+								
+							</div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+				</form>
+			</div>
+			<!-- /search phrases -->
+
+			<!-- import phrases -->
+			<div class="tab-page">
+					
+        			
+				<h2 class="tab">{_import}</h2>
+				<form method="post" action="{ilpage[language]}" accept-charset="UTF-8" enctype="multipart/form-data" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="_upload-xml-language" />
+						<input type="hidden" name="return" value="{ilpage[language]}" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_import_phrases}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_import_language_phrases_in_xml_format_below}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr>
+										<td class="alt1">
+										
+										<table width="100%" border="0" cellspacing="0" cellpadding="3">
+										<tr> 
+								
+											<td width="21%" valign="middle" nowrap="nowrap">{_import_valid_language_pack}</td>
+											<td width="100%">
+										
+												<input type="file" name="xml_file" />
+											</td>
+										</tr>
+										</table>
+									</td>
+									</tr>
+									<tr class="alt2">
+										<td><div class="smaller"><strong>{_advanced_import_options}</strong></div></td>
+									</tr>
+									<tr>
+									  <td class="alt1"><div class="gray"><label for="noversioncheck"><input type="checkbox" name="noversioncheck" id="noversioncheck" value="1" /> 
+									  {_check_this_box_if_you_would_like_to_disable_the_import_version_checker} </label></div></td>
+									  </tr>
+									<tr>
+									<td class="alt1">
+									<div class="gray"><input type="checkbox" name="overwrite" value="1" /> {_while_importing_do_not_change_the_text_of_each_phrase_imported_only_change_the_phrase_group_id_if_required}</div>
+									  </td>
+									  </tr>
+									  <tr class="alt2_top">
+										<td><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value=" {_upload} " style="font-size:15px" class="buttons" disabled="disabled" /><else /><input type="submit" value=" {_upload} " style="font-size:15px" class="buttons" /></if></td>
+									  </tr>
+									  </table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+			</div>
+			<!-- /import phrases -->
+				
+			<!-- export phrases -->
+			<div class="tab-page">
+					
+        			
+					<h2 class="tab">{_export}</h2>
+						<form method="get" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="_download-xml-language" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_export_phrases_to_xml}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_export_language_phrases_to_xml_format_using_the_tools_below}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr>
+										<td class="alt1"><table width="100%" border="0" cellspacing="0" cellpadding="3">
+								<tr> 
+									<td width="21%" valign="middle" nowrap="nowrap">{_language}</td>
+									<td width="100%">{language_pulldown}</td>
+								</tr>
+								
+								
+										</table></td>
+									</tr>
+									<tr class="alt2">
+										<td><div class="smaller"><strong>{_language_export_options}</strong></div></td>
+									</tr>
+									<tr>
+									<td class="alt1">
+									<div class="gray"><label for="untranslated"><input type="checkbox" name="untranslated" id="untranslated" value="1" />
+								      {_only_export_phrases_that_have_not_been_translated} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>Export Untranslated Phrases Only</strong></div><div>When enabled, this feature will only export phrases that have not been translated from English.  This feature only works on languages other than English.</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></label></div>
+									
+									  </td>
+									  </tr>
+									  <tr class="alt2_top">
+										<td><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value=" {_download} " style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value=" {_download} " style="font-size:15px" /></if></td>
+									  </tr>
+									  </table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+			</div>
+			<!-- /export phrases -->
+				
+			<!-- client nav tab page -->
+		  	<div class="tab-page">
+					
+					<h2 class="tab">{_settings}</h2>
+					{global_languagesettings}	
+                    	
+					<form name="languagedefault" method="post" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+                    	<input type="hidden" name="cmd" value="languagedefault" />
+						<input type="hidden" name="return" value="{ilpage[language]}" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">Set Default Language</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px">
+								  <div class="smaller">Use this setting to set all users in the marketplace to a specific installed language</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr>
+										<td class="alt1">
+										
+											<table width="100%" border="0" cellspacing="0" cellpadding="3">
+											<tr>
+												<td valign="top">{language_pulldown}</td>
+											</tr>
+											</table>
+											
+										</td>
+									</tr>
+									<tr class="alt2_top">
+										<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" disabled="disabled" /><else /><input type="submit" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></if></td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+				  </form>
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_detected_database_collation_settings}</div>
+							<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_below_is_the_currently_configured_character_set_and_connection_collation}</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+								<loop name="mysqlcharset">
+								<tr class="alt1">
+									<td width="20%">{Variable_name}</td>
+									<td><strong>{Value}</strong></td>
+								</tr>
+								</loop name="mysqlcharset"> 
+								<loop name="mysqlcollation">
+								<tr class="alt1">
+									<td width="20%">{Variable_name}</td>
+									<td><strong>{Value}</strong></td>
+								</tr>
+								</loop name="mysqlcollation"> 
+								</table>
+								
+							</div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+			</div>
+			<!-- /client nav tab page -->
+				
+</div>
+<!-- /view phrases -->
+
+<script language="JavaScript">
+<!--
+function MakeProper()
+{
+	var include = /^\s*|\s+/g
+	var exclude1 = /_+$/g
+	var exclude2 = /_+/g
+	var result;
+	var str = fetch_js_object('text').value;
+	if (str && str.length > 0) 
+	{
+		result = str.replace(include, '_');
+		result = result.replace(exclude1, '');
+		result = result.replace(exclude2, '_');
+		filter = /\$|,|@|#|~|`|\%|\*|\^|\&|\(|\)|\+|\=|\[|\-|\]|\[|\}|\{|\;|\:|\'|\"|\<|\>|\?|\||\\|\!|\$|\./g;
+		
+		// remove special characters like "$" and "," etc...
+		result = result.replace(filter, ''); 
+		fetch_js_object('varname').value = result.toLowerCase();
+	}
+}
+//-->
+</script>

@@ -1,0 +1,160 @@
+<div id="colorpicker301" class="colorpicker301"></div>
+
+<div id="v3body4"> 
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings"><a href="{url}" {class}><span>{name}</span></a> <span> | </span></loop name="subnav_settings">
+	</div>
+</div>
+	
+<div id="content">
+<h1>{_tools}</h1><br />
+		
+	<!-- tools -->
+	<div class="tab-pane" id="find">
+	
+			<div class="tab-page">
+			
+				<h2 class="tab">{_export}</h2>
+				
+				<form action="{ilpage[tools]}" name="ilform" method="get" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="export" />
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_export} {_configuration}</div>
+						<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_export} {_configuration}</div></div>
+						<div class="block3-content" style="padding:0px">
+							
+							<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+							<tr class="alt1">
+								<td colspan="2">{_default} - {_main} {_configuration}</td>
+							</tr>
+							<!--
+							<tr class="alt1">
+								<td colspan="2"><input type="checkbox" id="{type}_{name}" name="revert[{tid}]" value="1" tabindex="1" /> - {_main_configuration}</td>
+							</tr>
+							-->
+							<tr class="alt2_top">
+								<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value="  {_export}  " style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value="  {_export}  " style="font-size:15px" /></if></td>
+							</tr>
+							
+							</table>
+							
+						</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+				</div>
+		    	</form>
+            
+			</div>
+			
+				
+			
+			<div class="tab-page">
+			
+				
+              <h2 class="tab">{_import}</h2>
+			
+              <if condition="isset($show['preview']) AND $show['preview'] == true">
+          		<form action="{ilpage[tools]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+			  <input type="hidden" name="cmd" value="import" />
+			  <div class="block-wrapper">
+					<div class="block3">
+					
+							<div class="block3-top">
+									<div class="block3-right">
+											<div class="block3-left"></div>
+									</div>
+							</div>
+							
+							<div class="block3-header">{_preview} {_import} {_configuration}</div>
+							<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_preview} {_import} {_configuration}</div></div>
+							<div class="block3-content" style="padding:0px">
+								
+								<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+								
+								{html}
+								
+								<tr class="alt2_top">
+									<input type="hidden" name="cmd" value="import" />
+									<input type="hidden" name="subcmd" value="update" />
+									<input type="hidden" name="return" value="{ilpage[tools]}">
+									<if condition="isset($show['can_update']) AND $show['can_update']">
+										<td></td><td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value="  {_update}  " style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value="  {_update}  " style="font-size:15px" /></if></td><td></td>
+									</if>
+								</tr>
+								</table>
+								
+							</div>
+							
+							<div class="block3-footer">
+									<div class="block3-right">
+											<div class="block3-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+		  	    </form>
+              
+              	
+              <else />
+              
+              
+              <form action="{ilpage[tools]}" name="ilform" method="post" accept-charset="UTF-8" enctype="multipart/form-data" style="margin: 0px;">
+			  <input type="hidden" name="cmd" value="import" />
+			  <div class="block-wrapper">
+					<div class="block3">
+					
+							<div class="block3-top">
+									<div class="block3-right">
+											<div class="block3-left"></div>
+									</div>
+							</div>
+							
+							<div class="block3-header">{_import} {_configuration}</div>
+							<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_import} {_configuration}</div></div>
+							<div class="block3-content" style="padding:0px">
+								
+								
+								
+								<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+								<tr class="alt1"> 
+								  <td align="left"><input type="file" name="xml_file" />
+								</tr>
+							    <tr class="alt2_top">
+								  	<td><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value=" {_import} " style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value=" {_import} " style="font-size:15px" /></if>
+									</td>
+							    </tr>
+								</table>
+								
+							</div>
+							
+							<div class="block3-footer">
+									<div class="block3-right">
+											<div class="block3-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+		  	    </form>
+				</if>
+			</div>
+
+</div>
+	
+<!-- / tools -->

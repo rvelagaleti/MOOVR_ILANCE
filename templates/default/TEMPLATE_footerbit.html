@@ -1,0 +1,43 @@
+<!-- START footer bit --><if condition="isset($show['footerwysiwygpopup']) AND $show['footerwysiwygpopup']"><!-- START wysiwyg popup controls -->
+<div id="insert_pop" style="display:none; position:absolute;"><table class="wysiwyg_popuplayer" border="0" cellpadding="1" cellspacing="6" width="240">
+<tr>
+	<td id="insert_title" class="wysiwyg_popuplayer_title" style="cursor: move" nowrap="nowrap"><ilayer><layer onmouseover="steditor=1;" onmouseout="steditor=0"><span id="change_title" style="font-size:11px"></span></layer></ilayer></td>
+	<td class="wysiwyg_popuplayer_title" align="right"><span class="smaller blue"><a href="javascript:void(0)" onclick="close_insert_pop(); return false">Close</a></span></td>
+</tr>
+<tr>
+	<td colspan="2"><iframe onmouseover="hide_it2()" name="insert_elm" id="insert_elm" frameborder="0" width="100%" height="250" src="" scrolling="no"></iframe></td>
+</tr>
+</table></div><!-- END wysiwyg popup controls --></if><div style="padding-bottom:12px"></div>
+
+{apihook[footerbit_start]}
+
+<div align="{template_textalignment_alt}" style="padding-bottom:3px"><a href="#top" title="{_top}" onclick="self.scrollTo(0, 0); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}toppage.gif" alt="{_top}" border="0" /></a></div>
+<div style="background-color:#cccccc; height:1px; width:100%; margin-top:4px; margin-bottom:4px"></div>
+<form action="{template_requesturi}" method="get" accept-charset="UTF-8" style="margin: 0px;">
+<div id="logo_bgnd_footer" align="{template_textalignment_alt}">
+	<div style="height:40px; padding-top:12px">
+    <if condition="$ilconfig['globalauctionsettings_seourls']"><span style="float:{template_textalignment}" class="blue">{apihook[footerbit_sef_links_start]}<a href="{template_relativeimagepath}main-resources">{_resources}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{template_relativeimagepath}main-terms">{_terms}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{template_relativeimagepath}main-privacy">{_privacy}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{https_server}main-contact">{_contact_us}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{template_relativeimagepath}main-about">{_about_us}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{http_server}main-rss">{_project_xml_feed_upper}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{template_relativeimagepath}main-converter">{_currency_converter}</a>{apihook[footerbit_sef_links_end]}</span>
+    <else /><span style="float:{template_textalignment}" class="blue">{apihook[footerbit_links_start]}<a href="{template_relativeimagepath}{ilpage[main]}?cmd=resources">{_resources}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{template_relativeimagepath}{ilpage[main]}?cmd=terms">{_terms}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{template_relativeimagepath}{ilpage[main]}?cmd=privacy">{_privacy}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{https_server}{ilpage[main]}?cmd=contact">{_contact_us}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{template_relativeimagepath}{ilpage[main]}?cmd=about">{_about_us}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{http_server}{ilpage[rss]}">{_project_xml_feed_upper}</a> &nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{template_relativeimagepath}{ilpage[accounting]}?cmd=currency-converter">{_currency_converter}</a>{apihook[footerbit_links_end]}</span></if>{template_languagepulldown}{template_stylepulldown}</div></div></form><!-- END footer bit -->
+
+<!-- do not remove or alter the branding statement or url unless permitted -->
+<div id="logo_bgnd_footer" class="smaller" style="color:#333; line-height:17px"><span style="float:{template_textalignment_alt}">{_official_time}: {official_time}</span>
+{_powered_by}: <span class="blue"><if condition="isset($ilconfig['globalserversettings_ilanceaid']) AND !empty($ilconfig['globalserversettings_ilanceaid'])"><a href="http://www.ilance.com" target="_blank" onclick="location.href='http://www.ilance.com/?aid={ilanceaid}'">{site_name}<!-- {template_ilversion}--></a><else />{site_name}<!-- {template_ilversion}--></if></span></div>
+<div id="logo_bgnd_footer" class="smaller" style="color:#bbb; padding-bottom:25px"><span style="float:{template_textalignment_alt}">{_server}: <span title="{_build} {buildversion}">{site_id}</span></span>{_copyright} &copy;{year}, Moovr Inc.</div>
+<!-- do not remove or alter the branding statement or url unless permitted -->
+
+</div></div><!-- END content -->
+{new_pmb_popup_js}
+{new_pmb_popup_modal}
+{apihook[footerbit_end]}
+<if condition="isset($ilconfig['footercronjob']) AND $ilconfig['footercronjob']"><!-- START automation --><noscript><img src="{template_relativeimagepath}cron.php?type=image" width="1" height="1" alt="" border="0" id="noscriptcron" /></noscript>
+<script type="text/javascript" charset="utf-8">
+<!--
+iL_Tasks('{template_relativeimagepath}cron.php?type=ajax', {rand()});
+//-->
+</script><!-- END automation --></if>
+<!-- START autocomplete --><script type="text/javascript" charset="utf-8">
+<!--
+var iL_AutoComplete;
+iL_AutoComplete = new iLance_AutoComplete('search_keywords_id', 'search_autocomplete');
+//-->
+</script><!-- END autocomplete -->

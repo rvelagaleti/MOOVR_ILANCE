@@ -1,0 +1,442 @@
+<div id="v3body4"> 
+<!-- sub navigation -->
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+<!-- /sub navigation -->
+<div id="content">
+<h1>{_payment_modules_management}</h1><br />
+<div class="tab-pane">
+	<div class="tab-pane" id="paymodules">
+		<div class="tab-page">
+			<h2 class="tab">{_modules}</h2>
+			
+			{paymodules_authnet}
+			{paymodules_bluepay}
+			{paymodules_plugnpay} 
+			{paymodules_psigate}
+			{paymodules_eway}
+			{paymodules_paypal}
+			{paymodules_cashu}
+			{paymodules_moneybookers}
+			{paymodules_check}
+			{paymodules_bank}
+			{paymodules_platnosci}
+			{paymodules_paypal_pro}
+			
+		</div>
+		<div class="tab-page">
+      	<h2 class="tab">{_processing}</h2>
+   			
+			{paymodules_defaultgateway}
+			
+  </div>
+  <div class="tab-page">
+      	
+      <h2 class="tab">{_enckeys}</h2>
+	  
+   			{paymodules_keys}
+			
+  </div>
+  
+  <!-- invoice settings -->
+			<div class="tab-page">
+				
+		  		<h2 class="tab">{_tax_logic}</h2>
+				<!-- tab pane -->
+				<div class="tab-pane" id="invoicesettings">
+				
+					
+						
+							<div class="block-wrapper">
+
+								<div class="block">
+								
+										<div class="block-top">
+												<div class="block-right">
+														<div class="block-left"></div>
+												</div>
+										</div>
+										
+										<div class="block-header">{_tax_logic_integration}</div>
+										
+										<div class="block-content" style="padding:0px">
+											
+											<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+											<tr class="alt2"> 
+												
+												<td width="8%">{_title}</td>
+												<td>{_country}</td>
+												
+												<td width="8%" nowrap>{_state}</td>
+												<td width="8%">{_city}</td>
+												<td width="6%">{_amount}</td>
+												<td align="right" width="10%">{_action}</td>
+											</tr>							
+											<loop name="taxes"> 
+											<tr class="alt1" valign="top"> 
+												
+												<td nowrap="nowrap" class="alt2">{taxlabel}</td>
+												<td><span class="blue">{countryname}</span><div class="smaller black" style="padding-top:4px"><strong>{_entire_country_taxable}:</strong> {entire}</div><div class="smaller black" style="padding-top:3px"><strong>{_tax}:</strong> {types}</div></td>
+												
+												<td nowrap="nowrap">{state}</td>
+												<td nowrap="nowrap">{city}</td>
+												<td>{amount}%</td>
+												<td align="right">{edit}&nbsp;&nbsp;{remove}</td>
+											</tr>
+											</loop name="taxes">
+                                            <tr>
+                                            	<td colspan="6"><span class="gray">{_please_define_tax_zones_using_form_below}</span></td>
+                                            </tr> 
+											<if condition="isset($show['no_taxes']) AND $show['no_taxes']"> 
+											<tr> 
+												<td colspan="6" align="center">{_no_taxes_have_been_defined}</td>
+											</tr>
+											</if> 
+											</table>
+											
+										</div>
+										
+										<div class="block-footer">
+												<div class="block-right">
+														<div class="block-left"></div>
+												</div>
+										</div>
+										
+								</div>
+							</div>
+							
+							<form method="post" action="{ilpage[settings]}" name="ilform" accept-charset="UTF-8" style="margin: 0px;">
+							<input type="hidden" name="cmd" value="paymodules" />
+							<input type="hidden" name="subcmd" value="{tax_subcmd}" />
+							<input type="hidden" name="return" value="{ilpage[settings]}?cmd=paymodules" />
+							{tax_id_hidden}
+							<div class="block-wrapper">
+
+								<div class="block">
+								
+										<div class="block-top">
+												<div class="block-right">
+														<div class="block-left"></div>
+												</div>
+										</div>
+										
+										<div class="block-header"><a name="editzone">{_create_update_tax_zones}</a></div>
+										
+										<div class="block-content" style="padding:0px">
+											
+											<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+											<tr> 
+												<td colspan="2" class="alt2">{_configure_city_state_and_country_tax_for_transactions_generated_through_the_marketplace_using_the_form_below}</td>
+											</tr>
+											<tr class="alt1"> 
+												<td>{_tax_label}</td>
+												<td><input style="width:400px" name="taxlabel" value="{taxlabel}" class="input" /></td>
+											</tr>
+											<tr class="alt1"> 
+												<td>{_country}</td>
+												<td>{country_js_pulldown} <input type="checkbox" name="entirecountry" id="entirecountry" value="true" onclick="checkSelect(this)" {entirecountry_cb}  /> {_will_the_entire_country_be_taxable}</td>
+											</tr>
+											<tr class="alt1">
+											  <td class="alt1">{_state_or_province}</td>
+											  <td><div id="stateid" style="height:20px">{state_js_pulldown}</div></td>
+											  </tr>
+											<tr class="alt1">
+											  <td class="alt1">{_city}</td>
+											  <td><input style="width:150px" name="city" value="{city}" class="input" /></td>
+											  </tr>
+											<tr class="alt1"> 
+												<td class="alt1">{_percentage}</td>
+											  <td><input style="width:55px" name="amount" value="{amount}" class="input" /> <strong>%</strong></td>
+											</tr>
+											<tr class="alt1"> 
+												<td width="26%" valign="top">{_apply_this_tax_to_invoice_types}</td>
+											  <td width="74%" valign="top">{invoicetypetax}</td>
+											</tr>
+											<tr class="alt2_top"> 
+												<td colspan="2" valign="middle">{taxsubmit} <if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == '_update-taxzone'">&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[settings]}?cmd=paymodules">{_cancel}</a></span></if></td>
+											</tr>
+											</table>
+											
+								  </div>
+										
+										<div class="block-footer">
+												<div class="block-right">
+														<div class="block-left"></div>
+												</div>
+										</div>
+										
+								</div>
+							</div>
+							</form>
+				 
+				</div>
+				<!-- / tab pane -->
+				
+			</div>
+			<!-- / invoice settings -->
+            
+            <!-- begin payment types settings -->
+			<div class="tab-page">
+				
+				<h2 class="tab">{_offsite_payment_types}</h2>
+				<form action="{ilpage[settings]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="paymodules" />
+				<input type="hidden" name="subcmd" value="update-paytypes" />
+				<input type="hidden" name="return" value="{ilpage[settings]}?cmd=paymodules" />
+				<div class="block-wrapper">
+				<div class="block">
+				
+						<div class="block-top">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+						<div class="block-header">{_payment_types_methods}</div>
+						<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_manage_payment_types_and_methods_shown_when_users_post_listings_in_the_marketplace}</div></div>
+						<div class="block-content" style="padding:0px">
+							
+							<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+							<tr class="alt2"> 
+								<td width="80%">{_phrase_variable}</td>
+								<td width="5%"><span title="Total auction listings using this payment type">{_total}</span></td>
+								<td width="9%" nowrap="nowrap"><span title="Open/active auction listings using this payment type">{_open}</span></td>
+								<td width="6%" align="center">{_action}</td>
+							</tr>
+							<loop name="paytypes"> 
+							<tr class="alt1" valign="top"> 
+								<td>{title}</td>
+								<td>{totalcount}</td>
+								<td>{count}</td>
+								<td align="center">{action}</td>
+							</tr>
+							</loop name="paytypes">
+							<if condition="isset($show['no_paytypes_rows']) AND $show['no_paytypes_rows']"> 
+							<tr> 
+								<td colspan="4" align="center">{_no_results_found}</td>
+							</tr>
+							</if>
+							<tr class="alt2_top">
+								<td colspan="4"><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></td>
+							</tr>
+							</table>
+							
+</div>
+						
+						<div class="block-footer">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+						
+						</form>
+						
+		
+						
+						<form action="{ilpage[settings]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="paymodules" />
+						<input type="hidden" name="subcmd" value="insert-paytype" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=paymodules" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_add_new_payment_type}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_use_the_form_below_to_create_a_new_payment_type}</div></div>
+								<div class="block-content" style="padding:0px">
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td width="8%" nowrap="nowrap">{_phrase_variable}</td>
+										<td width="92%"><input type="text" name="title" style="width:450px" class="input" /></td>
+									</tr>
+										<td nowrap="nowrap" colspan="2"><input type="checkbox" name="bulkemail" value="1">&nbsp;&nbsp;&nbsp;{_i_would_like_to_bulk_email_active_sellers_informing_them_of_this_new_payment_type}</td>
+									<tr class="alt1"> 
+									</tr>
+									<tr class="alt2_top">
+										<!--<td colspan="2"><div class="gray">{_before_you_add_your_new_payment_type_please_create_your_new_payment_type_phrase}</div></td>-->
+										<td colspan="2"><div><input type="submit" name="save" value=" {_save} " class="buttons" style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></div></td> 
+									</tr>
+									
+									</table>
+									
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+						</div>
+						
+						</form>
+				
+			</div>
+			<!-- /begin payment types settings -->
+			
+			
+			<!-- begin payment offline deposit settings -->
+			<div class="tab-page">
+				
+				<h2 class="tab">{_offsite_deposit_types}</h2>
+				<form action="{ilpage[settings]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="paymodules" />
+				<input type="hidden" name="subcmd" value="update-paytypes" />
+				<input type="hidden" name="return" value="{ilpage[settings]}?cmd=paymodules" />
+				<div class="block-wrapper">
+				<div class="block">
+				
+						<div class="block-top">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+						<div class="block-header">{_offline_deposit_methods}</div>
+						<div class="block-content" style="padding:0px">
+							
+							<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+							<tr class="alt2"> 
+								<td width="18%">{_bank_name}</td>
+								<td width="35%">{_account_number}</td>
+								<td width="5%" nowrap="nowrap">{_account_swift}</td>
+								<td width="35%">{_custom_notes}</td>
+								<td width="5%">{_fee}</td>
+								<td width="1%" align="center">{_visible}</td>
+								<td width="1%" align="right">{_action}</td>
+							</tr>
+							<loop name="offline_deposit"> 
+							<tr class="alt1" valign="top"> 
+								<td class="alt2">{name}</td>
+								<td>{number}</td>
+								<td>{swift}</td>
+								<td>{custom_notes}</td>
+								<td>{fee}</td>
+								<td align="center">{visible}</td>
+								<td align="right">{action}</td>
+							</tr>
+							</loop name="offline_deposit">
+							<if condition="isset($show['no_offline_deposit_rows']) AND $show['no_offline_deposit_rows']"> 
+							<tr> 
+								<td colspan="2" align="center">{_no_results_found}</td>
+							</tr>
+							</if>
+
+							</table>
+							
+						</div>
+						
+						<div class="block-footer">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+						
+						</form>
+						
+                        <form action="{ilpage[settings]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="paymodules" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=paymodules" />
+						{hidden}
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_add_new_offline_deposit_method}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_use_the_form_below_to_create_a_new_offline_deposit_method}</div></div>
+								<div class="block-content" style="padding:0px">
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt1"> 
+											<td width="8%" nowrap="nowrap">{_bank_name}</td>
+											<td width="92%"><input type="text" name="name" value="{name}" class="input" size="50" /></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="8%" nowrap="nowrap">{_account_number}</td>
+											<td width="92%"><input type="text" name="number" value="{number}" class="input" size="50" /></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="8%" nowrap="nowrap">{_account_swift}</td>
+											<td width="92%"><input type="text" name="swift" value="{swift}" class="input" size="50" /></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="8%" nowrap="nowrap">{_company}</td>
+											<td width="92%"><input type="text" name="company_name" value="{companyname}" class="input" size="50" /></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="8%" nowrap="nowrap">{_address}</td>
+											<td width="92%"><input type="text" name="company_address" value="{company_address}" class="input" size="50" /></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="8%" nowrap="nowrap">{_custom_notes}</td>
+											<td width="92%"><textarea name="custom_notes" class="input" rows="5" cols="54" />{custom_notes}</textarea>
+											<div class="smaller gray" style="padding-top:3px">{_variables}: {transactionidx}, {username}</div>
+											</td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="8%" nowrap="nowrap">{_fee}</td>
+											<td width="92%"><input type="text" name="fee" value="{fee}" class="input" size="20" /></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="8%" nowrap="nowrap">{_sort}</td>
+											<td width="92%"><input type="text" name="sort" value="{sort}" class="input" size="20" /></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="8%" nowrap="nowrap">{_visible}</td>
+											<td width="92%"><input type="radio" name="visible" value="1" {opt1} /> {_yes} &nbsp;&nbsp;&nbsp;<input type="radio" name="visible" value="0" {opt2} /> {_no}</td>
+										</tr>
+										<tr class="alt2_top">
+										<td colspan="2"><div><input type="submit" name="save" value=" {_save} " class="buttons" style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></div></td>
+									</tr>
+									</table>
+									
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+						</div>
+						
+						</form>
+				
+			</div>
+			<!-- /begin payment offline deposit settings -->
+			
+			<div class="tab-page">
+      	
+      		<h2 class="tab">{_owner_bank_info}</h2>
+	  
+   			{paymodules_owner_bank_info}
+			
+  			</div>
+</div>
+</div>
+
+{dynamic_js_bodyend}

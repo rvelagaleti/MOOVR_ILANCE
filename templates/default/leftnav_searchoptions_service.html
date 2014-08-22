@@ -1,0 +1,193 @@
+<if condition="isset($show['searchengine']) AND $show['searchengine']"><else />
+{apihook[leftnav_searchoptions_service_start]}
+
+<if condition="isset($ilconfig['globalserverlocale_currencyselector']) AND $ilconfig['globalserverlocale_currencyselector']"><!-- START currency selector --><div class="block3-content-gray" style="padding-top:9px; padding-bottom:9px" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+    <span style="float:right"><span class="smaller blueonly">{clear_currencies}</span></span>
+    <span style="float:left; padding-top:5px; padding-right:10px" onClick="toggle('leftnav_currency')"><img id="collapseimg_leftnav_currency" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_currency]}.gif" border="0" alt="" /></span>
+    <span class="gray" onClick="toggle('leftnav_currency')"><strong>{_currency}</strong></span>
+</div>
+<div class="block3-content alt1" id="collapseobj_leftnav_currency" style="{collapse[collapseobj_leftnav_currency]} padding:6px">
+<div style="padding-top:6px; padding-bottom:6px">
+{leftnav_currencies}
+</div>
+</div><!-- END currency selector --></if>
+
+<if condition="isset($show['budgetgroups']) AND $show['budgetgroups'] OR !empty($budgetfilter)">
+<!-- START budget range -->
+<script type="text/javascript" language="javascript">
+<!--
+var sliderbudget;
+var budgetSliderArray = {budget_slider_1}
+var budgetValSliderArray = {budget_slider_2}
+var bgbudget = "budgetBGDiv";
+var thumbbudget = "budgetHandleDiv";
+var slidersActive;
+
+sliderbudget = YAHOO.widget.Slider.getHorizSlider(bgbudget, thumbbudget, 0, 150, 1);
+
+function init_budgetSlider() 
+{
+        var initvalue = Math.max(0, 150.0 / (budgetSliderArray.length-1) * (0 - 0.5));
+        sliderbudget.setValue(initvalue);
+        fetch_js_object('budget').value = budgetValSliderArray[0];
+        fetch_js_object('budgetSliderVal').innerHTML = budgetSliderArray[0];
+        var arrayLength = budgetSliderArray.length-1;
+        var incrementLength = (150.0/(budgetSliderArray.length-1));
+        
+        sliderbudget.subscribe("change", function(offsetFromStart) 
+        {
+                var i = Math.min( arrayLength, Math.ceil(offsetFromStart / incrementLength) );
+                fetch_js_object('budgetSliderVal').innerHTML = budgetSliderArray[i];
+                fetch_js_object('budget').value = budgetValSliderArray[i];
+        });
+        sliderbudget.subscribe("slideEnd", function() 
+        { 
+                if (slidersActive) 
+                {
+                        // auto-search after budget was selected..
+                }
+        }); 
+}
+
+function set_budgetSlider( setval ) 
+{
+        var newIndex = -1;
+        var i;
+        for (i = 0; i < budgetSliderArray.length; i++ ) 
+        {
+                if (setval == budgetValSliderArray[i]) 
+                {
+                        newIndex = i;
+                }
+        } 
+        if (newIndex >= 0 && newIndex < budgetSliderArray.length) 
+        {
+                var newValue = Math.max(0, 150.0 / (budgetSliderArray.length-1) * (newIndex - 0.5));
+                fetch_js_object('budget').value = budgetValSliderArray[newIndex];
+                sliderbudget.setValue(newValue);
+        }
+}
+//-->
+</script>
+<div class="block3-content-gray" style="padding-top:9px; padding-bottom:9px" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''">
+    <span style="float:right"><span class="smaller blueonly">{clear_budgetrange}</span></span>
+    <span style="float:left; padding-top:5px; padding-right:10px" onclick="toggle('leftnav_budgetfilter')"><img id="collapseimg_leftnav_budgetfilter" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_budgetfilter]}.gif" border="0" alt="" /></span>
+    <span class="gray" onclick="toggle('leftnav_budgetfilter')"><strong>{_budget_range}</strong></span>
+</div>
+<div class="block3-content alt1" id="collapseobj_leftnav_budgetfilter" style="{collapse[collapseobj_leftnav_budgetfilter]} padding:6px">
+<div style="padding-top:6px; padding-bottom:12px; padding-left:3px">
+<form name="minisearch" method="get" id="searchformleft" action="{ilpage[search]}" accept-charset="UTF-8" style="margin:0px">
+{hiddenfields_leftnav}
+<input type="hidden" name="budget" id="budget" value="" />
+<div class="sliderWrapper">
+    <div class="sliderLabelWrapper"><strong><span class="blue smaller" id="budgetSliderVal"></span></strong></div>
+        <div id="budgetBGDiv" class="sliderBg" onmousedown="javascript: slidersActive=true;">
+            <div id="budgetHandleDiv" class="sliderThumb" onmousedown="javascript: slidersActive=true;"><img src="{template_relativeimagepath}{template_imagesfolder}leftnav/slider-thumb.gif" border="0" alt="" style="cursor: hand;" />
+        </div> 
+    </div> 
+</div>
+<div style="padding-bottom:17px"><span style="float:right; padding-top:9px; padding-right:1px"><input type="submit" id="submitbudget" value=" {_go} " class="buttons_smaller" /></span></div>
+</form>
+</div>
+</div>
+<!-- END budget range --></if>
+
+<!-- START specific buyer --><div class="block3-content-gray" style="padding-top:9px; padding-bottom:9px" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''">
+    <span style="float:right"><span class="smaller blueonly">{clear_searchuser}</span></span>
+    <span style="float:left; padding-top:5px; padding-right:10px" onclick="toggle('leftnav_specificbuyer')"><img id="collapseimg_leftnav_specificbuyer" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_specificbuyer]}.gif" border="0" alt="" /></span>
+    <span class="gray" onclick="toggle('leftnav_specificbuyer')"><strong>{_buyer}</strong></span>
+</div>
+<div class="block3-content alt1" id="collapseobj_leftnav_specificbuyer" style="{collapse[collapseobj_leftnav_specificbuyer]}padding:6px">
+<div style="padding-top:6px; padding-bottom:6px">
+<if condition="isset($ilance->GPC['searchuser']) AND !empty($ilance->GPC['searchuser'])"><div style="padding-bottom:4px"><span style="float:left; padding-right:7px; padding-top:2px"><img src="{template_relativeimagepath}{template_imagesfolder}leftnav/selected.png" border="0" alt="" id="" name="sel_searchuser1" /></span><span class="black"><a href="{clear_searchuser_url}" onmouseover="rollovericon('sel_searchuser1', '{template_relativeimagepath}{template_imagesfolder}leftnav/selectedclear.png')" onmouseout="rollovericon('sel_searchuser1', '{template_relativeimagepath}{template_imagesfolder}leftnav/selected.png')"><strong>{_include}: {searchuser}</strong></a></span></div>
+<else /><form name="minisearchuser" method="get" id="searchformleftuser" action="{ilpage[search]}" accept-charset="UTF-8" style="margin:0px">	
+{hiddenfields_leftnav}
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr> 
+    <td><input type="text" id="servicesearchuser" name="searchuser" value="{searchuser}" maxlength="50" size="16" class="input" /></td>
+</tr>
+<tr>
+    <td><label for="exactname"><if condition="isset($ilance->GPC['exactname']) AND $ilance->GPC['exactname']"><input type="checkbox" name="exactname" value="1" id="serviceexactname" checked="checked" /><else /><input type="checkbox" name="exactname" value="1" id="serviceexactname" /></if> <span class="smaller black">{_exact_name}</span></label><span style="float:right; padding-top:3px"><input type="submit" id="submitbuyer" value=" {_go} " class="buttons_smaller" /></span></td>
+</tr>
+</table>
+</form></if>
+</div>
+</div><!-- END specific buyer -->
+
+<!-- START region --><div class="block3-content-gray" style="padding-top:9px; padding-bottom:9px" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''">
+    <span style="float:right"><span class="smaller blueonly">{clear_region}</span></span>
+    <span style="float:left; padding-top:5px; padding-right:10px" onclick="toggle('leftnav_regionfilter')"><img id="collapseimg_leftnav_regionfilter" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_regionfilter]}.gif" border="0" alt="" /></span>
+    <span class="gray" onclick="toggle('leftnav_regionfilter')"><strong>{_location}</strong></span>
+</div>
+<div class="block3-content alt1" id="collapseobj_leftnav_regionfilter" style="{collapse[collapseobj_leftnav_regionfilter]} padding:6px">
+
+    <div style="padding-left:2px; padding-bottom:4px">{leftnav_regions}</div>
+    <div style="padding-bottom:6px; padding-left:21px"><span class="blue"><a href="javascript:void(0)" onclick="javascript:jQuery('#zipcode_nag_modal').jqm({modal: false}).jqmShow();"><strong>{_my_region_dot_dot}</strong></a></span></div>
+    
+</div><!-- END region -->
+
+<if condition="!empty($ilance->GPC['country']) OR !empty($ilance->GPC['city']) OR !empty($ilance->GPC['state'])"><!-- START local search --><div class="block3-content-gray" style="padding-top:9px; padding-bottom:9px" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''">
+    <span style="float:right"><span class="smaller blueonly">{clear_local}</span></span>
+    <span style="float:left; padding-top:4px; padding-right:10px" onclick="toggle('leftnav_searchlocal')"><img id="collapseimg_leftnav_searchlocal" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_searchlocal]}.gif" border="0" alt="" /></span>
+    <span class="gray" onclick="toggle('leftnav_searchlocal')"><strong>{_city_or_state}</strong></span>
+</div>
+<div class="block3-content alt1" id="collapseobj_leftnav_searchlocal" style="{collapse[collapseobj_leftnav_searchlocal]} padding:6px">
+    <form name="minisearchdistance" method="get" id="searchformleftprice" action="{php_self}" accept-charset="UTF-8" style="margin:0px">	
+    {hiddenfields_leftnav}
+    <table cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td align="right"><div style="padding-bottom:9px; padding-top:9px; padding-right:2px"><span style="padding-bottom:4px; padding-top:3px; float:left" class="black">{_city_or_town}</span><input type="text" name="city" id="incity3_3" maxlength="100" size="11" value="{city}" class="input" /></div></td>
+    </tr>
+    <tr>
+        <td align="right"><div style="padding-right:2px"><span style="padding-bottom:4px; padding-top:3px; float:left" class="black">{_state}</span><input type="text" name="state" id="state3_3" maxlength="100" size="11" value="{state}" class="input" /></div></td>
+    </tr>
+    <tr>
+        <td><span style="float:right; padding-top:6px; padding-right:1px"><input type="submit" id="submitlocalsearch" value=" {_go} " class="buttons_smaller" /></span></td>
+    </tr>
+    </table>
+    </form>
+</div><!-- END local search --></if>
+
+<if condition="$ilconfig['globalserver_enabledistanceradius'] AND isset($ilance->GPC['country']) AND !empty($ilance->GPC['country'])"><!-- START distance --><div class="block3-content-gray" style="padding-top:9px; padding-bottom:9px" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''">
+    <span style="float:right"><span class="smaller blueonly">{clear_distance}</span></span>
+    <span style="float:left; padding-top:5px; padding-right:10px" onclick="toggle('leftnav_radiusfilter')"><img id="collapseimg_leftnav_radiusfilter" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_radiusfilter]}.gif" border="0" alt="" /></span>
+    <span class="gray" onclick="toggle('leftnav_radiusfilter')"><strong>{_radius}</strong></span>
+</div>
+<div class="block3-content alt1" id="collapseobj_leftnav_radiusfilter" style="{collapse[collapseobj_leftnav_radiusfilter]} padding:6px">    
+  <form name="minisearchdistance" method="get" id="searchformleftprice" action="{php_self}" accept-charset="UTF-8" style="margin:0px">	
+    {hiddenfields_leftnav}
+    <div style="padding-top:5px">{vars[radius_pulldown]}&nbsp;{_of}&nbsp;&nbsp;<span style="float:right; padding-top:4px"><input type="submit" id="submitdistance" value="{_go}" class="buttons_smaller" /></span><input type="text" id="serviceradiuszip" name="radiuszip" maxlength="15" size="6" value="{radiuszip}" style="font-family: verdana" />
+    </div>
+    <div style="padding-top:7px; padding-bottom:5px"></div>
+    </form>
+    
+</div><!-- END distance --></if>
+
+<!-- START buying formats --><div class="block3-content-gray" style="padding-top:9px; padding-bottom:9px" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''">
+    <span style="float:right"><span class="smaller blueonly">{clear_listtype}</span></span>
+    <span style="float:left; padding-top:4px; padding-right:10px" onclick="toggle('leftnav_auctiontype')"><img id="collapseimg_leftnav_auctiontype" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_auctiontype]}.gif" border="0" alt="" /></span>
+    <span class="gray" onclick="toggle('leftnav_auctiontype')"><strong>{_hiring_formats}</strong></span>
+</div>
+<div class="block3-content alt1" id="collapseobj_leftnav_auctiontype" style="{collapse[collapseobj_leftnav_auctiontype]} padding:6px">						
+<div style="padding-left:2px; padding-bottom:4px; padding-top:6px">{leftnav_buyingformats}</div>
+</div><!-- END buying formats -->
+
+<!-- START bid range --><div class="block3-content-gray" style="padding-top:9px; padding-bottom:9px" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''">
+    <span style="float:right"><span class="smaller blueonly">{clear_bidrange}</span></span>
+    <span style="float:left; padding-top:4px; padding-right:10px" onclick="toggle('leftnav_productbidrange')"><img id="collapseimg_leftnav_productbidrange" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_productbidrange]}.gif" border="0" alt="" /></span>
+    <span class="gray" onclick="toggle('leftnav_productbidrange')"><strong>{_bid_range}</strong></span>
+</div>
+<div class="block3-content alt1" id="collapseobj_leftnav_productbidrange" style="{collapse[collapseobj_leftnav_productbidrange]} padding:6px">						
+    <div>{search_bidrange_pulldown_product}</div>
+</div><!-- END bid range -->
+
+<!-- START options --><div class="block3-content-gray" style="padding-top:9px; padding-bottom:9px" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''">
+    <span style="float:right"><span class="smaller blueonly">{clear_options}</span></span>
+    <span style="float:left; padding-top:4px; padding-right:10px" onclick="toggle('leftnav_refinesearch')"><img id="collapseimg_leftnav_refinesearch" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_refinesearch]}.gif" border="0" alt="" /></span>
+    <span class="gray" onclick="toggle('leftnav_refinesearch')"><strong>{_options}</strong></span>
+</div>
+<div class="block3-content" id="collapseobj_leftnav_refinesearch" style="{collapse[collapseobj_leftnav_refinesearch]} padding:6px">						
+<div>{leftnav_options}</div>
+</div><!-- END options -->
+{apihook[leftnav_searchoptions_service_end]}
+</if>

@@ -1,0 +1,152 @@
+<div style="font-size:18px; padding-bottom:9px" class="black">{_moderation_tools}</div>
+<div class="bigtabs" style="padding-bottom:14px; padding-top:9px">
+<div class="bigtabsheader">
+<ul id="moderationtabs">
+	<li title="" id="resultsli"><a href="{returnurlback}" rel="nofollow"><img src="{template_relativeimagepath}{template_imagesfolder}icons/selectedcat_back.gif" border="0" alt="{_back}" /> {_back}</a></li>
+    <li title="" id="toolsli" class="on"><a href="javascript:void(0)" target="tools_iframe" rel="nofollow">{_tools}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<form method="post" name="ilform" action="{https_server}{ilpage[rfp]}" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="auctioncmd" />
+
+<div class="block-wrapper">
+	<div class="block3">
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			<div class="block3-header">{_please_confirm_the_action_youre_making}</div>
+            <div class="block3-content-gray" style="padding:9px"><div class="smaller">{_please_take_a_moment_to_review_the_action_youre_trying_to_make}</div></div>
+			<div class="block3-content" style="padding:0px">
+            
+            	<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%">
+				<tr class="alt1" valign="top"> 
+					<td width="33.3%"><div><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="delist" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'delist'">checked="checked"</if> /> <strong>{_delist}</strong></label></div>
+                    <div><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="physically_remove" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'physically_remove'">checked="checked"</if> /> <strong>{_physically_remove}</strong></label></div></td>
+                    
+                    <td width="33.3%"><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="relist" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'relist'">checked="checked"</if> /> <strong>{_autorelist}</strong></label></td>
+                    <td width="33.3%"><label for="" onclick="toggle_show('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="movecategory" onclick="toggle_show('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'movecategory'">checked="checked"</if> /> <strong>{_category_move}</strong></label></td>
+				</tr>
+                <tr class="alt1" valign="top"> 
+					<td>
+                    <div><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="highlite" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'highlite'">checked="checked"</if> /> <strong>{_highlight}</strong></label></div>
+                    <div class="litegray"><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="unhighlite" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'unhighlite'">checked="checked"</if> /> <strong>{_remove} {_highlight}</strong></label></div></td>
+                    <td>
+                    <div><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="bold" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'bold'">checked="checked"</if> /> <strong>{_bold}</strong></label></div>
+                    <div class="litegray"><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="unbold" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'unbold'">checked="checked"</if> /> <strong>{_remove} {_bold}</strong></label></div>
+                    </td>
+                    
+					<td><div><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="featured" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'featured'">checked="checked"</if> 
+					/> <strong>{_featured_homepage}</strong></label></div>
+                    <div class="litegray"><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="unfeatured" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'unfeatured'">checked="checked"</if> 
+                    /> <strong>{_remove} {_featured_homepage}</strong></label></div></td>                    
+				</tr>
+                <tr valign="top"> 
+                  <td><div><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="featured_search" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'featured_search'">checked="checked"</if> 
+					/> <strong>{_featured_search}</strong></label></div>
+                    <div class="litegray"><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="unfeatured_search" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'unfeatured_search'">checked="checked"</if> 
+                    /> <strong>{_remove} {_featured_search}</strong></label></div></td>
+                  <td><div><label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="extend" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'extend'">checked="checked"</if> /> <strong>{_extend_duration}</strong> (+1 {_day_lower})</label></div>
+                  <div class="litegray">
+                    <label for="" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')"><input type="radio" name="action" value="deextend" onclick="toggle_hide('showmovecategory'); toggle_hide('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'unextend'">checked="checked"</if> /> <strong>{_retract_duration}</strong> (-1 {_day_lower})</label></div></td>
+                    <td><label for="" onclick="toggle_hide('showmovecategory'); toggle_show('showemail')"><input type="radio" name="action" value="email" onclick="toggle_hide('showmovecategory'); toggle_show('showemail')" <if condition="isset($ilance->GPC['action']) AND $ilance->GPC['action'] == 'email'">checked="checked"</if> /> <strong>{_send_email}</strong></label></td>
+                </tr>
+				</table>
+                
+			</div>			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>			
+	</div>
+</div>
+
+<if condition="isset($show['sendemail']) AND $show['sendemail']"><div id="showemail"><else /><div id="showemail" style="display:none"></if>
+<div class="block-wrapper">
+	<div class="block3">
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			<div class="block3-header">{_send_email}</div>
+            <div class="block3-content-gray" style="padding:9px"><div class="smaller">{_please_compose_your_email_which_will_be_sent_to_the_owners_of_the_selected_listings}</div></div>
+			<div class="block3-content alt1" style="padding:9px">
+            
+            	<div><textarea id="message" name="message" style="font-family: verdana; width:500px; height:100px"></textarea></div>
+                
+			</div>
+            		
+	</div>
+</div>
+</div>
+
+<if condition="isset($show['movecategory']) AND $show['movecategory']"><div id="showmovecategory"><else /><div id="showmovecategory" style="display:none"></if>
+<div class="block-wrapper">
+	<div class="block3">
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			<div class="block3-header">{_category_move}</div>
+            <div class="block3-content-gray" style="padding:9px"><div class="smaller">{_please_select_the_desired_category_to_move_selected_listings_remember_all_selected_listings_will_be_moved_in_bulk_into_the_single_category_you_choose}</div></div>
+			<div class="block3-content alt1" style="padding:9px">
+            
+            	<table border="0" width="100%" cellspacing="0" cellpadding="0">
+                <tr>
+                <td>
+            	<div style="padding-bottom:6px"><strong>{_youve_selected}:</strong>&nbsp;<span id="selectedcategory" class="blue"></span><span id="cidstringcb"></span></div>
+	           	<div><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #fff; border-left:1px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #fff" src="{ajaxurl}?do=categories&mode={mode}&cid={cid}&showyouselectedstring=0&showcontinue=0&showthumb=0&showcidbox=1&showcheckmarkafterstring=1&categoryfinderjs=1&id=0&cmd=new-item"></iframe></div>
+                <div><span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_moving_to_category_number} <input type="text" id="cid" name="cid" style="font-family: verdana" size="6" /></span></div>
+                <div style="display:none"><div id="categorybutton"></div></div>
+                </td>
+                </tr>
+                </table>
+                
+			</div>
+            <div class="block3-content-gray" style="padding:9px"><div class="smaller">{_due_to_category_change_previously_answered_category_specifics_will_be_removed_please_answer_new_category_specifics_if_applicable}</div></div>
+            <div class="block3-content">
+                    <div id="categoryfindertext">{_choose_a_category}</div>
+            </div>	
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>			
+	</div>
+</div>
+</div>
+
+<div class="block-wrapper">
+	<div class="block3">
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			<div class="block3-header">{_perform_your_action_on_the_following_listings}</div>
+            <div class="block3-content-gray" style="padding:9px"><div class="smaller">{_please_review_selected_listings_and_determine_which_items}</div></div>
+			<div class="block3-content" style="padding:0px">
+				<div><table border="0" cellpadding="12" cellspacing="{table_cellspacing}" width="100%">
+                <loop name="results"><tr class="alt1"> 
+					<td colspan="2"><label for=""><span style="float:left; margin-top:-3px; padding-right:6px"><input type="checkbox" id="{project_id}" name="project_id[]" value="{value}" checked="checked" />
+					</span><span class="blue">{project_title} <span>(#{project_id})</span></span> <span class="blue"> : {_category_id} <span>(#{cid})</span></span></label></td>
+				</tr></loop name="results">
+				<tr class="alt2_top">
+					<td colspan="2"><input type="submit" value=" {_continue} " class="buttons" style="font-size:15px" />&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{returnurlback}">{_cancel}</a></span></td>
+				</tr>
+				</table></div>
+			</div>			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>			
+	</div>
+</div><input type="hidden" name="do" value="process" /><input type="hidden" name="returnurl" value="{returnurl}" /></form>

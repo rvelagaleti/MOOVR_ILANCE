@@ -1,0 +1,3 @@
+<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">box3<else />box2</if>">
+	<div class="breadcrumbs">{apihook[template_breadcrumbbit_start]}<span style="padding-<if condition="$ilconfig['template_textalignment'] == 'left'">right:3px<else />left:3px</if>; float:{template_textalignment}"><a href="{http_server}" rel="nofollow">{_home}</a></span>{breadcrumbtrail}> {breadcrumbfinal}</div>
+</div>

@@ -1,0 +1,18 @@
+HOW TO USE THESE ILANCE TOOLS
+
+~~~~~~~~~~~~
+APP 1
+~~~~~~~~~~~~
+find-orphan-phrases.php is an application that can be executed from your web browser and will scan
+your entire ilance php scripts and templates for orphan phrases.  Orphan phrases are phrases that 
+are no longer used in ilance and can occur when the phrase exists within the database table (language_phrases) but cannot be found anywhere within the PHP scripts or template files.
+
+~~~~~~~~~~~~
+APP 2
+~~~~~~~~~~~~
+find-orphan-emailtemplates.php is an application that can be executed from your web browser and will scan your entire ilance php scripts and templates for orphan email templates.  Orphan email templates are email templates that are no longer used in ilance and can occur when the email template exists within the database table (emails) but cannot be found anywhere within the PHP scripts or template files.
+
+~~~~~~~~~~~~
+APP 3
+~~~~~~~~~~~~
+make-database-schema.php is an application that is executed by ilance developers whenever a new release or upgrade is made.  When executed from your browser, a file will be created within ./functions/xml/ called database_schema.xml.  It is simply used for display purposes or when trying to compare your current database structure vs. another version.  The xml file will overwrite itself if run more than once.

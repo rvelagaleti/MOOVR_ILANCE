@@ -1,0 +1,10 @@
+<!-- START content -->
+{apihook[headerbit_start]}
+
+<!--[if lte IE 6]><div id="infobar" style="width:100%"><a href="http://www.mozilla.com" target="_blank"><strong>{_warning_exclamation}</strong> &nbsp;&nbsp;{_the_browser_you_are_using_is_old_and_no_longer_a_supported}</a></div><![endif]-->
+<script type="text/javascript" charset="utf-8" src="{template_relativeimagepath}functions/javascript/functions_tooltip<if condition="$ilconfig['globalfilters_jsminify']">.min</if>.js"></script>
+<noscript><div id="infobar" style="width:100%"><a href="http://www.mozilla.com"><strong>{_warning_exclamation}</strong> &nbsp;&nbsp;{_the_web_browser_youre_using_does_not_have_javascript_enabled} <strong>{_click_here}</strong>.</a></div></noscript>
+<if condition="!empty($_SESSION['ilancedata']['user']['active']) AND $_SESSION['ilancedata']['user']['active'] == 'no' AND defined('LOCATION') AND (LOCATION != 'invoicepayment' AND LOCATION != 'forum' AND LOCATION != 'subscription' AND LOCATION != 'ipn' AND LOCATION != 'search') AND !empty($_SESSION['ilancedata']['user']['cost']) AND $_SESSION['ilancedata']['user']['cost'] > 0"><div id="infobar" style="width:100%"><a href="{http_server}{ilpage[subscription]}?returnurl={pageurl_urlencoded}"><strong>{_notice}:</strong> &nbsp;&nbsp;{_unpaid_subscription_please_make_subscription_payment} - {_click_here}</a></div></if>
+<div align="center" id="topcontent">
+<div id="pagewrapper" class="page" style="width:<if condition="isset($show['widescreen']) AND $show['widescreen']">{template_table_width_wide}px<else />{template_table_width}px</if>; text-align:{template_textalignment}">
+<a name="top"></a>

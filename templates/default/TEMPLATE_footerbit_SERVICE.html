@@ -1,0 +1,179 @@
+<!-- start footer -->
+<footer class="footer2">
+
+	<if condition="isset($show['footerwysiwygpopup']) AND $show['footerwysiwygpopup']"><!-- start wysiwyg popup controls -->
+    <div id="insert_pop" style="display:none; position:absolute;"><table class="wysiwyg_popuplayer" border="0" cellpadding="1" cellspacing="6" width="240">
+    <tr>
+        <td id="insert_title" class="wysiwyg_popuplayer_title" style="cursor: move" nowrap="nowrap"><ilayer><layer onmouseover="steditor=1;" onmouseout="steditor=0"><span id="change_title" style="font-size:11px"></span></layer></ilayer></td>
+        <td class="wysiwyg_popuplayer_title" align="right"><span class="smaller blue"><a href="javascript:void(0)" onclick="close_insert_pop(); return false">{_close}</a></span></td>
+    </tr>
+    <tr>
+        <td colspan="2"><iframe onmouseover="hide_it2()" name="insert_elm" id="insert_elm" frameborder="0" width="100%" height="250" src="" scrolling="no"></iframe></td>
+    </tr>
+    </table></div><!-- end wysiwyg popup controls --></if>
+
+	<div class="box3">
+    
+    	{apihook[footerbit_start]}
+    
+    	<!-- start footer-top -->
+        <div class="footer2-top">
+        	<!-- start footer-link -->
+            <div class="footer-link">
+            	
+                <div class="column">
+                	<h4>{site_name}</h4>
+                    <ul>
+                        {apihook[footerbit_col1_start]}
+                    	{apihook[footerbit_col1_end]}
+                    </ul>
+                </div>
+                
+                <div class="column">
+                	<h4>{_buy}</h4>
+                    <ul>
+                    	{apihook[footerbit_col2_start]}
+                        <li><a href="{http_server}buy">{_post_a_job}</a></li>
+                        <li><a href="{http_server}search?tab=1">{_find_professionals}</a></li>
+                        <li><a href="{template_relativeimagepath}main-converter">{_currency_converter}</a></li>
+                        {apihook[footerbit_col2_end]}
+                    </ul>
+                </div>
+                
+                <div class="column">
+                	<h4>{_sell_services}</h4>
+                    <ul>
+                    	 {apihook[footerbit_col3_start]}
+                         <li><a href="{http_server}categories/projects">{_categories}</a></li>
+                         <li><a href="{http_server}search">{_advanced_search}</a></li>
+                         <li><a href="{template_relativeimagepath}main-resources">{_feeds}</a></li>
+                         {apihook[footerbit_col3_end]}
+                    </ul>
+                </div>
+                
+                <div class="column">
+                	<h4>{_support}</h4>
+                    <ul>
+                    	{apihook[footerbit_col4_start]}
+                        <li><a href="{https_server}main-contact">{_contact}</a></li>
+                        <li><a href="{https_server}main-terms">{_terms}</a></li>
+                        <li><a href="{https_server}main-privacy">{_privacy}</a></li>
+                        {apihook[footerbit_col4_end]}
+                    </ul>
+                </div>
+                
+                <div class="column">
+                	<h4>{_other}</h4>
+                    <ul>
+                    	{apihook[footerbit_col5_start]}
+                        <if condition="defined('HTTP_SERVER_OTHER') AND HTTP_SERVER_OTHER != ''"><li><a href="{http_server_other}sell">{_sell_new_item}</a></li>
+                    	<li><a href="{http_server_other}bulk/sell">{_sell_bulk_items}</a></li></if>
+                        <li><a href="{template_relativeimagepath}main-about">{_about_us}</a></li>
+                        <li><a href="{http_server}main-news">{_news}</a></li>
+                        
+                        {apihook[footerbit_col5_end]}
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            
+            </div>
+            <!-- end footer-link -->
+            
+            <!-- start footer-bottom -->
+        <div class="footer2-bottom">
+        	<h5 class="blue"><img src="{template_relativeimagepath}{template_imagesfolder}v4/logo2.png" alt="{site_name}"></h5>
+            <span>{_the_place_for_professional_talent}</span>
+            
+            <!-- <section class="col1">
+            	<h5 class="green">Find Freelancers &amp; Contractors by Skill</h5>
+                <ul>
+                	<li><a href="#" title="Freelancers by Name">Freelancers by Name</a></li>
+                	<li><a href="#" title="Freelancers by Skill">Freelancers by Skill</a></li>
+                	<li><a href="#" title="Web Developers">Web Developers</a></li>
+                	<li><a href="#" title="Programmers">Programmers</a></li>
+                	<li><a href="#" title="Designers">Designers</a></li>
+                	<li><a href="#" title="Multimedia Experts">Multimedia Experts</a></li>
+                	<li><a href="#" title="Writers">Writers</a></li>
+                	<li><a href="#" title="Translators">Translators</a></li>
+                </ul>
+                <ul class="gap">
+                	<li><a href="#" title="Admin Support">Admin Support</a></li>
+                	<li><a href="#" title="Sales Professionals">Sales Professionals</a></li>
+                	<li><a href="#" title="Marketers">Marketers</a></li>
+                	<li><a href="#" title="Finance Professionals">Finance Professionals</a></li>
+                	<li><a href="#" title="Consultants">Consultants</a></li>
+                	<li><a href="#" title="Legal-Experts">Legal-Experts</a></li>
+                	<li><a href="#" title="Engineers">Engineers</a></li>
+                	<li><a href="#" title="Manufacturing Professionals">Manufacturing Professionals</a></li>
+                </ul>
+            </section>
+            
+            <section class="col2">
+            	
+                <h5 class="green">Local Contractors</h5>
+                <ul>
+                	<li><a href="#" title="Contractors in USA">Contractors in USA</a></li>
+                	<li><a href="#" title="Contractors in UK">Contractors in UK</a></li>
+                	<li><a href="#" title="Contractors in Canada">Contractors in Canada</a></li>
+                	<li><a href="#" title="Contractors in Australia">Contractors in Australia</a></li>
+                </ul>
+            </section>
+            
+            <section class="col3">
+            	<h5 class="green">Job Directory</h5>
+                <ul>
+                	<li><a href="#" title="Mobile Applications Jobs">Mobile Applications Jobs</a></li>
+                	<li><a href="#" title="Graphic Design Jobs">Graphic Design Jobs</a></li>
+                	<li><a href="#" title="Writing Jobs">Writing Jobs</a></li>
+                	<li><a href="#" title="Sales Jobs">Sales Jobs</a></li>
+                	<li><a href="#" title="Admin Support Jobs">Admin Support Jobs</a></li>
+                	<li><a href="#" title="Data Entry Jobs">Data Entry Jobs</a></li>
+                	<li><a href="#" title="Accounting Jobs">Accounting Jobs</a></li>
+                	<li><a href="#" title="Product Design &amp;">Product Design &amp;</a></li>
+                </ul>
+                <ul>
+                	<li><a href="#" title="Web Design &amp; Programming">Web Design &amp; Programming</a></li>
+                	<li><a href="#" title="Jobs">Jobs</a></li>
+                	<li><a href="#" title="Design &amp; Multimedia Jobs">Design &amp; Multimedia Jobs</a></li>
+                	<li><a href="#" title="Logo Jobs">Logo Jobs</a></li>
+                	<li><a href="#" title="Translation Jobs">Translation Jobs</a></li>
+                	<li><a href="#" title="Search Engine Marketing Jobs">Search Engine Marketing Jobs</a></li>
+                	<li><a href="#" title="Virtual Assistant Jobs">Virtual Assistant Jobs</a></li>
+                	<li><a href="#" title="Finance &amp; Management Jobs">Finance &amp; Management Jobs</a></li>
+                </ul>
+            </section>
+            <div class="clear"></div>-->
+        </div>
+        <!-- end footer-bottom -->
+            
+            <!-- start social -->
+            <div class="social">
+            	<ul>
+                	<li class="ico facebook"><a href="{facebookurl}" title="Facebook">Facebook</a></li>
+                	<li class="ico twitter"><a href="{twitterurl}" title="Twitter">Twitter</a></li>
+                	<li class="ico rss"><a href="{http_server}main-rss" title="{_project_xml_feed_upper}">{_project_xml_feed_upper}</a></li>
+                </ul>
+            </div>
+            <!-- end social -->
+        </div>
+        <!-- end footer-top -->
+        
+        {apihook[footerbit_end]}
+        
+        <div class="locale-tools"><form action="{template_requesturi}" method="get" accept-charset="UTF-8">{template_languagepulldown}{template_stylepulldown}</form></div>
+        <div class="copyright">{_copyright} &copy;{year}, Moovr Inc.</div>
+        <div class="powered-by">{_powered_by}: <if condition="isset($ilconfig['globalserversettings_ilanceaid']) AND !empty($ilconfig['globalserversettings_ilanceaid'])"><a href="http://www.ilance.com" target="_blank" onclick="location.href='http://www.ilance.com/?aid={ilanceaid}'">{site_name}<!-- {template_ilversion}--></a><else />{site_name}<!-- {template_ilversion}--></if></div>
+
+        
+    </div>
+</footer>
+<!-- end footer -->
+{new_pmb_popup_js}
+{new_pmb_popup_modal}
+<if condition="isset($ilconfig['footercronjob']) AND $ilconfig['footercronjob']">
+<script type="text/javascript" charset="utf-8">
+<!--
+iL_Tasks('{template_relativeimagepath}cron.php?type=ajax', {rand()});
+//-->
+</script>
+<!-- start automation --><noscript><img src="{template_relativeimagepath}cron.php?type=image" width="1" height="1" alt="" border="0" id="noscriptcron" /></noscript></if>

@@ -1,0 +1,260 @@
+{apihook[watchlist_start_html]}
+        
+<h1 class="a_active">{_watchlist}</h1>
+<form name="formtab" style="margin:0px;" accept-charset="UTF-8">
+<input type="hidden" name="viewtab" value="{tab}" />
+</form>
+
+<div class="tab-pane" id="search" style="padding-top:12px">
+
+    <div class="tab-page">
+        <h2 class="tab" id="3">{_listings}</h2>
+        <form method="post" action="{ilpage[watchlist]}" accept-charset="UTF-8" style="margin: 0px;">
+        <input type="hidden" name="cmd" value="_do-watch-cmd" />
+        <input type="hidden" name="state" value="auction" />
+        <div class="block-wrapper">
+
+        <div class="block">
+        
+                <div class="block-top">
+                        <div class="block-right">
+                                <div class="block-left"></div>
+                        </div>
+                </div>
+                
+                <div class="block-header">{_listings_youre_watching}</div>
+                
+                <div class="block-content" style="padding:0px">
+                    
+                    <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                    <tr class="alt2">
+                        <td width="1%">{_sel}</td>
+                        <td width="1%">{_picture}</td>
+                        <td width="50%">{_title} <a href="javascript:void(0)" onmouseover="Tip('<strong>' + phrase['_inline_edit'] + '</strong><br />{_you_can_now_change_the_comment_on_each_listing_by_double_clicking}', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                        <td nowrap="nowrap" align="right">{_current_bid}</td>
+                        <td nowrap="nowrap">{_bids}</td>
+                        <td nowrap="nowrap">{_time_left}</td>
+                        <td nowrap="nowrap">{_actions}</td>
+                    </tr>
+                    <loop name="watchlist_rfp"> 
+                    <tr valign="top" class="alt1"> 
+                        <td valign="top">{action}</td>
+                        <td valign="top" align="center">{sample}</td>
+                        <td><div><span style="float:right">{attach}</span><span class="blue">{title}</span> <span class="smaller">({watching_project_id})</span></div>
+                        <div style="padding-top:9px" class="watchlistcomment">{comment}</div>
+                        </td>
+                        <td nowrap="nowrap" align="right"><strong>{currentbid}</strong></td>
+                        <td nowrap="nowrap">{bids}</td>
+                        <td nowrap="nowrap">{timeleft}&nbsp;</td>
+                        <td nowrap="nowrap"><div class="blueonly"><a href="javascript:void(0)" onmouseover="show_actions_popup('{watching_project_id}')" onmouseout="hide_actions_popup('{watching_project_id}')">{_more_actions}</a> <span style="padding-left:3px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/expand_hover.png" border="0" alt="" /></span></div>
+                                
+                                
+                        <div style="display:none;position:absolute;z-index:5000;background-color:#fff;margin-top:1px;margin-left:-85px;background-color:#fff;border:1px solid #ccc;-webkit-box-shadow: #ddd 3px 3px 6px;-moz-box-shadow: #ddd 3px 3px 6px" id="actions_popup_{watching_project_id}" onmouseover="show_actions_popup_links('{watching_project_id}');" onmouseout="hide_actions_popup('{watching_project_id}');"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+<div id="inline_watchlist_{watchlistid}"><table border="0" cellpadding="9" cellspacing="0">
+{ajax_lowbidnotify}
+{ajax_highbidnotify}
+{ajax_lasthournotify}
+<!--{ajax_subscribed}-->
+<tr class="alt1" onmouseover="this.className='alt2'" onmouseout="this.className='alt1'">
+    <td><div class="blueonly"><a href="{http_server}{ilpage[search]}?mode=product&amp;sort=01&amp;searchuser={seller}&amp;exactname=1">{_view_sellers_other_items}</a></div></td>
+</tr>
+<tr class="alt1" onmouseover="this.className='alt2'" onmouseout="this.className='alt1'">
+    <td><div class="blueonly"><a href="{http_server}{ilpage[search]}?mode=product&amp;sort=01&amp;q={titleplain}">{_view_similar_items}</a></div></td>
+</tr>
+<tr class="alt1" onmouseover="this.className='alt2'" onmouseout="this.className='alt1'">
+    <td><div class="blueonly"><a href="{ilpage[selling]}?cmd=new-item&amp;cid={cid}">{_sell_a_similar_item}</a></div></td>
+</tr>
+{apihook[watchlist_options]}
+</table></div></div><div class="s"><div class="e"><div class="w"></div></div></div>
+                                
+                                
+                                
+                      </td>
+                      </tr></loop name="watchlist_rfp"> 
+                            <if condition="isset($show['no_watchlist_rfp']) AND $show['no_watchlist_rfp']"> 
+                            <tr> 
+                                <td colspan="7" nowrap="nowrap" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                            </tr>
+                            </if> 
+                            <if condition="isset($show['no_watchlist_rfp']) AND $show['no_watchlist_rfp'] == false">
+                            <tr> 
+                                <td colspan="7" class="alt2_top">
+                                    <select name="rfpcmd" class="select-250">
+                                    <optgroup label="{_select_action}">
+                                    <option value="delete">{_remove_selected}</option>
+                                    <option value="delete_all">{_remove_all}</option>
+                                    </optgroup>
+                                    </select> 
+                                    <input type="submit" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value="{_go}" />
+                                </td>
+                            </tr>
+                            </if>
+                            </table>
+                            
+</div>
+                        
+                        <div class="block-footer">
+                                <div class="block-right">
+                                        <div class="block-left"></div>
+                                </div>
+                        </div>
+                        
+                </div>
+                </div>
+                </form>
+            </div>
+        
+            <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']">
+            <div class="tab-page">
+                <h2 class="tab" id="0">{_providers}</h2>
+                <form method="post" action="{ilpage[watchlist]}" accept-charset="UTF-8" style="margin: 0px;">
+                <input type="hidden" name="cmd" value="_do-watch-cmd" />
+                <input type="hidden" name="state" value="sprovider" />
+                <div class="block-wrapper">
+        
+            <div class="block">
+            
+                    <div class="block-top">
+                            <div class="block-right">
+                                    <div class="block-left"></div>
+                            </div>
+                    </div>
+                    
+                    <div class="block-header">{_providers_youre_watching}</div>
+                    
+                    <div class="block-content" style="padding:0px">
+                        
+                <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr class="alt2"> 
+                  <td width="6%">{_sel}</td>
+                  <td width="1%" nowrap="nowrap">{_picture}</td>
+                  <td width="56%" nowrap="nowrap">{_provider} <a href="javascript:void(0)" onmouseover="Tip('<strong>' + phrase['_inline_edit'] + '</strong><br />{_you_can_now_change_the_comment_on_each_listing_by_double_clicking}', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                  <td width="10%" nowrap="nowrap">{_hourly_rate}</td>
+                  <td width="8%" nowrap="nowrap" align="right">{_earnings}</td>
+                  <td width="15%" nowrap="nowrap">{_feedback}</td>
+                </tr>
+                <loop name="watchlist_sproviders"> 
+                <tr class="alt1" valign="top"> 
+                  <td valign="top">{action}</td>
+                  <td align="center">{picture}</td>
+                  <td><!--<span style="float:right" class="smaller gray">{online}</span>-->
+                  <div class="blue">{provider}</div>
+                  <if condition="$ilconfig['enableskills']"><div class="smaller gray" style="padding-top:9px">{_skills}: {skills}</div></if>
+                  <div style="padding-top:9px" class="watchlistcomment">{comment}</div></td>
+                  <td>{hourlyrate}</td>
+                  <td nowrap="nowrap" align="right">{earnings}</td>
+                  <td nowrap="nowrap">{score}% {_positive}<div class="blue" style="padding-top:3px">{feedback}</div></td>
+                </tr></loop name="watchlist_sproviders"> 
+                <if condition="isset($show['no_watchlist_sproviders']) AND $show['no_watchlist_sproviders']"> 
+                <tr> 
+                    <td colspan="6" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                </tr>
+                </if> 
+                <if condition="$show['no_watchlist_sproviders'] == false">
+                <tr class="alt2_top"> 
+                  <td colspan="6"><select name="action" class="select-250">
+                      <optgroup label="{_select_action}">
+                        <option value="delete">{_remove_selected}</option>
+                        <option value="delete_all">{_remove_all}</option>
+                        <option value="invite">{_invite_to_bid}</option>
+                      </optgroup>
+                    </select> <input type="submit" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value="{_go}">                                          </td>
+                </tr>
+                </if>
+                </table>
+                        
+          </div>
+                    
+                    <div class="block-footer">
+                            <div class="block-right">
+                                    <div class="block-left"></div>
+                            </div>
+                    </div>
+                    
+            </div>
+        </div>
+        </form>
+        
+            </div>
+            </if>
+        
+            <if condition="$ilconfig['globalauctionsettings_productauctionsenabled']">
+            <div class="tab-page">
+                <h2 class="tab" id="1">{_sellers}</h2>
+                <form method="post" action="{ilpage[watchlist]}" accept-charset="UTF-8" style="margin: 0px;">
+                <input type="hidden" name="cmd" value="_do-watch-cmd" />
+                <input type="hidden" name="state" value="mprovider" />
+                <div class="block-wrapper">
+        
+            <div class="block">
+            
+                    <div class="block-top">
+                            <div class="block-right">
+                                    <div class="block-left"></div>
+                            </div>
+                    </div>
+                    
+                    <div class="block-header">{_sellers_youre_watching}</div>
+                    
+                    <div class="block-content" style="padding:0px">
+                        
+                        <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                        <tr class="alt2">
+                          <td width="6%">{_sel}</td>
+                          <td width="1%">{_picture}</td> 
+                            <td width="54%">{_seller} <a href="javascript:void(0)" onmouseover="Tip('<strong>' + phrase['_inline_edit'] + '</strong><br />{_you_can_now_change_the_comment_on_each_listing_by_double_clicking}', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                            <!--<td width="17%">{_reviews}</td>-->
+                            <td width="25%" nowrap="nowrap">{_items}</td>
+                            <td width="15%">{_feedback}</td>
+                          </tr>
+                        <loop name="watchlist_mproviders"><tr class="alt1" valign="top">
+                          <td>{action}</td>
+                          <td align="center">{picture}</td> 
+                            <td><!--<span style="float:right" class="smaller gray">{online}</span>-->
+                            <div class="blue">{provider}</div>
+                            <div style="padding-top:9px" class="watchlistcomment">{comment}</div></td>
+                            <!--<td nowrap="nowrap"><span class="blue">{feedback}</span></td>-->
+                            <td nowrap="nowrap"><div><span class="blue"><a href="{ilpage[search]}?mode=product&amp;searchuser={provider_plain}">{_see_items_listed_by_this_member}</a></span></div></td>
+                            <td nowrap="nowrap">{score}% {_positive}</td>
+                          </tr></loop name="watchlist_mproviders"> 
+                        <if condition="isset($show['no_watchlist_mproviders']) AND $show['no_watchlist_mproviders']"> 
+                        <tr> 
+                            <td colspan="6" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                        </tr>
+                        </if> 
+                        <if condition="$show['no_watchlist_mproviders'] == false">
+                        <tr class="alt2_top"> 
+                            <td colspan="6"><select name="action" class="select-250">
+                                <optgroup label="{_select_action}">
+                                <option value="delete">{_remove_selected}</option>
+                                <option value="delete_all">{_remove_all}</option>
+                                </optgroup>
+                                </select> 
+                                <input type="submit" class="button" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value="{_go}" /></td>
+                        </tr>
+                        </if>
+                        </table>
+                        
+                    </div>
+                    
+                    <div class="block-footer">
+                            <div class="block-right">
+                                    <div class="block-left"></div>
+                            </div>
+                    </div>
+                    
+            </div>
+        </div>
+        </form>
+    </div>	
+    </if>
+    
+    {apihook[watchlist_end]}
+    
+</div>
+        
+<script type="text/javascript">
+<!--
+setupAllTabs();
+//-->
+</script>

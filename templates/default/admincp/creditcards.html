@@ -1,0 +1,278 @@
+<div id="v3body4">
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+
+	<div id="content">
+	<h1>{_credit_card_management}</h1><br />
+		
+		<div class="tab-pane">
+		
+			<div class="tab-pane" id="creditcardlistings">
+		
+				<div class="tab-page">
+      				
+        			
+      <h2 class="tab">{_verified}</h2>
+	  
+	    <div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{numberverified} {_verified_credit_cards_found}</div>
+				<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_when_users_add_verified_credit_card_profile_to_their_account_this_information_will_be_presented_below}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+					<tr class="alt2"> 
+					  <td align="center" width="5%">ID</td>
+					  <td width="6%">{_card_number}</td>
+					  <td width="33%">{_customer}</td>
+					  <td align="center" nowrap width="8%">{_type}</td>
+					  <td align="center" width="7%">{_expiry}</td>
+					  <td align="center" width="7%">CVV2</td>
+					  <td align="center" width="10%">{_verified}</td>
+					  <td align="center" width="7%">{_status}</td>
+					  <td align="center" width="11%">{_remove}</td>
+					</tr>
+					<loop name="verifiedcreditcards"> 
+					<tr valign="top" class="alt1"> 
+					  <td nowrap align="center">{cc_id}</td>
+					  <td nowrap><span class="blue">{ccnum}</span></td>
+					  <td nowrap><table width="100%" border="0" cellspacing="2" cellpadding="0">
+						  <tr> 
+							<td colspan="2" nowrap><span class="blue">{customer}</span></td>
+						  </tr>
+						  <tr> 
+							<td width="52%" nowrap>&nbsp;<img src="{template_relativeimagepath}{template_imagesfolder}phone.gif" alt="" border="0" />&nbsp;&nbsp;{phone}</td>
+							<td width="48%">&nbsp;</td>
+						  </tr>
+						  <tr>
+						    <td nowrap><span class="gray">{_name_on_card}:</span></td>
+						    <td><span>{username}</span></td>
+					    </tr>
+						  <tr>
+						    <td nowrap><span class="gray">{_verification_amount_sum}:</span></td>
+						    <td><strong>{authamounts}</strong></td>
+					    </tr>
+						</table></td>
+					  <td align="center">{cardtype}</td>
+					  <td align="center">{expiry}</td>
+					  <td align="center"><!-- {cvv2} //-->--</td>
+					  <td align="center">{authenticated}</td>
+					  <td align="center">{status}</td>
+					  <td align="center">{remove}</td>
+					</tr>
+					
+					</loop name="verifiedcreditcards">
+					<if condition="isset($show['no_verifiedcreditcards']) AND $show['no_verifiedcreditcards']"> 
+					<tr> 
+					  <td colspan="11" align="center">{_no_results_found}</td>
+					</tr>
+					<else />
+					<tr> 
+					  <td colspan="11">{verifiedprevnext}</td>
+					</tr>
+					</if> 
+				  </table>
+
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+
+    </div>
+
+				<div class="tab-page">
+					
+          
+      <h2 class="tab">{_unverified}</h2>
+	  
+	    <div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{numberunverified} {_unverified_credit_cards_found}</div>
+				<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_when_users_add_a_credit_card_which_is_still_unverified_and_is_pending}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+        <tr class="alt2"> 
+          <td align="center" width="5%">ID</td>
+          <td width="6%">#</td>
+          <td width="33%">{_customer}</td>
+          <td align="center" nowrap width="8%">{_type}</td>
+          <td align="center" width="7%">{_expiry}</td>
+          <td align="center" width="7%">CVV2</td>
+          <td align="center" width="10%">{_verified}</td>
+          <td align="center" width="7%">{_status}</td>
+          <td align="center" width="11%">{_remove}</td>
+        </tr>
+        <loop name="unverifiedcreditcards"> 
+        <tr valign="top" class="alt1"> 
+          <td nowrap align="center">{cc_id}</td>
+          <td nowrap>{ccnum}</td>
+          <td nowrap>
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+						  <tr> 
+							<td colspan="2" nowrap><span class="blue">{customer}</span></td>
+						  </tr>
+						  <tr> 
+							<td width="52%" nowrap>&nbsp;<img src="{template_relativeimagepath}{template_imagesfolder}phone.gif" alt="" border="0" />&nbsp;&nbsp;{phone}</td>
+							<td width="48%">&nbsp;</td>
+						  </tr>
+						  <tr>
+						    <td nowrap><span class="gray">{_name_on_card}:</span></td>
+						    <td><span>{username}</span></td>
+					    </tr>
+						  <tr>
+						    <td nowrap><span class="gray">{_verification_amount_sum}:</span></td>
+						    <td><strong>{authamounts}</strong></td>
+					    </tr>
+						</table></td>
+          <td align="center">{cardtype}</td>
+          <td align="center">{expiry}</td>
+          <td align="center"><!-- {cvv2} //-->--</td>
+          <td align="center">{authenticated}</td>
+          <td align="center">{status}</td>
+          <td align="center">{remove}</td>
+        </tr>
+		
+        </loop name="unverifiedcreditcards"> 
+		<if condition="isset($show['no_unverifiedcreditcards']) AND $show['no_unverifiedcreditcards']"> 
+        <tr> 
+          <td colspan="11" align="center">{_no_results_found}</td>
+        </tr>
+		<else />
+		<tr> 
+          <td colspan="11">{unverifiedprevnext}</td>
+        </tr>
+        </if> 
+      </table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</div>
+	
+	<div class="tab-page">
+					
+          
+      <h2 class="tab">{_expired}</h2>
+	  
+	    <div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{numberexpired} {_expired_credit_cards_found}</div>
+				<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_when_the_automation_system_detectes_expired_credit_cards}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+				  <table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+				  <tr class="alt2"> 
+					  <td align="center" width="5%">ID</td>
+					  <td width="6%">#</td>
+					  <td width="33%">{_customer}</td>
+					  <td align="center" nowrap width="8%">{_type}</td>
+					  <td align="center" width="7%">{_expiry}</td>
+					  <td align="center" width="7%">CVV2</td>
+					  <td align="center" width="10%">{_verified}</td>
+					  <td align="center" width="7%">{_status}</td>
+					  <td align="center" width="11%">{_remove}</td>
+					</tr>
+					<loop name="expiredcreditcards"> 
+					<tr valign="top" class="alt1"> 
+					  <td nowrap align="center">{cc_id}</td>
+					  <td nowrap>{ccnum}</td>
+					  <td nowrap><table width="100%" border="0" cellspacing="2" cellpadding="0">
+						  <tr> 
+							<td colspan="2" nowrap><span class="blue">{customer}</span></td>
+						  </tr>
+						  <tr> 
+							<td width="52%" nowrap>&nbsp;<img src="{template_relativeimagepath}{template_imagesfolder}phone.gif" alt="" border="0" />&nbsp;&nbsp;{phone}</td>
+							<td width="48%">&nbsp;</td>
+						  </tr>
+						  <tr>
+						    <td nowrap><span class="gray">{_name_on_card}:</span></td>
+						    <td><span>{username}</span></td>
+					    </tr>
+						  <tr>
+						    <td nowrap><span class="gray">{_verification_amount_sum}:</span></td>
+						    <td><strong>{authamounts}</strong></td>
+					    </tr>
+						</table>
+					  </td>
+					  <td align="center">{cardtype}</td>
+					  <td align="center">{expiry}</td>
+					  <td align="center"><!-- {cvv2} //-->--</td>
+					  <td align="center">{authenticated}</td>
+					  <td align="center">{status}</td>
+					  <td align="center">{remove}</td>
+					</tr>
+					
+					</loop name="expiredcreditcards">
+					<if condition="isset($show['no_expiredcreditcards']) AND $show['no_expiredcreditcards']"> 
+					<tr> 
+					  <td colspan="11" align="center">{_no_results_found}</td>
+					</tr>
+					<else />
+					<tr> 
+					  <td colspan="11">{expiredprevnext}</td>
+					</tr>
+					</if> 
+				  </table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	  
+      
+		  
+</div>
+</div>
+</div>
+
+<br />
+<br />

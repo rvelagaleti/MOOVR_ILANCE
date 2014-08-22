@@ -1,0 +1,68 @@
+{form[errors]}
+        
+<form method="post" name="ilform" action="{ilpage[accounting]}" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="_update-bankaccount" />
+<input type="hidden" name="bankid" value="{form[bankid]}" />
+<div class="block-wrapper">
+
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header"><if condition="(empty($form['errors']) AND isset($ilance->GPC['preview']))">{_preview}<else />{_update_bank_account_menu}</if></div>
+            <div class="block-content-yellow" style="padding:9px"><div class="smaller">{_please_use_this_menu_to_update_a_bank_account}</div></div>
+            
+            <div class="block-content" style="padding:0px">
+                
+                <div>
+                        
+                            <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+                            <tr class="alt1"> 
+                                  <td width="49%"><div>{_beneficiary_account_name}</div><div style="padding-top:3px"><input type="text" name="form[beneficiary_account_name]" value="{form[beneficiary_account_name]}" class="input" size="35" /></div></td>
+                                  <td width="51%"><div>{_bank_name}</div><div><input type="text" name="form[beneficiary_bank_name]" value="{form[beneficiary_bank_name]}" class="input" size="35" /></div></td>
+                            </tr>
+                            <tr class="alt1"> 
+                                  <td width="49%"><div>{_bank_account_type}</div><div style="padding-top:3px">{form[bank_account_type_pulldown]}</div></td>
+                                  <td width="51%" valign="top"><div>{_destination_currency}</div><div style="padding-top:3px">{form[bank_currency_pulldown]}</div></td>
+                            </tr>
+                            <tr class="alt1"> 
+                                  <td width="49%"><div>{_beneficiary_account_number}</div><div style="padding-top:3px"><input type="text" name="form[beneficiary_account_number]" value="{form[beneficiary_account_number]}" class="input" size="35" /></div></td>
+                                  <td width="51%"><div>{_bank_routing_number_swift_code}</div><div style="padding-top:3px"><input type="text" name="form[beneficiary_bank_routing_number_swift]" value="{form[beneficiary_bank_routing_number_swift]}" class="input" size="35" /></div></td>
+                            </tr>
+                            <tr class="alt1"> 
+                                <td width="49%"><div>{_beneficiary_bank_address_one}</div><div style="padding-top:3px"><input type="text" name="form[beneficiary_bank_address_1]" value="{form[beneficiary_bank_address_1]}" class="input" size="35" /></div></td>
+                                <td width="51%"><div>{_beneficiary_bank_address_two_optional}</div><div style="padding-top:3px"><input type="text" name="form[beneficiary_bank_address_2]" value="{form[beneficiary_bank_address_2]}" class="input" size="35" /></div></td>
+                            </tr>
+                            <tr class="alt1"> 
+                                <td width="49%"><div>{_bank} {_country}</div><div style="padding-top:3px">{form[bank_country_pulldown]}</div></td>
+                                 <td width="51%"><div>{_bank} {_state_or_province}</div><div style="padding-top:3px"><input type="text" name="form[beneficiary_bank_state]" value="{form[beneficiary_bank_state]}" class="input" size="35" /></div></td>
+                            </tr>
+                            <tr> 
+                                <td width="49%"><div>{_beneficiary_bank_city}</div><div style="padding-top:3px"><input type="text" name="form[beneficiary_bank_city]" value="{form[beneficiary_bank_city]}"class="input" size="35" /></div></td>
+                                <td width="51%"><div>{_beneficiary_bank_zip_or_postal_code}</div><div style="padding-top:3px"><input type="text" name="form[beneficiary_bank_zipcode]" value="{form[beneficiary_bank_zipcode]}" class="input" size="35" /></div></td>
+                            </tr>
+                            <tr class="alt2_top">
+                                <td colspan="2"><if condition="(empty($form['errors']) AND isset($ilance->GPC['preview']))">
+                                <input type="submit" class="buttons" name="submit" value=" {_save} " style="font-size:15px" /> <input type="submit" class="buttons" name="preview" value=" {_preview} " /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="{https_server}{ilpage[accounting]}">{_cancel}</a></span>
+                                <else />
+                                <input type="submit" class="buttons" name="preview" value=" {_preview} " style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="{https_server}{ilpage[accounting]}">{_cancel}</a></span>
+                                </if></td>
+                            </tr>
+                            </table>
+                    </div>
+                
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>

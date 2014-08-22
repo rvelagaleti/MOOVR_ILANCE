@@ -1,0 +1,354 @@
+<div id="v3body4"> 
+    <!-- sub navigation -->
+    <div id="sub">
+	<div id="subnav">
+	    <loop name="subnav_settings">
+		<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+	    </loop name="subnav_settings">
+	</div>
+    </div>
+    <!-- /sub navigation -->
+    <div id="content">
+	<h1>{_automated_tasks_and_scheduled_events}</h1><br />
+
+	<div class="tab-pane">
+	    <div class="tab-pane" id="automation">
+		<div class="tab-page">
+		    <h2 class="tab">{_tasks}</h2>
+
+		    <div class="block-wrapper">
+
+			<div class="block">
+
+			    <div class="block-top">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+
+			    <div class="block-header">{_automated_tasks_and_scheduled_events}</div>
+			    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_an_overview_of_all_scheduled_automated_tasks_is_presented_below}</div></div>
+			    <div class="block-content" style="padding:0px">
+
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">	
+				    <tr class="alt2"> 
+					<td width="5%" align="center">{_minute}</td>
+					<td width="5%" align="center">{_hour}</td>
+					<td width="5%" align="center">{_day}</td>
+					<td width="5%" align="center">{_month}</td>
+					<td width="5%" align="center" nowrap="nowrap">{_day_of_week}</td>
+					<td width="27%">{_task}</td>
+					<td width="10%">{_next_run}</td>
+					<td width="5%">{_product}</td>
+					<td width="30%">{_action}</td>
+				    </tr>
+				    <loop name="tasks">
+					<tr class="alt1" valign="top"> 
+					    <td width="8%" align="center">{minute}</td>
+					    <td width="7%" align="center">{hour}</td>
+					    <td width="8%" align="center">{day}</td>
+					    <td width="9%" align="center">{month}</td>
+					    <td width="11%" align="center">{day_of_week}</td>
+					    <td width="27%">{job}<div style="padding-top:3px" class="smaller litegray" title="{_average_time_in_seconds}">~{average}</div></td>
+					    <td nowrap="nowrap">{nextrun}</td>
+					    <td width="5%">{product}</td>
+					    <td width="30%" align="center" nowrap="nowrap">{action}</td>
+					</tr>
+				    </loop name="tasks">
+				</table>
+
+			    </div>
+
+			    <div class="block-footer">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+
+			</div>
+		    </div>
+
+		</div>
+
+
+		<!-- add task tab page -->
+		<div class="tab-page">
+
+		    <h2 class="tab">{_add_task}</h2>
+		    <form method="post" action="{ilpage[settings]}" name="ilform" accept-charset="UTF-8" style="margin: 0px;">
+			<input type="hidden" name="cmd" value="automation" />
+			<input type="hidden" name="subcmd" value="add-new-task" />
+			<input type="hidden" name="return" value="{ilpage[settings]}?cmd=automation" />
+			<div class="block-wrapper">
+			    <div class="block">
+
+				<div class="block-top">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+				<div class="block-header">{_add_new_scheduled_task}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_add_a_new_scheduled_task_using_the_form_below}</div></div>
+				<div class="block-content" style="padding:0px">
+
+				    <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+					<tr class="alt1">
+					    <td>{_task_identifier_title} </td>
+					    <td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td><input type="text" class="input" name="title" id="title" value="" size="35" dir="ltr" tabindex="1" /></td><td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_for_example_if_you_are_creating_a_subscription_task_you_would_call_this_subscriptions']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+					</tr>
+					<tr class="alt1">
+					    <td>{_minutes}</td>
+					    <td><table cellpadding="0" cellspacing="0" border="0" width="100%">
+						    <tr><td>{minute0} {minute1} {minute2} {minute3}</td>
+							<td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_may_specify_what_minutes_past_the_hour_this_task_will_run']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td>
+						    </tr>
+						</table></td>
+					</tr>
+					<tr class="alt1">
+					    <td>{_hour}</td>
+					    <td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>{hour}
+							</td><td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_may_specify_what_hour_this_task_will_run']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+					</tr>
+
+					<tr class="alt1">
+					    <td>{_day_of_the_week} <div class="smaller gray" style="padding-top:3px">{_note_this_overrides_day_of_the_month_option_below}</div></td>
+					    <td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td><select name="weekday" id="sel_weekday" tabindex="1" class="select-75">
+								<option value="-1" selected="selected">*</option>
+								<option value="1">{_monday}</option>
+								<option value="2">{_tuesday}</option>
+								<option value="3">{_wednesday}</option>
+								<option value="4">{_thursday}</option>
+								<option value="5">{_friday}</option>
+								<option value="6">{_saturday}</option>
+								<option value="0">{_sunday}</option>
+							    </select>
+							</td><td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_may_specify_what_day_of_the_week_this_task_will_run']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+					</tr>
+					<tr class="alt1">
+					    <td>{_day_of_the_month}</td>
+					    <td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>{day}
+							</td><td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_may_specify_what_day_of_the_month_this_task_will_run']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+					</tr>
+					<tr class="alt1">
+					    <td>{_save_logged_tasks_into_the_database}  </td>
+					    <td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td><span class="smallfont" style="white-space:nowrap">
+								<label for="rb_1_loglevel"><input type="radio" name="loglevel" id="rb_1_loglevel" value="1" tabindex="1" />{_yes}</label>
+								<label for="rb_0_loglevel"><input type="radio" name="loglevel" id="rb_0_loglevel" value="0" tabindex="1" checked="checked" />{_no}</label>
+							    </span></td><td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_whenever_a_task_you_create_is_executed_at_the_specified_time_the_cron_system_may']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+					</tr>
+					<tr class="alt1">
+					    <td>{_php_script_filename}<div class="smaller gray" style="padding-top:3px">Upload to: .{dir_server_root}functions/cron/</div></td>
+					    <td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td><input type="text" class="input" name="filename" id="it_filename" value=".php" size="35" dir="ltr" tabindex="1" /></td><td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_will_enter_the_name_of_the_php_script_you_wish_to_execute']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+					</tr>
+					<tr class="alt1">
+					    <td>{_product}</td>
+					    <td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+							<td>{products_pulldown}</td>
+							<td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_will_select_here_for_which_product_or_addon_this_scheduled_task_is_associated_with']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+					</tr>
+					<tr class="alt2_top">
+					    <td colspan="2">	
+						<input type="submit" class="buttons" tabindex="1" value="  {_save}  " style="font-size:15px" accesskey="s" />
+					    </td>
+					</tr>
+				    </table>
+
+				</div>
+
+				<div class="block-footer">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+			    </div>
+			</div>
+		    </form>
+		</div>
+		<!-- / add task tab page -->
+
+		<!-- task log -->
+		<div class="tab-page">
+
+		    <h2 class="tab">{_task_log}</h2>
+
+		    <form action="{ilpage[settings]}" name="ilform" method="get" accept-charset="UTF-8" style="margin:0px">
+			<input type="hidden" name="cmd" value="automation" />
+			<div class="block-wrapper">
+			    <div class="block">
+
+				<div class="block-top">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+				<div class="block-header">{_search_scheduled_task_history}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_view_scheduled_task_log_and_review_past_events_executed}</div></div>
+				<div class="block-content" style="padding:0px">
+
+				    <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+					<tr class="alt1">
+					    <td width="34%">{_entries_to_show_per_page}</td>
+					    <td width="66%">
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						    <tr valign="top">
+							<td>{pp_pulldown}</td>
+						    </tr>
+						</table>
+					    </td>
+					</tr>
+					<tr class="alt1" valign="top">
+					    <td>{_show_only_entries_generated_by}</td>
+					    <td><table cellpadding="0" cellspacing="0" border="0" width="100%">
+						    <tr valign="top">
+							<td>{tasks_pulldown}</td>
+						    </tr>
+						</table></td>
+					</tr>
+					<tr valign="top" class="alt1">
+					    <td>{_order_by}</td>
+					    <td>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						    <tr valign="top">
+							<td>
+							    <select name="orderby" id="sel_orderby" tabindex="1" class="select-75">
+								<option value="dateline"<if condition="isset($ilance->GPC['orderby']) AND $ilance->GPC['orderby'] == 'dateline'"> selected="selected"</if>>{_date}</option>
+								<option value="time"<if condition="isset($ilance->GPC['orderby']) AND $ilance->GPC['orderby'] == 'time'"> selected="selected"</if>>{_seconds}</option>
+								<option value="varname"<if condition="isset($ilance->GPC['orderby']) AND $ilance->GPC['orderby'] == 'varname'"> selected="selected"</if>>{_task}</option>
+							    </select> <select name="displayorder" id="sel_displayorder" tabindex="1" class="select">
+								<option value="asc"<if condition="isset($ilance->GPC['displayorder']) AND $ilance->GPC['displayorder'] == 'asc'"> selected="selected"</if>>{_ascending}</option>
+								<option value="desc"<if condition="isset($ilance->GPC['displayorder']) AND $ilance->GPC['displayorder'] == 'desc'"> selected="selected"</if>>{_descending}</option>
+							    </select>
+							</td>
+						    </tr>
+						</table></td>
+					</tr>
+					<tr class="alt2_top">
+					    <td colspan="2"><input type="submit" class="buttons" tabindex="1" value=" {_view} " style="font-size:15px" accesskey="s" />
+					    </td>
+					</tr>
+				    </table>
+
+				</div>
+
+				<div class="block-footer">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+			    </div>
+			</div>
+			<input type="hidden" name="do" value="view" />
+		    </form>
+
+		    <if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'view'">
+			<div class="block-wrapper">
+			    <div class="block">
+
+				<div class="block-top">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+				<div class="block-header">{_task_history_log_results}</div>
+				<div class="block-content" style="padding:0px">
+
+				    <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+					<tr valign="top" class="alt2">
+					    <td align="left">{_id}</td>
+					    <td>{_task}</td>
+					    <td>{_date}</td>
+					    <td>{_details}</td>
+					    <td>{_seconds}</td>
+					</tr>
+					<loop name="cronlog">
+					    <tr align="center" class="alt1" valign="top">
+						<td align="left">{cronlogid}</td>
+						<td align="left" nowrap="nowrap">{varname}</td>
+						<td align="left" nowrap="nowrap">{dateline}</td>
+						<td align="left">{description}</td>
+						<td align="left" nowrap="nowrap">{time}</td>
+					    </tr>
+					</loop name="cronlog">
+					<tr>
+					    <td colspan="5">{prevnext}</td>
+					</tr>
+				    </table>
+
+				</div>
+
+				<div class="block-footer">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+			    </div>
+			</div>
+		    </if>
+
+		</div>
+		<!-- / task log -->
+
+		<!-- prune log -->
+		<div class="tab-page">
+
+		    <h2 class="tab">{_prune_log}</h2>
+		    <form action="{ilpage[settings]}" name="ilform" method="post" accept-charset="UTF-8" style="margin:0px">
+			<input type="hidden" name="cmd" value="automation" />
+			<div class="block-wrapper">
+			    <div class="block">
+
+				<div class="block-top">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+				<div class="block-header">{_prune_scheduled_task_log}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_remove_old_scheduled_task_logs_that_have_executed_in_the_past}</div></div>
+				<div class="block-content" style="padding:0px">
+				    <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+					<tr class="alt1">
+					    <td width="35%">{_remove_logs_relating_to_task}</td>
+					    <td width="65%">
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						    <tr>
+							<td>{tasks_pulldown}</td>
+						    </tr>
+						</table></td>
+					</tr>
+					<tr class="alt1">
+					    <td>{_remove_logs_older_than_days}</td>
+					    <td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td><input type="text" class="input" name="days" id="days" value="30" size="10" dir="ltr" tabindex="1" /></td>
+						    </tr>
+						</table></td>
+					</tr>
+					<tr class="alt2_top">
+					    <td colspan="2"><input type="submit" class="buttons" tabindex="1" value="{_prune}" accesskey="s" style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}');" />
+					    </td>
+					</tr>
+				    </table>
+				</div>
+
+				<div class="block-footer">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+			    </div>
+			</div>
+
+			<input type="hidden" name="do" value="prune" />
+			<input type="hidden" name="return" value="{ilpage[settings]}?cmd=automation" />
+		    </form>
+
+		</div>
+		<!-- / prune log -->
+
+	    </div>

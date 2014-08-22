@@ -1,0 +1,185 @@
+<if condition="isset($show['deposit_errors']) AND $show['deposit_errors']">
+<div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+<tr>
+<td>
+<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+    <td style="padding-left:5px;" valign="top"></td>
+    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+    <td style="padding-right:5px;"><div style="color:#990000; font-size:14px"><strong>{_were_sorry_please_reenter_deposit_information_below}</strong></div><div style="padding-top:4px">{_you_either_entered_an_incorrect_amount_or_have_not_provided}</div></td>
+</tr>
+</table>
+</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+</td>
+</tr>
+</table>
+</div>
+</if>
+
+<div class="bigtabs" style="padding-bottom:10px; padding-top:5px">
+<div class="bigtabsheader">
+<ul>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}">{_accounting}</a></li>
+    <li title="" class="on"><a href="javascript:void(0)">{_deposit}</a></li>
+    <if condition="empty($_SESSION['ilancedata']['user']['active']) OR $_SESSION['ilancedata']['user']['active'] == 'no' OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'withdraw') == 'no'"><else /><li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=withdraw">{_withdraw}</a></li></if>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=transactions">{_transactions}</a></li>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=sch-transactions">{_scheduled_transactions}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<div class="block-wrapper">
+
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header">{_deposit_funds_menu}</div>
+            
+            <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_fund_your_account_balance_to_use_when_paying_for_unpaid_transactions_in_the_marketplace}</div></div>
+            <div class="block-content" style="padding:0px">
+                
+              <form name="deposit" action="{ilpage[accounting]}" method="post" accept-charset="UTF-8" onsubmit="return validate_deposit_form(this);" style="margin: 0px;">
+                <input type="hidden" name="cmd" value="_secure-deposit" />
+                <input type="hidden" name="do" value="preview" />
+                <input type="hidden" name="returnurl" value="{returnurl}" />
+                <table border="0" width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr class="alt1">
+                    <td colspan="3">
+                    
+                        <div>{_method}</div>
+                        <div style="padding-top:3px">{deposit_method_pulldown}</div>
+                        
+                    </td>
+                </tr>
+                <tr class="alt1" style="display:none;" id="paypaloptions">
+                    <td colspan="3">
+                        
+                            <div style="padding-bottom:3px">{_enter_your_paypal_email_address}</div>
+                            <div class="gray" style="padding-bottom:3px">{_please_enter_your_verified_paypal_email_address_you_will_be_sending_payment_with_below}</div>
+                            <div><input type="text" size="5" name="ppemail" value="" class="input" style="width:250px" />  <img name="paypalemailerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div>
+                        
+                    </td>
+                </tr>
+                <tbody style="display:none;" id="creditcardoptions">
+                <tr class="alt2_top">
+                    <td colspan="3" style="width:1100px"><div><strong>{_credit_card}</strong></div></td>
+                </tr>
+                <tr class="alt1">
+                    <td nowrap="nowrap"><div class="gray">{_card_type}</div></td>
+                    <td colspan="2" nowrap="nowrap">{cc_type_pulldown}</td>
+                </tr>
+                <tr class="alt1">
+                    <td nowrap="nowrap"><div class="gray">{_card_number}</div></td>
+                    <td nowrap="nowrap"><input type="text" size="5" name="creditcard_number" value="" class="input" style="width:150px" autocomplete="off" /></td>
+                    <td nowrap="nowrap"><div class="gray">{_expiration}  &nbsp;&nbsp;&nbsp;<select name="creditcard_month" style="font-family: verdana">
+                                            
+                                            <option value="">{_month}</option>
+                                                <option value="01" >01 - {_january}</option>
+                                                <option value="02" >02 - {_february}</option>
+                                                <option value="03" >03 - {_march}</option>
+                                                <option value="04" >04 - {_april}</option>
+                                                <option value="05" >05 - {_may}</option>
+                                                <option value="06" >06 - {_june}</option>
+                                                <option value="07" >07 - {_july}</option>
+                                                <option value="08" >08 - {_august}</option>
+                                                <option value="09" >09 - {_september}</option>
+                                                <option value="10" >10 - {_october}</option>
+                                                <option value="11" >11 - {_november}</option>
+                                                <option value="12" >12 - {_december}</option>
+                                          </select>
+                                          <select name="creditcard_year" style="font-family: verdana">
+                                            <option value="">{_year}</option>
+                                                <option value="2009" >2009</option>
+                                                <option value="2010" >2010</option>
+                                                <option value="2011" >2011</option>               
+                                                <option value="2012" >2012</option>
+                                                <option value="2013" >2013</option>
+                                                <option value="2014" >2014</option>
+                                                <option value="2015" >2015</option>
+                                                <option value="2016" >2016</option>
+                                                <option value="2017" >2017</option>
+                                                <option value="2018" >2018</option>
+                                                <option value="2019" >2019</option>
+                                                <option value="2020" >2020</option>												
+                                          </select></div></td>
+                </tr>
+                <tr class="alt1">
+                    <td nowrap="nowrap"><div class="gray">CVV2 {_number}</div></td>
+                    <td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_cvv2" value="" class="input" style="width:50px" autocomplete="off" /></td>
+                </tr>
+                <if condition="isset($show['paypal_pro']) AND $show['paypal_pro'] == true">
+                <tr class="alt1">
+                    <td nowrap="nowrap"><div class="gray">{_first_name_on_card}</div></td>
+                    <td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_firstname" id="creditcard_firstname" value="" class="input" style="width:150px" autocomplete="off" /></td>
+                </tr>
+                <tr class="alt1">
+                    <td nowrap="nowrap"><div class="gray">{_last_name_on_card}</div></td>
+                    <td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_lastname" id="creditcard_lastname" value="" class="input" style="width:150px" autocomplete="off" /></td>
+                </tr>
+                <else />
+                <tr class="alt1">
+                    <td nowrap="nowrap"><div class="gray">{_name_on_card}</div></td>
+                    <td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_name" value="" class="input" style="width:150px" autocomplete="off" /></td>
+                </tr>
+                </if>
+                <tr class="alt1">
+                    <td nowrap="nowrap"><div class="gray">{_billing_address}</div></td>
+                    <td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_billing" value="" class="input" style="width:250px" autocomplete="off" /></td>
+                </tr>
+                <tr class="alt1">
+                    <td nowrap="nowrap"><div class="gray">{_billing_postal_code}</div></td>
+                    <td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_postal" value="" class="input" style="width:50px" autocomplete="off" /></td>
+                </tr>
+                </tbody>
+                <tbody style="display:none;" id="depositoptions" class="alt1">
+                <tr class="alt2_top">
+                    <td colspan="3" style="width:1100px"><div><strong>{_deposit_amount}</strong></div></td>
+                </tr>
+                <tr class="alt1">
+                    <td colspan="3" class="alt1">
+                    
+                        <div style="padding-top:3px">{currencysymbol} <input type="text" size="8" id="deposit_amount" name="deposit_amount" value="" class="input" onkeyup="calculator(this, this.form, account_id.options[account_id.selectedIndex].value)" autocomplete="off" /> <img name="deposit_amounterror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div>
+                        <div style="padding-top:3px; width:100%" class="smaller black">{_this_value_will_be_the_total_amount_deposited_into_your_online_account_please_adjust_amount_accordingly}</div>
+                        <div style="padding-top:8px" class="smaller gray">{_minimum_deposit_to_your_account_is}: <span class="black" id="min_deposit_amount"></span></div>
+                        <div style="padding-top:3px" class="smaller gray">{_maximum_deposit_to_your_account_is}: <span class="black" id="max_deposit_amount"></span></div>
+                        
+                    </td>
+                </tr>
+                <tr class="alt1">
+                    <td colspan="3">
+                    
+                        <if condition="$ilconfig['invoicesystem_showlivedepositfees']">
+                        <div style="padding-bottom:3px"><strong>{_fees}</strong></div>
+                        <div style="padding-bottom:3px">{_gateway_fee}: <span>{currency}</span><span id="objTotalGWFees">0.00</span></div>
+                        <div>{_total_amount_to_pay}: <span>{currency}</span><span id="objTotalFees">0.00</span>
+                        <input type="hidden" name="accountcredit" id="objAccountCredit" value="" /></div><else />
+                        <span id="objTotalGWFees"></span><span id="objTotalFees"></span></if>
+                        <input type="hidden" name="deposit_amount2" id="objAccountCredit" value="" />
+                        
+                    </td>
+                </tr>
+                </tbody>
+                <tr class="alt2_top">
+                    <td colspan="3"><input type="submit" value=" {_continue} " class="buttons" style="font-size:15px" /></td>
+                </tr>
+                </table>
+                </form>
+                
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>

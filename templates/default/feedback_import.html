@@ -1,0 +1,137 @@
+<h1 style="padding-bottom:9px">{_import_your_feedback_from_other_marketplaces}</h1>
+<form method="post" action="{http_server}{ilpage[feedback]}" name="ilform" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="_do-feedback-import" />
+<input type="hidden" name="subcmd" value="process" />
+<div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+<tr>
+	<td><div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+		<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+        <tr class="alt1">
+            <td height="25" nowrap="nowrap" colspan="5"><h3>{_your_feedback_verification_code}: &nbsp;&nbsp;&nbsp;
+                <input type="text" value="{md5user}" size="50" style="font-size:14px"></h3>{error}</td>
+        </tr>
+        <tr class="alt3">
+            <td width="70%">{_import_from}</td>
+            <td width="5%" nowrap="nowrap">{_current_score}</td>
+            <td width="5%" nowrap="nowrap">{_last_updated}</td>
+            <td width="10%">{_username}</td>
+            <td width="10%">{_user_id}</td>
+        </tr>
+        <tr class="alt1" valign="top">
+            <td><h2><input type="radio" name="import" value="ebay"> <img src="{template_relativeimagepath}{template_imagesfolder}icons/ebay.png" border="0" alt="" style="vertical-align:middle;margin-top:-5px;padding-right:4px;padding-left:4px" /> eBay</h2>
+            <div style="padding-top:9px;line-height:1.4em" class="smaller gray">To import your Feedback score from eBay you will need to copy and then 
+	paste the above verification code onto your eBay AboutMe Page. </div></td>
+            <td><div style="font-size:14px"><strong>{data[fb_ebay]}</strong></div></td>
+            <td nowrap="nowrap">{data[dv_ebay]}</td>
+            <td align="left"><input type="text" name="ebayusername" size="15" class="input" value="{data[id_ebay]}" /></td>
+            <td align="left"><input type="text" name="" size="15" class="input" disabled="disabled" style="background-color:#dfdfdf"></td>
+        </tr>
+        <tr class="alt1" valign="top">
+            <td><h2><input type="radio" name="import" value="bonanzle"> <img src="{template_relativeimagepath}{template_imagesfolder}icons/bonanzle.gif" border="0" alt="" style="vertical-align:middle;margin-top:-5px;padding-right:4px;padding-left:4px" /> Bonanzle</h2>
+            <div style="padding-top:9px;line-height:1.4em" class="smaller gray">To import your Feedback score  from Bonanzle you will need to copy and then 
+	paste the above verification code into the "More booth details" page on your Booth. Once you are logged into the 
+	members area, click 'See my booth' then 'More booth Details' and click the 'Edit' under 'Booth overview'.</div></td>
+            <td><div style="font-size:14px"><strong>{data[fb_bonanzle]}</strong></div></td>
+            <td nowrap="nowrap">{data[dv_bonanzle]}</td>
+            <td align="left"><input type="text" name="bonanzleusername" size="15" class="input" value="{data[id_bonanzle]}" /></td>
+            <td align="left"><input type="text" name="" size="15" class="input" disabled="disabled" style="background-color:#dfdfdf"></td>
+        </tr>
+        <tr class="alt1" valign="top">
+            <td><h2><input type="radio" name="import" value="yahoo"> <img src="{template_relativeimagepath}{template_imagesfolder}icons/yahoo.png" border="0" alt="" style="vertical-align:middle;margin-top:-5px;padding-right:4px;padding-left:4px" /> Yahoo</h2>
+            <div style="padding-top:9px;line-height:1.4em" class="smaller gray">To import your Feedback score from Yahoo you will need to copy and then 
+	paste the above verification code onto your Yahoo About Me Page.</div></td>
+            <td><div style="font-size:14px"><strong>{data[fb_yahoo]}</strong></div></td>
+            <td nowrap="nowrap">{data[dv_yahoo]}</td>
+            <td align="left"><input type="text" name="yahoousername" size="15" class="input" value="{data[id_yahoo]}" /></td>
+            <td align="left"><input type="text" name="" size="15" class="input" disabled="disabled" style="background-color:#dfdfdf"></td>
+        </tr>
+        <tr class="alt1" valign="top">
+            <td><h2><input type="radio" name="import" value="emarket"> <img src="{template_relativeimagepath}{template_imagesfolder}icons/emarketgr.gif" border="0" alt="" style="vertical-align:middle;margin-top:-5px;padding-right:4px;padding-left:4px" /> eMarket</h2>
+            <div style="padding-top:9px;line-height:1.4em" class="smaller gray">To import your Feedback score from emarket.gr you will need to copy and then 
+	paste the above verification code onto your emarket About Me Page.</div></td>
+            <td><div style="font-size:14px"><strong>{data[fb_emarket]}</strong></div></td>
+            <td nowrap="nowrap">{data[dv_emarket]}</td>
+            <td align="left"><input type="text" name="emarketusername" size="15" class="input" value="{data[id_emarket]}" /></td>
+            <td align="left"><input type="text" name="" size="15" class="input" disabled="disabled" style="background-color:#dfdfdf"></td>
+        </tr>
+        
+       	<tr class="alt1" valign="top">
+            <td><h2><input type="radio" name="import" value="etsy"> <img src="{template_relativeimagepath}{template_imagesfolder}icons/etsy.png" border="0" alt="" style="vertical-align:middle;margin-top:-5px;padding-right:4px;padding-left:4px" /> Etsy</h2>
+            <div style="padding-top:9px;line-height:1.4em" class="smaller gray">To import your Feedback score from Etsy you will need to copy and then paste 
+	the above verification code into the Shop Announcement area of your Shop page. Once you are logged into the 
+	members area, Goto edit your Shop, you can enter the code into the Shop Announcement area. </div></td>
+            <td><div style="font-size:14px"><strong>{data[fb_etsy]}</strong></div></td>
+            <td nowrap="nowrap">{data[dv_etsy]}</td>
+            <td align="left"><input type="text" name="etsyusername" size="15" class="input" value="{data[id_etsy]}" /></td>
+            <td align="left"><input type="text" name="" size="15" class="input" disabled="disabled" style="background-color:#dfdfdf"></td>
+        </tr>
+        <tr class="alt1" valign="top">
+            <td><h2><input type="radio" name="import" value="ioffer"> <img src="{template_relativeimagepath}{template_imagesfolder}icons/ioffer.gif" border="0" alt="" style="vertical-align:middle;margin-top:-5px;padding-right:4px;padding-left:4px" /> iOffer</h2>
+            <div style="padding-top:9px;line-height:1.4em" class="smaller gray">To import your Feedback score from iOffer you will need to copy and then 
+	paste the above verification code into the description area of your "Store" page. Once you are logged into the 
+	members area, click on "Selling" then "Edit my Store" and from this page, you can enter the code into the Store 
+	Policies area.</div></td>
+            <td><div style="font-size:14px"><strong>{data[fb_ioffer]}</strong></div></td>
+            <td nowrap="nowrap">{data[dv_ioffer]}</td>
+            <td align="left"><input type="text" name="iofferusername" size="15" class="input" value="{data[id_ioffer]}" /></td>
+            <td align="left"><input type="text" name="" size="15" class="input" disabled="disabled" style="background-color:#dfdfdf"></td>
+        </tr>
+        <tr class="alt1" valign="top">
+            <td><h2><input type="radio" name="import" value="overstock"> <img src="{template_relativeimagepath}{template_imagesfolder}icons/overstock.gif" border="0" alt="" style="vertical-align:middle;margin-top:-5px;padding-right:4px;padding-left:4px" /> Overstock</h2>
+            <div style="padding-top:9px;line-height:1.4em" class="smaller gray">To import your Feedback score from Overstock you will need to copy and then 
+	paste the above verification code onto your Overstock Home Page. You will also need your <b>user id</b> number. You can find 
+	this at the END of your Overstock Home Page URL. Example: &USRID=1775 your user ID would be 1775.	</div></td>
+            <td><div style="font-size:14px"><strong>{data[fb_overstock]}</strong></div></td>
+            <td nowrap="nowrap">{data[dv_overstock]}</td>
+            <td align="left"><input type="text" name="" size="15" class="input" disabled="disabled" style="background-color:#dfdfdf"></td>
+            <td align="left"><input type="text" name="overstockusername" size="15" class="input" value="{data[id_overstock]}" /></td>
+        </tr>
+        <tr class="alt1" valign="top">
+            <td><h2><input type="radio" name="import" value="amazon"> <img src="{template_relativeimagepath}{template_imagesfolder}icons/amazon.png" border="0" alt="" style="vertical-align:middle;margin-top:-5px;padding-right:4px;padding-left:4px" /> Amazon</h2>
+            <div style="padding-top:9px;line-height:1.4em" class="smaller gray">To import your Feedback score from Amazon you will need to copy and then 
+	paste the above verification code onto your Amazon Store Page. You will also need your <b>seller id</b> number from Amazon.
+	You can find this at the END of the Amazon at a Glance Page. Example: &seller=1775 your seller ID would be 1775. your score.</div></td>
+            <td>{data[fb_amazon]}</td>
+            <td nowrap="nowrap">{data[dv_amazon]}</td>
+            <td align="left"><input type="text" name="" size="15" class="input" disabled="disabled" style="background-color:#dfdfdf"></td>
+            <td align="left"><input type="text" name="amazonusername" size="15" class="input" value="{data[id_amazon]}" /></td>
+        </tr>
+        <tr class="alt1" valign="top">
+            <td><h2><input type="radio" name="import" value="ebid"> <img src="{template_relativeimagepath}{template_imagesfolder}icons/ebid.gif" border="0" alt="" style="vertical-align:middle;margin-top:-5px;padding-right:4px;padding-left:4px" /> eBid.uk</h2>
+            <div style="padding-top:9px;line-height:1.4em" class="smaller gray">To import your Feedback score from eBid you will need to copy and then 
+	paste the above verification code onto your eBid.uk All About Page.</div></td>
+            <td><div style="font-size:14px"><strong>{data[fb_ebid]}</strong></div></td>
+            <td nowrap="nowrap">{data[dv_ebid]}</td>
+            <td align="left"><input type="text" name="ebidusername" size="15" class="input" value="{data[id_ebid]}" /></td>
+            <td align="left"><input type="text" name="" size="15" class="input" disabled="disabled" style="background-color:#dfdfdf"></td>
+        </tr>
+        <tr class="alt1" valign="top">
+            <td><h2><input type="radio" name="import" value="ebid"> <img src="{template_relativeimagepath}{template_imagesfolder}icons/ebid.gif" border="0" alt="" style="vertical-align:middle;margin-top:-5px;padding-right:4px;padding-left:4px" /> eBid.us</h2>
+            <div style="padding-top:9px;line-height:1.4em" class="smaller gray">To import your Feedback score from eBid you will need to copy and then 
+	paste the above verification code onto your eBid.us All About Page. </div></td>
+            <td><div style="font-size:14px"><strong>{data[fb_ebidus]}</strong></div></td>
+            <td nowrap="nowrap">{data[dv_ebidus]}</td>
+            <td align="left"><input type="text" name="ebidususername" size="15" class="input" value="{data[id_ebidus]}" /></td>
+            <td align="left"><input type="text" name="" size="15" class="input" disabled="disabled" style="background-color:#dfdfdf"></td>
+        </tr>
+        <tr class="alt1" valign="top">
+            <td><h2><input type="radio" name="import" value="ricardo"> <img src="{template_relativeimagepath}{template_imagesfolder}icons/ricardo.gif" border="0" alt="" style="vertical-align:middle;margin-top:-5px;padding-right:4px;padding-left:4px" /> Ricardo</h2>
+            <div style="padding-top:9px;line-height:1.4em" class="smaller gray">To import your Feedback score from Ricardo you will need to copy and then 
+	paste the above verification code onto your Ricardo Personal Message Page. You will also need your <b>user id</b> number. You can find 
+	this at the END of your Ricardo Home Page URL. Example: IDU=400623934 your user ID would be 400623934.	</div></td>
+            <td><div style="font-size:14px"><strong>{data[fb_ricardo]}</strong></div></td>
+            <td nowrap="nowrap">{data[dv_ricardo]}</td>
+            <td align="left"><input type="text" name="" size="15" class="input" disabled="disabled" style="background-color:#dfdfdf"></td>
+            <td align="left"><input type="text" name="ricardousername" size="15" class="input" value="{data[id_ricardo]}" /></td>
+        </tr>
+        <tr class="alt2_top">
+            <td colspan="5"><input type="submit" name="submit" class="buttons" style="font-size:15px" value=" {_continue} " /></td>
+        </tr>
+        </table>
+		</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+	</td>
+</tr>
+</table>
+</div>
+</form>

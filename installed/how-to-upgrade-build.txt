@@ -1,0 +1,11 @@
+###########################################################################
+UPGRADE FROM REVISION TO REVISION
+###########################################################################
+
+When you are not upgrading version to version (3.2.1 -> 4.0.0) but revision to revision you should refer to this thread http://www.ilance.com/forum/showthread.php?t=7661
+
+
+Regards,
+
+Team ILance
+http://www.ilance.com

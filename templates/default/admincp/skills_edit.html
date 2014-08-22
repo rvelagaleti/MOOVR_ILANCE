@@ -1,0 +1,81 @@
+<div id="v3body4">
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+
+	<div id="content">
+	<h1>{_skills} {_category_configuration}</h1><br />
+
+		<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND isset($ilance->GPC['subcmd']) AND ($ilance->GPC['subcmd'] == 'editskill' OR $ilance->GPC['subcmd'] == 'addskill')">
+		
+			<form method="post" action="{ilpage[subscribers]}" accept-charset="UTF-8" style="margin: 0px;">
+			<input type="hidden" name="cmd" value="skills" />
+			<input type="hidden" name="subcmd" value="{subcmd}" />
+			<input type="hidden" name="cid" value="{cid}" />
+			<input type="hidden" name="return" value="{ilpage[subscribers]}?cmd=skills" />
+
+			<a name="#skill"></a>
+			<div class="block-wrapper">
+			<div class="block">
+			
+					<div class="block-top">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+					<div class="block-header">{_skills} {_category_details}</div>
+					<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_you_may_define_everything_about_this_skill_category_using_the_options_and_fields_below}</div></div>
+					<div class="block-content" style="padding:0px">
+						
+						<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+						<loop name="servicelanguages">
+						<tr class="alt1"> 
+							<td valign="middle"><span class="gray">{_category_title} {_in} {language}</span></td>
+							<td><input class="input" name="title[{slng}]" value="{title}" style="width:98%" /></td>
+						</tr>
+						<tr class="alt1"> 
+							<td valign="middle"><span class="gray">{_description} {_in} {language}</span></td>
+							<td><input class="input" name="description[{slng}]" value="{description}" style="width:98%" /></td>
+						</tr>
+                        <tr class="alt1"> 
+							<td valign="middle"><span class="gray">SEO URL {_in} {language}</span></td>
+							<td><input class="input" name="seourl[{slng}]" value="{seourl}" style="width:98%" /></td>
+						</tr>
+						</loop name="servicelanguages">
+						<loop name="servicecategory">
+						<tr class="alt1"> 
+							<td width="58%"><span class="gray">{_parent_category}</span></td>
+							<td width="42%">{subcat_pulldown}</td>
+						</tr>
+						<tr class="alt1"> 
+							<td width="58%"><span class="gray">{_keywords}</span></td>
+							<td width="42%">{keywords}</td>
+						</tr>
+						<tr class="alt1"> 
+							<td valign="middle"><span class="gray">{_sort_display_order}</span></td>
+							<td><input class="input" size="3" name="sort" value="{sort}" /></td>
+						</tr>
+						</loop name="servicecategory">
+						<tr class="alt2_top">
+							<td colspan="2">{submit}&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[subscribers]}?cmd=skills">{_cancel}</a></span></td>
+						</tr>
+						</table>
+						
+					</div>
+					
+					<div class="block-footer">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+		</form></if>

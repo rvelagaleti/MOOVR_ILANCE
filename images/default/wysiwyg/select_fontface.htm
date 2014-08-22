@@ -1,0 +1,45 @@
+<html>
+<head>
+<script language="JavaScript" type="text/javascript">	
+function SetFormat(data) 
+{		
+	self.parent.SetFontFormat(data,"fontname");
+	self.parent.close_insert_pop();
+}
+</script>
+</head>
+<body leftmargin="0" rightmargin="0" marginwidth="0" marginheight="0" topmargin="0" bottommargin="0">
+<div style="overflow:auto;height:100%;width:100%"><script language="JavaScript" type="text/javascript"><!--
+var array = new Array();
+var Color_Title ="gray";
+array[0] ="Arial";
+array[1] ="Arial Black";
+array[2] ="Arial Narrow";
+array[3] ="Book Antiqua";
+array[4] ="Century Gothic";
+array[5] ="Comic Sans MS";
+array[6] ="Courier New";
+array[7] ="Fixedsys";
+array[8] ="Franklin Gothic Medium";
+array[9] ="Garamond";
+array[10] ="Georgia";
+array[11] ="Impact";
+array[12] ="Lucida Console";
+array[13] ="Lucida Sans Unicode";
+array[14] ="Microsoft Sans Serif";
+array[15] ="Palatino Linotype";
+array[16] ="System";
+array[17] ="Tahoma";
+array[18] ="Times New Roman";
+array[19] ="Trebuchet MS";
+array[20] ="Verdana";
+document.writeln('<table cellpadding="0" cellspacing="0" width="100%">' + "\n");
+for ( i= 0; i < array.length; i++)
+{
+	document.writeln("<tr class=\"alt1\"><td style=\"border-bottom:1px solid #eeeeee; padding:12px\"><div style=\"cursor:hand;cursor:pointer\" onclick=\"SetFormat('" + array[i] + "');\" class=\"wysiwyg_select\" onMouseover=\"this.className='wysiwyg_select_over'\" onMouseout=\"this.className='wysiwyg_select'\"><font size=\"2\" face='" + array[i] + "'><strong><font color=" + Color_Title + ">" + array[i] + "</font></strong><br />AaBbCcDd - 1234567890</font></div></td></tr>\n");
+}
+document.writeln("</table>\n");
+//-->
+</script></div>
+</body>
+</html>

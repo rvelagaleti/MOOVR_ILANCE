@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Input is required from you..</title>
+<script type="text/javascript">
+<!--
+window.onload = function ()
+{
+	var str = window.dialogArguments;
+   	if (str)
+	{
+    	document.getElementsByTagName("label")[0].innerHTML = str;
+   	}
+}
+
+window.onbeforeunload = function ()
+{
+   	var str = document.getElementById("prompt_text").value;
+   	window.returnValue = str;	
+   	window.close();
+}
+
+function formSubmit()
+{
+	var str = document.getElementById("prompt_text").value;
+   	window.returnValue = str;	
+   	window.close();
+}
+
+function formCancel()
+{
+	window.returnValue = null;
+   	window.close();
+}
+
+//-->
+</script>
+<style type="text/css">
+<!--
+body {
+	margin:0px;
+	color:buttontext;
+	background-color:appworkspace;
+	font:11px Verdana, Arial, Helvetica, sans-serif;
+}
+#inputrow {
+	margin-top:1px;
+	padding:6px;
+	color:black;
+	background-color:white;
+}
+#inputrow label {
+	margin-top:13px;
+	display:block;
+}
+#listcontainer {
+	margin-top:6px;
+	width:200px;
+	height:60px;
+	overflow:auto;
+	border:1px inset;
+	background-color:buttonface;
+	color:buttontext;
+}
+#submitrow {
+	margin-top:1px;
+	padding:6px;
+	border-top:2px outset;
+	border-bottom:2px outset;
+	color:buttontext;
+	background-color:buttonface;
+	text-align:left;
+}
+#inputrow input {
+	width:200px;
+	font:10pt Verdana, Arial, Helvetica, sans-serif;
+}
+#submitrow input {
+	width:85px;
+	font:11px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+//-->
+</style>
+</head>
+<!--<body onbeforeunload="formCancel()">-->
+<body>
+	<div id="inputrow">
+		<label id="textlabel" for="textinput"></label>
+		<input type="text" size="65" width="60%" id="prompt_text" />
+		
+	</div>
+	<div id="submitrow">
+		<input type="button" id="submitbutton" value="Ok" onclick="formSubmit()" />
+		<input type="button" id="cancelbutton" value="Cancel" onclick="formCancel()" />
+	</div>
+</body>
+</html>

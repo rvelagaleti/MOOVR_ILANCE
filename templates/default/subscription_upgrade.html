@@ -1,0 +1,152 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+	<div class="bigtabsheader">
+		<ul>
+			<li title="" class=""><a href="{ilpage[subscription]}">{_subscription}</a></li>
+			<li title="" class="on"><a href="javascript:void(0)">{_upgrade}</a></li>
+		</ul>
+	</div>
+</div>
+<div style="clear:both;"></div>
+
+<form name="subscriptionupgrade" action="{http_server}{ilpage[subscription]}" method="post" accept-charset="UTF-8" style="margin:0px">
+	<input type="hidden" name="cmd" value="_do-upgrade-process" />
+	<input type="hidden" name="subscriptionid" value="{subscriptionid}" />
+	<if condition="isset($ilance->GPC['returnurl']) AND !empty($ilance->GPC['returnurl'])"><input type="hidden" name="returnurl" value="{returnurl}" /></if>
+	<div class="block-wrapper">
+
+		<div class="block">
+
+			<div class="block-top">
+				<div class="block-right">
+					<div class="block-left"></div>
+				</div>
+			</div>
+
+			<div class="block-header">{_subscription_upgrade_preview}</div>
+
+			<div class="block-content" style="padding:0px">
+
+				<if condition="isset($show['unpaidsubscription']) AND $show['unpaidsubscription']">
+					<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                    <tr>
+                        <td colspan="4" class="alt2">{_other_pending_subscription_transactions_detected}</td>
+                    </tr>
+                    <tr> 
+                        <td colspan="4">
+                            <div style="padding:6px">{_it_appears_that_you_have_a_pending_scheduled_subscription_transaction_that_has_not_been_fully_paid}</div>
+                            <hr size="1" width="100%" style="color:#ebebeb" />
+
+                            <div style="padding-top:6px"><input type="radio" id="settle" name="removeprevioustransaction" value="false" checked="checked" onclick="toggle_tr('upgradesubscription')" /> <label for="settle">{_settle_the_pending_subscription_transaction} <span class="blue">{previousplantitle}</span> : <strong>{previousinvoiceamount}</strong> - <span class="blue"><a href="{https_server}{ilpage[invoicepayment]}?cmd=view&amp;txn={pendingtransactionid}"><strong>{_pay_now}</strong></a></span></label>
+                            </div>
+                            <div><input type="radio" name="removeprevioustransaction" id="remove" value="true" onclick="toggle_tr('upgradesubscription')"  /> <label for="remove">{_remove_pending_scheduled_transaction_and_continue_with_upgrade_selected_on_the_previous_page}</label></div>
+						</td>
+                    </tr>
+					</table>
+					<br />
+				</if>
+
+				<if condition="(isset($show['hassubscription']) AND $show['hassubscription'])"><input type="hidden" name="subscriptionmodify" value="1" /><else /><input type="hidden" name="subscriptionmodify" value="0" /></if>
+				<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" id="upgradesubscription" style="{tablestyle}">
+					<tr> 
+						<td width="66%" class="alt2">{_subscription}</td>
+						<td width="8%" class="alt2">{_cost}</td>
+                        <if condition="isset($tax) AND $tax > 0"><td width="8%" class="alt2">{_tax}</td></if>
+						<td width="8%" class="alt2">{_total}</td>
+						<td width="16%" align="center" class="alt2">{_length}</td>
+					</tr>
+					<tr class="alt1"> 
+						<td align="left"><div style="padding:6px"><strong>{title}</strong></div></td>
+						<td nowrap="nowrap">{cost}</td>
+                        <if condition="isset($tax) AND $tax > 0"><td nowrap="nowrap">{taxformatted}</td></if>
+						<td nowrap="nowrap">{total}</td>
+						<td align="center">{length} {units}</td>
+					</tr>
+					<tr>
+						<td colspan="5" class="alt2">{_you_can_choose_how_you_would_like_to_pay_for_this_subscription_using_the_options_below}</td>
+					</tr>
+					<tr> 
+						<td colspan="5">
+							<div id="recurringsubscriptions">
+								<div style="margin:4px;"><strong>{_recuring_subscription_options}</strong></div>
+								<div>
+									<table width="100%" border="0" align="center">
+										<tr> 
+											<td><label for="nosubscriptions"><input name="recurring[method]" id="nosubscriptions" type="radio" value="" checked="checked" /> {_i_prefer_not_to_use_recurring_subscriptions} <span class="gray">({_payments_made_by_depositing_funds_to_your_online_account_balance})</span></label></td>
+										</tr>
+										<if condition="$show['free_subscription_plan'] == false">
+											<if condition="$ilconfig['authnet_subscriptions'] AND $ilconfig['authnet_enabled'] AND $ilconfig['use_internal_gateway'] == 'authnet'">
+												<tr> 
+													<td>
+														<label for="authnetsubscriptions"><input name="recurring[method]" id="authnetsubscriptions" type="radio" value="authnet" /> {_i_would_like_to_use_the_authorizenet_subscription_recurring_service} <span class="green">({_credit_card_only})</span></label></td>
+												</tr>
+											</if>
+											<if condition="$ilconfig['bluepay_subscriptions'] AND $ilconfig['bluepay_enabled'] AND $ilconfig['use_internal_gateway'] == 'bluepay'">
+												<tr> 
+													<td>
+														<label for="bluepaysubscriptions"><input name="recurring[method]" id="bluepaysubscriptions" type="radio" value="bluepay" /> {_i_would_like_to_use_the_bluepay_subscription_recurring_service_and_subscribe_until_i_choose_to_cancel} <span class="green">({_credit_card_only})</span></label></td>
+												</tr>
+											</if>
+											<if condition="$ilconfig['paypal_subscriptions']">
+												<tr> 
+													<td><label for="paypalsubscriptions"><input name="recurring[method]" id="paypalsubscriptions" type="radio" value="paypal" /> {_i_would_like_to_use_the_paypal_subscription_recurring_service}</label></td>
+												</tr>
+											</if>
+											<if condition="$ilconfig['paypal_pro_subscriptions']">
+												<tr> 
+													<td><label for="paypalprosubscriptions"><input name="recurring[method]" id="paypalprosubscriptions" type="radio" value="paypal_pro" /> {_i_would_like_to_use_the_paypal_pro_subscription_recurring_service}</label></td>
+												</tr>
+											</if>
+											<if condition="$ilconfig['moneybookers_subscriptions']">
+												<tr> 
+													<td>
+														<label for="moneybookerssubscriptions"><input name="recurring[method]" id="moneybookerssubscriptions" type="radio" value="moneybookers" /> {_i_would_like_to_use_the_moneybookers_subscription_recurring_service_and_subscribe}</label></td>
+												</tr>
+											</if>
+										</if>
+										{apihook[subscription_upgrade_recurring_subscriptions]}
+									</table>
+								</div>
+							</div>
+							<div style="margin:4px; padding-top:12px"><strong>{_terms}</strong></div>
+							<div style="border:thin inset; padding:6px; height:175px; background-color: #fff; overflow:auto">{registration1}</div>  
+                            <div style="margin:4px">
+								<if condition="isset($show['paid_subscription_plan']) AND $show['paid_subscription_plan']"> 
+									<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+										<tr> 
+											<td valign="top"><label for="agreecheck"><input name="agreecheck" id="agreecheck" type="checkbox" value="1" onclick="agreesubmit(this)" /> {_i_have_read_and_agree_to_abide_by_the_terms_and_agreements_above}</label></td>
+										</tr>
+									</table>
+									<input type="hidden" name="isfreeplan" value="0" />
+								</if> 
+
+								<if condition="isset($show['free_subscription_plan']) AND $show['free_subscription_plan']">
+									<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+										<tr> 
+											<td valign="top"><label for="agreecheck"><input name="agreecheck" id="agreecheck" type="checkbox" value="1" onclick="agreesubmit(this)" /> {_i_have_read_and_agree_to_abide_by_the_terms_and_agreements_above}</label></td>
+										</tr>
+									</table>
+									<input type="hidden" name="isfreeplan" value="1" />
+								</if>
+							</div>
+
+						</td>
+					</tr>
+				</table>
+
+				{apihook[subscription_upgrade_content_end]}
+
+			</div>
+
+			<div class="block-footer">
+				<div class="block-right">
+					<div class="block-left"></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	{apihook[subscription_upgrade_end]}
+
+	<div style="margin-top:3px"><input type="submit" value="{_continue}" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" disabled="disabled" class="buttons" style="font-size:15px" /></div>
+</form>

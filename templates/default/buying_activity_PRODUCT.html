@@ -1,0 +1,411 @@
+<h1 class="a_active" style="padding-bottom:12px">{block_header_title}</h1>
+
+<if condition="$ilconfig['globalauctionsettings_payperpost']"><div style="border:2px solid #a6cc98;border-radius:6px;background-color:#d0f2c4;padding:15px;margin-bottom:12px;margin-top:12px"><span style="float:left;margin-right:10px;margin-top:-11px"><img src="{template_relativeimagepath}{template_imagesfolder}v4/bigcheckbox.png" height="36" /></span>{_pay_as_you_go_is_currently_enabled_any_auctions}</div></if>
+
+<a name="product"></a>
+<div class="bigtabs" style="padding-bottom:15px; padding-top:5px">
+    <div class="bigtabsheader">
+        <span style="float:right; padding-top:7px" class="smaller blue"></span>
+        <ul>
+            
+                <if condition="!isset($ilance->GPC['subcmd']) OR empty($ilance->GPC['subcmd']) AND $ilance->GPC['cmd'] != 'purchases'"><li title="" class="on"><a href="javascript:void(0)"><span class="gray">{_bidding}</span></a></li><else /><li title="" class=""><a href="{ilpage[buying]}?cmd=management"><span class="gray">{_bidding}</span></a></li></if>
+                <if condition="isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'purchases'"><li title="" class="on"><a href="{ilpage[buying]}?cmd=purchases"><span class="gray">{_purchases}</span></a></li><else /><li title="" class=""><a href="{ilpage[buying]}?cmd=purchases"><span class="gray">{_purchases}</span></a></li></if>
+                {apihook[buying_activity_bigtabs_nolub_end]}
+            
+      </ul>
+    </div>
+</div>
+<div style="clear:both;"></div>
+
+<if condition="!isset($ilance->GPC['subcmd']) OR empty($ilance->GPC['subcmd'])">
+<if condition="isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'purchases'">
+<h3 class="separator" style="font-size:12px;padding:6px;margin-top:4px"><form name="sortswitch_product" id="sortswitch_product" method="get" action="{ilpage[buying]}" accept-charset="UTF-8" style="margin:0px"><input type="hidden" name="cmd" value="purchases" /><span style="float:right">{_date}: {period_pulldown}&nbsp;&nbsp;{_order_by}: {orderby_pulldown}&nbsp;&nbsp;{_display_order}: {displayorder_pulldown} <input type="submit" class="buttons" value=" {_go} " /></span>{_keywords}: <input name="keyw" id="keyw" type="text" value="{keyw}" class="input" size="30" /></form></h3>
+<else />
+{producttabs}
+<h3 class="separator" style="font-size:12px;padding:6px;margin-top:4px"><form name="sortswitch_product" id="sortswitch_product" method="get" action="{ilpage[buying]}" accept-charset="UTF-8" style="margin:0px"><input type="hidden" name="cmd" value="management" /><input type="hidden" name="bidsub" value="{bidsub}" /><span style="float:right">{_date}: {period2_pulldown}&nbsp;&nbsp;{_order_by}: {orderby2_pulldown}&nbsp;&nbsp;{_display_order}: {displayorder2_pulldown} <input type="submit" class="buttons" value=" {_go} " /></span>{_keywords}: <input name="keyw2" id="keyw2" type="text" value="{keyw2}" class="input" size="30" /></form></h3>
+</if>
+<else />
+{apihook[buying_activity_custom_subcmd_display]}
+</if>
+
+<if condition="isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'purchases'">
+<if condition="isset($show['no_purchase_now_activity']) AND $show['no_purchase_now_activity']">
+<div align="center">{_no_results_found}</div>
+<else />
+<loop name="product_purchases_activity">
+<!-- start order card -->
+<a name="{project_id}"></a>
+<div class="action-box rounded"> 
+	<div class="order-level"> 
+    	<span class="top-text">{_order_placed}</span> <h2>{orderdate}</h2> 
+        
+      	<div class="order-links">
+        	<a href="{https_server}{ilpage[invoicepayment]}?cmd=orderdetail&pid={project_id}&oid={orderid}&returnurl={pageurl_urlencoded}">{_order_details}</a><span class="info-title">&nbsp;|&nbsp;</span>
+            <a href="#">{_invoice}</a> 
+        </div> 
+        <ul class="order-details"> 
+        	<li><span class="info-title">{_seller}:</span> <span class="price">{merchantplain}</span></li>
+        	<li><span class="info-title">{_order} #</span><span class="info-data"><a href="{https_server}{ilpage[invoicepayment]}?cmd=orderdetail&pid={project_id}&oid={orderid}&returnurl={pageurl_urlencoded}">{orderid}</a></span></li>
+        	<!--<li><span class="info-title">{_item} #</span><span class="info-data"><a href="{http_server}{ilpage[merch]}?id={project_id}">{project_id}</a></span></li>-->
+            <li><span class="info-title">{_recipient}:</span> <span class="info-data recipient">{user[firstname]} {user[lastname]}</span></li>
+            <li class="address"><span class="info-title">{_delivery_address}: <span class="smaller" style="text-transform:none">(<a href="{https_server}{ilpage[preferences]}?cmd=profile&amp;returnurl={pageurl_urlencoded}">{_edit}</a>)</span></span> <span class="info-data info-block"><br>{user[firstname]} {user[lastname]}<br>{user[address]}<br>
+            {user[city]}, {user[state]} {user[postalzip]}<br>
+            {user[country]}<br>{_phone}: {user[phone]}<br></span></li>
+            <li><span class="info-title">{_payment}:</span> <span class="info-data recipient">{buyerpaymethod}</span></li>
+            <li><span class="info-title">{_total}:</span> <span class="price">{total}</span></li>
+        </ul>
+    </div> 
+    
+    <div class="order-bar"> 
+    	<div class="ship-contain"> 
+        
+        	<if condition="isset($show_digitaldownload_{orderid}) AND $show_digitaldownload_{orderid}"><!-- shipping: digital download -->
+          	<div class="status first-shipment"> 
+           	<div class="deliv-text"><span class="info-title">{_delivery_estimate}:</span> {_local_pickup_only}</div>
+              <h2>{_local_pickup_only}<span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/shipbox_litegray.png" border="0" /></span></h2>
+            </div>
+            <!-- shipping: digital download --></if>
+            
+        	<if condition="isset($show_localpickuponly_{orderid}) AND $show_localpickuponly_{orderid}"><!-- shipping: local pickup only -->
+          	<div class="status first-shipment"> 
+           	<div class="deliv-text"><span class="info-title">{_delivery_estimate}:</span> {_local_pickup_only}</div>
+              <h2>{_local_pickup_only}<span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/shipbox_litegray.png" border="0" /></span></h2>
+            </div>
+            <!-- shipping: local pickup only --></if>
+        
+        	<if condition="isset($show_delivered_{orderid}) AND $show_delivered_{orderid}"><!-- shipping: delivered -->
+            <div class="status first-shipment"> 
+            	<div class="deliv-text"><span class="info-title">{_delivered_on}:</span> {deliveryestimate}<!--Friday Sep 23 2013--></div>
+                <h2>{_delivered}<span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/shipbox.png" border="0" /></span></h2> 
+            </div>
+            <!-- shipping: delivered --><else />
+            
+            <if condition="isset($show_shipped_{orderid}) AND $show_shipped_{orderid}"><!-- shipping: shipped -->
+            <div class="status first-shipment"> 
+            	<div class="deliv-text"><span class="info-title">{_delivery_estimate}:</span> {deliveryestimate}<!--Wednesday Sep 18 2013 &ndash; Wednesday Sep 25 2013 by 8:00pm--></div>
+                <h2>{_shipped}<span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/shipbox.png" border="0" /></span></h2> 
+                <ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="#" class="button-link"><span>{_mark_as_delivered}</span></a></li>
+                </ul> 
+            </div>
+            <!-- shipping: shipped --><else /><!-- shipping: not shipped -->
+          	<div class="status first-shipment"> 
+           	<div class="deliv-text"><span class="info-title">{_delivery_estimate}:</span> {deliveryestimate}<!--Wednesday Sep 18 2013 &ndash; Wednesday Sep 25 2013 by 8:00pm--></div>
+              <h2>{_not_yet_shipped}<span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/shipbox_litegray.png" border="0" /></span></h2>
+            </div>
+            <!-- shipping: not shipped --></if>
+            </if>
+            
+            <div class="ship-listing first-shipment"> 
+            	<ul class="self-service"> 
+                	{contactseller}
+                    <!--<li><a href="#" class="button-link"><span>{_return_items}</span></a></li>-->
+                    <if condition="isset($show_sellerinfavorites_{orderid}) AND $show_sellerinfavorites_{orderid} == 0"><li><span id="sellerwatchlistresponse"><a href="javascript:;" onclick="add_seller_to_watchlist('{user_id}', '{user[userid]}', '')" class="button-link" title="{_add_seller_to_favorites}"><span>{_add_seller_to_favorites}</span></a></span></li></if>
+                    <li><a href="{http_server}{ilpage[search]}?mode=product&amp;cid={cid}" class="button-link" title="{_view_similar_items}"><span>{_view_similar_items}</span></a></li>
+                    <li><a href="{http_server}{ilpage[selling]}?cmd=new-item&amp;cid={cid}" class="button-link" title="{_sell_a_similar_item}"><span>{_sell_a_similar_item}</span></a></li>
+                    <li><a href="{http_server}{ilpage[search]}?mode=product&amp;searchuser={merchantplain}" class="button-link" title="{_view_sellers_other_items}"><span>{_view_sellers_other_items}</span></a></li>
+                </ul>
+                <ul class="shipment en-ss-margin">
+                	<li><a href="{ilpage[merch]}?id={project_id}">
+                    	<span class="image-box">{photo}</span>
+                    	<span class="item-title">{item_title}</span></a>
+                        	<div class="seller">{_sold_by} {merchant}</div> 
+                            <div class="seller">{_order_quantity}: <span class="price">{qty} {itemsorlots}</span></div>  
+                    </li> 
+                </ul> 
+                <div class="clear"></div> 
+            </div>
+            
+            <if condition="isset($show_paymentescrow_{orderid}) AND $show_paymentescrow_{orderid}">
+            <if condition="isset($show_paymentescrowcomplete_{orderid}) AND $show_paymentescrowcomplete_{orderid}"><!-- escrow payment: release complete -->
+            <div class="status"> 
+            	<div class="deliv-text"><span class="info-title">{_escrow_status}:</span> {_funds_released_to_seller_on} {escrowfundreleasedate}</div>
+                <h2>{_funds_released_to_seller}<span style="float:left;padding-right:3px;margin-top:2px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/escrow_blue.png" border="0" /></span></h2>
+            </div>
+            <!-- escrow payment: release complete --><else />
+            <if condition="isset($show_paymentescrowrequired_{orderid}) AND $show_paymentescrowrequired_{orderid}"><!-- escrow payment: required -->
+            <div class="status" style="min-height:85px"> 
+            	<div class="deliv-text"><span class="info-title">{_escrow_status}:</span> {_funding_stage} <!--(day 1 of 7)--></div>
+                <h2>{_escrow_account_not_yet_funded}<span style="float:left;padding-right:3px;margin-top:2px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/escrow_litegray.png" border="0" /></span></h2> 
+             	<ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="#" class="button-link"><span>{_complete_payment}</span></a></li>
+                    <li><a href="#" class="button-link"><span>{_change_payment_method}</span></a></li>
+                </ul> 
+            </div>
+            <!-- escrow payment: required --><else /><!-- escrow payment: funded -->
+            <div class="status" style="min-height:85px"> 
+            	<div class="deliv-text"><span class="info-title">{_escrow_status}:</span> {_account_funded_on} {escrowfundeddate}</div>
+                <h2>{_escrow_account_funded_by} {buyer} {_for} {escrowamount}<span style="float:left;padding-right:3px;margin-top:2px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/escrow_green.png" border="0" /></span></h2>
+                <ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="#" class="button-link"><span>{_return_my_funds}</span></a></li>
+                    <li><a href="#" class="button-link"><span>{_release_funds_to_seller}</span></a></li>
+                </ul> 
+            </div>
+            <!-- escrow payment: funded --></if>
+            </if>
+            <else />
+            <if condition="isset($show_paymentrequired_{orderid}) AND $show_paymentrequired_{orderid}"><!-- payment: required -->
+            <div class="status" style="min-height:85px"> 
+            	<div class="deliv-text"><span class="info-title">{_payment_status}:</span> {_funding_stage} <!--(day 1 of 7)--></div>
+                <h2>{_payment_has_not_yet_been_sent}<span style="float:left;padding-right:3px;margin-top:2px"><img src="{template_relativeimagepath}{template_imagesfolder}buy_gray.gif" border="0" /></span></h2> 
+             	<ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="#" class="button-link"><span>{_complete_payment}</span></a></li>
+                    <li><a href="#" class="button-link"><span>{_mark_payment_as_sent}</span></a></li>
+                    
+                </ul> 
+            </div>
+            <!-- payment: required --><else /><!-- payment: completed -->
+            <div class="status"> 
+            	<div class="deliv-text"><span class="info-title">{_payment_status}:</span> {_payment_to_seller_completed_using} {buyerpaymethod}</div>
+                <h2>{_payment_has_been_completed}<span style="float:left;padding-right:3px;margin-top:2px"><img src="{template_relativeimagepath}{template_imagesfolder}buy.gif" border="0" /></span></h2> 
+             	<ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="#" class="button-link"><span>{_unmark_payment_as_sent}</span></a></li>
+                </ul> 
+            </div>
+            <!-- payment: completed --></if>
+            </if>
+            
+            <if condition="isset($show_feedbackrequired_{orderid}) AND $show_feedbackrequired_{orderid}"><!-- feedback: leave -->
+            <div class="status"> 
+            	<div class="deliv-text"><span class="info-title">{_feedback_status}: {_feedback_has_not_yet_been_received}</span></div>
+                <h2>{_feedback_has_not_yet_been_left}<span style="float:left;padding-right:3px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/feedback.gif" border="0" /></span></h2> 
+             	<ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="#" class="button-link"><span>{_leave_feedback}</span></a></li>
+                </ul> 
+             </div>
+             <!-- feedback: leave --><else /><!-- feedback: left -->
+             <div class="status"> 
+                <div class="deliv-text"><span class="info-title">{_feedback_status}: {_feedback_has_not_yet_been_received}</span></div>
+                <h2>{_feedback_has_been_left}<span style="float:left;padding-right:3px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/feedback_complete.gif" border="0" /></span></h2> 
+                <ul class="self-service" style="margin-top:-45px"> 
+                    <li><a href="{http_server}{ilpage[buying]}?cmd=management&amp;subcmd=requestsellerfeedback&amp;oid={orderid}" class="button-link"><span>{_request_feedback}</span></a></li>
+                </ul> 
+             </div>
+             <!-- feedback: left --></if>
+             
+             <if condition="isset($show_wintype_{orderid}) AND $show_wintype_{orderid} == 'auction'"><!-- win type: auction -->
+             <div class="status"> 
+            	<div class="deliv-text"><span class="info-title">{_listing_win_type}: {format}</span></div>
+                <h2>{_item_won_through_auction}</h2> 
+             	<ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="{http_server}{ilpage[merch]}?id={project_id}" class="button-link"><span>{_visit_this_listing}</span></a></li>
+                </ul>
+             </div>
+             <!-- win type: auction --></if>
+             
+             <if condition="isset($show_wintype_{orderid}) AND $show_wintype_{orderid} == 'fixed'"><!-- win type: fixed price -->
+             <div class="status"> 
+            	<div class="deliv-text"><span class="info-title">{_listing_win_type}: {format}</span></div>
+                <h2>{_item_purchased_outright}</h2> 
+             	<ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="{http_server}{ilpage[merch]}?id={project_id}" class="button-link"><span>{_visit_this_listing}</span></a></li>
+                </ul>
+             </div>
+             <!-- win type: fixed price --></if>
+             
+             <if condition="isset($show_wintype_{orderid}) AND $show_wintype_{orderid} == 'store'"><!-- win type: store -->
+             <div class="status"> 
+            	<div class="deliv-text"><span class="info-title">{_listing_win_type}: {format}</span></div>
+                <h2>{_item_purchased_from_a_store}</h2> 
+             	<ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="#" class="button-link"><span>{_visit_this_store}</span></a></li>
+                </ul> 
+             </div>
+             <!-- win type: store --></if>
+             
+             {apihook[buying_activity_product_wintype_end]}
+             
+             <div class="ship-listing"> 
+            	<ul class="self-service"></ul> 
+                <ul class="shipment en-ss-margin"></ul> 
+                <div class="clear"></div> 
+             </div>
+      	</div> 
+	</div> 
+	<div class="clear"></div> 
+</div>
+<!-- end order card -->
+</loop name="product_purchases_activity">
+
+{prevnext}
+</if>
+<else />
+<if condition="isset($show['no_product_bidding_activity']) AND $show['no_product_bidding_activity']">
+<div align="center">{_no_results_found}</div>
+<else />
+<if condition="!isset($ilance->GPC['subcmd']) OR empty($ilance->GPC['subcmd'])">
+<loop name="product_bidding_activity">
+<!-- start bid card -->
+<a name="{project_id}"></a>
+<div class="action-box rounded"> 
+	<div class="order-level"> 
+    	<span class="top-text">{_bid_placed}</span> <h2>{bidplacedate}</h2> 
+        
+        <div class="order-links"></div> 
+        
+        <ul class="order-details"> 
+        	<li><span class="info-title">{_seller}:</span> <span class="price">{merchantplain}</span></li>
+        	<li><span class="info-title">{_bid_id}: </span><span class="info-data">{bid_id}</span></li>
+        	<li><span class="info-title">{_item_number}: </span><span class="info-data"><a href="{http_server}{ilpage[merch]}?id={project_id}">{project_id}</a></span></li>
+            <li><span class="info-title">{_bids}: </span><span class="info-data"><a href="{http_server}{ilpage[merch]}?cmd=bidlog&amp;id={project_id}">{bids}</a></span></li>
+            <li><span class="info-title">{_bid_amount}:</span> <span class="price">{bidamount}</span></li>
+            <!--<li><span class="info-title">{_quantity}:</span> <span class="price">{qty}</span></li>-->
+        </ul>
+    </div> 
+    
+    <div class="order-bar"> 
+    	<div class="ship-contain"> 
+        	
+            <if condition="isset($ilance->GPC['bidsub']) AND $ilance->GPC['bidsub'] == 'retracted'"><else />
+        	<if condition="isset($show_reserve_{project_id}) AND $show_reserve_{project_id}">
+        	<if condition="isset($show_reservepricenotmet_{project_id}) AND $show_reservepricenotmet_{project_id}"><!-- bid status: reserve not met -->
+        	<div class="status first-shipment"> 
+            	<div class="deliv-text"><span class="info-title">{_reserve_price_status}:</span> {_reserve_price_has_not_yet_been_met}</div>
+                <h2>{_no_reserve_price_not_met}<span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_reserve.png" border="0" /></span></h2> 
+          	</div>
+            <!-- bid status: reserve not met --><else /><!-- bid status: reserve met -->
+        	<div class="status first-shipment"> 
+            	<div class="deliv-text"><span class="info-title">{_reserve_price_status}:</span> {_reserve_price_has_been_met}</div>
+                <h2>{_reserve_price_met}<span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_reserve.png" border="0" /></span></h2> 
+          	</div>
+            <!-- bid status: reserve met --></if>
+            </if>
+            
+            <if condition="isset($ilance->GPC['bidsub']) AND $ilance->GPC['bidsub'] == 'awarded'"><!-- bid status: winning bidder -->
+       	  	<div class="status first-shipment"> 
+           		<div class="deliv-text"><span class="info-title">{_bid_status}:</span> {_you_are_the_winning_bidder}</div>
+              	<h2>{_you_have_won_this_auction}!<span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}bid.gif" border="0" /></span></h2> 
+            	<ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="{https_server}{ilpage[buying]}?cmd=purchases" class="button-link" title="{_view_my_orders}"><span>{_view_my_orders}</span></a></li>
+                </ul>
+            </div>
+            <!-- bid status: winning bidder --><else />
+            <if condition="isset($show_highestbidder_{project_id}) AND $show_highestbidder_{project_id}"><!-- bid status: highest bidder -->
+       	  	<div class="status first-shipment"> 
+           		<div class="deliv-text"><span class="info-title">{_bid_status}:</span> <if condition="isset($ilance->GPC['bidsub']) AND $ilance->GPC['bidsub'] == 'expired'">{_you_were_the_highest_bidder_for_this_listing}<else />{_you_are_currently_the_highest_bidder}</if></div>
+              	<h2><if condition="isset($ilance->GPC['bidsub']) AND $ilance->GPC['bidsub'] == 'expired'">{_you_were_the_highest_bidder}<else />{_you_are_the_highest_bidder}!</if><span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}bid.gif" border="0" /></span></h2> 
+            	<if condition="isset($show_ended_{project_id}) AND $show_ended_{project_id} == 0 AND !isset($ilance->GPC['bidsub']) AND isset($show['canretractbid']) AND $show['canretractbid']"><ul class="self-service" style="margin-top:-45px">
+                	<li><a href="{https_server}{ilpage[buying]}?cmd=management&amp;subcmd=bidretract&amp;bid={bid_id}&amp;pid={project_id}&amp;returnurl={pageurl_urlencoded}" class="button-link" title="{_retract_bid}"><span>{_retract_bid}</span></a></li>
+                </ul></if>
+            </div>
+            <!-- bid status: highest bidder --><else /><!-- bid status: outbid -->
+          	<div class="status first-shipment"> 
+           		<div class="deliv-text"><span class="info-title">{_bid_status}:</span> <if condition="isset($ilance->GPC['bidsub']) AND $ilance->GPC['bidsub'] == 'expired'">{_you_were_outbid_by_another_bidder}<else />{_you_have_been_outbid_another_bidder}</if></div>
+              	<h2><if condition="isset($ilance->GPC['bidsub']) AND $ilance->GPC['bidsub'] == 'expired'">{_you_were_outbid}<else />{_you_have_been_outbid}!</if><span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}bid_gray.gif" border="0" /></span></h2>    
+            	<if condition="isset($show_ended_{project_id}) AND $show_ended_{project_id} == 0"><ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="{http_server}{ilpage[merch]}?id={project_id}" class="button-link" title="{_place_another_bid}"><span>{_place_another_bid}</span></a></li>
+                </ul>
+                </if>
+            </div>
+            <!-- bid status: outbid -->
+            </if>
+            </if>
+            </if>
+            
+            <if condition="isset($show_bidretracted_{project_id}) AND $show_bidretracted_{project_id}"><!-- bid status: retracted -->
+            <div class="status first-shipment"> 
+            	<div class="deliv-text"><span class="info-title">{_bid_status}:</span> {_this_bid_has_been_retracted} {_on} {bidretractdate}</div>
+                <h2>{_bid_retracted}<span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}bid_gray.gif" border="0" /></span></h2> 
+            </div>
+            <!-- bid status: retracted --></if>
+            
+            <if condition="isset($show_blockedbidding_{project_id}) AND $show_blockedbidding_{project_id}"><!-- bid status: blocked -->
+            <div class="status first-shipment"> 
+           		<div class="deliv-text"><span class="info-title">{_bid_status}:</span> {_you_have_been_blocked_bidding}</div>
+              	<h2>{_blocked}<span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}bid_gray.gif" border="0" /></span></h2> 
+            </div>
+            <!-- bid status: blocked --></if>
+            
+            <if condition="isset($show_bannedbidding_{project_id}) AND $show_bannedbidding_{project_id}"><!-- bid status: banned -->
+            <div class="status first-shipment"> 
+            	<div class="deliv-text"><span class="info-title">{_bid_status}:</span> {_you_have_been_banned_bidding_seller_items}</div>
+            	<h2>{_banned}<span style="float:left;padding-right:5px;margin-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}bid_gray.gif" border="0" /></span></h2> 
+            </div>
+            <!-- bid status: banned --></if>
+            
+            <div class="ship-listing first-shipment"> 
+            	<ul class="self-service">
+                	<if condition="isset($ilance->GPC['bidsub']) AND $ilance->GPC['bidsub'] == 'awarded'"><li>{contactseller}</li></if>
+                    <if condition="isset($show_sellerinfavorites_{project_id}) AND $show_sellerinfavorites_{project_id} == 0"><li><span id="sellerwatchlistresponse"><a href="javascript:;" onclick="add_seller_to_watchlist('{user_id}', '{user[userid]}', '')" class="button-link" title="{_add_seller_to_favorites}"><span>{_add_seller_to_favorites}</span></a></span></li></if>
+                    <li><a href="{http_server}{ilpage[search]}?mode=product&amp;cid={cid}" class="button-link" title="{_view_similar_items}"><span>{_view_similar_items}</span></a></li>
+                    <li><a href="{http_server}{ilpage[selling]}?cmd=new-item&amp;cid={cid}" class="button-link" title="{_sell_a_similar_item}"><span>{_sell_a_similar_item}</span></a></li>
+                    <li><a href="{http_server}{ilpage[search]}?mode=product&amp;searchuser={merchantplain}" class="button-link" title="{_view_sellers_other_items}"><span>{_view_sellers_other_items}</span></a></li>
+                </ul> 
+                <ul class="shipment en-ss-margin">
+                	<li><a href="{ilpage[merch]}?id={project_id}">
+                    	<span class="image-box">{photo}</span>
+                    	<span class="item-title">{item_title}</span></a>
+                        	<div class="seller">{_sold_by} {merchant}</div>
+                    </li> 
+                </ul> 
+                <div class="clear"></div> 
+            </div> 
+            
+            <if condition="isset($ilance->GPC['bidsub']) AND $ilance->GPC['bidsub'] == 'awarded'"><!-- time left: ended to winner -->
+            <div class="status"> 
+            	<div class="deliv-text">{_winning_bid}:</div>
+                <h2>{winningbid}</h2> 
+            </div>
+            <!-- time left: ended to winner --><else />
+            <if condition="isset($show_ended_{project_id}) AND $show_ended_{project_id}">
+            <if condition="isset($show_endedtowinner_{project_id}) AND $show_endedtowinner_{project_id}"><!-- time left: ended to another winner -->
+            <div class="status"> 
+            	<div class="deliv-text">{_winning_bid}:</div>
+                <h2>{currentbid}</h2> 
+            </div>
+            <else /><!-- time left: ended no winner -->
+            <div class="status"> 
+            	<div class="deliv-text">{_highest_bid}:</div>
+                <h2>{highestbid}</h2> 
+            </div>
+            <!-- time left: ended no winner -->
+            </if>
+            <else /><!-- time left: active -->
+   	    	<div class="status" style="border-bottom:1px dotted #dcdcdc"> 
+            	<div class="deliv-text">{_current_bid}:<if condition="isset($show_maxproxybid_{project_id}) AND $show_maxproxybid_{project_id}"> {_enter_max_bid}: <span class="green">{youmaxbid}</span>.</if></div>
+                <h2>{currentbid}</h2> 
+             	<if condition="isset($show_canproxycategory_{project_id}) AND $show_canproxycategory_{project_id}"><ul class="self-service" style="margin-top:-45px"> 
+                	<li><a href="{https_server}{ilpage[buying]}?cmd=management&amp;subcmd=increasemaxbid&amp;pid={project_id}&amp;returnurl={pageurl_urlencoded}" class="button-link" title="{_increase_my_max_bid}"><span>{_increase_my_max_bid}</span></a></li>
+                </ul>
+                </if> 
+          	</div>
+            <!-- time left: active -->
+            </if>
+            </if>
+            
+            <if condition="isset($show_endedearlytopurchase_{project_id}) AND $show_endedearlytopurchase_{project_id}"><!-- time left: ended early to purchase -->
+            <div class="status" style="border-top:none;border-bottom:none"> 
+            	<div class="deliv-text"><span class="info-title">{_ended_early}:</span> {close_date} {_vs} {ends}</div>
+                <h2>{_ended_early_to_buy_now}<span style="float:left;padding-right:5px;margin-top:0px"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_clock.png" border="0" /></span></h2> 
+            </div>
+            <!-- time left: ended early to purchase -->
+            <else />
+            <if condition="isset($show_ended_{project_id}) AND $show_ended_{project_id}"><!-- time left: ended -->
+            <div class="status" style="border-top:none;border-bottom:none"> 
+            	<div class="deliv-text"><span class="info-title">{_ended}:</span> {ends}</div>
+                <h2>{_ended}<span style="float:left;padding-right:5px;margin-top:0px"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_clock.png" border="0" /></span></h2> 
+            </div>
+            <!-- time left: ended --><else /><!-- time left: active -->
+            <div class="status" style="border-top:none;border-bottom:none"> 
+            	<div class="deliv-text"><span class="info-title">{_ends}:</span> {ends}</div>
+                <h2>{timeleft}<span style="float:left;padding-right:5px;margin-top:0px"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_clock.png" border="0" /></span></h2> 
+            </div>
+            <!-- time left: active --></if>
+            </if>
+            
+            <div class="ship-listing "> 
+            	<ul class="self-service"></ul> 
+                <ul class="shipment en-ss-margin"></ul> 
+                <div class="clear"></div> 
+            </div>
+      	</div> 
+	</div> 
+	<div class="clear"></div> 
+</div>
+<!-- end bid card -->
+</loop name="product_bidding_activity">
+</if>
+</if>
+</if>
+
+{prevnext2}

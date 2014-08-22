@@ -1,0 +1,129 @@
+
+{hidden_form_start}
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_subscribe_to_our_marketplace_via_paypal_recurring_subscriptions}</div>
+			<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_you_must_have_or_be_eligible_for_a_paypal_account_before_using_our_recurring_subscription_service}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+				<tr>
+					<td>
+						<div>
+							<div><img src="{template_relativeimagepath}{template_imagesfolder}payment/paypal.gif" border="0" alt="" id="paypal" /></div>
+						<blockquote><div>
+							{_subscription_details_at_paypal_once_payment_over_at_paypal_is_verified}
+							<br />
+							<br />
+							{_paypal_will_continue_to_bill_you_for_the_duration_you_selected_on_the_previous_menu}
+							<br />
+							<br />
+							{_this_will_be_an_automated_process_whereby_paypal_will_notify_us_upon_successful_subscription_payments_from_you}
+							<div class="gray"><br />{_please_note_if_you_manually_cancel_your_subscription_plan_on_paypalcom}</div>
+						</div></blockquote>
+						<hr size="1" width="100%" style="color:#cccccc; margin-top:6px" />
+						</div>
+					</td>
+				</tr>
+				</table>
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+                <tr>
+				  <td>
+				  	<tbody style="width:50%" id="creditcardoptions" class="alt1">
+                        <tr class="alt2_top">
+                        	<td colspan="3"><div ><strong>{_credit_card}</strong></div></td>
+                        	<td></td>
+                        </tr>
+                        <tr class="alt1">
+                            <td nowrap="nowrap"><div class="gray">{_card_type}</div></td>
+                            <td colspan="2" nowrap="nowrap">{cc_type_pulldown}</td>
+                        </tr>
+                        <tr class="alt1">
+                        	<td nowrap="nowrap"><div class="gray">{_card_number}</div></td>
+                        	<td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_number" id="creditcard_number" value="" class="input" style="width:150px" /></td>
+                        </tr>
+                        <tr class="alt1">	
+                        	<td nowrap="nowrap"><div class="gray">{_expiration}</td>
+                        	<td colspan="2" nowrap="nowrap">
+                    		<select name="creditcard_month" id="creditcard_month" style="font-family: verdana">
+                                <option value="">{_month}</option>
+                                    <option value="01" >01 - {_january}</option>
+                                    <option value="02" >02 - {_february}</option>
+                                    <option value="03" >03 - {_march}</option>
+                                    <option value="04" >04 - {_april}</option>
+                                    <option value="05" >05 - {_may}</option>
+                                    <option value="06" >06 - {_june}</option>
+                                    <option value="07" >07 - {_july}</option>
+                                    <option value="08" >08 - {_august}</option>
+                                    <option value="09" >09 - {_september}</option>
+                                    <option value="10" >10 - {_october}</option>
+                                    <option value="11" >11 - {_november}</option>
+                                    <option value="12" >12 - {_december}</option>
+                              </select>
+                              <select name="creditcard_year" id="creditcard_year" style="font-family: verdana">
+                                <option value="">{_year}</option>
+                                    <option value="2009" >2009</option>
+                                    <option value="2010" >2010</option>
+                                    <option value="2011" >2011</option>               
+                                    <option value="2012" >2012</option>
+                                    <option value="2013" >2013</option>
+                                    <option value="2014" >2014</option>
+                                    <option value="2015" >2015</option>
+                                    <option value="2016" >2016</option>
+                                    <option value="2017" >2017</option>
+                                    <option value="2018" >2018</option>
+                                    <option value="2019" >2019</option>
+                                    <option value="2020" >2020</option>												
+                              </select></td>
+                        </tr>
+                        <tr class="alt1">
+                        	<td nowrap="nowrap"><div class="gray">CVV2 {_number}</div></td>
+                        	<td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_cvv2" id="creditcard_cvv2" value="" class="input" style="width:50px" /></td>
+                        </tr>
+                        <tr class="alt1">
+                        	<td nowrap="nowrap"><div class="gray">{_first_name_on_card}</div></td>
+                        	<td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_firstname" id="creditcard_firstname" value="" class="input" style="width:150px" /></td>
+                        </tr>
+                        <tr class="alt1">
+                        	<td nowrap="nowrap"><div class="gray">{_last_name_on_card}</div></td>
+                        	<td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_lastname" id="creditcard_lastname" value="" class="input" style="width:150px" /></td>
+                        </tr>
+                        <tr class="alt1">
+                        	<td nowrap="nowrap"><div class="gray">{_billing_address}</div></td>
+                        	<td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_billing" id="creditcard_billing" value="" class="input" style="width:250px" /></td>
+                        </tr>
+                        <tr class="alt1">
+                        	<td nowrap="nowrap"><div class="gray">{_billing_postal_code}</div></td>
+                        	<td colspan="2" nowrap="nowrap"><input type="text" size="5" name="creditcard_postal" id="creditcard_postal" value="" class="input" style="width:50px" /></td>
+                        </tr>
+                        <tr class="alt1">
+                        	<td nowrap="nowrap"><div class="gray">{_amount}</div></td>
+                        	<td colspan="2" nowrap="nowrap">{amount}</td>
+                        </tr>
+                      	</tbody>
+				  </td>
+				</tr>
+
+				</table>
+				
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div><if condition="(isset($show['subscriptionmodify']) AND $show['subscriptionmodify'])"><input type="submit" value=" {_modify_subscription} " class="buttons" style="font-size:15px" /><else /><input type="submit" value=" {_subscribe} " style="font-size:15px" class="buttons" /></if></div>
+{hidden_form_end}

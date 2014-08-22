@@ -1,0 +1,686 @@
+<div id="v3body4"> 
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+	
+<!-- start content -->
+<div id="content">
+<h1>{_bid_manager}</h1><br />
+	<!-- templates -->
+	<div class="tab-pane">
+		<div class="tab-pane" id="bids">
+		
+			<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] == 1">
+			<div class="tab-page">
+				
+				
+        <h2 class="tab">{_service}</h2>
+		<form name="bidsearch" method="get" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+			<input type="hidden" name="cmd" value="bids" />
+			<input type="hidden" name="subcmd" value="searchservice" />
+			<div class="block-wrapper">
+
+	<div class="block2">
+	
+			<div class="block2-top">
+					<div class="block2-right">
+							<div class="block2-left"></div>
+					</div>
+			</div>
+			
+			<div class="block2-header">{_search_service_bid_proposals}</div>
+			<div class="block2-content-blue" style="padding:{table_cellpadding}px"><div class="smaller">{_search_service_bid_proposals_using_the_form_below}</div></div>
+			<div class="block2-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+            <tr class="alt1"> 
+              <td nowrap="nowrap"><span class="gray">{_search_by_auction_id}</span></td>
+              <td><input type="text" name="project_id" value="{project_id}" style="font-family: verdana;" class="input" /></td>
+              <td width="7%" align="right" nowrap="nowrap"><span class="gray">{_buyer_id} #</span></td>
+              <td width="13%" nowrap="nowrap"> <input type="text" name="user_id" value="{user_id}" style="font-family: verdana;" class="input" /></td>
+              <td width="6%" nowrap="nowrap"><span class="gray">{_bid_id} #</span></td>
+              <td width="42%" nowrap="nowrap"><input type="text" name="bid_id" value="{bid_id}" style="font-family: verdana;" size="8" class="input" /></td>
+            </tr>
+            <tr class="alt1"> 
+              <td width="16%" nowrap="nowrap"><span class="gray">{_bid} {_status}</span></td>
+              <td width="16%"><select name="bidstatus" style="font-family: verdana">
+                  <option value="">{_all}</option>
+                  <option value="placed" <if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'searchservice' AND isset($ilance->GPC['bidstatus']) AND $ilance->GPC['bidstatus'] == 'placed'">selected="selected"</if>>{_placed_bids}</option>
+                  <option value="awarded" <if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'searchservice' AND isset($ilance->GPC['bidstatus']) AND $ilance->GPC['bidstatus'] == 'awarded'">selected="selected"</if>>{_awarded_bids}</option>
+				  <option value="declined" <if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'searchservice' AND isset($ilance->GPC['bidstatus']) AND $ilance->GPC['bidstatus'] == 'declined'">selected="selected"</if>>{_declined_bids}</option>
+				  <option value="choseanother" <if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'searchservice' AND isset($ilance->GPC['bidstatus']) AND $ilance->GPC['bidstatus'] == 'choseanother'">selected="selected"</if>>{_chose_another}</option>
+                </select></td>
+              <td colspan="2" nowrap="nowrap"> <span class="gray">{_display_order}</span> 
+                <input type="radio" name="orderby" value="ASC" <if condition="isset($ilance->GPC['orderby']) AND $ilance->GPC['orderby'] == 'ASC'">checked="checked"</if> />
+                {_ascending} 
+                <input type="radio" name="orderby" value="DESC" <if condition="isset($ilance->GPC['orderby']) AND $ilance->GPC['orderby'] == 'DESC'">checked="checked"</if> />
+                {_descending} 
+              </td>
+              <td nowrap="nowrap"><div class="gray"></div></td>
+              <td>&nbsp;</td>
+            </tr>
+			<tr class="alt2_top">
+				<td colspan="6"><input type="submit" value=" {_search} " class="buttons" style="font-size:15px" /></td>
+			</tr>
+          </table>
+				
+			</div>
+			
+			<div class="block2-footer">
+					<div class="block2-right">
+							<div class="block2-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</form>
+			
+			<if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'searchservice'">
+			
+			<form method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+			<input type="hidden" name="cmd" value="bids" />
+			<input type="hidden" name="subcmd" value="do-bid-action" />
+			<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=bids" />
+			<div class="block-wrapper">
+			<div class="block2">
+			
+					<div class="block2-top">
+							<div class="block2-right">
+									<div class="block2-left"></div>
+							</div>
+					</div>
+					
+					<div class="block2-header">{_bid_proposals}</div>
+					<div class="block2-content-blue" style="padding:{table_cellpadding}px"><div class="smaller">{_viewing_bid_proposals}</div></div>
+					<div class="block2-content" style="padding:0px">
+						
+						<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+						<tr class="alt2">
+						  <td width="5%" nowrap="nowrap" align="center">{_more}</td> 
+						  <td width="6%" nowrap="nowrap" align="center">BID</td>
+						  <td width="34%" nowrap="nowrap" align="left">PID / {_title} </td>
+						  <td width="14%" nowrap="nowrap">{_service_provider}</td>
+						  <td width="11%" nowrap="nowrap">{_status}</td>
+						  <td width="10%" nowrap="nowrap">{_amount}</td>
+						  <td width="4%" nowrap="nowrap">{_fvf}</td>
+						  <td width="1%" align="right" nowrap="nowrap">{_action}</td>
+						  </tr>
+						<loop name="servicebids"> 
+						<tr class="alt1" valign="top">
+						  <td align="center" nowrap="nowrap"><a href="javascript:void(0)" onclick="return toggle('bidactivity_rfp{bid_id}');"><img id="collapseimg_bidactivity_rfp{project_id}" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_bidactivity_rfp{bid_id}]}.gif" border="0" alt="" /></a></td> 
+						  <td align="center" nowrap="nowrap"><span style="font-size:18px" class="gray">{bid_id}</span></td>
+						  <td align="left" nowrap="nowrap"><span style="float:right" class="smaller gray"><span class="smaller green"><a href="{http_server}{ilpage[rfp]}?id={project_id}" target="_blank">{_view}</a></span></span><span class="blue"><a href="{ilpage[distribution]}?cmd=auctions&amp;subcmd=_update-auction&amp;id={project_id}&amp;viewtype=service">{project_id}</a></span> <div class="smaller gray" style="padding-top:3px">{title}</div></td>
+						  <td nowrap="nowrap"><span class="blue">{provider}</span></td>
+						  <td nowrap="nowrap"><span class="gray">{award}</span></td>
+						  <td><span class="blue">{bidamount}</span><div class="smaller gray">({bidamounttype})</div></td>
+						  <td><span class="blue">{fvf}</span></td>
+						  <td align="right" nowrap="nowrap" class="alt2">{delete}</td>
+						  </tr>
+						<tr class="alt1" id="collapseobj_bidactivity_rfp{bid_id}" style="display:none;"> 
+						  <td colspan="9" valign="top" nowrap="nowrap"> <table width="100%" border="0" cellspacing="0" cellpadding="2">
+							<tr> 
+							  <td><div class="smaller" style="font-size:14px"><strong>{_bid_proposal}</strong><div><span class="gray">{proposal}</span></div><hr size="1" width="100%" style="color:#ebebeb" /></div>
+							  <div>{bidattach}</div></td>
+							</tr>
+							
+							
+							
+							<tr> 
+							  <td align="left" class="smaller"><div style="padding-top:5px; font-size:14px"><strong>{_bid_placed}</strong><div class="gray">{bid_datetime}</div></div></td>
+							</tr>
+						  </table></td>
+						  </tr>
+						</loop name="servicebids"> 
+						<if condition="isset($show['no_servicebids']) AND $show['no_servicebids']"> 
+						<tr> 
+						  <td colspan="9" align="center">{_no_results_found}</td>
+						</tr>
+						<else />
+						<tr class="alt2_top"> 
+							  <td colspan="8"><if condition="$show['ADMINCP_TEST_MODE']"><span title="Retracting bids updates the retract count for bidders + 1 and will adjust the current bid amount of the listing to the 2nd highest bid placed"><input type="submit" value=" {_retract} " style="font-size:15px" name="retract" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}');" disabled="disabled" /></span>&nbsp;&nbsp;&nbsp;<span title="Physically removing bids will not update retraction counts for bidders nor will it adjust the current bid amount for the listing"><input type="submit" value=" {_delete} " style="font-size:15px" name="delete" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}');" disabled="disabled" /></span><else /><span title="Retracting bids updates the retract count for bidders + 1 and will adjust the current bid amount of the listing to the 2nd highest bid placed"><input type="submit" value=" {_retract} " style="font-size:15px" name="retract" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}');" /></span>&nbsp;&nbsp;&nbsp;<span title="Physically removing bids will not update retraction counts for bidders nor will it adjust the current bid amount for the listing"><input type="submit" value=" {_delete} " style="font-size:15px" name="delete" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}');" /></span></if></td>
+						</tr>
+						<tr> 
+						  <td colspan="9">{serviceprevnext}</td>
+						</tr>
+						</if>
+					  </table>
+						
+					</div>
+					
+					<div class="block2-footer">
+							<div class="block2-right">
+									<div class="block2-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+		  </form>
+		</if>
+		
+			</div>
+			
+			</if>
+	
+			<if condition="$ilconfig['globalauctionsettings_productauctionsenabled']">
+			<div class="tab-page">
+				
+				<h2 class="tab">{_product}</h2>
+				<form name="bidsearch" method="get" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+			<input type="hidden" name="cmd" value="bids" />
+			<input type="hidden" name="subcmd" value="searchproduct" />
+			<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_search_product_bids}</div>
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_search_product_bids_using_the_form_below}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+            <tr class="alt1"> 
+              <td nowrap="nowrap"><span class="gray">{_search_by_auction_id}</span></td>
+              <td><input type="text" name="project_id" value="{project_id}" style="font-family: verdana;" class="input" /></td>
+              <td width="11%" align="right" nowrap="nowrap"><span class="gray">{_seller_id} #</span></td>
+              <td width="13%" nowrap="nowrap"> <input type="text" name="user_id" value="{user_id}" style="font-family: verdana;" class="input" /></td>
+              <td width="5%" nowrap="nowrap"><span class="gray">{_bid_id}</span></td>
+              <td width="43%" nowrap="nowrap"><input type="text" name="bid_id" value="{bid_id}" style="font-family: verdana;" size="8" class="input" /></td>
+            </tr>
+            <tr class="alt1"> 
+              <td width="16%" nowrap="nowrap"><span class="gray">{_status}</span></td>
+              <td width="12%"><select name="bidstatus" style="font-family: verdana">
+                  <option value="">{_all}</option>
+                  <option value="placed" <if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'searchproduct' AND isset($ilance->GPC['bidstatus']) AND $ilance->GPC['bidstatus'] == 'placed'">selected="selected"</if>>{_placed_bids}</option>
+                  <option value="awarded" <if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'searchproduct' AND isset($ilance->GPC['bidstatus']) AND $ilance->GPC['bidstatus'] == 'awarded'">selected="selected"</if>>{_won_bids}</option>
+				  <option value="outbid" <if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'searchproduct' AND isset($ilance->GPC['bidstatus']) AND $ilance->GPC['bidstatus'] == 'outbid'">selected="selected"</if>>{_outbid} {_bids}</option>
+                </select></td>
+              <td colspan="2" nowrap="nowrap"><span class="gray">{_display_order}</span> 
+                <input type="radio" name="orderby" value="ASC" <if condition="isset($ilance->GPC['orderby']) AND $ilance->GPC['orderby'] == 'ASC'">checked="checked"</if> />
+                {_ascending} 
+                <input type="radio" name="orderby" value="DESC" <if condition="isset($ilance->GPC['orderby']) AND $ilance->GPC['orderby'] == 'DESC'">checked="checked"</if> />
+                {_descending}</td>
+              <td nowrap="norwap">&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr class="alt2_top">
+				<td colspan="6"><input type="submit" value=" {_search} " style="font-size:15px" class="buttons" /></td>
+			</tr>
+          </table>
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</form>
+			
+			<if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'searchproduct'">
+			
+				<form method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="bids" />
+				<input type="hidden" name="subcmd" value="do-bid-action" />
+				<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=bids" />
+				<div class="block-wrapper">
+				<div class="block">
+				
+						<div class="block-top">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+						<div class="block-header">{_product}</div>
+						<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_bids_with_highlighted_background_represent_proxy_bids_placed_by_a_proxy_agent}</div></div>
+						<div class="block-content" style="padding:0px">
+							
+							<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+							<tr class="alt2"> 
+							  <td width="1%" nowrap="nowrap" align="center">BID</td>
+							  <td width="40%" nowrap="nowrap" align="left">{_title} </td>
+							  <td width="18%" nowrap="nowrap">{_bidder}</td>
+							  <td width="19%" nowrap="nowrap">{_bid_placed}</td>
+							  <td width="17%" nowrap="nowrap">{_bid_amount}</td>
+							  <td width="9%" nowrap="nowrap">{_bid_status}</td>
+							  <td width="10%" nowrap="nowrap">{_proxy_bid}</td>
+							  <td width="1%" nowrap="nowrap" align="right">{_action}</td>
+							</tr>
+							<loop name="productbids"> 
+							<tr class="alt1" valign="top"> 
+							  <td align="center" nowrap="nowrap"><span class="blue">{bid_id}</span></td>
+							  <td align="left" width="40%"><div class="blue">{title}</div><div class="smaller blue" style="padding-top:5px"><a href="{http_server}{ilpage[merch]}?id={project_id}" target="_blank">{_view} #{project_id}</a></div></td>
+							  <td align="left" nowrap="nowrap"><span class="blue">{provider}</span></td>
+							  <td nowrap="nowrap"><div class="blue">{bid_datetime}</div></td>
+							  <td nowrap="nowrap"><span class="blue">{bidamount}</span></td>
+							  <td nowrap="nowrap"><span class="gray">{award}</span></td>
+							  <td nowrap="nowrap">{proxy}</td>
+							  <td align="center" class="alt2" width="1%">{delete}</td>
+							</tr>
+							</loop name="productbids"> 
+							<if condition="isset($show['no_productbids']) AND $show['no_productbids']"> 
+							<tr> 
+							  <td colspan="8" align="center">{_no_results_found}</td>
+							</tr>
+							<else />
+							<tr class="alt2_top"> 
+							  <td colspan="8"><if condition="$show['ADMINCP_TEST_MODE']"><span title="Retracting bids updates the retract count for bidders + 1 and will adjust the current bid amount of the listing to the 2nd highest bid placed"><input type="submit" value=" {_retract} " style="font-size:15px" name="retract" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}');" disabled="disabled" /></span>&nbsp;&nbsp;&nbsp;<span title="Physically removing bids will not update retraction counts for bidders nor will it adjust the current bid amount for the listing"><input type="submit" value=" {_delete} " style="font-size:15px" name="delete" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}');" disabled="disabled" /></span><else /><span title="Retracting bids updates the retract count for bidders + 1 and will adjust the current bid amount of the listing to the 2nd highest bid placed"><input type="submit" value=" {_retract} " style="font-size:15px" name="retract" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}');" /></span>&nbsp;&nbsp;&nbsp;<span title="Physically removing bids will not update retraction counts for bidders nor will it adjust the current bid amount for the listing"><input type="submit" value=" {_delete} " style="font-size:15px" name="delete" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}');" /></span></if></td>
+							</tr>
+							</if>
+							<tr> 
+							  <td colspan="8">{productprevnext}</td>
+							</tr>
+							</table>
+							
+      </div>
+						
+						<div class="block-footer">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+		  	</form>
+			</if>
+			
+			</div>
+			</if>
+	
+					<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] == 1"><!-- START bid fields -->
+					<div class="tab-page"><h2 class="tab">{_bid_fields}</h2>
+							<form method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" name="updatesort" style="margin: 0px;">
+							<input type="hidden" name="cmd" value="bids" />
+							<input type="hidden" name="subcmd" value="_update-fields-sort" />
+							<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=bids" />
+							<div class="block-wrapper">
+							<div class="block3">
+							
+									<div class="block3-top">
+											<div class="block3-right">
+													<div class="block3-left"></div>
+											</div>
+									</div>
+									
+									<div class="block3-header">{_custom_bid_fields}: <span class="blue">{_service_auctions}</span></div>
+									<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_create_and_manage_custom_bidding_fields_and_assign_them_to_various_categories_you_cannot_assign_a_single}</div></div>
+									<div class="block3-content" style="padding:0px">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt2"> 
+											<td align="center" width="6%">FID</td>
+											<td align="center" width="6%">{_sort}</td>
+											<td>{_field}</td>
+											<td align="center" nowrap="nowrap">{_type}</td>
+											<td align="center" width="9%">{_active}</td>
+											<td width="9%" align="center">{_action}</td>
+										</tr>
+										<loop name="bidfields"> 
+										<tr class="alt1"> 
+											<td align="center">{fieldid}</td>
+											<td align="center">{sortinput}</td>
+											<td><div><span class="black"><strong>{question}</strong></span></div><div class="gray">{description}</div>
+											  <div style="padding-top:3px" class="smaller">{count}</div></td>
+											<td align="center"><strong>{inputtype}</strong></td>
+											<td align="center">{question_active}</td>
+											<td align="center">{edit}&nbsp;&nbsp;{remove} </td>
+										</tr>
+										</loop name="bidfields"> 
+										<if condition="isset($no_bidfields) AND $no_bidfields"> 
+										<tr> 
+											<td colspan="6" align="center">{_no_results_found}</td>
+										</tr>
+										<else />
+										<tr class="alt2_top"> 
+											<td colspan="6"><input name="savesort" type="submit" value="{_update_sort}" style="font-size:15px" class="buttons" /></td>
+										</tr>
+										</if>
+										</table>
+										
+									</div>
+									
+									<div class="block3-footer">
+											<div class="block3-right">
+													<div class="block3-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+						</form>
+
+						<a name="profilequestion"></a>
+						
+						<form method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" name="addbidfield" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="bids" />
+						<input type="hidden" name="subcmd" value="{subcmd}" />
+						<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=bids" />
+						{hiddenfield}
+						<div class="block-wrapper">
+						<div class="block3">
+						
+								<div class="block3-top">
+										<div class="block3-right">
+												<div class="block3-left"></div>
+										</div>
+								</div>
+								
+								<div class="block3-header">{_bid_field_management}</div>
+								<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_when_a_user_places_a_bid_the_following_field_you_create_will_be_answerable}</div></div>
+								<div class="block3-content" style="padding:0px">
+									
+								<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+								<loop name="servicelanguages">
+								<tr class="alt1"> 
+									<td valign="top"><span class="gray">{_question} {_in} {language}</span></td>
+									<td><input class="input" name="question[{slng}]" value="{question}" style="width:98%" /></td>
+								</tr>
+								<tr class="alt1"> 
+									<td valign="top"><span class="gray">{_question_description} {_in} {language}</span></td>
+									<td><textarea name="description[{slng}]" style="width: 98%; height: 84px; font-family: Verdana;" wrap="physical">{question_description}</textarea></td>
+								</tr>
+								</loop name="servicelanguages">
+								<tr class="alt1"> 
+									<td valign="middle"><span class="gray">{_type}</span></td>
+									<td>{field_inputtype_pulldown}</td>
+								</tr>
+								<tr class="alt1"> 
+									<td valign="middle"><span class="gray">{_display_values}</span> ( <strong><a href="javascript:void(0)" onclick="return alert_js('{_only_use_this_option_if_you_selected_the_question_type_of_pulldown_or_multiple_choice_for_each_menu_item}');">?</a></strong> )</td>
+									<td><input class="input" name="multiplechoice" value="{multiplechoicefield}" style="width:50%" /> 
+						 option1<strong>|</strong>option2<strong>|</strong>option3</td>
+								</tr>
+								<tr class="alt1"> 
+									<td valign="middle"><span class="gray">{_display_order}</span></td>
+									<td><input class="input" name="sort" value="{sort}" size="3" /></td>
+								</tr>
+								<tr class="alt1"> 
+								  <td valign="middle"><span class="gray">{_active}</span></td>
+								  <td><label for="active"><input type="checkbox" id="active" name="visible" value="1" {checked_active} /> {_yes}</label></td>
+								</tr>
+								<tr class="alt2_top"> 
+									<td colspan="2" valign="middle">{submit_field}</td>
+								</tr>
+								</table>
+
+									
+								</div>
+								
+								<div class="block3-footer">
+										<div class="block3-right">
+												<div class="block3-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+					</div><!-- END bid fields -->
+                    </if>
+				
+				<if condition="$ilconfig['globalauctionsettings_productauctionsenabled']">
+				<div class="tab-page"> 
+				<h2 class="tab">{_increments}</h2>
+				
+				<!-- begin tab pane -->
+				<div class="tab-pane" id="productincrements">
+				
+				
+					<!-- begin marketplace profile groups tab page -->
+						<div class="tab-page">
+							<h2 class="tab">{_groups}</h2>
+							
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_bid_increment_groups}</div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_and_manage_bid_increment_groups_which_hold_increment_range_values}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt2"> 
+											<td width="7%" align="center">GID</td>
+											<td width="50%">{_group}</td>
+											<td width="26%">{_quick_assign}</td>
+											<td width="5%" align="center">{_edit}</td>
+											<td width="12%" align="center">{_remove}</td>
+										</tr>
+										<loop name="increment_groups"> 
+										<tr class="alt1" valign="top"> 
+											<td align="center">{groupid}</td>
+											<td><span class="blue">{groupname}</span>
+											<div><strong>{description}</strong></div>
+											<div class="smaller gray">{groupcount} {_categories_using_this_bid_increment_group}</div></td>
+											<td><a href="{ilpage[distribution]}?cmd=bids&amp;subcmd=assign-all-categories&amp;title={groupnameplain}"><span class="blue">{_assign_to_all_categories}</span></a></td>
+											<td align="center">{edit}</td>
+											<td align="center">{remove_group}</td>
+										</tr>
+										</loop name="increment_groups"> 
+										<if condition="isset($show['no_increment_groups']) AND $show['no_increment_groups']"> 
+										<tr> 
+											<td colspan="5" align="center">{_no_groups_exist}</td>
+										</tr>
+										</if>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+							
+							
+							<form method="post" action="{ilpage[distribution]}" name="increments" accept-charset="UTF-8" style="margin: 0px;">
+							<input type="hidden" name="cmd" value="bids" /> 
+							<input type="hidden" name="subcmd" value="{subcmdincrementgroup}" />
+							<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=bids" />
+							{hiddenincrementgroupid2}
+							
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_new_bid_increment_group}</div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_a_new_bid_increment_group_so_that_you_can_begin_to_create}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt1"> 
+											<td width="9%" nowrap="nowrap">{_group_title} </td>
+										  <td width="91%"> <input type="text" name="groupname" value="{incrementgroupname}" class="input" /><div class="smaller gray">{_example}: <strong>Increments</strong> - {_please_do_not_include_spaces_as_they_will_be_replaced_with_underscores}</div></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="9%" nowrap="nowrap" >{_description} </td>
+											<td width="91%"> <input type="text" name="description" value="{incrementgroupdescription}" class="input" style="width:98%" /> <div class="smaller gray">{_example}: <strong>{_increment_ranges_001_to_10000_10001__1000_etc}</strong></div></td>
+										</tr>
+										<tr class="alt2_top"> 
+											<td colspan="2" valign="middle" nowrap="nowrap">{submitincrement}</td>
+										</tr>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+						</form>
+						</div>
+						<!-- /begin marketplace profile groups tab page -->
+						
+						<!-- begin marketplace profile questions tab -->
+						<div class="tab-page">
+						  <h2 class="tab">{_ranges}</h2>
+							
+							<loop name="increment_groups2">
+							
+							<form method="post" action="{ilpage[distribution]}" name="updateincrement" accept-charset="UTF-8" style="margin:0px">
+							<input type="hidden" name="cmd" value="bids" />
+							<input type="hidden" name="subcmd" value="_update-increment-sort" />
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header"><span class="blue">{groupname}</span></div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_to_enable_this_bid_increment_group_range_below}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+										<tr class="alt2"> 
+											<td width="27%" nowrap="nowrap">{_bid_amount} {_from} </td>
+											<td width="26%" nowrap="nowrap">{_bid_amount} {_to_upper} </td>
+											<td width="19%" nowrap="nowrap">{_increment} {_amount}</td>
+											<td width="8%" align="center" nowrap="nowrap">{_sort}</td>
+											<td align="center" width="12%" nowrap="nowrap">{_action}</td>
+										</tr>
+										<loop name="increments{groupid}">
+										<tr class="alt1"> 
+											<td align="left">{from}</td>
+											<td align="left">{to}</td>
+											<td align="left">{amount}</td>
+											<td align="center"><input type="text" name="sort[{incrementid}]" value="{sort}" style="width:100%; text-align:center; font-family: verdana" /></td>
+											<td align="center">{actions}</td>
+										</tr>
+										</loop name="increments{groupid}"> 
+										<if condition="isset($no_increments{groupid}) AND $no_increments{groupid}"> 
+										<tr> 
+											<td colspan="6" align="center">{_no_results_found} {_in} <span class="blue"><strong>{groupname}</strong></span></td>
+										</tr>
+										<else />
+										<tr class="alt2_top"> 
+											<td colspan="6" valign="middle"><input type="submit" name="submit" value="{_update_sort}" style="font-size:15px" class="buttons" /> </td>
+										</tr>
+										</if>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+						</form>
+						</loop name="increment_groups2">
+	
+							<a name="editgroup"></a>
+							
+							<form method="post" action="{ilpage[distribution]}" name="increment" accept-charset="UTF-8" style="margin: 0px;">
+							<input type="hidden" name="cmd" value="bids" />
+							<input type="hidden" name="subcmd" value="{incform}" />
+							<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=bids" />
+							{inchidden}
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_add_new_increment_range}</div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_once_you_are_finished_adding_ranges_you_can_start_assigning_categories}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt1"> 
+											<td width="11%">{_from}</td>
+											<td width="89%"><input class="input" name="increment_from" value="{incfrom}" /><div class="smaller gray">{_the_lowest_value_you_can_enter_here_is_001_1_penny}</div></td>
+										</tr>
+										<tr class="alt1"> 
+											<td>{_to_upper}</td>
+											<td><input class="input" name="increment_to" value="{incto}" /><div class="smaller gray">{_to_denote_an_unlimited_range_enter_1_instead_for_example}</div></td>
+										</tr>
+										<tr class="alt1"> 
+											<td>{_amount}</td>
+											<td><input class="input" name="amount" value="{incamount}" /><div class="smaller gray">{_this_is_the_bid_increment_amount_assigned_to_this_range}</div></td>
+										</tr>
+										<tr class="alt1"> 
+										<td>{_sort}</td>
+										<td><input class="input" name="sort" value="{incsort}" /><div class="smaller gray">{_if_you_need_to_resort_your_ranges_manually_you_can_change_this_value}</div></td>
+										</tr>
+										<tr class="alt1"> 
+											<td>{_group}</td>
+											<td>{incrementgrouppulldown}<div class="smaller gray">{_please_assign_this_new_range_by_selecting_an_increment_group}</div></td>
+										</tr>
+										<tr class="alt2_top"> 
+										<td colspan="2" valign="middle">{incsubmit}</td>
+										</tr>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+						</form>
+						
+						</div>					
+						<!-- begin marketplace profile questions tab -->
+				
+				</div>
+				
+			</div>
+			</if>
+            
+            <!-- begin product bid logic settings -->
+            <div class="tab-page">
+                <h2 class="tab">{_settings}</h2>
+                
+                {configuration_productbid}
+                
+            </div>
+            <!-- /begin product bid logic settings -->
+			
+		</div>
+		<!-- / templates -->
+		
+	</div>

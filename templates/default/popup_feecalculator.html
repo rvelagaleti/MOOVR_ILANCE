@@ -1,0 +1,129 @@
+<div align="center" style="padding:9px">
+<div class="block-wrapper" style="width:99%" align="left">
+
+	<div class="block5">
+	
+			<div class="block5-top">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+			<div class="block5-header">{_fee_calculator}</div>
+			<div class="block5-content-gray"><div class="smaller">{_use_the_calculator_below_to_get_an_acurate_measure}</div></div>
+			
+			<div class="block5-content" style="padding:0px">
+				
+					<if condition="!empty($final_conversion)">
+					<div class="alt3">
+					<table width="100%" border="0" cellspacing="0" cellpadding="{table_cellpadding}">
+					<tr> 
+						<td colspan="5" align="left"><h1><img src="{template_relativeimagepath}{template_imagesfolder}icons/money.gif" border="0" alt="" /> {final_conversion}</h1></td>
+					</tr>
+					</table>
+					</div>
+				</if>
+					
+				<form method="post" name="ilform" action="{ilpage[accounting]}" accept-charset="UTF-8" style="margin:0px">
+				<input type="hidden" name="cmd" value="feecalculator" />
+				<input type="hidden" name="subcmd" value="process" />
+				<input type="hidden" name="c" value="{cid}" />
+				<input type="hidden" name="fvf" value="{fvf}" />
+				<input type="hidden" name="ins" value="{ins}" />
+				<input type="hidden" name="esc" value="{esc}" />
+				<input type="hidden" name="t" value="{t}" />
+				<input type="hidden" name="bidamounttype" value="{bidamounttype}" />
+				<div>
+				
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				<tr class="alt1"> 
+					<td width="36%" align="left"><div><strong>{_amount}</strong></div>
+						<div class="gray" style="padding-bottom:9px">{_enter_the_estimated_amount_to_calculate}</div>
+						<div style="padding-bottom:9px"><span style="float:left; padding-right:6px; padding-top:5px" class="gray">{currencysymbol}</span><div><input type="text" name="amount" value="{amount}" size="11" style="font-family: verdana" /></div></td>
+				</tr>
+				<if condition="isset($ilance->GPC['t']) AND $ilance->GPC['t'] == 'serviceprovider' AND $ilconfig['globalauctionsettings_serviceauctionsenabled']">
+				<tr class="alt1"> 
+					<td width="36%" align="left">
+					
+						<div><strong>{_bid_amount_type}</strong></div>
+						<div class="gray" style="padding-bottom:9px">{_select_the_bid_amount_type_to_process}</div>
+						<div style="padding-bottom:9px">{bidamounttype_pulldown}</div>
+					
+					</td>
+				</tr>
+				</if>
+				<if condition="isset($ilance->GPC['t']) AND ($ilance->GPC['t'] == 'service' OR $ilance->GPC['t'] == 'serviceprovider') AND $ilconfig['globalauctionsettings_serviceauctionsenabled']">
+				<tr class="alt1"> 
+					<td width="36%" align="left">
+											<div><strong>{_category}</strong></div>
+						<div class="gray" style="padding-bottom:9px">{_select_the_appropriate_category_to_process}</div>
+						<div style="padding-bottom:9px">{category_pulldown}</div>
+
+					</td>
+				</tr>
+				</if>
+				<if condition="isset($ilance->GPC['t']) AND $ilance->GPC['t'] == 'product' AND $ilconfig['globalauctionsettings_productauctionsenabled']">
+				<tr class="alt1"> 
+					<td width="36%" align="left">
+					
+					<div><strong>{_category}</strong></div>
+						<div class="gray" style="padding-bottom:9px">{_select_the_appropriate_category_to_process}</div>
+						<div style="padding-bottom:9px">{category_pulldown2}</div>
+					</td>
+				</tr>
+				</if>
+				<tr class="alt1"> 
+					<td width="36%" align="left"> 
+						
+						
+						<div><strong>{_fee_type}</strong></div>
+						<div class="gray" style="padding-bottom:9px">{_select_the_appropriate_fee_type_to_process}</div>
+						<table cellpadding="0" cellspacing="3" border="0">
+						<tr> 
+							<td>
+								<if condition="isset($ilance->GPC['fvf']) AND $ilance->GPC['fvf']">
+									<div><label for="fvf"><input type="radio" name="feetype" id="fvf" value="fvf" checked="checked" /> {_final_value_fees}</label></div>
+									<if condition="isset($ilance->GPC['t']) AND $ilance->GPC['t'] == 'service'">
+										<div class="smaller gray">{_service_providers_pay_final_value_fees_based_on_the_buyers_awarded_bid_amount}</div>
+									</if>
+									<if condition="isset($ilance->GPC['t']) AND $ilance->GPC['t'] == 'product'">
+										<div class="smaller gray">{_sellers_pay_final_value_fees_based_on_the_final_value_auction_amount_of_the_winning_bid}</div>
+									</if>
+								</if>
+								
+								<if condition="isset($ilance->GPC['ins']) AND $ilance->GPC['ins'] == '1'">
+									<div><label for="ins"><input type="radio" name="feetype" id="ins" value="ins" checked="checked" /> {_insertion_fees}</label></div>
+									<if condition="isset($ilance->GPC['t']) AND $ilance->GPC['t'] == 'service'">
+										<div class="smaller gray">{_insertion_fees_are_charged_to_service_buyers_for_posting_new_service_requests}</div>
+									</if>
+									<if condition="isset($ilance->GPC['t']) AND $ilance->GPC['t'] == 'product'">
+										<div class="smaller gray">{_insertion_fees_are_charged_to_the_seller_for_listing_their_items_in_the_marketplace}</div>
+									</if>
+								</if>
+								
+								<if condition="isset($ilance->GPC['esc']) AND $ilance->GPC['esc'] == '1'">
+									<div><label for="esc"><input type="radio" name="feetype" id="esc" value="esc" checked="checked" /> {_escrow_fees}</label></div>
+								</if>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				<tr class="alt2_top">
+					<td><input type="submit" value="{_calculate}" style="font-size:15px" class="buttons" /></td>
+				</tr>
+				</table>
+				</div>
+				</form>
+				
+			</div>
+			
+			<div class="block5-footer">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</div>

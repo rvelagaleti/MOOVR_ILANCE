@@ -1,0 +1,259 @@
+<div id="v3body4"> 
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+	
+<!-- start content -->
+<div id="content">
+<h1>{_registration_question_management}</h1><br />
+
+<!-- begin tab pane -->
+<div class="tab-pane">
+		
+<!-- begin registration settings -->
+<div class="tab-page">
+    
+    <h2 class="tab">{_settings}</h2>
+    
+    {configuration_registrationdisplay}
+    
+</div>
+<!-- end registration settings -->
+
+<!-- begin registration upsell -->
+<div class="tab-page">
+    <h2 class="tab">{_upsell}</h2>
+    
+    {configuration_registrationupsell}
+    
+</div>
+<!-- end registration upsell -->
+
+<!-- begin registration questions tab -->
+<div class="tab-page"><h2 class="tab">{_questions}</h2>
+    
+    <form method="post" action="{ilpage[settings]}" name="updatesort" accept-charset="UTF-8" style="margin: 0px;">
+        <input type="hidden" name="cmd" value="registration" />
+        <input type="hidden" name="subcmd" value="_update-register-questions-sort" />
+        <input type="hidden" name="return" value="{ilpage[settings]}?cmd=registration" />
+        <div class="block-wrapper">
+        <div class="block">
+        
+                <div class="block-top">
+                        <div class="block-right">
+                                <div class="block-left"></div>
+                        </div>
+                </div>
+                
+                <div class="block-header">{_custom_registration_questions}</div>
+                <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_custom_registration_questions_allow_you_to_extend_the_registration_system}</div></div>
+                <div class="block-content" style="padding:0px">
+                    
+                    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+                    <tr class="alt2"> 
+                        <td align="center" width="1%">QID</td>
+                        <td align="center" width="10%">{_sort}</td>
+                        <td width="47%">{_question}</td>
+                        <td width="11%" nowrap="nowrap">{_type}</td>
+                        <td align="center" width="9%">{_active}</td>
+                        <td align="center" width="3%">{_required}</td>
+                        <td align="center" width="2%" nowrap="nowrap">{_visible_in_profile}</td>
+                        <td align="center" width="2%" nowrap="nowrap">{_guests_viewable}</td>
+                        <td align="center" width="9%">{_action}</td>
+                    </tr>
+                    <loop name="register_questions"> 
+                        <tr class="alt1" valign="top"> 
+                        <td align="center">{questionid}</td>
+                        <td align="center">{sortinput}</td>
+                        <td>{question}<!--<div class="gray">{question_description}</div>--><div><span class="smaller" style="padding-top:3px">{_shown_on}: <em>{_page} <strong>{pageid}</strong></em></span></div></td>
+                        <td><span class="smaller">{inputtype}</span></td>
+                        <td align="center">{question_active}</td>
+                        <td align="center">{isrequired}</td>
+                        <td align="center">{visibleprofile}</td>
+                        <td align="center">{guestsprofile}</td>
+                        <td align="center">{edit}&nbsp;&nbsp;{remove}</td>
+                        </tr>
+                    </loop name="register_questions"> 
+                    <if condition="isset($show['no_register_questions']) AND $show['no_register_questions']"> 
+                    <tr> 
+                        <td class="alt1" colspan="9" align="center">{_no_results_found}</td>
+                    </tr>
+                    </if> 
+                    <tr class="alt2_top"> 
+                    <td colspan="9" align="left"><input name="savesort" type="submit" value=" {_save} " style="font-size:15px" class="buttons" /></td>
+                    </tr>
+                    </table>
+                    
+</div>
+                
+                <div class="block-footer">
+                        <div class="block-right">
+                                <div class="block-left"></div>
+                        </div>
+                </div>
+                
+        </div>
+    </div>
+    </form>
+    
+    <a name="registrationquestion"></a>
+    <form method="post" action="{ilpage[settings]}" name="addregisterquestion" accept-charset="UTF-8" style="margin: 0px;">
+    <input type="hidden" name="cmd" value="registration" />
+    <input type="hidden" name="subcmd" value="{regquestion_subcmd}" />
+    <input type="hidden" name="return" value="{ilpage[settings]}?cmd=registration" />
+    <input type="hidden" name="formname" value="{regformname}" />
+    {regquestion_id_hidden}
+    
+    <div class="block-wrapper">
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header">{_registration_question_management}</div>
+            <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_new_questions_and_assign_them_on_either_page_of_the_registration_process}</div></div>
+            <div class="block-content" style="padding:0px">
+                
+                <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+                <tr class="alt1"> 
+                    <td width="35%">{_page}</span></td>
+                    <td width="65%">{register_page_pulldown}</td>
+                </tr>
+                <tr class="alt1"> 
+                    <td width="35%">{_role}</span></td>
+                    <td width="65%">{role_option}</td>
+                </tr>
+                <loop name="registerlanguages">
+                <tr class="alt1"> 
+                    <td valign="top" class="alt1">{_question} {_in} <strong>{language}</strong></td>
+                    <td><input style="width:450px" name="question[{slng}]" value="{question}" class="input" /></td>
+                </tr>
+                <tr class="alt1"> 
+                    <td valign="top" class="alt1">{_description} {_in} <strong>{language}</strong></td>
+                    <td><textarea name="description[{slng}]" style="width: 525px; height: 84px" class="input" wrap="physical">{description}</textarea></td>
+                </tr>
+                </loop name="registerlanguages">
+                <tr class="alt1">
+                  <td class="alt1">{_default_input_value}</td>
+                  <td><input class="input" name="formdefault" value="{regformdefault}" /></td>
+                </tr>
+                <tr class="alt1"> 
+                    <td valign="middle" class="alt1">{_type}</td>
+                    <td>{regprofile_inputtype_pulldown}</td>
+                </tr>
+                <tr class="alt1">
+                    <td valign="middle" class="alt1">{_display_values}</td>
+                    <td><input class="input" name="multiplechoice" value="{multiplechoice}" style="width:450px" /> <div class="smaller gray">option1<strong>|</strong>option2<strong>|</strong>option3 if you are using pulldown menu type</div></td>
+                </tr>
+                <tr class="alt1"> 
+                    <td valign="middle" class="alt1">{_display_order}</td>
+                    <td><input class="input" size="3" name="sort" value="{regsort}" /></td>
+                </tr>
+                <tr class="alt2"> 
+                    <td colspan="2"><strong>{_advanced_options}</strong></td>
+                </tr>
+                <tr class="alt1"> 
+                  <td valign="middle" class="alt1">{_active}</td>
+                  <td>
+                  <label for="visible"><input type="checkbox" name="visible" id="visible" value="1" {regchecked_visible} /> {_yes}</label></td>
+                </tr>
+                <tr class="alt1">
+                  <td valign="middle" class="alt1">{_required}</td>
+                  <td>
+                    <label for="required"><input type="checkbox" name="required" id="required" value="1" {regchecked_required} /> {_yes}</label></td>
+                  </tr>
+                 <tr class="alt1">
+                  <td valign="middle" class="alt1">{_shown_in_public_profile}</td>
+                  <td>
+                    <label for="public"><input type="checkbox" name="public" id="public" value="1" {regchecked_public} /> {_yes}</label></td>
+                  </tr>
+                  <tr class="alt1"> 
+                    <td valign="middle" class="alt1">{_searchable}</td>
+                    <td> <label for="cansearch"><input type="checkbox" name="cansearch" id="cansearch" value="1" {checked_question_cansearch} /> 
+                {_yes}</label>
+                <span class="smaller gray">({_can_this_question_be_searchable_from_the_experts_search_tab})</span>
+                </td>
+                </tr>
+                 <tr class="alt1">
+                  <td valign="middle" class="alt1">{_guests_can_view}</td>
+                  <td><label for="guests"><input type="checkbox" name="guests" id="guests" value="1" {regchecked_guests} /> {_yes}</label></td>
+                  </tr>
+                <tr class="alt2_top"> 
+                <td colspan="2" valign="middle">{regsubmit_profile_question}</td>
+                </tr>
+                </table>
+                
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>
+</div>
+<!-- end registration questions -->
+<!-- begin reports tab -->
+
+<if condition="isset($show['register_questions']) AND $show['register_questions']">
+<div class="tab-page"><h2 class="tab">{_reports}</h2>
+    
+    <form method="get" action="{ilpage[settings]}" name="updatesort" accept-charset="UTF-8" style="margin: 0px;">
+        <input type="hidden" name="cmd" value="registration" />
+        <input type="hidden" name="subcmd" value="_report-register-questions-sort" />
+        <input type="hidden" name="return" value="{ilpage[settings]}?cmd=registration" />
+        <div class="block-wrapper">
+        <div class="block">
+        
+                <div class="block-top">
+                        <div class="block-right">
+                                <div class="block-left"></div>
+                        </div>
+                </div>
+                
+                <div class="block-header">{_custom_registration_questions}</div>
+                <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_custom_registration_questions_allow_you_to_extend_the_registration_system}</div></div>
+                <div class="block-content" style="padding:0px">
+                    
+                    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					<tr class="alt1"> 
+					<td><span>{_action}</span></td>
+					<td>{reportaction}</td>
+				  </tr>
+                    <tr class="alt1">
+                         	<td align="left"><span>{_questions}</span></td>
+                        	<td align="left">{reports_dropdown}</td>                  
+                    <tr class="alt2_top"> 
+                    		<td colspan="2" align="left"><input name="savesort" type="submit" value=" {_report} " style="font-size:15px" class="buttons" /></td>
+                    </tr>
+                    </table>
+                    
+</div>
+                
+                <div class="block-footer">
+                        <div class="block-right">
+                                <div class="block-left"></div>
+                        </div>
+                </div>
+                
+         </div>
+        </div>
+  </form>
+  
+  {report_output}
+  
+</div>
+ </if>
+ 
+<!-- end reports tab -->
+</div>

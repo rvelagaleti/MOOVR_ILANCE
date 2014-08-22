@@ -1,0 +1,85 @@
+<div class="bigtabs" style="padding-bottom:15px; padding-top:5px">
+<div class="bigtabsheader">
+<ul>
+    <li title="" class=""><a href="{ilpage[selling]}?cmd=profile">{_my_profile}</a></li>
+    <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND isset($ilconfig['enableskills']) AND $ilconfig['enableskills']"><li title="" class=""><a href="{ilpage[selling]}?cmd=skills">{_skills}</a></li></if>
+    <li title="" class=""><a href="{ilpage[members]}?id={user[username]}">{_view} {_selling_profile}</a></li>
+    <li title="" class="on"><a href="{ilpage[selling]}?cmd=profile-specifics">{_profile_specifics}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<a name="categories"></a>
+
+<form method="post" action="{ilpage[selling]}" name="sellingprofile" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return validatecustomform(this)">
+<input type="hidden" name="cmd" value="_do-profile-preview" />
+<input type="hidden" name="subcmd" value="specifics" />
+<div class="block-wrapper">
+
+    <div class="block3">
+    
+            <div class="block3-top">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block3-header">{_profile_specifics}</div>
+            <div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_switch_categories_to_answer_specific_questions}</div></div>
+            <div class="block3-content">
+            
+                <div>
+                    
+                    <div style="padding-bottom:6px"><strong>{_category_specific_expertise}</strong></div>
+                    <div><table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td width="1%">{category_pulldown}</td>
+    <td width="99%" align="left"><input type="button" value="{_go}" class="buttons" /></td>
+</tr>
+</table></div>
+                    
+                    
+                </div>
+                
+                <loop name="profile_question_groups">
+                <div>
+                    
+                    <div style="height:1px;width:100%;background-color:#cccccc;margin-top:12px;margin-bottom:12px"></div>
+                    
+
+                    <table cellpadding="0" cellspacing="3" border="0" width="100%">
+                    <tr> 
+                        <td colspan="3"><div style="font-size:15px"><strong><a name="{groupname}">{groupname}</a></strong></div></td>
+                    </tr>
+                    <loop name="profile_questions{groupid}">
+                    <tr> 
+                        <td colspan="2">
+                          <div class="gray" style="padding-bottom:3px">{question_description}</div>
+                          <div>{question_answer_input} <span>{question_answer_error}</span></div>
+                        </td>
+                        <td align="right" valign="top">{verify2}</td>
+                    </tr>
+                    <tr> 
+                        <td colspan="3" height="12"></td>
+                    </tr>
+                    </loop name="profile_questions{groupid}">
+                    </table>
+                    
+                </div>
+                </loop name="profile_question_groups">
+                
+                
+                    <if condition="isset($ilance->GPC['cid']) AND $ilance->GPC['cid'] > 0"><hr size="1" width="100%" style="color:#cccccc; margin-top:12px; padding-bottom:8px" /><div style="padding-top:5px"><input type="submit" value=" {_save} " class="buttons" style="font-size:15px" /></div></if>
+                
+            </div>
+            
+            <div class="block3-footer">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>

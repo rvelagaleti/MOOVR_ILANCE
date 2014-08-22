@@ -1,0 +1,131 @@
+<if condition="isset($show['error_role']) AND $show['error_role']">
+<div style="border:2px solid #a6cc98;border-radius:6px;background-color:#d0f2c4;padding:15px;margin-bottom:12px;margin-top:12px"><span style="float:left;margin-right:10px;margin-top:-11px"><img src="{template_relativeimagepath}{template_imagesfolder}v4/bignotice.png" height="36" /></span>There was a problem assigning you a default membership role.  Please contact site admin.</div></if>
+
+<form method="post" action="{ilpage[registration]}" accept-charset="UTF-8" onsubmit="return register1(this); validatecustomform(this);" style="margin: 0px;">
+<input type="hidden" name="cmd" value="register" />
+<input type="hidden" name="step" value="2" />
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header"><span style="float:right"><img src="{template_relativeimagepath}{template_imagesfolder}icons/project_0.gif" border="0" alt="" /></span>{_user_registration}</div>
+			<div class="block-content" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x; padding:0px">
+				
+                <if condition="isset($show['rolescount']) AND $show['rolescount']">
+				<div style="padding:12px; padding-top:16px"><div style="padding-bottom:3px"><span style="float:left; padding-right:15px"><img src="{template_relativeimagepath}{template_imagesfolder}person.png" border="0" alt="" id="selectrole" /></span><strong>{_select_your_role}</strong></div><div>{rolepulldown}<img name="roleerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /><if condition="isset($show['error_role']) AND $show['error_role']"><br /><span style="color:#FF0000;float:left;"><strong>{_this_form_field_is_required}</strong></span></if></div></div>
+				<div style="height:1px;width:100%;background-color:#ccc;margin-top:12px; margin-bottom:12px"></div>
+                <else /><input type="hidden" name="roleid" id="roleid" value="{defaultroleid}" /></if>
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+				<tr>
+					<td>
+					
+						<div> 
+				
+							<table width="100%"  border="0" cellspacing="0" cellpadding="4">
+							<tr>
+								<td valign="top" width="60%">
+									
+									<table width="100%"  border="0" cellspacing="3" cellpadding="0">
+									<tr>
+										<td><div><strong>{_username}</strong></div></td>
+									</tr>
+									<tr>
+										<td><div class="gray" style="padding-bottom:3px">{_you_will_gain_access_via_log_in_menu_using_this_username}</div>
+										<input type="text" name="username" value="{username}" maxlength="49"  class="input" /> <img name="usernameerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" />
+										<if condition="isset($show['error_username']) AND $show['error_username']"><br /><span style="color:#FF0000"><strong>{_were_sorry_that_username_is_taken}</strong></span></if>
+										<if condition="isset($show['error_username2']) AND $show['error_username2']"><br /><span style="color:#FF0000"><strong>{_sorry_that_username_has_been_blocked}</strong></span></if>
+										</td>
+									</tr>
+									</table>			
+									
+				  					<div style="padding-bottom:9px"></div>
+							
+									
+									<table border="0" cellspacing="3" cellpadding="0">
+									<tr>
+										<td><div><strong>{_password}</strong></div></td>
+									</tr>
+									<tr>
+										<td valign="top"><div class="gray" style="padding-bottom:3px">{_enter_a_password}</div><input type="password" name="password" value="{password}" id="password" maxlength="32" onkeyup="verify.check()" class="input" /> <img name="passworderror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /><if condition="isset($show['error_password']) AND $show['error_password']"><br /><span style="color:#FF0000"><strong>{_passwords_do_not_match}</strong></span></if></td>
+										<td valign="top"><div class="gray" style="padding-bottom:3px">{_re_enter_the_same_password}</div><input type="password" name="password2" value="{password2}" id="password2" maxlength="32" onkeyup="verify.check()" class="input" /> <img name="password2error" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /> <span id="password_result"></span></td>
+									</tr>
+									</table>
+									
+				  					<div style="padding-bottom:9px"></div>
+									
+									<table border="0" cellspacing="3" cellpadding="0">
+									<tr>
+										<td><div><strong>{_email}</strong></div></td>
+									</tr>
+									<tr>
+										<td valign="top"><div class="gray" style="padding-bottom:3px">{_master_email_address}</div><input type="text" name="email" value="{email}" maxlength="49"  class="input" /> <img name="emailerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></td>
+										<td valign="top"><div class="gray" style="padding-bottom:3px">{_re_enter_the_same_email_address}</div><input type="text" name="email2" value="{email2}" maxlength="49" class="input" /> <img name="email2error" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /> </td>
+									</tr>
+									<tr>
+										<td valign="top" colspan="2"><if condition="isset($show['error_email2']) AND $show['error_email2']"><span style="color:#FF0000"><strong>{_email_addresses_do_not_match}</strong></span></if><if condition="isset($show['error_email']) AND $show['error_email']"><span style="color:#FF0000"><strong>{_email_address_already_in_use}</strong></span></if> <if condition="isset($show['error_email3']) AND $show['error_email3']"><span style="color:#FF0000"><strong>{_email_domain_block} </strong></span></if></td>
+									</tr>
+									</table>
+									
+				  					<div style="padding-bottom:15px"></div>
+									
+									<table border="0" cellspacing="3" cellpadding="0">
+									<tr>
+										<td><div><strong>{_advanced}</strong></div></td>
+									</tr>
+									<tr>
+										<td valign="top"><div class="gray" style="padding-bottom:3px">{_enter_a_question_only_you_know}</div><input type="text" name="secretquestion" value="{secretquestion}" maxlength="49" class="input" /> <img name="secretquestionerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></td>
+										<td valign="top"><div class="gray" style="padding-bottom:3px">{_enter_secret_answer_to_your_question}</div><input type="password" name="secretanswer" value="{secretanswer}" maxlength="49"  class="input" /> <img name="secretanswererror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></td>
+									</tr>
+									</table>
+									
+									
+								</td>
+								<td valign="top">
+								
+									<if condition="$ilconfig['registrationdisplay_turingimage']"> 
+									<table border="0" cellspacing="3" cellpadding="0">
+									<tr>
+										<td><div><strong>{_security_verification}</strong></div></td>
+									</tr>
+									<tr>
+										<td valign="top"><div class="gray" style="padding-bottom:3px">{_please_enter_the_security_code_shown_on_the_image_to_continue_registration}</div><input type="text" name="turing" id="turing" maxlength="49" class="input" /> <img name="turingerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /><if condition="isset($show['error_turing']) AND $show['error_turing']"><br /><span style="color:#FF0000"><strong>{_invalid_security_code_attempt}</strong></span></if></td>
+									</tr>
+									</table>
+									<div style="padding-left:3px; padding-top:6px">{captcha}</div>
+									</if>
+									<if condition="!empty($customquestions)">
+                                        <if condition="$ilconfig['registrationdisplay_turingimage']">
+                                            <div style="height:1px;width:100%;background-color:#ccc;margin-top:12px; margin-bottom:12px"></div>
+                                        </if>
+									</if>
+									<div id="customquestions" style="margin-top:20px">{customquestions}</div>
+				
+								</td>
+							</tr>
+							</table>
+				
+						</div>
+						
+					</td>
+				</tr>
+                <tr class="alt2_top">
+                	<td colspan="2"><input type="submit" class="buttons" value=" {_continue} " accesskey="s" style="font-size:15px" /> <span id="inlineerror"></span></td>
+                </tr>
+				</table>
+			</div>
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</form>
+{js}

@@ -1,0 +1,49 @@
+<div class="block-wrapper">
+
+	<div class="block2">
+	
+			<div class="block2-top">
+					<div class="block2-right">
+							<div class="block2-left"></div>
+					</div>
+			</div>
+			
+			<div class="block2-header">{_service_auction_award_for_rfp_accepted}</div>
+			<div class="block2-content-blue" style="padding:9px"><div class="smaller">{_you_have_accepted_the_award_for_this_service_auction_and_your_buyer_has_been_notified}</div></div>
+			<div class="block2-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				<tr>
+					<td>
+						<div>
+							<div>
+		                        <if condition="$ilconfig['escrowsystem_enabled'] AND isset($show['escrow']) AND $show['escrow']">
+		                        <!--<blockquote>{_your_buyer_might_have_already_funded_the_escrow_account_for_your_bid_amount_for_this_service_auction_you_can_review} <span class="blue"><a href="{https_server}{ilpage[escrow]}?cmd=management&amp;bidsub=rfp-escrow">{_escrow_management_activies_from_here}</a></span>. {_it_is_highly_recommended_you_delay_work_engagement_until_the_escrow_account_has_been_funded}</blockquote>-->
+		                        </if>
+		                        <blockquote>{_if_the_service_commissioned_requires_ongoing_invoice_generation_to_your_buyer_use_the_payment_icon_from_your} <span class="blue"><a href="{http_server}{ilpage[selling]}?cmd=management">{_selling_activity}</a></span> {_to_generate_a_new_invoice_instantly}</blockquote>
+                    		</div>
+						</div>
+					</td>
+				</tr>
+				</table>
+				
+			</div>
+			
+			<div class="block2-footer">
+					<div class="block2-right">
+							<div class="block2-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="2">
+<tr>
+	<td colspan="2"><strong>{_whats_next}</strong></td>
+</tr>
+<tr> 
+	<td width="9%" align="center"><img src="{template_relativeimagepath}{template_imagesfolder}arrow_right.gif" width="18" height="18"></td>
+	<td width="91%"><span class="blue"><a href="{ilpage[selling]}?cmd=management&amp;bidsub=awarded">{_selling_activity}</a></span></td>
+</tr>
+</table>

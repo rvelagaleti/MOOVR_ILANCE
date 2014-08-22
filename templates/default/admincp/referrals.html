@@ -1,0 +1,134 @@
+<div id="v3body4"> 
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+	
+<!-- start content -->
+<div id="content">
+<h1>{_referral_manager}</h1><br />
+
+	<div class="tab-pane">
+		<div class="tab-pane" id="referrals">
+			<div class="tab-page">
+				
+			<h2 class="tab">{_activity}</h2>
+            
+            
+            
+            
+			<form action="{ilpage[distribution]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+			<input type="hidden" name="cmd" value="referrals" />
+			<input type="hidden" name="subcmd" value="referral-manage" />
+			<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=referrals" />
+			<div class="block-wrapper">
+			<div class="block">
+			
+					<div class="block-top">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+					<div class="block-header">{_referral_activity}</div>
+					<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_view_and_manage_the_referral_activity_within_the_marketplace_from_here}</div></div>
+					<div class="block-content" style="padding:0px">
+						
+						<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+						<tr class="alt2"> 
+							
+							<td width="13%" align="left">{_referred}</td>
+							<td width="15%">{_referred_by}</td>
+							<td width="9%" nowrap="nowrap">{_referral_code}</td>
+							<td width="18%" nowrap="nowrap">{_date_referred}</td>
+							<td width="22%" nowrap="nowrap">{_last_seen}</td>
+							<td width="19%" align="right" nowrap="nowrap">{_paid}?</td>
+                            <td width="4%" align="center">{_sel}</td>
+						</tr>
+						<loop name="referrals"> 
+						<tr class="alt1" valign="top"> 
+							<td align="left" nowrap="nowrap" width="25%"><span class="blue"><span style="float:left; padding-right:5px"><a href="javascript:void(0)" onclick="return toggle('acpref{id}');"><div style="padding-right:5px"><img id="collapseimg_acpref{id}" src="{template_relativeimagepath}{template_imagesfolder}expand_collapsed.gif" border="0" alt="" /></div></a></span>{username}</span></td>
+							<td><span class="green">{referredby}</span></td>
+							<td><span class="green">{ridcode}</span></td>
+							<td nowrap="nowrap"><span class="black">{date}</span></td>
+							<td nowrap="nowrap"><span class="black">{lastvisit}</span></td>
+							<td align="right" nowrap="nowrap">{payout}</td>
+                            <td align="center" class="alt2"><input type="checkbox" name="id[]" value="{id}" /></td>
+						</tr>
+						<tr class="alt2_top" id="collapseobj_acpref{id}" style="display:none"> 
+							<td colspan="7" align="left" valign="top">
+							<div>
+								
+							  <div style="padding-bottom:12px"><span class="smaller black">{_initiated_events_by} <span class="blue">{username}</span></span>&nbsp;</div>
+							  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              	{apihook[distribution_referral_actions_top_tr]}
+								<tr> 
+									<td width="1%">{invoicepaid}</td>
+									<td width="22%" nowrap="nowrap">{_paid_subscription} ({paysubscription})</td>
+									<td width="1%">{postedauction}</td>
+									<td width="28%" nowrap="nowrap">{_posted_any_valid_auction} ({postauction})</td>
+									<td width="1%">{awardedauction}</td>
+									<td width="22%" nowrap="nowrap">{_awarded_any_valid_bid} ({awardauction})</td>
+								</tr>
+								<tr> 
+									<td width="1%">{fvfpaid}</td>
+									<td width="22%" nowrap="nowrap">{_paid_final_value_fee} ({payfvf})</td>
+									<td width="1%">{inspaid}</td>
+									<td width="28%" nowrap="nowrap">{_paid_insertion_fee} ({payins})</td>
+									<td width="1%">{enhancementspaid}</td>
+									<td width="22%" nowrap="nowrap">{_paid_auction_upsell_fee} ({payenhancements})</td>
+								</tr>
+								<tr> 
+									<td width="1%">{portfoliopaid}</td>
+									<td width="22%" nowrap="nowrap">{_paid_portfolio_fee} ({payportfolio})</td>
+									<td width="1%">{credentialpaid}</td>
+									<td width="28%" nowrap="nowrap">{_paid_any_credential_fee} ({paycredentials})</td>
+                                    {apihook[distribution_referral_actions_end_td]}
+								</tr>
+                                {apihook[distribution_referral_actions_end_tr]}
+							  </table>
+								
+								<div style="padding-top:7px">
+								<hr size="1" width="100%" style="color:#ccc" />
+								<div><span class="smaller">{_payout_amount_to} <span class="blue">{referredby}</span></span></div>
+								<div class="smaller gray">{_pay_out_this_referrer_below_credit_their_online_account_balance}</div>
+								<div style="padding-top:4px"><input type="text" name="amount" value="{payout_amount}" style="font: 9pt courier new; width: 75px; background-color: #fff;"> &nbsp; <input type="submit" class="smaller" name="payout[{id}]" value="{_credit_account}" onclick="return confirm_js('{_you_are_about_to_credit_the_referrals_account_for_this_valid_referring_customer_are_you_sure}');" /></div>
+								
+								</div>
+								
+							</div>
+							</td>
+						</tr>
+						</loop name="referrals"> 
+						<if condition="isset($show['no_referrals']) AND $show['no_referrals']"><tr><td colspan="7" align="center">{_no_referrals_found}</td></tr></if> 
+						<tr valign="top" class="alt1"><td colspan="7">{prevnext}</td></tr>
+                        <if condition="$show['no_referrals'] == false"><tr valign="top" class="alt2_top"><td colspan="7" align="left"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" name="delete" value="{_delete}" style="font-size:15px" onclick="return confirm_js('{_you_are_about_to_delete_selected_referralss_that_were_referred_by_actual_members_continue}');" disabled="disabled" /><else /><input type="submit" class="buttons" name="delete" value="{_delete}" style="font-size:15px" onclick="return confirm_js('{_you_are_about_to_delete_selected_referralss_that_were_referred_by_actual_members_continue}');" /></if></td></tr></if>
+						</table>
+						
+					</div>
+					
+					<div class="block-footer">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+		</form>
+		
+		</div>
+		
+		<!-- settings -->
+		<div class="tab-page">
+			<h2 class="tab">{_settings}</h2>
+			
+			{configuration_referalsystem}
+			
+		</div>
+		<!-- / settings -->
+		
+	</div>

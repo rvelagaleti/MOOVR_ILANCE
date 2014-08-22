@@ -1,0 +1,121 @@
+<form action="{ilpage[selling]}" method="post" name="profileverification" accept-charset="UTF-8" onsubmit="return validateprofileverification(this);" style="margin:0px">
+    <input type="hidden" name="cmd" value="_profile-verification-process" />
+    <input type="hidden" name="answerid" value="{answerid}" />
+    <input type="hidden" name="questionid" value="{questionid}" />
+    <input type="hidden" name="answer" value="{answer}" />
+    <div class="block-wrapper">
+
+        <div class="block">
+
+            <div class="block-top">
+                <div class="block-right">
+                    <div class="block-left"></div>
+                </div>
+            </div>
+
+            <div class="block-header"><span style="float:right"><img src="{template_relativeimagepath}{template_imagesfolder}verified_icon.gif" border="0" alt="" /></span>{_profile_verification_payment}</div>
+
+            <div class="block-content" style="padding:0px">
+
+                <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+                    <if condition="isset($show['need_to_pay']) AND $show['need_to_pay'] == true">
+			<tr> 
+			    <td class="alt2">{_product_item_name}</td>
+			    <td class="alt2">{_pay_to}</td>
+			    <td class="alt2">{_qty}</td>
+			    <td class="alt2">{_length}</td>
+                        <if condition="isset($show['istaxable']) AND $show['istaxable']">
+                            <td width="11%" class="alt2">{_amount}</td>
+                            <td class="alt2">{_tax} / VAT</td>
+                        </if>
+                        <td width="11%" class="alt2">{_total}</td>
+			</tr>
+			<tr class="alt1"> 
+			    <td><div style="padding-top:7px; padding-bottom:7px">{profile_item}</div></td>
+			    <td width="13%"><span class="blue">{site_name}</span></td>
+			    <td width="9%">1</td>
+			    <td width="9%">{days} {_days}</td>						
+                        <if condition="isset($show['istaxable']) AND $show['istaxable']">
+                            <td width="11%">{amount_formatted}</td>
+                            <td width="9%">{tax_formatted}</td>
+                        </if>
+                        <td width="11%"><span class="blue"><strong>{total_formatted}</strong></span></td>
+			</tr>
+			<tr>
+			    <td colspan="7" class="alt1">
+				<div style="padding-bottom:9px"></div>
+
+				<div style="padding-bottom:3px"><strong>{_select_payment_method}</strong></div>
+				<div class="gray" style="padding-bottom:3px">{_account_balance_payments_only_to_fund_your_account_balance} <span class="blue"><a href="{https_server}{ilpage[accounting]}?cmd=deposit">{_visit_the_deposit_menu}</a></span>.</div>
+				<div>{payment_method_pulldown}</div>
+
+				<hr size="1" width="100%" style="color:#ebebeb; margin-top:12px; padding-bottom:8px" />
+				<div style="padding-bottom:15px"></div>
+			    </td>
+			</tr>
+                    </if>
+                    <tr> 
+                        <td align="left">
+                            <div><strong>{_reference_contact_name}</strong></div>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr> 
+                                    <td align="left" valign="top"></td>
+                                </tr>
+                                <tr> 
+                                    <td align="left" valign="top">
+                                        <div class="gray" style="padding-bottom:3px">{_the_contact_name_who_can_be_contacted_to_verify_authenticity_of_your_profile}</div>
+                                        <div><input type="text" name="contactname" value="" class="input" /> <img name="contactnameerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div style="padding-bottom:15px"></div>
+
+                            <div><strong>{_reference_contact_information}</strong></div>
+
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr> 
+                                    <td align="left" valign="top"></td>
+                                </tr>
+                                <tr> 
+                                    <td align="left" valign="top">
+                                        <div class="gray" style="padding-bottom:3px">{_please_enter_the_contact_phone_number_of_your_reference_please_include_country_code}</div>
+                                        <div><input type="text" name="contactnumber" value="" class="input" /> <img name="contactnumbererror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="padding-bottom:15px"></div>
+
+                            <div><strong>{_notes_or_information}</strong></div>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr> 
+                                    <td align="left" valign="top"></td>
+                                </tr>
+                                <tr> 
+                                    <td align="left" valign="top">
+                                        <div class="gray" style="padding-bottom:3px">{_describe_any_notes_or_information_we_should_know_before_we_contact_your_reference}</div>
+                                        <div><textarea name="contactnotes" style="width: 350px; height: 84px"></textarea> <img name="contactnoteserror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8"><div><input type="submit" value="{_continue}" class="buttons" style="font-size:15px" /></div></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="block-footer">
+                <div class="block-right">
+                    <div class="block-left"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div><strong>{_note}</strong>: <span class="gray">{notes}</span></div>
+
+</form>

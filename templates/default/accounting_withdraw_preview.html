@@ -1,0 +1,111 @@
+<script language="javascript">
+<!--
+function validate_email(f)
+{	
+		if (window.document.ilform.custom.value != '')
+		{
+				if ((window.document.ilform.custom.value.indexOf(".") > 2) && (window.document.ilform.custom.value.indexOf("@") > 0))
+				{
+						return(true);		
+				}
+				else
+				{
+						alert_js('{_you_did_not_enter_a_valid_email_address_please_retry}');				
+				}
+			
+				return(false);
+		}
+		<if condition="isset($show['paypal']) AND $show['paypal']">else if (window.document.ilform.custom.value == '')
+		{
+				alert_js('{_you_did_not_enter_a_valid_email_address_please_retry}');
+				return(false);	
+		}</if>
+		return(true);
+}
+function validate_all()
+{	
+		return validate_email(); 
+}
+//-->
+</script>
+
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class=""><a href="{ilpage[accounting]}">{_accounting}</a></li>
+	<if condition="empty($_SESSION['ilancedata']['user']['active']) OR $_SESSION['ilancedata']['user']['active'] == 'no' OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'deposit') == 'no'"><else /><li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=deposit">{_deposit}</a></li></if>
+	<li title="" class="on"><a href="javascript:void(0)">{_withdraw}</a></li>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=transactions">{_transactions}</a></li>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=sch-transactions">{_scheduled_transactions}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<form name="ilform" action="{ilpage[accounting]}" method="post" accept-charset="UTF-8" style="margin: 0px" <if condition="isset($show['paypal']) AND $show['paypal']">onsubmit="return validate_all();"</if>>
+<input type="hidden" name="cmd" value="_withdraw-funds" />
+<input type="hidden" name="account_number" value="{account_number}" />
+<input type="hidden" name="withdraw_amount" value="{withdraw_amount}" />
+<input type="hidden" name="withdraw_debit_amount" value="{withdraw_debit_amount}" />
+<if condition="isset($show['use_withdraw_fees']) AND $show['use_withdraw_fees']"><input type="hidden" name="transaction_amount" value="{transaction_amount}" /></if>
+<input type="hidden" name="account_id" value="{account_id}" />
+<input type="hidden" name="do" value="submit" />
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_withdraw_funds_preview}</div>
+			
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_after_withdraw_request_you_will_be_able}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				<tr> 
+					<td align="right" class="alt1"><span class="gray">{_source}:</span></td>
+					<td nowrap align="left" class="alt1">{_account_balance}</td>
+				</tr>
+				<tr> 
+					<td align="right" width="19%" valign="top" class="alt1"><span class="gray">{_target}:</span></td>
+					<td align="left" class="alt1"><div style="line-height:17px">{payment_method}</div></td>
+				</tr>
+				<tr> 
+					<td width="19%" align="right" class="alt1"><span class="gray">{_withdraw_amount}:</span></td>
+					<td width="81%" align="left" nowrap class="alt1">{withdraw_amount_request} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_withdraw_amount'] + '</strong></div><div>' + phrase['_the_withdraw_amount_is_the_amount_you_have_requested_to_debit_from_your_online_account_balance'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+				</tr>
+				<if condition="isset($show['use_withdraw_fees']) AND $show['use_withdraw_fees']"><tr> 
+					<td align="right" class="alt1"><span class="gray">{_processing_fee}:</span></td>
+					<td nowrap align="left" class="alt1">{transaction_fee_formatted}</td>
+				</tr>
+				<tr> 
+					<td align="right" class="alt1"><span class="gray">{_account_debit}:</span></td>
+					<td nowrap align="left" class="alt1"><strong>{withdraw_amount_formatted}</strong>  <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_account_debit'] + '</strong></div><div>' + phrase['_the_account_debit_is_the_total_cost_that_will_be_debited'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+				</tr></if>
+                <tr class="alt2_top">
+                	<td colspan="2"><input type="submit" value=" {_continue} " class="buttons" style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[accounting]}?cmd=withdraw">{_cancel}</a></span></td>
+                </tr>
+				</table>
+				
+			  <if condition="isset($show['paypal']) AND $show['paypal']"><div style="padding-top:14px">
+			  		<span style="float:left; padding-right:12px"><img src="{template_relativeimagepath}{template_imagesfolder}payment/paypal.gif" border="0" alt="" id="paypal" /></span>
+					<div><strong>{_enter_your_paypal_email_address}</strong></div>
+					<div class="gray" style="padding-bottom:3px">{_please_provide_us_with_your_verified_paypal_email_address}</div>
+					<div><input type="text" name="custom" value="" class="input" size="25" /> <img name="withdraw_amounterror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div>
+			  </div></if>
+
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</form>

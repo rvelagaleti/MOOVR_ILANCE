@@ -1,0 +1,229 @@
+<div id="v3body4"> 
+<!-- sub navigation -->
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+<!-- /sub navigation -->
+<div id="content">
+<h1>{_update_subscription_group_permissions}</h1><br />
+
+<div class="tab-pane" id="update_subscription_plan">
+<div class="tab-pane">
+<div class="tab-page">
+<h2 class="tab">{_details}</h2>
+
+		<if condition="isset($ilance->GPC['id']) AND $ilance->subscription_plan->is_subscription_permissions_ready($ilance->GPC['id']) == false">
+		<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;">
+	<div class="n">
+		<div class="e">
+			<div class="w"></div>
+		</div>
+	</div>
+	
+	<div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span><strong>{_please_click_perm_tab_above}</strong></div>		
+	
+	<div class="s">
+		<div class="e">
+			<div class="w"></div>
+		</div>
+	</div>
+</div>
+<div style="padding-bottom:20px"></div>
+</if>
+
+		<form method="post" action="{ilpage[settings]}" name="updatesubscriptionplan" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="subscriptions" />
+		<input type="hidden" name="subcmd" value="_update-subscription-group" />
+		<input type="hidden" name="subscriptiongroupid" value="{subscriptiongroupid}" />
+		<input type="hidden" name="return" value="{ilpage[settings]}?cmd=subscriptions" />
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{_update_permission_group_title_description}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_update_the_subscription_permission_group_information_using_the_form_below}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					
+					<loop name="languages_permission_group">
+					<tr class="alt1"> 
+					  <td width="23%">{_title} {_in} {language}</td>
+					  <td width="77%"><input type="text" name="title_{languagecode}" size="40" value="{title}" class="input" style="width:500px" /></td>
+					</tr>
+					<tr class="alt1"> 
+					  <td valign="top">{_description} {_in} {language}</td>
+					  <td>
+						<textarea name="description_{languagecode}" style="width: 500px; height: 84px" class="input" wrap="physical">{description}</textarea>
+					  </td>
+					</tr>
+					</loop name="languages_permission_group">
+					<tr class="alt1"> 
+					  <td valign="middle">{_plans_using_this_group}</td>
+					  <td width="77%"> {plans_in_group} </td>
+					</tr>
+					<tr class="alt2_top">
+					  <td colspan="2"><input type="submit" name="save" value=" {_update} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" />&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[settings]}?cmd=subscriptions">{_cancel}</a></span></td>
+					</tr>
+				  </table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	  
+	</form>
+  	</div>
+	
+  	<div class="tab-page">
+    	<h2 class="tab">{_permissions}</h2>
+		
+		<if condition="isset($ilance->GPC['id']) AND $ilance->subscription_plan->is_subscription_permissions_ready($ilance->GPC['id']) == false">
+		<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;">
+	<div class="n">
+		<div class="e">
+			<div class="w"></div>
+		</div>
+	</div>
+	
+	<div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span><strong>{_please_scroll_down_to_the_bottom_of_this_page_and_click_create_permissions}</strong></div>		
+	
+	<div class="s">
+		<div class="e">
+			<div class="w"></div>
+		</div>
+	</div>
+</div>
+<div style="padding-bottom:20px"></div>
+</if>
+
+	<form name="changepermissions" method="post" action="{ilpage[settings]}" accept-charset="UTF-8" style="margin: 0px;">
+	<input type="hidden" name="cmd" value="subscriptions" />
+	<input type="hidden" name="subcmd" value="_change-permissions" />
+	<input type="hidden" name="subscriptiongroupid" value="{subscriptiongroupid}" />
+	
+	<!--{languagetabs}-->
+	<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_permissions}</div>
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_the_visible_column_allows_you_to_show_or_hide_any_permissions_when_members_click_view_access_from_the_subscription_menu}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" align="center" id="permissions">
+				<tr class="alt2"> 
+					<td width="6%" align="center">{_sel}</td>
+					<td>{_title_and_description}</td>
+					<td width="15%" align="right">{_current_setting} </td>
+					<td width="7%" nowrap="nowrap">{_original} <a href="javascript:void(0)" onmouseover="Tip('<strong>{_original}</strong><br />This column will inform you if the permission you are viewing is an Original ILance Framework Permission or a custom permission which may have been added at a later date by a third party developer.', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+					<td width="8%" nowrap="nowrap">{_visible} <a href="javascript:void(0)" onmouseover="Tip('<strong>{_visible}</strong><br />This column will inform you if the permission you are viewing can be seen from the View Access Permissions popup menu that is presented to users from their subscription plan menu.  This setting is ideal if you would like to introduce new limitations or enhancements but do not want them to be visible to the users eyes when viewing his or her permissions matrix from the popup menu.', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+				  </tr>
+				  <loop name="access_permission_items"> 
+				  <tr class="alt1" valign="top"> 
+					<td><div align="center">{action}</div></td>
+					<td><strong>{accesstext}</strong><div class="smaller gray" style="padding-top:3px">{accessdescription}</div><div class="smaller" style="padding-top:3px"><strong>{_variable}:</strong> <span title="PHP: $ilance->permissions->check_access($userid, '{accessname}')">{accessname}</span></div></td>
+					<td nowrap="nowrap" align="right">{userinput}</td>
+					<td nowrap="nowrap" align="center">{iscustom}</td>
+					<td nowrap="nowrap" align="center" class="alt2">{visible_perm}</td>
+				  </tr>
+				  </loop name="access_permission_items"> 
+				  <tr class="alt2_top"> 
+					<td width="6%" colspan="5"> 
+					  
+							<if condition="$show['deletebutton']">
+							<input type="submit" style="font-size:15px" name="deletepermissions" value=" {_delete} " class="buttons" />
+							<input type="submit" style="font-size:15px" name="updatepermissions" value=" {_save} " class="buttons" />
+							<else />
+							<input type="submit" style="font-size:15px" name="updatepermissions" value=" {_create} " class="buttons" />
+							</if>
+					  </td>
+				  </tr>
+				</table>
+				
+		  </div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+	</div>
+	</form>
+	
+	
+	<!--
+	<form name="addpermissions" method="post" action="{ilpage[settings]}" accept-charset="UTF-8" style="margin: 0px;">
+	<input type="hidden" name="cmd" value="subscriptions" />
+	<input type="hidden" name="subcmd" value="_add-permissions" />
+	<div class="block-wrapper">
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">PHP {_developer_permissions_toolkit}</div>
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_a_new_developer_subscription_permission_for_this_selected_subscription_plan_using_the_form_below}.  Do not create a new permission if you are not a PHP programmer.  A programmer will still need to write the PHP code to make this new permission actually work within the PHP scripts.</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" align="center">
+				
+				<tr class="alt1">
+					<td colspan="5"><strong>{_developer_permission_example}:</strong><br /><code style="background:#efefef">&lt;?php <br />
+					include('/path/to/config.php');
+					<br />if ($ilance-&gt;subscription-&gt;check_access(<span style="color:green">$userid</span>, '<span style="color:blue"><strong>attachlimit</strong></span>') > <span style="color:red"><strong>10000</strong></span>) { // good } else { // bad } <br />
+					?&gt;</code></td>
+				</tr>
+		
+				<tr class="alt2"> 
+					<td>{_new_access_permission_description}</td>
+					<td align="center">{_input_type} <a href="javascript:void(0)" onmouseover="Tip('<strong>{_developer_input_type}</strong><br />{_input_type_refers_to_the_type_of_permission_you_are_creating}', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+					<td align="center">{_variable_name} <a href="javascript:void(0)" onmouseover="Tip('<strong>{_developer_variable_name}</strong><br />{_a_variable_name_is_a_unique_name_to_create_this_new_permission}', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+					<td align="center">{_value} <a href="javascript:void(0)" onmouseover="Tip('<strong>{_developer_default_value}</strong><br />{_if_you_selected_the_type_of_this_new_permission_as_yes_no}', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+					<td align="center">{_create}</td>
+				</tr>
+				{new_resource_item} 
+				</table>
+
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+	</div>
+
+	</form>-->
+	
+  </div>
+</div>

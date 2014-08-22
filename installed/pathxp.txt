@@ -1,0 +1,11 @@
+Example if ILance was to be installed at http://mydomain.com/upload/
+
+define('HTTP_SERVER','http://mydomain.com/upload/');
+define('HTTPS_SERVER','http://mydomain.com/upload/');
+define('HTTP_SERVER_OTHER','http://mydomain2.com/upload/');
+define('HTTPS_SERVER_OTHER','http://mydomain2.com/upload/');
+define('DIR_SERVER_ROOT','C:/web server/www/upload/');
+define('DIR_SERVER_ROOT_IMAGES','C:/web server/www/upload/');
+define('SUB_FOLDER_ROOT', '/upload/');
+
+** Notice the start and ending slashes for all paths

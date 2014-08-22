@@ -1,0 +1,46 @@
+<div id="v3body4"> 
+    <div id="sub">
+	<div id="subnav">
+	    <loop name="subnav_settings">
+		<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+	    </loop name="subnav_settings">
+	</div>
+    </div>
+    <div id="content">
+	<h1>{_locations}</h1><br />
+	<div class="tab-pane">
+	    <div class="tab-pane" id="locationstabpane">
+		<div class="tab-page">
+		    <h2 class="tab" id="locationstab">{_update}</h2>
+		    <div class="block-wrapper">
+			<div class="block">
+			    <div class="block-top">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			    <div class="block-header">{_region}</div>
+			    <div class="block-content" style="padding:0px">
+				<form name="regions" id="regions" method="post" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+				    <input type="hidden" name="cmd" value="locations" />
+				    <input type="hidden" name="subcmd" value="region" />
+				    <input type="hidden" name="action" value="save" />
+				    <input type="hidden" name="id" value="{id}" />
+				    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					{langs_table}
+                    <tr class="alt2_top">
+					    <td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" disabled="disabled" /><else /><input type="submit" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></if> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back();">{_cancel}</a></span></td>
+					</tr>
+				    </table>
+				</form>
+			    </div>
+			    <div class="block-footer">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+	    </div>
+      </div>

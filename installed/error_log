@@ -1,0 +1,9 @@
+[04-Aug-2014 15:07:13 UTC] PHP Notice:  Use of undefined constant ‘ilance_app’ - assumed '‘ilance_app’' in /home/rvelagaleti/public_html/app/functions/connect.php on line 17
+[04-Aug-2014 15:07:13 UTC] PHP Notice:  Use of undefined constant ‘ilance_admin’ - assumed '‘ilance_admin’' in /home/rvelagaleti/public_html/app/functions/connect.php on line 20
+[04-Aug-2014 15:07:58 UTC] PHP Notice:  Use of undefined constant ‘ilance_admin’ - assumed '‘ilance_admin’' in /home/rvelagaleti/public_html/app/functions/connect.php on line 20
+[04-Aug-2014 16:02:53 UTC] PHP Notice:  Undefined index: HTTP_REFERER in /home/rvelagaleti/public_html/app/install/installer.php on line 549
+[04-Aug-2014 16:02:53 UTC] PHP Notice:  Undefined index: HTTP_REFERER in /home/rvelagaleti/public_html/app/install/installer.php on line 550
+[04-Aug-2014 16:03:40 UTC] PHP Notice:  Undefined index: HTTP_REFERER in /home/rvelagaleti/public_html/app/install/installer.php on line 549
+[04-Aug-2014 16:03:40 UTC] PHP Notice:  Undefined index: HTTP_REFERER in /home/rvelagaleti/public_html/app/install/installer.php on line 550
+[04-Aug-2014 16:05:55 UTC] PHP Notice:  Undefined index: HTTP_REFERER in /home/rvelagaleti/public_html/app/install/installer.php on line 549
+[04-Aug-2014 16:05:55 UTC] PHP Notice:  Undefined index: HTTP_REFERER in /home/rvelagaleti/public_html/app/install/installer.php on line 550

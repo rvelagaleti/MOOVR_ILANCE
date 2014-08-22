@@ -1,0 +1,116 @@
+{js_start}
+<if condition="$show['errorusername'] == 1">
+<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;">
+    <div class="n">
+        <div class="e">
+            <div class="w"></div>
+        </div>
+    </div>
+    
+    <div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span>{_the_username_you_supplied_does_not_exist_you_can_not_send_a_message_to_an_unknown_user_please_try_again}</div>		
+    
+    <div class="s">
+        <div class="e">
+            <div class="w"></div>
+        </div>
+    </div>
+</div>
+<div style="padding-bottom:20px"></div>
+</if>
+
+<if condition="$show['errorprojectid'] == 1">
+<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;">
+    <div class="n">
+        <div class="e">
+            <div class="w"></div>
+        </div>
+    </div>
+    
+    <div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span>{_the_auction_id_entered_is_no_longer_valid_please}</div>		
+    
+    <div class="s">
+        <div class="e">
+            <div class="w"></div>
+        </div>
+    </div>
+</div>
+<div style="padding-bottom:20px"></div>
+</if>
+<form action="{ilpage[messages]}" method="post" name="ilform" accept-charset="UTF-8" onsubmit="return validate_all();">
+<input type="hidden" name="cmd" value="compose" />
+<input type="hidden" name="from_id" value="{user[userid]}" />
+<if condition="isset($ilance->GPC['hideid']) AND $ilance->GPC['hideid']"><input type="hidden" name="project_id" value="0" /><input type="hidden" name="hideid" value="1" /><else /></if>
+<if condition="$show['preview'] == 1">
+<div class="block-wrapper">
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header">{subjectpv}</div>
+            <div class="block-content" style="padding:{table_cellpadding}px">
+            
+            {descriptionpv}
+            
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</if>
+
+
+
+<div class="block-wrapper">
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header">{_compose_a_private_message}</div>
+            <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_compose_your_message_using_the_form_below_when_you_are_done_click_compose}</div></div>
+            <div class="block-content" style="padding:0px">
+                
+                <div>
+                        <table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" align="center">
+                        <tr class="alt1">
+                            <td width="10%" nowrap="nowrap">{_username}</td>
+                            <td width="90%"><input type="text" class="input" name="username" id="username" size="40" maxlength="30" value="{username}" tabindex="1" /></td>
+                        </tr><if condition="isset($ilance->GPC['hideid']) AND $ilance->GPC['hideid']"><else /><tr class="alt1">
+                            <td nowrap="nowrap">{_auction_id}</td>
+                            <td valign="top"><input type="text" class="input" name="project_id" size="40" maxlength="85" value="{project_id}" tabindex="1" /> <span class="smaller gray">{_if_this_pmb_will_be_associated_with_an_existing_auction_please_enter_the_auction_id}</span></td>
+                        </tr></if><tr class="alt1">
+                            <td nowrap="nowrap">{_subject}</td>
+                            <td><input type="text" class="input" name="subject" size="76" maxlength="85" value="{subject}" tabindex="1" /></td>
+                        </tr>
+                        <tr class="alt1">
+                            <td colspan="2" valign="top">{wysiwyg_area}</td>
+                        </tr>
+                        <tr class="alt2_top">
+                            <td colspan="2" valign="top"><input type="submit" name="preview" value="{_preview}" style="font-size:15px" class="buttons" /> <input type="submit" name="submit" value="{_send}" style="font-size:15px" class="buttons" /></td>
+                        </tr>
+                        </table>
+                        </div>
+                
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>

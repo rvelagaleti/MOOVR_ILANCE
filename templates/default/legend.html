@@ -1,0 +1,49 @@
+<div style="width:235px">
+    <div class="block-wrapper">
+	<div class="block5">
+
+	    <div class="block5-top">
+		<div class="block5-right">
+		    <div class="block5-left"></div>
+		</div>
+	    </div>
+
+	    <div class="block5-header" onClick="toggle('leftnav_legend')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+		<span style="float:{template_textalignment}; padding-top:4px; padding-{template_textalignment_alt}:10px"><img id="collapseimg_leftnav_legend" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_legend]}.gif" border="0" alt="" /></span>{_legend}
+	    </div>
+	    <div class="block5-content" id="collapseobj_leftnav_legend" style="{collapse[collapseobj_leftnav_legend]}">
+		<div id="legendblock">
+		    <div>
+			<table>
+			    {apihook[main_template_legend_start]}
+			    <if condition="isset($ilconfig['enableclassifiedtab']) AND $ilconfig['enableclassifiedtab'] AND $ilconfig['globalauctionsettings_productauctionsenabled']"><tr valign="top">
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_phone.png" border="0" alt="" /></td><td>{_classified_ad}</td>
+				</tr></if>
+			    <if condition="$ilconfig['escrowsystem_enabled']"><tr>
+				    <td valign="top"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_escrow.png" border="0" alt="" /></td><td valign="middle">{_escrow}</td>
+				</tr></if>
+			    <if condition="isset($ilconfig['enablenonprofits']) AND $ilconfig['enablenonprofits'] AND $ilconfig['globalauctionsettings_productauctionsenabled']"><tr>
+				    <td valign="top"><img src="{template_relativeimagepath}{template_imagesfolder}icons/nonprofits.png" border="0" alt="" /></td><td valign="middle">{_nonprofits}</td>
+				</tr></if>
+			    <if condition="$ilconfig['globalauctionsettings_productauctionsenabled']"><tr>
+				<td valign="top"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_reserve.png" border="0" alt="" /></td><td valign="middle">{_reserve_price}</td>
+			    </tr></if>
+			    <tr>
+				<td valign="top"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_clock.png" border="0" alt="" /></td><td valign="middle">{_invitation_event_realtime}</td>
+			    </tr>
+
+			    {apihook[main_template_legend_end]}
+			</table>
+
+		    </div>
+		</div>
+	    </div>
+
+	    <div class="block5-footer">
+		<div class="block5-right">
+		    <div class="block5-left"></div>
+		</div>
+	    </div>
+	</div>
+    </div>
+</div>

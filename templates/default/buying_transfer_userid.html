@@ -1,0 +1,29 @@
+<h1>{_transfer_of_project_ownership}</h1><br />
+
+<table width="100%" border="0" cellspacing="0" cellpadding="4">
+<tr> 
+	<td>{_you_have_selected_to_transfer_ownership_of_projects_to_an_existing_member}</td>
+</tr>
+<tr> 
+	<td>&nbsp;</td>
+</tr>
+<tr> 
+	<td>
+	
+		<form method="post" action="{ilpage[buying]}" name="transferprojectsuserid" accept-charset="UTF-8" onsubmit="return validate_all(this);">
+		<input type="hidden" name="cmd" value="_do-transfer-userid" />
+		{transfer_hidden_inputs} 
+		<table border="0" cellpadding="1" cellspacing="6" align="center" width="100%">
+		<tr> 
+			<td width="40%" align="right">{_enter_by_username}</td>
+			<td><input type="text" name="username" value="" class="input" /> <img name="usernameerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}">                              </td>
+		</tr>
+		<tr> 
+			<td align="center"></td>
+			<td align="left"><input type="submit" value="{_continue}" class="buttons" onclick="return confirm_js(phrase['_confirmation_please_make_sure_you_enter_the_members_correct_userid'])" /></td>
+		</tr>
+	</table>
+	</form>
+</td>
+</tr>
+</table>

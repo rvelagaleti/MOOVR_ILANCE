@@ -1,0 +1,153 @@
+{apihook[buying_buynow_escrow_template_start]}
+<div class="bigtabs" style="padding-bottom:15px; padding-top:5px">
+<div class="bigtabsheader">
+<span style="float:right; padding-top:7px" class="smaller blue"></span>
+<ul>
+    
+	<if condition="!isset($ilance->GPC['subcmd']) OR empty($ilance->GPC['subcmd'])"><li title="" class="on"><a href="javascript:void(0)"><span class="gray">{_items_im_bidding_on}</span></a></li><else /><li title="" class=""><a href="{ilpage[buying]}?cmd=management"><span class="gray">{_items_im_bidding_on}</span></a></li></if>
+	{apihook[buying_buynow_escrow_activity_bigtabs_nolub_end]}
+    
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+{producttabs}
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header"><span style="float:left; padding-right:6px; padding-top:3px"><a href="#top" onclick="return toggle('buyingbuynowescrow');"><img src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_buyingbuynowescrow]}.gif" alt="" border="0" id="collapseimg_buyingbuynowescrow" /></a></span>{_purchase_now_escrow_buying_activity}</div>
+			<!--<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_when_you_skip_the_bidding_process_and_directly_purchase_merchandise_from_our_merchants_an_escrow_account_for_that_order_will_be_created_below}</div></div>-->
+			<div class="block-content-yellow" style="padding:9px"><div><span style="max-height:0px">
+			<form name="sortswitch" method="get" action="{https_server}{ilpage[escrow]}" accept-charset="UTF-8" style="margin:0px">
+			<input type="hidden" name="cmd" value="management" />
+			<input type="hidden" name="bidsub" value="buynow-escrow" />
+			<table border="0" cellspacing="0" cellpadding="0" class="smaller">
+			  <tr> <td>{_keywords}:&nbsp;</td>
+            <td>
+           <input name="keyw" type="text"  value="{keyw}" style="width:100px" />&nbsp;&nbsp;&nbsp;</td>
+				<td>{_period}:&nbsp;</td>
+				<td>
+				<select name="period2" class="smaller" style="font-family: verdana">
+					<option value="-1" <if condition="isset($ilance->GPC['period2']) AND $ilance->GPC['period2'] == -1">selected="selected"</if>>{_any_date}</option>
+                    <option value="1" <if condition="isset($ilance->GPC['period2']) AND $ilance->GPC['period2'] == 1">selected="selected"</if>>{_last_hour}</option>
+                    <option value="6" <if condition="isset($ilance->GPC['period2']) AND $ilance->GPC['period2'] == 6">selected="selected"</if>>{_last_12_hours}</option>
+					<option value="7" <if condition="isset($ilance->GPC['period2']) AND $ilance->GPC['period2'] == 7">selected="selected"</if>>{_last_24_hours}</option>
+					<option value="13" <if condition="isset($ilance->GPC['period2']) AND $ilance->GPC['period2'] == 13">selected="selected"</if>>{_last_7_days}</option>
+					<option value="14" <if condition="isset($ilance->GPC['period2']) AND $ilance->GPC['period2'] == 14">selected="selected"</if>>{_last_14_days}</option>
+					<option value="15" <if condition="isset($ilance->GPC['period2']) AND $ilance->GPC['period2'] == 15">selected="selected"</if>>{_last_30_days}</option>
+                    <option value="16" <if condition="isset($ilance->GPC['period2']) AND $ilance->GPC['period2'] == 16">selected="selected"</if>>{_last_60_days}</option>
+					<option value="17" <if condition="isset($ilance->GPC['period2']) AND $ilance->GPC['period2'] == 17">selected="selected"</if>>{_last_90_days}</option>
+				</select>&nbsp;&nbsp;&nbsp;</td>
+				<td>{_order_by}:&nbsp;</td>
+				<td>
+				<select name="orderby2" class="smaller" style="font-family: verdana">
+                    <option value="project_id" <if condition="isset($ilance->GPC['orderby2']) AND $ilance->GPC['orderby2'] == 'project_id'">selected="selected"</if>>{_item_id}</option>
+                    <option value="amount" <if condition="isset($ilance->GPC['orderby2']) AND $ilance->GPC['orderby2'] == 'amount'">selected="selected"</if>>{_amount}</option>
+                    <option value="orderdate" <if condition="isset($ilance->GPC['orderby2']) AND $ilance->GPC['orderby2'] == 'orderdate'">selected="selected"</if>>{_order_date}</option>
+                    <option value="paiddate" <if condition="isset($ilance->GPC['orderby2']) AND $ilance->GPC['orderby2'] == 'paiddate'">selected="selected"</if>>{_paid_date}</option>
+                    <option value="qty" <if condition="isset($ilance->GPC['orderby2']) AND $ilance->GPC['orderby2'] == 'qty'">selected="selected"</if>>{_quantity}</option>
+                    <option value="escrowfeebuyer" <if condition="isset($ilance->GPC['orderby2']) AND $ilance->GPC['orderby2'] == 'escrowfeebuyer'">selected="selected"</if>>{_escrow} {_fee}</option>
+				</select></td>
+                <td>&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;</td>
+                <td>
+                <select name="pics2" class="smaller" style="font-family: verdana">
+                    <option value="1" <if condition="isset($ilance->GPC['pics2']) AND $ilance->GPC['pics2'] == '1'">selected="selected"</if>>{_include_pictures}</option>
+                    <option value="0" <if condition="isset($ilance->GPC['pics2']) AND $ilance->GPC['pics2'] == '0'">selected="selected"</if>>{_exclude_pictures}</option>
+                </select>&nbsp;&nbsp;&nbsp;</td>
+				<td>{_display_order}:&nbsp;</td>
+				<td>
+				<select name="displayorder2" class="smaller" style="font-family: verdana">
+					<option value="desc" <if condition="isset($ilance->GPC['displayorder2']) AND $ilance->GPC['displayorder2'] == 'desc'">selected="selected"</if>>{_descending}</option>
+					<option value="asc" <if condition="isset($ilance->GPC['displayorder2']) AND $ilance->GPC['displayorder2'] == 'asc'">selected="selected"</if>>{_ascending}</option>
+				</select>&nbsp;&nbsp;&nbsp;</td><td>{_per_page}:&nbsp;</td>
+                        <td>
+                        <select name="pp" class="smaller" style="font-family: verdana">
+                            <option value="10" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '10'">selected="selected"</if>>10</option>
+                            <option value="50" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '50'">selected="selected"</if>>50</option>
+                            <option value="100" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '100'">selected="selected"</if>>100</option>
+                            <option value="500" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '500'">selected="selected"</if>>500</option>
+                            <option value="1000" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '1000'">selected="selected"</if>>1000</option>
+                        </select>&nbsp;</td>
+				<td><input type="submit" value="{_go}" class="buttons_smaller" /></td>
+			  </tr>
+			</table>
+			</form>			
+			</span></div></div>
+			<div class="block-content" id="collapseobj_buyingbuynowescrow" style="padding:0px;{collapse[collapseobj_buyingbuynowescrow]}">
+				
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				<tr class="alt2"> 
+					<td colspan="3" nowrap="nowrap"><span class="blue"><a href="{php_self}&amp;bidsub=buynow-escrow&amp;orderby2=project_title">{_title}</a></span></td>
+                    <td width="10%" align="right">{_price}</td>
+                    <if condition="$ilconfig['escrowsystem_enabled']"><td width="1%"><span title="{_escrow}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/escrow_gray.png" alt="" border="0" /></span></td></if>
+                    <td width="1%"><span title="{_payment}"><img src="{template_relativeimagepath}{template_imagesfolder}buy_gray.png" alt="" border="0" /></span></td>
+                    <td width="1%"><span title="{_shipping}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/shipbox_gray.png" alt="" border="0" /></span></td>
+                    <td width="1%"><span title="{_feedback_left}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/feedback_gray.gif" alt="" border="0" /></span></td>
+                    <td width="1%"><span title="{_feedback_received}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/feedback_received_gray.gif" alt="" border="0" /></span></td>
+		    <if condition="$ilconfig['productaward_mediashareafterend']"><td width="1%"><span title="{_share}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/share_gray.gif" alt="" border="0" /></span></td></if>
+                    <td width="10%">{_actions}</td>
+				</tr>
+				<loop name="purchase_now_activity"><tr class="alt1"> 
+					<td colspan="3" valign="top">
+                    <div><span style="float:left; padding-right:12px"><if condition="isset($ilance->GPC['pics2']) AND $ilance->GPC['pics2'] == '0'"><else /><table><tr valign="top"><td><div align="center">{sample}</div></td></tr></table></if></span><span class="blue">{item_name}</span>&nbsp;<span class="smaller">({project_id})</span></div>
+                    <div style="padding-top:6px;padding-left:25px" class="smaller"><span class="blue">{ordermerchant}</span><span style="float:left;padding-right:5px;margin-top:-3px">{pmb}</span></div>
+                    <div style="padding-top:9px;padding-bottom:3px;padding-left:25px" class="smaller"><strong>{_quantity}:</strong> {orderqty}</div>
+                    {currencyinfo}
+                    <div style="padding-bottom:3px;padding-left:25px" class="smaller"><strong>{_order_date}:</strong> {orderdate}</div>
+                    {shiptracking}
+                    <!--<div style="padding-bottom:3px" class="smaller">{orderinfo}</div>-->
+                    <div style="clear:both"></div>
+                    </td>
+                    <td valign="top" align="right"><div class="smaller"><strong>{price}</strong></div><div class="smaller gray" style="padding-top:3px">{shipping}</div></td>
+                    <if condition="$ilconfig['escrowsystem_enabled']"><td valign="top"><div class="smaller">{escrowtotal}</div><!--<div class="smaller">{escrowfeebuyer}</div>--></td></if>
+                    <td valign="top">{paystatus}</td>
+                    <td valign="top">{shipstatus}</td>
+                    <td valign="top">{feedback}</td>
+                    <td valign="top">{feedbackreceived}</td>
+		    	<if condition="$ilconfig['productaward_mediashareafterend']"><td valign="top">{share}</td></if>
+                    <td valign="top" nowrap="nowrap">{orderactions}</td>
+				</tr></loop name="purchase_now_activity"> 
+				<if condition="isset($show['no_purchase_now_activity']) AND $show['no_purchase_now_activity']"><tr> 
+					<td colspan="12" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+				</tr><else /><tr> 
+					<td colspan="12">{prevnext}</td>
+				</tr></if>
+				</table>
+
+				
+</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<if condition="!isset($ilance->GPC['cancelled'])">
+<div class="litegray" style="padding-top:5px; padding-bottom:5px">{_please_note_cancelled_buy_now_orders_will_not_appear_by_default} 
+<span class="blue"><a href="{https_server}{ilpage[escrow]}?cmd=management&amp;bidsub=buynow-escrow&amp;cancelled=1">{_to_view_cancelled_order_listings_please_use_this_link}</a></div>
+<else />
+<div style="padding-top:5px; padding-bottom:5px" class="blue"><a href="{https_server}{ilpage[escrow]}?cmd=management&amp;bidsub=buynow-escrow">{_hide_cancelled_orders}</a></div>
+{apihook[buying_buynow_escrow_td_template_end]}
+
+</if>
+<if condition="isset($show['escrowcolumn']) AND $show['escrowcolumn']"><div class="litegray" style="padding-top:4px">{_fees_related_to_each_escrow_account_will_be_included_in_the_total_amount_column_for_example_if_you_purchased_an_item_for_2000}</div></if>
+    
+
+    
+    
+	</td>
+</tr>
+</table>
+
+{apihook[buying_buynow_escrow_template_end]}

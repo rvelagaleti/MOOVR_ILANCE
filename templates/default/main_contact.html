@@ -1,0 +1,82 @@
+<div class="box3"><div class="block-wrapper">
+
+	<div class="block5">
+	
+			<div class="block5-top">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+			<div class="block5-header"><span style="float:right; padding-top:3px" class="smaller litegray">{_all_contact_inquiries_are_confidential}</span>{_contact} {site_name}</div>
+			
+			<div class="block5-content" style="padding:0px">
+				
+					<form action="{ilpage[notify]}" method="post" accept-charset="UTF-8" style="margin:0px">
+					<div align="left">
+					
+						    
+							<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+							<tr class="alt1">
+								<td>
+									<div style="padding-bottom:3px" class="gray">{_first_name}</div>
+									<if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0">
+									<input type="text" class="input" name="name" value="{user[firstname]}" size="50" />
+									<else />
+									<input type="text" class="input" name="name" value="" size="50" />
+									</if>
+							    </td>
+							</tr>
+							<tr class="alt1">
+								<td>
+									<div style="padding-bottom:3px" class="gray">{_email}</div>
+									<if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0">
+									<input type="text" class="input" name="email" value="{user[email]}" size="50" dir="{template_textdirection}" />
+									<else />
+									<input type="text" class="input" name="email" value="" size="50" dir="{template_textdirection}" />
+									</if>
+								</td>
+							</tr>
+							<tr class="alt1">
+								<td>
+									<div class="gray">{_subject}</div>
+										<div style="padding-top:5px">
+										<div style="padding-top:3px"><label for="rb_0"><input type="radio" name="subject" id="rb_0" value="0" checked="checked" /> {_feedback}</label></div>
+										<div style="padding-top:3px"><label for="rb_1"><input type="radio" name="subject" id="rb_1" value="1"  /> {_registration}</label></div>
+										<div style="padding-top:3px"><label for="rb_other"><input type="radio" name="subject" value="other" id="rb_other" /> {_other}</label> &nbsp;<input type="text" class="input" name="subject_other" size="42" maxlength="85" /></div>
+									</div>
+								</td>
+							</tr>
+							<tr class="alt1">
+								<td>
+									<div class="gray">{_message}</div>
+										<div style="padding-top:3px">
+										<textarea name="message" rows="10" cols="50" wrap="virtual" style="width:540px" class="input"></textarea>
+									</div>
+								</td>
+							</tr>
+							<tr class="alt2_top">
+								<td>
+									<div>
+								<input type="submit" class="buttons" value=" {_send} " accesskey="s" style="font-size:15px" />
+							</div>
+								</td>
+							</tr>
+							</table>
+						
+							
+					</div>
+					<input type="hidden" name="cmd" value="_submit-contactus" />		
+					</form>
+				
+			</div>
+
+			<div class="block5-footer">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</div>

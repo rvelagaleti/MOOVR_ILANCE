@@ -1,0 +1,127 @@
+<div id="v3body4"> 
+<!-- sub navigation -->
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+<!-- /sub navigation -->
+<div id="content">
+<h1>{_rss_feed_manager}</h1><br />
+
+<div class="tab-pane">
+	<div class="tab-pane" id="rssfeeds">
+	<div class="tab-page">
+		
+      <h2 class="tab">{_feeds}</h2>
+		
+				<form method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" name="ilform" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="rssfeeds" />
+				<input type="hidden" name="subcmd" value="update-sort" />
+				<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=rssfeeds" />
+				<div class="block-wrapper">
+				<div class="block">
+				
+						<div class="block-top">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+						<div class="block-header">RSS {_feeds}</div>
+						<div class="block-content-yellow" style="padding:9px"><div class="smaller">View and manage RSS feed resources in the marketplace.  Users will be able to read/view resources added below</div></div>
+						<div class="block-content" style="padding:0px">
+							<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+							<tr class="alt2"> 
+								<td width="45%">{_title}</td>
+								<td width="45%">{_rss_feed_url}</td>
+								<td width="5%" nowrap="nowrap" align="center">{_display_order}</td>
+								<td width="5%" nowrap="nowrap" align="center">{_remove}</td>
+							</tr>
+							<loop name="rssfeeds">
+							<tr class="alt1"> 
+								<td width="45%"><span class="blue">{rssname}</span></td>
+								<td width="45%"><span class="gray">{rssurl}</span></td>
+								<td width="5%" align="center"><input type="text" name="sort[{rssid}]" value="{sort}" class="input" size="3" style="text-align:center" /></td>
+								<td width="5%" align="center">{remove}</td>
+							</tr>
+							</loop name="rssfeeds">
+							<tr class="alt2_top">
+								<td valign="middle" colspan="4"><input name="submit" type="submit" style="font-size:15px" class="buttons" value="{_update_sort}" /></td>
+							</tr>
+							</table>
+						</div>
+						
+						<div class="block-footer">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+              	
+				</form>
+			
+	</div>
+	
+	<div class="tab-page">
+      <h2 class="tab">{_add}</h2>
+	  
+	  
+		<form method="get" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="rssfeeds" />
+		<input type="hidden" name="subcmd" value="insert-feed" />
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{_rss_feed_title}</div>
+				<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_create_a_new_rss_feed_resource_below}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					<tr class="alt1"> 
+						<td width="14%" valign="middle">{_rss_feed_title}</td>
+						<td width="86%"><input type="text" name="rssname" value="" class="input" size="50" /></td>
+					</tr>
+					<tr class="alt1"> 
+						<td width="14%" valign="middle">{_rss_feed_url}</td>
+						<td width="86%"><input type="text" name="rssurl" value="" class="input" size="50" style="width:98%" /></td>
+					</tr>
+					<tr class="alt1"> 
+						<td width="14%" valign="middle">{_display_order}</td>
+						<td width="86%"><input type="text" name="sort" value="" class="input" size="3" /></td>
+					</tr>
+					<tr class="alt2_top">
+						<td valign="middle" colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value=" {_save} " style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value=" {_save} " style="font-size:15px" /></if></td>
+					</tr>
+					</table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>
+	
+	</div>
+	
+	
+</div>
+
+<br />
+<br />
+<br />

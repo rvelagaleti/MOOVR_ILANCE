@@ -1,0 +1,52 @@
+<div style="font-size:18px; padding-bottom:9px" class="black">{_invite_to_bid}</div>
+<div class="bigtabs" style="padding-bottom:14px; padding-top:9px">
+<div class="bigtabsheader">
+<ul id="moderationtabs">
+	<li title="" id="resultsli"><a href="javascript:history.back()" rel="nofollow"><img src="{template_relativeimagepath}{template_imagesfolder}icons/selectedcat_back.gif" border="0" alt="{_back}" /> {_back}</a></li>
+    <li title="" id="toolsli" class="on"><a href="javascript:void(0)" target="tools_iframe" rel="nofollow">{_confirm_action}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<form method="get" name="ilform" action="{ilpage[buying]}" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="rfp" />
+<input type="hidden" name="do" value="invite" />
+{hidden_invitations}
+<div class="block-wrapper">
+	<div class="block3">
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			<div class="block3-header">{_please_confirm_the_service_providers_youre_inviting}</div>
+            <div class="block3-content-gray" style="padding:9px"><div class="smaller">{_please_take_a_moment_to_review_the_action_youre_trying_to_make}</div></div>
+			<div class="block3-content" style="padding:0px">
+				<div>
+				<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%">
+				<if condition="isset($show['norfps']) AND $show['norfps'] == false">
+				<tr class="alt1"> 
+					<td colspan="2"><div class="gray">{_invite} <span class="black">{provider}</span></div><div style="padding-top:3px"><img src="{template_relativeimagepath}{template_imagesfolder}trail.gif" border="0" alt="{_back}" /> {invite_pulldown}</div></td>
+				  </tr>
+				<tr class="alt3">
+				  <td colspan="2">
+				 
+				  <strong>{_or_upper}</strong></td>
+				</tr>
+				</if>
+				<tr class="alt1"> 
+					<td colspan="2" valign="bottom"><div class="gray"><label for="invite"><span style="float:left; padding-right:6px"><input type="checkbox" id="invite" name="invitation" value="1" <if condition="isset($show['norfps']) AND $show['norfps'] == false"><else />checked="checked"</if> /></span>{_invite} <strong>{provider}</strong> {_to_a_new_auction_i_will_create_now}</label></div></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" value=" {_continue} " class="buttons" style="font-size:15px" /></td>
+				</tr>
+				</table>
+				</div>
+			</div>
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+</div></div></form>

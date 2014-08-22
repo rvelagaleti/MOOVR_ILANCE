@@ -1,0 +1,130 @@
+<div style="color: #333; font-size: 26px; margin-bottom: 15px;">{_classified_ads}</div>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+    <td width="70%" valign="top">
+	
+    	{apihook[main_classifieds_start]}
+    
+		<div class="block-wrapper">
+
+			<div class="block3">
+			
+					<div class="block3-top">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+					<div class="block3-header">{_free_local_classified_ads}</div>
+					
+					<div class="block3-content alt_top">
+					
+                    	  {apihook[main_classifieds_table_start]}
+                    
+						  <table width="100%" border="0" cellspacing="0" cellpadding="{table_cellpadding}">
+                          
+                          <tr>
+                          
+							<td valign="top">
+							<div style="font-size:14px; margin-bottom:15px"><strong>{_selling}?</strong></div>
+							<a href="javascript:void(0)" onclick="location.href='{https_server}{ilpage[main]}?cmd=selling&amp;classifieds=1'" class="buttons" style="font-size:14px">{_post_new_ad}</a></td>
+							
+							
+							<td valign="top">&nbsp;</td>
+							<td valign="top">
+							
+							<div style="font-size:14px; margin-bottom:15px"><strong>{_browse_classified_ads}</strong></div>
+							<ul style="margin-top:5px; list-style:circle">
+								<li style="padding-bottom:2px"><span class="blue"><a href="{http_server}{ilpage[search]}?mode=product&amp;sort=01&amp;classifieds=1" rel="nofollow">{_all}: {_ending_soon}</a></span></li>
+								<li style="padding-bottom:2px"><span class="blue"><a href="{http_server}{ilpage[search]}?mode=product&amp;sort=02&amp;classifieds=1" rel="nofollow">{_all}: {_newly_listed}</a></span></li>
+                                <li style="padding-bottom:2px"><span class="blue"><a href="{http_server}{ilpage[search]}?mode=product&amp;sort=01&amp;classifieds=1&amp;urgent=1" rel="nofollow">{_urgent}</a></span></li>
+							</ul></td>
+							
+                            
+						  </tr>
+                          </table>
+                          
+                          {apihook[main_classifieds_table_end]}
+
+					</div>
+					
+					<div class="block3-footer">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+			</div>
+			
+		</div>
+        
+        
+        {apihook[main_classifieds_end]}
+	
+	</td>
+	<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td width="30%" valign="top">
+	
+		
+	
+		<div class="block-wrapper">
+
+			<div class="block3">
+			
+					<div class="block3-top">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+					<div class="block3-header">{_other_ways_to_search}</div>
+					
+					<div class="block3-content alt_top" style="padding:14px">
+                    		
+                            {apihook[main_classifieds_otherways_start]}
+                            
+							<div style="padding-bottom:4px"><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search" rel="nofollow">{_advanced_search}</a><else /><a href="{http_server}{ilpage[search]}" rel="nofollow">{_advanced_search}</a></if></span></div>
+							<div style="padding-bottom:4px"><span class="blue"><a href="{ilpage[preferences]}?cmd=favorites" rel="nofollow">{_favorite_searches}</a></span></div>
+							<div style="padding-bottom:4px"><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}watchlist" rel="nofollow">{_watchlist_manager}</a><else /><a href="{http_server}{ilpage[watchlist]}" rel="nofollow">{_watchlist_manager}</a></if></span></div>
+                            
+                            {apihook[main_classifieds_otherways_end]}
+                           	</div>
+					
+					<div class="block3-footer">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+			</div>
+		</div>
+	</td>
+</tr>
+</table>
+
+<div style="font-size:17px;margin-bottom:10px"><strong>{state}</strong>&nbsp;&nbsp;&nbsp;<span class="smaller litegray">{_change_location}</span></div>
+<div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+<tr>
+<td>
+<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_gray_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="padding-left:5px;" valign="top"></td>
+	<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+	<td style="padding-right:5px;">
+    
+    
+    <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+    {cities}
+    </table>
+    
+    
+    </td>
+</tr>
+</table>
+</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+</td>
+</tr>
+</table>
+</div>

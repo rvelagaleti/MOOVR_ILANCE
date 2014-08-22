@@ -1,0 +1,194 @@
+<if condition="$show['subscriptioncancelled']"><div class="redhlite"><h1>{_your_subscription_has_been_cancelled}</h1><br />
+            	<div>{_the_subscription_plan_associated_with_your_account_has_been_cancelled}</div>
+            </div></if>
+            
+            <if condition="isset($show['autorenewalchanged']) AND $show['autorenewalchanged'] OR isset($show['autopaymentchanged']) AND $show['autopaymentchanged']"><div><table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+<tr>
+<td>
+<div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td valign="top"></td>
+	<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1" border="0" id="" /></td>
+	<td style="padding-right:5px; padding-left:3px"><div style="font-size:14px"><strong>{_thank_you_your_membership_renewal_settings_have_been_adjusted}</strong></div>
+	
+	</td>
+</tr>
+</table>
+</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+</td>
+</tr>
+</table></div></if>
+            
+            
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+<div class="bigtabsheader">
+<ul>
+    <li title="" class="on"><a href="javascript:void(0)">{_subscription}</a></li>
+    <li title="" class=""><a href="{https_server}{ilpage[subscription]}?cmd=_do-subscription-manage&amp;subcmd=cancel">{_cancel_subscription}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+<div class="block-wrapper">
+
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header">{_subscription_management}</div>
+            <div class="block-content" style="padding:0px">
+                
+                <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr class="alt2"> 
+                    <td width="27%">{_title}</td>
+                    <td width="20%" nowrap="nowrap">{_renew_date}</td>
+                    <td width="8%" align="center" nowrap="nowrap">{_recurring} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_recurring_subscription'] + '</strong></div><div>' + phrase['_a_recurring_subscription_is_handled_by_a_3rd_party_payment_gateway'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                    <td width="7%">{_cost}</td>
+                    <td width="11%">{_length}</td>
+                    <td width="9%">{_status}</td>
+                    <td width="18%" align="right">{_action}</td>
+                </tr>
+                <loop name="subscription_rows"><tr valign="top"> 
+                    <td align="left" nowrap="nowrap">{title}</td>
+                    <td nowrap="nowrap">{renewdate}</td>
+                    <td>{recurring}</td>
+                    <td nowrap="nowrap">{cost}</td>
+                    <td>{length} {units}</td>
+                    <td>{status}</td>
+                    <td align="right"><span class="blue">{action}</span></td>
+                </tr></loop name="subscription_rows">
+                <tbody>
+                <if condition="isset($show['no_subscription_rows']) AND $show['no_subscription_rows']"><tr class="alt2_top"> 
+                    <td colspan="7" align="center" class="alt1"><div style="padding-top:8px; padding-bottom:8px">{_no_subscription_plan_found_choose_one_below}</div></td>
+                </tr></if>
+                <tr>
+                    <td colspan="7">
+                        <if condition="isset($show['freeplan']) AND $show['freeplan']"><else /><div style="padding-top:12px">
+                            
+                            
+                            <form name="autopayment" action="{https_server}{ilpage[subscription]}" method="post" accept-charset="UTF-8" style="margin: 0px;">
+                            <input type="hidden" name="cmd" value="_do-autopayment-change" />
+                            <input type="hidden" name="returnurl" value="{pageurl_urlencoded}" />
+                            <div>{_subscription_auto_payments} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_subscription_auto_payments'] + '</strong></div><div>{_would_you_like_us_to_automatically_debit_your_account}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></div><div style="padding-top:4px">{autopayments_pulldown} <input type="submit" class="button_smaller" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value=" {_go} "/></div>
+                            </form>
+                            
+                        </div></if>
+                        
+                        <if condition="(isset($show['onlyupgrade']) AND $show['onlyupgrade'] == '0') AND (isset($show['freeplan']) AND $show['freeplan'] == false)"><div style="padding-top:12px">
+                            
+                            <form name="autorenewal" action="{https_server}{ilpage[subscription]}" method="post" accept-charset="UTF-8" style="margin: 0px;">
+                            <input type="hidden" name="cmd" value="_do-autorenewal-change" />
+                            <input type="hidden" name="returnurl" value="{pageurl_urlencoded}" />
+                            <div>{_subscription_auto_renewal}</div><div style="padding-top:4px">{autorenewal_pulldown} <input type="submit" class="button_smaller" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value=" {_go} "/></div>
+                            </form>
+                        </div></if>
+                        
+                    </td>
+                </tr>
+                </tbody>
+                </table>
+                
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="bigtabs" style="padding-bottom:10px; padding-top:15px">
+<div class="bigtabsheader">
+<ul>
+    <li title="" class="on"><a href="{ilpage[subscription]}#plans">{_upgrade}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+<a name="plans"></a>
+<div class="block-wrapper">
+
+    <div class="block3">
+    
+            <div class="block3-top">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block3-header">{_subscription_upgrade_matrix}</div>
+            
+            <div class="block3-content" style="padding:0px">
+            
+                <form name="ilform" id="ilform" action="{ilpage[subscription]}" method="post" accept-charset="UTF-8" onsubmit="return subscription_upgcheck()" style="margin: 0px;">
+                <input type="hidden" name="cmd" value="_do-upgrade-preview" />
+                <if condition="isset($ilance->GPC['returnurl']) AND !empty($ilance->GPC['returnurl'])"><input type="hidden" name="returnurl" value="{returnurl}" /></if>
+                <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr class="alt2"> 
+                    <td width="5%" align="center">{_select}</td>
+                    <td width="5%" align="center">{_badge}</td>
+                    <td width="56%" nowrap="nowrap" >{_title} / {_description}</td>
+                    <td width="8%">{_role}</td>
+                    <td width="6%">{_cost}</td>
+                    <td width="9%">{_length}</td>
+                    <td width="11%" align="right">{_access}</td>
+                </tr>
+                <loop name="upgrade_rows"> 
+                <tr class="alt1" valign="top"> 
+                    <td align="center" class="alt2">{action}</td>
+                    <td align="center">{badge}</td>
+                    <td align="left"><div style="padding-bottom:6px"><div><strong>{title}</strong></div><div class="gray" style="padding-top:3px">{description}</div></div></td>
+                    <td align="left" nowrap="nowrap">{roletype}</td>
+                    <td nowrap="nowrap">{cost}</td>
+                    <td>{length} {units}</td>
+                    <td align="right" nowrap="nowrap"><span class="blue">{access}</span></td>
+                </tr>
+                </loop name="upgrade_rows"> 
+                <if condition="isset($show['no_upgrade_rows']) AND $show['no_upgrade_rows']"><tr class="alt1"> 
+                    <td colspan="7" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_subscription_plans_found_for_this_role_type}</div></td>
+                </tr></if> 
+                <tr class="alt2_top"> 
+                    <td colspan="7"> 
+                        <table width="100%" border="0" cellspacing="3" cellpadding="0">
+                        <tr> 
+                            <td width="17%"><select name="subcmd" style="font-family: verdana">
+                                <optgroup label="{_select_action}">
+                                <option value="upgrade">{_upgrade_subscription}</option>
+                                </optgroup>
+                                </select></td>
+                            <td width="83%" align="left">
+                            
+                            {apihook[subscription_upgrade_form_end]}
+                            
+                            <input type="submit" value=" {_go} " class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></td>
+                        </tr>
+                      </table>  </td>
+                </tr>
+                </table>
+                </form>
+                
+            </div>
+            
+            <div class="block3-footer">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+{clock_js}

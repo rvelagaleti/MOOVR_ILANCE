@@ -1,0 +1,79 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:5px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class=""><a href="{ilpage[accounting]}">{_accounting}</a></li>
+	<li title="" class="on"><a href="javascript:void(0)">{_deposit}</a></li>
+	<if condition="empty($_SESSION['ilancedata']['user']['active']) OR $_SESSION['ilancedata']['user']['active'] == 'no' OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'withdraw') == 'no'"><else /><li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=withdraw">{_withdraw}</a></li></if>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=transactions">{_transactions}</a></li>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=sch-transactions">{_scheduled_transactions}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<form action="{ilpage[accounting]}" method="post" accept-charset="UTF-8" style="margin:0px">
+
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_deposit_funds_preview}</div>
+			
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_after_deposit_is_complete}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+				<tr class="alt1"> 
+                    <td width="14%" align="right"><span class="gray">{_bank} {_account}:</span></td>
+                    <td>{name}</td>
+                </tr>
+                <tr class="alt1"> 
+                    <td align="right"><span class="gray">{_number}:</span></td>
+                    <td nowrap="nowrap">{number}</td>
+                </tr>
+                <tr class="alt1"> 
+                    <td align="right"><span class="gray">{_account_swift}:</span></td>
+                    <td nowrap="nowrap">{swift}</td>
+                </tr>
+                <tr class="alt1"> 
+                    <td align="right"><span class="gray">{_company} {_name}:</span></td>
+                    <td nowrap="nowrap">{companyname}</td>
+                </tr>
+                <tr class="alt1"> 
+                    <td align="right"><span class="gray">{_company} {_address}:</span></td>
+                    <td nowrap="nowrap">{company_address}</td>
+                </tr>
+                <if condition="isset($show['custom_notes']) AND $show['custom_notes']">
+                <tr class="alt1"> 
+                    <td align="right"><span class="gray">{_custom} {_notes}:</span></td>
+                    <td>{custom_notes}</td>
+                </tr>
+                </if>
+                <!--
+                <tr class="alt1"> 
+                    <td align="right"><span class="gray">{_wire_info} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_please_enter_this_information_in_your_wire_transfer'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a>:</span></td>
+                    <td nowrap="nowrap">{transactionidx} {_username}: {username}</td>
+                </tr>
+                -->
+                <tr class="alt1"> 
+                    <td align="right"><span class="gray">{_amount}:</span></td>
+                    <td nowrap="nowrap">{amount}</td>
+                </tr>
+				</table>
+                
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+	</div>
+</div>
+</form>

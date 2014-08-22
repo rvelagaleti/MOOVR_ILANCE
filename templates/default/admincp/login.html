@@ -1,0 +1,95 @@
+<div id="v3body4">
+<div id="sub">
+<div id="subnav">
+	<loop name="subnav_settings">
+	<a href="{url}" {class}><span>{name}</span></a> <span> | </span>
+	</loop name="subnav_settings">
+</div>
+</div>
+
+<div id="content" align="center">
+
+<div style="padding:6px; width:98%">
+<div>
+<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 1"><h1>{_you_have_provided_incorrect_login_credentials}</h1></if> 
+<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'suspended'"><h1>{_your_account_is_suspended_login_disabled}</h1></if> 
+<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'iprestrict'"><h1>{_your_ip_address_does_not_match_for_this_account}</h1></if> 
+
+<form name="login" action="{https_server}{ilpage[login]}" method="post" accept-charset="UTF-8" style="margin:0px;" onsubmit="md5(password, md5pass, md5pass_utf)">
+<input type="hidden" name="redirect" value="{redirect}" />
+<input type="hidden" name="login_process" value="2" />
+<input type="hidden" name="md5pass" />
+<input type="hidden" name="md5pass_utf" />
+<div class="block-wrapper">
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header">{_sign_in}</div>
+			<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_login_to_the_admin_control_panel}</div></div>
+			<div class="block3-content" style="padding:0px">
+				
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" align="center">
+					<tr class="alt1"> 
+					<td>
+					
+					<table width="100%" border="0" cellspacing="3" cellpadding="2" align="left">
+					  <tr>
+						<td nowrap align="right">{_username}</td>
+						<td width="100%"><input type="text" name="username" value="{username}" style="width:99%; font-family: Verdana" autocomplete="off" /></td>
+						<td width="26%">&nbsp;</td>
+					  </tr>
+					  <tr>
+						<td align="right">{_password}</td>
+						<td width="100%"><input type="password" name="password" value="{password}" style="width:99%; font-family: Verdana" autocomplete="off" /></td>
+						<td>&nbsp;</td>
+					  </tr>
+					  <tr>
+						<td colspan="2"></td>
+						<td></td>
+					  </tr>
+					</table></td>
+					<td valign="top">
+					
+						<table width="50%" border="0" align="center" cellpadding="6" cellspacing="0">
+						<tr> 
+							<td colspan="2" align="center" valign="top"><span class="blue"><a href="{ilpage[login]}?cmd=_pw-renew">{_recover_my_password}</a></span></td>
+						</tr>
+						</table></td>
+					</tr>
+					<tr class="alt1">
+					  <td colspan="2"><div><strong>{_remember_me}</strong></div>
+						  <table width="100%" border="0" cellspacing="0" cellpadding="1" align="center">
+							<tr>
+							  <td align="left" valign="middle"><label for="remember">
+								<input type="checkbox" name="remember" id="remember" value="1" />
+								<span class="gray">{_remember_me_for_future_visits}?</span></label></td>
+							</tr>
+							<tr>
+							  <td></td>
+							</tr>
+						  </table>    </td>
+					  </tr>
+					<tr class="alt2_top">
+						<td colspan="2"><input type="submit" value="{_sign_in}" style="font-size:15px" class="buttons" /></td>
+					</tr>
+					</table>
+
+				
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</form>
+</div>
+</div>

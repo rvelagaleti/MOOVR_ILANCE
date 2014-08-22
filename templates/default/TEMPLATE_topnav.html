@@ -1,0 +1,81 @@
+<div style="padding-bottom:11px">
+    <span style="float:{template_textalignment_alt}; margin-top:0px;">
+    <div class="links_l">
+        <div class="links_r">
+            <div class="link_row">
+                <ul class="smaller" style="padding-top:2px">
+                    {apihook[topnav_links_start]}
+                    <if condition="$ilconfig['globalauctionsettings_seourls']">
+	                    <li class="first blue"><span style="float:{template_textalignment_alt}; margin-top:0px;"><a href="{https_server}mycp" onmouseover="show_category1_popup();" onmouseout="hide_category1_popup();">{_my_account}</a></span></li>
+	                    <li class="blue"><span style="float:{template_textalignment_alt}; margin-top:0px;"><a href="{https_server}messages">{new_messages_nav} {_messages}</a></span></li>
+	                    <li class="blue"><span style="float:{template_textalignment_alt}; margin-top:0px;"><a href="{https_server}preferences">{_preferences}</a></span></li>
+	                    <li class="blue"><span style="float:{template_textalignment_alt}; margin-top:0px;"><a href="{http_server}watchlist">{_watchlist}</a></span></li>
+	                    <li class="blue"><span style="float:{template_textalignment_alt}; margin-top:0px;"><a href="{http_server}main-news">{_news}</a></span></li>
+                    <else />
+	                    <li class="first blue"><span style="float:{template_textalignment_alt}; margin-top:0px;"><a href="{https_server}{ilpage[main]}?cmd=cp" onmouseover="show_category1_popup();" onmouseout="hide_category1_popup();">{_my_account}</a></span></li>
+	                    <li class="blue"><span style="float:{template_textalignment_alt}; margin-top:0px;"><a href="{https_server}{ilpage[messages]}">{new_messages_nav} {_messages}</a></span></li>
+	                    <li class="blue"><span style="float:{template_textalignment_alt}; margin-top:0px;"><a href="{https_server}{ilpage[preferences]}">{_preferences}</a></span></li>
+	                    <li class="blue"><span style="float:{template_textalignment_alt}; margin-top:0px;"><a href="{http_server}{ilpage[watchlist]}">{_watchlist}</a></span></li>
+	                    <li class="blue"><span style="float:{template_textalignment_alt}; margin-top:0px;"><a href="{http_server}{ilpage[main]}?cmd=news">{_news}</a></span></li>
+                    </if>
+                    {apihook[topnav_links_end]}
+                </ul>
+            </div>
+			</div>
+			<div style="display:none; position: absolute;z-index:5000;background-color:#fff; margin-top:-8px;background-color:#fff;border: 1px solid #ccc;-webkit-box-shadow: #ddd 3px 3px 6px" id="category_popup1" onmouseover="show_category_popup_link1()" onmouseout="hide_category1_popup()">
+			<div class="n"><div class="e"><div class="w"></div></div></div><div>
+			<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+			<if condition="$show['product_buying_activity'] == true OR $show['service_buying_activity'] == true"><tr class="alt1" onmouseover="this.className='alt2'" onmouseout="this.className='alt1'">
+				<td><div style="padding-{template_textalignment}:15px"><span class="blueonly"><a href="{ilpage[buying]}?cmd=management">{_buying_activity}</a></span></div></td>
+			</tr></if>
+			<if condition="$show['product_selling_activity'] == true OR $show['service_selling_activity'] == true"><tr class="alt1" onmouseover="this.className='alt2'" onmouseout="this.className='alt1'">
+				<td><div style="padding-{template_textalignment}:15px"><span class="blueonly"><a href="{ilpage[selling]}?cmd=management">{_selling_activity}</a></span></div></td>
+			</tr></if>
+			<tr class="alt1" onmouseover="this.className='alt2'" onmouseout="this.className='alt1'">
+				<td><div style="padding-{template_textalignment}:15px"><span class="blueonly"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{https_server}accounting">{_my_account_manager}</a><else /><a href="{https_server}{ilpage[accounting]}?cmd=management">{_my_account_manager}</a></if></span></div></td>
+			</tr>
+            <tr class="alt1" onmouseover="this.className='alt2'" onmouseout="this.className='alt1'">
+				<td><div style="padding-{template_textalignment}:15px"><span class="blueonly"><a href="{ilpage[subscription]}?cmd=management">{_subscription_manager}</a></span></div></td>
+			</tr>
+            <tr class="alt1" onmouseover="this.className='alt2'" onmouseout="this.className='alt1'">
+				<td><div style="padding-{template_textalignment}:15px"><span class="blueonly"><a href="{ilpage[feedback]}?cmd=_leave-feedback">{_leave_feedback}</a></span></div></td>
+			</tr>
+			</table>
+			</div><div class="s"><div class="e"><div class="w"></div></div></div>
+        </div>
+    </div>		
+    </span>
+    <div id="logo_bgnd"><span style="padding-{template_textalignment_alt}:15px; padding-top:9px;float:{template_textalignment_alt}" id="loginwelcome" class="smaller">{login_include}{apihook[topnav_login_welcome_end]}</span><a href="{http_server}"><img src="{template_relativeimagepath}{template_logo}" border="0" alt="" id="logo" /></a></div>
+</div>
+<div class="tl">
+	<div class="tr">
+		<div class="firstrow">
+			<form name="global" id="globalsearch" action="{ilpage[search]}" method="get" accept-charset="UTF-8" style="margin: 6px" dir="{template_textdirection}">
+			<input style="padding:2px; height:15px; width:360px; font-family: verdana" id="search_keywords_id" autocomplete="off" type="text" name="q" size="55" value="{q}" />
+            <select name="mode" id="searchmode" style="font-family: verdana; vertical-align: baseline">
+				<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']">
+				<optgroup label="{_services}">
+					<option value="service" <if condition="(isset($ilance->GPC['mode']) AND $ilance->GPC['mode'] == 'service') OR (defined('LOCATION') AND LOCATION == 'rfp')">selected="selected"</if>>{_find_work}</option>
+					<option value="rfpid" <if condition="isset($ilance->GPC['mode']) AND $ilance->GPC['mode'] == 'rfpid'">selected="selected"</if>>{_project} {_id}</option>
+					<option value="experts" <if condition="isset($ilance->GPC['mode']) AND $ilance->GPC['mode'] == 'experts'">selected="selected"</if>>{_find_professionals}</option>
+				</optgroup>
+				</if>
+	            <if condition="$ilconfig['globalauctionsettings_productauctionsenabled']">
+	            <optgroup label="{_products}">
+					<option value="product" <if condition="(isset($ilance->GPC['mode']) AND $ilance->GPC['mode'] == 'product') OR (defined('LOCATION') AND LOCATION == 'merch')">selected="selected"</if>>{_find_products}</option>
+					<option value="itemid" <if condition="isset($ilance->GPC['mode']) AND $ilance->GPC['mode'] == 'itemid'">selected="selected"</if>>{_item} {_id}</option>
+				</optgroup>
+				</if>
+			</select>&nbsp;<input type="hidden" name="titlesonly" value="1" /><input type="hidden" name="sort" value="124" /><input type="submit" class="buttons" value="{_search}" />&nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search">{_advanced_search}</a><else /><a href="{ilpage[search]}">{_advanced_search}</a></if></span></form>
+			<div id="search_autocomplete"></div>
+		</div>
+	</div>
+</div>
+<div class="bl">
+	<div class="br">   
+		<div class="secondrow">{topnav_menu_links}</div>        
+	</div>    
+</div>
+<div class="clear"></div>
+{categorypopup}
+<div style="padding-bottom:5px"></div>

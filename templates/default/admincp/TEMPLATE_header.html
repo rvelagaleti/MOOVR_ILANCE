@@ -1,0 +1,36 @@
+{template_htmldoctype}
+<html dir="{template_textdirection}" lang="{template_languagecode}">
+<head>
+<title>{page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={template_charset}">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="revisit-after" content="0">
+<meta name="robots" content="noindex, nofollow">
+{js_phrases_content}
+{headinclude}
+</head>
+<body {onload}>
+<if condition="isset($show['ADMINCP_TEST_MODE']) AND $show['ADMINCP_TEST_MODE']"><div style="width:100%; height:25px;background-color:#ebebeb;border-bottom:2px solid #ccc;line-height:25px;text-align:center;padding: 0 0 0 5px" class="smaller">ILance Software Admin CP in demonstration mode- limited options are available to save or modify.  <span class="blueonly"><a href="http://www.ilance.ca/pricing" target="_blank">Please purchase a full license</a></span>.</div></if>
+<div id="v3body1"><div id="v3body2"><div id="v3body3">
+<div id="top"><span style="float:left; padding-top:6px" class="smaller gray">{official_time}</span>
+<div id="version">
+	<if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0 AND $_SESSION['ilancedata']['user']['isadmin'] == '1'">
+	<span class="smaller gray">{ilanceversion}&nbsp;&nbsp;|&nbsp;&nbsp;{_build}: <strong>{buildversion}</strong>&nbsp;&nbsp;|&nbsp;&nbsp;{_server}: <strong>{site_id}</strong>&nbsp;&nbsp;|&nbsp;&nbsp;{_load}: <strong>{loadaverage}</strong>&nbsp;&nbsp;|&nbsp;&nbsp;{_users}: <strong>{totalusers}/{userlimit}</strong></span>
+	<else />&nbsp;</if>
+</div>
+<div id="logo">
+<div style="padding-bottom:25px"></div>
+<span class="blue"><a href="{https_server_admin}{ilpage[dashboard]}" style="text-decoration:none; font-family: Georgia, Times New Roman, Times, serif; font-size: 21px; line-height: 25px; letter-spacing: -1px; font-weight: normal;">{site_name}</a></span>
+<div class="smaller" style="padding-top:6px;"><span class="blue" style="float:right"><a href="{http_server_admin}{ilpage[dashboard]}">{_dashboard}</a>&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;<a href="{http_server}" target="_blank">{_client_cp}</a></span><span>{login_include_admin}</span></div>
+</div></div>
+<if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0 AND $_SESSION['ilancedata']['user']['isadmin'] == '1'"><!-- main header links -->
+<div id="v3menu">
+<ul>
+	<loop name="v3nav">
+	<li id="{id}"><a href="{https_server_admin}{url}" accesskey="{key}" {class}><span><strong>{name}</strong></span></a></li>
+	</loop name="v3nav">
+</ul>
+</div><!-- / main header links --><else /><div style="height:28px"></div></if>

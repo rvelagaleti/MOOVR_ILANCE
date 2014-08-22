@@ -1,0 +1,101 @@
+HOW TO INSTALL ILANCE 4.x
+
+~~~~~~~~~~~~
+STEP 1
+~~~~~~~~~~~~
+Upload all files to your public web space.
+
+~~~~~~~~~~~~
+STEP 2
+~~~~~~~~~~~~
+- Edit license key and server paths in /functions/config.php.new. Note: You MUST enter your license key!
+- Edit database connection details in /functions/connect.php.new
+- Pay close attention to the SUB_FOLDER_ROOT define and follow these simple rules:
+
+1.) If you installed ilance in a sub-directory from the root web space, example: 
+
+Subfolder: /www/ilance/
+URL to access subfolder as per example: www.yourdomain.com/ilance/
+
+Then update your new define above to look like this:
+define('SUB_FOLDER_ROOT', '/ilance/');
+
+Otherwise, if you're installing ilance in the main web root and you can access it 
+using www.yourdomain.com then leave new define with only 1 slash (as default):
+
+define('SUB_FOLDER_ROOT', '/');
+
+2.) Remember that HTTP_SERVER, HTTPS_SERVER, HTTP_SERVER_OTHER, HTTPS_SERVER_OTHER, DIR_SERVER_ROOT and DIR_SERVER_ROOT_IMAGES defines all require beginning and ending slashes.  
+
+Example where we've installed ilance in a sub-folder off the main webroot /ilance/ :
+
+define('HTTP_SERVER', 'http://localhost/ilance/');
+define('HTTPS_SERVER', 'http://localhost/ilance/');
+define('DIR_SERVER_ROOT', 'c:/wamp/www/ilance/');
+define('DIR_SERVER_ROOT_IMAGES', 'c:/wamp/www/ilance/');
+define('SUB_FOLDER_ROOT', '/ilance/');
+
+~~~~~~~~~~~~
+STEP 3
+~~~~~~~~~~~~
+If you are running ILance where product marketplace is on one URL and service marketplace is on another URL you must update these defines within config.php.new:
+
+define('HTTP_SERVER_OTHER', 'http://localhost/ilance2/');
+define('HTTPS_SERVER_OTHER', 'http://localhost/ilance2/');
+
+So if the user is connecting to your main site http://localhost/ilance the above two defines allow the main site to know about your other site which might be on http://localhost/ilance2. This will allow site one to connect to site two from the footer.
+
+~~~~~~~~~~~~
+STEP 4
+~~~~~~~~~~~~
+If you are running two marketplaces on the same server using two different URLS and are saving file attachments to the "file system" instead of the database this next variable lets both your sites know where the public upload/attachments folder exists.  This value should be set to the same path on all sites on the same server.
+
+define('DIR_SERVER_ROOT_IMAGES', '');
+
+This path should be the same as DIR_SERVER_ROOT by default even if you're only running a single site.  You cannot leave this value empty.
+
+~~~~~~~~~~~~
+STEP 5
+~~~~~~~~~~~~
+a) Rename ./functions/config.php.new to ./functions/config.php
+b) Rename ./functions/connect.php.new to ./functions/connect.php
+
+~~~~~~~~~~~~
+STEP 6
+~~~~~~~~~~~~
+Run the web based installer by pointing to: http://www.yourdomain.com/install/installer.php. Go through all steps starting at step 1.
+
+~~~~~~~~~~~~
+STEP 7
+~~~~~~~~~~~~
+At some point in time a member will upload an attachment, to allow attachment uploads you must set a few folders to the correct read/write permission (but not execute permissions).  Do this by CHMOD 777 to the following:
+
+./path/to/ilance/uploads/ (where attachments are stored)
+./path/to/ilance/uploads/attachments/*.* (make sure all subfolders has read/write permission)
+./path/to/ilance/cache/ (where language cache and style sheet files will reside)
+./path/to/ilance/sitemap.xml
+./path/to/ilance/functions/css/ (where css style sheets will reside)
+./path/to/ilance/images/default/categoryicons/  (where default should be your template name)
+./path/to/ilance/images/default/categoryheros/  (where default should be your template name)
+./path/to/ilance/images/default/heros/  (where default should be your template name)
+
+~~~~~~~~~~~~
+STEP 8
+~~~~~~~~~~~~
+You must now verify your image creation in php support by trying to register as a new member.  Once you view page 1 (after the date and birth input), at the very bottom you *should* see a custom generated image with 4 to 5 random characters.  If this image is not displaying, visit your AdminCP > Settings > Registration (tab) to disable registration security image support until you can modify your php installation build to support functions in php such as createimagefrompng(), etc.  For more information about this error on your server, contact your hosting company.
+
+~~~~~~~~~~~~
+STEP 9
+~~~~~~~~~~~~
+Once installation is complete, please REMOVE/DELETE the entire ./install/ folder from your web site. This will prevent guests, search engines and the likes from reaching your new installation screen.
+
+~~~~~~~~~~~~
+STEP 10
+~~~~~~~~~~~~
+You will need to update the ./images/default/v4/logo.png (width: 150px by height: 27px) and ./images/default/v4/logo-slim.png (Width: 68px by Height: 13px) to match the logos of your own.
+Please try to match the sizes above to ensure the design layout works without issues.
+
+Regards,
+
+Team ILance
+http://www.ilance.com

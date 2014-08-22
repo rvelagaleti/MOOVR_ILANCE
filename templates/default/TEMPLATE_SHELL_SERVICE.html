@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<!--{template_htmldoctype}-->
+<html dir="{template_textdirection}" xml:lang="{template_languagecode}" lang="{template_languagecode}" xmlns="http://www.w3.org/1999/xhtml" {template_htmlextra} {apihook[template_shell_html_tag_end]}>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={template_charset}" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>{page_title}</title>
+<if condition="!empty($metadescription)"><meta content="{template_metadescription}" property="og:description" /></if>
+<meta content="{pageurl}" property="og:url" />
+<meta content="website" property="og:type" />
+<meta content="{site_name}" property="og:site_name" />
+<if condition="!empty($metadescription)"><meta content="{template_metadescription}" name="description" /></if>
+<if condition="!empty($metakeywords)"><meta content="{template_metakeywords}" name="keywords" /></if>
+<meta content="NOODP" name="robots" />
+<if condition="PROTOCOL_REQUEST == 'https'"><base href="{https_server}" /><else /><base href="{http_server}" /></if>
+<link href="{template_relativeimagepath}functions/css/v4-pro.css" rel="stylesheet" type="text/css" />
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+{js_phrases_content}
+{headinclude}
+</head>
+<body{onload}>
+{headerbit}
+{navbar}
+<if condition="(!isset($show['nobreadcrumb'])) OR (isset($show['nobreadcrumb']) AND $show['nobreadcrumb'] == false)">{breadcrumbbit}</if>
+{infobar}
+<!-- START template content --><if condition="defined('LOCATION') AND LOCATION == 'main'">{maincontent}<else /><div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">box3<else />box2</if>">{maincontent}</div></if><!-- END template content -->
+{footerbit}
+{footinclude}
+</body>
+</html>

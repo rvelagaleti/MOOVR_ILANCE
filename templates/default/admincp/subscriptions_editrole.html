@@ -1,0 +1,84 @@
+<div id="v3body4"> 
+<!-- sub navigation -->
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+<!-- /sub navigation -->
+<div id="content">
+<h1>{_update_subscription_role}</h1><br />
+
+<div class="tab-pane" id="editcommgroup">
+<div class="tab-page">
+    <h2 class="tab">{_details}</h2>
+		<form method="post" action="{ilpage[settings]}" name="ilform" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="subscriptions" />
+		<input type="hidden" name="subcmd" value="_update-role" />
+		<input type="hidden" name="return" value="{ilpage[settings]}?cmd=subscriptions" />
+        <input type="hidden" name="roleid" value="{id}" />
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{_update_subscription_role}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_modify_your_subscription_role_details_from_this_section}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				  
+				  <loop name="languages_role">
+					<tr class="alt1"> 
+					<td width="25%">{_title} {_in} {language}</td>
+					<td width="75%"><input type="text" name="title_{languagecode}" value="{title}" style="width:98%" class="input" /></td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td valign="top">{_role_purpose} {_in} {language}</td>
+					<td><textarea name="purpose_{languagecode}" style="width: 98%; height: 54px" class="input" wrap="physical">{purpose}</textarea></td>
+				  </tr>
+					</loop name="languages_role">
+				  <tr class="alt1">
+					<td valign="top">{_custom_username_display}  </td>
+					<td><input type="text" value="{custom}" name="custom" style="width:98%" class="input" />
+					<div style="padding-top:3px">{_objects_available}: [<strong>fbscore</strong>] [<strong>fbpercent</strong>] [<strong>stars</strong>] [<strong>store</strong>] [<strong>verified</strong>] [<strong>subscription</strong>] </div>			</td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td width="25%">{_role_type_key}</td>
+					<td width="75%">{roletypepulldown}</td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td width="25%">{_role_user_type_key} </td>
+					<td width="75%">{roleusertypepulldown}</td>
+				  </tr>
+				  <tr class="alt1">
+					<td>{_role_is_active} </td>
+					<td>{rolevisible}</td>
+				  </tr>
+				  
+				  <tr class="alt2_top">
+					<td colspan="2"><input type="submit" name="save" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" />&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[settings]}?cmd=subscriptions">{_back}</a></span></td>
+				  </tr>
+				</table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+
+        
+		</form>
+	  </div>
+ </div>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<static>
+		<_root>
+			<language>
+				<name><![CDATA[English]]></name>
+				<Auction><![CDATA[Listing: ]]></Auction>
+				<TimeLeft><![CDATA[Time left: ]]></TimeLeft>
+				<eventClosed><![CDATA[ Ended]]></eventClosed>
+				<sec><![CDATA[ sec]]></sec>
+				<secs><![CDATA[ secs]]></secs>
+				<min><![CDATA[ min]]></min>
+				<mins><![CDATA[ mins]]></mins>
+				<hr><![CDATA[ hr]]></hr>
+				<hrs><![CDATA[ hrs]]></hrs>
+				<day><![CDATA[ day]]></day>
+				<days><![CDATA[ days]]></days>
+				<AuctionBegins><![CDATA[Auction Begins: ]]></AuctionBegins>
+				<Sound><![CDATA[Sound]]></Sound>
+				<wantSoundOff><![CDATA[Do you want to turn sound Off?]]></wantSoundOff>
+				<wantSoundOn><![CDATA[Do you want to turn sound On?]]></wantSoundOn>
+				<lastMaxBidPlased><![CDATA[Last maximum bid placed: ]]></lastMaxBidPlased>
+				<lastMinBidPlased><![CDATA[Last minimum bid placed: ]]></lastMinBidPlased>
+				<HighestBidPlaced><![CDATA[Highest bid placed: ]]></HighestBidPlaced>
+				<LowestBidPlaced><![CDATA[Lowest bid placed: ]]></LowestBidPlaced>
+				<Starts><![CDATA[Starts: ]]></Starts>
+				<Time><![CDATA[Time: ]]></Time>
+				<By><![CDATA[By: ]]></By>
+				<BiddingClosed><![CDATA[Bidding closed]]></BiddingClosed>
+				<None><![CDATA[None]]></None>
+				<PlaceNewBid><![CDATA[Place New Bid]]></PlaceNewBid>
+				<AreYouSureWantToBid><![CDATA[Are you sure want to bid ]]></AreYouSureWantToBid>
+				<RetryAmount><![CDATA[Retry Amount]]></RetryAmount>
+				<viewMinAndMaxAct><![CDATA[View minimum and maximum activity]]></viewMinAndMaxAct>
+				<ReSync><![CDATA[ReSync Pane]]></ReSync>
+				<Minimize><![CDATA[Minimize]]></Minimize>
+				<MaxBid><![CDATA[Max Bid]]></MaxBid>
+				<MinBid><![CDATA[Min Bid]]></MinBid>
+				<SoundOn><![CDATA[Sound On]]></SoundOn>
+				<SoundOff><![CDATA[Sound Off]]></SoundOff>
+				<Bidders><![CDATA[Bidders]]></Bidders>
+				<PlaceBid><![CDATA[Place Bid]]></PlaceBid>
+				<Yes><![CDATA[Yes]]></Yes>
+				<No><![CDATA[No]]></No>
+				<Ok><![CDATA[Ok]]></Ok>
+				<bidError><![CDATA[Bid Error]]></bidError>
+				<Notice><![CDATA[Notice]]></Notice>
+				<Bid><![CDATA[Bid]]></Bid>
+				<CurrentBid><![CDATA[Current bid: ]]></CurrentBid>
+				<_dateFormat><![CDATA[%m-%d-%y %h:%i:%s]]></_dateFormat>
+				<_months type="sArray" separator=",">Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec</_months>
+				<_d><![CDATA[d]]></_d>
+				<_h><![CDATA[h]]></_h>
+				<_m><![CDATA[m]]></_m>
+				<_s><![CDATA[s]]></_s>
+                                <CurrencyFormat><![CDATA[$]]></CurrencyFormat>
+			</language>
+		</_root>
+	</static>
+</config>

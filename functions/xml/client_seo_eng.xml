@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metadata>
+    
+    <meta section="global">
+        <title></title>
+        <description></description>
+        <keywords></keywords>
+        <robot></robot>
+        <revisit-after></revisit-after>
+    </meta>
+    
+    <meta section="main-menu">
+        <title></title>
+        <description></description>
+        <keywords></keywords>
+        <robot></robot>
+        <revisit-after></revisit-after>
+    </meta>
+
+</metadata>

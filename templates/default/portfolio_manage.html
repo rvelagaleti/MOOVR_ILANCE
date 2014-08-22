@@ -1,0 +1,147 @@
+<h1 class="a_active">{_my_portfolio_manager}</h1>
+<div class="bigtabs" style="padding-bottom:10px; padding-top:12px">
+<div class="bigtabsheader">
+<ul>
+    <li title="" class=""><a href="{ilpage[portfolio]}?id={user[username]}">{_review_portfolio}</a></li>
+    <li title="" class="highlight">{uploadbutton}</li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<div style="display:none" id="attachmentlist"></div>
+
+<if condition="$ilconfig['attachment_moderationdisabled'] == false OR $show['no_attachment_pending_rows'] == false">
+<form action="{ilpage[portfolio]}" name="ilform" method="post" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="manage-portfolio" />
+<div class="block-wrapper">
+
+    <div class="block3">
+    
+            <div class="block3-top">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block3-header">{_pending_attachments}</div>
+            <div class="block3-content-gray"><div class="smaller">{_attachments_located_in_this_section_are_attachments_yet_to_be_verified_by_an_administrator_or_moderator}</div></div>
+            <div class="block3-content" style="padding:0px">
+                
+                <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr class="alt2"> 
+                  <td nowrap>{_attachment}</td>
+                  <td nowrap>{_attachment_type}</td>
+                  <td width="24%" nowrap>{_status}</td>
+                  <td align="right" width="9%" nowrap>{_sel}</td>
+                </tr>
+                <loop name="attachment_pending_rows"> 
+                <tr class="alt1"> 
+                  <td width="46%"><span class="blue"><a href="{ilpage[attachment]}?id={filehash}">{attach_filename}</a></span></td>
+                  <td width="21%">{attach_type} {_attachment}&nbsp;</td>
+                  <td nowrap>{status}</td>
+                  <td align="right" nowrap>{actions}</td>
+                </tr>
+                </loop name="attachment_pending_rows"> 
+                <if condition="isset($show['no_attachment_pending_rows']) AND $show['no_attachment_pending_rows']"> 
+                <tr> 
+                  <td colspan="4" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                </tr>
+                </if> 
+                <if condition="$show['no_attachment_pending_rows'] == false">
+                <tr> 
+                  <td colspan="4" align="right"><select name="attachcmd" style="font-family: verdana">
+                      <optgroup label="{_select_action}:">
+                      <option value="delete">{_delete_undoable}</option>
+                      </optgroup>
+                        </select> <input type="submit" class="buttons" onClick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value="{_go}"/>
+                  </td>
+                </tr>
+                </if>
+                </table>
+                
+            </div>
+            
+            <div class="block3-footer">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>
+</if>
+
+<div class="block-wrapper">
+
+    <div class="block3">
+    
+            <div class="block3-top">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block3-header">{_verified} {_portfolio} {_attachments}</div>
+            
+            <div class="block3-content" style="padding:0px">
+                
+                <form action="{ilpage[portfolio]}" name="ilform" method="post" accept-charset="UTF-8" style="margin:0px">
+                <input type="hidden" name="cmd" value="manage-portfolio" />
+                <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr class="alt2">
+                      <td width="1%">{_type}</td>
+                      <td width="9%" align="center">{_thumbnail}</td> 
+                      <td width="37%">{_title} <a href="javascript:void(0)" onmouseover="Tip('<strong>' + phrase['_inline_edit'] + '</strong><br />' + phrase['_you_can_now_change_the_title_on_each_listing_by_double_clicking_on_the_title_text_to_edit_inline'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                      <td width="11%">{_size}</td>
+                      <td width="14%" nowrap="nowrap">{_traffic}</td>
+                      <td width="16%">{_upload} {_date}</td>
+                      <td width="1%" align="right">{_sel}</td>
+                </tr>
+                <loop name="attachment_rows"> 
+                <tr class="alt1" valign="top">
+                      <td align="center" valign="top">{icon}</td>
+                      <td align="center" valign="top">{thumbnail}</td> 
+                      <td valign="top">
+                            <div style="padding-bottom:3px"><strong>{attach_caption}</strong></div>
+                            <div class="smaller gray">{attach_description}</div>
+                            <div style="padding-top:9px">{isfeatured}</div>
+                      </td>
+                      <td nowrap="nowrap" valign="top">{attach_size}</td>
+                      <td valign="top">{attach_views} {_views}</td>
+                      <td valign="top" nowrap="nowrap">{attach_date}</td>
+                      <td align="right" valign="top" class="alt2">{attach_action}</td>
+                </tr>
+                </loop name="attachment_rows"> 
+                <if condition="isset($show['no_attachment_rows']) AND $show['no_attachment_rows']"> 
+                <tr> 
+                    <td colspan="7" align="center" class="alt1"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                </tr>
+                </if>
+                <if condition="$show['no_attachment_rows'] == false"> 
+                <tr class="alt2_top"> 
+                    <td colspan="7" align="right"><select name="attachcmd" style="font-family: verdana">
+                         <optgroup label="{_select_action}:">
+                          <option value="delete">{_delete}</option>
+                          </optgroup>
+                        </select> <input name="submit" type="submit" class="buttons" onClick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value="{_go}"/>
+                    </td>
+                </tr>
+                </if>
+                <tr>
+                    <td colspan="7">{prevnext}</td>
+                </tr>
+                </table>
+                </form>
+                
+            </div>
+            
+            <div class="block3-footer">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>

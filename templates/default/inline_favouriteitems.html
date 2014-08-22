@@ -1,0 +1,7 @@
+<if condition="isset($show['noresults']) AND $show['noresults'] == false"><table cellpadding="12" cellspacing="0" width="100%">
+<loop name="favouriteitems"><tr valign="top">
+<td width="1%" style="padding-bottom:12px;padding-top:12px;border-bottom:1px dotted #e5e5e5">{picture}</td>
+<td width="92%" style="padding-bottom:12px;padding-top:12px;border-bottom:1px dotted #e5e5e5"><div class="blue" style="height:65px; overflow:hidden;font-size:11px;text-shadow: 0px 1px 0px #f1f1f1;max-height: 65px;">{title}</div></td>
+<td width="7%" style="padding-bottom:12px;padding-top:12px;border-bottom:1px dotted #e5e5e5" align="right" nowrap="nowrap"><div class="smaller"><strong>{currentbid}</strong></div><if condition="$ilconfig['timeleftblocks']"><span class="timeleft gray pt-4">{timeleft}</span></if></td>
+</tr></loop name="favouriteitems">
+</table><else /><div style="padding:13px">{_no_results_found}</div></if>

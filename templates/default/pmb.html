@@ -1,0 +1,185 @@
+<table border="0" cellpadding="12" cellspacing="0" width="99.9%">
+<tr>
+	<td>
+        <form name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px" onsubmit="return validate_all();">
+        <input type="hidden" name="cmd" value="_process-pm" />
+
+		<if condition="isset($ilance->GPC['decrypted']['isadmin']) AND $ilance->GPC['decrypted']['isadmin'] == 1">
+        <input type="hidden" name="isadmin" value="1" />
+		</if>
+        <input type="hidden" name="project_id" value="{project_id}" />
+        <input type="hidden" name="from_id" value="{from_id}" />
+        <input type="hidden" name="to_id" value="{to_id}" />
+        <input type="hidden" name="event_id" value="{event_id}" />
+        <input type="hidden" name="pmbfileid" value="{attachid}" />
+
+        <if condition="isset($pmb['preview_mode']) AND $pmb['preview_mode'] == 1">
+        <input type="hidden" name="subject" value="{subject}" />
+		</if>
+        <div class="block-wrapper">
+
+                <div class="block">
+                
+                    <div class="block-top">
+                                    <div class="block-right">
+                                                    <div class="block-left"></div>
+                                    </div>
+                    </div>
+                    
+                    <div class="block-header"><span style="float:right"><span class="blue"><a href="#" onclick="window.location.reload()">{_refresh_pmb}</a></span></span>{_private_messages}</div>
+                    <div class="block-content-yellow" style="padding:9px"><div class="smaller">{_pmb_for} <if condition="$ilance->GPC['decrypted']['project_id'] == 0"> {_non_auction_related}<else /><span class="blue"><a href="{auctiontype}?id={project_id}" target="_blank">{project_title}</a></span></if></div></div>
+                    <div class="block-content" style="padding:0px">
+                                        
+        <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" align="center" dir="{template_textdirection}">
+        <tr>
+            <td align="left" class="alt1">
+        	<if condition="empty($pmb['preview_mode']) OR $pmb['preview_mode'] != true">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" dir="{template_textdirection}">
+                <tr height="40" valign="top">
+                    <td colspan="2">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" dir="{template_textdirection}">                          
+							
+                        	<if condition="isset($show['are_messages']) AND $show['are_messages']">
+							<loop name="messages">
+								<tr class="alt1">
+						            <td colspan="2" valign="top">
+					                    <div>
+				                            <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center" dir="{template_textdirection}">
+				                            <tr>
+				                                    <td><span style="float:right" class="smaller gray">&nbsp;{_message} #{id} &nbsp;</span><span class="smaller">{_posted}: <span class="gray">{datetime}</span></span></td>
+				                            </tr>
+				                            <tr>
+			                                    <td style="padding:0px">
+	                                            <!-- customer info -->
+	                                            <table cellpadding="0" cellspacing="6" border="0" width="100%" dir="{template_textdirection}">
+	                                            <tr>
+	                                                    <td nowrap="nowrap"><h1>{username}</h1><br /><div class="smaller gray">{online_status}</div></td>
+	                                                    <td width="100%" align="right"><span class="blue"><a href="#reply">{_post_new_reply}</a></span>
+														<if condition="isset($isadminviewing) AND $isadminviewing">
+	                                                    	<div class="smaller"><a href="{ilpage[pmb]}?cmd=remove-post&amp;id={id}" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}')"><font color="red">{_delete}</font></a></div>
+														</if>
+	                                                    </td>
+	                                                    <td valign="top" nowrap="nowrap"></td>
+	                                            </tr>
+	                                            </table>
+	                                            <!-- / customer info -->
+			                                    </td>
+				                            </tr>
+				                            <tr>
+			                                    <td align="left">
+	                                            <!-- private message -->
+												<div class="smaller gray" style="padding-bottom:4px"><strong>{subject}</strong></div>
+							                    {message}
+	                                            <!-- / private message -->
+				                                </td>
+				                            </tr>
+				                            </table>
+					                    </div>
+				                    <div style="padding-top:7px"></div>
+						            </td>
+						    	</tr>
+                            </loop name="messages">
+                            <else />
+                            	<div>{_no_messages_currently_posted}</div>
+                            </if>
+                        </table>
+                    </td>
+                </tr>
+                </table>
+            </td>
+        </tr>
+
+        <if condition="$ilconfig['globalfilters_pmbattachments'] > 0">
+        	<tr>
+                <td class="alt2" align="left"><strong>{_attachments_window}</strong></td>
+	        </tr>
+	        <tr>
+                <td class="alt1">
+                        <div>
+                        <div align="left">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" dir="{template_textdirection}">
+                            <tr>
+                                <td valign="top" align="left"><div id="attachmentlist">{attachment_list}</div></td>
+                            </tr>
+                            </table>
+                            {uploadbutton}
+             				<br />
+                        </div>
+                        </div>
+                </td>
+        	</tr>
+        	<!-- / attachment window -->           
+        </if>
+
+        <else />
+                <div><div class="smaller"><strong>{previewsubject}</strong></div><div>{preview}</div></div>
+								 <table width="100%" border="0" cellspacing="0" cellpadding="0" dir="{template_textdirection}">
+				<tr>
+                <td class="alt2" align="left"><strong>{_attachments_window}</strong></td>
+	        </tr>
+	        <tr>
+                <td class="alt1">
+                        <div>
+                        <div align="left">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" dir="{template_textdirection}">
+                            <tr>
+                                <td valign="top" align="left"><div id="attachmentlist">{attachment_list}</div></td>
+                            </tr>
+                            </table>
+                            {uploadbutton}
+             				<br />
+                        </div>
+                        </div>
+                </td>
+        	</tr>
+			</table>
+       </if>
+					
+        <tr>
+                <td class="alt2" align="left"><strong>{_submit_message}</strong></td>
+        </tr>
+        <tr class="alt1">
+                <td>
+                        <div>
+                                <div style="width:610px" align="left">
+                                        <a name="reply"></a>
+                                        <div align="left" style="padding-bottom:6px;">
+                                                <div class="black" style="padding-bottom:3px"><strong>{_subject}</strong></div>
+                                                <input type="text" name="subject" value="{subject}" style="width: 500px; font-family: verdana" />
+                                        </div>
+                                        <div style="padding-top:3px"><div class="black" style="padding-bottom:3px">{_message}</div>{wysiwyg_area}</div>
+                                </div>
+                        </div>
+                </td>
+        </tr>
+        <tr>
+                <td><input type="submit" name="preview" id="preview" value="{_preview}" class="buttons" style="font-size:15px" {pmbaction} />&nbsp;&nbsp;&nbsp;<input type="submit" name="submit" id="save" value="{_continue}" class="buttons" style="font-size:15px" {pmbaction} /></td>
+        </tr>
+        </table>
+<!--</td>
+</tr>
+</table>-->
+                                        
+                                </div>
+                                
+                                <div class="block-footer">
+                                                <div class="block-right">
+                                                                <div class="block-left"></div>
+                                                </div>
+                                </div>
+                                
+                </div>
+        </div>       
+        </form>
+	</td>
+</tr>
+</table>
+<div id="insert_pop" style="display:none; width:50; position:absolute;"><table class="wysiwyg_popuplayer tableborder" border="0" cellpadding="1" cellspacing="6">
+<tr>
+	<td id="insert_title" class="wysiwyg_popuplayer_title" style="cursor: move" width="*"><ilayer><layer onmouseover="steditor=1;" onmouseout="steditor=0"><span id="change_title" style="font-size:11px"></span></layer></ilayer></td>
+	<td width="1%" class="wysiwyg_popuplayer_title"><span class="smaller blue"><a href="javascript:void(0)" onclick="close_insert_pop(); return false">Close</a></span></td>
+</tr>
+<tr>
+	<td width="100%" colspan="2"><iframe onmouseover="hide_it2()" name="insert_elm" id="insert_elm" frameborder="0" width="100%" height="250" src="" scrolling="no"></iframe></td>
+</tr>
+</table></div>	

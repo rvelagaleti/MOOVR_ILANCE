@@ -1,0 +1,29 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class=""><a href="{ilpage[login]}">{_sign_in}</a></li>
+	<li title="" class="on"><a href="javascript:void(0)">{_change_ip_preference}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+<div style="padding-bottom:12px"></div>
+<form method="post" action="{https_server}{ilpage[login]}" name="passwordrenewal" accept-charset="UTF-8" onsubmit="return validate_secret_answer(this);" style="margin:0px">
+<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="80%" align="center">
+<tr class="alt1">
+  <td width="16%" align="right"></td>
+  <td width="84%"><span class="gray">{secret_question}</span></td>
+</tr>
+<tr> 
+	<td align="right">{_answer}</td>
+	<td><input type="password" name="secretanswer" value="" size="45" class="input" /> <img name="secretanswererror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></td>
+</tr>
+<tr> 
+	<td align="center"></td>
+	<td><input type="submit" value="{_continue}" style="font-size:15px" class="buttons" /></td>
+</tr>
+</table>
+<input type="hidden" name="cmd" value="ipaddress-change" />
+<input type="hidden" name="email" value="{email}" />
+<input type="hidden" name="username" value="{username}" />
+</form>

@@ -1,0 +1,128 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+<tr valign="top">
+	<td width="100%">
+	
+    	        <div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+        <tr>
+        <td>
+        <div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_gray_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+        <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding-left:5px;" valign="top"><img src="{template_relativeimagepath}{template_imagesfolder}escrow_icon.gif" alt="{_escrow}" border="0" id="" /></td>
+            <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+            <td style="padding-right:5px;">
+            
+            
+            
+                <div style="font-size:15px"><strong>{_service_auctions_listed_here_have_been_awarded_to_your_selected_service_providers}</strong></div>
+                <div class="gray"style="padding-top:4px">{_please_fund_your_escrow_accounts_immediately_any_delay_results_in_loss_of_time_for_your_providers}</div>
+        
+        </td>
+        </tr>
+        </table>
+        </div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+        </td>
+        </tr>
+        </table>
+        </div>
+        
+        {servicetabs}
+        <div class="block-wrapper">
+        
+            <div class="block2">
+            
+                    <div class="block2-top">
+                            <div class="block2-right">
+                                    <div class="block2-left"></div>
+                            </div>
+                    </div>
+                    
+                    <div class="block2-header"><span style="float:right" class="smaller gray"></span>{_service_escrow_payments_out}</div>
+                    <div class="block2-content-blue" style="padding:9px"><div><span style="max-height:0px">
+        <form name="sortswitch" method="get" action="{https_server}{ilpage[escrow]}" accept-charset="UTF-8" style="margin:0px">
+        <input type="hidden" name="cmd" value="management" />
+        <input type="hidden" name="sub" value="rfp-escrow" />
+        <table border="0" cellspacing="0" cellpadding="0" class="smaller">
+          <tr><td>{_keywords}:&nbsp;</td>
+            <td>
+           <input name="keyw" type="text"  value="{keyw}" />&nbsp;&nbsp;&nbsp;&nbsp;</td><td>{_escrow_period}:&nbsp;</td>
+            <td>
+            <select name="period" class="smaller" style="font-family: verdana">
+                <option value="-1" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == -1">selected="selected"</if>>{_any_date}</option>
+                <option value="7" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 7">selected="selected"</if>>{_last_24_hours}</option>
+                <option value="13" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 13">selected="selected"</if>>{_last_7_days}</option>
+                <option value="14" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 14">selected="selected"</if>>{_last_14_days}</option>
+                <option value="15" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 15">selected="selected"</if>>{_last_30_days}</option>
+                <option value="16" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 16">selected="selected"</if>>{_last_60_days}</option>
+                <option value="17" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 17">selected="selected"</if>>{_last_90_days}</option>
+            </select>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            
+            <td>{_display_order}:&nbsp;</td>
+            <td>
+            <select name="displayorder" class="smaller" style="font-family: verdana">
+                <option value="desc" <if condition="isset($ilance->GPC['displayorder']) AND $ilance->GPC['displayorder'] == 'desc'">selected="selected"</if>>{_descending}</option>
+                <option value="asc" <if condition="isset($ilance->GPC['displayorder']) AND $ilance->GPC['displayorder'] == 'asc'">selected="selected"</if>>{_ascending}</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>{_per_page}:&nbsp;</td>
+                        <td>
+                        <select name="pp" class="smaller" style="font-family: verdana">
+                            <option value="10" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '10'">selected="selected"</if>>10</option>
+                            <option value="50" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '50'">selected="selected"</if>>50</option>
+                            <option value="100" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '100'">selected="selected"</if>>100</option>
+                            <option value="500" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '500'">selected="selected"</if>>500</option>
+                            <option value="1000" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '1000'">selected="selected"</if>>1000</option>
+                        </select>&nbsp;</td>
+            <td><input type="submit" value="{_go}" class="buttons_smaller" /></td>
+          </tr>
+        </table>
+        </form>
+        </span></div></div>
+                    <div class="block2-content" style="padding:0px">
+                    
+                    <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                    <tr class="alt2">
+                        <td width="35%" nowrap="nowrap">{_title}</td> 
+                        <td nowrap="nowrap">{_bid_amount}</td>
+                        <td width="13%" nowrap="nowrap">{_fee} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_escrow'] + ' ' + phrase['_fee'] + '</strong></div><div>' + phrase['_this_is_the_escrow_fee_associated_with_securing_your_funds_for_this_item_within_escrow'] + ' ' + phrase['site_name'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                        <td width="18%">{_tax}</td>
+                        <td width="14%" nowrap="nowrap">{_in_escrow} <a href="javascript:void(0)" onmouseover="Tip(phrase['_this_value_will_change_when_you_have_forwarded_funds_into_this_escrow_account_or_release_funds_from_within_this_escrow_account_to_your_vendor'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                        <td width="13%">{_next_step}</td>
+                        <td width="6%" align="right">{_action}</td>
+                    </tr>
+                    <loop name="servicebuyingescrow"> 
+                    <tr class="alt1" valign="top">
+                        <td><div><span class="blue" style="padding-right:6px"><a href="{ilpage[rfp]}?id={project_id}">{job_title}</a></span><div class="smaller" style="padding-top:3px">{_awarded} <span class="blue"><a href="{ilpage[members]}?id={vendor_id}" title="{provider} {_is_your_service_provider_for_this_particular_escrow_auction_account}">{provider}</a></span> {_on} {awarddate}</div></div></td> 
+                        <td width="14%"><div class="smaller"> {bidamount}</div></td>
+                        <td nowrap="nowrap"><div class="smaller">{fee}</div></td>
+                        <td nowrap="nowrap"><div class="smaller">{taxinfo}</div></td>
+                        <td><div class="smaller"><strong>{escrowamount}</strong></div></td>
+                        <td nowrap="nowrap"><div class="smaller">{status}</div></td>
+                        <td align="right" nowrap="nowrap"><div class="smaller">{actions}</div></td>
+                    </tr>
+                    </loop name="servicebuyingescrow">
+                    <if condition="isset($show['no_servicebuyingescrow']) AND $show['no_servicebuyingescrow']"> 
+                    <tr> 
+                        <td colspan="8" align="center" class="alt1"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                    </tr>
+                    </if>
+                    <tr>
+                        <td colspan="8">{prevnext}</td>
+                    </tr>
+                    </table>
+                        
+        </div>
+                    
+                    <div class="block2-footer">
+                            <div class="block2-right">
+                                    <div class="block2-left"></div>
+                            </div>
+                    </div>
+                    
+            </div>
+        </div>
+    
+	</td>
+</tr>
+</table>

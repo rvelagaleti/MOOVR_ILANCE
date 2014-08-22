@@ -1,0 +1,119 @@
+<if condition="isset($ilance->GPC['sent']) AND $ilance->GPC['sent']"><div style="border:2px solid #a6cc98;border-radius:6px;background-color:#d0f2c4;padding:15px;margin-bottom:12px;margin-top:12px"><span style="float:left;margin-right:10px;margin-top:-11px"><img src="{template_relativeimagepath}{template_imagesfolder}v4/bigcheckbox.png" height="36" /></span>{_your_private_message_was_delivered_there_is_no_guarantee}</div></if>
+
+<div class="leftcol">
+    <!-- start widget2 -->
+    <div class="widget2">
+        <h3>{_messages}</h3>
+        <div class="widget2-in">
+            <!-- start filters -->
+            <div class="filter">
+                <if condition="isset($show['no_rows_returned']) AND $show['no_rows_returned'] == false"><else /></if><!-- start categories --><div class="filter-content">
+                    <div class="filter-content-block">
+                    	
+                        <if condition="isset($ilance->GPC['pmbfolder']) AND $ilance->GPC['pmbfolder'] == 'inbox'"><h4 class="black">{_inbox} <span class="litegray">({receivedcount})</span></h4><else /><h4 class="messages blue"><a href="{https_server}{ilpage[messages]}?pmbfolder=inbox">{_inbox}</a> <span class="litegray">({receivedcount})</span></h4></if>
+                        <if condition="isset($ilance->GPC['pmbfolder']) AND $ilance->GPC['pmbfolder'] == 'sent'"><h4 class="black">{_sent} <span class="litegray">({sentcount})</span></h4><else /><h4 class="messages blue"><a href="{https_server}{ilpage[messages]}?pmbfolder=sent">{_sent}</a> <span class="litegray">({sentcount})</span></h4></if>
+                        <if condition="isset($ilance->GPC['pmbfolder']) AND $ilance->GPC['pmbfolder'] == 'archived'"><h4 class="black">{_archived} <span class="litegray">({archivedcount})</span></h4><else /><h4 class="messages blue"><a href="{https_server}{ilpage[messages]}?pmbfolder=archived">{_archived}</a> <span class="litegray">({archivedcount})</span></h4></if>
+                        <if condition="isset($ilance->GPC['pmbfolder']) AND $ilance->GPC['pmbfolder'] == 'site'"><h4 class="black">{_from} {site_name} <span class="litegray">({siteemailcount})</span></h4><else /><h4 class="messages blue"><a href="{https_server}{ilpage[messages]}?pmbfolder=site">{_from} {site_name}</a> <span class="litegray">({siteemailcount})</span></h4></if>
+                        <if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'pmbcompose') == 'yes' AND $ilconfig['globalfilters_cansendpms']"><h4 class="messages blue"><a href="{ilpage[messages]}?cmd=compose">{_compose}</a></h4></if>
+                        {pmbgauge}
+                    </div>
+                    <div class="clear"></div>
+                </div><!-- end categories -->
+                
+            </div>
+            <!-- end filters -->
+        </div>
+    </div>
+    <!-- end widget2 -->
+</div>
+
+<div class="rightcol">
+        
+    <!-- start content -->
+    <div class="content">
+
+	<h1 class="a_active"><if condition="isset($ilance->GPC['view']) AND $ilance->GPC['view'] == 'message' AND isset($ilance->GPC['id']) AND $ilance->GPC['id'] > 0"><else />{pmfoldername}</if></h1>
+
+	<if condition="isset($ilance->GPC['view']) AND $ilance->GPC['view'] == 'message' AND isset($ilance->GPC['id']) AND $ilance->GPC['id'] > 0">
+    
+    <h2 class="separator" style="margin-top:-7px">{subject}</h2>
+    <h3 class="gray" style="font-weight:normal">{_from}: {site_name}</h3>
+    <h3 class="gray" style="font-weight:normal;;margin-bottom:12px">{_sent}: {date}</h3>
+    
+    <div style="height:1px;background-color:#ccc;width:100%"></div>
+    
+    <p style="line-height:18px;margin-top:12px;color:#333">{body}</p>
+    
+    <else /><div class="block-wrapper">
+
+    <form action="{ilpage[messages]}" method="get" accept-charset="UTF-8" style="margin:0px;" id="pmfolder">
+    <input type="hidden" name="pmbfolder" value="{pmb_name}" />
+    <span style="padding-left:4px"><select name="period" class="select">
+    <option value="-1" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == -1">selected="selected"</if>>{_any_date}</option>
+    <option value="1" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 1">selected="selected"</if>>{_last_hour}</option>
+    <option value="6" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 6">selected="selected"</if>>{_last_12_hours}</option>
+    <option value="7" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 7">selected="selected"</if>>{_last_24_hours}</option>
+    <option value="13" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 13">selected="selected"</if>>{_last_7_days}</option>
+    <option value="14" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 14">selected="selected"</if>>{_last_14_days}</option>
+    <option value="15" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 15">selected="selected"</if>>{_last_30_days}</option>
+    <option value="16" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 16">selected="selected"</if>>{_last_60_days}</option>
+    <option value="17" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 17">selected="selected"</if>>{_last_90_days}</option>
+</select> <input type="submit" value="{_go}" class="buttons" /></span></form></div>
+            <form action="{ilpage[messages]}" method="get" accept-charset="UTF-8" style="margin:0px;" id="pmbs">
+            <input type="hidden" name="pmbfolder" value="{pmb_name}" />
+            <span style="float:right;margin-top:-40px;margin-bottom:12px"><if condition="empty($show['no_pmbs']) OR $show['no_pmbs'] == false"><select name="cmd" class="select">
+            <optgroup label="{_select_action}">
+            <if condition="isset($ilance->GPC['pmbfolder']) AND $ilance->GPC['pmbfolder'] == 'site'">
+            <option value="delete">{_delete_selected}</option>
+            <option value="deleteall">{_delete_all}</option>
+            <option value="txt">{_download_as_text}</option>
+            <option value="csv">{_download_as_csv}</option>
+            <else /><option value="archive">{_archive_selected}</option>
+            <option value="delete">{_delete_selected}</option>
+            <option value="txt">{_download_as_text}</option>
+            <option value="csv">{_download_as_csv}</option></if>
+            </optgroup></select>
+            <if condition="isset($ilance->GPC['pmbfolder']) AND $ilance->GPC['pmbfolder'] == 'site'"><input type="hidden" name="action" value="alert-manage" /><else /><input type="hidden" name="action" value="pmb-manage" /></if>
+            <input type="submit" class="buttons" value="{_go}" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></if></span>
+            <div class="block-content" id="collapseobj_pmbstoday" style="padding:0px;{collapse[collapseobj_pmbstoday]}">
+                
+              <div>
+                <if condition="isset($show['pmb_folder_sent']) AND $show['pmb_folder_sent']">
+                <input type="hidden" name="folder" value="sent" />
+                </if>
+                <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+                <tr class="alt2">
+                  <td width="1%"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_pinflag.png" alt="" border="0" /></td>
+                    <td width="80%">{_subject}</td>
+                    <td width="19%"><if condition="isset($ilance->GPC['pmbfolder']) AND $ilance->GPC['pmbfolder'] != 'site'">{_last_post_by}<else />
+                    {_from} / {_sent}</if></td>
+                    <td width="1%" align="center"><input type="checkbox" name="checkall" onclick="check_uncheck_all('pmbs');" /></td>
+                </tr>
+                <loop name="pmbs"> 
+                <tr class="alt1" valign="top">
+                  <td align="left"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_pinflag_gray.png" alt="" border="0" /></td> 
+                    <td align="left"><span class="smaller" style="float:right;padding-left:7px">{attach} </span><span class="blue">{subject}</span> <if condition="isset($ilance->GPC['pmbfolder']) AND $ilance->GPC['pmbfolder'] == 'site'"><div class="smaller litegray" style="padding-top:4px">This email was delivered as {ishtml}.</div><else /><div class="smaller litegray" style="padding-top:4px">{posts} {_messages_posted}, {unread} {_unread} between you and {recipient}.</div>{relatedauction}<else /><div class="smaller litegray" style="padding-top:4px"></div></if></td>
+                    <td nowrap="nowrap"><if condition="isset($ilance->GPC['pmbfolder']) AND $ilance->GPC['pmbfolder'] != 'site'"><div class="black">{lastpost}</div><div class="smaller litegray" style="padding-top:3px">{date_posted}</div><else /><div class="black">{site_name}</div><div class="smaller litegray" style="padding-top:3px">{date}</div></if></td>
+                    <td align="center" width="1%">{action}</td>
+                </tr>
+                </loop name="pmbs"> 
+                <if condition="isset($show['no_pmbs']) AND $show['no_pmbs']"><tr> 
+                    <td colspan="4" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                </tr>
+                <else /><tr>
+                    <td colspan="4">{prevnext}</td>
+                </tr>
+                </if>
+                </table>
+                </div>
+            </div>
+            </form>
+		</div>
+
+</if>
+{pmbmodal}
+        
+    </div><!-- end content -->
+    
+</div>
+<div style="clear:both"></div>

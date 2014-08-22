@@ -1,0 +1,70 @@
+{form[errors]}
+        
+<form method="post" name="ilform" action="{ilpage[accounting]}" accept-charset="UTF-8" style="margin: 0px;">
+<input type="hidden" name="cmd" value="_update-creditcard" />
+<input type="hidden" name="form[cc_id]" value="{form[cc_id]}" />
+<div class="block-wrapper">
+
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header"><if condition="(empty($form['errors']) AND isset($ilance->GPC['preview']))">{_preview}<else />{_update_credit_card_menu}</if></div>
+            <div class="block-content-yellow" style="padding:9px"><div class="smaller">{_use_the_form_below_to_modify_your_credit_debit_card_details}</div></div>
+            <div class="block-content" style="padding:0px">  
+            <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+            <tr class="alt1"> 
+                <td width="49%"><div>{_credit_card_number}</div><div style="padding-top:3px"><input type="text" name="form[number]" value="{form[number]}" class="input" size="35" /></div></td>
+                <td width="51%"><div>{_credit_card_type}</div><div style="padding-top:3px">{form[cc_type_pulldown]}</div></td>
+            </tr>
+            <tr class="alt1"> 
+                <td width="49%"><div>{_card_verification_number} (CVV)</div><div style="padding-top:3px"><input type="password" name="form[cvv2]" size="6" value="{form[cvv2]}" class="input" /></div></td>
+                <td width="51%" valign="top"><div>{_expiration_date}</div><div style="padding-top:3px"><strong>{_month_shortform}&nbsp;&nbsp;</strong> {form[exp_mon_pulldown]}&nbsp;&nbsp;<strong>{_year_shortform}&nbsp;&nbsp;</strong> {form[exp_year_pulldown]}</div></td>
+            </tr>
+            <tr class="alt1"> 
+                <td width="49%"><div>{_firstname_as_it_appears_on_card}</div><div style="padding-top:3px"><input type="text" name="form[first_name]" value="{form[first_name]}" class="input" size="35" /></div></td>
+                <td width="51%"><div>{_lastname_as_it_appears_on_card}</div><div style="padding-top:3px"><input type="text" name="form[last_name]" value="{form[last_name]}" class="input" size="35" /></div></td>
+            </tr>
+            <tr class="alt1"> 
+                <td width="49%"><div>{_phone_number_of_card_owner}</div><div style="padding-top:3px"><input type="text" name="form[phone]" value="{form[phone]}" class="input" size="35" /></div></td>
+                <td width="51%"><div>{_email_address_of_card_owner}</div><div style="padding-top:3px"><input type="text" name="form[email]" value="{form[email]}" class="input" size="35" /></div></td>
+            </tr>
+            <tr class="alt1"> 
+                <td width="49%"><div>{_address_one}</div><div style="padding-top:3px"><input type="text" name="form[address1]" value="{form[address1]}" class="input" size="35" /></div></td>
+                <td width="51%"><div>{_address_two_optional}</div><div style="padding-top:3px"><input type="text" name="form[address2]" value="{form[address2]}" class="input" size="35" /></div></td>
+            </tr>
+            <tr class="alt1"> 
+                <td width="49%"><div>{_country}</div><div style="padding-top:3px">{form[cc_country_pulldown]}</div></td>
+                <td width="51%"><div>{_state_or_province}</div><div style="padding-top:3px"><input type="text" name="form[state]" value="{form[state]}" onkeypress="return noenter()" class="input" size="35" /></div></td>
+            </tr>
+            <tr class="alt1"> 
+                <td width="49%"><div>{_city}</div><div style="padding-top:3px"><input type="text" name="form[city]" value="{form[city]}" onkeypress="return noenter()" class="input" size="35" /></div></td>
+                <td width="51%"><div>{_zip_or_postal_code}</div><div style="padding-top:3px"><input type="text" name="form[postalzip]" value="{form[postalzip]}" class="input" size="35" /></div></td>
+            </tr>
+            <tr class="alt2_top">
+            	<td colspan="2">
+            
+                <if condition="(empty($form['errors']) AND isset($ilance->GPC['preview']))">
+                <input type="submit" class="buttons" name="submit" value=" {_save} " style="font-size:15px" /> <input type="submit" class="buttons" name="preview" value=" {_preview} " /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="{https_server}{ilpage[accounting]}">{_cancel}</a></span>
+                <else />
+                <input type="submit" class="buttons" name="preview" value=" {_preview} " style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="{https_server}{ilpage[accounting]}">{_cancel}</a></span>
+                </if>
+            
+            	</td>
+            </tr>
+            </table>
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>

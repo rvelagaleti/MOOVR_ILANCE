@@ -1,0 +1,445 @@
+<div class="box3">
+    
+    <h1 class="a_active" style="padding-bottom:12px"><strong>{_my_account}</strong></h1>
+
+	<div id="account-notifications">
+    	{notices}
+    </div>
+
+	<!-- start column holder -->
+	<div class="column-holder">
+    
+    	{apihook[main_mycp_start]}
+        
+    	<!-- start primary column -->
+    	<div class="primary">
+        
+        	{apihook[main_mycp_start_primary]}
+
+            <div class="action-box rounded">
+                <div class="titlebar">
+                    <h2>{_account}</h2>
+                    <h3>{_information}</h3>
+                </div>
+            
+                <div class="listbar">
+                	
+                    {apihook[dashboard_account_li_personalblock_start]}
+                    
+                    <div class="listbox">
+                        <h4>{_personal_information}</h4>
+                        <ul>
+                            {apihook[dashboard_account_li_personal_start]}
+                            <li><a href="{https_server}{ilpage[preferences]}?cmd=profile">{_personal_profile}</a></li>
+                            <li><a href="{https_server}{ilpage[accounting]}?cmd=management">{_my_account_manager}</a></li>
+                            <li><a href="{ilpage[subscription]}?view=seller">{_subscription_manager}</a></li>
+                            <li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'deposit')"><a href="{https_server}{ilpage[accounting]}?cmd=deposit">{_deposit_funds}</a><else /><div class="gray" title="{_upgrade_subscription}">{_deposit_funds}</div></if></li>
+                            <li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'deposit')"><a href="{https_server}{ilpage[accounting]}?cmd=withdraw">{_withdraw_funds}</a><else /><div class="gray" title="{_upgrade_subscription}">{_withdraw_funds}</div></if></li>
+                            
+                            {apihook[dashboard_account_li_personal_end]}
+                        </ul>
+                     </div>
+                     
+                     {apihook[dashboard_account_li_personalblock_end]}
+                     {apihook[dashboard_account_li_localeblock_start]}
+                     
+                     <div class="listbox">
+                        <h4>{_locale}</h4>
+                        <ul>
+                            {apihook[dashboard_account_li_locale_start]}
+                            <li><a href="{https_server}{ilpage[preferences]}?cmd=timezone">{_time_zone_management}</a></li>
+                            <li><a href="{https_server}{ilpage[preferences]}?cmd=currency">{_currency_preference}</a></li>
+                            <li><a href="{https_server}{ilpage[preferences]}?cmd=language">{_language_preference}</a></li>
+                            {apihook[dashboard_account_li_locale_end]}
+                        </ul>
+                     </div>
+                     
+                     {apihook[dashboard_account_li_localeblock_end]}
+                     {apihook[dashboard_account_li_otherblock_start]}
+                     
+                     <div class="listbox">
+                        <h4>{_other}</h4>
+                        <ul>
+                            {apihook[dashboard_account_li_other_start]}
+                              <li><a href="{https_server}{ilpage[preferences]}?cmd=attachments">{_attachment_manager}</a></li>
+                              <li><a href="{https_server}{ilpage[preferences]}?cmd=login">{_start_page_management}</a></li>
+                              <li><if condition="$ilconfig['globalserver_enabledistanceradius']"><a href="{ilpage[preferences]}?cmd=distance">{_distance_management}</a><else /><div class="gray" title="{_not_in_use}">{_distance_management}</div></if></li>
+                            {apihook[dashboard_account_li_other_end]}
+                        </ul>
+                     </div>
+                     
+                     {apihook[dashboard_account_li_otherblock_end]}
+                     {apihook[dashboard_account_li_notificationsblock_start]}
+                     
+                     <div class="listbox">
+                        <h4>{_email} &amp; {_notifications}</h4>
+                        <ul>
+                            {apihook[dashboard_account_li_notifications_start]}
+                            <li><a href="{https_server}{ilpage[messages]}?cmd=management">{_messages}</a> <span class="gray">{new_messages_nav}</span></li>
+                            <if condition="$ilconfig['globalfilters_cansendpms']"><li><a href="{ilpage[messages]}?cmd=compose">{_compose_a_new_private_message}</a></li></if>
+                            <li><a href="{https_server}{ilpage[preferences]}?cmd=notifications">{_category_notifications}</a></li>
+                            <li><if condition="$ilconfig['savedsearches']"><a href="{https_server}{ilpage[preferences]}?cmd=favorites">{_favorite_searches}</a><else /><div class="gray" title="{_upgrade_subscription}">{_favorite_searches}</div></if></li>
+                            <li><a href="{https_server}{ilpage[preferences]}?cmd=email">{_email_preferences}</a></li>
+                            <li><a href="{https_server}{ilpage[watchlist]}">{_watchlist_manager}</a></li>
+                            {apihook[dashboard_account_li_notifications_end]}
+                        </ul>
+                     </div>
+                     
+                     {apihook[dashboard_account_li_notificationsblock_end]}
+                     {apihook[dashboard_account_li_securityblock_start]}
+                     
+                     <div class="listbox">
+                        <h4>{_security}</h4>
+                        <ul>
+                            {apihook[dashboard_account_li_security_start]}
+                              <li><a href="{https_server}{ilpage[preferences]}?cmd=ip-restrict">{_ip_restrict_management}</a></li>
+                              <li><a href="{https_server}{ilpage[preferences]}?cmd=password-renewal">{_request_new_password}</a></li>
+                            {apihook[dashboard_account_li_security_end]}
+                        </ul>
+                     </div>
+                     
+                     {apihook[dashboard_account_li_securityblock_end]}
+                     
+                     <div class="clear"></div>
+                </div>
+            </div>
+            <if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'createproductauctions') OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'servicebid')"><!-- start selling -->
+            <div class="action-box rounded">
+                <div class="titlebar">
+                    <h2>{_selling}</h2>
+                    <h3>{_your_selling_account}</h3>
+                    <h4 style="text-transform:uppercase;padding-top:9px;font-size:9px;font-weight:normal" class="black">{_todays_remaining_bids}: <span class="a_active"><strong>{bidsleft}</strong></span> <a href="javascript:void(0)" onmouseover="Tip('{_this_number_will_represent_how_many_bids_you_have_left_for_today}<br /><br /><strong>{_your_bids_will_renew_on} {datereset}</strong>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" style="vertical-align:middle" /></a></h4> 
+                </div>
+            
+                <div class="listbar">
+                
+                	{apihook[dashboard_selling_li_infoblock_start]}
+                
+                    <div class="listbox">
+                        <h4>{_manage}</h4>
+                        <ul>
+                            {apihook[dashboard_selling_li_info_start]}
+                            <li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'createserviceprofile')"><a href="{https_server}{ilpage[selling]}?cmd=profile">{_selling_profile}</a><else /><div class="gray" title="{_upgrade_subscription}">{_selling_profile}</div></if></li>
+                            <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'service'"><li><a href="{https_server}{ilpage[selling]}?cmd=skills">{_skills}</a></li></if>
+                            <li><a href="{https_server}{ilpage[selling]}?cmd=profile-specifics">{_profile_specifics}</a></li>
+                            <li><a href="{https_server}{ilpage[feedback]}?cmd=_leave-feedback&amp;view=2">{_leave_feedback_for_buyers}</a></li>
+                            <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'product'"><li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'createproductauctions')"><a href="{http_server}{ilpage[selling]}?cmd=management&amp;sub=sold&amp;displayorder=desc">{_items_ive_sold}</a><else /><div class="gray" title="{_upgrade_subscription}">{_items_ive_sold}</div></if></li></if>
+                            <li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'createproductauctions') OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'servicebid')"><a href="{https_server}{ilpage[selling]}?cmd=management">{_selling_activity}</a><else /><div class="gray" title="{_upgrade_subscription}">{_selling_activity}</div></if></li>
+                           	{apihook[dashboard_selling_li_info_end]}
+                        </ul>
+                     </div>
+                     
+                     {apihook[dashboard_selling_li_infoblock_end]}
+                     {apihook[dashboard_selling_li_sellblock_start]}
+                     
+                     <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'service'"><div class="listbox">
+                        <h4>{_sell_your_services}</h4>
+                        <ul>
+                            {apihook[dashboard_selling_li_sell_start]}
+                        	<li><a href="{http_server}categories/projects">{_browse_service_auctions_via_marketplace_categories}</a></li>
+                            <li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'servicebid')"><a href="{https_server}{ilpage[selling]}?cmd=management&amp;bidsub=awarded">{_reverse_auctions_awarded}</a><else /><div class="gray" title="{_upgrade_subscription}">{_reverse_auctions_awarded}</div></if></li>
+                          	<li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'addportfolio') AND $ilconfig['portfoliodisplay_enabled']"><a href="{https_server}{ilpage[portfolio]}?cmd=management">{_portfolio_manager}</a><else /><div class="gray" title="{_upgrade_subscription}">{_portfolio_manager}</div></if></li>
+                            
+                            {apihook[dashboard_selling_li_sell_end]}
+                        </ul>
+                     </div></if>
+                     
+                     <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'product'"><div class="listbox">
+                        <h4>{_sell_your_items}</h4>
+                        <ul>
+                            {apihook[dashboard_selling_li_sell_start]}
+                       	    <li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'createproductauctions')"><a href="{http_server}sell">{_sell_single_item}</a><else /><div class="gray" title="{_upgrade_subscription}">{_sell_single_item}</div></if></li>
+                            <li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'createproductauctions')"><a href="{http_server}bulk/sell">{_sell_bulk_items}</a><else /><div class="gray" title="{_upgrade_subscription}">{_sell_bulk_items}</div></if></li>
+                            {apihook[dashboard_selling_li_sell_end]}
+                       </ul>
+                     </div></if>
+                     
+                     {apihook[dashboard_selling_li_sellblock_end]}
+                     <if condition="$ilconfig['escrowsystem_enabled']">
+                     {apihook[dashboard_selling_li_escrowblock_start]}
+                     <div class="listbox">
+                        <h4>{_escrow}</h4>
+                        <ul>
+                            {apihook[dashboard_selling_li_escrow_start]}
+                            <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'service'"><li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'servicebid')"><a href="{https_server}{ilpage[escrow]}?cmd=management&amp;bidsub=rfp-escrow">{_service_escrow_payments_in}</a><else /><div class="gray" title="{_upgrade_subscription}">{_service_escrow_payments_in}</div></if></li></if>
+                            <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'product'"><li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'servicebid')"><a href="{https_server}{ilpage[escrow]}?cmd=management&amp;sub=product-escrow">{_product_escrow_payments_in}</a><else /><div class="gray" title="{_upgrade_subscription}">{_product_escrow_payments_in}</div></if></li></if>
+                            {apihook[dashboard_selling_li_escrow_end]}
+                        </ul>
+                     </div>
+                     {apihook[dashboard_selling_li_escrowblock_end]}
+                     </if>
+                     <div class="clear"></div>
+                </div>
+            </div>
+            <!-- end selling --></if>
+            
+            <if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'createserviceauctions') OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'productbid') OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'buynow')">
+            <!-- start buying -->
+            <div class="action-box rounded">
+                <div class="titlebar">
+                    <h2>{_buying}</h2>
+                    <h3>{_your_buying_account}</h3>
+                </div>
+            
+                <div class="listbar">
+                
+                	{apihook[dashboard_buying_li_infoblock_start]}
+                
+                    <div class="listbox">
+                        <h4>{_manage}</h4>
+                        <ul>
+                            {apihook[dashboard_buying_li_info_start]}
+                            <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'service'"><li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'productbid') OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'buynow')"><a href="{ilpage[buying]}?cmd=management">{_jobs_ive_posted}</a><else /><div class="gray" title="{_upgrade_subscription}">{_jobs_ive_posted}</div></if></li></if>
+                            <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'product'"><li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'productbid') OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'buynow')"><a href="{ilpage[buying]}?cmd=management&amp;bidsub=awarded">{_items_ive_won}</a><else /><div class="gray" title="{_upgrade_subscription}">{_items_ive_won}</div></if></li></if>
+                            <li><a href="{ilpage[feedback]}?cmd=_leave-feedback&amp;view=1">{_leave_feedback}</a></li>
+                            <li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'createserviceauctions') OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'servicebid')"><a href="{https_server}{ilpage[buying]}?cmd=management">{_buying_activity}</a><else /><div class="gray" title="{_upgrade_subscription}">{_buying_activity}</div></if></li>
+                            {apihook[dashboard_buying_li_info_end]}
+                        </ul>
+                     </div>
+                     
+                     {apihook[dashboard_buying_li_infoblock_end]}
+                     {apihook[dashboard_buying_li_hiringblock_start]}
+                     
+                     <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'service'"><div class="listbox">
+                        <h4>{_find_talent}</h4>
+                        <ul>
+                            {apihook[dashboard_buying_li_hiring_start]}
+                            <li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'createserviceauctions')"><a href="{http_server}buy">{_post_a_job}</a><else /><div class="gray" title="{_upgrade_subscription}">{_post_a_job}</div></if></li>
+                            <li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'createserviceauctions')"><a href="{ilpage[buying]}?cmd=management&amp;sub=awarded">{_bid_proposals_ive_awarded}</a><else /><div class="gray" title="{_upgrade_subscription}">{_bid_proposals_ive_awarded}</div></if></li>
+                            <!--<li><a href="{http_server}categories/skills">{_search_skills}</a></li>-->
+                            {apihook[dashboard_buying_li_hiring_end]}
+                        </ul>
+                     </div></if>
+                     
+                     <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'product'"><div class="listbox">
+                        <h4>{_find_items}</h4>
+                        <ul>
+                            {apihook[dashboard_buying_li_hiring_start]}
+                            <li><a href="{http_server}categories/items">{_categories}</a></li>
+                            <li><a href="{http_server}search">{_advanced_search}</a></li>
+                            {apihook[dashboard_buying_li_hiring_end]}
+                        </ul>
+                     </div></if>
+                     
+                     {apihook[dashboard_buying_li_hiringblock_end]}
+                     <if condition="$ilconfig['escrowsystem_enabled']">
+                     {apihook[dashboard_buying_li_escrowblock_start]}
+                     <div class="listbox">
+                        <h4>{_escrow}</h4>
+                        <ul>
+                            {apihook[dashboard_buying_li_escrow_start]}
+                            <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'service'"><li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'createserviceauctions')"><a href="{ilpage[escrow]}?cmd=management&amp;sub=rfp-escrow">{_service_escrow_payments_out}</a><else /><div class="gray" title="{_upgrade_subscription}">{_service_escrow_payments_out}</div></if></li></if>
+                            <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'product'"><li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'productbid') OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'buynow')"><a href="{ilpage[escrow]}?cmd=management&amp;bidsub=product-escrow">{_product_escrow_payments_out}</a><else /><div class="gray" title="{_upgrade_subscription}">{_product_escrow_payments_out}</div></if></li></if>
+                            <if condition="isset($ilconfig['globalauctionsettings_auctionstypeenabled']) AND $ilconfig['globalauctionsettings_auctionstypeenabled'] == 'product'"><li><if condition="$ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'buynow')"><a href="{ilpage[escrow]}?cmd=management&amp;bidsub=buynow-escrow">{_purchase_now_escrow_buying_activity}</a><else /><div class="gray" title="{_upgrade_subscription}">{_product_escrow_payments_out}</div></if></li></if>
+                            {apihook[dashboard_buying_li_escrow_end]}
+                        </ul>
+                     </div>
+                     {apihook[dashboard_buying_li_escrowblock_end]}
+                     </if>
+                     
+                     <div class="clear"></div>
+                </div>
+            </div>
+            <!-- end buying --></if>
+            
+            <if condition="$ilconfig['referalsystem_active']"><!-- start referral -->
+            <div class="action-box rounded">
+                <div class="titlebar">
+                    <h2>{_referral_activity}</h2>
+                    <h3>{_your_referral_account}</h3>
+                    <h4 style="text-transform:uppercase;padding-top:9px;font-size:9px;font-weight:normal" class="black">{_referral_code}: <span class="a_active"><strong>{user[ridcode]}</strong></span></h4>
+                </div>
+            
+                <div class="listbar">
+                
+                	{apihook[dashboard_referral_li_referralblock_start]}
+                
+                    <div class="listbox" style="width:500px">
+                        <h4>{_referral_links_for} {user[username]}</h4>
+                        <p style="padding-top:5px">{_place_the_links_below_on_your_site_referral} {site_name}.</p>
+                        <div style="padding-top:6px"><strong>{_standard_web_link}</strong></div>
+                        <div style="padding-top:6px"><input type="text" name="" value="<a href=&quot;{ridlink}&quot;>{site_name}</a>" class="input" size="60" /></div>
+                        <div style="padding-top:12px"><strong>{_logo_web_link}</strong></div>
+                        <div style="padding-top:6px"><input type="text" name="" value="<a href=&quot;{ridlink}&quot;><img src=&quot;{http_server}{template_logo}&quot; border=&quot;0&quot; alt=&quot;&quot; /></a>" class="input" size="60" /></div>
+                        <p style="padding-top:16px">{referalactivity}</p>
+                  	</div>
+                    
+                     {apihook[dashboard_referral_li_referralblock_end]}
+                     
+                     <div class="clear"></div>
+                </div>
+            </div>
+            <!-- end referral --></if>
+
+			{apihook[main_mycp_end_primary]}
+
+    	</div>
+        <!-- end primary column -->
+        
+        <div class="sidebar">
+        
+            <div class="side-box-title">{_other_information}</div>
+            <div class="side-box-body">
+                <ul>
+                    {apihook[dashboard_accounts_li_other_start]}
+                    {apihook[dashboard_accounts_li_other_end]}
+                </ul>
+            </div>
+            
+        </div>
+        
+        {apihook[main_mycp_end]}
+        
+	</div>
+    <!-- end column holder -->
+</div>
+<!--<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+	<tr valign="top">
+		<td>{v3left_nav}</td>
+		<td><div style="width:10px"></div></td>
+		<td width="100%">
+
+			<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+				<div class="bigtabsheader">
+					<ul>
+						<li title="" class="on"><a href="javascript:void(0)">{_dashboard}</a></li>
+						<if condition="$show['product_buying_activity'] == true OR $show['service_buying_activity'] == true">
+							<li title="" class=""><a href="{ilpage[buying]}?cmd=management">{_buying_activity}</a></li>
+						</if>
+						<if condition="$show['product_selling_activity'] == true OR $show['service_selling_activity'] == true">
+							<li title="" class=""><a href="{ilpage[selling]}?cmd=management">{_selling_activity}</a></li>
+						</if>
+						<li title="" class=""><a href="{ilpage[preferences]}?cmd=favorites">{_favorite_searches}</a></li>
+						<li title="" class=""><a href="{ilpage[watchlist]}?cmd=management">{_watchlist}</a></li>
+					</ul>
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+
+			<div class="block-wrapper">
+
+				<div class="block3">
+
+					<div class="block3-top">
+						<div class="block3-right">
+							<div class="block3-left"></div>
+						</div>
+					</div>
+
+					<div class="block3-header">
+						<span style="float:right;">
+							<form name="sortswitch" method="get" action="{ilpage[main]}" accept-charset="UTF-8" style="margin:0px">
+								<input type="hidden" name="cmd" value="cp" />
+								<table border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td>
+											<select name="period" class="smaller" style="font-family: verdana">
+												<option value="1" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 1">selected="selected"</if>>{_last_24_hours}</option>
+												<option value="7" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 7">selected="selected"</if>>{_last_7_days}</option>
+												<option value="14" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 14">selected="selected"</if>>{_last_14_days}</option>
+												<option value="15" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 15">selected="selected"</if>>{_last_30_days}</option>
+												<option value="16" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 16">selected="selected"</if>>{_last_60_days}</option>
+												<option value="17" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 17">selected="selected"</if>>{_last_90_days}</option>
+											</select>&nbsp;</td>
+
+										<td><input type="submit" value="{_go}" class="buttons_smaller" /></td>
+									</tr>
+								</table>
+							</form>
+						</span>{_reminders}
+					</div>
+
+					<div class="block3-content" style="padding:0px">
+
+						<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+							<tr class="alt2">
+								<td width="33.3%" nowrap="nowrap">{_buying_reminders}</td>
+								<td width="33.3%" nowrap="nowrap">{_selling_reminders}</td>
+								<td width="33.3%" nowrap="nowrap">{_feedback_reminders} </td>
+							</tr>
+							<tr class="alt1">
+								<td valign="top">{buyingreminders}</td>
+								<td valign="top" class="alt3">{sellingreminders}</td>
+								<td valign="top" class="featured_highlight">{feedbackactivity}</td>
+							</tr>
+							<tr class="alt2_top">
+								<td width="33.3%" nowrap="nowrap">{_messages}</td>
+								<td width="33.3%" nowrap="nowrap">{_todays_remaining_bids}: <span class="blue"><strong>{bidsleft}</strong></span> <a href="javascript:void(0)" onmouseover="Tip('<div style=\'font-size:14px\' class=\'blue\'><strong>{bidsleft}</strong></div>' + phrase['_this_number_will_represent_how_many_bids_you_have_left_for_today'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+								<td width="33.3%" nowrap="nowrap">{_invitation_reminders} </td>
+							</tr>
+							<tr>
+								<td valign="top" style="padding-top:10px; padding-bottom:10px;"><div>{messagesactivity}</div>
+							<if condition="$ilconfig['globalfilters_cansendpms']">
+								<div style="padding-bottom:6px; padding-top:6px"><span class="smaller blue"><a href="{ilpage[messages]}?cmd=compose">{_compose_a_new_private_message}</a></span></div></if></td>
+							<td valign="top"><div><span class="gray">{_your_bids_will_renew_on}</span> {datereset}</span></div>
+								<div></div></td>
+							<td valign="top" style="padding-top:10px; padding-bottom:10px;">{invitationactivity}</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="block3-footer">
+						<div class="block3-right">
+							<div class="block3-left"></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			{apihook[main_mycp_end]}
+
+	<if condition="$ilconfig['referalsystem_active']">
+		<div class="block-wrapper">
+
+			<div class="block3">
+
+				<div class="block3-top">
+					<div class="block3-right">
+						<div class="block3-left"></div>
+					</div>
+				</div>
+
+                    <div class="block3-header">{_referral_activity}</div>
+
+                    <div class="block3-content" style="padding:0px; background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_gray_1x1000.gif) repeat-x;">
+					<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+						<tr class="alt2">
+							<td><div class="smaller"><strong>{_actions_taken_by_people_referred_by_you}</strong></div></td>
+						</tr>
+						<tr>
+							<td valign="top"><div class="gray">{_below_you_will_find_detailed_and_realtime_referral_activity_for_your_profile}</div>
+								<div style="clear:both"><div style="padding-top:9px">{referalactivity}</div></div></td>	
+						</tr>
+						<tr class="alt2">
+							<td><div class="smaller"><strong>{_referral_links_for} {user[username]}</strong></div></td>
+						<tr>
+
+							<td valign="top"><div class="gray">{_when_referring_others_to_the_marketplace_you_can_use_the_link_below}</div>
+								<div style="padding-top:10px; padding-bottom:10px">{_referral_code}: <span class="blue">{user[ridcode]}</span></div>
+
+								<div class="smaller" style="padding-bottom:3px"><strong>{_standard_web_link}</strong> <span class="gray">- {_place_this_link_anywhere_on_your_web_site_to_start_referring_users}</span></div>
+								<div><input type="text" name="" value="<a href=&quot;{ridlink}&quot;>{site_name}</a>" class="input" size="80" /></div>
+								<div class="gray" style="padding-top:3px">{_example}: <span class="blue"><a href="javascript:void(0)">{site_name}</a></span></div>
+
+								<div class="smaller" style="padding-top:12px; padding-bottom:3px"><strong>{_logo_web_link}</strong>  <span class="gray">- {_place_this_link_anywhere_on_your_web_site_to_start_referring_users}</span></div>
+								<div><input type="text" name="" value="<a href=&quot;{ridlink}&quot;><img src=&quot;{http_server}{template_logo}&quot; border=&quot;0&quot; alt=&quot;&quot; /></a>" class="input" size="80" /></div>
+								<div class="gray" style="padding-top:3px">{_example}:</div><div><a href="javascript:void(0)"><img src="{template_relativeimagepath}{template_logo}" border="0" alt="" /></a></div>
+							</td>
+						</tr>
+					</table>	
+                    </div>
+
+                    <div class="block3-footer">
+					<div class="block3-right">
+						<div class="block3-left"></div>
+					</div>
+                    </div>
+
+			</div>
+		</div>
+	</if>
+
+</td>
+</tr>
+</table>-->

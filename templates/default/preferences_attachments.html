@@ -1,0 +1,141 @@
+<form action="{ilpage[preferences]}" method="post" name="attachments" accept-charset="UTF-8" style="margin:0px;">
+<input type="hidden" name="crypted" value="{inputcrypted}" />
+<div class="block-wrapper">
+
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header"><span style="float:right"><!--<select name="attachtype" style="font-family:verdana"><option value="">{_all} {_attachments}</option><option value="profile">{_profile} {_attachments}</option><option value="portfolio">{_portfolio} {_attachments}</option><option value="project">{_project} {_attachments}</option><option value="itemphoto">{_item} {_picture} {_attachments}</option><option value="itemphoto">{_item} {_slideshow} {_attachments}</option><option value="bid">{_service} {_bid} {_attachments}</option><option value="pmb">{_pmb} {_attachments}</option><option value="ws">{_workspace} {_attachments}</option></select>--></span>{_attachment_manager}</div>
+            <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_attachment_usage}&nbsp;{attach_usage_total}&nbsp;{_of}&nbsp;<strong>{attach_user_max}</strong></div></div>
+            <div class="block-content" style="padding:0px">
+                
+                <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr class="alt2"> 
+                    <td width="33%">{_attachment}</td>
+                    
+                    <td width="18%" nowrap="nowrap">{_type}</td>
+                    <td width="15%">{_uploaded}</td>
+                    <td width="1%" align="center">{_views}</td>
+                    <td width="1%" nowrap="nowrap" align="center"><span title="{_invoice}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/invoice_gray.png" /></span></td>
+                    <td align="right" width="1%">{_sel}</td>
+                </tr>
+                <loop name="attachment_rows"> 
+                <tr class="alt1" valign="top"> 
+                    <td><div><span class="blue"><span style="float:left; padding-right:8px; margin-top:-1px">{attachextension}</span><a href="{http_server}{ilpage[attachment]}?id={filehash}">{attach_filename}</a></span> <span class="smaller gray">({attach_size})</span></div>
+                    <div style="padding-top:9px" class="smaller">{sizes}</div></td>
+                    <td><span class="smaller gray">{attach_type}</span></td>
+                    <td><span class="smaller">{attach_date}</span></td>
+                    <td align="center"><span class="smaller">{attach_views}</span></td>
+                    <td align="center"><span class="smaller blue">{invoiceid}</span></td>
+                    <td align="right" class="alt2">{attach_action}</td>
+                </tr>
+                </loop name="attachment_rows">
+                <if condition="isset($show['no_attachment_rows']) AND $show['no_attachment_rows']"> 
+                <tr> 
+                    <td colspan="6" align="center" class="alt1"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                </tr>
+                </if> 
+                <if condition="$show['no_attachment_rows'] == false">
+                <tr class="alt2_top"> 
+                    <td colspan="6" align="right"> 
+                    <select name="attachcmd" style="font-family:verdana">
+                        <optgroup label="{_please_select}">
+            {apihook[preferences_attachments_attachments_options_start]}
+            <option value="delete">{_delete_selected}</option>
+                            <option value="deleteall">{_delete_all}</option>
+                            <option value="deleteexpireditemphoto">{_delete_all_item_photos_ended_listings}</option>
+                            {apihook[preferences_attachments_attachments_options_end]}
+                        </optgroup>
+                    </select> 
+                    <input type="submit" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value="{_go}"/>					</td>
+                </tr>
+                </if>
+                <tr> 
+                    <td colspan="6">{prevnext}</td>
+                </tr>
+                </table>
+                
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>
+
+
+<form action="{ilpage[preferences]}" method="post" name="attachments" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="crypted" value="{inputcrypted}" />
+<div class="block-wrapper">
+
+    <div class="block3">
+    
+            <div class="block3-top">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block3-header">{_pending_attachments}</div>
+            <div class="block3-content" style="padding:0px">
+                
+                <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr class="alt2"> 
+                    <td nowrap="nowrap">{_attachment}</td>
+                    <td nowrap="nowrap">{_attachment_type}</td>
+                    <td width="21%" nowrap="nowrap">{_status}</td>
+                    <td align="right" width="1%" nowrap="nowrap">{_action}</td>
+                </tr>
+                <loop name="attachment_pending_rows"> 
+                <tr class="alt1" valign="top"> 
+                    <td width="45%" align="left"><div><span class="blue"><span style="float:left; padding-right:8px; margin-top:-1px">{attachextension}</span><a href="{ilpage[attachment]}?id={filehash}">{attach_filename}</a></span></div>
+                    <div style="padding-top:9px" class="smaller">{sizes}</div></td>
+                    <td width="23%">{attach_type} {_attachment}</td>
+                    <td>{status}</td>
+                    <td align="right" class="alt2">{actions}</td>
+                </tr>
+                </loop name="attachment_pending_rows"> 
+                <if condition="isset($show['no_attachment_pending_rows']) AND $show['no_attachment_pending_rows']">
+                <tr> 
+                    <td colspan="4" align="center" class="alt1"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                </tr>
+                </if>
+                <if condition="$show['no_attachment_pending_rows'] == false">
+                <tr class="alt2_top"> 
+                    <td colspan="4" align="right">
+                    <select name="attachcmd" style="font-family: verdana">
+                        <optgroup label="{_please_select}">
+            {apihook[preferences_attachments_pending_attachments_options_start]}
+            <option value="delete">{_delete_selected}</option>
+                            {apihook[preferences_attachments_pending_attachments_options_end]}
+                        </optgroup>
+                    </select>
+                    <input type="submit" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value="{_go}"/>
+                    </td>
+                </tr>
+                </if>
+                <tr> 
+                    <td colspan="5">{prevnext2}</td>
+                </tr>
+                </table>
+                
+            </div>
+            
+            <div class="block3-footer">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>

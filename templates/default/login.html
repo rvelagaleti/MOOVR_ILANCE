@@ -1,0 +1,273 @@
+
+<if condition="!empty($ilance->GPC['error'])">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div>
+	
+	<div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span>
+	<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'suspended'">{_your_account_is_suspended_login_disabled}</if>
+	<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == '1'">{_you_have_provided_incorrect_login_credentials}</if>
+	<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'unverified'">{_you_have_not_activated_your_account_via_email}</if>
+	<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'cancelled'">{_your_account_is_cancelled}</if>
+	<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'iprestrict'">{_your_ip_address_does_not_match_for_this_account}: <span class="blue"><a href="{https_server}{ilpage[login]}?cmd=_ip-reset">{_click_here_to_reset_your_ip_address_preference}</a></span></if>
+	<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'checkemail'">{_please_check_your_email_for_the_link_to_activate_your_account}</if>
+	<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'checkemailpassword'">{_please_check_your_email_for_the_auto_generated_password_we_sent}</if>
+    <if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'moderated'">{_your_account_is_in_moderation_mode_login_temporarily_disabled_until_further_notice}</if>
+	<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'agentchange'">{_while_your_session_is_still_active_your_connection_details_have_changed}</if></div>		
+	<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'specialcharacters'">{_it_appears_username_special_characters} {site_name}.</if>
+    
+	<div class="s"><div class="e"><div class="w"></div></div></div></div>
+</td>
+</tr>
+</table><div style="margin-bottom:12px"></div></if>
+
+<if condition="isset($ilance->GPC['error']) AND $ilance->GPC['error'] == 'unverified'">
+<div style="padding-top:12px"></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_resend_email_activiation_code}</div>
+            <div class="block-content-yellow" style="padding:9px"><div class="smaller">{_resend_activation_code_via_email_below_if_necessary}</span></div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<form name="activation" action="{ilpage[registration]}" method="post" accept-charset="UTF-8" style="margin:0px;">
+				<table width="100%" border="0" align="center" cellpadding="6" cellspacing="{table_cellspacing}">
+				<tr>
+						<td colspan="2" style="padding-top:15px; padding-bottom:15px">{_email} &nbsp;&nbsp;<input type="text" name="email" value="" size="35" style="font-family: Verdana" />&nbsp;&nbsp;<input type="submit" value="{_resend}" class="buttons" /></td>
+				</tr>
+				</table>
+				<input type="hidden" name="cmd" value="activate" />
+				<input type="hidden" name="subcmd" value="resend" />
+				</form>
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+	
+</div>
+</td>
+  </tr>
+</table>
+</if>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td valign="top" width="50%">
+		<div>
+			<h1 style="margin-top:25px">{_still_not_a_member_register_here}</h1>
+			
+			<div>
+			  <div style="padding-top:8px; padding-bottom:15px"><input type="button" value="{_register}" onclick="location.href='{https_server}{ilpage[registration]}'" class="buttons" style="font-size:15px" /> <if condition="$ilconfig['registrationdisplay_quickregistration'] AND (empty($_SESSION['ilancedata']['user']['userid']))"><input type="button" value="{_quick_register}" onclick="toggle_show('quickregisterblock')" class="buttons" style="font-size:15px" /></if></div>
+			<ul style="line-height:1.6em">
+				<li>{_bid_or_buy_items_youre_watching_or_bidding_on}</li>
+				<li>{_buy_and_sell_with_confidence}</li>
+				<li>{_connect_with_our_growing_community_and_more}</li>
+			</ul>
+            <div align="right" style="padding-right:18px" class="smaller"><!--{_last_visit}: <span class="black">{lastvisit}--></span></div></div></div>
+	</td>
+    <td width="1%"><div style="width:10px"></div></td>
+    <td valign="top" width="50%" align="left"><div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+			<div style="padding-left:18px; padding-top:10px; padding-bottom:1px; font-size:18px;">{apihook[login_signin_right]}<strong>{_sign_in}</strong><span style="float:left;padding-right:9px;margin-bottom:32px;margin-top:-7px"><img src="{template_relativeimagepath}{template_imagesfolder}v4/safety_icon.png" border="0" alt="" width="40" id="signin" /></span></div>
+			
+				<form name="login" action="{ilpage[login]}" method="post" accept-charset="UTF-8" style="margin:0px;" onsubmit="md5(password, md5pass, md5pass_utf);">
+				
+					<div style="padding-left:18px; padding-top:15px; padding-bottom:10px; max-width:410px">
+						<div align="right" style="width:410px"><span style="float:left; padding-top:4px">{_username}</span> <input type="text" name="username" value="{username}" size="30" class="input" autocomplete="off" /></div>
+						
+						<div style="padding-top:4px"></div>
+						
+						<div align="right" style="width:410px"><span style="float:left; padding-top:4px">{_password}</span> <input type="password" name="password" value="{password}" size="30" class="input" autocomplete="off" /><div class="blue" style="padding-top:7px"><span style="float:left; padding-left:48px;" class="smaller black"><label for="remember"><input type="checkbox" name="remember" id="remember" value="1" />&nbsp;<span>{_remember_me}?</span></label></span><a href="{ilpage[login]}?cmd=_pw-renew" class="smaller gray">{_recover_my_password}</a></div></div>
+						
+						<div style="margin-bottom:20px;padding-top:9px"><span style="float:right;"><input type="submit" value="{_sign_in}" class="buttons" style="font-size:15px" /></span></div>
+					</div>
+					
+					<input type="hidden" name="redirect" value="{redirect}" />
+					<input type="hidden" name="login_process" value="1" />  
+					<input type="hidden" name="md5pass" />
+					<input type="hidden" name="md5pass_utf" />
+				</form>
+			</div>
+		<div class="s"><div class="e"><div class="w"></div></div></div></div></td>
+  </tr>
+</table>
+
+<if condition="$ilconfig['registrationdisplay_quickregistration'] AND (empty($_SESSION['ilancedata']['user']['userid']))">
+<!-- quick registration --><script type="text/javascript" language="javascript">
+<!--
+var http_request = false;
+
+function makePOSTRequest(url, parameters)
+{
+        http_request = false;
+        if (window.XMLHttpRequest)
+        { // Mozilla, Safari,...
+                http_request = new XMLHttpRequest();
+                if (http_request.overrideMimeType)
+                {
+                        http_request.overrideMimeType('text/html');
+                }
+        }
+        else if (window.ActiveXObject)
+        { // IE
+                try
+                {
+                        http_request = new ActiveXObject("Msxml2.XMLHTTP");
+                }
+                catch (e)
+                {
+                        try
+                        {
+                                http_request = new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        catch (e) {}
+                }
+        }
+        if (!http_request)
+        {
+                alert_js('Cannot create XMLHTTP instance');
+                return false;
+        }
+   
+        http_request.onreadystatechange = alertContents;
+        http_request.open('POST', url, true);
+        http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        http_request.setRequestHeader("Content-length", parameters.length);
+        http_request.setRequestHeader("Connection", "close");
+        http_request.send(parameters);
+}
+function alertContents()
+{
+        if (http_request.readyState == 4)
+        {
+                if (http_request.status == 200)
+                {
+                        result = http_request.responseText;
+                        fetch_js_object('quickregisterresponse').innerHTML = result;            
+                }
+                else
+                {
+						result = '{_there_was_a_problem_with_the_request_please_try_again}';
+                        fetch_js_object('quickregisterresponse').innerHTML = result;
+                }
+        }
+}
+function get(obj)
+{
+        var poststr = "do=quickregister" +
+		"&qusername=" + encodeURI( fetch_js_object("qusername").value ) +
+        "&qpassword=" + encodeURI( fetch_js_object("qpassword").value ) +
+        "&qpasswordconfirm=" + encodeURI( fetch_js_object("qpasswordconfirm").value ) +
+        "&qemail=" + encodeURI( fetch_js_object("qemail").value ) +
+        "&qemailconfirm=" + encodeURI( fetch_js_object("qemailconfirm").value ) +
+        "&subscriptionid=" + encodeURI( fetch_js_object("subscriptionid").value ) +
+        "&subscriptionpaymethod=" + encodeURI( fetch_js_object("subscriptionpaymethod").value );
+        
+        makePOSTRequest(AJAXURL, poststr);
+}
+function verify_pass(username, password1, password2, email1, email2)
+{
+		if (username.value == '')
+		{
+				alert_js(phrase['_please_enter_correct_username']);
+				return false;
+		}
+		else if (password1.value == '' || password2.value == '')
+		{
+				alert_js(phrase['_fill_out_both_password_fields_in_order_to_quickly_register']);
+				return false;
+		}
+		else if (password1.value != password2.value)
+		{
+				alert_js(phrase['_entered_passwords_do_not_match']);
+				return false;
+		}
+		else if (email1.value == '' || email2.value == '')
+		{
+				alert_js(phrase['_fill_out_both_email_fields_in_order_to_quickly_register']);
+				return false;
+		}
+		else if (email1.value != email2.value)
+		{
+				alert_js(phrase['_entered_email_addresses_do_not_match']);
+				return false;
+		}
+		else
+		{
+				get(this.parentNode);
+				return true;
+		}
+		return false;
+}
+//-->
+</script>
+<div id="quickregisterblock" style="display:none">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+<div style="padding-top:12px; padding-bottom:3px" name="quickregisterresponse" id="quickregisterresponse"></div>
+
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_quick_registration}</div>
+			<div class="block-content" style="padding:0px">
+				
+				<form action="javascript:get(fetch_js_object('quickregister'));" name="quickregister" accept-charset="UTF-8" id="quickregister" style="margin:0px">
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+				<tr class="alt2">
+				  <td width="20%">{_username}</td>
+				  <td width="20%">{_pass}</td>
+				  <td width="20%">{_confirm_pass}</td>
+				  <td width="21%">{_email}</td>
+				  <td width="19%">{_confirm_email}</td>
+				</tr>
+				<tr>
+				  <td><input type="text" class="input" name="qusername" id="qusername" maxlength="49" value="" style="width:98%" /></td>
+				  <td><input type="password" class="input" name="qpassword" id="qpassword" maxlength="32" value="" style="width:98%" /></td>
+				  <td><input type="password" class="input" name="qpasswordconfirm" id="qpasswordconfirm" maxlength="32" value="" style="width:98%" /></td>
+				  <td><input type="text" class="input" name="qemail" id="qemail" maxlength="49" value="" style="width:98%" /></td>
+				  <td><input type="text" class="input" name="qemailconfirm" id="qemailconfirm" maxlength="49" value="" style="width:98%" /></td>
+				</tr>
+				<tr>
+						<td colspan="5" align="right"><span style="float:left;padding-top:10px"><span style="" class="gray">{_get_your_account_started_using_our_quick_registration_form_below}</span></span><input type="button" name="button" value="{_register}" accesskey="s" class="buttons" onclick="return verify_pass(qusername, qpassword, qpasswordconfirm, qemail, qemailconfirm);" style="font-size:15px" /></td>
+				</tr>
+				</table>
+				<input type="hidden" name="subscriptionid" id="subscriptionid" value="1" />
+				<input type="hidden" name="subscriptionpaymethod" id="subscriptionpaymethod" value="account" />
+				</form>
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+	
+</div><!-- / quick registration -->
+</td></table></div>
+</if>
+{apihook[login_template_end]}

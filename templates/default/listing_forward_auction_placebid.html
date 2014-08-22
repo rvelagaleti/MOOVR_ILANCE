@@ -1,0 +1,91 @@
+<form method="get" action="{ilpage[rfp]}" name="placebid" accept-charset="UTF-8" onsubmit="return validate_place_bid(this)" style="margin:0px">
+<input type="hidden" name="cmd" value="_do-bid-preview" />
+<input type="hidden" name="subcmd" value="product-bid" />
+<input type="hidden" name="id" value="{id}" />
+<input type="hidden" name="state" value="{state}" />
+<input type="hidden" name="minimum" value="{min_bidamount}" id="hiddenfieldminimum" />
+<if condition="$ilconfig['productbid_enableproxybid'] AND $show['categoryuseproxybid']"><input type="hidden" name="isproxy" value="1" /></if>
+<if condition="isset($show['localpickuponly']) AND $show['localpickuponly'] == false AND isset($shippercount) AND $shippercount == 1"><input type="hidden" name="shipperid" value="{shipperid}" /></if>
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_enter_bid_amount}</div>
+            <div class="block-content-yellow smaller" style="padding:9px">{_place_a_bid}</div>
+			<div class="block-content" style="padding:9px">
+				
+                <table border="0" cellpadding="5" cellspacing="{table_cellspacing}" width="100%" align="center">
+                <tr>
+                    <td align="right" valign="top"><span class="black">{_title}:</span></td>
+                    <td colspan="3" nowrap="nowrap"><span class="blue">{title}</span><if condition="isset($auctiontype) AND $auctiontype == 'fixed'">&nbsp;&nbsp;&nbsp;<span class="smaller gray">({buynow_qty} {_available})</span></if></td>
+                </tr>
+                <if condition="isset($show['localpickuponly']) AND $show['localpickuponly'] == false AND isset($shippercount) AND $shippercount >= 1">
+                <tr> 
+                    <td align="right" nowrap="nowrap">{_your_ship_service}:</td>
+                    <td nowrap="nowrap" colspan="3">{shipservicepulldown}</td>
+                </tr>
+                </if>
+                <if condition="!empty($proxybit)">
+                <tr> 
+                    <td align="right" nowrap="nowrap"><span class="gray">{_your_maximum_bid}:</span></td>
+                    <td colspan="3" nowrap="nowrap"><span class="gray">{proxybit}</span></td>
+                </tr>
+                </if>
+                <tr> 
+                    <td align="right" nowrap="nowrap"><span class="black">{_minimum_bid_amount}:</span></td>
+                    <td colspan="3" nowrap="nowrap"><span class="black">{min_bidamountformatted}</span></td>
+                </tr>
+                <tr> 
+                    <td width="19%" align="right" nowrap="nowrap"><span class="black">{_bid_amount}:</span></td>
+                    <td width="1%" nowrap="nowrap"><input type="text" class="input" name="bidamount" id="bidamount_field" value="{min_bidamount}" onkeypress="return noenter()" style="width:80px" /></td>
+                    <td nowrap="nowrap"><img name="bidamounterror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></td>
+                    <td width="100%" nowrap="nowrap"><if condition="$ilconfig['productbid_enableproxybid'] AND $show['categoryuseproxybid']"><span class="smaller litegray">({_enter} {min_bidamountformatted} <strong>{_or_more}</strong>)</span> <else />({_your_maximum_bid_is_public})</if></td>
+                </tr>
+                <tr> 
+                    <td align="right"><span class="black">{_quantity}:</span></td>
+                    <td colspan="3" nowrap="nowrap"> <input type="text" name="qty" value="1" onkeypress="return noenter()" style="width:30px" /> &nbsp;&nbsp;&nbsp;<span class="smaller black">({qty} {_available})</span></td>
+                </tr>
+                
+                </table>
+                
+				{apihook[item_placebid_mid1]}
+				
+			</div>
+            <div class="block-content-yellow-top smaller" style="padding:9px">{_realtime_bid_management}</div>
+			<div class="block-content" style="padding:0px">
+            	
+                <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr class="alt1"> 
+                    <td width="2%" align="center" valign="middle">{lasthour}</td>
+                    <td width="98%" align="left" valign="middle"><label for="lasthournotify0"><span class="black">{_notify_me_via_email_when_auction_has_one_hour_left}</span></label></td>
+                </tr>
+                <tr class="alt1"> 
+                    <td align="center" valign="middle">{higherbid}</td>
+                    <td align="left" valign="middle"><label for="highbidnotify0"><span class="black">{_notify_me_via_email_when_a_higher_bid_is_placed}</span></label></td>
+                </tr>
+                <tr> 
+                    <td align="center" valign="middle">{subscribed}</td>
+                    <td align="left" valign="middle"><label for="subscribed0"><span class="black">{_global_optin_optout_from_receiving_emails_for_this_watchlist_item}</span></label></td>
+                </tr>
+                </table>
+
+                {apihook[item_placebid_mid2]}
+                
+            </div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div><if condition="isset($auctiontype) AND $auctiontype == 'fixed' AND isset($buynow_qty) AND $buynow_qty > 0 OR isset($auctiontype) AND $auctiontype == 'regular'"><input type="submit" value=" {_preview} " class="buttons" style="font-size:15px" /><else /><input type="submit" value=" {_preview} " class="buttons" disabled="disabled" style="font-size:15px" /></if>&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{http_server}{ilpage[merch]}?id={id}">{_cancel}</a></span></div>
+</form>

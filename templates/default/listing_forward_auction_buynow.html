@@ -1,0 +1,93 @@
+<form name="ilform" action="{ilpage[merch]}" method="post" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="crypted" value="{encrypted}" />
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_commit_to_purchase}</div>
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_you_are_skipping_the_bid_process_to_continue_please_enter_the_required_information_below}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+			<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+			<tr class="alt2"> 
+				<td width="100%">&nbsp;</td>
+                <td width="20%" nowrap="nowrap" align="right"><span title="<if condition="$show['lot']">{_per_lot}<else />{_per_item_lower}</if>">{_price}</span></td>
+				<if condition="$ilconfig['escrowsystem_enabled'] AND $show['filter_escrow']"><td align="right" nowrap="nowrap">{_fee} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_escrow'] + ' ' + phrase['_fee'] + '</strong></div><div>' + phrase['_this_is_the_escrow_fee_associated_with_securing_your_funds_for_this_item_within_escrow'] + ' {site_name}.</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" id="" /></a></td></if>
+                <if condition="isset($show['salestaxbit']) AND $show['salestaxbit']"><td nowrap="nowrap" align="right"> {_sales_tax}</td></if>
+				<td width="10%" align="right">{_total}</td>
+			</tr>
+			<tr class="alt1" valign="top"> 
+				<td><div><span style="float:left; padding-right:12px"><table><tr valign="top"><td width="76"><div align="center">{attachment}</div></td></tr></table></span><h3 class="blue"><a href="{ilpage[merch]}?id={project_id}">{project_title}</a> <span class="smaller black">({project_id})</span></h3></div>
+                    <div style="padding-top:3px;padding-left:25px" class="smaller">{seller}</div>
+                    <div style="padding-top:9px;padding-bottom:3px;padding-left:25px" class="smaller"><strong>{_quantity}:</strong> {qty}</div>
+                    <div style="padding-bottom:3px;padding-left:25px" class="smaller"><strong>{_payment_method}:</strong> <if condition="$ilconfig['escrowsystem_enabled'] AND isset($show['sellerusingescrow']) AND $show['sellerusingescrow']">{site_name} {_escrow}<else />{_outside_payment}</if></div>
+                    <if condition="isset($show['currencyconverted']) AND $show['currencyconverted'] AND isset($fee) AND $fee > 0"><div style="padding-bottom:3px;padding-left:25px" class="smaller"><strong>{_fee} {_currency}:</strong> <span title="The fee associated with this purchase has been converted from {curfrom} into {curto}.  The fee transaction for this invoice will be settled in {curdefault}.">{curfrom} {_to} {curto}</div></if>
+                    <div style="padding-bottom:3px;padding-left:25px" class="smaller"><strong>{_item_location}:</strong> {itemlocation}</div>
+                    <!--<div style="padding-bottom:6px;padding-left:25px" class="smaller"><strong>{_tax}:</strong> {taxinfo}</div>-->
+                    <!--<div style="padding-bottom:3px" class="smaller">{orderinfo}</div>-->
+                    <div style="clear:both"></div>
+                </td>
+                <td align="right" nowrap="nowrap"><div>{amount_formatted}</div><if condition="isset($show['noshipping']) AND $show['noshipping'] == false AND isset($show['freeshipping']) AND $show['freeshipping'] <= 0"><div style="padding-top:3px" class="gray" title="{_shipping}"><if condition="isset($show['localpickuponly']) AND $show['localpickuponly']">{_local_pickup_only}<else />+{samount}</if></div></if><if condition="isset($show['freeshipping']) AND $show['freeshipping']"><div style="padding-top:3px" class="smaller gray" title="{_free_shipping}">{_free_shipping}</div></if></td>
+				<if condition="$ilconfig['escrowsystem_enabled'] AND $show['filter_escrow']"><td width="5%" align="right"><div title="{_includes_tax_if_applicable}">{fees}</div></td></if>
+                <if condition="isset($show['salestaxbit']) AND $show['salestaxbit']"><td width="5%" nowrap="nowrap" align="right"><div>{salestax}</div></td></if>
+				<td nowrap="nowrap" align="right"><h3 class="black"><strong>{topay}</strong></h3></td>
+			</tr>
+			<if condition="isset($show['digitaldownload']) AND $show['digitaldownload']">
+			<tr class="alt2">
+				<td colspan="7">{_digital_download_vault}</td>
+			</tr>
+			<tr class="alt1"> 
+				<td width="100%" class="alt1" align="left" colspan="7"><strong>{digitalfile}</strong>
+				<div class="smaller">{_this_digital_item_will_become_downloadable_once_merchant_confirms_delivery_of_funds}</div></td>
+			</tr>
+			</if>
+			<if condition="isset($show['makepayment']) AND $show['makepayment']">
+			<tr class="alt1"> 
+				<td width="100%" class="alt1" align="left" colspan="7">
+				<if condition="isset($show['noshipping']) AND $show['noshipping']"><div style="padding-bottom:10px; padding-top:5px;"><strong>{_ship_to_location}</strong></div><else /><div style="padding-bottom:10px; padding-top:5px;"><strong>{_change_shipping_address_here}</strong>: <span class="smaller blue"><a href="{ilpage[preferences]}?cmd=profile&amp;returnurl={returnurl}" style="text-decoration:underline">{_edit_address}</a></span></div></if>
+				<table width="100%" border="0" cellspacing="0" cellpadding="2">
+				<if condition="isset($show['noshipping']) AND $show['noshipping'] OR isset($show['localpickuponly']) AND $show['localpickuponly']">
+				<tr> 
+					<td width="1%" align="right"><input type="radio" id="shipping_address_required0" name="shipping_address_required" value="0" checked="checked" /></td>
+					<td width="91%" align="left"><label for="shipping_address_required0">{_no_shipping_address_required}</label></td>
+				</tr><else /><tr> 
+					<td width="1%" align="right"><input type="radio" id="shipping_address_required1"  name="shipping_address_required" value="1" {cb_shipping_address_required1} /></td>
+					<td width="91%" align="left" nowrap="nowrap"><label for="shipping_address_required1">{_ship_to_address}:</label> {shipping_address_pulldown}</td>
+				</tr>
+				<tr> 
+					<td align="right"><input type="radio" id="shipping_address_required0" name="shipping_address_required" value="0" {cb_shipping_address_required0} /></td>
+					<td align="left"><label for="shipping_address_required0">{_no_shipping_address_required}</label></td>
+				</tr></if>
+				</table>
+				
+				</td>
+			</tr>
+			<tr class="alt1"> 
+				<td width="100%" align="left" colspan="7"><if condition="isset($show['digitaldownload']) AND $show['digitaldownload'] OR isset($show['localpickuponly']) AND $show['localpickuponly'] OR isset($show['hideshippingmethodchange']) AND $show['hideshippingmethodchange']"><else /><div style="padding-top:5px;"><strong>{_change_shipping_service}</strong>: <span class="smaller blue"><a href="{https_server}{ilpage[merch]}?cmd=purchase-confirm&amp;pid={project_id}&amp;qty={qty}&amp;paymethod={paymethodid}&amp;shipperid=" style="text-decoration:underline">{_edit_service}</a></span></if></div><div style="padding-bottom:3px">
+				  <div style="padding-bottom:7px; padding-left:2px"><strong>{_shipping}</strong></div>
+                  <div style="padding-left:2px">{shippingservice}</div></div></td>
+			</tr>
+            <tr> 
+				<td width="100%" align="left" colspan="7"><div><if condition="isset($show['hidepaymethodchange']) AND $show['hidepaymethodchange'] == false"><strong>{_change_payment_method}</strong>: <span class="smaller blue"><a href="{https_server}{ilpage[merch]}?cmd=purchase-confirm&amp;pid={project_id}&amp;qty={qty}&amp;shipperid={shipperid}&amp;paymethod=" style="text-decoration:underline">{_edit_method}</a></span></if></div><div style="padding-bottom:3px; padding-top:10px;"><div style="padding-bottom:3px; padding-left:2px"><strong><if condition="$ilconfig['escrowsystem_enabled'] AND $show['filter_escrow']">{_escrow_funding_method}<else />{_payment_method}</if>:</strong>&nbsp;&nbsp;{payment_method_pulldown} <if condition="isset($show['depositlink']) AND $show['depositlink']">&nbsp;&nbsp;<span class="smaller blue"><a href="{https_server}{ilpage[accounting]}?cmd=deposit&amp;returnurl={returnurl}" style="text-decoration:underline">{_if_you_would_like_to_deposit_funds_into_your_online_account_click_here}</a></span></if></div></div></td>
+			</tr>
+			</if>
+            <tr>
+            	<td colspan="7" class="alt2_top"><div><if condition="isset($show['sellerusingescrow']) AND $show['sellerusingescrow']"><input type="submit" value="{_confirm__purchase}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /><else /><input type="submit" value="{_commit_to_purchase}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></if>&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[merch]}?id={project_id}">{_back}</a></span></div></td>
+            </tr>
+			</table>
+            </div>
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</form>

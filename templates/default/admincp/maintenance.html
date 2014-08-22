@@ -1,0 +1,24 @@
+<!-- begin v3body4 layer -->
+<div id="v3body4"> 
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+	
+	<!-- begin content layer -->	
+	<div id="content">
+		<h1>{_maintenance_mode_management}</h1><br />
+		<div class="tab-pane" id="maintenance">
+			<div class="tab-page">
+				<h2 class="tab">{_settings}</h2>
+				
+				{configuration_input}
+				
+			</div>
+		</div>
+<br /><br /><br />

@@ -1,0 +1,27 @@
+<h1 style="padding-bottom:12px">{_rss_feeds}</h1>
+<if condition="isset($show['generated_feed']) AND $show['generated_feed']"><div style="padding-top:6px"><strong>{_your_custome_generated_syndication_feed}</strong></div>
+<div class="blue" style="padding-bottom:15px; padding-top:9px; font-size:15px"><input type="text" name="url" value="{syndicate_url}" style="font-size:15px; padding:9px; width:800px" /></div></if>
+<if condition="isset($show['generated_feed']) AND $show['generated_feed'] == false">
+<if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND (isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'items' OR empty($ilance->GPC['do']))"><form method="get" action="{http_server}{ilpage[rss]}" accept-charset="UTF-8" style="margin:0px;">
+<input type="hidden" name="cmd" value="generate" />
+<input type="hidden" name="subcmd" value="productauctions" />
+<input type="hidden" name="limit" value="25" />
+<input type="hidden" name="version" value="2.0" />
+<div style="padding-bottom:6px"><strong>{_youve_selected}:</strong>&nbsp;<span id="selectedcategory" class="blue"></span><span id="cidstringcb"></span></div>
+<div><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #fff; border-left:1px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #fff" src="{ajaxurl}?do=categories&mode=product&cid={cid}&showyouselectedstring=0&showcontinue=0&showthumb=0&showcidbox=0&showcheckmarkafterstring=0&rss=1"></iframe></div>
+<div style="display:none"><span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" style="font-family: verdana" size="6" /></span></div>
+<div style="display:none"><div id="categorybutton"></div></div>
+<input type="submit" value=" {_submit} " class="buttons" style="font-size:15px" />
+</form></if>
+<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND (isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'services' OR empty($ilance->GPC['do']) AND $ilconfig['globalauctionsettings_productauctionsenabled'] == false)"><form method="get" action="{http_server}{ilpage[rss]}" accept-charset="UTF-8" style="margin:0px;">
+<input type="hidden" name="cmd" value="generate" />
+<input type="hidden" name="subcmd" value="serviceauctions" />
+<input type="hidden" name="limit" value="25" />
+<input type="hidden" name="version" value="2.0" />
+<div style="padding-bottom:6px"><strong>{_youve_selected}:</strong>&nbsp;<span id="selectedcategory" class="blue"></span><span id="cidstringcb"></span></div>
+<div><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #fff; border-left:1px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #fff" src="{ajaxurl}?do=categories&mode=service&cid={cid}&showyouselectedstring=0&showcontinue=0&showthumb=0&showcidbox=0&showcheckmarkafterstring=0&rss=1"></iframe></div>
+<div style="display:none"><span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" style="font-family: verdana" size="6" /></span></div>
+<div style="display:none"><div id="categorybutton"></div></div>
+<input type="submit" value=" {_submit} " class="buttons" style="font-size:15px" />
+</form></if>
+<else /><div style="padding-top:2px" class="blue"><a href="{http_server}{ilpage[rss]}">&lt; {_back}</a></div></if>

@@ -1,0 +1,113 @@
+<div id="v3body4"> 
+<!-- sub navigation -->
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+<!-- /sub navigation -->
+<div id="content">
+<h1>{_automated_tasks_and_scheduled_events}</h1><br />
+<div class="tab-pane">
+<div class="tab-pane" id="automation">
+<div class="tab-page">
+      <h2 class="tab">{_edit_task}</h2>
+	  		<loop name="tasks">
+			<form method="post" action="{ilpage[settings]}" name="addnewtask" accept-charset="UTF-8" style="margin:0px">
+			<input type="hidden" name="cmd" value="automation" />
+            <input type="hidden" name="subcmd" value="_update-crontab" />
+            <input type="hidden" name="return" value="{ilpage[settings]}?cmd=automation" />
+			<input type="hidden" name="cronid" value="{cronid}" />
+			<div class="block-wrapper">
+			<div class="block">
+			
+					<div class="block-top">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+					<div class="block-header">{_update}</div>
+					<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_edit_scheduled_task}</div></div>
+					<div class="block-content" style="padding:0px">
+						
+						<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+						<tr class="alt1">
+							<td>{_task_identifier_title}</td>
+							<td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td><input type="text" class="input" name="title" id="title" value="{varname}" size="35" dir="ltr" tabindex="1" /></td><td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_for_example_if_you_are_creating_a_subscription_task_you_would_call_this_subscriptions']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+						</tr>
+						<tr class="alt1">
+							<td>{_minutes}</td>
+							<td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>
+								{minute1}
+								{minute2}
+								{minute3}
+								{minute4}
+						</td><td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_may_specify_what_minutes_past_the_hour_this_task_will_run']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+						</tr>
+						<tr class="alt1">
+							<td>{_hour}</td>
+							<td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+							  <td>
+								{hours}
+						</td>
+							  <td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_may_specify_what_hour_this_task_will_run']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+						</tr>
+						
+						<tr class="alt1">
+							<td>{_day_of_the_week}<div class="smaller gray" style="padding-top:3px">{_note_this_overrides_day_of_the_month_option_below}</div></td>
+							<td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+							  <td>
+								{dow}
+						</td>
+							  <td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_may_specify_what_day_of_the_week_this_task_will_run']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+						</tr>
+						<tr class="alt1">
+							<td>{_day_of_the_month}</td>
+							<td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>
+								{dom}
+						</td><td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_may_specify_what_day_of_the_month_this_task_will_run']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+						</tr>
+						
+						
+						<tr class="alt1">
+							<td>{_save_logged_tasks_into_the_database}</td>
+							<td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td><span class="smallfont" style="white-space:nowrap">
+								<label for="rb_1_loglevel"><input type="radio" name="loglevel" id="rb_1_loglevel" value="1" tabindex="1" {savelog_1} />{_yes}</label>
+								<label for="rb_0_loglevel"><input type="radio" name="loglevel" id="rb_0_loglevel" value="0" tabindex="1" {savelog_0} />{_no}</label>
+							</span></td><td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_whenever_a_task_you_create_is_executed_at_the_specified_time_the_cron_system_may']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+						</tr>
+						<tr class="alt1">
+							<td>{_php_script_filename}<div class="smaller gray" style="padding-top:3px">Upload to: .{dir_server_root}functions/cron/</div></td>
+							<td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td><input type="text" class="input" name="filename" id="it_filename" value="{filename}" size="35" dir="ltr" tabindex="1" /></td><td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_will_enter_the_name_of_the_php_script_you_wish_to_execute']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+						</tr>
+						<tr class="alt1">
+							<td>{_product}</td>
+							<td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+							  <td>{products_pulldown}</td>
+							  <td align="right" style="padding-left:4px"><a class="helplink" href="#" onclick="alert_js(phrase['_you_will_select_here_for_which_product_or_addon_this_scheduled_task_is_associated_with']); return false;"><img src="{template_relativeimagepath}{template_imagesfolder}talk.gif" alt="" border="0" title="{_click_for_help}" /></a> </td></tr></table></td>
+						</tr>
+						<tr class="alt2_top">
+							<td colspan="2">
+							<input type="submit" class="buttons" tabindex="1" value="  {_save}  " accesskey="s" style="font-size:15px" />&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[settings]}?cmd=automation">{_cancel}</a></span>
+						</td>
+						</tr>
+						</table>
+						
+					</div>
+					
+					<div class="block-footer">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+        </form>
+			</loop name="tasks">
+  </div>
+  
+</div>

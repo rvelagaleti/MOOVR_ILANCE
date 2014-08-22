@@ -1,0 +1,359 @@
+{apihook[main_template_start]}
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center" dir="{template_textdirection}">
+    <tr valign="top">
+	<td>{apihook[main_template_leftnav_top]}
+	    {v3left_nav}
+
+    <if condition="isset($ilconfig['keywords_tab']) AND $ilconfig['keywords_tab'] AND isset($show['recentkeywords']) AND $show['recentkeywords']">
+	<div style="width:235px"><div class="block-wrapper">
+	    <div class="block5">
+
+		<div class="block5-top">
+                    <div class="block5-right">
+			<div class="block5-left"></div>
+                    </div>
+		</div>
+
+		<div class="block5-header" onclick="toggle('leftnav_recentkeywords')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''"><span class="smaller blue" style="float:{template_textalignment_alt};padding:2px"><a href="{http_server}{ilpage[preferences]}?cmd=favorites&amp;do=recentlyreviewed&amp;subcmd=clearkeywordlist&amp;returnurl={pageurl_urlencoded}" style="text-decoration:underline">{_clear}</a></span><span style="float:{template_textalignment}; padding-top:4px; padding-{template_textalignment_alt}:10px"><img id="collapseimg_leftnav_recentkeywords" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_recentkeywords]}.gif" border="0" alt="" /></span>{_recent_search}</div>
+		<div class="block5-content" id="collapseobj_leftnav_recentkeywords" style="{collapse[collapseobj_leftnav_recentkeywords]}">
+		    <div id="tagsblock">
+			<div><table><loop name="recentkeywords"><tr><td><div class="blueonly"><span title="{keywordfull}"><a href="{ilpage[search]}?mode={searchmode}&amp;q={keywordurlencoded}&amp;nkw=1" rel="nofollow">{keyword}</a></span></div></td></tr></loop name="recentkeywords"></table></div>
+		    </div>
+		</div>
+
+		<div class="block5-footer">
+                    <div class="block5-right">
+			<div class="block5-left"></div>
+                    </div>
+		</div>
+	    </div>
+	</div></div></if>
+
+    <if condition="isset($ilconfig['popular_tab']) AND $ilconfig['popular_tab'] AND isset($show['tagcloud']) AND $show['tagcloud']">
+	<div style="width:235px"><div class="block-wrapper">
+	    <div class="block5">
+		<div class="block5-top">
+                    <div class="block5-right">
+			<div class="block5-left"></div>
+                    </div>
+		</div>
+		<div class="block5-header" onClick="toggle('leftnav_tags')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''"><span style="float:{template_textalignment}; padding-top:4px; padding-{template_textalignment_alt}:10px"><img id="collapseimg_leftnav_tags" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_tags]}.gif" border="0" alt="" /></span>{_whats_popular}</div>
+		<div class="block5-content" id="collapseobj_leftnav_tags" style="{collapse[collapseobj_leftnav_tags]}">
+		    <div id="tagsblock">
+
+			<div class="tagscloud blue"><div style="line-height:1.5em">{tagcloud}</div></div>
+
+		    </div>
+		</div>
+		<div class="block5-footer">
+                    <div class="block5-right">
+			<div class="block5-left"></div>
+                    </div>
+		</div>
+	    </div></div></div></if>
+
+    {legend}
+
+
+    <if condition="isset($ilconfig['trend_tab']) AND $ilconfig['trend_tab'] AND $ilconfig['globalauctionsettings_serviceauctionsenabled']">
+	<div style="width:235px"><div class="block-wrapper">
+	    <div class="block5">
+
+		<div class="block5-top">
+                    <div class="block5-right">
+			<div class="block5-left"></div>
+                    </div>
+		</div>
+
+		<div class="block5-header" onClick="toggle('leftnav_stats')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''"><span style="float:{template_textalignment}; padding-top:4px; padding-{template_textalignment_alt}:10px"><img id="collapseimg_leftnav_stats" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_stats]}.gif" border="0" alt="" /></span>{_trends}</div>
+		<div class="block5-content" id="collapseobj_leftnav_stats" style="{collapse[collapseobj_leftnav_stats]}">
+		    <div id="statsblock">
+			<div>
+			    {apihook[main_template_stats_start]}
+			    
+				<div class="black" style="font-size:17px"><a href="{ilpage[search]}?mode=service"><strong>{jobcount}</strong></a></div><div class="gray" style="padding-top:1px">{_services}</div>
+				<!--<div class="black" style="font-size:20px;padding-top:14px"><a href="{ilpage[search]}?mode=experts&amp;sort=102"><strong>{expertsrevenue}</strong></a></div><div class="litegray" style="padding-top:1px">{_experts_revenue_earned}</div>-->
+				<div class="black" style="font-size:17px;padding-top:14px"><a href="{ilpage[search]}?mode=experts&amp;sort=52"><strong>{expertcount}</strong></a></div><div class="gray" style="padding-top:1px">{_experts}</div>
+			    
+			    {apihook[main_template_stats_end]}
+			</div>
+		    </div>
+		</div>
+
+		<div class="block5-footer">
+                    <div class="block5-right">
+			<div class="block5-left"></div>
+                    </div>
+		</div>
+	    </div>
+	</div></div></if>
+
+    {apihook[main_template_leftnav_mid]}
+
+    <if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND isset($recentreviewedproductauctions) AND count($recentreviewedproductauctions) > 0"><!-- START last viewed items -->
+	<div onMouseover="this.className='alt2 amazon_scroller';toggle_show('clearitems')" onMouseout="this.className='amazon_scroller';toggle_hide('clearitems')"><h2 style="padding:10px 0px 14px 10px"><span class="smaller blue" style="float:right;display:none;padding:3px" id="clearitems"><a href="{http_server}{ilpage[preferences]}?cmd=favorites&amp;do=recentlyreviewed&amp;subcmd=clearproductlist&amp;returnurl={pageurl_urlencoded}" onclick="return confirm_js('{_are_you_sure_you_would_like_to_clear_your_recently_reviewed_product_auctions_list}')" style="text-decoration:underline">{_clear}</a></span>{_recently_viewed_items}</h2>
+
+	    <div id="amazon_scroller_recent_items" class="amazon_scroller">
+		<div class="amazon_scroller_mask">
+		    <ul>
+			<loop name="recentreviewedproductauctions"><li><div class="iphotowrapper">
+				    {photo}
+				    <div class="ititle"><span class="blue">{title}</span></div>
+				    <if condition="isset($ilconfig['lowestpricecombined']) AND $ilconfig['lowestpricecombined']"><div class="icurrentprice">{lowestprice}</div><else />
+					<div class="icurrentprice">{price}</div><div class="ibuynowprice">{buynow}</div>
+				    </if>
+				    <if condition="isset($ilconfig['timeleftblocks']) AND $ilconfig['timeleftblocks']"><div class="itimeleft">{timeleft}</div></if>
+				</div><div style="clear:both;"></div></li></loop name="recentreviewedproductauctions">
+		    </ul>
+		</div>
+		<ul class="amazon_scroller_nav">
+		    <li></li>
+		    <li></li>
+		</ul>
+	    </div><div style="margin-bottom:15px"></div></div><!-- END last viewed items --></if>
+
+
+    <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND isset($recentreviewedserviceauctions) AND count($recentreviewedserviceauctions) > 0"><!-- START last viewed jobs -->
+	<div onMouseover="this.className='alt2 amazon_scroller amazon_scroller_services';toggle_show('clearjobs')" onMouseout="this.className='amazon_scroller amazon_scroller_services';toggle_hide('clearjobs')"><h2 style="padding:10px 0px 14px 10px"><span class="smaller blue" style="float:right;display:none;padding:3px" id="clearjobs"><a href="{ilpage[preferences]}?cmd=favorites&amp;do=recentlyreviewed&amp;subcmd=clearservicelist&amp;returnurl={pageurl_urlencoded}" onclick="return confirm_js('{_are_you_sure_you_would_like_to_clear_your_recently_reviewed_service_auctions_list}')" style="text-decoration:underline">{_clear}</a></span>{_recently_viewed_jobs}</h2>
+	    <div id="amazon_scroller_recent_jobs" class="amazon_scroller amazon_scroller_services">
+		<div class="amazon_scroller_mask">
+		    <ul>
+			<loop name="recentreviewedserviceauctions"><li><div class="iphotowrapper">
+				    <div class="blue ijobtitle">{title}</div>
+				    <div class="litegray idescription">{description}</div>
+				    <div class="black iaveragebid">{_average}: {average}</div>
+				    <if condition="isset($ilconfig['timeleftblocks']) AND $ilconfig['timeleftblocks']"><div class="itimeleft">{timeleft}</div></if>
+				</div></li></loop name="recentreviewedserviceauctions">
+
+		    </ul>
+		</div>
+		<ul class="amazon_scroller_nav">
+		    <li></li>
+		    <li></li>
+		</ul>
+		<div style="clear: both"></div>
+	    </div>
+	    <div style="clear:both;"></div><div style="margin-bottom:15px"></div></div><!-- END last viewed jobs -->
+    </if>
+
+    {apihook[main_template_leftnav_bottom]}
+
+</td>
+<td><div style="width:15px"></div></td>
+<td width="100%">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td valign="top">
+
+                {apihook[main_templatemid_featured_start]}
+
+		<!--<div style="padding-top:7px;padding-bottom:10px;font-size:18px" class="gray">{_i_want_to} <if condition="empty($_SESSION['ilancedata']['user']['userid'])">&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="location.href='{https_server}{ilpage[registration]}'" class="buttons" style="font-size:14px">{_register}</a>&nbsp;&nbsp;</if><if condition="$ilconfig['globalauctionsettings_productauctionsenabled']">&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="location.href='{http_server}sell'" class="buttons" style="font-size:14px">{_sell_an_item}</a> &nbsp;&nbsp;&nbsp;<if condition="$ilconfig['globalfilters_bulkupload']"><a href="javascript:void(0)" onclick="location.href='{http_server}bulk/sell'" class="buttons" style="font-size:14px">{_sell_bulk_items}</a> &nbsp;&nbsp;&nbsp;</if></if> <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']"><a href="javascript:void(0)" onclick="location.href='{http_server}buy'" class="buttons" style="font-size:14px">{_post_a_job}</a> &nbsp;&nbsp;&nbsp;  <a href="javascript:void(0)" onclick="location.href='{http_server}{ilpage[search]}?mode=experts&amp;sort=52'" class="buttons" style="font-size:14px">{_find_talent}</a></if></div><div style="height:1px;background-color:#dfdfdf;width:100%;margin-top:11px;margin-bottom:14px"></div>-->
+
+
+	<if condition="$ilconfig['globalfilters_specialshomepage']"><div><a href="{ilpage[search]}?mode=product&amp;cid=552&amp;q=&amp;titlesonly=1&amp;images=1&amp;nkw=1"><img src="{template_relativeimagepath}{template_imagesfolder}01.jpg" border="0" alt="" id="" style="border-radius:5px; width:100%;" /></a></div></if>
+
+	<div id="featuredblock">
+
+	    <!-- BEGIN featured blocks --><if condition="$ilconfig['showfeaturedlistings']">
+                <if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND isset($featuredproductauctions) AND count($featuredproductauctions) > 0">
+		    <!-- BEGIN featured products --><div style="margin-bottom:16px">
+			<h2 style="padding-bottom:14px;padding-top:14px">{_featured} : {_items}</h2>
+			<div id="amazon_scroller_featured_items" class="amazon_scroller">
+			    <div class="amazon_scroller_mask" style="width:800px;">
+				<ul><loop name="featuredproductauctions"><li><div class="iphotowrapper">
+						{photo}
+						<div class="ititle"><span class="blue">{title}</span></div>
+						<if condition="isset($ilconfig['lowestpricecombined']) AND $ilconfig['lowestpricecombined']"><div class="icurrentprice">{lowestprice}</div><else />
+						    <div class="icurrentprice">{price}</div><div class="ibuynowprice">{buynow}</div>
+						</if>
+						<if condition="isset($ilconfig['timeleftblocks']) AND $ilconfig['timeleftblocks']"><div class="itimeleft">{timeleft}</div></if>
+					    </div><div style="clear:both;"></div></li>
+				    </loop name="featuredproductauctions"></ul>
+			    </div>
+			    <ul class="amazon_scroller_nav">
+				<li></li>
+				<li></li>
+			    </ul>
+			    <div style="clear: both"></div>
+			</div>
+			<div style="clear:both;"></div>
+		    </div><div style="height:1px;background-color:#dfdfdf;width:100%;margin-top:6px;margin-bottom:9px"></div><!-- END featured products --></if>
+
+                <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND isset($featuredserviceauctions) AND count($featuredserviceauctions) > 0">
+		    <!-- BEGIN featured services --><div style="margin-bottom:16px">
+			<h2 style="padding-bottom:14px">{_featured} : {_jobs}</h2>
+			<div id="amazon_scroller_featured_jobs" class="amazon_scroller amazon_scroller_services">
+			    <div class="amazon_scroller_mask">
+				<ul><loop name="featuredserviceauctions"><li><div class="iphotowrapper">
+						<div class="blue ijobtitle">{title}</div><div class="litegray idescription">{description}</div>
+						<div class="black iaveragebid">{average}</div>
+						<if condition="isset($ilconfig['timeleftblocks']) AND $ilconfig['timeleftblocks']"><div class="itimeleft">{timeleft}</div></if>
+					    </div></li></loop name="featuredserviceauctions"></ul>
+			    </div>
+			    <ul class="amazon_scroller_nav">
+				<li></li>
+				<li></li>
+			    </ul>
+			    <div style="clear: both"></div>
+			</div>
+			<div style="clear:both;"></div>
+		    </div><div style="height:1px;background-color:#dfdfdf;width:100%;margin-top:6px;margin-bottom:9px"></div><!-- END featured services --></if>
+
+                {apihook[main_templatemid_featured_end]}
+
+	    </if></div><!-- END featured blocks -->
+
+	<if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] OR $ilconfig['globalauctionsettings_serviceauctionsenabled']">
+	    <div id="sellerwatchlist"><!-- BEGIN seller watchlist block -->
+		<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr valign="top">	
+		    <if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND !empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0 AND isset($itemsfromsellerwatchlist) AND count($itemsfromsellerwatchlist) > 0"><td>
+			    <!-- START items from seller watchlist --><h2 style="padding-bottom:14px;padding-top:7px">{_items_from_seller_watchlist} &nbsp;&nbsp;<span class="smaller blue"><a href="{ilpage[watchlist]}" style="text-decoration:underline">{_view}</a></span></h2>
+			    <div id="amazon_scroller_watchlist_items" class="amazon_scroller">
+				<div class="amazon_scroller_mask" style="width:800px;">
+				    <ul>
+					<loop name="itemsfromsellerwatchlist">
+					    <li>
+						<div class="iphotowrapper">
+						    {photo}
+						    <div class="ititle"><span class="blue">{title}</span></div>
+						    <if condition="isset($ilconfig['lowestpricecombined']) AND $ilconfig['lowestpricecombined']"><div class="icurrentprice">{lowestprice}</div><else />
+							<div class="icurrentprice">{price}</div><div class="ibuynowprice">{buynow}</div>
+						    </if>
+						    <if condition="isset($ilconfig['timeleftblocks']) AND $ilconfig['timeleftblocks']"><div class="itimeleft">{timeleft}</div></if>
+						</div><div style="clear:both;"></div></li>
+					</loop name="itemsfromsellerwatchlist">
+				    </ul>
+				</div>
+				<ul class="amazon_scroller_nav">
+				    <li></li>
+				    <li></li>
+				</ul>
+				<div style="clear: both"></div>
+			    </div>
+			    <div style="clear:both;"></div><!-- END items from seller watchlist -->
+			</td>
+			<else />
+			<if condition="empty($_SESSION['ilancedata']['user']['userid'])">
+			    <td><h2 style="padding-bottom:14px">{_bid_or_buy_items_youre_watching_or_bidding_on}</h2><div style="padding-bottom:14px"><input type="submit" value="{_sign_in}" class="buttons" style="font-size:14px" onclick="location.href='{https_server}{ilpage[login]}'" />&nbsp;&nbsp;<input type="submit" value="{_register}" class="buttons" style="font-size:14px" onclick="location.href='{https_server}{ilpage[registration]}'" /></div></td>
+			    <else />
+			    <td width="100%"></td>
+			</if>
+		    </if>
+		    {apihook[main_templatemid_recentlyviewed_end]}
+		    </tr></table></div><!-- END seller watchlist block --></if>
+
+	<div id="endingsoonblock"><!-- BEGIN ending soon blocks -->
+	    <if condition="$ilconfig['showendingsoonlistings']">
+		<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND isset($servicesendingsoon) AND count($servicesendingsoon) > 0">
+		    <div style="height:1px;background-color:#dfdfdf;width:100%;margin-top:16px;margin-bottom:16px"></div>
+		    <!-- BEGIN ending soon services --><div style="margin-bottom:16px">
+                        <h2 style="padding-bottom:14px">{_bid_on_ending_soon_service_auctions_before_its_too_late} &nbsp;&nbsp;&nbsp;<span class="smaller blue"><a href="{http_server}{ilpage[search]}?mode=service&amp;sort=01">{_view_all}</a></span></h2>
+                        <div id="amazon_scroller_endingsoon_jobs" class="amazon_scroller amazon_scroller_services">
+			    <div class="amazon_scroller_mask">
+				<ul>
+				    <loop name="servicesendingsoon"><li><div class="iphotowrapper">
+						<div class="blue ijobtitle">{title}</div><div class="litegray idescription">{description}</div>
+						<div class="black iaveragebid">{average}</div>
+						<if condition="isset($ilconfig['timeleftblocks']) AND $ilconfig['timeleftblocks']"><div class="itimeleft">{timeleft}</div></if>
+					    </div></li></loop name="servicesendingsoon">
+
+				</ul>
+			    </div>
+			    <ul class="amazon_scroller_nav">
+				<li></li>
+				<li></li>
+			    </ul>
+			    <div style="clear: both"></div>
+			</div>
+                        <div style="clear:both;"></div>
+		    </div><!-- END ending soon services --></if>
+
+		<if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND isset($productsendingsoon) AND count($productsendingsoon) > 0">
+		    <div style="height:1px;background-color:#dfdfdf;width:100%;margin-top:16px;margin-bottom:16px"></div>
+		    <!-- BEGIN ending soon products --><div style="padding:9px">
+                        <h2 style="padding-bottom:14px">{_bid_on_ending_soon_items_now_before_theyre_gone} &nbsp;&nbsp;&nbsp;<span class="smaller blue"><a href="{http_server}{ilpage[search]}?mode=product&amp;sort=01">{_view_all}</a></span></h2>
+                        <div id="amazon_scroller_endingsoon_items" class="amazon_scroller">
+			    <div class="amazon_scroller_mask">
+				<ul>
+				    <loop name="productsendingsoon"><li><div class="iphotowrapper">
+						{photo}
+						<div class="ititle"><span class="blue">{title}</span></div>
+						<if condition="isset($ilconfig['lowestpricecombined']) AND $ilconfig['lowestpricecombined']"><div class="icurrentprice">{lowestprice}</div><else />
+						    <div class="icurrentprice">{price}</div><div class="ibuynowprice">{buynow}</div>
+						</if>
+						<if condition="isset($ilconfig['timeleftblocks']) AND $ilconfig['timeleftblocks']"><div class="itimeleft">{timeleft}</div></if>
+					    </div><div style="clear:both;"></div></li></loop name="productsendingsoon"></ul>
+			    </div>
+			    <ul class="amazon_scroller_nav">
+				<li></li><li></li>
+			    </ul>
+			    <div style="clear: both"></div>
+			</div>
+			<div style="clear:both;"></div>
+		    </div><!-- END ending soon products --></if>
+	    </if>
+	</div><!-- END ending soon blocks -->
+
+	<div id="latestblock">
+	    <!-- BEGIN latest services blocks --><if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND $ilconfig['showlatestlistings'] AND isset($latestserviceauctions) AND count($latestserviceauctions) > 0">
+		<div style="height:1px;background-color:#dfdfdf;width:100%;margin-top:16px;margin-bottom:16px"></div>
+		<!-- BEGIN latest services --><div style="margin-bottom:16px">
+		    <h2 style="padding-bottom:14px">{_bid_on_new_projects_posted} &nbsp;&nbsp;&nbsp;<span class="smaller blue"><a href="{http_server}{ilpage[search]}?mode=service&amp;sort=02">{_view_all}</a></span></h2>
+		    <div id="amazon_scroller_latest_jobs" class="amazon_scroller amazon_scroller_services">
+			<div class="amazon_scroller_mask">
+			    <ul>
+				<loop name="latestserviceauctions"><li><div class="iphotowrapper">
+					    <div class="blue ijobtitle">{title}</div><div class="litegray idescription">{description}</div>
+					    <div class="black iaveragebid">{average}</div>
+					    <if condition="isset($ilconfig['timeleftblocks']) AND $ilconfig['timeleftblocks']"><div class="itimeleft">{timeleft}</div></if>
+                                        </div></li></loop name="latestserviceauctions">
+
+			    </ul>
+			</div>
+			<ul class="amazon_scroller_nav">
+			    <li></li>
+			    <li></li>
+			</ul>
+			<div style="clear: both"></div>
+		    </div>
+
+		</div><!-- END latest services --></if>
+
+	    <if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND $ilconfig['showlatestlistings'] AND isset($latestproductauctions) AND count($latestproductauctions) > 0">
+		<div style="height:1px;background-color:#dfdfdf;width:100%;margin-top:16px;margin-bottom:16px"></div>
+		<!-- BEGIN latest products --><div style="margin-bottom:16px">
+		    <h2 style="padding-bottom:14px">{_bid_on_new_items_for_sale} &nbsp;&nbsp;&nbsp;<span class="smaller blue"><a href="{http_server}{ilpage[search]}?mode=product&amp;sort=02">{_view_all}</a></span></h2>
+		    <div id="amazon_scroller_latest_items" class="amazon_scroller">
+			<div class="amazon_scroller_mask" style="width:800px;">
+			    <ul>
+				<loop name="latestproductauctions"><li><div class="iphotowrapper">
+                                            {photo}
+                                            <div class="ititle"><span class="blue">{title}</span></div>
+                                            <if condition="isset($ilconfig['lowestpricecombined']) AND $ilconfig['lowestpricecombined']"><div class="icurrentprice">{lowestprice}</div><else />
+						<div class="icurrentprice">{price}</div><div class="ibuynowprice">{buynow}</div>
+                                            </if>
+                                            <if condition="isset($ilconfig['timeleftblocks']) AND $ilconfig['timeleftblocks']"><div class="itimeleft">{timeleft}</div></if>
+					</div><div style="clear:both;"></div></li></loop name="latestproductauctions"></ul>
+			</div>
+			<ul class="amazon_scroller_nav">
+			    <li></li>
+			    <li></li>
+			</ul>
+			<div style="clear: both"></div>
+		    </div>
+		    <div style="clear:both;"></div>
+		</div><!-- END latest products --></if>
+	</div><!-- END latest products blocks -->
+
+	{apihook[main_template_mid_bigtabs_top]}
+
+
+	{apihook[main_templatemid_end]}
+</td>
+</tr>
+</table>    
+</td>
+</tr>
+</table>
+{apihook[main_template_end]} 

@@ -1,0 +1,156 @@
+<if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'invoice'"><h1>{_send_invoice_to_buyer}</h1><else /><h1>{_order_details}</h1></if>
+<div class="smaller" style="padding-top:3px">{ordernumber}</div>
+<div style="padding-top:12px"></div>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td valign="top" width="50%">
+	
+		<div class="block-wrapper">
+		
+			<div class="block5">
+			
+					<div class="block5-top">
+							<div class="block5-right">
+									<div class="block5-left"></div>
+							</div>
+					</div>
+					
+					<div class="block5-header"><img src="{template_relativeimagepath}{template_imagesfolder}icons/shipbox.png" alt="" border="0" /> {_shipping}</div>
+					<div class="block5-content" style="padding:12px">
+						
+						
+						
+						<div><div><strong>{buyerfullname}</strong> ({buyerusername})</div><div style="padding-top:6px">{shippinginfo}</div><div style="padding-top:12px">{shippingpartner}</div><div style="padding-top:6px">{shippingstatus}</div></div>
+						
+					  
+					</div>
+					
+					<div class="block5-footer">
+							<div class="block5-right">
+									<div class="block5-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+	</td>
+
+	<td width="2%"></td>
+	<td valign="top" width="47%">
+	
+		<div class="block-wrapper">
+		
+			<div class="block5">
+			
+					<div class="block5-top">
+							<div class="block5-right">
+									<div class="block5-left"></div>
+							</div>
+					</div>
+					
+					<div class="block5-header"><img src="{template_relativeimagepath}{template_imagesfolder}buy.gif" alt="" border="0" /> {_payment}</div>
+					<div class="block5-content" style="padding:12px">
+						
+						<div><strong>{paymentinfo}</strong></div><div style="padding-top:6px">{paymentstatus}</div>
+						
+					</div>
+					
+					<div class="block5-footer">
+							<div class="block5-right">
+									<div class="block5-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+	
+	</td>
+
+</tr>
+</table>
+
+<div class="block-wrapper">
+
+<div class="block5">
+	
+			<div class="block5-top">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+			<div class="block5-header">{_order_details}</div>
+			<div class="block5-content" style="padding:0px">
+				
+				<if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'invoice'">
+                <form name="ilform" action="{ilpage[invoicepayment]}" method="get">
+                <input type="hidden" name="do" value="invoice" />
+                <input type="hidden" name="cmd" value="orderdetail" />
+                <input type="hidden" name="pid" value="{project_id}" />
+                <if condition="isset($ilance->GPC['oid']) AND $ilance->GPC['oid']"><input type="hidden" name="oid" value="{oid}" /></if>
+                <if condition="isset($ilance->GPC['soid']) AND $ilance->GPC['soid']"><input type="hidden" name="soid" value="{soid}" /></if>
+                <if condition="isset($ilance->GPC['bid']) AND $ilance->GPC['bid']"><input type="hidden" name="bid" value="{bid}" /></if>
+                <input type="hidden" name="returnurl" value="{pageurl}" /> 
+                </if>
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+                <tr class="block5-content-gray">
+                	<td width="80%"><div class="black"><strong>{_title}</strong></div></td>
+                    <td width="10%" align="right" nowrap="nowrap"><div class="black"><strong>{_shipping_and_handling}</strong></div></td>
+                    <td width="9%" align="right"><div class="black"><strong>{_price}</strong></div></td>
+                    <td width="1%" align="right"></td>
+                </tr>
+				<tr class="alt1" valign="top">
+					<td><div style="padding-bottom:6px" class="black">{description}</div><div style="padding-top:4px;padding-bottom:3px" class="smaller"><strong>{_quantity}:</strong> {qty}</div>
+					<div class="smaller" style="padding-bottom:3px"><strong>{_price_per_item}:</strong> {priceperitem}</div>{currencyinfo}<div class="smaller" style="padding-bottom:3px"><strong>{_order_date}:</strong> {orderdate}</div><div class="smaller" style="padding-bottom:3px"><strong>{_seller}:&nbsp;</strong><span>{ordermerchant}</span></div></td>
+					<td align="right">{shipping}</td>
+                    <td align="right">{price}</td>
+                    <td align="right"></td>
+				</tr>
+				<tr>
+					<td align="right" colspan="2"><span style="float:left">{cancelstatus}</span><span class="gray">{_sub_total}:</span></td> 
+					<td  nowrap="nowrap" class="alt1_left alt1" align="right">{amount}</td>
+					<td nowrap="nowrap" class="alt1" align="right"></td> 
+				</tr>
+				<if condition="isset($show['shipping']) AND $show['shipping']">
+				<tr>
+				  <td align="right" colspan="2"><span class="gray">{_shipping_and_handling}:<if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'invoice'"> {shippingservice}</if></span></td>
+				  <td nowrap="nowrap" class="alt1_left alt1" align="right"><if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'invoice'">{currencysymbol2}
+				      <input type="text" name="buyershipcost" size="5" value="{shipping_plain}" class="input" style="text-align:right" /><else />{shipping}</if></td>
+				  <td nowrap="nowrap" class="alt1" align="right"></td>
+				  </tr>
+				</if>
+				<if condition="isset($show['taxes']) AND $show['taxes']">
+				<tr valign="top">
+					<td align="right" colspan="2"><div><span class="gray">{_sales_tax}:<if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'invoice'"> {taxpulldown}</if></span></div>
+                    <if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'invoice' AND !isset($ilance->GPC['soid'])"><div style="padding-top:4px" class="smaller gray"><input type="checkbox" name="salestaxshipping" value="1" id="salestaxshipping" {cbsalestaxshipping} /> {_apply_tax_to_shipping_handling_costs}</div></if>
+                    </td> 
+					<td nowrap="nowrap" class="alt1_left alt1" align="right"><if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'invoice'"><input type="text" name="salestaxrate" size="5" value="{salestaxrate}" class="input" style="text-align:right" /><else />{taxamount}</if></td>
+					<td nowrap="nowrap" class="alt1" align="left" valign="top"><if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'invoice'"><span style="float:left;margin-top:4px;margin-left:-18px;">%</span></if></td> 
+				</tr>
+				</if>
+				<tr valign="top">
+					<td colspan="2" align="right"><span class="black"><strong>{_total}<if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'invoice'"><else /> ({paymentstatus2})</if>:</strong></span></td>
+					<td class="alt1_left" align="right" nowrap="nowrap"><span class="black" style="font-size:16px"><strong>{totalamount}</strong></span></td>
+					<td align="right"></td>
+				</tr>
+                <if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'invoice'"><tr class="alt2_top">
+                	<td colspan="4"><if condition="isset($ilance->GPC['soid']) AND $ilance->GPC['soid'] != ''"><input type="submit" name="send" value="{_send_invoice}" style="font-size:15px" class="buttons" /><else /><input type="submit" name="update" value="{_update}" style="font-size:15px" class="buttons" /> <input type="submit" name="send" value="{_send_invoice}" style="font-size:15px" class="buttons" /></if>&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{returnurl}">{_cancel}</a></span></td>
+                </tr></if>
+				</table>
+                <if condition="isset($show['cancelled']) AND $show['cancelled']"><span style="background:url({template_relativeimagepath}{template_imagesfolder}cancelled.png);width:390px;height:250px;float:left;margin-left:350px;margin-top:-300px"></span></if>
+                <if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'invoice'">
+                </form>
+                </if>
+				
+			  
+</div>
+			
+			<div class="block5-footer">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>

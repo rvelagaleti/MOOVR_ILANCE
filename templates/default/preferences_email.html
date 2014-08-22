@@ -1,0 +1,136 @@
+{apihook[preferences_email_main_table_start]}
+
+<form method="post" action="{ilpage[preferences]}" name="emailupdate" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="_do-email-change" />
+{apihook[preferences_email_form_start]}
+
+<div class="block-wrapper">
+    <div class="block">
+        <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            <div class="block-header">{_email_preferences}</div>
+            <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_keep_your_email_updated_from_this_area}</div></div>
+            <div class="block-content" style="padding:0px">
+            
+                {apihook[preferences_email_mid_table_start]}
+                
+                <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+                <tr class="alt1">
+                    <td align="left" colspan="5">
+                    
+                          {apihook[preferences_email_inner_table_start]}
+                        
+                          <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                          {apihook[preferences_email_inner_table_tr_start]}
+                          <tr> 
+                                <td width="75%"><div class="gray" style="padding-bottom:3px">{_master_email_address}</div><div><input type="text" name="email" value="{session_email}" maxlength="49" size="30" class="input" /></div><div class="smaller gray" style="padding-top:3px">{_please_whitelist_the_following_email}: {site_email}</div></td>
+                                <td><div class="gray" style="padding-bottom:3px">{_send_test_email}</div><div><select name="testnotify" style="font-family: verdana"><option value="1">{_yes}</option><option value="0" selected="selected">{_no}</option></select></div></td>
+                          </tr>
+                          {apihook[preferences_email_inner_table_tr_end]}
+                          </table>
+                        
+                          {apihook[preferences_email_inner_table_end]}
+                    
+                    </td>
+                </tr>
+                <tr class="alt2_top">
+                    <td colspan="5"><input type="submit" class="buttons" value=" {_save} " accesskey="s" style="font-size:15px" /></td>
+                </tr>
+                </table>
+                
+                {apihook[preferences_email_mid_table_end]}
+
+                
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+{apihook[preferences_email_form_end]}
+</form>
+
+<form method="post" action="{ilpage[preferences]}" name="notificationupdate" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="_do-notification-change" />
+<input type="hidden" name="returnurl" value="{pageurl_urlencoded}" />
+{apihook[preferences_email_form2_start]}
+<div class="block-wrapper">
+    <div class="block">
+        <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            <div class="block-header">{_notifications}</div>
+            <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_our_interactive_reverse_auction_platform_actively_sends_email_based_on_a_wide_variety_of_events_that_may_occur}</div></div>
+            <div class="block-content" style="padding:0px">
+            
+                <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+                <tr class="alt1">
+                    <td align="left" colspan="5">
+                    
+                          <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                          <tr> 
+                                <td width="75%"><div class="gray" style="padding-bottom:3px">{_show_specific_user_type}</div><div><label for="all"><input name="type" id="all" type="radio" value="" <if condition="!isset($ilance->GPC['t']) OR isset($ilance->GPC['t']) AND $ilance->GPC['t'] == ''">checked="checked"</if> onclick="location.href='{https_server}{ilpage[preferences]}?cmd=email'" />
+                       <span>{_all_types}</span></label>&nbsp;&nbsp;&nbsp;
+                  <label for="buyer"><input name="type" id="buyer" type="radio" value="buyer" <if condition="isset($ilance->GPC['t']) AND $ilance->GPC['t'] == 'buyer'">checked="checked"</if> onclick="location.href='{https_server}{ilpage[preferences]}?cmd=email&amp;t=buyer'" />
+                       <span>{_buyer}</span></label>&nbsp;&nbsp;&nbsp;
+                    <label for="seller"><input name="type" id="seller" type="radio" value="seller" <if condition="isset($ilance->GPC['t']) AND $ilance->GPC['t'] == 'seller'">checked="checked"</if> onclick="location.href='{https_server}{ilpage[preferences]}?cmd=email&amp;t=seller'" />
+                       <span>{_seller}</span></label><if condition="$_SESSION['ilancedata']['user']['isadmin'] == '1'">&nbsp;&nbsp;&nbsp;
+                    <label for="admin"><input name="type" id="admin" type="radio" value="admin" <if condition="isset($ilance->GPC['t']) AND $ilance->GPC['t'] == 'admin'">checked="checked"</if> onclick="location.href='{https_server}{ilpage[preferences]}?cmd=email&amp;t=admin'" />
+                       <span>{_admin}</span></label></if></div></td>
+                          </tr>
+                          </table>
+                    
+                    </td>
+                </tr>
+                <tr class="alt2"> 
+                        <td width="95%"><strong>{_notification_title}</strong></td>
+                        <td width="1%" align="center"><span title="{_buyer_specific_email}"><strong>B</strong></span></td>
+                        <td width="1%" align="center"><span title="{_seller_specific_email}"><strong>S</strong></span></td>
+                        <if condition="$_SESSION['ilancedata']['user']['isadmin'] == '1'"><td width="1%" align="center"><span title="{_admin_specific_email}"><strong>A</strong></span></td></if>
+                        <td width="1%"><span title="{_enable_email_notification}"><strong>{_email}</strong></span></td>
+                        <!--<td width="1%"><strong>{_sms}</strong></td>-->
+                  </tr>
+                  {apihook[preferences_email_notifications_loop_start]}
+                  <loop name="emailnotifications">
+                  <tr class="alt1">
+                        <td>{name}<span style="float:left;padding-right:9px; padding-top:1px"><img src="{template_relativeimagepath}{template_imagesfolder}email_post.gif" border="0" alt="" /></span></td>
+                        <td align="center"><span title="{_buyer_specific_email}">{ebuyer}</span></td>
+                        <td align="center"><span title="{_seller_specific_email}">{eseller}</span></td>
+                        <if condition="$_SESSION['ilancedata']['user']['isadmin'] == '1'"><td align="center"><span title="{_admin_specific_email}">{eadmin}</span></td></if>
+                        <td align="center" class="alt2">{emailcb}</td>
+                        <!--<td align="center">{smscb}</td>-->
+                  </tr>
+                  </loop name="emailnotifications">
+                  {apihook[preferences_email_notifications_loop_end]}
+                   <tr class="alt1">
+                    <td colspan="5">{prevnext}</td>
+                   </tr>
+                   <tr class="alt2_top">
+                    <td colspan="5"><input type="submit" class="buttons" value=" {_save} " accesskey="s" style="font-size:15px" /></td>
+                </tr>
+                </table>
+                
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+
+{apihook[preferences_email_form2_end]}
+</form>
+
+{apihook[preferences_email_main_table_end]}

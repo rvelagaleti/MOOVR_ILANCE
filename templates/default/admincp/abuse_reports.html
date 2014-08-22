@@ -1,0 +1,213 @@
+<div id="v3body4">
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+
+	<div id="content">
+	<h1>{_abuse_reports}</h1><br />
+		
+		<div class="tab-pane" id="abusereportsmain">
+
+			<!-- begin tab page -->
+			<div class="tab-page">
+	
+				<h2 class="tab">{_listings}</h2>
+				
+				<!-- begin tab pane -->
+				<div class="tab-pane">
+				
+					<!-- categories view -->
+					<form name="ilform" action="{ilpage[subscribers]}" accept-charset="UTF-8" method="post" style="margin: 0px;">
+					<input type="hidden" name="cmd" value="abuse" />
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_auction_listing_abuse}</div>
+							<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_when_a_registered_user_submits_an_abuse_report_from_a_detailed_auction}</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0">
+								<tr class="alt2">
+									<td width="44%" align="left">{_regarding}</td>
+									<td width="21%" align="left">{_submission_by} </td>
+									<td width="26%">{_date}</td>
+									<td width="9%" align="right" nowrap="nowrap">{_action}</td>
+								  </tr>
+								<loop name="listingabuse">
+								<tr class="alt1" valign="top">
+									<td align="left"><span style="float:right;padding-left:14px" class="smaller"><span class="blue"><a href="javascript:void(0)" onmouseover="Tip('{fullregarding}', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()">{_view}</a></span></span>{regarding}<div class="smaller" style="padding-top:4px"><strong>{_listing}:</strong> <span class="blue">{ref}</span></div></td>
+								  <td align="left" nowrap="nowrap">{username}<a href="mailto:{email}"><div class="smaller blue" style="padding-top:3px">{email}</div></a></td>
+									<td align="left"><div class="smaller">{dateadded}</div></td>
+									<td align="right"><span class="blueonly">{action}</span></td>
+								  </tr>
+								</loop name="listingabuse">
+								<if condition="isset($show['listingabuse']) AND $show['listingabuse'] == false">
+								<tr>
+									<td colspan="4" align="center">{_no_results_found}</td>
+								</tr>
+								</if>
+								</table>
+								
+							</div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+					
+					</form>
+					<!-- /categories view -->
+									
+				</div>
+				<!-- /begin tab pane -->
+				
+			</div>
+			<!-- /begin tab page -->
+			
+			<!-- begin tab page -->
+			<div class="tab-page">
+	
+				<h2 class="tab">{_portfolios}</h2>
+				
+				<!-- begin tab pane -->
+				<div class="tab-pane">
+				
+					<!-- categories view -->
+					<form name="ilform" action="{ilpage[subscribers]}" accept-charset="UTF-8" method="post" style="margin: 0px;">
+					<input type="hidden" name="cmd" value="abuse" />
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_portfolio_abuse}</div>
+							<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_when_a_registered_user_submits_an_abuse_report_from_a_detailed_portfolio_listing_page}</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0">
+								<tr class="alt2">
+									<td width="44%" align="left">{_regarding}</td>
+									<td width="22%" align="left">{_submission_by}</td>
+									<td width="25%">{_date}</td>
+									<td width="9%" align="right">{_action}</td>
+								  </tr>
+								<loop name="portfolioabuse">
+								<tr class="alt1" valign="top">
+									<td align="left"><span style="float:right;padding-left:14px" class="smaller"><span class="blue"><a href="javascript:void(0)" onmouseover="Tip('{fullregarding}', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()">{_view}</a></span></span>{regarding}<div class="smaller" style="padding-top:4px"><strong>{_re_attachment_id}:</strong> <span class="blue">{ref}</span></div></td>
+								  <td align="left" nowrap="nowrap">{username}<a href="mailto:{email}"><div class="smaller blue" style="padding-top:3px">{email}</div></a></td>
+									<td><div class="smaller">{dateadded}</div></td>
+									<td align="right"><span class="blueonly">{action}</span></td>
+								  </tr>
+								</loop name="portfolioabuse">
+								<if condition="isset($show['portfolioabuse']) AND $show['portfolioabuse'] == false">
+								<tr>
+									<td colspan="4" align="center">{_no_results_found}</td>
+								</tr>
+								</if>
+								</table>
+								
+							</div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+				</form>
+					<!-- /categories view -->
+									
+				</div>
+				<!-- /begin tab pane -->
+				
+			</div>
+			<!-- /begin tab page -->
+			
+			<!-- begin tab page -->
+			<div class="tab-page">
+	
+				<h2 class="tab">{_profiles}</h2>
+				
+				<!-- begin tab pane -->
+				<div class="tab-pane">
+				
+					<!-- categories view -->
+					<form name="ilform" action="{ilpage[subscribers]}" accept-charset="UTF-8" method="post" style="margin: 0px;">
+					<input type="hidden" name="cmd" value="abuse" />
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_profile_abuse}</div>
+							<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_when_a_registered_user_submits_an_abuse_report_from_a_members_detailed_profile_page}</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0">
+								<tr class="alt2">
+									<td width="44%" align="left">{_regarding}</td>
+									<td width="23%" align="left">{_submission_by}</td>
+									<td width="24%">{_date}</td>
+									<td width="9%" align="right" nowrap="nowrap">{_action}</td>
+								  </tr>
+								<loop name="profilesabuse">
+								<tr class="alt1" valign="top">
+									<td align="left"><span style="float:right;padding-left:14px" class="smaller"><span class="blue"><a href="javascript:void(0)" onmouseover="Tip('{fullregarding}', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()">{_view}</a></span></span>{regarding}<div class="smaller" style="padding-top:4px"><strong>{_re_profile_id}:</strong> <span class="blue">{ref}</span></div></td>
+								  <td align="left" nowrap="nowrap">{username}<a href="mailto:{email}"><div class="smaller blue" style="padding-top:3px">{email}</div></a></td>
+									<td><div class="smaller">{dateadded}</div></td>
+									<td align="right"><span class="blueonly">{action}</span></td>
+								  </tr>
+								</loop name="profilesabuse">
+								<if condition="isset($show['profilesabuse']) AND $show['profilesabuse'] == false">
+								<tr>
+									<td colspan="4" align="center">{_no_results_found}</td>
+								</tr>
+								</if>
+								</table>
+								
+							</div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+				</form>
+					<!-- /categories view -->
+									
+				</div>
+				<!-- /begin tab pane -->
+				
+			</div>
+			<!-- /begin tab page -->
+			
+		</div>

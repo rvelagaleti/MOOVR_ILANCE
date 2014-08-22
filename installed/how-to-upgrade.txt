@@ -1,0 +1,81 @@
+###########################################################################
+UPGRADE PROCEDURE FOR ILANCE 4.X
+###########################################################################
+
+STEP 1
+~~~~~~~~~~~~
+If you uploaded a new logo for your marketplace and named it "logo.png" or "logo2.png" or "logo-slim.png" and placed it within the /images/default/v4/ folder then it would be advisable for you to back up logos
+as the default "ILance Logos" will overwrite those if you re-upload the ./images/default/ folder.
+
+Once you have completed your upgrade procedure and you've overwritten the logos above you can re-upload your customized version of the logos and place them back into /images/default/v4/
+
+STEP 2
+~~~~~~~~~~~~
+A) Make backup of your marketplace. You should backup files, database schema + data, templates: /templates/default/ (in AdminCP if you have created new ./admincp/templates/).
+B) Make sure that if you have new customized add-ons you should back them up from within /functions/xml/ by downloading them first to your local computer.
+
+
+STEP 3
+~~~~~~~~~~~~
+You should disable ILance API Hooks. They can cause issues during upgrade process.  In short, an API hook is a integrated XML file that resides within ./functions/xml/ folder 
+which hold the necessary plugin files to make your addon products work.
+
+To disable these plugin files temporarily while we upgrade, please open ./functions/init.php
+
+FIND:
+define('DISABLE_PLUGINAPI', false);
+
+CHANGE CODE TO:
+define('DISABLE_PLUGINAPI', true);
+
+
+STEP 4
+~~~~~~~~~~~~
+A) Download and unzip ILance 4.x to your computer.  
+B) Upload all files to your root folder path where the ilance scripts exist.
+C) You will be prompted to overwrite files already existing on the server, click YES.
+(Optional) You don't have to re-upload the ./images/default/ or the ./cache/ or the ./uploads/ folder so you can skip these specific folders.
+(Warning) Do not re-upload the ./install/ folder
+
+
+STEP 5
+~~~~~~~~~~~~
+Open file /functions/config.php and make sure you have those values in this file
+define('DIR_SERVER_ROOT_IMAGES', '/path/to/ilance/');
+define('HTTP_CDN_SERVER', '');
+define('HTTPS_CDN_SERVER', '');
+define('HTTP_SERVER_OTHER', '');
+define('HTTPS_SERVER_OTHER', '');
+
+Additionally, as per ILance 4.0 Build 7984 you need to ensure that these define constants exist in your config.php as well:
+
+define('TEMPLATE_NEWUI', true);
+define('TEMPLATE_NEWUI_MODE', 'PRODUCT');
+
+If you are running a service marketplace only please change the PRODUCT above to say SERVICE within the single quotes as above.  Please use UPPERCASE letters.
+
+STEP 6
+~~~~~~~~~~~~
+Now you should upgrade your add-on products. Documentation on how you should do it is attached to add-on within the package you downloaded from ilance.com.  The file will be called how-to-upgrade.txt and will be located within the add-on package or zip file you've already downloaded.
+
+
+STEP 7
+~~~~~~~~~~~~
+Now you can re-enable ILance API Plugin system. Open ./functions/init.php
+
+FIND:
+define('DISABLE_PLUGINAPI', true); 
+
+CHANGE CODE TO:
+define('DISABLE_PLUGINAPI', false);
+
+STEP 8
+~~~~~~~~~~~~
+CHMOD 777 to the following folders:
+./path/to/ilance/images/default/categoryheros/
+
+
+Regards,
+
+Team ILance
+http://www.ilance.com

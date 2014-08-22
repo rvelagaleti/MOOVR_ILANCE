@@ -1,0 +1,267 @@
+<div id="v3body4">
+    <!-- sub navigation -->
+    <div id="sub">
+	<div id="subnav">
+	    <loop name="subnav_settings">
+		<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+	    </loop name="subnav_settings">
+	</div>
+    </div>
+    <!-- /sub navigation -->
+
+    <div id="content">
+	<h1>{_templates_css_manager}</h1><br />
+
+	<!-- templates -->
+	<div class="tab-pane" id="styles">
+
+	    <div class="tab-page" id="manage">
+		<h2 class="tab">{_manage}</h2>
+
+		<div class="block-wrapper">
+		    <div class="block3">
+			<div class="block3-top">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+			<div class="block3-header">{_create_new_style_based_on_existing_one}</div>
+			<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_please_enter_a_new_style_name_and_select_the_base_style_to_create_your_new_template_styles_from}</div></div>
+			<div class="block3-content" style="padding:0px">
+			    <form action="{ilpage[styles]}" name="ilform" method="get" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return validate_all();">
+				<input type="hidden" name="cmd" value="_new-style" /> 
+				<input type="hidden" name="return" value="{ilpage[styles]}" />
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+				    <tr class="alt1">
+					<td>
+					    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+						    <td><strong>{_new_style_name}</strong></td>
+						</tr>
+						<tr>
+						    <td>
+							<input type="text" name="name" id="styletitle" size="35" class="input" />&nbsp;{styles_pulldown} 
+						    </td>
+						</tr>
+					    </table>
+					</td>
+				    </tr>
+				    <tr class="alt2_top">
+					<td><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value="{_create}" style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value="{_create}" style="font-size:15px" /></if></td>
+				    </tr>	
+				</table>
+			    </form>
+			</div>
+			<div class="block3-footer">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+
+		<div class="block-wrapper">
+		    <div class="block3">
+			<div class="block3-top">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+			<div class="block3-header">{_templates_css_manager}</div>
+			<div class="block3-content" style="padding:0px">
+			    <table width="100%" border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr class="alt2">
+               		<td width="1%"><b>{_id}</b></td>
+                    <td><b>{_title}</b></td>
+                    <td><b>Master CSS Files</b></td
+                    ><td><b>{_default}</b></td>
+                    <td><b>{_visible}</b></td>
+                    <td><b>{_sort}</b></td>
+                    <td><b>{_actions}</b></td>
+                </tr>
+                {styles_table}
+                </table>
+			</div>
+			<div class="block3-footer">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+
+	    </div>
+	    <!-- client nav tab page -->
+	    <div class="tab-page">
+
+		<h2 class="tab">{_templates}</h2>
+
+		<div class="block-wrapper">
+		    <div class="block3">
+			<div class="block3-top">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+			<div class="block3-header">{_create_new_template_variable}</div>
+			<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_template_variables_are_accessable_in_every_available_template}</div></div>
+			<div class="block3-content" style="padding:0px">
+			    <form name="createtemplatevar" method="post" action="{ilpage[styles]}" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="_new-template-var" />
+				<input type="hidden" name="gid" value="-1" />
+				<input type="hidden" name="type" value="variable" />				
+				<input type="hidden" name="author" value="{user[username]}" />				
+				<input type="hidden" name="version" value="1.0" />				
+				<input type="hidden" name="return" value="{ilpage[styles]}" />
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0">
+				    <tr class="alt1">
+					<td width="31%" valign="top">{_template_variable}<div class="smaller gray">{_example}: my_variable</div></td>
+					<td width="69%"><input type="text" name="name" id="name" size="70" class="input" /><div class="smaller gray">{_replace_all_spaces_with_underscore_like_some_variable}</div></td>
+				    </tr>
+				    <tr class="alt1">
+					<td width="31%">{_description}<div class="smaller gray">{_describe_what_this_variable_does}</div></td>
+					<td width="69%"><input type="text" name="description" id="description" size="70" class="input" /></td>
+				    </tr>
+				    <tr class="alt1">
+					<td valign="top">{_template_data}<div class="smaller gray">{_content_that_will_be_displayed}</div></td>
+					<td>
+					    <textarea name="content" style="width: 450px; height: 80px;" class="input"></textarea></td>
+				    </tr>
+				    <tr class="alt2_top">
+					<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value=" {_save} " class="buttons" style="font-size:15px" disabled="disabled" /><else /><input type="submit" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value=" {_save} " class="buttons" style="font-size:15px" /></if></td>
+				    </tr>
+				</table>
+			    </form>
+			</div>
+			<div class="block3-footer">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+
+		<div class="block-wrapper">
+		    <div class="block3">
+			<div class="block3-top">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+			<div class="block3-header">{_template_custom_variables}</div>
+			<div class="block3-content" style="padding:0px">
+			    <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0">
+				{template_custom_vars}	
+			    </table>
+			</div>
+			<div class="block3-footer">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+		    </div>
+		</div>		
+
+	    </div>
+	    <!-- / client nav tab page -->
+	    <!-- client nav tab page -->
+	    <div class="tab-page">
+
+		<h2 class="tab">Import / Export</h2>
+
+		<div class="block-wrapper">
+		    <div class="block3">
+			<div class="block3-top">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+			<div class="block3-header">{_import} {_style}</div>
+			<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_import} {_style}</div></div>
+			<div class="block3-content" style="padding:0px">
+			    <form action="{ilpage[styles]}" name="ilform" method="post" accept-charset="UTF-8" enctype="multipart/form-data" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="_import-style-xml" />			 
+				<input type="hidden" name="return" value="{ilpage[styles]}" />
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+				    <tr class="alt1"> 
+					<td align="left"><input type="file" name="xml_file" />
+					    <div style="padding-top:5px" class="gray">{_if_the_imported_xml_package_has_the_same_name_as_a_style_already}</div>
+					</td>
+				    </tr>
+				    <tr class="alt1"> 
+					<td align="left"><label>
+						<input type="checkbox" name="makedefault" value="1" /> {_yes_this_uploaded_style_will_be_the_default_marketplace_style}</label>
+					</td>
+				    </tr>
+				    <tr class="alt2_top">
+					<td><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value=" {_import} " style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value=" {_import} " style="font-size:15px" /></if>
+				    </td>
+				    </tr>
+				</table>
+			    </form>
+			</div>
+			<div class="block3-footer">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+
+		    </div>
+		</div>
+
+
+		<div class="block-wrapper">
+		    <div class="block3">
+
+			<div class="block3-top">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+
+			<div class="block3-header">{_export}</div>
+			<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_please_select_your_desired_style_and_select_an_action_using_the_management_pulldown}</div></div>
+			<div class="block3-content" style="padding:0px">
+			    <form action="{ilpage[styles]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="_export-style-xml" />
+				<input type="hidden" name="action" value="exportstyle" />
+				<input type="hidden" name="return" value="{ilpage[styles]}" />
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+				    <tr class="alt1">
+					<td width="17%" nowrap="nowrap"><span class="gray">{_style}</span></td>
+					<td>{styles_pulldown}</td>
+				    </tr>
+				    <tr class="alt1"> 
+					<td width="17%" nowrap="nowrap"><span class="gray">{_product}</span></td>
+					<td width="83%">{products_pulldown}</td>
+				    </tr>
+				    <tr class="alt2_top">
+					<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value=" {_export} " style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value=" {_export} " style="font-size:15px" /></if></td>
+				    </tr>
+				</table>
+			    </form>
+			</div>
+
+			<div class="block3-footer">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+
+		    </div>
+		</div>
+
+	    </div>
+	    <!-- / client nav tab page -->
+	    <!-- client nav tab page -->
+	    <div class="tab-page">
+
+		<h2 class="tab">{_settings}</h2>
+
+		{global_templatesettings}		
+
+	    </div>
+	    <!-- / client nav tab page -->
+	</div>
+
+	<!-- / templates -->

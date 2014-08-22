@@ -1,0 +1,89 @@
+<div style="margin-bottom:20px"><img src="{template_logo}" border="0" alt="" /></div>
+
+<table width="609" height="41" border="0">
+  <tr>
+    <td width="603" height="37"><h2>{_packing_slip}</h2></td>
+  </tr>
+</table>
+
+<table width="318">
+  <tr height="25">
+    <td><div style="padding-bottom:5px"><strong>{_seller_info_upper}</strong></div>
+    <span class="style7">{owner[first_name]} {owner[last_name]} ({owner[username]})</span></td>
+  </tr>
+  
+  <tr height="19">
+    <td><span class="style1">{owner[city]}, {owner[state]}, {owner[zip_code]}</span></td>
+  </tr>
+  <!--<tr height="19">
+    <td><span class="style1">{_phone}: {owner[phone]}</span></td>
+  </tr>-->
+  <tr height="19">
+    <td><span class="style1">{_email}: {owner[email]}</span></td>
+  </tr>
+</table>
+<br />
+
+<br />
+<table width="893" cellspacing="0">
+  <tr height="24">
+    <td width="190" height="24"><span class="style1"><strong>{_bill_to_upper}</strong></span></td>
+    <td width="255"><span class="style1"></span></td>
+    <td width="426"><span class="style1"><strong>{_ship_to_upper}</strong></span></td>
+  </tr>
+  <tr height="24" valign="top">
+    <td height="24"><span class="style1">{buyer[first_name]} {buyer[last_name]} ({buyer[username]})</span></td>
+    <td><span class="style1"></span></td>
+    <td rowspan="4"><span class="style1">{shiptolocation}</span></td>
+  </tr>
+  <tr height="24">
+    <td height="24"><span class="style1">{buyer[address]}</span></td>
+    <td><span class="style1"></span></td>
+  </tr>
+  <tr height="24">
+    <td height="24"><span class="style1">{buyer[city]}, {buyer[state]}, {buyer[zip_code]}</span></td>
+    <td><span class="style1"></span></td>
+  </tr>
+  <tr height="24">
+    <td height="24"><span class="style1">{_phone}: {buyer[phone]}</span></td>
+    <td><span class="style1"></span></td>
+  </tr>
+</table>
+<br />
+
+<br />
+<table width="892" border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+  <tr bgcolor="#ccc" style="background-color:#ccc">
+    <td><span class="style9"><strong>{_order_date}</strong></span></td>
+    <td><span class="style9"><strong>{site_name} {_contact}</strong></span></td>
+  </tr>
+  <tr>
+    <td>{orderdate}</td>
+    <td>{site_email}</td>
+  </tr>
+</table>
+<br />
+
+
+<br />
+<table width="892" border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+  <tr bgcolor="#ccc" style="background-color:#ccc">
+    <td width="151"><span class="style1"><strong>{_item_id}</strong></span></td>
+    <td width="402"><span class="style1"><strong>{_description}</strong></span></td>
+    <td width="167" align="right" nowrap="nowrap"><span class="style1"><strong>{_quantity}</strong></span></td>
+    <td width="143" align="right" nowrap="nowrap"><span class="style1"><strong>{_quantity_shipped}</strong></span></td>
+    <td width="143" align="right" nowrap="nowrap"><strong>{_shipping}</strong></td>
+    <td width="143" align="right" nowrap="nowrap"><strong>{_price}</strong></td>
+  </tr>
+  <loop name="orderinfo">
+  <tr height="19">
+    <td height="19"><span class="style1">{project[project_id]}</span></td>
+    <td><span class="style1">{project[project_title]}</span></td>
+    <td align="right"><span class="style1">{orderqty}</span></td>
+    <td align="right"><span class="style1">{orderqty}</span></td>
+    <td align="right">{shipping}</td>
+    <td align="right">{price}</td>
+  </tr></loop name="orderinfo">
+</table>
+
+<div style="padding-top:16px"><a href="#" onClick="window.print(); return false">{_print_this_page}</a></div>

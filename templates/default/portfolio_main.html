@@ -1,0 +1,62 @@
+<h1 class="a_active" style="padding-bottom:12px">{_portfolios}</h1>
+<div style="display:none; position:absolute;z-index:120;" id="preview_div"></div>
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td valign="top" width="235">
+		
+		{portfoliocategory}
+		
+        	<div>
+        	<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+            <tr>
+                <td>
+                    <div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+                    <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="padding-right:10px; padding-left:10px"><div><span class="gray" style="font-size:16px"><strong>{_recently_featured}</strong></span></div>
+                        <div style="padding-top:12px">
+                        
+                        {recentlyfeatured}
+                        
+                        </div>
+                        
+                        
+                        </td>
+                    </tr>
+                    </table>
+                    </div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+                </td>
+            </tr>
+            </table>
+        	</div>
+			<div style="padding-top:10px"><strong>{_upload}: </strong><span class="blue"><a href="{http_server}{ilpage[portfolio]}?cmd=create-portfolio">{_portfolio_manager}</a></span></div>
+	
+	</td>
+	<td>&nbsp;&nbsp;&nbsp;</td>
+	<td width="100%" valign="top">
+	
+			<if condition="isset($show['no_featured_portfolio_items']) AND $show['no_featured_portfolio_items'] == false">
+            <table align="center" border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%">
+            {portfolio_featured_html}
+            <tr>
+                <td colspan="4">{prevnext}</td>
+            </tr>
+            </table></if>
+        
+        	<table align="center" border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%">
+            {portfolio_html}
+            <if condition="isset($show['no_portfolio_items']) AND $show['no_portfolio_items']"> 
+            <tr align="left"> 
+                <td valign="bottom" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_portfolio_items_available}</div></td>
+            </tr>
+            <else />
+            <tr>
+                <td colspan="4">{prevnext2}</td>
+            </tr>
+            </if>
+            </table>
+		
+	</td>
+</tr>
+</table>

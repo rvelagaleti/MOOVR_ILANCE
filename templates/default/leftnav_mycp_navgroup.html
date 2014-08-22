@@ -1,0 +1,5 @@
+<div><if condition="isset($link) AND !empty($link)">
+	<div class="$topclass" style="$style" ondblclick="return toggle('navid$navid')" onclick="return toggle('navid$navid')" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''" id="group_navid$navid"><span style="float:left; padding-top:4px; padding-right:10px"><img id="collapseimg_navid$navid" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_navid$navid]}.gif" alt="" border="0" /></span><a href="{http_server}$link"><span class="gray"><strong>$title</strong></span></a></div>
+<else />
+	<div class="$topclass" style="$style" ondblclick="return toggle('navid$navid')" onclick="return toggle('navid$navid')" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''" id="group_navid$navid"><span style="float:left; padding-top:4px; padding-right:10px"><img id="collapseimg_navid$navid" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_navid$navid]}.gif" alt="" border="0" /></span><span class="gray"><strong>$title</strong></span></div>
+</if></div>

@@ -1,0 +1,43 @@
+<form name="ilform" action="{ilpage[accounting]}" method="post" accept-charset="UTF-8" onsubmit="return defaultagree(this)" style="margin:0px">
+<input type="hidden" name="cmd" value="_auth-creditcard" />
+<input type="hidden" name="cc_id" value="{cc_id}" />
+<input type="hidden" name="do" value="submit" />
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{area_title}</div>
+			<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_this_process_involves_two_small_amounts_both}</div></div>
+			<div class="block-content" style="padding:9px">
+				<div>
+			
+			
+						<div style="padding-top:4px; padding-bottom:4px"><strong>{_credit_card_number}: <span class="blue">{ccnum_hidden}</span></strong></div>
+							
+						<table width="100%" border="0" cellspacing="0" cellpadding="4" align="center">
+						<tr> 
+							<td width="3%" align="right" valign="top"><input name="agreecheck" type="checkbox" id="agree" /></td>
+							<td width="97%"><label for="agree">{_i_authorize_two_amounts_both}</label></td>
+						</tr>
+						</table>
+						
+				</div>
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div style="margin-top:3px" align="right"><input type="submit" value=" {_authenticate} " class="buttons" style="font-size:15px" onclick="return confirm_js('{_confirmation_engage_credit_card_authentication}')" /></div>
+</form>

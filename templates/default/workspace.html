@@ -1,0 +1,379 @@
+<h1 style="padding-bottom:15px"><span style="float:left; padding-right:10px;margin-top:-5px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/share.gif" border="0" alt="" id="workspace" /></span><span style="padding-top:20px">{_mediashare_for} <span>{project_title}</span></span></h1>
+
+<if condition="isset($error_code) AND !empty($error_code) AND !empty($errormessage)"><!-- error -->
+<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;">
+<div class="n">
+<div class="e">
+<div class="w"></div>
+</div>
+</div>
+<div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span><strong>{errormessage}</strong></div>		
+<div class="s">
+<div class="e">
+<div class="w"></div>
+</div>
+</div>
+</div>
+<div style="padding-bottom:20px"></div>
+<!-- end error --></if>
+
+<div class="block-wrapper">
+<div class="block">
+<div class="block-top">
+        <div class="block-right">
+                <div class="block-left"></div>
+        </div>
+</div>
+
+<div class="block-header">{_navigation}: <span class="blue"><a href="{ilpage[workspace]}?crypted={cryptedhome}">{project_title}</a></span>&nbsp;{currentfolder}</div>
+
+
+<if condition="!empty($fold_id) AND isset($p_id) AND $p_id != '-1'"><!-- share actions -->
+<form action="{ilpage[workspace]}" method="post" accept-charset="UTF-8" style="margin:0px;">
+<div class="block-content-yellow" style="padding:9px">
+<input type="hidden" name="crypted" value="{cryptedws}" />
+<input type="hidden" name="buyer_id" value="{buyer_id}" />
+<input type="hidden" name="seller_id" value="{seller_id}" />
+<input type="hidden" name="project_id" value="{project_id}" />
+<input type="hidden" name="fold_id" value="{fold_id}" />
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+    <td align="center" width="14.2%"><input type="submit" name="newfolder" value="{_new_folder}" class="buttons" /></td>
+    <td align="center" width="14.2%"><input type="submit" name="copyitems" value="{_copy_items}" class="buttons" /></td>
+    <td align="center" width="14.2%"><input type="submit" name="moveitems" value="{_move_items}" class="buttons" /></td>
+    <td align="center" width="14.2%"><input type="submit" name="rename" value="{_rename}" class="buttons" /></td>
+    <td align="center" width="14.2%"><input type="submit" name="delete" value="{_delete}" class="buttons" /></td>
+    <td align="center" width="14.2%"><input type="submit" name="upload" value="{_upload}" class="buttons" /></td>
+    <td align="center" width="14.2%"><input type="submit" name="comment" value="{_comment}" class="buttons" /></td>
+</tr>
+</table>
+</div>
+<!-- share actions -->
+
+<!-- folder selection -->
+<div class="block-content" style="padding:0px;background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x;">
+<div style="padding: 6px;">
+<div>
+<table width="100%" cellpadding="6" cellspacing="1" border="0">
+<tr>
+	<td width="50%" valign="top">
+		<table width="100%" cellpadding="1" cellspacing="0" border="0">
+		{filesfolders}
+		</table>
+	</td>
+	<td width="50%" valign="top">
+		<table width="100%" border="0" cellpadding="4" cellspacing="1">
+        <tr> 
+            <td colspan="2">{attachmentgauge}</td>
+        </tr>
+        <tr> 
+            <td colspan="2" valign="top">
+                
+                <table width="100%" cellpadding="3" cellspacing="0" align="center">
+                <tr> 
+                    <td width="27%"><span class="gray">{_folder_name}</span></td>
+                    <td width="26%"><strong>{foldername}</strong></td>
+                    <td width="24%" nowrap="nowrap"><span class="gray">&nbsp; {_last_modified}</span></td>
+                    <td width="23%" nowrap="nowrap"><strong>{lastmodified}</strong></td>
+                </tr>
+                <tr> 
+                    <td><span class="gray">{_folder_space}</span></td>
+                    <td colspan="3"><strong>{foldersize}</strong></td>
+                </tr>
+                <tr> 
+                    <td nowrap="nowrap" valign="top"><span class="gray">{_folder_comment}</span></td>
+                    <td colspan="3">{foldercomment}</td>
+                </tr>
+                </table>
+                
+            </td>
+        </tr>
+        </table>
+	</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</form>
+<!-- folder selection -->
+<else /><!-- intro folder selection -->
+<div class="block-content" style="padding:0px;background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x;">
+<table cellpadding="9" cellspacing="1" border="0" width="100%" align="center">
+<tr>
+	<td colspan="2" valign="top"> 
+	<div>
+	
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<td width="25" height="30" align="center"><img src="{template_relativeimagepath}{template_imagesfolder}rfolder.gif" width="16"  height="13" /></td>
+			<td>
+            
+            <span class="blue"><a href="{ilpage[workspace]}?crypted={cryptedwsprivate}">{_private}</a></span></td>
+		</tr>
+        	<tr>
+          		<td width="25" height="30" align="center"><img src="{template_relativeimagepath}{template_imagesfolder}folder.gif" width="16"  height="14" /></td>
+          		<td>
+                
+                <span class="blue"><a href="{ilpage[workspace]}?crypted={cryptedwsshared}">{_shared}</a></span>
+			</td>
+        	</tr>
+		</table>
+	  
+	</div>
+	</td>
+</tr>
+</table>
+</div>
+<!-- intro folder selection --></if>
+<div class="block-footer">
+	<div class="block-right">
+		<div class="block-left"></div>
+	</div>
+</div>
+			
+</div>
+</div>
+
+<if condition="$show['donewfolder']">
+<form name="ilform" action="{ilpage[workspace]}" method="post" onsubmit="return mediashare_validate(this.folder_name, 'folder name')" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="crypted" value="{cryptedws}" />
+<input type="hidden" name="cmd" value="_save-folder" />
+<div class="block-wrapper">
+	<div class="block5">
+			<div class="block5-top">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			<div class="block5-header">{_supply_new_folder_information_below}</div>
+			<div class="block5-content" style="padding:0px">
+				
+                            <table width="100%" cellpadding="6" cellspacing="1" align="center">
+                            <tr> 
+                                <td width="120" nowrap="nowrap">{_folder_name}</td>
+                                <td><input type="text" name="folder_name" class="input" size="48" /></td>
+                            </tr>
+                            <tr> 
+                                <td width="120" valign="top" nowrap="nowrap">{_comments}</td>
+                                <td><textarea virtual name="folder_comments" style="width: 350px; height: 62px; font-family: Verdana"></textarea></td>
+                            </tr>
+                            </table>
+                                
+			</div>
+			<div class="block5-footer">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+	</div>
+</div>
+<div><input type="submit" value="{_save}" style="font-size:15px" class="buttons" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back()">{_cancel}</a></span></div>
+</form></if>
+
+<if condition="$show['docopy']">
+<!-- copy -->
+<form name="ilform" action="{ilpage[workspace]}" method="post" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="crypted" value="{cryptedws}" />
+<input type="hidden" name="cmd" value="_save-copy-files" />
+{hiddenfieldscopy}
+<div class="block-wrapper">
+	<div class="block5">
+			<div class="block5-top">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			<div class="block5-header">{_select_the_folder_you_will_copy_selected_items_into}</div>
+			<div class="block5-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="1" cellpadding="6">
+				<tr> 
+					<td width="1%" nowrap="nowrap">
+						{folder_pulldown}
+					</td>
+				</tr>
+				</table>
+			</div>
+			
+			<div class="block5-footer">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div><input type="submit" value="{_copy_items}" class="buttons" style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back()">{_cancel}</a></span></div>
+</form>
+<!-- end copy --></if>
+
+<if condition="$show['domove']">
+<!-- move -->
+<form name="ilform" action="{ilpage[workspace]}" method="post" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="crypted" value="{cryptedws}" />
+<input type="hidden" name="cmd" value="_move-file-folder" />
+{hiddenfieldsmove}
+<div class="block-wrapper">
+	<div class="block5">
+			<div class="block5-top">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			<div class="block5-header">{_select_the_folder_you_will_move_selected_items_to}</div>
+			<div class="block5-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="1" cellpadding="6">
+				<tr> 
+                	<td width="1%" nowrap="nowrap">{_move_to_folder}</td>
+					<td>
+						{folder_pulldown}
+					</td>
+                    
+				</tr>
+                <tr> 
+					<td width="1%" align="right">
+						<input type="checkbox" name="movetofolder" value="1" />
+					</td>
+                    <td>{_take_me_into_the_folder_after_moving_is_complete}</td>
+				</tr>
+				</table>
+			</div>
+			
+			<div class="block5-footer">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div><input type="submit" value="{_move_items}" class="buttons" style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back()">{_cancel}</a></span></div>
+</form>
+<!-- end move --></if>
+
+<if condition="$show['dorename']">
+<!-- rename -->
+<form name="ilform" action="{ilpage[workspace]}" method="post" accept-charset="UTF-8" onsubmit="return mediashare_validate(this.re_name, 'renamed filename')" style="margin:0px">
+<input type="hidden" name="crypted" value="{cryptedws}" />
+<input type="hidden" name="rfoldId" value="{nfoldId}" />
+<input type="hidden" name="nfile_id" value="{nfile_id}" />
+<input type="hidden" name="cmd" value="_save-rename" />
+<div class="block-wrapper">
+	<div class="block5">
+			<div class="block5-top">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+			<div class="block5-header">{_enter_the_new_name_for_this_file_folder_below}</div>
+			<div class="block5-content" style="padding:0px">
+				
+				<table width="100%" cellpadding="6" cellspacing="1" align="center">
+				<tr> 
+					<td width="1%" valign="middle" nowrap="nowrap">&nbsp;{_new_name}</td>
+					<td><input type="text" name="re_name" value="{old_name}" class="input" style="width:250px" /></td>
+				</tr>
+				<tr>
+				    <td colspan="2" align="left"></td>
+				</tr>  
+				</table>
+				
+			</div>
+			
+			<div class="block5-footer">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div><input name="submit" type="submit" class="buttons" value="{_save}" style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back()">{_cancel}</a></span></div>
+</form>
+<!-- end rename --></if>
+
+<if condition="$show['doupload']">
+<!-- upload -->
+<form name="ilform" action="{ilpage[workspace]}" method="post" enctype="multipart/form-data" accept-charset="UTF-8" style="margin:0px;">
+<input type="hidden" name="crypted" value="{cryptedws}" />
+<input type="hidden" name="doupload" value="1" />
+<div class="block-wrapper">
+
+	<div class="block5">
+	
+			<div class="block5-top">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+			<div class="block5-header">{_upload_a_new_file_attachment_below}</div>
+			<div class="block5-content" style="padding:0px">
+				
+                                <table width="100%" cellpadding="6" cellspacing="1" align="center">
+                                <tr> 
+                                        <td nowrap="nowrap" width="1%">{_browse_file}</td>
+                                        <td><input type="file" name="ufile" /></td>
+                                </tr>
+                                <if condition="isset($folder_type) AND $folder_type == '2'"><tr>
+                                  <td align="right"><input type="checkbox" name="sendmail" value="1" /></td>
+                                  <td>{_send_an_email_regarding_this_upload_to_the} {sendtype}</td>
+                                </tr></if>
+                                </table>
+                                
+		</div>
+			
+			<div class="block5-footer">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<if condition="isset($show['nouploading']) AND $show['nouploading']">
+<div><input name="submit" type="submit" class="buttons" value="{_upload}" disabled="disabled" style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back()">{_cancel}</a></span></div>
+<else />
+<div><input name="submit" type="submit" class="buttons" value="{_upload}" style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back()">{_cancel}</a></span></div>
+</if>
+</form>
+<!-- end upload --></if>
+
+<if condition="$show['docomment']">
+<!-- comment -->
+<form name="ilform" action="{ilpage[workspace]}" method="post" accept-charset="UTF-8" onsubmit="return mediashare_validate(this.folder_comments, 'folder comment')" style="margin:0px">
+<input type="hidden" name="crypted" value="{cryptedws}" />
+<input type="hidden" name="cmd" value="_save-comments" />
+<div class="block-wrapper">
+	<div class="block5">
+			<div class="block5-top">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			<div class="block5-header">{_enter_any_comments_for_this_file_or_folder_below}</div>
+			<div class="block5-content" style="padding:0px">
+				
+            <table width="100%" cellpadding="6" cellspacing="1" align="center">
+            <tr>
+                    <td valign="top" nowrap="nowrap">
+                        <textarea virtual name="folder_comments" style="width:350px; height:55px; font-family: Verdana">{comments}</textarea>
+                    </td>
+            </tr>
+            </table>
+                                
+			</div>
+			<div class="block5-footer">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+	</div>
+</div>
+<div><input type="submit" value="{_save}" style="font-size:15px" class="buttons" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back()">{_cancel}</a></span></div>
+</form>
+<!-- end comment --></if>

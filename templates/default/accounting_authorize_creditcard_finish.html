@@ -1,0 +1,58 @@
+<form action="{ilpage[accounting]}" name="authccfinish" method="post" accept-charset="UTF-8" onsubmit="return validateAuthCCFinishForm(this);" style="margin:0px">
+<input type="hidden" name="cmd" value="_auth-creditcard-final-process" />
+<input type="hidden" name="cc_id" value="{cc_id}" />
+<input type="hidden" name="subcmd" value="submit" />
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{area_title}</div>
+			<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_please_enter_the_two_amounts_debitted_from_your_credit_card_in_random_order}</div></div>
+			<div class="block-content" style="padding:9px">
+				<div>
+			
+			
+						<div style="padding-top:4px; padding-bottom:4px"><strong>{_credit_card_number}: <span class="blue">{ccnum_hidden}</span></strong></div>
+							
+						<if condition="isset($show['auth_limit']) AND $show['auth_limit']">
+						<table width="100%" border="0" cellspacing="0" cellpadding="{table_cellpadding}" align="center">
+						<tr class="alt1"> 
+							<td valign="middle" align="right"><strong>{_transaction_amount_number_one}</strong></td>
+							<td align="left"><input type="text" name="amount1" size="9" onkeypress="return noenter()" class="input" /> <img name="amount1error" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></td>
+						</tr>
+						<tr> 
+							<td width="43%" align="right"><strong>{_transaction_amount_number_two}</strong></td>
+							<td align="left"><input type="text" name="amount2" size="9" onkeypress="return noenter()" class="input" /> <img name="amount2error" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></td>
+						</tr>
+						</table> 
+						<br />
+						<div align="left">{_upon_successful_authentication_the_two_amounts_will_be_forwarded_directly_to_your_online_account} <a href="{ilpage[accounting]}?cmd=transactions">{_transactions_menu}</a></div>
+						</if>
+												
+						<if condition="isset($show['auth_limit_message']) AND $show['auth_limit_message']"> 
+						<!-- payment attempts exceeded -->
+						<h1>{_credit_card_authentication_process_aborted}</h1>
+						<div style="padding-top:6px">{_were_sorry_you_have_reached_the_maximum_attempt_limit_trying_to_verify_and_authenticate_this_card}</div>
+						<!-- / payment attempts exceeded -->
+						</if>
+						
+				</div>
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<if condition="isset($show['auth_limit_message']) AND $show['auth_limit_message']"><else /><div style="margin-top:3px" align="right"><input type="submit" value=" {_authenticate} " class="buttons" style="font-size:15px" onclick="return confirm_js('{_confirmation_engage_credit_card_authentication}')" /></div></if>
+</form>

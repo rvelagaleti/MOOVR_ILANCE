@@ -1,0 +1,78 @@
+<h1 class="a_active" style="padding-bottom:12px">{_notice}</h1>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="75%" valign="top">
+	
+	<div class="block-wrapper">
+
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header"><span style="float:right; padding-top:3px" class="smaller gray"></span>{_thank_you_for_your_patience}</div>
+				<div class="block-content-yellow" style="padding:9px"><div class="smaller">
+				<if condition="isset($show['error']) AND $show['error'] == true">
+				{_were_sorry_your_transaction_has_encountered_an_error_and_can_not_be_processed_at_the_moment}
+				<else />
+				{_invoice_payment_complete}
+				</if>
+				</div></div>
+				<div class="block-content" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x;">
+					
+						<div>
+							<blockquote>
+								<div style="padding-top:8px">
+								<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center">
+								<tr> 
+									<td align="left" valign="top" nowrap="nowrap"><strong>{_transaction_message}:</strong></td>
+									<td align="left">{transaction_message}</td>
+								</tr>
+								<if condition="!empty($error_code)">
+									<td align="left" valign="top" nowrap="nowrap"><strong>{_error_code}:</strong></td>
+									<td align="left">{error_code}</td>
+								</if>
+								<tr> 
+									<td width="16%" align="left" nowrap="nowrap"><strong>{_transaction_date}:</strong></td>
+									<td width="84%" align="left">{date_time}</td>
+								</tr>
+								</table>
+								</div>
+							</blockquote>
+						</div>
+					
+				</div>
+	
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+
+	</td>
+    <td width="3%"></td>
+    <td width="25%" valign="top">
+	
+	<div style="font-size:15px"><strong>{_where_to}</strong></div>
+	<ul>
+		<if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0">
+		<li><span class="blue"><a href="{http_server}">{_home}</a></span></li>
+		<li><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}mycp" rel="nofollow">{_my_cp}</a><else /><a href="{http_server}{ilpage[main]}?cmd=cp">{_my_cp}</a></if></span></li>		
+		<li><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}accounting" rel="nofollow">{_accounting}</a><else /><a href="{http_server}{ilpage[accounting]}">{_accounting}</a></if></span></li>
+		<else />
+		<li><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{https_server}signin" rel="nofollow">{_sign_in}</a><else /><a href="{https_server}{ilpage[login]}">{_sign_in}</a></if></span></li>
+		<li><span class="blue"><a href="{http_server}">{_home}</a></span></li>
+		<li><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{https_server}register" rel="nofollow">{_registration}</a><else /><a href="{https_server}{ilpage[registration]}">{_registration}</a></if></span></li>
+		</if>
+	</ul>
+	
+	</td>
+  </tr>
+</table>

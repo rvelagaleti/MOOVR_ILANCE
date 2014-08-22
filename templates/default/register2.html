@@ -1,0 +1,103 @@
+<form method="post" action="{ilpage[registration]}" accept-charset="UTF-8" onsubmit="return register2(this); validatecustomform(this);" style="margin: 0px;">
+<input type="hidden" name="cmd" value="register" />
+<input type="hidden" name="step" value="3" />
+<div class="block-wrapper">
+    <div class="block">
+    
+    <div class="block-top">
+        <div class="block-right">
+                <div class="block-left"></div>
+        </div>
+    </div>
+    <div class="block-header"><span style="float:right"><img src="{template_relativeimagepath}{template_imagesfolder}icons/project_3.gif" border="0" alt="" /></span>{_contact_information}</span></div>
+    <div class="block-content" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x; padding:0px">
+    <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+    <tr>
+        <td><div><table width="100%"  border="0" cellspacing="0" cellpadding="4">
+                <tr>
+                    <td valign="top">	
+                        <table border="0" cellspacing="0" cellpadding="3" width="98%">
+                        <tr> 
+                            <td width="63%" nowrap="nowrap"><div style="padding-bottom:3px">{_first_name}</div><input type="text" name="first_name" value="{first_name}" id="first_name" maxlength="49" class="input" /> <img name="first_nameerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></td>
+                            <td width="37%" nowrap="nowrap"><div style="padding-bottom:3px">{_last_name}</div><input type="text" name="last_name" value="{last_name}" id="last_name"  maxlength="49" class="input" /> <img name="last_nameerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></td>
+                        </tr>
+                        <if condition="$ilconfig['genderactive']"><tr><td colspan="2"><div style="height:1px;width:100%;background-color:#ccc;margin-top:6px;margin-bottom:18px"></div><div style="padding-bottom:3px">{_gender}</div>
+                                <table cellpadding="3" cellspacing="0" border="0" width="1%">
+                                <tr>
+                                    <td width="33.3%" nowrap="nowrap"><div><input type="radio" name="gender" value="" {cb_gender_undecided} /> {_undecided}</div><div style="padding-right:5px"></div></td>
+                                    <td width="33.3%" nowrap="nowrap"><div><input type="radio" name="gender" value="male" {cb_gender_male} /> {_male}</div><div style="padding-right:5px"></div></td>
+                                    <td width="33.3%" nowrap="nowrap"><div> <input type="radio" name="gender" value="female" {cb_gender_female} /> {_female}</div><div style="padding-right:5px"></div></td>
+                                </tr>
+                                </table></td></tr>
+                        </if>
+                        <tr>
+                            <td colspan="2"><div style="height:1px;width:100%;background-color:#ccc;margin-top:6px;margin-bottom:12px"></div><div style="padding-bottom:3px; padding-top:4px">{_company_name}</div><input type="text" name="companyname" value="{companyname}" maxlength="49" class="input" />										  <input type="hidden" name="usecompanyname" value="0" /></td>
+                          </tr>
+                        </table>
+                        <div style="height:1px;width:98%;background-color:#ccc;margin-top:11px;margin-bottom:15px"></div>
+                        <table border="0" cellspacing="0" cellpadding="3">
+                        <tr>
+                            <td><div style="padding-bottom:3px">{_currency}</div><div>{currency_pulldown}</div></td>
+                          </tr>
+                        <tr>
+                            <td><div style="padding-bottom:3px; padding-top:9px">{_time_zone}</div><div>{timezone_pulldown}</div></td>
+                        </tr>
+                        </table>
+                    </td>
+                    <td valign="top" class="alt1_left">
+                
+                        <div style="padding-left:6px">
+                        <table border="0" cellspacing="0" cellpadding="3" width="98%">
+                        <tr>
+                            <td><div style="padding-bottom:3px">{_address}</div>
+                          <div><input type="text" name="address" value="{address}" maxlength="100" size="30"  class="input" /> <img name="addresserror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div></td>
+                            <td><div style="padding-bottom:3px">{_address_two_optional}</div><div><input type="text" name="address2" value="{address2}" maxlength="49" class="input" /></div></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                        
+                                <div style="height:1px;width:98%;background-color:#ccc;margin-top:6px;margin-bottom:12px"></div><div style="padding-bottom:3px; padding-top:4px">{_phone_number}</div>
+                                <div style="padding-bottom:3px">
+                                <if condition="isset($show['us_phone_format']) AND $show['us_phone_format']">
+                                <input type="text" name="phone1" value="+{phone1}" maxlength="3" size="1" {input_style}  />&nbsp;&nbsp;(&nbsp;&nbsp;<input type="text" name="phone2" value="{phone2}" maxlength="3" size="2" {input_style} />&nbsp;&nbsp;)&nbsp;&nbsp;<input type="text" name="phone3" value="{phone3}" maxlength="3" size="3" {input_style} />&nbsp;&nbsp;-&nbsp;&nbsp;<input type="text" name="phone4" value="{phone4}" maxlength="4" size="4" {input_style} />
+                                <else />
+                                <input type="text" name="phone1" id="phone1" value="+{phone1}" class="input" /><input type="hidden" name="phone2" id="phone2" value="" /><input type="hidden" name="phone3" id="phone3" value="" /><input type="hidden" name="phone4" id="phone4" value="" />
+                                </if>
+                                <img name="phoneerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" />
+                                </div>
+                                <div style="height:1px;width:98%;background-color:#ccc;margin-top:10px;margin-bottom:12px"></div>
+                        
+                            </td>
+                          </tr>
+                        <tr>
+                            <td><div style="padding-bottom:3px;">{_country}</div><div>{country_js_pulldown}</div></td>
+                            <td><div style="padding-bottom:3px">{_state_or_province}</div><div>{state_js_pulldown}</div></td>
+                        </tr>
+                        <tr>
+                            <td><div style="padding-bottom:3px;padding-top:12px">{_city_or_town}</div><div>{city_js_pulldown} <img name="cityerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div></td>
+                            <td><div style="padding-bottom:3px;padding-top:12px">{_zip_or_postal_code}</div><div><input type="text" name="zipcode" value="{zipcode}" maxlength="49" class="input" /> <img name="zipcodeerror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div></td>
+                        </tr>
+                        </table>
+                        <if condition="!empty($customquestions)">
+                            <div style="height:1px;width:98%;background-color:#ccc;margin-top:12px;margin-bottom:18px"></div>
+                            <div>{customquestions}</div>
+                        </if>
+                        </div>
+                    </td>
+                </tr>
+                </table></div></td>
+    </tr>
+    <tr class="alt2_top">
+                    <td colspan="2"><input type="submit" class="buttons" value=" {_continue} " accesskey="s" style="font-size:15px" /> <span id="inlineerror"></span></td>
+                </tr>
+    </table>
+    </div>
+    <div class="block-footer">
+        <div class="block-right">
+                <div class="block-left"></div>
+        </div>
+    </div>
+    </div>
+</div>
+</form>
+{dynamic_js_bodyend}

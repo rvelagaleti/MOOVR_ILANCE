@@ -1,0 +1,131 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class=""><a href="{https_server}signin">{_sign_in}</a></li>
+	<li title="" class="on"><a href="javascript:void(0)">{_register}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<if condition="$ilconfig['registrationdisplay_dob']">
+<script type="text/javascript">
+<!--
+function checkform(formobj)
+{
+	var ischecked = formobj.agreecheck.checked;
+	if (ischecked == 0) 
+	{
+  		alert_js("{_please_agree_to_the_terms_and_conditions_of_the_marketplace}");
+		return false;
+	}
+	if (formobj.month.selectedIndex == 0)
+	{
+		alert_js("{_select_the_month_you_were_born}");
+		return false;
+	}
+	if (formobj.day.selectedIndex == 0)
+	{
+		alert_js("{_select_the_day_you_were_born}");
+		return false;
+	}
+	if (formobj.year.value.length < 4)
+	{
+		alert_js("{_please_enter_the_proper_year_you_were_born_yyyy}");
+		return false;
+	}
+	return true;
+}
+//-->
+</script>
+<else />
+<script type="text/javascript">
+<!--
+function checkform(formobj)
+{
+	var ischecked = formobj.agreecheck.checked;
+	if (ischecked == 0) 
+	{
+  		alert_js("{_please_agree_to_the_terms_and_conditions_of_the_marketplace}");
+		return false;
+	}
+	return true;
+}
+//-->
+</script>
+</if>
+
+{apihook[registration_template_start]}
+
+<form method="post" action="{ilpage[registration]}" accept-charset="UTF-8" onsubmit="return checkform(this);" style="margin: 0px;">
+<input type="hidden" name="cmd" value="register" />
+<input type="hidden" name="step" value="1" />
+<input type="hidden" name="agreement" value="1" />
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_registration}</div>
+			
+			<div class="block-content" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x; padding:0px">
+				
+				
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+				<tr class="alt1">
+					<td>
+						
+						<if condition="$ilconfig['registrationdisplay_dob']">
+						
+							<div style="padding-top:6px"></div>
+							<table cellpadding="0" cellspacing="0" border="0" align="left" width="250">
+							<tr>
+								<td colspan="3"><div style="padding-bottom:3px"><strong>{_please_enter_your_date_of_birth}</strong></div></td>
+							</tr>
+							<tr>
+								<td><span class="gray">{_month}</span> <br />{monthpulldown}</td>
+								<td><span class="gray">{_day}</span><br />{daypulldown}</td>
+								<td><span class="gray">{_year}</span><br />{yearpulldown}</td>
+							</tr>
+							</table>
+							<div style="clear:both;"></div>
+								<div style="width:100%; height:1px; background-color:#ccc;margin-top:12px;margin-bottom:12px"></div>
+						</if>
+						
+						
+						<div style="padding:3px">
+						
+						<div style="padding-bottom:3px"><strong>{_terms}</strong></div>
+						
+							<div style="padding-bottom:5px" class="gray">{_in_order_to_proceed_you_must_agree_with_the_following_rules}</div>
+							<div style="border:thin inset; padding:6px; height:175px; background-color: #fff; overflow:auto">{registration1}</div>  
+							<div style="padding-top:10px"><label for="agreecheck"><input type="checkbox" name="agreecheck" id="agreecheck" value="1" /> <span class="black">{_i_have_read_and_agree_to_abide_by_the_terms_and_agreements_above}</span></label></div>
+							
+						</div>
+												
+					</td>
+				</tr>
+				<tr class="alt2_top">
+					<td><input type="submit" class="buttons" value=" {_continue} " accesskey="s" style="font-size:15px" /></td>
+				</tr>
+				</table>
+				
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</form>
+
+{apihook[registration_template_end]}

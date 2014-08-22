@@ -1,0 +1,17 @@
+<h1 style="padding-bottom:5px">{_purchase_history}</h1>
+<div class="blue" style="margin-bottom:15px"><a href="{returnurl}">{_back_to} {project_title}</a></div>
+<table width="100%" border="0" align="center" cellpadding="14" cellspacing="{table_cellspacing}">
+<tr>
+    <td width="25%" nowrap="nowrap" style="border-bottom:1px dotted #ccc"><div><strong>{_buyer}</strong></div></td>
+    <td width="25%" style="border-bottom:1px dotted #ccc"><div><strong>{_price}</strong></div></td>
+    <td width="25%" style="border-bottom:1px dotted #ccc"><div><strong>{_quantity}</strong></div></td>
+    <td width="25%" style="border-bottom:1px dotted #ccc"><div><strong>{_date}</strong></div></td>
+</tr>
+<loop name="sales"><tr valign="top">
+    <td style="border-bottom:1px dotted #ccc"><div class="{fontclass}" style="font-weight:{fontweight}">{buyer}</div></td>
+    <td style="border-bottom:1px dotted #ccc"><div class="{fontclass}" style="font-weight:{fontweight}">{price}</div><!--{shippingcost}--></td>
+    <td style="border-bottom:1px dotted #ccc"><div class="{fontclass}" style="font-weight:{fontweight}">{orderqty}</div></td>
+    <td style="border-bottom:1px dotted #ccc"><div class="{fontclass}" style="font-weight:{fontweight}">{orderdate}</div></td>
+</tr></loop name="sales">
+</table>
+<div style="margin-top:15px;margin-bottom:20px"></div>

@@ -1,0 +1,86 @@
+<loop name="memberinfo">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td width="1" valign="top">{profile_logo}</td>
+	<td>&nbsp;&nbsp;&nbsp;</td>
+	<td width="100%" valign="top"><div style="padding-bottom:6px; padding-top:10px" class="blueonly"><h1>{vendorname}</h1><if condition="isset($show['openingstatement']) AND $show['openingstatement']"><div style="font-size:15px; padding-top:3px" class="black">{openingstatement}</div></if></div>
+	<div class="litegray">{_member_since} {membersince}</div></td>
+</tr>
+</table>
+
+<br />
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class=""><a href="{feedbackprofileurl}" rel="nofollow">{_feedback}</a></li>
+	<li title="" class=""><a href="{fullprofileurl}">{_full_profile}</a></li>
+    <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']"><li title="" class="on"><a href="javascript:void(0)">{_job_history}</a></li></if>
+	<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND isset($show['portfoliolink']) AND $show['portfoliolink']"><li title="" class=""><a href="{http_server}{ilpage[portfolio]}?id={uid}" rel="nofollow">{_portfolio}</a></li></if>
+</ul>
+<span style="padding-top:5px; float:left; padding-left:14px"><span class="blue"><a href="javascript:void(0)" onclick=Attach("{http_server}{ilpage[watchlist]}?cmd=add&amp;wtype=sprovider&amp;id={uid}")>{_add_to_watchlist}</a></span>&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{http_server}{ilpage[rfp]}?cmd=rfp-invitation&amp;id={uid}&amp;trk=u_jobhistory">{_invite_to_bid}</a></span></span>
+</div>
+</div>
+<div style="clear:both;"></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td width="25%" valign="top"><div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+        <tr>
+            <td>
+                <div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="padding-right:10px; padding-left:10px"><div><span class="black" style="font-size:16px"><strong>{_search_job_history}</strong></span></div>
+                    <div style="padding-top:12px;padding-bottom:6px">
+                    <input style="padding:2px; height:15px; width:154px; font-family: verdana" id="search_job_keywords_id" autocomplete="off" type="text" name="q" size="75" value="{q}" />&nbsp;&nbsp;<input type="submit" value="{_search}" class="buttons" />
+                    </div></td>
+                </tr>
+                </table>
+                </div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+            </td>
+        </tr>
+        </table></div>
+		
+		{apihook[leftnav_jobhistory_end]}
+	</td>
+	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	<td width="75%" valign="top">
+	<h1 style="padding-bottom:3px; padding-top:9px" class="gray">{_job_history}</h1>
+	<div style="font-size:14px; padding-bottom:20px; padding-top:9px; font-weight:bold" class="black"><span style="float:left;padding-top:12px;padding-right:5px"><img src="{template_relativeimagepath}{template_imagesfolder}expand.gif" border="0" /></span>{jobcategories}</div>
+    <div style="background-color:#EDF8FE; padding:26px"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <loop name="jobhistorystats"><tr valign="top">
+        <td align="left" width="18%"><table width="7%" border="0" cellspacing="3" cellpadding="0"><tr><td align="right" nowrap="nowrap"><div style="font-size:14px; font-weight:bold" class="black"><strong>{jobs}</strong></div></td><td nowrap="nowrap"><div style="font-size:11px; padding-top:1px;  padding-left:9px" class="gray">{_jobs}</div></td></tr><tr><td align="right" nowrap="nowrap"><div style="font-size:14px; font-weight:bold" class="black"><strong>{milestones}</strong></div></td><td nowrap="nowrap"><div style="font-size:11px; padding-top:1px; padding-left:9px" class="gray">{_milestones}</div></td></tr><tr><td align="right" nowrap="nowrap"><div style="font-size:14px; font-weight:bold" class="black"><strong>{hours}</strong></div></td><td><div style="font-size:11px; padding-top:1px; padding-left:9px" class="gray">{_hours}</div></td></tr></table></td>
+        <td class="alt1_left">&nbsp;</td>
+        <td width="18%"><table width="7%" border="0" cellspacing="3" cellpadding="0"><tr><td align="right" nowrap="nowrap"><div style="font-size:14px; font-weight:bold" class="black"><strong>{rating}</strong></div></td><td nowrap="nowrap"><div style="font-size:11px; padding-top:1px;  padding-left:9px" class="gray">{_rating}</div></td></tr><tr><td align="right" nowrap="nowrap"><div style="font-size:14px; font-weight:bold" class="black"><strong>{reviews}</strong></div></td><td nowrap="nowrap"><div style="font-size:11px; padding-top:1px; padding-left:9px" class="gray">{_reviews}</div></td></tr><tr><td align="right" nowrap="nowrap"><div style="font-size:14px; font-weight:bold" class="black"><strong>{scorepercent}</strong></div></td><td><div style="font-size:11px; padding-top:1px; padding-left:9px" class="gray">{_recommeded}</div></td></tr></table></td>
+        <td class="">&nbsp;&nbsp;</td>
+        <td class="alt1_left">&nbsp;</td>
+        <td width="18%"><table width="7%" border="0" cellspacing="3" cellpadding="0"><tr><td align="right" nowrap="nowrap"><div style="font-size:14px; font-weight:bold" class="black"><strong>{clients}</strong></div></td><td nowrap="nowrap"><div style="font-size:11px; padding-top:1px;  padding-left:9px" class="gray">{_clients}</div></td></tr><tr><td align="right" nowrap="nowrap"><div style="font-size:14px; font-weight:bold" class="black"><strong>{repeatclientspercent}</strong></div></td><td nowrap="nowrap"><div style="font-size:11px; padding-top:1px; padding-left:9px" class="gray">{_repeat}</div></td></tr><tr><td align="right" nowrap="nowrap"></td><td></td></tr></table></td>
+        <td class="alt1_left">&nbsp;</td>
+        <td width="18%"><table width="7%" border="0" cellspacing="3" cellpadding="0"><tr><td align="right" nowrap="nowrap"><div style="font-size:14px; font-weight:bold" class="black"><strong>{earnings}</strong></div></td><td nowrap="nowrap"><div style="font-size:11px; padding-top:1px;  padding-left:9px" class="gray">{_earnings}</div></td></tr><tr><td align="right" nowrap="nowrap"><div style="font-size:14px; font-weight:bold" class="black"><strong>{earningsaverage}</strong></div></td><td nowrap="nowrap"><div style="font-size:11px; padding-top:1px; padding-left:9px" class="gray">{_per_client}</div></td></tr><tr>
+          <td align="right">&nbsp;</td><td></td></tr></table></td>
+    </tr></loop name="jobhistorystats">
+    </table></div>
+    <div><table width="100%" border="0" cellspacing="1" cellpadding="12">
+    <tr>
+    	<td colspan="3" class="alt_top"><div class="litegray">{_viewing_job_history_within_sel_cat}</div></td>
+    </tr>
+    <loop name="jobhistory"><tr>
+    	<td colspan="3" class="alt1"><div class="black" style="font-size:16px"><strong>{jobtitle}</strong></div></td>
+    </tr>
+    <tr valign="top">
+        <td width="5%" valign="top" style="padding:9px"><table><tr>
+        <td width="5%">{jobstars}</td>
+        <td width="5%"><strong>{jobscore}</strong></td>
+        
+    </tr>
+    <loop name="criteria{project_id}"><tr>
+    	<td nowrap="nowrap"><div style="padding-top:7px">{average}</div></td>
+    	<td><div class="gray" style="padding-top:7px">{criteriatitle}</div></td>
+    </tr></loop name="criteria{project_id}"></table></td>
+       
+        <td><div class="smaller gray">{_client}: <span class="blue">{jobclient}</span></div>
+        <div style="padding-top:12px">{awarddate}&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;{amount}&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;{category}&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;{status}</div></td>
+    </tr></loop name="jobhistory">
+    </table></div></td>
+</tr>
+</table>

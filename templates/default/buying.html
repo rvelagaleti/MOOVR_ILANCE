@@ -1,0 +1,39 @@
+<div class="box3">
+<h1>{_post_your_job}</h1>
+
+<div class="block-wrapper" style="padding-top:6px">
+	<div class="block3">
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header">{_category}</div>
+			<div class="block3-content">
+			
+				<form name="ilform" action="{http_server}{ilpage[buying]}" method="get" accept-charset="UTF-8" style="margin:0px">
+				<input type="hidden" name="cmd" value="new-rfp" />
+				<table cellpadding="3" cellspacing="{table_cellspacing}" border="0" width="100%" align="center" dir="{template_textdirection}">
+				<tr>
+					<td><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:245px; border-top:1px solid #ebebeb; border-left:1px solid #ebebeb; border-right:1px solid #bdbdbd; border-bottom:1px solid #bdbdbd" src="{ajaxurl}?do=categories&mode=service"></iframe>
+					<span style="float:{template_textalignment_alt}; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" style="font-family: verdana" size="6" /></span>		
+					<div id="selectedcategory"></div>
+					</td>
+				</tr>
+				</table>
+				<div id="categorybutton"></div>
+				</form>
+			
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>			
+	</div>
+</div>
+
+{apihook[buying_end]}
+</div>

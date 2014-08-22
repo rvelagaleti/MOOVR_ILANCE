@@ -1,0 +1,381 @@
+<div id="v3body4">
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+
+	<div id="content">
+	<h1>{_category_configuration}</h1><br />
+
+		<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND isset($ilance->GPC['subcmd']) AND ($ilance->GPC['subcmd'] == 'editservicecat' OR $ilance->GPC['subcmd'] == 'addservicecat')">
+
+					<a name="#question"></a>
+					<form method="post" enctype='multipart/form-data' action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+					<input type="hidden" name="cmd" value="categories" />
+					<input type="hidden" name="subcmd" value="{subcmd}" />
+					<input type="hidden" name="return" value="{return}" />
+					<input type="hidden" name="cid" id="cid" value="{cid}" />
+					<div class="block-wrapper">
+					<div class="block2">
+					
+							<div class="block2-top">
+									<div class="block2-right">
+											<div class="block2-left"></div>
+									</div>
+							</div>
+							
+							<div class="block2-header">{_category_details}</div>
+							<div class="block2-content-blue" style="padding:9px"><div class="smaller">{_you_may_define_everything_about_this_category_using_the_options_below}</div></div>
+							<div class="block2-content" style="padding:0px">
+								
+								<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+                                <tr class="alt1" valign="top"> 
+                                    <td width="27%"  class="alt2">{_parent_category}</td>
+                                  <td width="73%" class="alt1">
+                                    <div><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #fff; border-left:1px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #fff" src="{ajaxurl}?do=categories&mode=service&cid={cid}&pid={pid}&showyouselectedstring=0&showcontinue=0&showthumb=0&showcidbox=0&showcheckmarkafterstring=0&rootcid=1&cidfield={cidfield}"></iframe></div>
+                                    <div style="display:none"><span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="pid" name="pid" style="font-family: verdana" size="6" /></span></div>
+                                    <div style="display:none"><div id="categorybutton"></div></div>
+                                    <div style="padding-top:12px; padding-bottom:12px"><strong>{_youve_selected}:</strong> <span id="selectedcategory" class="blue"></span><span id="cidstringcb"></span></div>
+                                    </td>
+                                </tr>
+                                </table>
+                                <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									{apihook[service_category_edit_start]}
+									<loop name="servicelanguages">
+										<tr class="alt2_top" valign="top"> 
+											<td>{_category_title} {_in} {language}<div class="smaller gray" style="padding-top:3px">{_also_embeds_within_meta_title_when_viewing_this_category}</div></td>
+											<td class="alt_top"><input class="input" name="title[{slng}]" value="{title}" size="45" /></td>
+										</tr>
+										<tr class="alt2" valign="top"> 
+											<td>{_description} {_in} {language}<div class="smaller gray" style="padding-top:3px">{_also_embeds_within_the_meta_description_when_viewing_this_category}</div></td>
+											<td class="alt1"><input class="input" name="description[{slng}]" value="{description}" size="45" /></td>
+										</tr>
+										<tr class="alt2" valign="top">
+											<td>{_meta_tag_keywords} {_in} {language}<div class="smaller gray" style="padding-top:3px">{_for_advanced_seo_techniques_add_more_meta_keywords_for_search_engines}</div></td>
+											<td class="alt1"><input class="input" name="keywords[{slng}]" value="{keywords}" size="45" /></td>
+									    </tr>
+                                        <tr class="alt2" valign="top">
+                                          <td>SEO URL {_in} {language}<div class="smaller gray" style="padding-top:3px">{_for_seo_urls_in} {language}</div></td>
+                                          <td class="alt1"><input class="input" name="seourl[{slng}]" value="{seourl}" size="45" /></td>
+                                        </tr>
+									</loop name="servicelanguages">
+								
+									<loop name="servicecategory">
+									  	<tr class="alt2" valign="top"> 
+											<td>{_category_icon}
+                                            <div class="smaller gray" style="padding-top:3px">{_format}: .jpg, .gif, .bmp, .png</div></td>
+											<td class="alt1">
+											{category_icon_old}<div><input type="file" name="catimage" size="30" ><div class="smaller gray" style="padding-top:3px">{_max_filesize}: 65KB</div></div></td>
+										</tr>
+                                        <tr class="alt2" valign="top"> 
+                                            <td>{_category_popout_hero_image}<div class="smaller gray" style="padding-top:3px">{_format}: .jpg, .gif, .bmp, .png</div></td>
+                                            <td class="alt1">
+                                            {category_hero_old}<div><input type="file" name="catimagehero" size="30"><div class="smaller gray" style="padding-top:3px">{_max_filesize}: {_unlimited}</div></div></td>
+                                        </tr>
+										<tr class="alt2" valign="top"> 
+											<td>{_can_members_post_auctions_in_this_category}<div class="smaller gray" style="padding-top:3px">{_if_not_members_will_be_redirected_to_a_category_map_page}</div></td>
+											<td class="alt1">
+											<input type="radio" name="canpost" value="1" id="canpost1" {checked_canpost_1} /> <label for="canpost1">{_yes}</label>
+											<input type="radio" name="canpost" value="0" id="canpost0" {checked_canpost_0} /> <label for="canpost0">{_no}</label></td>
+										</tr>
+										<if condition="isset($ilconfig['enableclassifiedtab']) AND $ilconfig['enableclassifiedtab']"><tr class="alt2" valign="top"> 
+											<td>{_can_members_post_classifieds_in_this_category}<div class="smaller gray" style="padding-top:3px">{_can_members_post_classifieds_in_this_category_desc}</div></td>
+											<td class="alt1">
+											<input type="radio" name="canpostclassifieds" value="1" id="canpostclassifieds1" {checked_canpostclassifieds_1} /> <label for="canpostclassifieds1">{_yes}</label>
+											<input type="radio" name="canpostclassifieds" value="0" id="canpostclassifieds0" {checked_canpostclassifieds_0} /> <label for="canpostclassifieds0">{_no}</label></td>
+										</tr></if>
+										<tr class="alt2" valign="top">
+										  <td>{_can_members_view_rss_feeds_in_this_category}</td>
+										  <td class="alt1"><input type="radio" name="xml" value="1" id="xml1" {checked_xml_1} /> <label for="xml1">{_yes}</label>
+											<input type="radio" name="xml" value="0" id="xml0" {checked_xml_0} /> <label for="xml0">{_no}</label> </td>
+										  </tr>
+										<tr class="alt2" valign="top">
+										  <td>{_can_members_create_portfolios_in_this_category}</td>
+										  <td class="alt1"><input type="radio" name="portfolio" value="1" id="portfolio1" {checked_portfolio_1} /> <label for="portfolio1">{_yes}</label>
+											<input type="radio" name="portfolio" value="0" id="portfolio0" {checked_portfolio_0} /> <label for="portfolio0">{_no}</label></td>
+										  </tr>
+										<tr class="alt2" valign="top"> 
+											<td>{_can_members_optin_to_this_categorys_newsletter}</td>
+											<td class="alt1"><input type="radio" name="newsletter" value="1" id="newsletter1" {checked_newsletter_1} /> <label for="newsletter1">{_yes}</label>
+											<input type="radio" name="newsletter" value="0" id="newsletter0" {checked_newsletter_0} /> <label for="newsletter0">{_no}</label></td>
+										</tr>
+										
+										<tr class="alt2" valign="top">
+										  <td><span class="blue"><a href="{ilpage[settings]}?cmd=marketplace" title="{_click_here_to_manage_insertion_fee_groups_and_values}">{_insertion_fee_group}</a></span>
+										  <div class="smaller gray" style="padding-top:3px">{_defines_buyer_fees_specific_to_listing_a_service_request_in_this_category} </div></td>
+										  <td class="alt1"><div style="padding-bottom:4px">{insertionfeepulldown}</div><div class="smaller"><input type="checkbox" name="igchildren" value="1" /> {_apply_to_all_children_categories_too}</div></td>
+										  </tr>
+										<tr class="alt2" valign="top">
+										  <td><span class="blue"><a href="{ilpage[settings]}?cmd=marketplace" title="{_click_here_to_manage_budget_groups_and_fees}">{_budget_range_group}</a></span>
+										  <div class="smaller gray" style="padding-top:3px">{_defines_budget_range_values_for_placing_bid_amounts_in_this_category}</div></td>
+										  <td class="alt1"><div style="padding-bottom:4px">{budgetgrouppulldown}</div><div class="smaller"><input type="checkbox" name="brchildren" value="1" /> {_apply_to_all_children_categories_too}</div></td>
+									  	</tr>
+										
+										<tr class="alt2" valign="top">
+										<td><span class="blue"><a href="{ilpage[settings]}?cmd=marketplace" title="{_click_here_to_manage_final_value_fee_groups_and_values}">{_final_value_fee_group}</a></span>
+										<div class="smaller gray" style="padding-top:3px">{_defines_service_provider_fees_specific_for_awarding_bid_amounts_in_this_category} </div></td>
+										<td class="alt1"><div style="padding-bottom:4px">{finalvaluepulldown}</div><div class="smaller"><input type="checkbox" name="fvchildren" value="1" /> {_apply_to_all_children_categories_too}</div></td>
+										</tr>
+                                        
+                                        <tr class="alt2" valign="top">
+										<td><div>{_nondisclosed_budget_fee}</div>
+										
+										<div class="smaller gray" style="padding-top:3px">{_if_you_have_assigned_a_specific_budget_range_group_that_is_associated}</div></td>
+										<td class="alt1">{nondisclosefee}</td>
+										</tr>
+                                        
+										<tr class="alt2" valign="top"> 
+											<td>{_if_fixed_award_fees_are_enabled_for_bid_types_other_than}</td>
+											<td class="alt1">
+											<input class="input" name="fixedfeeamount" value="{fixedfeeamount}" size="5" /></td>
+										</tr>
+										<tr class="alt2" valign="top">
+										<td>{_bid_amount_types_available_to_this_category}<div class="smaller gray" style="padding-top:3px">{_this_defines_what_bid_types_buyers_posting_in_this_category_can_choose}</div></td>
+										<td class="alt1">
+											{bidtypes}
+											<br />
+											<div><input type="checkbox" name="bachildren" value="1" /> {_apply_to_all_children_categories_too}</div>
+										</td>
+										</tr>
+										
+										<tr class="alt2" valign="top">
+										<td>{_skills_category_association}<div class="smaller gray" style="padding-top:3px">{_when_you_associate_this_main_category_to_skills}</div></td>
+										<td class="alt1">
+										{skillspulldown}</td>
+										</tr>
+										
+										<tr class="alt2" valign="top">
+											<td><span class="blue"><a href="{ilpage[distribution]}?cmd=bids" title="{_click_here_to_manage_custom_bid_fields}">{_custom_bid_fields}</a></span>
+											<div class="smaller gray" style="padding-top:3px">{_when_users_are_placing_bids_in_this_category_you_can_assign}</div></td>
+											<td class="alt1">
+											{bidfields}</td>
+										</tr>
+										
+										<tr class="alt2" valign="top">
+											<td>{_bid_amount_types_award_winner_logic}<div class="smaller gray" style="padding-top:3px">{_for_bid_types_other_than_for_entire_project_per_item_and_per_lot_will_you} <div class="smaller">{_bid_amount_x_delivery_amount_to_calculate_final_value_commission_fee}</div></div>						</td>
+											<td class="alt1"><input type="radio" name="usefixedfees" value="1" id="usefixedfees1" {checked_usefixedfees_1} /> <label for="usefixedfees1">{_yes}</label>
+											<input type="radio" name="usefixedfees" value="0" id="usefixedfees0" {checked_usefixedfees_0} /> <label for="usefixedfees0">{_no}</label></td>
+											</tr>
+											
+										<!--
+										  <tr class="alt2" valign="top"> 
+										  <td>{_category_icon} </td>
+										  <td class="alt1">
+											<input class="input" name="catimage" value="{catimage}" style="width:100%" /></td>
+										</tr>
+										//-->
+										<tr class="alt2" valign="top">
+											<td>{_sort_display_order}</td>
+											<td class="alt1"><input class="input" size="3" name="sort" value="{sort}" /></td>
+										</tr>
+										<!--<tr class="alt2" valign="top"> 
+											<td>{_can_buyers_in_this_category_award_multiple_bidders}</td>
+											<td class="alt1"><input type="radio" name="multipleaward" value="1" id="multipleaward1" {checked_multipleaward_1} /> <label for="multipleaward1">{_yes}</label>
+											<input type="radio" name="multipleaward" value="0" id="multipleaward0" {checked_multipleaward_0} /> <label for="multipleaward0">{_no}</label></td>
+										</tr>-->
+										<tr class="alt2" valign="top"> 
+											<td>
+								        {_group_bids_placed_in_this_category_per_user_or_show_all_bids_placed_at_once}</td>
+											<td class="alt1"><input type="radio" name="bidgrouping" value="1" id="bidgrouping1" {checked_bidgrouping_1} /> <label for="bidgrouping1">{_group_bids}</label>
+											<input type="radio" name="bidgrouping" value="0" id="bidgrouping0" {checked_bidgrouping_0} /> <label for="bidgrouping0">{_dont_group_bids}</label></td>
+										</tr>
+										<tr class="alt2" valign="top"> 
+											<td>{_if_bid_grouping_is_enabled_show_the_bidders_lowest_or_highest_bid_placed}</td>
+											<td class="alt1"><input type="radio" name="bidgroupdisplay" value="lowest" id="bidgroupdisplay1" {checked_bidgroupdisplay_1} /> <label for="bidgroupdisplay1">{_lowest}</label>
+											<input type="radio" name="bidgroupdisplay" value="highest" id="bidgroupdisplay0" {checked_bidgroupdisplay_0} /> <label for="bidgroupdisplay0">{_highest}</label></td>
+										</tr>
+										{apihook[service_category_edit_end]}
+										<tr class="alt2 valign="top""> 
+											<td>{_is_category_active_and_visible} </td>
+											<td class="alt1"><input type="radio" name="visible" value="1" id="visible1" {checked_visible_1} /> <label for="visible1">{_yes}</label>
+											<input type="radio" name="visible" value="0" id="visible0" {checked_visible_0} /> <label for="visible0">{_no}</label></td>
+										</tr>
+									</loop name="servicecategory">
+									
+									<tr class="alt2_top"> 
+										<td colspan="2" valign="middle">{submit}&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back();">{_cancel}</a></span></td>
+									</tr>
+								</table>
+								
+							</div>
+							
+							<div class="block2-footer">
+									<div class="block2-right">
+											<div class="block2-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+					</form>
+			
+		</if>
+		
+		<if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND isset($ilance->GPC['subcmd']) AND ($ilance->GPC['subcmd'] == 'editproductcat' OR $ilance->GPC['subcmd'] == 'addproductcat')">
+			<form method="post" enctype='multipart/form-data' action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+			<input type="hidden" name="cmd" value="categories" />
+			<input type="hidden" name="subcmd" value="{subcmd}" />
+			<input type="hidden" name="return" value="{return}" />
+			<input type="hidden" name="cid" id="cid" value="{cid}" />
+			<a name="#question"></a>
+			<div class="block-wrapper">
+			<div class="block">
+			
+					<div class="block-top">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+					<div class="block-header">{_category_details}</div>
+					<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_you_may_define_everything_about_this_category_using_the_options_below}</div></div>
+					<div class="block-content" style="padding:0px">
+						
+						<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+						<tr class="alt1" valign="top"> 
+							<td width="27%"  class="alt2">{_parent_category}</td>
+						  <td width="73%" class="alt1">
+                            <div><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #fff; border-left:1px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #fff" src="{ajaxurl}?do=categories&mode=product&cid={cid}&pid={pid}&showyouselectedstring=0&showcontinue=0&showthumb=0&showcidbox=0&showcheckmarkafterstring=0&rootcid=1&cidfield={cidfield}"></iframe></div>
+                            <div style="display:none"><span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="pid" name="pid" style="font-family: verdana" size="6" /></span></div>
+                            <div style="display:none"><div id="categorybutton"></div></div>
+                            <div style="padding-top:12px; padding-bottom:12px"><strong>{_youve_selected}:</strong> <span id="selectedcategory" class="blue"></span><span id="cidstringcb"></span></div>
+                            </td>
+						</tr>
+                        </table>
+                        <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+						{apihook[product_category_edit_start]}
+						<loop name="productlanguages">
+						<tr class="alt2_top" valign="top"> 
+							<td>{_category_title} {_in} {language}<div class="smaller gray" style="padding-top:3px">{_also_embeds_within_meta_title_when_viewing_this_category}</div></td>
+							<td class="alt_top"><input class="input" name="title[{slng}]" value="{title}" size="45" /></td>
+						</tr>
+						<tr class="alt2" valign="top"> 
+							<td>{_description} {_in} {language}<div class="smaller gray" style="padding-top:3px">{_also_embeds_within_the_meta_description_when_viewing_this_category}</div></td>
+							<td class="alt1"><input class="input" name="description[{slng}]" value="{description}" size="45" /></td>
+						</tr>
+						<tr class="alt2" valign="top">
+						  <td>{_meta_tag_keywords} {_in} {language}<div class="smaller gray" style="padding-top:3px">{_for_advanced_seo_techniques_add_more_meta_keywords_for_search_engines}</div></td>
+						  <td class="alt1"><input class="input" name="keywords[{slng}]" value="{keywords}" size="45" /></td>
+						</tr>
+                        <tr class="alt2" valign="top">
+						  <td>SEO URL {_in} {language}<div class="smaller gray" style="padding-top:3px">{_for_seo_urls_in} {language}</div></td>
+						  <td class="alt1"><input class="input" name="seourl[{slng}]" value="{seourl}" size="45" /></td>
+						</tr>
+						</loop name="productlanguages">
+						
+						<loop name="productcategory">
+						<tr class="alt2" valign="top"> 
+							<td>{_category_icon}<div class="smaller gray" style="padding-top:3px">{_format}: .jpg, .gif, .bmp, .png</div></td>
+							<td class="alt1">
+							{category_icon_old}<div><input type="file" name="catimage" size="30"><div class="smaller gray" style="padding-top:3px">{_max_filesize}: 65KB</div></div></td>
+						</tr>
+                        <tr class="alt2" valign="top"> 
+							<td>{_category_popout_hero_image}<div class="smaller gray" style="padding-top:3px">{_format}: .jpg, .gif, .bmp, .png</div></td>
+							<td class="alt1">
+							{category_hero_old}<div><input type="file" name="catimagehero" size="30"><div class="smaller gray" style="padding-top:3px">{_max_filesize}: {_unlimited}</div></div></td>
+						</tr>
+						  <tr class="alt2" valign="top">
+						  <td>{_category_popout_hero_image_url}<div class="smaller gray" style="padding-top:3px">{_category_popout_hero_image_url_info}</div></td>
+						  <td class="alt1"><input class="input" name="catimageherourl" value="{catimageherourl}" size="45" /></td>
+						</tr>
+                          <tr class="alt2" valign="top">
+								  <td>{_can_members_post_auctions_in_this_category}<div class="smaller gray" style="padding-top:3px">{_if_not_members_will_be_redirected_to_a_category_map_page}</div></td>
+								  <td class="alt1">
+									<input type="radio" name="canpost" value="1" id="canpost1" {checked_canpost_1} /> <label for="canpost1">{_yes}</label>
+									<input type="radio" name="canpost" value="0" id="canpost0" {checked_canpost_0} /> <label for="canpost0">{_no}</label></td>
+						  </tr>
+						  <if condition="isset($ilconfig['enableclassifiedtab']) AND $ilconfig['enableclassifiedtab']"><tr class="alt2" valign="top"> 
+                                    <td>{_can_members_post_classifieds_in_this_category}<div class="smaller gray" style="padding-top:3px">{_can_members_post_classifieds_in_this_category_desc}</div></td>
+                                    <td class="alt1">
+                                    <input type="radio" name="canpostclassifieds" value="1" id="canpostclassifieds1" {checked_canpostclassifieds_1} /> <label for="canpostclassifieds1">{_yes}</label>
+                                    <input type="radio" name="canpostclassifieds" value="0" id="canpostclassifieds0" {checked_canpostclassifieds_0} /> <label for="canpostclassifieds0">{_no}</label></td>
+							</tr></if>
+				    		<tr class="alt2" valign="top">
+								  <td>{_can_members_view_rss_feeds_in_this_category}<div class="smaller gray" style="padding-top:3px">{_this_option_allows_users_to_view_the_forward_auction_listings_via_rss_syndication_from_the_client_side_marketplace}</div></td>
+								  <td class="alt1"><input type="radio" name="xml" value="1" id="xml1" {checked_xml_1} /> <label for="xml1">{_yes}</label>
+									<input type="radio" name="xml" value="0" id="xml0" {checked_xml_0} /> <label for="xml0">{_no}</label> </td>
+						  	</tr>
+							<tr class="alt2" valign="top"> 
+									<td>{_can_members_optin_to_this_categorys_newsletter}<div class="smaller gray" style="padding-top:3px">{_this_option_allows_users_to_subscribe_and_receive_email_daily_based_on_new_listings_posted_within_this_category}</div></td>
+									<td class="alt1"><input type="radio" name="newsletter" value="1" id="newsletter1" {checked_newsletter_1} /> <label for="newsletter1">{_yes}</label>
+									<input type="radio" name="newsletter" value="0" id="newsletter0" {checked_newsletter_0} /> <label for="newsletter0">{_no}</label></td>
+								</tr>
+						
+						<tr class="alt2" valign="top">
+						  <td><span class="blue"><a href="{ilpage[settings]}?cmd=marketplace" title="{_click_here_to_manage_insertion_fee_groups_and_values}">{_insertion_fee_group}</a></span>
+						  <div class="smaller gray" style="padding-top:3px">{_defines_fees_specific_to_listing_an_item_in_this_category} </div>			  </td>
+						  <td class="alt1"><div style="padding-bottom:4px">{insertionfeepulldown}</div><div class="smaller"><input type="checkbox" name="igchildren" value="1" /> {_apply_to_all_children_categories_too}</div></td>
+						  </tr>
+									  
+						  <tr class="alt2" valign="top">
+						  <td><span class="blue"><a href="{ilpage[settings]}?cmd=marketplace" title="{_click_here_to_manage_final_value_fee_groups_and_values}">{_final_value_fee_group}</a></span>
+						  <div class="smaller gray" style="padding-top:3px">{_defines_fee_values_specific_for_end_of_auction_listing_in_this_category} </div></td>
+						  <td class="alt1"><div style="padding-bottom:4px">{finalvaluepulldown}</div><div class="smaller"><input type="checkbox" name="fvchildren" value="1" /> {_apply_to_all_children_categories_too}</div></td>
+						  </tr>
+						
+						<tr class="alt2" valign="top">
+						  <td><span class="blue"><a href="{ilpage[distribution]}?cmd=bids" title="{_click_here_to_manage_bid_increment_fees_ranges_and_values}">{_bid_increment_group}</a></span>
+						  <div class="smaller gray" style="padding-top:3px">{_defines_the_bid_increment_range_to_apply_when_auctions_are_posted}</div></td>
+						  <td class="alt1"><div style="padding-bottom:4px">{incrementpulldown}</div><div class="smaller"><input type="checkbox" name="bichildren" value="1" /> {_apply_to_all_children_categories_too}</div></td>
+						  </tr>
+                          
+						<tr class="alt2" valign="top"> 
+							<td>{_sort_display_order}</td>
+							<td class="alt1"><input class="input" size="3" name="sort" value="{sort}" /></td>
+						</tr>
+						
+						<if condition="$ilconfig['productbid_enableproxybid']">
+						<tr class="alt2" valign="top"> 
+							<td>{_would_you_like_to_enable_proxy_bidding_within_this_category}
+					    <div class="smaller gray" style="padding-top:3px">{_for_example_if_a_user_places_a_bid_where_the_current_bid_is}</div></td>
+							<td class="alt1"><input type="radio" name="useproxybid" value="1" id="useproxybid1" {checked_useproxybid_1} /> <label for="useproxybid1">{_yes}</label>
+							<input type="radio" name="useproxybid" value="0" id="useproxybid0" {checked_useproxybid_0} /> <label for="useproxybid0">{_no}</label></td>
+						</tr>
+						</if>
+						<tr class="alt2" valign="top"> 
+							<td>{_would_you_like_to_enable_reserve_price_feature_within_this_category}
+<div class="smaller gray" style="padding-top:3px">{_for_example_when_a_seller_list_their_item_they_can_choose_to_set_a_reserve_price_if_you_want_within_this_category}</div>
+							</td>
+							<td class="alt1"><input type="radio" name="usereserveprice" value="1" id="usereserveprice1" {checked_usereserveprice_1} /> <label for="usereserveprice1">{_yes}</label>
+							<input type="radio" name="usereserveprice" value="0" id="usereserveprice0" {checked_usereserveprice_0} /> <label for="usereserveprice0">{_no}</label></td>
+						</tr>
+						
+						<tr class="alt2" valign="top"> 
+							<td>{_would_you_like_to_hide_buy_now_button_in_this_category_after_first_bid_is_placed}
+<div class="smaller gray" style="padding-top:3px">{_this_option_will_work_in_auction_with_buy_now_when_you_have_this_option_enabled_and_the_first_bid_is_made_buy_now_button_will_dissapear}</div>
+							</td>
+							<td class="alt1"><input type="radio" name="usehidebuynow" value="1" id="usehidebuynow1" {checked_usehidebuynow_1} /> <label for="usehidebuynow1">{_yes}</label>
+							<input type="radio" name="usehidebuynow" value="0" id="usehidebuynow0" {checked_usehidebuynow_0} /> <label for="usehidebuynow0">{_no}</label></td>
+						</tr>
+						<if condition="$ilconfig['productbid_enablesniping']"><tr class="alt2" valign="top"> 
+							<td>{_would_you_like_to_enable_anti_bid_sniping_within_this_category}
+<div class="smaller gray" style="padding-top:3px">{_this_option_allows_you_to_set_anti_bid_sniping_within_this_category}</div>
+							</td>
+							<td class="alt1"><input type="radio" name="useantisnipe" value="1" id="useantisnipe1" {checked_useantisnipe_1} /> <label for="useantisnipe1">{_yes}</label>
+							<input type="radio" name="useantisnipe" value="0" id="useantisnipe0" {checked_useantisnipe_0} /> <label for="useantisnipe0">{_no}</label></td>
+						</tr></if>
+						{apihook[product_category_edit_end]}
+						<tr class="alt2" valign="top"> 
+                            <td>{_is_category_active_and_visible}</td>
+                            <td class="alt1"><input type="radio" name="visible" value="1" id="visible1" {checked_visible_1} /> <label for="visible1">{_yes}</label>
+                            <input type="radio" name="visible" value="0" id="visible0" {checked_visible_0} /> <label for="visible0">{_no}</label></td>
+						</tr>
+						</loop name="productcategory">
+						<tr class="alt2_top">
+						<td colspan="2">{submit}&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back();">{_cancel}</a></span></td>
+						</tr>
+						</table>
+					</div>
+					<div class="block-footer">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+			</div>
+		</div>
+		</form></if>

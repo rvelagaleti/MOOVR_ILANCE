@@ -1,0 +1,320 @@
+<div id="v3body4">
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+
+	<div id="content">
+	<h1>{_escrow_management}</h1><br />
+
+		
+		<div class="tab-pane">
+		
+			<div class="tab-pane" id="escrowlistings">
+		
+				<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']">
+				<div class="tab-page">
+      				
+        			
+					<h2 class="tab">{_service}</h2>
+					
+					<div class="block-wrapper">
+					<div class="block2">
+					
+							<div class="block2-top">
+									<div class="block2-right">
+											<div class="block2-left"></div>
+									</div>
+							</div>
+							
+							<div class="block2-header">{numberservice} Reverse Auction Escrow Activities</div>
+							<div class="block2-content-blue" style="padding:9px"><div class="smaller">You are currently viewing active service escrow accounts below.  You can force a buyer refund or force a payment forward from this area</div></div>
+							<div class="block2-content" style="padding:0px">
+								
+								<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+								<tr class="alt2"> 
+									<td nowrap="nowrap" align="center" width="1%">{_order_id}</td>
+									<td nowrap="nowrap">{_provider}</td>
+									<td width="10%" nowrap="nowrap">{_buyer}</td>
+									<td nowrap="nowrap">{_bid_amount}</td>
+									<td width="14%" nowrap="nowrap">{_in_escrow} <a href="javascript:void(0)" onmouseover="Tip('{_this_value_will_change_when_the_buyer_purchaser_has_forwarded_funds_into_this_escrow_account}', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+									<td width="17%" nowrap="nowrap">{_escrow_status}</td>
+									<td width="26%" nowrap="nowrap" align="right">Force Actions</td>
+								</tr>
+								<loop name="serviceescrows"> 
+								<tr class="alt1" valign="top"> 
+									<td align="center" nowrap="nowrap"><span style="float:left"><a href="#top" onclick="return toggle('adminescrowservice{escrow_id}')"><img src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_adminescrowservice{escrow_id}]}.gif" alt="" border="0" id="collapseimg_adminescrowservice{escrow_id}" /></a></span><span style="font-size:15px" class="gray">{escrow_id}</span></td>
+									<td width="14%" nowrap="nowrap"><div class="blue">{provider}</div>
+									<div class="smaller gray" style="padding-top:3px">{_fee}: {fees2}</div></td>
+									<td align="left" nowrap="nowrap"><div class="blue">{buyer}</div>
+									<div class="smaller gray" style="padding-top:3px">{_fee}: {fees}</div></td>
+									<td width="10%"><span class="gray">{bidamount}</span></td>
+									<td><span class="blue" style="font-size:13px"><strong>{escrowamount}</strong></span></td>
+									<td nowrap="nowrap"><span class="smaller gray">{status}</span></td>
+									<td align="right" nowrap="nowrap"><span class="blue">{actions}</span></td>
+								</tr>
+                                <tbody id="collapseobj_adminescrowservice{escrow_id}" style="display: none;">
+								<tr class="alt1"> 
+									<td colspan="8">
+									<div class="blue" style="font-size:14px"><a href="{http_server}{ilpage[rfp]}?id={project_id}" target="_blank">{job_title}</a></div>
+									<div class="smaller gray" style="padding-top:4px"><strong>{_award_date}</strong>: <span class="black">{awarddate}</span></div></td>
+								</tr>
+                                </tbody>
+								</loop name="serviceescrows"> 
+								<if condition="isset($show['no_serviceescrows']) AND $show['no_serviceescrows']"> 
+								<tr> 
+									<td colspan="9" align="center">{_no_results_found}</td>
+								</tr>
+								<else />
+								<tr> 
+									<td colspan="9" align="center">{serviceprevnext}</td>
+								</tr>
+								</if>
+								</table>
+								
+</div>
+							
+							<div class="block2-footer">
+									<div class="block2-right">
+											<div class="block2-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+					
+				</div>
+				</if>
+				
+				<if condition="$ilconfig['globalauctionsettings_productauctionsenabled']">
+				<div class="tab-page">
+					
+          
+					<h2 class="tab">{_product}</h2>
+					
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{numberproduct} Forward Auction Escrow Activities</div>
+							<div class="block-content-yellow" style="padding:9px"><div class="smaller">You are currently viewing active product/item escrow accounts below.  You can force a buyer refund or force a payment forward from this area</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+								<tr class="alt2"> 
+									<td nowrap="nowrap" align="center">{_order_id}</td>
+									<td nowrap="nowrap">{_winner}</td>
+									<td width="16%" nowrap="nowrap">{_merchant}</td>
+									<td width="18%" nowrap="nowrap">{_bid_amount}</td>
+									<td width="10%" nowrap="nowrap">{_in_escrow} <a href="javascript:void(0)" onmouseover="Tip('{_this_value_will_change_when_the_buyer_purchaser_has_forwarded_funds_into_this_escrow_account}', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+									<td width="12%" nowrap="nowrap">{_status}</td>
+									<td width="21%" nowrap="nowrap" align="right">Force Actions</td>
+								</tr>
+								<loop name="productescrows"> 
+								<tr class="alt1" valign="top"> 
+									<td width="1%" align="center" nowrap="nowrap"><span style="float:left"><a href="#top" onclick="return toggle('adminescrowproduct{escrow_id}')"><img src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_adminescrowproduct{escrow_id}]}.gif" alt="" border="0" id="collapseimg_adminescrowproduct{escrow_id}" /></a></span><span style="font-size:15px" class="gray">{escrow_id}</span></td>
+									<td width="16%"><div class="blue">{buyer}</div><div class="smaller gray" style="padding-top:3px">{_fee}: {fees2}</div></td>
+									<td><div class="blue">{merchant}</div><div class="smaller gray" style="padding-top:3px">{_fee}: {fees}</div></td>
+									<td><div class="blue">{bidamount}</div><div class="smaller gray" style="padding-top:3px">{_shipping}: {shipfees}</div></td>
+									<td><span class="blue" style="font-size:13px"><strong>{escrowamount}</strong></span></td>
+									<td nowrap="nowrap"><span class="smaller gray">{status}</span></td>
+									<td align="right" nowrap="nowrap">{actions}</td>
+								</tr>
+                                <tbody id="collapseobj_adminescrowproduct{escrow_id}" style="display: none;">
+								<tr class="alt1"> 
+									<td colspan="7" align="left"><div class="blue" style="font-size:14px"><a href="{http_server}{ilpage[merch]}?id={project_id}" target="_blank">{job_title}</a></div>
+									<div class="smaller gray" style="padding-top:4px"><strong>{_award_date}</strong>: {awarddate}</div></td>
+								</tr>
+                                </tbody>
+								</loop name="productescrows">					
+								<if condition="isset($show['no_productescrows']) AND $show['no_productescrows']"> 
+								<tr> 
+									<td colspan="8" align="center">{_no_results_found}</td>
+								</tr>
+								<else />
+								<tr> 
+									<td colspan="8" align="center">{productprevnext}</td>
+								</tr>
+								</if>
+								</table>
+								
+</div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+					
+				</div>
+				
+				
+				<div class="tab-page">
+					
+          
+					<h2 class="tab">{_buy_now}</h2>
+					
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{numberpurchasenow} Buy Now Purchase Activities</div>
+							<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_when_a_buyer_purchases_an_item_product_from_a_seller_from_the_auction_listing_via_buy_now}</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+								<tr class="alt2"> 
+									<td width="7%" align="center" nowrap="nowrap">{_order_id}</td>
+									<td width="19%" nowrap="nowrap">{_buyer}</td>
+									<td width="15%" nowrap="nowrap">{_merchant}</td>
+									<td width="8%" nowrap="nowrap">{_seller} FVF</td>
+									<td width="8%" nowrap="nowrap">{_in_escrow}</td>
+									<td width="18%">{_status}</td>
+									<td width="4%" align="center">{_qty}</td>
+									<td width="21%" align="right">{_actions}</td>
+								</tr>
+								<loop name="buynowescrows"> 
+								<tr class="alt1" valign="top"> 
+									<td align="center"><span style="float:left"><a href="#top" onclick="return toggle('adminescrowbuynow{orderid}')"><img src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_adminescrowbuynow{orderid}]}.gif" alt="" border="0" id="collapseimg_adminescrowbuynow{orderid}" /></a></span><span style="font-size:15px" class="gray">{orderid}</span></td>
+									<td><div class="blue">{buyer}</div>
+									<div class="smaller gray" style="padding-top:3px">{_escrow_fee}: {escrowfeebuyer}</div></td>
+									<td nowrap="nowrap"><div class="blue">{merchant}</div><div class="smaller gray" style="padding-top:3px">{_escrow_fee}: {escrowfee}</div></td>
+									<td nowrap="nowrap"><span class="blue">{fvf}</span></td>
+								  <td nowrap="nowrap"><span class="blue" style="font-size:13px"><strong>{orderamount}</strong></span></td>
+									<td><span class="smaller gray">{orderstatus}</span></td>
+									<td align="center" nowrap="nowrap"><span class="blue">{qty}</span></td>
+									<td align="right" nowrap="nowrap">{orderactions}</td>
+								</tr>
+								<tbody id="collapseobj_adminescrowbuynow{orderid}" style="display: none;">
+								<tr class="alt2">
+									<td colspan="2">{_title}</td>
+									<td colspan="10" class="alt1"><div style="padding-top:5px; padding-bottom:5px; font-size:13px" class="blue"><a href="{http_server}{ilpage[merch]}?id={project_id}" target="_blank">{item}</a></div></td>
+								</tr>
+								<tr class="alt2">
+									<td colspan="2">{_order_date}</td>
+									<td colspan="10" class="alt1"><span class="gray">{orderdate}</span></td>
+								</tr>
+								<tr class="alt2">
+									<td colspan="2">{_seller} {_shipto}</td>
+									<td colspan="10" class="alt1">{orderlocation}</td>
+								</tr>
+								</tbody>
+								</loop name="buynowescrows"> 
+								<if condition="isset($show['no_buynowescrows']) AND $show['no_buynowescrows']"> 
+								<tr> 
+									<td colspan="11" align="left" valign="top" nowrap="nowrap"><div align="center">{_no_results_found}</div></td>
+								</tr>
+								<else />
+								<tr> 
+									<td colspan="11" align="left">{purchasenowprevnext}</td>
+								</tr>
+								</if>
+								</table>
+								
+			    </div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+					
+					<if condition="!isset($ilance->GPC['cancelled'])"><div class="gray" style="padding-top:5px; padding-bottom:5px">{_please_note_cancelled_buy_now_orders_will_not_appear_by_default}  <span class="blue"><a href="{ilpage[accounting]}?cmd=escrow&amp;cancelled=1">{_to_view_cancelled_order_listings_please_use_this_link}</a></span></div><else /><div style="padding-top:5px; padding-bottom:5px"><span class="blue"><a href="{ilpage[accounting]}?cmd=escrow">{_hide_cancelled_orders}</a></span></div></if>
+				</div>
+				</if>
+				
+				<!-- balance settings 
+				<div class="tab-page">
+				<h2 class="tab">{_balance}</h2>
+				
+				<div class="tab-pane" id="escrowbalance">
+				
+					<div>
+					<loop name="escrowbalance">
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					
+				  <tr class="alt2 smaller">
+					<td>Escrow Type </td>
+					<td>Total Escrow Holdings </td>
+					<td>Total Accounts </td>
+					<td>Revenue From  Buyer Fees </td>
+					<td>Revenue From Seller Fees </td>
+				  </tr>
+				  <tr class="alt1">
+					<td><span class="gray">Service Escrow </span></td>
+					<td><span class="blue" style="font-size:14px">{serviceescrow1}</span></td>
+					<td><span class="gray" style="font-size:14px">{serviceescrow2}</span></td>
+					<td><span class="green" style="font-size:14px">{serviceescrow3}</span></td>
+					<td><span class="green" style="font-size:14px">{serviceescrow4}</span></td>
+				  </tr>
+				  <tr>
+					<td><span class="gray">Product Escrow</span></td>
+					<td><span class="blue" style="font-size:14px">{productescrow1}</span></td>
+					<td><span class="gray" style="font-size:14px">{productescrow2}</span></td>
+					<td><span class="green" style="font-size:14px">{productescrow3}</span></td>
+					<td><span class="green" style="font-size:14px">{productescrow4}</span></td>
+				  </tr>
+				  <tr class="alt1">
+					<td><span class="gray">Buy Now Escrow </span></td>
+					<td><span class="blue" style="font-size:14px">{buynowescrow1}</span></td>
+					<td><span class="gray" style="font-size:14px">{buynowescrow2}</span></td>
+					<td><span class="green" style="font-size:14px">{buynowescrow3}</span></td>
+					<td><span class="green" style="font-size:14px">{buynowescrow4}</span></td>
+				  </tr>
+				  <tr>
+					<td><span class="gray" style="font-size:14px"><strong>{_totals}</strong></span></td>
+					<td><span class="blue" style="font-size:14px"><strong>{totalsgenerated}</strong></span></td>
+					<td><span class="gray" style="font-size:14px"><strong>{totalaccounts}</strong></span></td>
+					<td><span class="green" style="font-size:14px"><strong>{buyerrevenue}</strong></span></td>
+					<td><span class="green" style="font-size:14px"><strong>{sellerrevenue}</strong></span></td>
+				  </tr>
+				  <tr>
+				    <td>&nbsp;</td>
+				    <td colspan="4" valign="top"><img src="{template_relativeimagepath}{template_imagesfolder}trail.gif" border="0" alt="" /> <span class="blue">You should have at least this amount within a seperate business account for Escrow Holdings</span></td>
+				    </tr>
+				</table>
+				</loop name="escrowbalance">
+					</div>
+	
+				</div>
+				</div>-->
+				
+				<!-- escrow settings -->
+				<div class="tab-page">
+				<h2 class="tab">{_settings}</h2>
+				<!-- tab pane -->
+				<div class="tab-pane" id="escrowsettings">
+				
+					{configuration_escrowsystem}
+	
+				</div>
+				<!-- /  tab pane -->
+				
+			</div>
+			<!-- / escrow settings -->
+				
+		</div>
+	</div>
+<br />
+<br />

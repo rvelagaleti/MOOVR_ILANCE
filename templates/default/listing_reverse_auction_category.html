@@ -1,0 +1,56 @@
+<form name="ilform" action="{ilpage[buying]}" method="post" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="new-rfp" />
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td valign="top">
+	
+<div class="block-wrapper">
+
+	<div class="block2">
+	
+			<div class="block2-top">
+					<div class="block2-right">
+							<div class="block2-left"></div>
+					</div>
+			</div>
+			
+			<div class="block2-header">{_category}</div>
+			
+			<div class="block2-content" style="padding:0px">
+				
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+				<tr>
+					  <td class="alt2">{_please_select_your_auction_line_items_for_bulk_auction_creation_and_the_category_for_your_new_service_auction}</td>
+				</tr>
+				<tr>
+					<td>
+					<iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #ebebeb; border-left:1px solid #ebebeb; border-right:1px solid #bdbdbd; border-bottom:1px solid #bdbdbd" src="{ajaxurl}?do=categories&mode=service"></iframe>
+					<span style="float:right; font-family: arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" size="6" /></span>
+					<div id="selectedcategory"></div>
+					<div id="categorybutton"></div>
+					</td>
+				</tr>
+				</table>
+				
+			</div>
+			
+			<div class="block2-footer">
+					<div class="block2-right">
+							<div class="block2-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+
+	
+	</td>
+	<td>{invitespaces}</td>
+	<td valign="top" width="{invitewidth}">{inviteduserlist}</td>
+</tr>
+</table>
+
+</form>

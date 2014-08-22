@@ -1,0 +1,82 @@
+<div id="v3body4">
+<div id="sub">
+<div id="subnav">
+	<loop name="subnav_settings">
+	<a href="{url}" {class}><span>{name}</span></a> <span> | </span>
+	</loop name="subnav_settings">
+</div>
+</div>
+
+<div id="content" align="center">
+
+<div style="padding:6px; width:98%">
+<div>  
+
+<if condition="isset($show['error_login']) AND $show['error_login']"><h1>{_you_have_provided_incorrect_login_credentials}</h1></if>
+<if condition="isset($show['password_renewed']) AND $show['password_renewed']"><h1>{_your_password_has_been_renewed_and_sent_to_your_email_address}</h1></if>
+
+<form name="login" action="{ilpage[login]}" method="post" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="_renew-password" />
+<div class="block-wrapper">
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header">{_password_recovery}</div>
+			<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_recover_your_password_to_the_admin_control_panel}</div></div>
+			<div class="block3-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" align="center">
+				<tr class="alt1"> 
+					<td width="69%">
+				
+						<table width="100%" border="0" cellspacing="3" cellpadding="2" align="left">
+						<tr> 
+						<td nowrap> <div align="right">{_username}</div></td>
+						<td width="100%"><input type="text" name="username" value="{admin_cookie}" style="width:100%; font-family: Verdana" /></td>
+						<td width="26%">&nbsp;</td>
+						</tr>
+						<tr> 
+						<td nowrap="nowrap"> <div align="right">{_email}</div></td>
+						<td width="100%"><input type="text" name="email" style="width:100%; font-family: Verdana" /></td>
+						<td>&nbsp;</td>
+						</tr>
+						<tr> 
+						<td nowrap="nowrap"> <div align="right">{_license_key}</div></td>
+						<td width="100%"><input type="password" name="license" style="width:100%; font-family: Verdana" /></td>
+						<td>&nbsp;</td>
+						</tr>
+						</table>
+					</td>
+					<td width="31%" valign="top">
+					
+						<table width="50%" border="0" align="center" cellpadding="6" cellspacing="0">
+						<tr> 
+							<td colspan="2" align="center" valign="top"><span class="blue"><a href="{ilpage[login]}" target="_self">{_return_to_login_menu}</a></span></td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="submit" value="{_recover_password}" style="font-size:15px" class="buttons" /></td>
+				</tr>
+				</table>
+
+				
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</form>
+</div>
+</div>

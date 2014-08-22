@@ -1,0 +1,81 @@
+<h1 class="a_active" style="padding-bottom:5px">{_leave_feedback}</h1>
+<div class="gray" style="padding-bottom:9px">{_please_enter_feedback_for_others_to_review_for_this_customer}</div>
+<form method="post" action="{http_server}{ilpage[feedback]}" name="ilform" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="_do-feedback-submit" />
+{hiddenfields}
+<div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+<tr>
+	<td><div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+		<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+        <tr class="alt1">
+            <td height="25" nowrap="nowrap">{showview}</td>
+        </tr>
+        <loop name="feedback"><tr class="alt1">
+            <td>
+            	<a name="{project_id}_{from_user_id}_{for_user_id}_{fromtype}{orderid}"></a>
+            	<div style="padding-top:6px"></div>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+					    <td width="15%" valign="top"><div style="padding-right:21px" align="center"><span class="photo_wrapper" style="width:120px; max-height:100px">{photo}</span></div></td>
+				        <td width="85%" valign="top">
+                        	<div class="black" style="font-weight:bold;font-size:17px"><span style="float:right" class="smaller litegray">{_feedback} #{project_id}</span>{project_title}</div>
+                            <div style="padding-top:9px; font-size:13px" class="gray">{usertype}: <span class="a_active">{customer}</span></div>
+                            <div style="padding-top:4px; font-size:13px" class="gray">{_ended}: <span class="black">{enddate}</span></div>
+                            <div style="padding-top:4px; font-size:13px" class="gray">{_format}: <span class="black">{format}</span></div>
+                            
+                            <div style="padding-top:15px" class="a_active"><strong>{_feedback_from} {customer}</strong></div>
+                            <div style="padding-top:4px" class="litegray">{customercomment}</div>
+                            <div style="padding-top:21px; padding-bottom:12px" class="black"><strong>{_leave_feedback} {_for} {customer}.</strong>&nbsp;{_please_enter_your_overall_response_for_this_experience_positive_neutral_or_negative}</div>
+							<div style="padding-bottom:12px">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td><input type="radio" name="response[{project_id}_{md5}]" value="positive" id="vpositive_{project_id}_{md5}" onclick="toggle_show('leavefeedback_{project_id}_{md5}')" /></td>
+                                <td><label for="vpositive_{project_id}_{md5}">{_positive}</label></td>
+                                <td><input type="radio" name="response[{project_id}_{md5}]" value="neutral" id="vneutral_{project_id}_{md5}" onclick="toggle_show('leavefeedback_{project_id}_{md5}')" /></td>
+                                <td><label for="vneutral_{project_id}_{md5}">{_neutral}</label></td>
+                                <td><input type="radio" name="response[{project_id}_{md5}]" value="negative" id="vnegative_{project_id}_{md5}" onclick="toggle_show('leavefeedback_{project_id}_{md5}')" /></td>
+                                <td><label for="vnegative_{project_id}_{md5}">{_negative}</label></td>
+                                <td><input type="radio" name="response[{project_id}_{md5}]" value="later" id="vlater_{project_id}_{md5}" checked="checked" onclick="toggle_hide('leavefeedback_{project_id}_{md5}')" /></td>
+                                <td nowrap="nowrap"><label for="vlater_{project_id}_{md5}">{_i_will_leave_feedback_later}</label></td>
+                            </tr>
+                            </table>
+                            <input type="hidden" name="for_user_id[{project_id}_{md5}]" value="{for_user_id}" />
+                            <input type="hidden" name="from_user_id[{project_id}_{md5}]" value="{from_user_id}" />
+                            <input type="hidden" name="fromtype[{project_id}_{md5}]" value="{fromtype}" />
+                            <input type="hidden" name="orderids[{project_id}_{md5}]" value="{orderid}" />
+                            <div id="leavefeedback_{project_id}_{md5}" style="display:none">
+                            	<div style="height:1px;width:100%;background-color:#cccccc; margin-top:16px;margin-bottom:16px"></div>
+                            	<div style="font-size:13px">{_please_explain}: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="comments[{project_id}_{md5}]" value="" style="font-family: verdana; width:440px" class="input" maxlength="120" /> &nbsp;&nbsp;&nbsp;<span class="smaller gray">({_120_characters_max})</span></div>
+                                <if condition="isset($show_stars{project_id}) AND $show_stars{project_id}"><div style="padding-top:21px; padding-bottom:12px; font-size:13px" class="black"><strong>{_please_select_the_closest_rating_specifics_using_the_chart_below}.</strong></div>
+                                <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="2">
+                                <loop name="feedback_criteria{project_id}"><tr>
+                                    <td width="35%">{title}</td>
+                                    <td width="1%" nowrap="nowrap"><div><img id="star1_{project_id}_{md5}_{id}" class="star" onMouseOut="starover(0, '{project_id}_{md5}', {id})" onMouseOver="starover(1, '{project_id}_{md5}', {id})" onMouseDown="stardown(1, '{project_id}_{md5}', {id})" src="{template_relativeimagepath}{template_imagesfolder}icons/star_off.gif" border="0" width="18" height="18" />
+                                        <img id="star2_{project_id}_{md5}_{id}" class="star" onMouseOut="starover(0, '{project_id}_{md5}', {id})" onMouseOver="starover(2, '{project_id}_{md5}', {id})" onMouseDown="stardown(2, '{project_id}_{md5}', {id})" src="{template_relativeimagepath}{template_imagesfolder}icons/star_off.gif" border="0" width="18" height="18" />
+                                        <img id="star3_{project_id}_{md5}_{id}" class="star" onMouseOut="starover(0, '{project_id}_{md5}', {id})" onMouseOver="starover(3, '{project_id}_{md5}', {id})" onMouseDown="stardown(3, '{project_id}_{md5}', {id})" src="{template_relativeimagepath}{template_imagesfolder}icons/star_off.gif" border="0" width="18" height="18" />
+                                        <img id="star4_{project_id}_{md5}_{id}" class="star" onMouseOut="starover(0, '{project_id}_{md5}', {id})" onMouseOver="starover(4, '{project_id}_{md5}', {id})" onMouseDown="stardown(4, '{project_id}_{md5}', {id})" src="{template_relativeimagepath}{template_imagesfolder}icons/star_off.gif" border="0" width="18" height="18" />
+                                        <img id="star5_{project_id}_{md5}_{id}" class="star" onMouseOut="starover(0, '{project_id}_{md5}', {id})" onMouseOver="starover(5, '{project_id}_{md5}', {id})" onMouseDown="stardown(5, '{project_id}_{md5}', {id})" src="{template_relativeimagepath}{template_imagesfolder}icons/star_off.gif" border="0" width="18" height="18" /></div></td>
+                                    <td align="left" width="1%">&nbsp;&nbsp;</td>
+                                    <td width="29%" colspan="6">&nbsp;&nbsp;<span class=""><span id="fbtext_{project_id}_{md5}_{id}"></span></span><input type="hidden" name="criteria[{project_id}_{md5}][{id}]" id="criteria_{project_id}_{md5}_{id}" /></td>
+                                </tr></loop name="feedback_criteria{project_id}">
+                                </table></if>
+							</div></div>
+                        </td>
+  			    </tr>
+                </table>
+            </td>
+        </tr></loop name="feedback">
+        <if condition="isset($show['noresults']) AND $show['noresults']"><tr>
+        	<td><div style="padding-top:10px; padding-bottom:10px" align="center">{_no_feedback_activity_found}</div></td>
+        </tr><else />
+        <tr class="alt2_top">
+        	<td><input type="submit" value="{_leave_feedback}" class="buttons" style="font-size:15px" />&nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back(1)">{_back}</a></span></td>
+        </tr></if>
+        </table>
+		</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+	</td>
+</tr>
+</table>
+</div>
+</form>

@@ -1,0 +1,50 @@
+<div style="padding:9px">
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_bid_increments}</div>
+			
+			<div class="block-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+				<tr> 
+					<td class="alt2" nowrap="nowrap">{_from}</td>
+					<td class="alt2" nowrap="nowrap">{_to_upper}</td>
+					<td width="26%" nowrap="nowrap" class="alt2">{_amount}</td>
+				</tr>
+				<loop name="increments"> 
+				<tr class="alt1"> 
+					<td width="30%" align="left">{from}</td>
+					<td width="44%">{to}</td>
+					<td>{amount}</td>
+				</tr>
+				</loop name="increments"> 
+				<if condition="isset($show['no_increments']) AND $show['no_increments']"> 
+				<tr> 
+					<td colspan="4" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+				</tr>
+				<else />
+				<tr class="alt2_top">
+					<td colspan="4"><div class="gray">{_category}: <span class="blue"><strong>{categorytitle}</strong></span></div></td>
+				</tr>
+				</if>
+				</table>
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</div>

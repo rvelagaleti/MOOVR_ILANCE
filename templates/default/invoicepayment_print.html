@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>{site_name} - Print Invoice</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset={template_charset}">
+</head>
+<style type="text/css">
+<!--
+.body
+{
+	background: #FFFFFF;
+	font: 12px helvetica, geneva, lucida, 'lucida grande', arial, helvetica, sans-serif;
+}
+
+.page
+{
+	background: #FFFFFF;
+	border: solid 1px black;
+}
+
+.bg
+{
+	background: #FFFFFF;
+	color: #000000;
+	font-size: 12px;
+}
+
+.tablehead
+{
+	background: #EEEEEE;
+	color: #000000;
+	font-weight: bold;
+	
+}
+.boldword
+{
+	font-weight: bold;
+}
+-->
+</style>
+<body class="body">
+<loop name="invoice">
+<table cellpadding="6" cellspacing="0" border="0" width="100%" align="center">
+<tr>
+	<td valign="top">
+		<p>
+			<span class="boldword">{_from}</span><br />{site_name}<br />
+	        {siteaddress} 
+			{sitebusinessnumber}
+		</p>
+		<if condition="isset($show['owner_bank_info']) AND $show['owner_bank_info'] == true">
+		<p>
+			<span class="boldword">{_bank_info}</span><br />
+			{owner_bank_info}
+		</p>
+		</if>
+		<p>
+		
+		<span class="boldword">{_customer}</span>
+		<br />
+        {fullname}
+		
+        {businessnumber}
+		<br />
+		<span class="boldword">{_doing_business_as}</span>
+		<br />
+		{username}
+		<br />
+		<br />
+		<span class="boldword">{_address}</span>
+		<br />
+		{fulladdress}
+		<br />
+		<br />
+		</p>
+	</td>
+	<td valign="top" align="right">
+		
+		
+		<table style="background-color:#ccc;" border="0" cellpadding="6" cellspacing="1">
+		<tr>
+			<td class="tablehead" colspan="2" align="left">{_order_number}: {txn}</td>
+		</tr>
+		<tr>
+			<td class="bg" width="125" align="left" valign="top"><span class="boldword">{_sales_person}</span><br />
+			{site_name}<br />{site_email}</td>
+			<td class="bg" width="125" align="left" valign="top" nowrap="nowrap"><span class="boldword">{_order_date} </span><br />
+            {purchasedate}</td>
+		</tr>
+		<tr>
+			<td class="bg" colspan="2" valign="top" align="left">
+				<span class="boldword">{_provider}</span> 
+				<strong>/ {_trading_partner} </strong><br />
+            {providerfullname}<br />
+			
+			<br /><strong>{_company}</strong><br />			
+			{providerbusinessnumber}<br />
+			
+            <br />
+            <span class="boldword">{_doing_business_as}</span><br />
+			{providerusername}
+				<br />
+				<br />
+			<strong>{_address}</strong>
+				<br />
+		{providerfulladdress}
+				 <br />
+				
+			</td>
+		</tr>
+		</table>
+		
+	</td>
+</tr>
+</table>
+
+<br />
+
+<table style="background-color:#ccc" width="100%" cellpadding="6" cellspacing="1" border="0" align="center">
+<tr>
+	<td class="tablehead" width="150">{_order_date}</td>
+	<td class="tablehead" width="150">{_order_terms}</td>
+	<td class="tablehead" width="150">{_order_due_date}</td>
+	<td class="tablehead" width="150">{_order_number}</td>
+</tr>
+<tr valign="top">
+	<td class="bg" width="150">{purchasedate}</td>
+	<td class="bg" width="150">Net {maxpaymentdays} ({_purchase_orders_only})</td>
+	<td class="bg" width="150">{duedate}</td>
+	<td class="bg" width="150">{txn}</td>
+</tr>
+</table>
+
+<br />
+
+<table style="background-color:#ccc" width="100%" cellpadding="6" cellspacing="1" border="0" align="center">
+<tr>
+	<td class="tablehead" width="450" align="left">{_memo_description}</td>
+	<td class="tablehead" width="150" align="left">{_order_amount}</td>
+</tr>
+
+<tr>
+	<td class="bg" colspan="2">{comments}</td>
+</tr>
+
+<tr>
+	<td class="bg"><span style="margin-left:20px">{description}</span></td>
+	<td class="bg" width="150">{amount}</td>
+</tr>
+
+<tr>
+  <td colspan="2" align="left" class="tablehead"> {_transaction_type}</td>
+  </tr>
+<tr>
+  <td colspan="2" align="left" class="bg"><span style="margin-left:10px">{type}</span></td>
+</tr>
+
+{taxlogic}
+
+<tr>
+	<td class="bg" align="right">{_total_order_amount}: &nbsp;&nbsp;</td>
+	<td class="bg" width="150">{totalamount}</td>
+</tr>
+
+<tr>
+	<td class="bg" align="right">{_total_paid}: &nbsp;&nbsp;</td>
+	<td class="bg" width="150">{totalpaid}</td>
+</tr>
+</table>
+</loop name="invoice">
+</body>
+</html>

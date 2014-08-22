@@ -1,0 +1,55 @@
+<div style="padding:9px">
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_permissions_for} {plan_title}</div>
+			
+			<div class="block-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="6">
+				<tr> 
+					<td width="70%" class="alt2" align="left" height="20" style="padding:9px"><strong>{_permission}</strong></td>
+					<td width="30%" class="alt2" align="center" style="padding:5px"><strong>{_value}</strong></td>
+				</tr>
+				<loop name="access_permission_items"> 
+				<tr class="alt1"> 
+					<td align="left"><div style="padding:4px">{accesstext}</div></td>
+					<td align="center"><div style="padding:4px"><strong>{userinput}</strong></div></td>
+				</tr>
+				</loop name="access_permission_items">
+				<!--
+				<tr class=""> 
+					<td align="left" colspan="2">
+					
+						<div style="padding:4px"><strong>{_related_subscription_plans_you_might_also_enjoy}:</strong>
+						
+						<ul>
+							
+							<li></li>
+							
+						</ul>
+						
+						</div>
+					
+					</td>
+				</tr>-->
+				</table>
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</div>

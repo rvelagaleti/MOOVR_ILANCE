@@ -1,0 +1,886 @@
+<div id="v3body4">
+    <!-- sub navigation -->
+    <div id="sub">
+	<div id="subnav">
+	    <loop name="subnav_settings">
+		<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+	    </loop name="subnav_settings">
+	</div>
+    </div>
+    <!-- /sub navigation -->
+
+    <div id="content">
+	<h1>{_category_configuration}<if condition="isset($ilance->GPC['subcmd']) AND ($ilance->GPC['subcmd'] == '_edit-service-questions' OR $ilance->GPC['subcmd'] == '_edit-product-questions')">: {_question_management}</if></h1><br />
+
+	<div class="tab-pane">
+
+	    <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']">		
+		<!-- begin tab page -->
+		<div class="tab-page">
+
+		    <h2 class="tab">{_service}</h2>
+
+		    <!-- begin tab pane -->
+		    <div class="tab-pane">
+
+
+			<if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'importservicecsv' AND isset($ilance->GPC['cid']) AND $ilance->GPC['cid'] > 0">
+
+			    <if condition="!isset($ilance->GPC['do'])">
+				<!-- service categories import via CSV -->
+				<form enctype="multipart/form-data" action="{ilpage[distribution]}" name="ilform" accept-charset="UTF-8" method="post" style="margin: 0px;">
+				    <input type="hidden" name="cmd" value="categories" />
+				    <input type="hidden" name="subcmd" value="importservicecsv" />
+				    <input type="hidden" name="do" value="assign" />
+				    <input type="hidden" name="cid" value="{cid}" />
+				    <div class="block-wrapper">
+
+					<div class="block2">
+
+					    <div class="block2-top">
+						<div class="block2-right">
+						    <div class="block2-left"></div>
+						</div>
+					    </div>
+
+					    <div class="block2-header">{_find_attachment}</div>
+					    <div class="block2-content-blue" style="padding:{table_cellpadding}px"><div class="smaller">{_csv_comma_separated_values_document_format_only}</div>{apihook[bulk_b1]}</div>
+					    <div class="block2-content" style="padding:0px">
+
+						<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+						    <tr class="alt1"> 
+							<td> 
+							    <table width="100%" border="0">
+								<tr>
+								    <td width="50%" valign="top">
+
+									<div>
+									    <table cellpadding="0" cellspacing="3" border="0" width=100%>
+										<tr valign="bottom"> 
+										    <td><input type="file" name="csv_file" style="width:250px; font-family: verdana" /></td>
+										</tr>
+									    </table>
+									</div>
+
+								    </td>
+								</tr>
+							    </table>
+							</td>
+						    </tr>
+						    <tr class="alt1"> 
+							<td>{_import_category}: {importcategory}</td>
+						    </tr>
+						    <tr> 
+							<td><input type="checkbox" name="containsheader" value="1" /> {_my_csv_file_contains_title_header_columns}</td>
+						    </tr>
+						    <tr class="alt2_top">
+							<td><input type="submit" value=" {_next_step} " class="buttons" {upload_style} style="font-size:14px" />&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[distribution]}?cmd=categories">{_cancel}</a></span></td>
+						    </tr>
+						</table>
+					    </div>
+
+					    <div class="block2-footer">
+						<div class="block2-right">
+						    <div class="block2-left"></div>
+						</div>
+					    </div>
+
+					</div>
+				    </div>
+				</form>
+
+				<div class="block-wrapper">
+				    <div class="block3">
+
+					<div class="block3-top">
+					    <div class="block3-right">
+						<div class="block3-left"></div>
+					    </div>
+					</div>
+
+					<div class="block3-header" onclick="return toggle('bulkapi');" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''"><span style="float:left; padding-top:5px; padding-right:10px"><a href="javascript:void(0)" onclick="return toggle('bulkapi');"><div style="padding-right:5px"><img id="collapseimg_bulkapi" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_bulkapi]}.gif" border="0" alt="" /></div></a></span>{_bulk_items_api}</div>
+					<div class="block3-content" style="padding:0px">
+
+					    <table border="0" cellspacing="0" cellpadding="0">
+
+						<tbody id="collapseobj_bulkapi" style="{collapse[collapseobj_bulkapi]}">
+						    <tr>
+							<td>
+
+
+
+							    <div class="smaller" style="padding:{table_cellpadding}px">{_column_separator}: <strong>{csv_sep}</strong></div>
+							    <div style="padding-left:9px; padding-bottom:9px" class="smaller">{_column_encapsulation}: <strong>{csv_encap}</strong></div>
+
+							    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="14">
+								<tr class="alt2_top">
+								    <td width="6%" class="smaller">{_column}</td>
+								    <td width="13%" class="smaller">{_description}</td>
+								    <td width="7%" class="smaller">{_required}</td>
+								    <td width="11%" class="smaller">{_example}</td>
+								    <td width="15%" class="smaller" nowrap="norwap">{_accepted_input}</td>
+								    <td width="7%" class="smaller" nowrap="nowrap">{_max_input}</td>
+								    <td width="41%" class="smaller">{_information}</td>
+								</tr>
+								<tr class="alt1" valign="top">
+								    <td class="smaller">1</td>
+								    <td class="smaller" nowrap="nowrap">{_title}</td>
+								    <td class="smaller">{_yes}</td>
+								    <td class="smaller" nowrap="nowrap">Job or service title</td>
+								    <td class="smaller">String</td>
+								    <td class="smaller">75</td>
+								    <td class="smaller">The title or name of the item</td>
+								</tr>
+								<tr class="alt1" valign="top">
+								    <td class="smaller">2</td>
+								    <td class="smaller" nowrap="nowrap">{_description}</td>
+								    <td class="smaller">{_yes}</td>
+								    <td class="smaller" nowrap="nowrap">Job or service description</td>
+								    <td class="smaller">String</td>
+								    <td class="smaller">1000</td>
+								    <td class="smaller">The description of the job or service</td>
+								</tr>
+								<tr class="alt1" valign="top">
+								    <td class="smaller">3</td>
+								    <td class="smaller">{_keywords}</td>
+								    <td class="smaller">{_no}</td>
+								    <td class="smaller" nowrap="nowrap"> (i.e.: Keyword1, Keyword2, etc.)</td>
+								    <td class="smaller">String</td>
+								    <td class="smaller">200</td>
+								    <td class="smaller">It is recommended that keywords exist</td>
+								</tr>
+								<tr valign="top">
+								    <td class="smaller">4</td>
+								    <td class="smaller">{_budget_range}</td>
+								    <td class="smaller">{_yes}</td>
+								    <td class="smaller" nowrap="nowrap">(i.e.: 100-500)</td>
+								    <td class="smaller">String</td>
+								    <td class="smaller">20</td>
+								    <td class="smaller">100-500 denotes budget between $100 and $500</td>
+								</tr>
+
+								{apihook[services_bulk_csv_api_table_end]}
+							    </table>
+
+							    {apihook[services_bulk_b2]}
+
+							</td>
+						    </tr>
+						</tbody>
+					    </table>
+
+					</div>
+
+					<div class="block3-footer">
+					    <div class="block3-right">
+						<div class="block3-left"></div>
+					    </div>
+					</div>
+
+				    </div>
+				</div>
+				<!-- end service categories import via CSV --></if>
+			    <if condition="!empty($ilance->GPC['do']) AND $ilance->GPC['do'] == 'assign'">
+				<!-- start service categories import assignment via CSV -->
+				<form name="ilform" method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin:0px" onsubmit="return disable_submit_button(this, '{_your_action_is_being_processed_allow_some_time}', 1, 'working_icon')">
+				    <input type="hidden" name="cmd" value="categories" />
+				    <input type="hidden" name="subcmd" value="importservicecsv" />
+				    <input type="hidden" name="do" value="assign-preview" />
+				    <input type="hidden" name="cid" value="{cid}" />
+				    <input type="hidden" name="bulk_id" value="{bulk_id}" />
+				    <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+					<tr>
+					    <td><div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+							<div style="padding-left:18px; padding-top:6px; padding-bottom:3px; font-size:23px">{_bulk_import_assignment_preview}</div>
+
+							<div style="padding-left:18px">
+							    <div style="padding-top:2px; padding-bottom:12px" class="gray">{response}</div>
+							    <div><span class="blue">{preview_count}  {_use_the_pulldown_menus_to_assign_your_content_to_the_appropriate_columns}:</span></div>
+							</div>
+						    </div>
+						    <div class="s"><div class="e"><div class="w"></div></div></div></div>
+					    </td>
+					</tr>
+				    </table>
+				    <div style="height:365px; border-color:#fff; background-color: #fff; overflow:auto;width:880px">{col}</div>
+
+				    <div style="padding-top:14px; padding-bottom:15px"><span><input type="submit" value=" {_continue} " style="font-size:15px" class="buttons" id="submitbutton" /><span id="working_icon" style="padding-left:5px"></span></span></div>
+				</form><!-- end service categories import assignment via CSV --></if>
+
+			    <if condition="!empty($ilance->GPC['do']) AND $ilance->GPC['do'] == 'assign-preview'">
+				{js_start}
+				<form name="ilform" method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin:0px">
+				    <input type="hidden" name="cmd" value="categories" />
+				    <input type="hidden" name="subcmd" value="importservicecsv" />
+				    <input type="hidden" name="cid" value="{cid}" />
+				    <input type="hidden" name="bulk_id" value="{bulk_id}" />
+				    <input type="hidden" name="do" value="assign-import" />
+				    {hidden}
+				    <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+					<tr>
+					    <td>
+						<div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+							<div style="padding-left:18px; padding-top:6px; padding-bottom:3px; font-size:23px">{_import_bulk_jobs}</div>
+
+							<div style="padding-left:18px"></div>
+						    </div>
+						    <div class="s"><div class="e"><div class="w"></div></div></div></div>
+					    </td>
+					</tr>
+				    </table>
+
+				    <div class="block-wrapper" style="padding-top:12px">
+
+					<div class="block">
+
+					    <div class="block-top">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					    <div class="block-header">{_auction_event_duration}</div>
+					    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_how_long_will_your_auction_be_listed_on_the_marketplace}</div></div>
+					    <div class="block-content" style="padding:0px">
+
+						<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+						    <tr> 
+							<td width="1%" nowrap="nowrap">{duration}</td>
+							<td width="100%">{durationbits}</td>
+						    </tr>
+						</table>
+						<div id="durationverbose"></div>
+
+					    </div>
+
+					    <div class="block-footer">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					</div>
+				    </div>
+
+				    <div class="block-wrapper">
+					<div class="block">
+
+					    <div class="block-top">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					    <div class="block-header">{_payment_method}</div>
+					    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_please_decide_how_you_would_like_to_pay_for_services}</div></div>
+					    <div class="block-content">
+						<div>{escrowfilter}</div>
+					    </div>
+
+					    <div class="block-footer">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					</div>
+				    </div>
+
+				    <div class="block-wrapper">
+					<div class="block">
+
+					    <div class="block-top">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					    <div class="block-header"><span style="float:right; padding-top:3px" class="smaller gray"></span>{_bidding_privacy}</div>
+					    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_if_you_would_like_to_allow_buyers_to_ask_public_questions_about_this_item}</div></div>
+					    <div class="block-content">
+						<div id="">
+						    {publicboard}
+						</div>
+					    </div>
+
+					    <div class="block-footer">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					</div>
+				    </div>
+
+				    <div class="block-wrapper">
+					<div class="block">
+
+					    <div class="block-top">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					    <div class="block-header">{_draft}</div>
+					    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_saving_as_draft_allows_you_to_edit_and_modify_this_listing_before_its_posted_live_to_the_marketplace}</div></div>
+					    <div class="block-content">
+						{saveasdraft}
+					    </div>
+
+					    <div class="block-footer">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					</div>
+				    </div>
+
+				    <div class="block-wrapper">
+
+					<div class="block">
+
+					    <div class="block-top">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					    <div class="block-header">{_preview} {response}</div>
+
+					    <div class="block-content" style="padding:0px">
+
+						<div style="height:365px; border-color:#fff; background-color: #fff; overflow:auto;width:876px">{col}</div>
+
+					    </div>
+
+					    <div class="block-footer">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					</div>
+				    </div>
+
+				    <div style="clear:both"></div><div style="padding-top:9px"><span><input type="submit" value=" {_continue} " style="font-size:15px" class="buttons"{disabled} /></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="blue"><a href="{ilpage[distribution]}?cmd=categories">{_back}</a></span></div>
+				</form>
+			    </if>
+
+			    <else />
+			    <!-- categories search -->
+			    <form name="servicecatsearch" id="servicecatsearch" method="get" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="categories" />
+				<div class="block-wrapper">
+				    <div class="block2">
+
+					<div class="block2-top">
+					    <div class="block2-right">
+						<div class="block2-left"></div>
+					    </div>
+					</div>
+
+					<div class="block2-header">{_search}</div>
+					<div class="block2-content-blue" style="padding:{table_cellpadding}px"><div class="smaller">{_search_categories_using_numerous_methods_below}</div></div>
+					<div class="block2-content" style="padding:0px">
+
+					    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+						<tr class="alt1">
+						    <td nowrap="nowrap"><span class="gray">{_category_id}</span></td>
+						    <td width="17%"><input type="text" name="cid" style="font-family: verdana" value="{cid}" class="input"  size="8" /></td>
+						    <td width="15%" nowrap="nowrap"><span class="gray">{_title}</span></td>
+						    <td width="32%"><input type="text" name="title" value="{title}" style="font-family: verdana" size="25" class="input" /></td>
+						    <td width="9%"><span class="gray">{_page}</span></td>
+						    <td width="9%"><input type="text" name="page" style="font-family: verdana" value="{page}" class="input"  size="4" /></td>
+						</tr>
+						<tr class="alt1"> 
+						    <td width="18%" nowrap="nowrap"><span class="gray">{_category_level_depth}</span></td>
+						    <td>{level_pulldown}</td>
+						    <td><span class="gray">{_status}</span></td>
+						    <td>{visible_pulldown}</td>
+						    <td><span class="gray">{_per_page}</span></td>
+						    <td>{pp_pulldown}</td>
+						</tr>
+						<tr class="alt2_top"> 
+						    <td colspan="6"><input type="submit" value="{_search}" style="font-size:15px" class="buttons" /></td>
+						</tr>
+                                            </table>
+
+					</div>
+
+                                        <div class="block2-footer">
+					    <div class="block2-right">
+						<div class="block2-left"></div>
+					    </div>
+                                        </div>
+
+				    </div>
+				</div>
+			    </form>
+			    <!-- end categories search -->
+
+
+			    <!-- categories view -->
+			    <form name="ilform" id="ilform" action="{ilpage[distribution]}" method="post" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="categories" />
+				<div class="block-wrapper">
+				    <div class="block2">
+
+					<div class="block2-top">
+					    <div class="block2-right">
+						<div class="block2-left"></div>
+					    </div>
+					</div>
+
+					<div class="block2-header"><span style="float:right" class="blue"><a href="{ilpage[distribution]}?cmd=categories&amp;subcmd=addservicecat&amp;cid=0">{_add_new_category}</a></span>{_category_manager}</div>
+					<div class="block2-content-blue" style="padding:{table_cellpadding}px"><div class="smaller">{_category_names_in_bold_represent_categories_that_do_not_allow_auctions_to_be_directly_posted_in_them}</div></div>
+					<div class="block2-content" style="padding:0px">
+
+					    <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+						<tr class="alt2">
+						    <td width="52%" align="left">{_category}</td>
+						    <td align="left">{_actions}</td>
+						    <td width="10%" nowrap="nowrap">BG <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_budget_groups}</strong></div><div>{_this_column_represents_which_budget_group_is_currently_assigned}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+						    <td width="10%" nowrap="nowrap">IF <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_insertion_fees}</strong></div><div>{_if_stands_for_insertion_fee_and_this_column_represents_which_insertion_fee_group_is_currently_assigned_to_that_category_insertion_fees_in_a_service}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+						    <td width="10%" nowrap="nowrap">FVF <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_final_value_fees}</strong></div><div>{_fvf_stands_for_final_value_fee_and_this_column_represents_which_final_value_fee_group_is_currently_assigned_to_that_category_final_values_fees_in_a_service}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+						    <td width="1%" nowrap="nowrap">Q <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_category_questions}</strong></div><div>{_this_column_represents_how_many_predefined_questions_exist_within_a_particular_category}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+						    <td width="1%" nowrap="nowrap">BF <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_bid_field_questions}</strong></div><div>{_this_column_represents_how_many_predefined_bid_fields_exist}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+						    <td width="1%" nowrap="nowrap">S <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_skills_category_association}</strong></div><div>{_when_you_associate_this_main_category_to_skills}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+						    <td width="1%" nowrap="nowrap">{_views}</td>
+						    <td width="1%" align="left"><input type="checkbox" name="checkall" onclick="check_uncheck_all('ilform');" /></td>
+						</tr>
+						<loop name="servicecategories">
+						    <tr class="alt1" valign="top">
+							<td align="left"><span style="float:right">{apihook[admincp_service_categories_loop_column]} {isportfolio}</span><a name="category{cid}">&nbsp;</a><span class="blue">{title}</span> <span class="smaller gray">({auctioncount})</span></td>
+							<td align="left" nowrap="nowrap">
+							    <select name="cid{cid}" onchange="category_jump({cid}, {parentid}, {level}, {lft}, {rgt});" style="font-family: verdana;width:90px" class="smaller">
+								<option value="edit">{_edit_category} #{cid}</option>
+								<option value="questions">{_edit_category_questions}</option>
+								<option value="add">{_add_child_category}</option>
+								<if condition="$show['ADMINCP_TEST_MODE']"><else /><option value="remove">{_delete_category_and_children}</option></if>
+								<option value="importcsv">{_import_listings_from_csv}</option>
+							    </select>
+
+							    <input type="button" class="buttons_smaller" value="{_go}" onclick="category_jump({cid}, {parentid}, {level}, {lft}, {rgt});" /></td>
+							<td><div class="smaller gray">{budgetgroup}</div></td>
+							<td><div class="smaller gray">{insertiongroup}</div></td>
+							<td><div class="smaller gray">{finalvaluegroup}</div></td>
+							<td><div class="smaller blue">{questions}</div></td>
+							<td><div class="smaller blue">{bfields}</div></td>
+							<td><dov c;ass="smaller black">{skills}</</td>
+							<td><div class="smaller black">{views}</div></td>
+							<td class="alt2"><input type="checkbox" name="cids[]" value="{cid}" /></td>
+							</tr>
+						</loop name="servicecategories">
+						<tr class="alt2_top">
+						    <td colspan="10" align="right">
+						<select name="subcmd" class="select">
+							<option value="removeservicecats">{_remove_selected}</option>
+							<option value="activecats">Set selected active</option>
+							<option value="inactivecats">Set selected inactive</option>
+						    </select>
+							<input type="submit" class="buttons" tabindex="1" style="font-size:11px" value=" {_submit} " accesskey="s" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" />
+						</td>
+						</tr>
+						<tr>
+						    <td colspan="10">{prevnext}</td>
+						</tr>
+					    </table>
+					</div>
+
+					<div class="block2-footer">
+					    <div class="block2-right">
+						<div class="block2-left"></div>
+					    </div>
+					</div>
+
+				    </div>
+				</div>
+			    </form>
+			    <!-- /categories view -->
+			</if>
+
+		    </div>
+		    <!-- /begin tab pane -->
+
+		</div>
+		<!-- /begin tab page -->
+	    </if>
+
+	    <if condition="$ilconfig['globalauctionsettings_productauctionsenabled']">
+		<!-- begin marketplace product settings tab -->
+		<div class="tab-page"> 
+		    <h2 class="tab">{_product}</h2>
+
+		    <!-- begin tab pane -->
+		    <div class="tab-pane">
+
+			<if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'importcategorycsv'">
+
+			    <if condition="!isset($ilance->GPC['do'])">
+				<!-- service categories import via CSV -->
+				<form enctype="multipart/form-data" action="{ilpage[distribution]}" name="ilform" accept-charset="UTF-8" method="post" style="margin: 0px;">
+				    <input name="cmd" value="categories" type="hidden" />
+				    <input name="subcmd" value="importcategorycsv" type="hidden" />
+				    <input name="mode" value="product" type="hidden" />
+				    <input name="do" value="assign" type="hidden" />
+				    <div class="block-wrapper">
+
+					<div class="block">
+
+					    <div class="block-top">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					    <div class="block-header">{_find_attachment}</div>
+					    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_csv_comma_separated_values_document_format_only}</div>{apihook[bulk_b1]}</div>
+					    <div class="block-content" style="padding:0px">
+
+						<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+						    <tr class="alt1"> 
+							<td> 
+							    <table width="100%" border="0">
+								<tr>
+								    <td width="50%" valign="top">
+
+									<div>
+									    <table cellpadding="0" cellspacing="3" border="0" width=100%>
+										<tr valign="bottom"> 
+										    <td><input type="file" name="csv_file" style="width:250px; font-family: verdana" /></td>
+										</tr>
+									    </table>
+									</div>
+
+								    </td>
+								</tr>
+							    </table>
+							</td>
+						    </tr>
+						    <tr class="alt1"> 
+							<td><input type="checkbox" name="containsheader" value="1" /> {_my_csv_file_contains_title_header_columns}</td>
+						    </tr>
+						    <tr> 
+							<td><input type="checkbox" name="deletecurrent" value="1" /> {_remove_all_existing_product_categories_including_listings_within_on_successful_csv_import}</td>
+						    </tr>
+						    <tr class="alt2_top">
+							<td><input type="submit" value=" {_next_step} " class="buttons" {upload_style} style="font-size:14px" />&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[distribution]}?cmd=categories">{_cancel}</a></span></td>
+						    </tr>
+						</table>
+					    </div>
+
+					    <div class="block-footer">
+						<div class="block-right">
+						    <div class="block-left"></div>
+						</div>
+					    </div>
+
+					</div>
+				    </div>
+				</form>
+
+				<div class="block-wrapper">
+				    <div class="block3">
+
+					<div class="block3-top">
+					    <div class="block3-right">
+						<div class="block3-left"></div>
+					    </div>
+					</div>
+
+					<div class="block3-header" onclick="return toggle('bulkapi');" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''"><span style="float:left; padding-top:5px; padding-right:10px"><a href="javascript:void(0)" onclick="return toggle('bulkapi');"><div style="padding-right:5px"><img id="collapseimg_bulkapi" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_bulkapi]}.gif" border="0" alt="" /></div>
+						</a></span>Bulk Category API</div>
+					<div class="block3-content" style="padding:0px">
+
+					    <table border="0" cellspacing="0" cellpadding="0">
+
+						<tbody id="collapseobj_bulkapi" style="{collapse[collapseobj_bulkapi]}">
+						    <tr>
+							<td>
+
+							    <div class="smaller" style="padding:{table_cellpadding}px">{_column_separator}: <strong>{csv_sep}</strong></div>
+							    <div style="padding-left:9px; padding-bottom:9px" class="smaller">{_column_encapsulation}: <strong>{csv_encap}</strong></div>
+
+							    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="14">
+								<tr class="alt2_top">
+								    <td width="6%" class="smaller">{_column}</td>
+								    <td width="13%" class="smaller">{_description}</td>
+								    <td width="7%" class="smaller">{_required}</td>
+								    <td width="11%" class="smaller">{_example}</td>
+								    <td width="15%" class="smaller" nowrap="norwap">{_accepted_input}</td>
+								    <td width="7%" class="smaller" nowrap="nowrap">{_max_input}</td>
+								    <td width="41%" class="smaller">{_information}</td>
+								</tr>
+								<tr class="alt1" valign="top">
+								    <td class="smaller">1</td>
+								    <td class="smaller" nowrap="nowrap">Level 1</td>
+								    <td class="smaller">{_yes}</td>
+								    <td class="smaller" nowrap="nowrap">Books</td>
+								    <td class="smaller">String</td>
+								    <td class="smaller">200</td>
+								    <td class="smaller">Level 1 category title</td>
+								</tr>
+								<tr class="alt1" valign="top">
+								    <td class="smaller">2</td>
+								    <td class="smaller">Level 2</td>
+								    <td class="smaller">{_no}</td>
+								    <td class="smaller" nowrap="nowrap">Poetry</td>
+								    <td class="smaller">String</td>
+								    <td class="smaller">200</td>
+								    <td class="smaller">Level 2 category title</td>
+								</tr>
+								<tr class="alt1" valign="top">
+								    <td class="smaller">3</td>
+								    <td class="smaller">Level 3</td>
+								    <td class="smaller">{_no}</td>
+								    <td class="smaller" nowrap="nowrap">Another title</td>
+								    <td class="smaller">String</td>
+								    <td class="smaller">20</td>
+								    <td class="smaller">Level 3 category title</td>
+								</tr>
+								<tr class="alt1" valign="top">
+								    <td class="smaller">4</td>
+								    <td class="smaller">Level 4</td>
+								    <td class="smaller">{_no}</td>
+								    <td class="smaller" nowrap="nowrap">Another title</td>
+								    <td class="smaller">String</td>
+								    <td class="smaller">20</td>
+								    <td class="smaller">Level 4 category title</td>
+								</tr>
+								<tr class="alt1" valign="top">
+								    <td class="smaller">5</td>
+								    <td class="smaller">Level 5</td>
+								    <td class="smaller">{_no}</td>
+								    <td class="smaller" nowrap="nowrap">Another title</td>
+								    <td class="smaller">String</td>
+								    <td class="smaller">20</td>
+								    <td class="smaller">Level 5 category title</td>
+								</tr>
+								<tr class="alt1" valign="top">
+								    <td class="smaller">6</td>
+								    <td class="smaller">Level 6</td>
+								    <td class="smaller">{_no}</td>
+								    <td class="smaller" nowrap="nowrap">Another title</td>
+								    <td class="smaller">String</td>
+								    <td class="smaller">20</td>
+								    <td class="smaller">Level 6 category title</td>
+								</tr>
+								<tr class="alt1" valign="top">
+								    <td class="smaller">7</td>
+								    <td class="smaller">Custom field</td>
+								    <td class="smaller">{_no}</td>
+								    <td class="smaller" nowrap="nowrap">Some information</td>
+								    <td class="smaller">String</td>
+								    <td class="smaller">1000</td>
+								    <td class="smaller">Custom field row information can be added here</td>
+								</tr>
+								<tr class="alt1" valign="top">
+								    <td class="smaller">8</td>
+								    <td class="smaller">Category ID</td>
+								    <td class="smaller">{_yes}</td>
+								    <td class="smaller" nowrap="nowrap">100</td>
+								    <td class="smaller">Integer</td>
+								    <td class="smaller">10</td>
+								    <td class="smaller">Category ID number</td>
+								</tr>
+								<tr valign="top">
+								    <td class="smaller">9</td>
+								    <td class="smaller">Parent ID</td>
+								    <td class="smaller">{_yes}</td>
+								    <td class="smaller" nowrap="nowrap">0</td>
+								    <td class="smaller">Integer</td>
+								    <td class="smaller">10</td>
+								    <td class="smaller">Parent category ID number</td>
+								</tr>
+
+								{apihook[services_bulk_csv_api_table_end]}
+							    </table>
+
+							    {apihook[services_bulk_b2]}
+
+							</td>
+						    </tr>
+						</tbody>
+					    </table>
+
+					</div>
+
+					<div class="block3-footer">
+					    <div class="block3-right">
+						<div class="block3-left"></div>
+					    </div>
+					</div>
+
+				    </div>
+				</div>
+				<!-- end service categories import via CSV --></if>
+			    <if condition="!empty($ilance->GPC['do']) AND $ilance->GPC['do'] == 'assign'">
+				<!-- start product categories import assignment via CSV -->
+				<form name="ilform" method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin:0px" onsubmit="return disable_submit_button(this, '{_your_action_is_being_processed_allow_some_time}', 1, 'working_icon')">
+				    <input type="hidden" name="cmd" value="categories" />
+				    <input type="hidden" name="subcmd" value="importproductcsv" />
+				    <input type="hidden" name="do" value="assign-preview" />
+				    <input type="hidden" name="cid" value="{cid}" />
+				    <input type="hidden" name="bulk_id" value="{bulk_id}" />
+				    <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+					<tr>
+					    <td><div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+							<div style="padding-left:18px; padding-top:6px; padding-bottom:3px; font-size:23px">{_bulk_import_assignment_preview}</div>
+
+							<div style="padding-left:18px">
+							    <div style="padding-top:2px; padding-bottom:12px" class="gray">{response}</div>
+							    <div><span class="blue">{preview_count}  {_use_the_pulldown_menus_to_assign_your_content_to_the_appropriate_columns}:</span></div>
+							</div>
+						    </div>
+						    <div class="s"><div class="e"><div class="w"></div></div></div></div>
+					    </td>
+					</tr>
+				    </table>
+				    <div style="height:365px; border-color:#fff; background-color: #fff; overflow:auto;width:935px">{col}</div>
+
+				    <div style="padding-top:14px; padding-bottom:15px"><span><input type="submit" value=" {_continue} " style="font-size:15px" class="buttons" id="submitbutton" /><span id="working_icon" style="padding-left:5px"></span></span></div>
+				</form><!-- end product categories import assignment via CSV --></if>
+
+			    <else />
+			    <!-- categories search -->
+			    <form name="productcatsearch" id="productcatsearch" method="get" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="categories" />
+				<div class="block-wrapper">
+				    <div class="block">
+
+					<div class="block-top">
+					    <div class="block-right">
+						<div class="block-left"></div>
+					    </div>
+					</div>
+
+					<div class="block-header">{_search}</div>
+					<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_search_categories_using_numerous_methods_below}</div></div>
+					<div class="block-content" style="padding:0px">
+
+					    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+						<tr class="alt1">
+						    <td nowrap="nowrap"><span class="gray">{_category_id}</span></td>
+						    <td width="17%"><input type="text" name="cid2" style="font-family: verdana" value="{cid2}" class="input"  size="8" /></td>
+						    <td width="15%" nowrap="nowrap"><span class="gray">{_title}</span></td>
+						    <td width="32%"><input type="text" name="title2" value="{title2}" style="font-family: verdana" size="25" class="input" /></td>
+						    <td width="9%"><span class="gray">{_page}</span></td>
+						    <td width="9%"><input type="text" name="page2" style="font-family: verdana" value="{page2}" class="input"  size="4" /></td>
+						</tr>
+						<tr class="alt1"> 
+						    <td width="18%" nowrap="nowrap"><span class="gray">{_category_level_depth}</span></td>
+						    <td>{level2_pulldown}</td>
+						    <td><span class="gray">{_status}</span></td>
+						    <td>{visible2_pulldown}</td>
+						    <td><span class="gray">{_per_page}</span></td>
+						    <td>{pp2_pulldown}</td>
+						</tr>
+						<tr class="alt2_top"> 
+						    <td colspan="6"><input type="submit" value="{_search}" style="font-size:15px" class="buttons" /></td>
+						</tr>
+                                            </table>
+					</div>
+
+                                        <div class="block-footer">
+					    <div class="block-right">
+						<div class="block-left"></div>
+					    </div>
+                                        </div>
+
+				    </div>
+				</div>
+			    </form>
+			    <!-- end categories search -->
+
+			    <!-- START product categories -->
+			    <form name="ilform2" id="ilform2" action="{ilpage[distribution]}" method="post" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="categories" />
+				<div class="block-wrapper">
+				    <div class="block">
+
+					<div class="block-top">
+					    <div class="block-right">
+						<div class="block-left"></div>
+					    </div>
+					</div>
+
+					<div class="block-header"><span style="float:right" class="blue"><a href="{ilpage[distribution]}?cmd=categories&amp;subcmd=addproductcat&amp;cid=0">{_add_new_category}</a></span>{_category_manager}</div>
+					<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_category_names_in_bold_represent_categories_that_do_not_allow_auctions_to_be_directly_posted_in_them}</div></div>
+					<div class="block-content" style="padding:0px">
+
+					    <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+						<tr class="alt2">
+						    <td width="52%">{_category}</td>
+						    <td>{_actions}</td>
+						    <td width="10%" nowrap="nowrap">IF <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_insertion_fees}</strong></div><div>{_if_stands_for_insertion_fee_and_this_column_represents_which_insertion_fee_group_is_currently_assigned_to_that_category_insertion_fees_in_a_product}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+						    <td width="10%" nowrap="nowrap">FVF <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_final_value_fees}</strong></div><div>{_fvf_stands_for_final_value_fee_and_this_column_represents_which_final_value_fee_group_is_currently_assigned_to_that_category_final_values_fees_in_a_product_auction_environment_applies_to_the_seller}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+						    <td width="10%" nowrap="nowrap">IG <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_bid_increment_group}</strong></div><div>{_this_column_represents_the_currently_assigned_bid_increment_group}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+						    <td width="1%" nowrap="nowrap">Q <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_category_questions}</strong></div><div>{_this_column_represents_how_many_predefined_category_questions_exist_product}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+						    <td width="1%" nowrap="nowrap">{_views}</td>
+						    <td width="1%"><input type="checkbox" name="checkall" onclick="check_uncheck_all('ilform2');" /></td>
+						</tr>
+						<loop name="productcategories">
+						    <tr class="alt1" valign="top">
+							<td><span style="float:right">{apihook[admincp_product_categories_loop_column]} {useclassifieds} {usereserveprice} {useproxybid} {useantisnipe}</span><a name="category{cid}">&nbsp;</a><span class="blue">{title}</span> <span class="smaller gray">({auctioncount})</span></td>
+							<td nowrap="nowrap">
+							    <select name="cid{cid}" onchange="category_jump2({cid}, {parentid}, {level}, {lft}, {rgt});" style="font-family: verdana;width:90px" class="smaller">
+								<option value="edit">{_edit_category} #{cid}</option>
+								<option value="questions">{_edit_category_questions}</option>
+								<option value="add">{_add_child_category}</option>
+								<if condition="$show['ADMINCP_TEST_MODE']"><else /><option value="remove">{_delete_category_and_children}</option></if>
+								<option value="importcsv">{_import_listings_from_csv}</option>
+							    </select> <input type="button" class="buttons_smaller" value="{_go}" onclick="category_jump2({cid}, {parentid}, {level}, {lft}, {rgt});" /></td>
+							<td><div class="smaller gray">{insertiongroup}</div></td>
+							<td><div class="smaller gray">{finalvaluegroup}</div></td>
+							<td><div class="smaller gray">{incrementgroup}</div></td>
+							<td><div class="smaller blue">{questions}</div></td>
+							<td><div class="smaller black">{views}</div></td>
+							<td class="alt2"><input type="checkbox" name="cids[]" value="{cid}" /></td>
+						    </tr>
+						</loop name="productcategories">
+						<tr class="alt2_top">
+						    <td colspan="8" align="right">
+							<select name="subcmd" class="select">
+							<option value="removeproductcats">{_remove_selected}</option>
+							<option value="activecats">Set selected active</option>
+							<option value="inactivecats">Set selected inactive</option>
+						    </select>
+							<input type="submit" class="buttons" tabindex="1" style="font-size:11px" value=" {_submit} " accesskey="s" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" />
+						</td>
+						</tr>
+						<tr>
+						    <td colspan="8">{prevnext2}</td>
+
+						</tr>
+					    </table></div>
+
+					<div class="block-footer">
+					    <div class="block-right">
+						<div class="block-left"></div>
+					    </div>
+					</div>
+
+				    </div>
+				</div>
+			    </form><!-- END product categories -->
+			</if>
+
+		    </div>
+		    <!-- /begin tab pane -->
+
+		</div>
+		<!-- /begin marketplace product settings tab -->
+	    </if>
+
+            <!-- begin marketplace moderation settings tab -->
+            <div class="tab-page">
+
+                <h2 class="tab">{_settings}</h2>
+
+                {global_categoryoptions}	
+
+            </div>
+            <!-- /begin marketplace moderation settings tab -->
+
+	</div>

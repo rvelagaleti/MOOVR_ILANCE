@@ -1,0 +1,75 @@
+<form method="post" action="{ilpage[invoicepayment]}" name="invoicepreview" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="_do-generate-submit" />
+<input type="hidden" name="project_id" value="{project_id}" />
+<input type="hidden" name="amount" value="{amount}" />
+<input type="hidden" name="seller_id" value="{seller_id}" />
+<input type="hidden" name="buyer_id" value="{buyer_id}" />
+<input type="hidden" name="comments" value="{comments}" />
+<input type="hidden" name="instantpay" value="{instantpay}" />
+<input type="hidden" name="paymentstatus" value="{paymentstatus}" />
+<input type="hidden" name="paymentmethod" value="{paymentmethod}" />
+{txn_fee_hidden}
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_preview_new_invoice_generation_for} <a href="{ilpage[rfp]}?id={project_id}">{project_title}</a></div>
+			
+			<div class="block-content-yellow"><div class="smaller">{_please_preview_the_invoice_amount_to_generate_to_your_customer}</div></div>
+			<div class="block-content">
+				
+				<table width="100%" border="0" cellspacing="0" cellpadding="12">
+				<tr> 
+					<td width="19%" align="right" class="alt1"><span class="gray">{_customer}</span></td>
+					<td width="81%" align="left" nowrap="nowrap" class="alt1">{customer}</td>
+				</tr>
+				<tr> 
+					<td width="19%" align="right" class="alt1"><span class="gray">{_regarding_listing}</span></td>
+					<td width="81%" align="left" nowrap="nowrap" class="alt1">{project_title}</td>
+				</tr>
+				<tr> 
+					<td width="19%" align="right" class="alt1"><span class="gray">{_amount}</span></td>
+					<td width="81%" align="left" nowrap="nowrap" class="alt1"><span style="font-size:14px" class="blue">{amount_formatted}</span></td>
+				</tr>
+				<if condition="isset($show['p2b_transaction_fee']) AND $show['p2b_transaction_fee']">
+				<tr> 
+					<td align="right" class="alt1" valign="top"><span class="gray">{_transaction_fee}</span></td>
+					<td nowrap="nowrap" align="left" class="alt1"><span style="font-size:14px" class="gray">({transaction_fee_formatted})</span>
+				</tr>
+				</if>
+				<tr> 
+					<td width="19%" align="right" class="alt1"><span class="gray">{_payment_status} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_payment_status'] + '</strong></div><div>' + phrase['_if_your_buyer_has_already_paid_for_additional_work_you_can_generate'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span></td>
+					<td width="81%" align="left" nowrap="nowrap" class="alt1">{paymentstatus_formatted}</td>
+				</tr>
+				<tr> 
+					<td width="19%" align="right" class="alt1"><span class="gray">{_my_payment_method} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_my_payment_method'] + '</strong></div><div>' + phrase['_for_convenience_we_can_provide_you_with_quick_and_easy_electronic_invoicing'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span></td>
+					<td width="81%" align="left" nowrap="nowrap" class="alt1">{paymentmethod_formatted}</td>
+				</tr>
+				<tr> 
+					<td align="right" valign="top" class="alt1"><span class="gray">{_comments_to_buyer}</span></td>
+					<td nowrap="nowrap" align="left" class="alt1" style="width:600px; max-width:600px; white-space:pre-line; ">{comments}</td>
+				</tr>
+				<tr> 
+					<td align="right"><input name="agreecheck" id="agreecheck" type="checkbox" onclick="agreesubmit(this)" /></td>
+					<td valign="middle"><label for="agreecheck">{_i_authorize_this_invoice_generation_and_adhere_to} <span class="blue"><a href="{ilpage[main]}?cmd=terms" target="_blank">{_payment_generation_terms_and_policies}</a></span>.</label></td>
+				</tr>
+			  </table>
+			  
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div style="margin-top:3px"><input disabled="disabled" type="submit" value=" {_generate} " class="buttons" style="font-size:15px" /></div>
+</form>

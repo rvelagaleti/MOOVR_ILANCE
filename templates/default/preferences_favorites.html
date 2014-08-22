@@ -1,0 +1,63 @@
+<div class="block-wrapper">
+
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header">{_favorite_searches}</div>
+            
+            <div class="block-content" style="padding:0px">
+                
+                <form method="post" action="{ilpage[preferences]}" accept-charset="UTF-8" style="margin: 0px;">
+                <input type="hidden" name="cmd" value="favorites" />
+                <input type="hidden" name="subcmd" value="deletesearches" />
+                <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" id="favoritesearches">
+                <tr> 
+                      <td width="30%" class="alt2" nowrap="nowrap">{_title} <a href="javascript:void(0)" onmouseover="Tip('<strong>' + phrase['_inline_edit'] + '</strong><br />' + phrase['_you_can_now_change_the_title_on_each_listing_by_double_clicking_on_the_title_text_to_edit_inline'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                      <td width="50%" class="alt2" nowrap="nowrap">{_criteria} </td>
+                      <td width="5%" class="alt2" nowrap="nowrap">{_type}</td>
+                      <td width="1%" nowrap="nowrap" class="alt2"><a href="javascript:void(0)" onmouseover="Tip(phrase['_subscribe_via_email_daily_when_new_matches_meet_my_search_criteria'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}email_post.gif" border="0" alt="" /></a></td>
+                      <td width="1%" nowrap="nowrap" class="alt2">&nbsp;</td>
+                  </tr>		   
+                <loop name="favorites"> 
+                <tr class="alt1" valign="top"> 
+                      <td>{title} {edit}</td>
+                      <td><div>{searchoptionstext}</div><div style="padding-top:6px" class="smaller blue">{goto}</div><div class="smaller gray" style="padding-top:15px">{_last_sent}: {lastsent}</div><div class="smaller black" style="padding-top:3px">{daysleft}</div></td>
+                      <td>{cattype}</td>
+                      <td nowrap="nowrap" align="center">{ajax_subscribed}</td>
+                      <td align="center">{action}</td>
+                  </tr>
+                </loop name="favorites"> 
+                <if condition="isset($show['no_favorites']) AND $show['no_favorites']"> 
+                <tr> 
+                    <td colspan="5" nowrap="nowrap" align="center" class="alt1"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                </tr>
+                </if> 
+                <if condition="$show['no_favorites'] == false">
+                <tr class="alt2_top"> 
+                  <td colspan="5" align="right"><select name="rfpcmd" style="font-family: verdana">
+                      <optgroup label="{_select_action}">
+                      <option value="delete">{_delete}</option>
+                      </optgroup>
+                    </select> <input type="submit" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value="{_go}"></td>
+                </tr>
+                </if>
+                <tr> 
+                    <td colspan="5"><div class="gray" style="padding-top:6px">{_saved_searches_can_be_used_when_you_are_viewing_search_results_from_the_marketplace}</div></td>
+                </tr>
+                </table>
+                </form>
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>

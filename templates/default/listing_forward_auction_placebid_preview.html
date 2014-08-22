@@ -1,0 +1,85 @@
+{apihook[item_placebid_preview_start]}
+
+<form method="post" action="{ilpage[rfp]}" name="previewbid" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="_do-bid-submit" />
+<input type="hidden" name="subcmd" value="product-bid" />
+<input type="hidden" name="bidamount" value="{current_bidamount}" />
+<input type="hidden" name="id" value="{id}" />
+<input type="hidden" name="project_user_id" value="{project_user_id}" />
+<input type="hidden" name="highbidnotify" value="{current_highbidnotify}" />
+<input type="hidden" name="lasthournotify" value="{current_lasthournotify}" />
+<input type="hidden" name="subscribed" value="{current_subscribed}" />
+<input type="hidden" name="bidstate" value="{bidstate}" />
+<input type="hidden" name="state" value="product" />
+<input type="hidden" name="minimum" value="{min_bidamount}" />
+<input type="hidden" name="qty" value="{qty}" />
+<if condition="isset($ilance->GPC['shipperid']) AND $ilance->GPC['shipperid'] > 0"><input type="hidden" name="shipperid" value="{shipperid}" /></if>
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_preview_your_bid}</div>
+            <div class="block-content-yellow smaller" style="padding:9px">{_preview}</div>
+			<div class="block-content" style="padding:9px">
+				
+                <table border="0" cellpadding="2" cellspacing="0" width="100%" align="center">
+                <tr> 
+                    <td width="15%" nowrap>{_bid_amount}:</td>
+                    <td width="90%"><span class="blue">{current_bidamountformatted}</span></td>
+                </tr>
+                <tr> 
+                    <td width="15%" valign="top"><span style="float:right"></span>{_quantity}:</td>
+                    <td width="90%"> <span>{qty}</span>&nbsp;&nbsp;<strong>x</strong>&nbsp;&nbsp;<if condition="isset($show['lot']) AND $show['lot']">{_lot} ({items_in_lot} {_items_in_lot})<else />{_item}</if></td>
+                </tr>
+                </table>
+                
+				{apihook[item_placebid_preview_mid1]}
+				
+			</div>
+            <if condition="isset($ilance->GPC['shipperid']) AND $ilance->GPC['shipperid'] > 0">
+            <div class="block-content-yellow-top smaller" style="padding:9px">{_shipping_information}</div>
+			<div class="block-content" style="padding:9px">
+            
+            	<div class="smaller gray" style="padding-left:2px; padding-bottom:7px">{_the_seller_will_ship_your_item_using_the_service_youve_selected_below}</div>
+            
+            	<table border="0" cellpadding="2" cellspacing="0" width="100%" align="center">
+                <tr> 
+                    <td width="15%" valign="top"><span style="float:right"></span>{_ship_service}:</td>
+                    <td width="90%"><span class="blue">{shippingservice}</span></td>
+                </tr>
+                </table>
+                
+                {apihook[item_placebid_preview_mid2]}
+                
+            </div>
+            </if>
+            <div class="block-content-yellow-top smaller" style="padding:9px">{_your_bid_is_contract}</div>
+			<div class="block-content" style="padding:9px">
+            	
+                <if condition="$ilconfig['productbid_enableproxybid'] AND $show['categoryuseproxybid']">
+                <div class="smaller">{_proxy_bidding_is_currently_in_effect_our_system_will_automatically}</div>
+                <div style="padding-top:9px"><img src="{template_relativeimagepath}{template_imagesfolder}proxybidscale.gif" border="0" alt="" /></div>
+                <else /><div class="smaller">{_your_bid_amount_is_a_contract_between_you_and_the_vendor}</div></if>
+                
+                {apihook[item_placebid_preview_mid3]}
+                
+            </div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div><input type="submit" value=" {_bid_now} " class="buttons" style="font-size:15px" />&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{http_server}{ilpage[rfp]}?cmd=bid&amp;id={id}&amp;state=product">{_revise_bid_amount}</a></span></div>
+</form>
+
+{apihook[item_placebid_preview_end]}

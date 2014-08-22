@@ -1,0 +1,595 @@
+<if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND $ilconfig['globalfilters_bulkupload'] AND isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'sell'">
+<div class="bigtabs" style="padding-bottom:15px; padding-top:5px">
+<div class="bigtabsheader">
+<ul>
+	<if condition="$ilconfig['globalauctionsettings_productauctionsenabled']"><li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}sell">{_sell_single_item}</a><else /><a href="{ilpage[main]}?cmd=selling">{_sell_single_item}</a></if></li></if>
+	<if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND $ilconfig['globalfilters_bulkupload']"><li title="" class="on"><a href="javascript:void(0)">{_sell_bulk_items}</a></li></if>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+<if condition="!empty($ilance->GPC['do']) AND $ilance->GPC['do'] == 'assign-preview'">{js_start}
+<form name="ilform" method="post" action="{ilpage[bulk]}" accept-charset="UTF-8" style="margin:0px" onsubmit="return validate_all_bulk(this);">
+<input type="hidden" name="cmd" value="sell" />
+<input type="hidden" name="mode" value="bulk" />
+<input type="hidden" name="do2" value="assign-import" />
+<div class="block-wrapper">
+	<div class="block">
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			<div class="block-header">{_auction_event_duration}</div>
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_decide_how_long_items_uploaded_will_remain_active_on_the_marketplace}</div></div>
+			<div class="block-content" style="padding:0px">
+
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				<tr> 
+					<td width="1%" nowrap="nowrap">{duration}</td>
+					<td width="77%">{durationbits}</td>
+				</tr>
+				</table>
+				<div id="durationverbose"></div>
+				
+			</div>
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div class="block-wrapper">
+<div class="block">
+
+		<div class="block-top">
+				<div class="block-right">
+						<div class="block-left"></div>
+				</div>
+		</div>
+		
+		<div class="block-header">{_payment_method}</div>
+		<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_please_enter_your_accepted_payment_method_and_or_payment_instructions_bidders_will_see_in_the_listing}</div></div>
+		<div class="block-content">
+				<div>{escrowfilter}</div>
+		</div>
+		
+		<div class="block-footer">
+				<div class="block-right">
+						<div class="block-left"></div>
+				</div>
+		</div>
+		
+</div>
+</div>
+<div class="block-wrapper">
+<div class="block">
+
+		<div class="block-top">
+				<div class="block-right">
+						<div class="block-left"></div>
+				</div>
+		</div>
+		<div class="block-header">{_shipping_information}</div>
+        <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_item_location}</div></div>
+        <div class="block-content" style="padding:{table_cellpadding}px"><div class="smaller">{_item_location_handled_via_csv}</div></div>
+		<div class="block-content-yellow-top" style="padding:{table_cellpadding}px"><div class="smaller">{_decide_how_you_will_ship_this_item_domestically_and_or_internationally}</div></div>
+		<div class="block-content" style="padding:{table_cellpadding}px">{shipping}</div>
+        <div class="block-content-yellow-top" style="padding:{table_cellpadding}px" id="handlingfeeheader"><div class="smaller">{_enter_your_ship_handling_fee_if_applicable}</div></div>
+		<div class="block-content" style="padding:{table_cellpadding}px" id="handlingfeerow">{shipping_handling}</div>
+		<div class="block-footer">
+				<div class="block-right">
+						<div class="block-left"></div>
+				</div>
+		</div>
+		
+</div>
+</div>
+<div class="block-wrapper">
+<div class="block">
+
+		<div class="block-top">
+				<div class="block-right">
+						<div class="block-left"></div>
+				</div>
+		</div>
+		<div class="block-header">
+		<span style="float:right; padding-top:3px" class="smaller gray"></span>{_return_policy}</div>
+		<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_describe_your_return_policy_for_bidders_and_buyers_to_review_before_they_purchase}</div></div>
+		<div class="block-content">
+				<div id="">
+					{returnpolicy}
+				</div>
+		</div>
+		<div class="block-footer">
+				<div class="block-right">
+						<div class="block-left"></div>
+				</div>
+		</div>
+</div>
+</div>
+<div class="block-wrapper">
+<div class="block">
+
+		<div class="block-top">
+				<div class="block-right">
+						<div class="block-left"></div>
+				</div>
+		</div>
+		
+		<div class="block-header"><span style="float:right; padding-top:3px" class="smaller gray"></span>{_bidding_privacy}</div>
+		<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_if_you_would_like_to_allow_buyers_to_ask_public_questions_about_this_item}</div></div>
+		<div class="block-content">
+				<div id="">
+					{publicboard}
+				</div>
+		</div>
+		
+		<div class="block-footer">
+				<div class="block-right">
+						<div class="block-left"></div>
+				</div>
+		</div>
+		
+</div>
+</div>
+<div class="block-wrapper">
+<div class="block">
+
+		<div class="block-top">
+				<div class="block-right">
+						<div class="block-left"></div>
+				</div>
+		</div>
+		
+		<div class="block-header">{_bid_filtering_permissions}</div>
+		<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_please_ensure_that_the_coresponding_checkbox_for_the_bid_filter}</div></div>
+		<div class="block-content">
+				<div id="">
+					{bidfilters}
+				</div>
+		</div>
+		
+		<div class="block-footer">
+				<div class="block-right">
+						<div class="block-left"></div>
+				</div>
+		</div>
+		
+</div>
+</div>
+<div class="block-wrapper">
+<div class="block">
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			<div class="block-header">{_draft}</div>
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_saving_as_draft_allows_you_to_edit_and_modify_this_listing_before_its_posted_live_to_the_marketplace}</div></div>
+			<div class="block-content">
+				{saveasdraft}
+			</div>
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+</div>
+</div>
+
+<div class="block-wrapper">
+	<div class="block">
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			<div class="block-header">{_preview} {response}</div>
+			<div class="block-content" style="padding:0px">
+				
+				<div style="height:365px; border-color:#fff; background-color: #fff; overflow:auto;width:100%">{col}</div>
+                <div style="background-color:#cccccc; height:1px; width:100%;margin-bottom:12px"></div>
+				{fees_html}
+			</div>
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+{hidden}
+<input type="hidden" name="fees[buynow]" value="{feesbuynow}" />
+<input type="hidden" name="fees[reserve]" value="{feesreserve}" />
+<input type="hidden" name="fees[insertion]" value="{feesinsertion}" />
+<input type="hidden" name="fees[total]" value="{feestotal}" />
+<div style="clear:both"></div>
+</form><else /><if condition="!empty($ilance->GPC['do']) AND $ilance->GPC['do'] == 'assign'">
+<form name="ilform" method="post" action="{ilpage[bulk]}" accept-charset="UTF-8" style="margin:0px" onsubmit="return disable_submit_button(this, '{_your_action_is_being_processed_allow_some_time}', 1, 'working_icon')">
+<input type="hidden" name="cmd" value="sell" />
+<input type="hidden" name="mode" value="bulk" />
+<input type="hidden" name="do" value="assign-preview" />
+<input type="hidden" name="bulk_id" value="{bulk_id}" />
+<h1>{_bulk_import_assignment_preview}</h1>
+<div>
+  	<div style="padding-bottom:12px" class="gray">{response}</div>
+  	<div style="padding-bottom:12px"><span>{preview_count}  {_use_the_pulldown_menus_to_assign_your_content_to_the_appropriate_columns}:</span></div>
+</div>
+<div style="background-color:#cccccc; height:1px; width:100%"></div>
+<div style="height:365px; border-color:#fff; background-color: #fff; overflow:auto;width:100%">{col}</div>
+<div style="background-color:#cccccc; height:1px; width:100%;margin-bottom:12px"></div>
+<div style="padding-bottom:15px"><input type="submit" value=" {_continue} " style="font-size:15px" class="buttons" id="submitbulk" /><span id="working_icon" style="padding-left:5px"></span></div>
+</form>
+<!--
+<div style="padding-top:12px; padding-bottom:12px; padding-left:9px; background-color:#ebebeb">
+<strong>Fees to post this bulk item list:</strong> &nbsp;&nbsp;<a href="javascript:void(0)" onmouseover="Tip('<div>{_this_value_represents_the_listing_fees_you_have_selected_so_far}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a> &nbsp;&nbsp;<span id="feetotal">{feetotal}</span>
+</div>-->
+<else />
+<if condition="isset($ilance->GPC['specifics']) AND $ilance->GPC['specifics']"><h1 style="padding-bottom:12px">{_category_specifics_api_for_bulk_upload}</h1>
+        <form enctype="multipart/form-data" action="{ilpage[bulk]}" name="ilform" accept-charset="UTF-8" method="get" style="margin: 0px;">
+        <input type="hidden" name="cmd" value="sell" />
+        <input type="hidden" name="mode" value="bulk" />
+        <input type="hidden" name="specifics" value="1" />
+        <div class="block-wrapper">
+
+                <div class="block">
+
+                                <div class="block-top">
+                                                <div class="block-right">
+                                                                <div class="block-left"></div>
+                                                </div>
+                                </div>
+
+                                <div class="block-header">{_category}</div>
+                                <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_select_the_category_you_are_trying_to_fetch_item_specifics}</div></div>
+                                <div class="block-content" style="padding:0px">
+
+                                            <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+                                            <tr>
+                                                <td>
+                                                    <iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #ebebeb; border-left:1px solid #ebebeb; border-right:1px solid #bdbdbd; border-bottom:1px solid #bdbdbd" src="{ajaxurl}?do=categories&mode=product&cmd=specifics-api&showyouselectedstring=1&showthumb=0&showcheckmarkafterstring=1&categoryfinderjs=1&categoryfinderapi=1"></iframe>
+                                                    <span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" style="font-family: verdana" size="6" /></span>	
+                                                    <div><span id="selectedcategory"></span><span id="cidstringcb"></span></div>
+
+                                                    <div id="categoryfindertext" style="padding-top:12px"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <div id="categoryfindercode" style="padding-top:12px"></div>
+                                            </tr>
+                                            </table>
+
+                                </div>
+
+                                <div class="block-footer">
+                                                <div class="block-right">
+                                                                <div class="block-left"></div>
+                                                </div>
+                                </div>
+
+                </div>
+        </div>
+        </form>
+<else />
+<style id="bulkapicounter">
+<!--
+table
+{
+	counter-reset:group;
+}
+tbody
+{
+ 	counter-increment:group;
+	counter-reset:row;
+}
+tbody tr
+{
+	counter-increment:row;
+}
+tbody td .counter:first-child:before
+{
+	content:counter(row);
+}
+//-->
+</style>
+<form enctype="multipart/form-data" action="{ilpage[bulk]}" name="ilform" accept-charset="UTF-8" method="post" style="margin: 0px;">
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_find_attachment}</div>
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_csv_comma_separated_values_document_format_only}</div>{apihook[bulk_b1]}</div>
+			<div class="block-content" style="padding:0px">
+				
+            <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+            <tr class="alt1"> 
+	            <td><input type="file" name="csv_file" style="width:250px; font-family: verdana" /></td>
+            </tr>
+            <tr> 
+                <td><input type="checkbox" name="containsheader" value="1" /> {_my_csv_file_contains_title_header_columns}</td>
+            </tr>
+            <tr class="alt2_top">
+            	<td><input type="submit" value=" {_next_step} " class="buttons" {upload_style} style="font-size:14px" /></td>
+            </tr>
+            </table>
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<input name="cmd" value="sell" type="hidden" />
+<input name="subcmd" value="bulkupload" type="hidden" />
+<input name="mode" value="bulk" type="hidden" />
+<input name="do" value="assign" type="hidden" />
+</form>
+<div class="block-wrapper">
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header" onclick="return toggle('bulkapi');" onmouseover="this.style.cursor='pointer'" onmouseout="this.style.cursor=''"><span style="float:left; padding-top:5px; padding-right:10px"><a href="javascript:void(0)" onclick="return toggle('bulkapi');"><div style="padding-right:5px"><img id="collapseimg_bulkapi" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_bulkapi]}.gif" border="0" alt="" /></div></a></span>{_bulk_items_api}</div>
+			<div class="block3-content" style="padding:0px">
+				
+                <table border="0" cellspacing="0" cellpadding="0">
+                <tbody id="collapseobj_bulkapi" style="{collapse[collapseobj_bulkapi]}">
+                <tr>
+                    <td>
+                            
+                                <div class="smaller" style="padding-top:9px;padding-left:{table_cellpadding}px">{_column_separator}: <strong>{csv_sep}</strong></div>
+                                <div class="smaller" style="padding-top:9px;padding-left:{table_cellpadding}px;padding-bottom:9px">{_column_encapsulation}: <strong>{csv_encap}</strong></div>
+                                <div style="padding-left:{table_cellpadding}px;padding-bottom:9px"><input type="button" value=" {_download_sample_csv} " class="buttons_smaller" style="font-size:10px" onclick="location.href='{http_server}{ilpage[bulk]}?cmd=sell&amp;do=downloadsample'" /></div>
+                                
+                                  <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="14">
+                                  <tr class="alt2_top">
+                                    <td width="6%" class="smaller">{_col}</td>
+                                    <td width="13%" class="smaller">{_description}</td>
+                                    <td width="7%" class="smaller">{_required}</td>
+                                    <td width="11%" class="smaller">{_example}</td>
+                                    <td width="15%" class="smaller">{_accepted_input}</td>
+                                    <td width="7%" class="smaller" nowrap="nowrap">{_max_input}</td>
+                                    <td width="41%" class="smaller">{_information}</td>
+                                  </tr>
+                                  <tbody>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black">{_item_title}</span></td>
+                                    <td class="smaller"><span style="color:black">{_yes}</span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black">{_some_title}</span></td>
+                                    <td class="smaller"><span style="color:black">{_string}</span></td>
+                                    <td class="smaller"><span style="color:black">75</span></td>
+                                    <td class="smaller"><span style="color:black">{_the_title_or_name_of_the_item}</span></td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black">{_item_description}</span></td>
+                                    <td class="smaller"><span style="color:black">{_yes}</span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black">{_some_description}</span></td>
+                                    <td class="smaller"><span style="color:black">{_string}</span></td>
+                                    <td class="smaller"><span style="color:black">{description_limit}</span></td>
+                                    <td class="smaller"><span style="color:black">{_the_description_of_the_item}</span></td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller"><span style="color:black">{_starting_price}</span></td>
+                                    <td class="smaller"><span style="color:black">{_yes}</span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black"> (i.e.: 25.99) {_or_lower} 0.01</span></td>
+                                    <td class="smaller"><span style="color:black">{_integer}</span></td>
+                                    <td class="smaller"><span style="color:black">15</span></td>
+                                    <td class="smaller"><span style="color:black">{_if_this_item_sold_leave_0}</span></td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller"><span style="color:black">{_buy_now_price}</span></td>
+                                    <td class="smaller"><span style="color:black">{_yes}</span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black">(i.e.: 44.99) {_or_lower} 0.00</span></td>
+                                    <td class="smaller"><span style="color:black">{_integer}</span></td>
+                                    <td class="smaller"><span style="color:black">15</span></td>
+                                    <td class="smaller"><span style="color:black">{_if_this_item_purchased_leave_0}</span></td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller"><span style="color:black">{_reserve_price}</span></td>
+                                    <td class="smaller"><span style="color:black">{_yes}</span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black">(i.e.: 50.00) {_or_lower} 0.00</span></td>
+                                    <td class="smaller"><span style="color:black">{_integer}</span></td>
+                                    <td class="smaller"><span style="color:black">15</span></td>
+                                    <td class="smaller"><span style="color:black">{_if_you_want_reserve_0}</span></td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller"><span style="color:black">{_qty}</span></td>
+                                    <td class="smaller"><span style="color:black">{_yes}</span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black"> (i.e.: 1)</span></td>
+                                    <td class="smaller"><span style="color:black">{_integer}</span></td>
+                                    <td class="smaller"><span style="color:black">5</span></td>
+                                    <td class="smaller"><span style="color:black">{_enter_the_amount_quantity_selling_item}</span></td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_lot}</td>
+                                    <td class="smaller">{_yes}</td>
+                                    <td class="smaller" nowrap="nowrap">(i.e.: 1 {_or_lower} 8)</td>
+                                    <td class="smaller">{_integer}</td>
+                                    <td class="smaller">1</td>
+                                    <td class="smaller">{_enter_how_many_items_in_lot}</td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_event_type}</td>
+                                    <td class="smaller">{_yes}</td>
+                                    <td class="smaller" nowrap="nowrap"><strong>public</strong> {_or_lower} <strong>realtime</strong></td>
+                                    <td class="smaller">{_string}</td>
+                                    <td class="smaller">30</td>
+                                    <td class="smaller">{_if_item_scheduled_to_start}</td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller"><span style="color:black">{_bid_type}</span></td>
+                                    <td class="smaller"><span style="color:black">{_yes}</span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black"><strong>regular</strong> {_or_lower} <strong>fixed</strong><if condition="isset($ilconfig['enableclassifiedtab']) AND $ilconfig['enableclassifiedtab']"> {_or_lower} <strong>classified</strong></if></span></td>
+                                    <td class="smaller"><span style="color:black">{_string}</span></td>
+                                    <td class="smaller"><span style="color:black">10</span></td>
+                                    <td class="smaller"><span style="color:black">{_if_you_want_sell_bid_buy}
+                                        <if condition="isset($ilconfig['enableclassifiedtab']) AND $ilconfig['enableclassifiedtab']"></if></span></td>
+                                    </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller"><span style="color:black">{_category_id}</span></td>
+                                    <td class="smaller"><span style="color:black">{_yes}</span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black"> (i.e.: 100)</span></td>
+                                    <td class="smaller"><span style="color:black">{_integer}</span></td>
+                                    <td class="smaller"><span style="color:black">5</span></td>
+                                    <td class="smaller"><span style="color:black">{_in_order_to_assign_specific_cat} <span class="blue"><a href="{http_server}bulk.php?cmd=sell&do=categorylist">{_click_here}</a></span></span></td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller"><span style="color:black">{_pictures}</span></td>
+                                    <td class="smaller"><span style="color:black"><if condition="isset($ilconfig['attachment_forceproductupload']) AND $ilconfig['attachment_forceproductupload']">{_yes}<else />{_no}</if></span></td>
+                                    <td class="smaller"><span style="color:black">(i.e.: http://domain/image.gif) {_or_lower} {_multiple_photos_lower} (i.e.: http://domain/image1.gif|http://domain/image2.gif</span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black">{_string}</span></td>
+                                    <td class="smaller"><span style="color:black">500</span></td>
+                                    <td class="smaller"><span style="color:black">{_you_can_assign_single_or_multiple_pictures}</span></td>
+                                  </tr>
+                                  <if condition="$ilconfig['globalserverlocale_currencyselector']"><tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller"><span style="color:black">{_currency_code}</span></td>
+                                    <td class="smaller"><span style="color:black">{_no}</span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black"> (i.e.: USD, CAD, etc)</span></td>
+                                    <td class="smaller" nowrap="nowrap"><span style="color:black">{_string}</span></td>
+                                    <td class="smaller"><span style="color:black">3</span></td>
+                                    <td class="smaller"><span style="color:black">{_bid_amounts_and_fixed_price}</span></td>
+                                  </tr>
+                                  </if>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_item_city}</td>
+                                    <td class="smaller">{_no}</td>
+                                    <td class="smaller" nowrap="nowrap">(i.e.: Toronto)</td>
+                                    <td class="smaller">{_string}  </td>
+                                    <td class="smaller">50</td>
+                                    <td class="smaller">{_city_item_located}</td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_item_state}</td>
+                                    <td class="smaller">{_no}</td>
+                                    <td class="smaller" nowrap="nowrap">(i.e.: Ontario)</td>
+                                    <td class="smaller">{_string} </td>
+                                    <td class="smaller">50</td>
+                                    <td class="smaller">{_state_item_located}</td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_item_zip_postal_code}</td>
+                                    <td class="smaller">{_no}</td>
+                                    <td class="smaller" nowrap="nowrap">(i.e.: M3N2J9 {_or_lower} 90210)</td> 
+                                    <td class="smaller">{_string}</td>
+                                    <td class="smaller">25</td>
+                                    <td class="smaller">{_zip_item_located}</td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_item_country}</td>
+                                    <td class="smaller">{_no}</td>
+                                    <td class="smaller" nowrap="nowrap">(i.e.: Canada)</td>
+                                    <td class="smaller">{_string} </td>
+                                    <td class="smaller">50</td>
+                                    <td class="smaller">{_country_item_located}</td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_item_attributes}</td>
+                                    <td class="smaller">{_no}</td>
+                                    <td class="smaller" nowrap="nowrap">(i.e.: {_question}1={_answer}1|{_question}2={_answer}2)</td>
+                                    <td class="smaller">{_string} </td>
+                                    <td class="smaller">250</td>
+                                    <td class="smaller">{_attributes_avail_for_item}  <span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}bulk/sell?specifics=1">{_click_here}</a><else /><a href="{http_server}bulk.php?cmd=sell&specifics=1">{_click_here}</a></if></span> {_to_learn_how_associate_for_item}</td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_sku}</td>
+                                    <td class="smaller">{_no}</td>
+                                    <td class="smaller" nowrap="nowrap">(i.e.: 2881928-BA)</td>
+                                    <td class="smaller">{_string}</td>
+                                    <td class="smaller">250</td>
+                                    <td class="smaller">{_sku_item_number_for_item}</td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_upc}</td>
+                                    <td class="smaller">{_no}</td>
+                                    <td class="smaller" nowrap="nowrap">(i.e.: 82819281827721)</td>
+                                    <td class="smaller">{_string}</td>
+                                    <td class="smaller">250</td>
+                                    <td class="smaller">{_upc_item_number_for_item}</td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_part_number}</td>
+                                    <td class="smaller">{_no}</td>
+                                    <td class="smaller" nowrap="nowrap">(i.e.: 77281-ABC)</td>
+                                    <td class="smaller">{_string}</td>
+                                    <td class="smaller">250</td>
+                                    <td class="smaller">{_pn_item_number_for_item}</td>
+                                  </tr>
+                                  <tr class="alt1" valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_model_number}</td>
+                                    <td class="smaller">{_no}</td>
+                                    <td class="smaller" nowrap="nowrap">(i.e.: ABCDEF)</td>
+                                    <td class="smaller">{_string}</td>
+                                    <td class="smaller">250</td>
+                                    <td class="smaller">{_mn_item_number_for_item}</td>
+                                  </tr>
+                                  <tr valign="top">
+                                    <td class="smaller"><span style="color:black" class="counter"></span></td>
+                                    <td class="smaller">{_ean}</td>
+                                    <td class="smaller">{_no}</td>
+                                    <td class="smaller" nowrap="nowrap">(i.e.: ABCDEF-123)</td>
+                                    <td class="smaller">{_string}</td>
+                                    <td class="smaller">250</td>
+                                    <td class="smaller">{_ean_item_number_for_item}</td>
+                                  </tr>
+                                  {apihook[bulk_csv_api_table_end]}
+                                  </tbody>
+                                </table>
+                
+                                {apihook[bulk_b2]}
+                
+                  </td>
+                </tr>
+                </tbody>
+                </table>
+                
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+	</div>
+</div>
+</if>
+</if>
+</if>
+</if>

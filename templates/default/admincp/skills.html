@@ -1,0 +1,180 @@
+<div id="v3body4">
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+
+	<div id="content">
+	<h1>{_skills} {_category_configuration}</h1><br />
+		
+		<div class="tab-pane" id="skillsmain">
+
+			<!-- begin tab page -->
+			<div class="tab-page">
+	
+				<h2 class="tab">{_categories}</h2>
+				
+				<!-- begin tab pane -->
+				<div class="tab-pane">
+				
+                	<!-- categories search -->
+                    <form name="invoicesearch" method="get" action="{ilpage[subscribers]}" accept-charset="UTF-8" style="margin: 0px;">
+					<input type="hidden" name="cmd" value="skills" />
+					<div class="block-wrapper">
+<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_search}</div>
+							<div class="block-content-yellow" style="padding:{table_cellpadding}px">
+      <div class="smaller">Search skill categories using numerous methods below</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+								  <tr class="alt1">
+								    <td nowrap="nowrap"><span class="gray">{_title}</span></td>
+								    <td><input type="text" name="title" value="{title}" style="font-family: verdana" size="25" class="input" /></td>
+									<td width="15%" nowrap="nowrap">&nbsp;</td>
+								    <td width="32%">&nbsp;</td>
+								    <td width="9%"><span class="gray">{_page}</span></td>
+								    <td width="9%"><input type="text" name="page" style="font-family: verdana" value="{page}" class="input"  size="4" /></td>
+								  </tr>
+								  <tr class="alt1"> 
+									<td width="18%" nowrap="nowrap"><span class="gray">{_category} {_level} Depth</span></td>
+									<td><select name="level" class="select-75">
+                                                    <option value="2" <if condition="isset($ilance->GPC['level']) AND $ilance->GPC['level'] == '2'">selected="selected"</if>>2</option>
+                                                    <option value="1" <if condition="isset($ilance->GPC['level']) AND $ilance->GPC['level'] == '1'">selected="selected"</if>>1</option>
+                                                  </select></td>
+									<td><span class="gray">Per page</span></td>
+									<td><select name="pp" class="select-75">
+									  <option value="10" 
+									  <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '10'">selected="selected"</if>
+									  >10
+									  </option>
+									  <option value="50" 
+									  <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '50'">selected="selected"</if>
+									  >50
+									  </option>
+									  <option value="100" 
+									  <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '100'">selected="selected"</if>
+									  >100
+									  </option>
+									  <option value="250" 
+									  <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '250'">selected="selected"</if>
+									  >250
+									  </option>
+									  </select></td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+                                              </tr>
+                                              <tr class="alt2_top"> 
+                                                <td colspan="6"><input type="submit" value="{_search}" style="font-size:15px" class="buttons" /></td>
+                                              </tr>
+                                            </table>
+                                            
+</div>
+                                        
+                                        <div class="block-footer">
+                                                <div class="block-right">
+                                                        <div class="block-left"></div>
+                                                </div>
+                                        </div>
+                                        
+                      </div>
+                            </div>
+                    </form>
+                    <!-- end categories search -->
+                
+					<!-- categories view -->
+					<form id="skills" name="ilform" action="{ilpage[subscribers]}" accept-charset="UTF-8" method="post" style="margin: 0px;">
+					<input type="hidden" name="cmd" value="skills" />
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header"><span style="float:right" class="blue"><a href="{ilpage[subscribers]}?cmd=skills&amp;subcmd=addskill&amp;cid=0">{_add_new_skill_category}</a></span>{_skills} {_category_manager}</div>
+							<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_skills_in_bold_represent_main_skill_genres_only_subcategories}</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center">
+								<tr class="alt2">
+									<td width="44%" align="left">{_title}</td>
+									<td width="24%" align="left">{_category}</td>
+									<td width="30%" align="left">{_actions}</td>
+									<td width="15%" align="center">{_sort}</td>
+									
+									<td width="1%" align="center" nowrap="nowrap"><input type="checkbox" name="checkall" onclick="check_uncheck_all('skills');" /></td>
+								</tr>
+								<loop name="servicecategories">
+								<tr class="alt1">
+									<td align="left"><a name="category{cid}">&nbsp;</a><span class="blue">{title}</span> <span class="smaller gray">({auctioncount})</span></td>
+									<td align="left">{rootcategory}</td>
+									<td align="left" nowrap="nowrap">
+									<select name="cid{cid}" onchange="category_jump({cid});" class="select">
+										<optgroup label="{_actions}">
+										<option value="edit">{_edit} &rarr;</option>
+                                        <!-- <option value="addtest">Add Skill Test &rarr;</option>-->                                       
+										<if condition="isset($level{cid}) AND $level{cid} == 1"><option value="add">{_add_skill_category} &darr;</option></if>
+										<if condition="$show['ADMINCP_TEST_MODE']"><else /><option value="remove">{_delete}</option></if>
+										</optgroup>
+									</select>
+									
+									<input type="button" class="buttons_smaller" value="{_go}" onclick="category_jump({cid});" /></td>
+									<td align="center"><input type="text" name="sort[{cid}]" value="{sort}" tabindex="1" size="3" title="{_edit_display_order}" style="text-align:center" /></td>
+									<td align="center" class="alt2"><input type="checkbox" name="skillcid[]" value="{cid}" /></td>
+								</tr>
+								</loop name="servicecategories">
+								<tr>
+									<td colspan="6" class="alt2_top"><span style="float:right"><input type="submit" name="savesort" class="buttons" tabindex="1" value="{_save} {_sort}" accesskey="s" style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="remove" class="buttons" value="{_remove}" tabindex="1"  style="font-size:15px" disabled="disabled" /><else /><input type="submit" name="remove" class="buttons" value="{_remove}" tabindex="1"  style="font-size:15px" /></if></span> <span style="float:left"><input type="button" class="buttons" value="{_add_new_category}" tabindex="1" onclick="window.location='{ilpage[subscribers]}?cmd=skills&amp;subcmd=addskill&amp;cid=0';" style="font-size:15px"/></span></td>
+								</tr>
+                                <tr>
+									<td colspan="6">{prevnext}</td>
+								</tr>
+								</table>
+								
+					  </div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+					
+					<input type="hidden" name="subcmd" value="_update-service-sort" />
+					</form>
+					<!-- /categories view -->
+									
+				</div>
+				<!-- /begin tab pane -->
+				
+			</div>
+			<!-- /begin tab page -->
+			<!-- task log -->
+			<div class="tab-page">
+	
+				<h2 class="tab">{_settings}</h2>
+			
+			
+				{configuration_skills}
+			
+			</div>
+			<!-- / task log -->
+
+		</div>

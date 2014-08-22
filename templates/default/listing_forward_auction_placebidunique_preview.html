@@ -1,0 +1,56 @@
+<form method="post" action="{ilpage[merch]}" name="previewbid" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="submit-unique-bid" />
+<input type="hidden" name="project_id" value="{project_id}" />
+<input type="hidden" name="id" value="{project_id}" />
+<input type="hidden" name="owner_id" value="{owner_id}" />
+<input type="hidden" name="uniquebid" value="{uniquebid}" />
+<if condition="isset($show['localpickuponly']) AND $show['localpickuponly'] == false AND isset($shippercount) AND $shippercount == 1"><input type="hidden" name="shipperid" value="{shipperid}" /></if>
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_ready_when_you_are}</div>
+            <div class="block-content-yellow smaller" style="padding:{table_cellpadding}px">{_click_bid_now_to_place_your_unique_bid_we_will_immediately_redirect_you_back_to_the_main_listing}</div>
+			<div class="block-content" style="padding:0px">
+				
+                <table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%" align="center">
+                <tr class="alt1">
+                    <td align="right" valign="top"><span class="black">{_title}:</span></td>
+                    <td colspan="3" nowrap="nowrap" width="100%"><span class="black"><strong>{title}</strong></span></td>
+                </tr>
+                <if condition="isset($show['localpickuponly']) AND $show['localpickuponly'] == false AND isset($shippercount) AND $shippercount > 1">
+                <tr class="alt1"> 
+                    <td align="right" nowrap="nowrap">{_your_ship_service}:</td>
+                    <td nowrap="nowrap" colspan="3">{shipservicepulldown}</td>
+                </tr>
+                </if>
+                <tr> 
+                    <td align="right" nowrap="nowrap"><span class="black">{_unique_bid_amount}:</span></td>
+                    <td colspan="3" nowrap="nowrap"><span class="black"><strong>{bidamountformatted}</strong></span></td>
+                </tr>
+                <tr class="alt2_top">
+                	<td colspan="4"><div><input type="submit" value="{_bid_now}" class="buttons" style="font-size:15px" />&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{http_server}{ilpage[merch]}?id={project_id}">{_revise_bid_amount}</a></span></div></td>
+                </tr>
+                {apihook[item_placeuniquebid_mid1]}
+                </table>
+                
+				{apihook[item_placeuniquebid_mid2]}
+				
+			</div>
+            
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+</div>
+</div>
+</form>

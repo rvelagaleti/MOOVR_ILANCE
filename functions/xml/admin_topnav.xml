@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Official AdminCP English (US) Navigation menu system for ILance.
+//-->
+
+<adminnavgroups languagecode="eng">
+
+	<adminnavgroup phrase="_settings" link="settings.php" seolink="" config="" permission1="" permission2="" sort="10">
+		<option phrase="_global" link="settings.php?cmd=global" seolink="" config="" permission1="" permission2="" sort="10"></option>
+		<option phrase="_marketplace" link="settings.php?cmd=marketplace" seolink="" config="" permission1="" permission2="" sort="20"></option>
+		<option phrase="_pay_modules" link="settings.php?cmd=paymodules" seolink="" config="" permission1="" permission2="" sort="40"></option>
+		<option phrase="_emails" link="settings.php?cmd=emailtemplates" seolink="" config="" permission1="" permission2="" sort="50"></option>
+		<option phrase="_maintenance" link="settings.php?cmd=maintenance" seolink="" config="" permission1="" permission2="" sort="60"></option>
+		<option phrase="_subscriptions" link="settings.php?cmd=subscriptions" seolink="" config="" permission1="" permission2="" sort="70"></option>
+		<option phrase="_automation" link="settings.php?cmd=automation" seolink="" config="" permission1="" permission2="" sort="80"></option>
+		<option phrase="_feedback" link="settings.php?cmd=feedback" seolink="" config="" permission1="" permission2="" sort="90"></option>
+		<option phrase="_registration" link="settings.php?cmd=registration" seolink="" config="" permission1="" permission2="" sort="90"></option>
+	</adminnavgroup>
+	
+	<adminnavgroup phrase="_customer" link="subscribers.php" seolink="" config="" permission1="" permission2="" sort="20">
+		<option phrase="_management" link="subscribers.php" seolink="" config="" permission1="" permission2="" sort="10"></option>
+		<option phrase="_skills" link="subscribers.php?cmd=skills" seolink="" config="" permission1="" permission2="" sort="20"></option>
+		<option phrase="_abuse" link="subscribers.php?cmd=abuse" seolink="" config="" permission1="" permission2="" sort="30"></option>
+		<option phrase="_nonprofits" link="subscribers.php?cmd=nonprofits" seolink="" config="" permission1="" permission2="" sort="40"></option>
+	</adminnavgroup>
+	
+	<adminnavgroup phrase="_accounting" link="accounting.php" seolink="" config="" permission1="" permission2="" sort="30">
+		<option phrase="_manager" link="accounting.php" seolink="" config="" permission1="" permission2="" sort="10"></option>
+		<option phrase="_escrow" link="accounting.php?cmd=escrow" seolink="" config="" permission1="" permission2="" sort="20"></option>
+		<option phrase="_withdrawals" link="accounting.php?cmd=withdraws" seolink="" config="" permission1="" permission2="" sort="30"></option>
+		<option phrase="_credit_cards" link="accounting.php?cmd=creditcards" seolink="" config="" permission1="" permission2="" sort="40"></option>
+		<option phrase="_bank_accounts" link="accounting.php?cmd=bankaccounts" seolink="" config="" permission1="" permission2="" sort="50"></option>
+		<option phrase="_reports" link="accounting.php?cmd=reports" seolink="" config="" permission1="" permission2="" sort="60"></option>
+		<option phrase="_currencies" link="accounting.php?cmd=currencies" seolink="" config="" permission1="" permission2="" sort="70"></option>
+	</adminnavgroup>
+	
+	<adminnavgroup phrase="_distribution" link="distribution.php" seolink="" config="" permission1="" permission2="" sort="40">
+		<option phrase="_auctions" link="distribution.php" seolink="" config="" permission1="" permission2="" sort="10"></option>
+		<option phrase="_attachments" link="distribution.php?cmd=attachments" seolink="" config="" permission1="" permission2="" sort="20"></option>
+		<option phrase="_bid_manager" link="distribution.php?cmd=bids" seolink="" config="" permission1="" permission2="" sort="30"></option>
+		<option phrase="_verifications" link="distribution.php?cmd=verifications" seolink="" config="" permission1="" permission2="" sort="40"></option>
+		<option phrase="_referrals" link="distribution.php?cmd=referrals" seolink="" config="" permission1="" permission2="" sort="50"></option>
+		<option phrase="_bulk_email" link="distribution.php?cmd=bulkemail" seolink="" config="" permission1="" permission2="" sort="60"></option>
+		<option phrase="_categories" link="distribution.php?cmd=categories" seolink="" config="" permission1="" permission2="" sort="70"></option>
+                <option phrase="_feeds" link="distribution.php?cmd=rssfeeds" seolink="" config="" permission1="" permission2="" sort="70"></option>	
+	</adminnavgroup>
+	
+	<adminnavgroup phrase="_languages" link="language.php" seolink="" config="" permission1="" permission2="" sort="50">
+		<option phrase="_languages" link="language.php" seolink="" config="" permission1="" permission2="" sort="10"></option>
+		<option phrase="_locations" link="language.php?cmd=locations" seolink="" config="" permission1="" permission2="" sort="20"></option>
+	</adminnavgroup>
+        
+        <adminnavgroup phrase="_styles_css" link="styles.php" seolink="" config="" permission1="" permission2="" sort="60">
+                <option phrase="_templates" link="styles.php" seolink="" config="" permission1="" permission2="" sort="10"></option>    
+        </adminnavgroup>
+	
+	<adminnavgroup phrase="_apps" link="components.php" seolink="" config="" permission1="" permission2="" sort="70">
+		<option phrase="_apps" link="components.php" seolink="" config="" permission1="" permission2="" sort="10"></option>
+		<option phrase="_manage" link="components.php?cmd=install" seolink="" config="" permission1="" permission2="" sort="20"></option>
+		<option phrase="_apps_store" link="components.php?cmd=appstore" seolink="" config="" permission1="" permission2="" sort="30"></option>
+		<!--<option phrase="_forum" link="components.php?cmd=forum" seolink="" config="" permission1="" permission2="" sort="40"></option>-->
+	</adminnavgroup>
+	
+	<adminnavgroup phrase="_connections" link="connections.php" seolink="" config="" permission1="" permission2="" sort="80"></adminnavgroup>
+	
+	<adminnavgroup phrase="_tools" link="tools.php" seolink="" config="" permission1="" permission2="" sort="90">
+		<option phrase="_configuration" link="tools.php" seolink="" config="" permission1="" permission2="" sort="10"></option>
+		<option phrase="_orphans" link="tools.php?cmd=orphan" seolink="" config="" permission1="" permission2="" sort="20"></option>
+	</adminnavgroup>
+	
+</adminnavgroups>

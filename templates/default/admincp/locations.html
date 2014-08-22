@@ -1,0 +1,377 @@
+<div id="v3body4"> 
+    <div id="sub">
+	<div id="subnav">
+	    <loop name="subnav_settings">
+		<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+	    </loop name="subnav_settings">
+	</div>
+    </div>
+    <div id="content">
+	<h1>{_locations_administration_menu}</h1><br />
+	<div class="tab-pane">
+	    <div class="tab-page">
+		<h2 class="tab" id="regionstab">{_regions}</h2>
+		<div class="tab-pane" id="regionstabpane">
+		    <div class="block-wrapper">
+			<div class="block">
+			    <div class="block-top">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			    <div class="block-header">{_regions}</div>
+			    <div class="block-content" style="padding:0px">
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				    <tr class="alt2">
+                    	{region_table_head}
+                        <td><strong>{_actions}</strong></td>
+                    </tr>
+				    <loop name="regions"><tr class="alt1">
+					    {names}
+                        <td width="1%" align="center">{actions}</td>	
+					</tr></loop name="regions">
+				</table>
+			    </div>
+			    <div class="block-footer">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	    <div class="tab-page">
+		<h2 class="tab" id="locationstab">{_countries}</h2>
+		<div class="tab-pane" id="locationstabpane">
+        
+       	  	<form name="countryfilter" method="get" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+            <input type="hidden" name="cmd" value="locations" />
+            <input type="hidden" name="do" value="countries" />
+            <div class="block-wrapper">
+                <div class="block">
+            
+                    <div class="block-top">
+                            <div class="block-right">
+                                    <div class="block-left"></div>
+                            </div>
+                    </div>
+                    
+                    <div class="block-header">{_countries} {_filter}</div>
+                    <div class="block-content" style="padding:0px">
+                        
+                        <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+                          <tr class="alt1">
+                            <td nowrap="nowrap"><span class="gray">{_region}</span></td>
+                            <td><select name="regionid" class="select">
+                            
+                            <option value="1" <if condition="isset($ilance->GPC['regionid']) AND $ilance->GPC['regionid'] == '1'">selected="selected"</if>>Africa</option>
+                            <option value="2" <if condition="isset($ilance->GPC['regionid']) AND $ilance->GPC['regionid'] == '2'">selected="selected"</if>>Antarctica</option>
+                            <option value="3" <if condition="isset($ilance->GPC['regionid']) AND $ilance->GPC['regionid'] == '3'">selected="selected"</if>>Asia</option>
+                            <option value="4" <if condition="isset($ilance->GPC['regionid']) AND $ilance->GPC['regionid'] == '4'">selected="selected"</if>>Europe</option>
+                            <option value="5" <if condition="isset($ilance->GPC['regionid']) AND $ilance->GPC['regionid'] == '5'">selected="selected"</if>>North America</option>
+                            <option value="6" <if condition="isset($ilance->GPC['regionid']) AND $ilance->GPC['regionid'] == '6'">selected="selected"</if>>Oceania</option>
+                            <option value="7" <if condition="isset($ilance->GPC['regionid']) AND $ilance->GPC['regionid'] == '7'">selected="selected"</if>>South America</option>
+                          	</select></td>
+                            <td width="15%" nowrap="nowrap">&nbsp;</td>
+                            <td width="32%">&nbsp;</td>
+                            <td width="9%"></td>
+                            <td width="9%"></td>
+                          </tr>
+                          <tr class="alt2_top"> 
+                            <td colspan="6"><input type="submit" value=" {_go} " style="font-size:15px" class="buttons" /></td>
+                          </tr>
+                        </table>
+                                    
+                  </div>
+                        
+                        <div class="block-footer">
+                                <div class="block-right">
+                                        <div class="block-left"></div>
+                                </div>
+                        </div>
+                        
+              </div>
+            </div>
+            </form>
+            
+            <if condition="isset($ilance->GPC['regionid']) AND $ilance->GPC['regionid'] > 0">
+		    <div class="block-wrapper">
+			<div class="block">
+			    <div class="block-top">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			    <div class="block-header">{_countries}</div>
+			    <div class="block-content" style="padding:0px">
+				<form action="{ilpage[language]}" name="locationscountries" id="locationscountries" method="post" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="locations" />
+				<input type="hidden" name="subcmd" value="location" />
+				<input type="hidden" name="action" value="save_locations" />
+                <input type="hidden" name="regionid" value="{regionid}" />
+                <input type="hidden" name="returnurl" value="{pageurl_urlencoded}" />
+                <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+                <tr class="alt2">
+                	<td><strong>{_region}</strong></td>
+                    {location_table_head}
+                    <td align="center" width="1%"><strong>{_actions}</strong></td>
+                    <td width="1%" align="center" title="{_visible}"><input type="checkbox" name="checkall" onclick="check_uncheck_all('locationscountries');"></td>
+                </tr>
+                <loop name="locations"><tr class="alt1">
+                    <td width="3%" nowrap="nowrap">{region}</td>
+                    {names}
+                    <td width="1%" align="center">{actions}</td>
+                    <td width="1%" align="center"><input type="checkbox" name="visible[]" id="visible_{locationid}" value="{locationid}" {visible} /></td>
+                </tr></loop name="locations">
+                <tr class="alt2_top">
+                	<td colspan="10"><input type="submit" class="buttons" name="update" value="{_save}" style="font-size:15px" /></td>
+                </tr>
+                </table>
+                </form>
+				</div>
+			    <div class="block-footer">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			</div>
+		    </div></if>
+		</div>
+        
+	    </div>
+        
+        
+        <div class="tab-page">
+		<h2 class="tab" id="locationstab">{_states}</h2>
+		<div class="tab-pane" id="locationsstatestabpane">
+        
+        	<form name="statefilter" method="get" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+            <input type="hidden" name="cmd" value="locations" />
+            <input type="hidden" name="do" value="states" />
+            <div class="block-wrapper">
+                <div class="block">
+            
+                    <div class="block-top">
+                            <div class="block-right">
+                                    <div class="block-left"></div>
+                            </div>
+                    </div>
+                    
+                    <div class="block-header">{_states} {_filter}</div>
+                    <div class="block-content" style="padding:0px">
+                        
+                        <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+                          
+                          <tr class="alt1">
+                            <td nowrap="nowrap"><span class="gray">{_country}</span></td>
+                            <td>{countrypulldownstates}</td>
+                            <td width="15%" nowrap="nowrap">&nbsp;</td>
+                            <td width="32%">&nbsp;</td>
+                            <td width="9%"></td>
+                            <td width="9%"></td>
+                          </tr>
+                          <tr class="alt2_top"> 
+                            <td colspan="6"><input type="submit" value=" {_go} " style="font-size:15px" class="buttons" /></td>
+                          </tr>
+                        </table>
+                                    
+                        </div>
+                        
+                        <div class="block-footer">
+                                <div class="block-right">
+                                        <div class="block-left"></div>
+                                </div>
+                        </div>
+                        
+              </div>
+            </div>
+            </form>
+        
+       	  <if condition="isset($ilance->GPC['country']) AND !empty($ilance->GPC['country'])">
+		    <div class="block-wrapper">
+			<div class="block">
+			    <div class="block-top">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			    <div class="block-header">{_states}</div>
+			    <div class="block-content" style="padding:0px">
+				<form action="{ilpage[language]}" name="locationsstates" id="locationsstates" method="post" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="locations" />
+				<input type="hidden" name="subcmd" value="state" />
+				<input type="hidden" name="action" value="save_states" />
+                <input type="hidden" name="cid" value="{cid}" />
+                <input type="hidden" name="returnurl" value="{pageurl_urlencoded}" />
+                <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+                <tr class="alt2">
+                	<td><b>{_region}</b></td>
+                    <td><b>{_country}</b></td>
+                    <td><b>{_state_or_province}</b></td>
+                    <td title="{_visible}"><input type="checkbox" name="checkall" onclick="check_uncheck_all('locationsstates');"></td>
+                </tr>
+                <loop name="locations_states">
+                <tr class="alt1">
+                    <td width="3%" nowrap="nowrap">{region}</td>
+                    <td width="3%" nowrap="nowrap">{country}</td>
+                    <td class="alt2">{state}</td>
+                    <td width="1%" align="center"><input type="checkbox" name="visible[]" id="visible_{id}" value="{id}" {visible} /></td>
+                </tr>
+                </loop name="locations_states">
+                <tr class="alt2_top">
+                	<td colspan="4"><input type="submit" class="buttons" name="update" value="{_save}" style="font-size:15px" /></td>
+                </tr>
+                </table>
+                </form>
+				</div>
+			    <div class="block-footer">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			</div>
+		    </div></if>
+		</div>
+	    </div>
+        
+        <div class="tab-page">
+		<h2 class="tab" id="locationstab">{_cities}</h2>
+		<div class="tab-pane" id="locationscitiestabpane">
+        
+        	<form name="cityfilter" method="get" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+            <input type="hidden" name="cmd" value="locations" />
+            <input type="hidden" name="do" value="cities" />
+            <div class="block-wrapper">
+                <div class="block">
+            
+                    <div class="block-top">
+                            <div class="block-right">
+                                    <div class="block-left"></div>
+                            </div>
+                    </div>
+                    
+                    <div class="block-header">{_cities} {_filter}</div>
+                    <div class="block-content" style="padding:0px">
+                        
+                        <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+                          
+                          <tr class="alt1">
+                            <td nowrap="nowrap"><span class="gray">{_country}</span></td>
+                            <td>{countrypulldowncities}</td>
+                            <td width="15%" nowrap="nowrap">&nbsp;</td>
+                            <td width="32%">&nbsp;</td>
+                            <td width="9%"></td>
+                            <td width="9%"></td>
+                          </tr>
+                          <tr class="alt1">
+                            <td nowrap="nowrap"><span class="gray">{_state}</span></td>
+                            <td>{statepulldowncities}</td>
+                            <td width="15%" nowrap="nowrap">&nbsp;</td>
+                            <td width="32%">&nbsp;</td>
+                            <td width="9%"></td>
+                            <td width="9%"></td>
+                          </tr>
+                          <tr class="alt2_top"> 
+                            <td colspan="6"><input type="submit" value=" {_go} " style="font-size:15px" class="buttons" /></td>
+                          </tr>
+                        </table>
+                                    
+                  </div>
+                        
+                        <div class="block-footer">
+                                <div class="block-right">
+                                        <div class="block-left"></div>
+                                </div>
+                        </div>
+                        
+              </div>
+            </div>
+            </form>
+        
+        	<if condition="isset($ilance->GPC['country2']) AND !empty($ilance->GPC['country2']) AND isset($ilance->GPC['state']) AND !empty($ilance->GPC['state'])">
+		    <div class="block-wrapper">
+			<div class="block">
+			    <div class="block-top">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			    <div class="block-header">{_cities} {_in} {state}</div>
+			    <div class="block-content" style="padding:0px">
+				<form action="{ilpage[language]}" name="locationscities" id="locationscities" method="post" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="locations" />
+				<input type="hidden" name="subcmd" value="city" />
+				<input type="hidden" name="action" value="save_cities" />
+                <input type="hidden" name="cid" value="{cid2}" />
+                <input type="hidden" name="state" value="{state}" />
+                <input type="hidden" name="returnurl" value="{pageurl_urlencoded}" />
+                <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+                <tr class="alt2">
+                	<td><b>{_region}</b></td>
+                    <td><b>{_country}</b></td>
+                    <td><b>{_state_or_province}</b></td>
+                    <td><b>{_city_or_village}</b></td>
+                    <td title="{_visible}"><input type="checkbox" name="checkall" onclick="check_uncheck_all('locationscities');"></td>
+                </tr><if condition="isset($show['activecities']) AND $show['activecities'] == false">
+                <tr>
+                	<td colspan="5" align="center">{_no_results_found}</td>
+                </tr>
+                <else />
+                <loop name="locations_cities"><tr class="alt1">
+                    <td width="3%" nowrap="nowrap">{region}</td>
+                    <td width="3%" nowrap="nowrap">{country}</td>
+                    <td width="3%" nowrap="nowrap">{state}</td>
+                    <td class="alt2">{city}</td>
+                    <td width="1%" align="center"><input type="checkbox" name="visible[]" id="visible_{id}" value="{id}" {visible} /></td>
+                </tr></loop name="locations_cities">
+                <tr class="alt2_top">
+                	<td colspan="5"><input type="submit" class="buttons" name="update" value="{_save}" style="font-size:15px" /></td>
+                </tr>
+                </if>
+                </table>
+                </form>
+				</div>
+			    <div class="block-footer">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			</div>
+		    </div></if>
+            
+            <if condition="isset($show['activecities']) AND $show['activecities'] == false"><div class="block-wrapper">
+			<div class="block">
+			    <div class="block-top">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			    <div class="block-header">Import cities into {state} from {country2} Geo DB</div>
+			    <div class="block-content" style="padding:{table_cellpadding}px">
+				<if condition="isset($show['canimportcities']) AND $show['canimportcities']">
+                <form action="{ilpage[language]}" name="locationscitiesimport" id="locationscitiesimport" method="post" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="locations" />
+				<input type="hidden" name="subcmd" value="city" />
+				<input type="hidden" name="action" value="import_cities" />
+                <input type="hidden" name="cid" value="{cid2}" />
+                <input type="hidden" name="state" value="{state}" />
+                <input type="hidden" name="returnurl" value="{pageurl_urlencoded}" />
+                <input type="submit" class="buttons" name="import" value="{_import}" style="font-size:15px" />
+                </form>
+                <else />
+                The {country2} geo distance database is not installed.
+                </if>
+				</div>
+			    <div class="block-footer">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+			</div>
+		    </div></if>
+            
+            
+		</div>
+	    </div>
+</div>

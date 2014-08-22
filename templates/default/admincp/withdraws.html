@@ -1,0 +1,381 @@
+<div id="v3body4">
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+
+	<div id="content">
+	<h1>{_withdrawal_management}</h1><br />
+
+		
+		<div class="tab-pane">
+		
+			<div class="tab-pane" id="withdrawslistings">
+		
+		<div class="tab-page">
+      				
+        			
+      <h2 class="tab">{_check}</h2>
+					
+		<form name="withdrawsearch" method="get" action="{ilpage[accounting]}" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="withdraws" />
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{_withdraw_requests_via_check_money_order}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_search_check_money_order_withdraw_requests_using_the_form_below}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					  <tr class="alt1">
+						<td width="7%" nowrap="nowrap"><span class="gray">{_invoice_id}</span></td>
+						<td width="22%"><input type="text" name="invoiceid" style="font-family: verdana" class="input" /></td>
+						<td width="9%" nowrap="nowrap"><span class="gray">{_transaction_id}</span></td>
+						<td width="62%"><input type="text" name="transactionid" style="font-family: verdana" class="input" /></td>
+					  </tr>
+					  <tr class="alt1">
+						<td nowrap="nowrap"><span class="gray">{_status}</span></td>
+						<td colspan="3">{invoice_status_pulldown}</td>
+					  </tr>
+					  <tr>
+							<td colspan="4"><input type="submit" value="{_search}" style="font-size:15px" class="buttons"></td>
+					  </tr>
+					</table>
+					
+			</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>			
+         
+     
+	 	<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{numbercheck} {_check_money_order_withdrawal_requests} {searchstatus}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_when_users_request_withdrawals_via_check_money_order_from_funds}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+				  <tr class="alt2"> 
+					<td>ID</td>
+					<td>{_customer}</td>
+					<td>{_created}</td>
+					<td align="right" nowrap="nowrap">{_requested}</td>
+					<td align="right" nowrap="nowrap">{_fee}</td>
+					<td align="right" nowrap="nowrap">{_total_payout}</td>
+					<td nowrap="nowrap">{_status}</td>
+					<td align="center" nowrap="nowrap">{_update}</td>
+					<td align="center" nowrap="nowrap">{_cancel}</td>
+				  </tr>
+				  <loop name="check"> 
+				  <tr class="alt1"> 
+					<td>{invoiceid}</td>
+					<td><span class="blue">{customer}</span></td>
+					<td>{createdate}</td>
+					<td align="right" nowrap="nowrap">{request}</td>
+					<td align="right" nowrap="nowrap"><span style="color: green">{fee}</span></td>
+					<td align="right" nowrap="nowrap">{payout}</td>
+					<td nowrap="nowrap">{message}</td>
+					<td align="center" nowrap="nowrap">{status}</td>
+					<td align="center">{action}</td>
+				  </tr>
+				  </loop name="check">
+				  <if condition="isset($show['no_check']) AND $show['no_check']"> 
+				  <tr> 
+					<td colspan="9" align="center">{_no_results_found}</td>
+				  </tr>
+				  <else />
+				  <tr class="alt2"> 
+					<td colspan="3" align="right">&nbsp;</td>
+					<td colspan="1" align="right" nowrap="nowrap"><h2>{requesttotal1}</h2></td>
+					<td colspan="1" align="right" nowrap="nowrap"><h2>{feetotal1}</h2></td>
+					<td colspan="4" align="center"></td>
+			  </tr>
+				  <tr> 
+					<td colspan="9">{checkprevnext}</td>
+				  </tr>
+				  </if>
+				  
+			  </table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	 
+      
+    </div>
+		
+				<div class="tab-page">
+      				
+        			
+      <h2 class="tab">{_bank}</h2>
+					
+	  <form name="withdrawsearch" method="get" action="{ilpage[accounting]}" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="withdraws" />
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{_withdraw_requests_via_bank_wire_transfer}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_search_wire_transfer_withdraw_requests_using_the_form_below}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				  <tr class="alt1">
+					<td width="13%" nowrap="nowrap"><span class="gray">{_invoice_id}</span></td>
+					<td width="19%"><input type="text" name="invoiceid" style="font-family: verdana" class="input" /></td>
+					<td width="9%" nowrap="nowrap"><span class="gray">{_transaction_id}</span></td>
+					<td width="59%"><input type="text" name="transactionid" style="font-family: verdana" class="input" /></td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td nowrap="nowrap"><span class="gray">{_status}</span></td>
+					<td colspan="3">{invoice_status_pulldown}</td>
+				  </tr>
+				  <tr>
+						<td colspan="4"><input type="submit" value="{_search}" style="font-size:15px" class="buttons" /></td>
+				  </tr>
+				</table>
+					
+			</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>		
+	</form>				
+
+
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{numberwire} {_wire_transfer_withdrawal_requests} {searchstatus}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_when_users_request_withdrawals_via_wire_transfer_from_funds_available_in_their_account_balance}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					 <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+					<tr class="alt2"> 
+						<td>ID</td>
+						<td>{_customer}</td>
+						<td>{_created}</td>
+						<td align="right" nowrap="nowrap">{_requested}</td>
+						<td align="right" nowrap="nowrap">{_fee}</td>
+						<td align="right" nowrap="nowrap">{_total_payout}</td>
+						<td>{_status}</td>
+						<td align="center" nowrap="nowrap">{_update}</td>
+						<td align="center">{_cancel}</td>
+				 	 </tr>
+					  <loop name="wire"> 
+					  <tr class="alt1"> 
+						<td>{invoiceid}</td>
+						<td><span class="blue">{customer}</span></td>
+						<td>{createdate}</td>
+						<td align="right" nowrap="nowrap">{request}</td>
+						<td align="right" nowrap="nowrap"><span style="color: green">{fee}</span></td>
+						<td align="right" nowrap="nowrap">{payout}</td>
+						<td nowrap="nowrap">{message}</td>
+						<td align="center" nowrap="nowrap">{status}</td>
+						<td align="center">{action}</td>
+					  </tr>
+					  </loop name="wire">
+					  <if condition="isset($show['no_wire']) AND $show['no_wire']"> 
+					  <tr> 
+						<td colspan="9" align="center">{_no_results_found}</td>
+					  </tr>
+					  <else />
+					  <tr class="alt2"> 
+							<td colspan="3" align="right">&nbsp;</td>
+							<td colspan="1" align="right" nowrap="nowrap"><h2>{requesttotal2}</h2></td>
+							<td colspan="1" align="right" nowrap="nowrap"><h2>{feetotal2}</h2></td>
+							<td colspan="4" align="center"></td>
+					  </tr>
+					  <tr> 
+						<td colspan="9">{wireprevnext}</td>
+					  </tr>
+					  </if>
+					  
+					  </table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+
+     
+
+    </div>
+
+	  <if condition="$ilconfig['paypal_withdraw_active']">
+	  <div class="tab-page">
+					
+          
+      <h2 class="tab">PayPal</h2>
+		<form name="withdrawsearch" method="get" action="{ilpage[accounting]}" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="withdraws" />
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{_withdraw_requests_via_paypal}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_search_paypal_withdraw_requests_using_the_form_below}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				  <tr class="alt1">
+					<td nowrap="nowrap"><span class="gray">{_invoice_id}</span></td>
+					<td width="13%"><input type="text" name="invoiceid" style="font-family: verdana" class="input" /></td>
+					<td width="9%" nowrap="nowrap"><span class="gray">{_transaction_id}</span></td>
+					<td width="65%"><input type="text" name="transactionid" style="font-family: verdana" class="input" /></td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td width="13%" nowrap="nowrap"><span class="gray">{_status}</span></td>
+					<td colspan="3">{invoice_status_pulldown}</td>
+				  </tr>
+				  <tr>
+						<td colspan="4"><input type="submit" value="{_search}" style="font-size:15px" class="buttons" /></td>
+				  </tr>
+				</table>
+					
+			</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>
+
+
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{numberpaypal} {_paypal_withdrawal_requests} {searchstatus}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_when_users_request_withdrawals_via_paypal_from_funds_available}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+					<tr class="alt2">
+						<td>ID</td>
+						<td>{_customer}</td>
+						<td>{_created}</td>
+						<td align="right">{_requested}</td>
+						<td align="right"  nowrap="nowrap">{_fee} {_paid} </td>
+						<td align="right"  nowrap="nowrap">{_total_payout}</td>
+						<td>{_status}</td>
+						<td align="center">{_payment}</td>
+						<td align="right" nowrap="nowrap">{_cancel}</td>
+				  	</tr>
+				  	<loop name="paypal"> 
+				  	<tr class="alt1"> 
+						<td>{invoiceid}</td>
+						<td><span class="blue">{customer}</span></td>
+						<td>{createdate}</td>
+						<td align="right" nowrap="nowrap">{request}</td>
+						<td align="right"  nowrap="nowrap"><span style="color: green">{fee}</span> </td>
+						<td align="right"  nowrap="nowrap">{payout}</td>
+						<td nowrap="nowrap">{status}</td>
+						<td nowrap="nowrap" align="center">{button}</td>
+						<td align="right">{action}</td>
+					  </tr>
+					  </loop name="paypal">
+					  <if condition="isset($show['no_paypal']) AND $show['no_paypal']"> 
+					  <tr> 
+						<td colspan="9" align="center">{_no_results_found}</td>
+					  </tr>
+					  <else />
+					  <tr class="alt2"> 
+							<td colspan="3" align="right">&nbsp;</td>
+							<td colspan="1" align="right" nowrap="nowrap"><h2>{requesttotal3}</h2></td>
+							<td colspan="1" align="right" nowrap="nowrap"><h2>{feetotal3}</h2></td>
+							<td colspan="4" align="center"></td>
+					  </tr>
+					  <tr>
+							<td colspan="9">{paypalprevnext}</td>
+					  </tr>
+					  </if>
+					  
+					  </table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+ 	  
+</div>
+</if>
+
+</div>
+</div>
+
+<br /><br />

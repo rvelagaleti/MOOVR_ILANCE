@@ -1,0 +1,137 @@
+<if condition="empty($ilance->GPC['subcmd']) AND $ilance->GPC['cmd'] != 'purchase-confirm'"><div style="font-size:20px; padding-bottom:12px">{_congratulations_this_item_is_yours}</div></if>
+<form name="ilform" action="{https_server}{ilpage[merch]}" method="post" accept-charset="UTF-8" style="margin:0px" onsubmit="{onsubmit}">
+{hiddenfields}
+
+{apihook[listing_payment_selection_start]}
+
+<if condition="isset($show['multipleorders']) AND $show['multipleorders']">
+<div class="block-wrapper">
+
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header">{_which_order_are_you_updating}</div>
+			<div class="block3-content-gray smaller" style="padding:{table_cellpadding}px">{_it_appears_that_you_have_multiple_orders_being_placed_with_this_seller}</div>
+			<div class="block3-content" style="padding:9px">
+				
+				<div>{orderidradios}</div>
+                
+				
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div></if>
+
+<if condition="isset($show['multipleorders']) AND $show['multipleorders']"><div id="methods_wrapper" style="display:none"></if>
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_how_would_you_like_to_pay}</div>
+			<if condition="isset($methodscount) AND $methodscount > 1"><div class="block-content-yellow smaller" style="padding:{table_cellpadding}px">{_it_appears_the_seller_is_offering_multiple_payment_options_please_choose}</div></if>
+			<div class="block-content" style="padding:9px">
+			<div>{paymethodsradios}</div>
+                
+			{apihook[listing_payment_selection_mid]}
+				
+			</div>
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<if condition="isset($show['multipleshipservices']) AND $show['multipleshipservices']">
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_how_would_you_like_this_order_shipped}</div>
+			<if condition="isset($shippercount) AND $shippercount > 1"><div class="block-content-yellow smaller" style="padding:{table_cellpadding}px">{_it_appears_the_seller_offers_multiple_shipping_services_to_your_destination}</div></if>
+			<div class="block-content" style="padding:9px">
+				
+				<div>{shippingradios}</div>
+				
+				{apihook[listing_payment_selection_mid2]}
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<else />
+<div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+<tr>
+    <td>
+        <div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+        <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding-right:9px;; padding-left:9px"><div><span class="black" style="font-size:17px"><img src="{template_relativeimagepath}{template_imagesfolder}shiptruck.gif" border="0" alt="" /> {_information_about_shipping_you_should_know}</span></div>
+            <div style="padding-top:15px; padding-bottom:9px">
+            
+            <if condition="isset($show['localpickuponly']) AND $show['localpickuponly']">
+           		<div>{_you_will_need_to_make_arrangements_to_meet_with_the_seller_for_local_pickup}</div>
+            <else />
+            	<if condition="isset($show['shipservices']) AND $show['shipservices']">
+            		<div>{_your_order_will_be_shipped_using} <span class="blue">{shippingservice}</span> {_within_lower} {days} {_days_after_clear_payment_by_seller} {_additionally_once_the_seller_has_marked_your_item_as_shipped}</div>
+            		<input type="hidden" name="shipperid" value="{shipperid}" />
+            	<else />
+                    <if condition="isset($show['digital_download_delivery']) AND $show['digital_download_delivery']">
+                    	<div>{_your_order_will_be_shipped_using} <span class="blue">{_digital_download}</span> {_within_lower} {days} {_days_after_clear_payment_by_seller}</div>
+                    <else />
+                    	<div class="red">{_this_item_does_not_ship_to_your_location} ({user[country]}).  {_please_contact_the_seller_from_the_listing_page_for_more_information}</div>
+                    </if>
+            	</if>
+            </if>
+            
+            {apihook[listing_payment_selection_mid3]}
+            
+            </div>
+            
+            
+            </td>
+        </tr>
+        </table>
+        </div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+    </td>
+</tr>
+</table>
+</div></if>
+<if condition="isset($show['multipleorders']) AND $show['multipleorders']"></div></if>
+
+{apihook[listing_payment_selection_end]}
+
+<div style="margin-top:3px"><if condition="isset($show['localpickuponly']) AND $show['localpickuponly']"><input type="submit" value="{_continue}" class="buttons" style="font-size:15px" /><else /><if condition="isset($show['shipservices']) AND $show['shipservices']"><input type="submit" value="{_continue}" class="buttons" style="font-size:15px" /><else /><if condition="isset($show['digital_download_delivery']) AND $show['digital_download_delivery']"><input type="submit" value="{_continue}" class="buttons" style="font-size:15px" /><else /><input type="submit" value="{_continue}" class="buttons" style="font-size:15px" disabled="disabled" /></if></if></if>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{http_server}{ilpage[merch]}?id={pid}">{_return_to_listing}</a></span></div>
+</form>

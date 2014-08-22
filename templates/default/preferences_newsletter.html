@@ -1,0 +1,121 @@
+<div class="block-wrapper">
+
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header">{_category_subscriptions}</div>
+            <div class="block-content-yellow" style="padding:9px"><div class="smaller">{_upon_registration_you_were_asked_to_select_categories_of_expertise_preference}</div></div>
+            <div class="block-content" style="padding:0px">
+                
+                <div class="bigtabs" style="padding-bottom:10px; padding-top:10px">
+                <div class="bigtabsheader">
+                <ul>
+                    <if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND (isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'items' OR empty($ilance->GPC['do']) OR !empty($ilance->GPC['do']) AND $ilance->GPC['do'] != 'services')">
+                        <li title="" class="on"><a href="javascript:void(0)">{_items}</a></li>
+                        <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']"><li title=""><a href="{http_server}{ilpage[preferences]}?cmd=notifications&amp;do=services">{_services}</a></li></if>
+                    <else />
+                        <if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND (isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'items' OR empty($ilance->GPC['do']) OR !empty($ilance->GPC['do']) AND $ilance->GPC['do'] == 'services')"><li title=""><a href="{http_server}{ilpage[preferences]}?cmd=notifications&amp;do=items">{_items}</a></li></if>
+                        <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']"><li title="" class="on"><a href="javascript:void(0)">{_services}</a></li></if>
+                    </if>
+                </ul>
+                </div>
+                </div>
+                <div style="clear:both;"></div>
+                
+                
+                    <if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND (isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'items' OR empty($ilance->GPC['do']))">
+                        <form method="post" action="{http_server}{ilpage[preferences]}" name="ilform" accept-charset="UTF-8" style="margin:0px">
+                        <input type="hidden" name="cmd" value="_do-notifications-change" />
+                        <input type="hidden" name="do" value="product" />
+                        
+                            
+                            <table border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" width="100%">
+                            <tr class="alt1" valign="top"> 
+                                <td colspan="2" style="padding:9px">
+                                <div style="padding-bottom:9px"><span style="float:left; padding-top:3px; padding-right:7px"><img src="{template_relativeimagepath}{template_imagesfolder}email_post.gif" alt="" border="0" /></span>{_email_last_sent}: <strong>{lastitemsentdate}</strong></div>
+                                <div><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #fff; border-left:1px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #fff" src="{ajaxurl}?do=categories&mode=product&cid={cid}&showyouselectedstring=0&showcontinue=0&showthumb=0&showcidbox=0&showcheckmarkafterstring=0&newsletter=1&showaddanother=1"></iframe></div>
+                                <div style="display:none"><span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" style="font-family: verdana" size="6" /></span></div>
+                              </td>
+                            </tr>
+                            <tr class="alt1" valign="top"> 
+                                <td colspan="2">
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr> 
+                                        <td colspan="2">
+                                        
+                                            <div style="padding-bottom:6px">
+                                                <div><strong>{_youve_selected}:</strong><span id="cidstringcb"></span></div>
+                                                <div style="padding-top:5px"><span id="selectedcategory" class="blue"></span></div>
+                                                <div><span id="existingproduct" class="blue">{existingproduct}</span></div>
+                                                <div style="padding-top:12px"><span id="showaddanother" class="blue"></span></div>
+                                                <div id="categorybutton" style="display:none"></div>
+                                            </div>
+                                            
+                                        </td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="alt2_top"><div style="padding-top:5px;" class="black"><label for="">{notifyproducts_cb} {_yes_please_notify_me_via_email_when_new_auctions_become_available}</label></div></td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" value=" {_save} " class="buttons" style="font-size:15px" /></td>
+                            </tr>
+                            </table>
+                            
+                        
+                </form></if>
+                
+                <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND (isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'services' OR empty($ilance->GPC['do']) AND $ilconfig['globalauctionsettings_productauctionsenabled'] == false)">
+                <form method="post" action="{http_server}{ilpage[preferences]}" name="ilform" accept-charset="UTF-8" style="margin:0px">
+                <input type="hidden" name="cmd" value="_do-notifications-change" />
+                <input type="hidden" name="do" value="service" />
+                
+                        <table border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" width="100%">
+                           
+                            <tr class="alt1" valign="top"> 
+                                <td colspan="2" style="padding:9px">
+                                <div style="padding-bottom:9px"><span style="float:left; padding-top:3px; padding-right:7px"><img src="{template_relativeimagepath}{template_imagesfolder}email_post.gif" alt="" border="0" /></span>{_email_last_sent}: <strong>{lastservicesentdate}</strong></div>
+                                <div><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #fff; border-left:1px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #fff" src="{ajaxurl}?do=categories&mode=service&cid={cid}&showyouselectedstring=0&showcontinue=0&showthumb=0&showcidbox=0&showcheckmarkafterstring=0&newsletter=1&showaddanother=1"></iframe></div>
+                                <div style="display:none"><span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" style="font-family: verdana" size="6" /></span></div>
+                              </td>
+                            </tr>
+                            <tr class="alt1" valign="top"> 
+                                <td colspan="2">
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                    <tr> 
+                                        <td colspan="2">
+                                            <div style="padding-bottom:6px">
+                                                <div><strong>{_youve_selected}:</strong><span id="cidstringcb"></span></div>
+                                                <div style="padding-top:5px"><span id="selectedcategory" class="blue"></span></div>
+                                                <div><span id="existingservice" class="blue">{existingservice}</span></div>
+                                                <div style="padding-top:12px"><span id="showaddanother" class="blue"></span></div>
+                                                <div id="categorybutton" style="display:none"></div>
+                                            </div></td>
+                                    </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="alt2_top"><div style="padding-top:5px;" class="black"><label for="">{notifyservices_cb} {_yes_please_notify_me_via_email_when_new_auctions_become_available}</label></div></td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" value=" {_save} " class="buttons" style="font-size:15px" /></td>
+                            </tr>
+                            </table>
+                    
+                </form></if></div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+    </div>
+</div>

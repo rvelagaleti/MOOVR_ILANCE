@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<blacklist>
+	<word>in</word>
+        <word>the</word>
+        <word>and</word>
+        <word>a</word>
+        <word>e</word>
+        <word>i</word>
+        <word>o</word>
+        <word>u</word>
+</blacklist>

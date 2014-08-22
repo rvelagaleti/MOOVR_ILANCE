@@ -1,0 +1,43 @@
+@font-face { /* roman */
+    font-family: 'zurich_bt';
+    src: url('../fonts/zurchb-webfont.eot');
+    src: url('../fonts/zurchb-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/zurchb-webfont.woff') format('woff'),
+         url('../fonts/zurchb-webfont.ttf') format('truetype'),
+         url('../fonts/zurchb-webfont.svg#zurich_btbold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+@font-face { /* bold */
+    font-family: 'zurich_bt';
+    src: url('../fonts/zurchn-webfont.eot');
+    src: url('../fonts/zurchn-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/zurchn-webfont.woff') format('woff'),
+         url('../fonts/zurchn-webfont.ttf') format('truetype'),
+         url('../fonts/zurchn-webfont.svg#zurich_btroman') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+	font-family: 'Conv_Belizio-Regular';
+	src: url('../fonts/Belizio-Regular.eot');
+	src: local('☺'), url('../fonts/Belizio-Regular.woff') format('woff'), 
+	url('../fonts/Belizio-Regular.ttf') format('truetype'), 
+	url('../fonts/Belizio-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Conv_Univers-Light-Light';
+	src: url('../fonts/Univers-Light-Light.eot');
+	src: local('☺'), url('../fonts/Univers-Light-Light.woff') format('woff'), 
+	url('../fonts/Univers-Light-Light.ttf') format('truetype'), 
+	url('../fonts/Univers-Light-Light.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}

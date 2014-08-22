@@ -1,0 +1,37 @@
+<if condition="$auctiontype == 'regular'"><div>
+		<div align="center" style="padding-top:3px; padding-bottom:3px;">
+			<span style="float:right">{data[sel]}</span><div align="center">{data[sample]}</div>
+        </div>
+        
+		<div align="left" style="padding-top:3px; padding-bottom:3px; height:55px">
+        	<div style="padding-top:3px; padding-bottom:3px; height:60px">
+                <div class="blue" style="padding-top:3px; padding-bottom:5px; height:39px">{data[title]}</div><!--<div class="black" style="padding-top:10px; height:34px">{data[description]}</div>-->
+            </div>
+        </div>
+		<div class="smaller" style="height:35px">{data[location]}</div>
+        <div>
+            <div style="height:25px"><span class="smaller black" style="float:left;margin-top:4px">({data[bids]} {_bids_lower})</span><span style="float:right;" class="black"><strong>{data[price]}</strong></span></div>
+            <div><span style="float:right; margin-top:3px" class="gray">{data[buynow]}</span>{data[buynowimg]}</div>
+            <div style="height:25px"><span style="float:left;font-size:15px;margin-top:3px" class="black" title="{_ends} {data[timeleft_verbose]}"><strong>{data[timeleft]}</strong></span></div>
+        </div>
+		</div></if>
+
+<if condition="$auctiontype == 'fixed'"><div>
+		<div align="center" style="padding-top:3px; padding-bottom:3px;">
+        <span style="float:right">{data[sel]}</span><div align="center">{data[sample]}</div>
+        </div>
+        
+		<div align="left">
+        	<div style="padding-top:3px; padding-bottom:3px; height:55px">
+                <div class="blue" style="padding-top:3px; padding-bottom:5px; height:39px">{data[title]}</div><!--<div class="black" style="padding-top:10px; height:34px">{data[description]}</div>-->
+            </div>
+        </div>
+        <div class="smaller" style="height:35px">{data[location]}</div>
+        <div>
+			<div style="height:25px"><span class="smaller black" style="float:left;margin-top:4px">({data[sold]} {_sold_lower})</span></div>
+            <div><span style="float:right; margin-top:3px" class="black">{data[buynow]}</span>{data[buynowimg]}</div>
+            <div style="height:25px"><span style="float:left;font-size:15px;margin-top:3px" class="black" title="{_ends} {data[timeleft_verbose]}"><strong>{data[timeleft]}</strong></span></div>
+        </div>
+        
+</div></if>
+<if condition="$auctiontype == 'blank'"><div align="center"></div></if>

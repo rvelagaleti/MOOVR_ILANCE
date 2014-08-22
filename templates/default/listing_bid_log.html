@@ -1,0 +1,23 @@
+<h1 style="padding-bottom:5px">{_bid_history}</h1>
+<div class="blue" style="margin-bottom:15px"><a href="{returnurl}">{_back_to} {project_title}</a></div>
+<table width="100%" border="0" align="center" cellpadding="14" cellspacing="{table_cellspacing}">
+<tr>
+    <td width="33.3%" nowrap="nowrap" style="border-bottom:1px dotted #ccc"><div><strong>{_bidder}</strong></div></td>
+    <td width="33.3%" style="border-bottom:1px dotted #ccc"><div><strong>{_bid_amount}</strong></div></td>
+    <td width="33.3%" style="border-bottom:1px dotted #ccc"><div><strong>{_bid_placed}</strong></div></td>
+</tr>
+<loop name="bids"><tr valign="top">
+    <td width="33.3%" style="border-bottom:1px dotted #ccc"><div class="{fontclass}" style="font-weight:{fontweight}">{bid_provider}</div></td>
+    <td width="33.3%" style="border-bottom:1px dotted #ccc"><div class="{fontclass}" style="font-weight:{fontweight}">{bidamount}</div></td>
+    <td width="33.3%" style="border-bottom:1px dotted #ccc"><div class="{fontclass}" style="font-weight:{fontweight}">{bid_datetime}</div></td>
+</tr></loop name="bids">
+<tr>
+    <td valign="middle" width="33.3%"><div class="litegray">{_starting_bid}</div></td>
+    <td valign="middle" width="33.3%"><div class="litegray">{startprice}</div></td>
+    <td valign="middle" width="33.3%"><div class="litegray">{date_starts}</div></td>
+</tr>
+</table>
+<div style="margin-top:15px;margin-bottom:20px">
+<p>{_grey_text_bid_history_proxy}</p>
+<p style="margin-top:-7px">{_if_two_bidders_same_amount_lead}</p>
+</div>

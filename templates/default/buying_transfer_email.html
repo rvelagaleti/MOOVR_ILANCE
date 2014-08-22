@@ -1,0 +1,40 @@
+<h1>{_transfer_of_project_ownership}</h1><br />
+
+<table width="100%" border="0" cellspacing="0" cellpadding="4">
+<tr> 
+	<td>{_you_have_selected_to_transfer_ownership_of_projects_to_a_potentially_new_customer}<br /> <strong>{_please_note}</strong>{_the_customer_will_be_required_to_signup_using_the_exact_email_address}</td>
+</tr>
+<tr> 
+	<td>&nbsp;</td>
+</tr>
+<tr> 
+	<td>
+		<form method="post" action="{ilpage[buying]}" name="transferprojectsuserid" accept-charset="UTF-8">
+		<input type="hidden" name="cmd" value="_do-transfer-email" />
+		{transfer_hidden_inputs} 
+		<table border="0" cellpadding="0" cellspacing="{table_cellspacing}" align="center" width="100%">
+		<tr> 
+		<td> 
+			<table border="0" cellpadding="2" cellspacing="0" width="100%">
+			<tr> 
+				<td colspan="2"><h1>{_transferring_ownership_via_email}</h1><br />{_please_enter_the_email_of_the_new_customer}</td>
+			</tr>
+			<tr> 
+				<td height=1 colspan="2" align="right" valign="top">&nbsp; </td>
+			</tr>
+			<tr> 
+				<td width="40%" height=1 align="right">{_enter_the_email_address}</td>
+				<td> <input type="text" name="email" style="width:180" value="" ></td>
+			</tr>
+			<tr> 
+				<td align="center"></td>
+				<td align="left"><input name="submit" type="submit" value="{_finish}" class="buttons" onClick="return confirm_js('Confirmation - Please make sure you enter the correct Email Address.\nFor best results, notify the user prior to email transfer. This member will be notified\nvia email, and will be given two links as choices to accept or deny project takeover. Are you sure?')" /></td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+	</form>
+</td>
+</tr>
+</table>

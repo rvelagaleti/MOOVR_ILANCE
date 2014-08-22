@@ -1,0 +1,169 @@
+<div id="colorpicker301" class="colorpicker301"></div>
+
+<div id="v3body4"> 
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings"><a href="{url}" {class}><span>{name}</span></a> <span> | </span></loop name="subnav_settings">
+	</div>
+</div>
+	
+<div id="content">
+<h1>{_orphans}</h1><br />
+		
+	<!-- tools -->
+	<div class="tab-pane" id="phrases">
+	
+			<div class="tab-page">
+			
+				<h2 class="tab">{_phrases}</h2>
+				
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_phrases}</div>
+						<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_find} {_orphans} {_phrases}</div></div>
+						<div class="block3-content" style="padding:0px">
+							
+							
+							
+							<if condition="isset($show['results']) AND $show['results']">
+							
+								
+								<if condition="isset($show['can_delete']) AND $show['can_delete']">
+									<form action="{ilpage[tools]}" name="ilform" method="get" accept-charset="UTF-8" style="margin: 0px;">
+									<input type="hidden" name="cmd" value="orphan" />
+									<input type="hidden" name="type" value="phrase" />
+									<input type="hidden" name="subcmd" value="delete_all" />
+                                    	<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt1">
+											<td colspan="2"><textarea rows="30" cols="100" name="orphan_phrases_txt" id="orphan_phrases_txt">{orphan_phrases_text_area}</textarea></td>
+										</tr>
+										<tr class="alt1">
+											<td colspan="2">{orphan_phrases_table}</td>
+										</tr>
+										<tr class="alt2_top">
+											
+												<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value="  {_delete_all}  " style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value="  {_delete_all}  " style="font-size:15px" onClick="return confirm_js('{_you_are_about_to_delete_orphan_phrases_continue}');" /></if></td>
+											
+										</tr>
+                                        </table>
+									</form>
+								<else />
+									<tr class="alt1">
+										<td colspan="2">{_no_results_found}</td>
+									</tr>
+								</if>
+							<else />
+								<form action="{ilpage[tools]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+								<input type="hidden" name="cmd" value="orphan" />
+								<input type="hidden" name="type" value="phrase" />
+								<input type="hidden" name="subcmd" value="find" />
+                                <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+								<tr class="alt1">
+									<td colspan="2">{_find} {_orphans} {_phrases}</td>
+								</tr>
+								<tr class="alt2_top">
+									<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value="  {_find}  " style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value="  {_find}  " style="font-size:15px" /></if></td>
+								</tr>
+								</table>
+                                </form>
+							</if>
+							
+							
+							
+						</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+				</div>
+            
+			</div>
+
+	
+			<div class="tab-page">
+			
+				<h2 class="tab">{_emails}</h2>
+				
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_emails}</div>
+						<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_find} {_orphans} {_email_templates}</div></div>
+						<div class="block3-content" style="padding:0px">
+							
+							<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+							
+							<if condition="isset($show['results_emails']) AND $show['results_emails']">
+							
+								
+								<if condition="isset($show['can_delete_emails']) AND $show['can_delete_emails']">
+									<form action="{ilpage[tools]}" name="ilform" method="get" accept-charset="UTF-8" style="margin: 0px;">
+									<input type="hidden" name="cmd" value="orphan" />
+									<input type="hidden" name="type" value="email" />
+									<input type="hidden" name="subcmd" value="delete_all" />
+										<tr class="alt1">
+											<td colspan="2"><textarea rows="30" cols="100" name="orphan_emails_txt" id="orphan_emails_txt">{orphan_emails_text_area}</textarea></td>
+										</tr>
+										<tr class="alt1">
+											<td colspan="2">{orphan_emails_table}</td>
+										</tr>
+										<tr class="alt2_top">
+											
+												<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value="  {_delete_all}  " style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value="  {_delete_all}  " style="font-size:15px" onClick="return confirm_js('{_you_are_about_to_delete_orphan_email_templates_continue}');" /></if></td>
+											
+										</tr>
+									</form>
+								<else />
+									<tr class="alt1">
+										<td colspan="2">{_no_results_found}</td>
+									</tr>
+								</if>
+							<else />
+								<form action="{ilpage[tools]}" name="ilform" method="get" accept-charset="UTF-8" style="margin: 0px;">
+								<input type="hidden" name="cmd" value="orphan" />
+								<input type="hidden" name="type" value="email" />
+								<input type="hidden" name="subcmd" value="find" />
+								<tr class="alt1">
+									<td colspan="2">{_find} {_orphans} {_email_templates}</td>
+								</tr>
+								<tr class="alt2_top">
+									<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value="  {_find}  " style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value="  {_find}  " style="font-size:15px" /></if></td>
+								</tr>
+								
+							</if>
+							
+							</table>
+							
+						</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+				</div>
+            
+			</div>
+	</div>
+</div>
+	
+<!-- / tools -->

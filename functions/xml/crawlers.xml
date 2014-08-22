@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Add new robot or search engine tags following the same format as you see below.
+//-->
+
+<crawlers>
+	<crawler>
+                <title>GoogleBot</title>
+		<agent>GoogleBot</agent>
+	</crawler>
+	<crawler>
+                <title>Google Feedfetcher</title>
+		<agent>Feedfetcher-Google</agent>
+	</crawler>
+	<crawler>
+                <title>Mediapartners Google</title>
+		<agent>Mediapartners-Google</agent>
+	</crawler>
+        <crawler>
+                <title>Yahoo Slurp!</title>
+		<agent>Yahoo</agent>
+	</crawler>
+        <crawler>
+                <title>MSNBot</title>
+		<agent>msnbot</agent>
+	</crawler>
+        <crawler>
+                <title>AOL</title>
+		<agent>aol</agent>
+	</crawler>
+        <crawler>
+                <title>BaiduSpider</title>
+		<agent>baiduspider</agent>
+	</crawler>
+        <crawler>
+                <title>ExaBot</title>
+		<agent>exabot</agent>
+	</crawler>
+	<crawler>
+                <title>Alexa</title>
+		<agent>ia_archiver</agent>
+	</crawler>
+	<crawler>
+                <title>Cuil</title>
+		<agent>Twiceler</agent>
+	</crawler>
+	<crawler>
+                <title>Yandex</title>
+		<agent>Yandex</agent>
+	</crawler>
+	<crawler>
+                <title>Sogou</title>
+		<agent>Sogou</agent>
+	</crawler>
+	<crawler>
+                <title>Sosospider</title>
+		<agent>Sosospider</agent>
+	</crawler>
+	<crawler>
+                <title>Bing Bot</title>
+		<agent>bingbot</agent>
+	</crawler>
+	<crawler>
+                <title>YodaoBot</title>
+		<agent>YodaoBot</agent>
+	</crawler>
+	<crawler>
+                <title>DiscoBot</title>
+		<agent>discobot</agent>
+	</crawler>
+	<crawler>
+                <title>DotBot</title>
+		<agent>DotBot</agent>
+	</crawler>
+	<crawler>
+                <title>Speedy Spider</title>
+		<agent>Speedy Spider</agent>
+	</crawler>
+		<crawler>
+                <title>SuperBot</title>
+		<agent>SuperBot</agent>
+	</crawler>
+	<crawler>
+                <title>Magpie Crawler</title>
+		<agent>magpie-crawler</agent>
+	</crawler>
+	<crawler>
+                <title>Geo Spider</title>
+		<agent>geospider</agent>
+	</crawler>
+	<crawler>
+                <title>eZooms Bot</title>
+		<agent>ezooms.bot@gmail.com</agent>
+	</crawler>
+	<crawler>
+                <title>Gigabot</title>
+		<agent>Gigabot</agent>
+	</crawler>
+	<crawler>
+                <title>iChiro</title>
+		<agent>ichiro</agent>
+	</crawler>
+	<crawler>
+                <title>Majestic Bot</title>
+		<agent>MJ12bot</agent>
+	</crawler>
+	<crawler>
+                <title>oBot</title>
+		<agent>oBot</agent>
+	</crawler>
+	<crawler>
+                <title>Wget</title>
+		<agent>Wget/1.11.4 Red hat modified</agent>
+	</crawler>
+	<crawler>
+                <title>Bixolabs Crawler</title>
+		<agent>ptd-crawler</agent>
+	</crawler>
+	<crawler>
+                <title>GosoSpider</title>
+		<agent>gosospider</agent>
+	</crawler>
+	<crawler>
+                <title>Huaweisysmantec Spider</title>
+		<agent>Huaweisymantecspider</agent>
+	</crawler>
+	<crawler>
+                <title>ScoutJet</title>
+		<agent>ScoutJet</agent>
+	</crawler>
+	<crawler>
+                <title>Jikespider</title>
+		<agent>jikespider</agent>
+	</crawler>
+	<crawler>
+                <title>FaceBook Hit Bot</title>
+		<agent>facebookexternalhit</agent>
+	</crawler>
+	<crawler>
+                <title>Archive.org</title>
+		<agent>archive.org_bot</agent>
+	</crawler>
+	<crawler>
+                <title>SemrushBot</title>
+		<agent>SemrushBot</agent>
+	</crawler>
+	<crawler>
+                <title>NetcraftSurveyAgent</title>
+		<agent>NetcraftSurveyAgent/1.0</agent>
+	</crawler>
+	<crawler>
+                <title>EventGuruBot/1.0</title>
+		<agent>EventGuruBot</agent>
+	</crawler>
+	<crawler>
+                <title>SeznamBot/1.0</title>
+		<agent>SeznamBot</agent>
+	</crawler>
+	<crawler>
+                <title>Unknown</title>
+		<agent>unknown</agent>
+	</crawler>
+</crawlers>

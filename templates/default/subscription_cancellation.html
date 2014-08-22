@@ -1,0 +1,30 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+<div class="bigtabsheader">
+    <ul>
+        <li title="" class=""><a href="{https_server}{ilpage[subscription]}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/selectedcat_back.gif" border="0" alt="{_back}" /> {_subscription}</a></li>
+        <li title="" class="on"><a href="javascript:void(0)">{_cancel_subscription}</a></li>
+    </ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<form method="post" action="{https_server}{ilpage[subscription]}" name="subscriptioncancel" accept-charset="UTF-8" onsubmit="return validateSubscriptionCancel(this);" style="margin:0px">
+<h1>{_subscription_cancellation_preview}</h1>
+<div style="padding-bottom:12px;padding-top:9px">{_a_subscription_cancellation_request_will_be_processed_but_still_allows_you_to_place_bids_and_use_the_remainding_duration_of_your_current_subscription_plan}</div>
+
+
+<div style="padding-bottom:15px">
+    <div><strong>{_subscription}:</strong> {title}</div>
+    <div style="padding-top:3px"><strong>{_expires}:</strong> {renewdate}</div>
+</div>
+
+
+<div style="padding-bottom:15px"></div>
+
+<div style="padding-bottom:6px"><div style="padding-bottom:3px"><strong>{_enter_password_to_confirm}</strong></div><div><input type="password" name="password" value="" maxlength="49" class="input" /> <img name="passworderror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div></div>
+<div style="padding-bottom:6px; padding-top:9px"><div style="padding-bottom:3px"><strong>{_comment}</strong></div><div><textarea name="comment" style="width: 350px; height: 84px" wrap="physical" class="input"></textarea> <img name="commenterror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div></div>
+<div style="padding-top:6px"><input type="submit" value="{_continue}" class="buttons" style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="{https_server}{ilpage[subscription]}">{_cancel}</a></span></div>
+<input type="hidden" name="cmd" value="_do-subscription-cancellation" /> 
+<input type="hidden" name="userid" value="{userid}" />
+{hiddenfields}
+</form>

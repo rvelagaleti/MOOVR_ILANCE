@@ -1,0 +1,53 @@
+
+<div class="bigtabs" style="padding-bottom:15px; padding-top:5px">
+    <div class="bigtabsheader">
+	<ul>
+    	{apihook[selling_product_bigtabs_start]}
+	    <li title="" class="on"><a href="javascript:void(0)">{_sell_single_item}</a></li>
+	    <if condition="$ilconfig['globalfilters_bulkupload']"><li title=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}bulk/sell">{_sell_bulk_items}</a><else /><a href="{ilpage[bulk]}?cmd=sell">{_sell_bulk_items}</a></if></li></if>
+        {apihook[selling_product_bigtabs_end]}
+	</ul>
+    </div>
+</div>
+<div style="clear:both;"></div>
+
+<div class="block-wrapper">
+    <div class="block">
+	<div class="block-top">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>			
+	<div class="block-header">{_category}</div>			
+	<div class="block-content">
+
+	    <form name="ilform" action="{ilpage[selling]}" method="get" accept-charset="UTF-8" style="margin:0px">
+		<input type="hidden" name="cmd" value="new-item" />
+		<table cellpadding="3" cellspacing="{table_cellspacing}" border="0" width="100%" align="center" dir="{template_textdirection}">
+		    <tr>
+			<td>
+			    <iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:245px; border-top:1px solid #ebebeb; border-left:1px solid #ebebeb; border-right:1px solid #bdbdbd; border-bottom:1px solid #bdbdbd" src="{ajaxurl}?do=categories&mode=product&showcheckmarkafterstring=1"></iframe>
+			    <span style="float:{template_textalignment_alt}; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" size="6" /></span>	
+			    <div><span id="selectedcategory"></span><span id="cidstringcb"></span></div>
+			</td>
+		    </tr>
+		</table>
+		<div id="categorybutton"></div>
+                <if condition="isset($ilance->GPC['scheduled']) AND $ilance->GPC['scheduled']"><input type="hidden" name="scheduled" value="1" /></if>
+		<if condition="isset($ilance->GPC['donation']) AND $ilance->GPC['donation']"><input type="hidden" name="donation" value="1" /></if>
+		<if condition="isset($ilance->GPC['charityid']) AND $ilance->GPC['charityid']"><input type="hidden" name="charityid" value="{charityid}" /></if>
+                <if condition="isset($ilance->GPC['classifieds']) AND $ilance->GPC['classifieds']"><input type="hidden" name="classifieds" value="1" /></if>
+	    </form>
+
+	</div>
+
+	<div class="block-footer">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+    </div>
+</div>
+
+{apihook[selling_end]}

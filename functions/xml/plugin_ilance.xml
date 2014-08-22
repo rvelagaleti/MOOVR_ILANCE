@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <plug key="ILance_plugin" addon="ILance_plugin">
+	<title>ILance_plugin</title>
+	<api>init_configuration_end</api>
+	<php><![CDATA[global $show;
+/**
+* handle database updates from ILance Vendor
+* if you added new query to functions/update/query.php don't forget to update $last_query_index as well as install/installer.php!!
+*/
+$current_version = $ilance->db->fetch_field(DB_PREFIX . "configuration", "name = 'current_version'", "value", "1");
+$sql_version = $i = intval($ilance->db->fetch_field(DB_PREFIX . "configuration", "name = 'current_sql_version'", "value", "1"));
+$last_query_index = '898';
+if (($current_version == '4.0.0' AND $sql_version < $last_query_index) OR (isset($show['upgrade_mode']) AND $show['upgrade_mode'] == true))
+{
+	include_once('update/query.php');
+	include_once('update/queryindex.php');
+}]]></php>
+    </plug>
+</plugin>

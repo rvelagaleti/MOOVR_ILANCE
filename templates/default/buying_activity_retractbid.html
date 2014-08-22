@@ -1,0 +1,55 @@
+<h1 class="a_active" style="padding-bottom:12px">{_retract_your_bid}</h1>
+<form method="post" action="{https_server}{ilpage[buying]}" name="retractbid" id="retractbid" style="margin:0px" accept-charset="UTF-8" onsubmit="return validate_retract_bid(this);">
+<input type="hidden" name="cmd" value="_do-bid-action" />
+<input type="hidden" name="returnurl" value="{returnurl}" />
+<input type="hidden" name="bidcmd" value="retract" />
+<input type="hidden" name="bidid" value="{bid_id}" />
+<table cellpadding="5" cellspacing="0" border="0">
+<tr> 
+    <td align="right"><strong>{_title}:</strong></td>
+    <td><a href="{http_server}{ilpage[merch]}?id={project_id}">{project_title}</a> ({project_id})</td>
+</tr>
+<tr> 
+    <td align="right"><strong>{_time_left}:</strong></td>
+    <td>{timeleft}</td>
+</tr>
+<tr> 
+    <td align="right"><strong>{_bid_id}:</strong></td>
+    <td>{bid_id}</td>
+</tr>
+<tr> 
+    <td align="right"><strong>{_bid_amount}:</strong></td>
+    <td>{bidamount}</td>
+</tr>
+<tr> 
+    <td align="right"><strong>{_bid_position}:</strong></td>
+    <td>{_highest_bidder}</td>
+</tr>
+<tr> 
+    <td align="right"><strong>{_other_bidders}:</strong></td>
+    <td>{otherbidders}</td>
+</tr>
+<tr> 
+    <td align="right"><strong>{_bid_retracts_left}:</strong></td>
+    <td>{bidretractsleft}</td>
+</tr>
+<tr>
+    <td align="right"><strong>{_reason}:</strong></td>
+    <td>
+    <select class="select-250" id="bidretractreason" name="bidretractreason">
+    <option value="">- {_select_a_reason} -</option> 
+    <option value="{_accidental_bid}">{_accidental_bid}</option>
+    <option value="{_incorrect_bid_amount}">{_incorrect_bid_amount}</option>
+    <option value="{_does_not_ship_to_my_location}">{_does_not_ship_to_my_location}</option>
+    <option value="{_better_price_available}">{_better_price_available}</option>
+    <option value="{_no_longer_needed_wanted}">{_no_longer_needed_wanted}</option>
+    <option value="{_unauthorized_bid}">{_unauthorized_bid}</option>
+    </select></td>
+</tr>
+</table>
+
+<div style="height:1px; background-color:#cccccc;width:100%;margin-top:12px;margin-bottom:12px"></div>
+
+<div><input type="submit" class="buttons" value="{_retract_bid}" accesskey="s" style="font-size:15px" /></div>
+</form>
+<div style="margin-bottom:14px"></div>

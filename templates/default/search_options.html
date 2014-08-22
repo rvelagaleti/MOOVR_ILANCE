@@ -1,0 +1,241 @@
+{js_start}
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search">{_search}</a><else /><a href="{http_server}{ilpage[search]}">{_search}</a></if></li>
+	<li title="" class="on"><a href="javascript:void(0)">{_options}</a></li>
+    <li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search-promotion">{_search_promotion}</a><else /><a href="{http_server}{ilpage[search]}?cmd=promotion">{_search_promotion}</a></if></li>
+    <if condition="isset($ilconfig['fulltextsearch']) AND $ilconfig['fulltextsearch']"><li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search-help">{_help}</a><else /><a href="{http_server}{ilpage[search]}?cmd=help">{_help}</a></if></li></if>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+
+	<form method="post" action="{ilpage[search]}" name="searchoptions" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return select_all_lists()">
+	<input type="hidden" name="cmd" value="saveoptions" />
+	<input type="hidden" name="returnurl" value="{returnurl}" />
+	<div class="block-wrapper">
+
+	<div class="block5">
+	
+			<div class="block5-top">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+			<div class="block5-header">{_customize_how_you_want_the_search_results_to_appear_when_searching_the_marketplace}</div>
+			<div class="block5-content" style="padding:0px">
+			
+			<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+			<tr> 
+				<td class="alt1"><div><table cellpadding="0" cellspacing="0" border="0">
+				<tr>
+				  <td valign="top" width="32%">
+				  
+					<div style="padding-bottom:5px"><strong>{_results}</strong></div>
+					<div>
+				
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tr>
+							<td><div>{perpage} <span>{_results_per_page}</span></div></td>
+						</tr>
+                        <tr>
+							<td><div style="padding-top:7px">{colsperrow} <span>{_columns_per_row}</span></div></td>
+						</tr>
+						<tr>
+							<td height="15"></td>
+						</tr>
+						<tr>
+							<td><div style="padding-bottom:5px"><strong>{_display_order}</strong></div>
+							  <div>{sortpulldown}</div>
+						</tr>
+						</table>
+						</div>
+				  
+				  </td>
+				  <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="10" height="1" /></td>
+					<td valign="top" width="32%"><div style="padding-bottom:5px"><strong>{_display}</strong></div>
+					<div>
+				
+						<table cellpadding="1" cellspacing="0" border="0">
+						<tr>
+							<td valign="top"><input type="checkbox" id="username" name="username" value="true" {cb_username} /></td>
+							<td><label for="username">{_auction_listing_username}</label></td>
+						</tr>
+						<tr>
+							<td valign="top"><input type="checkbox" id="latestfeedback" name="latestfeedback" value="true" {cb_latestfeedback} /></td>
+							<td><label for="latestfeedback">{_latest_feedback_information_when_applicable}</label></td>
+						</tr>
+                        <tr>
+							<td valign="top"><input type="checkbox" id="icons" name="icons" value="true" {cb_icons} /></td>
+							<td><label for="icons">{_display_auction_icons_within_search_results}</label></td>
+						</tr>
+						</table>
+						</div></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="60" height="1" /></td><td valign="top" width="32%"><div style="padding-bottom:5px"><strong>{_show_time_as}</strong></div>
+					<div><table cellpadding="1" cellspacing="0" border="0"><tr><td valign="top"><input type="radio" id="showtimeas1" name="showtimeas" value="static" {rb_showtimeas_static} /></td>
+					<td><label for="showtimeas1">5h, 10m, 3s</label></td>
+					
+				</tr>
+                <!--<tr><td valign="top"><input type="radio" id="showtimeas2" name="showtimeas" value="staticvt" {rb_showtimeas_staticvt} /></td>
+					<td><label for="showtimeas1">Jan 3, 5:30pm EDT</label></td>
+					
+				</tr>
+                <tr><td valign="top"><input type="radio" id="showtimeas3" name="showtimeas" value="staticmt" {rb_showtimeas_staticmt} /></td>
+					<td><label for="showtimeas1">01-03-2012 17:30 EDT</label></td>
+					
+				</tr>-->
+				</table>
+				</div>
+				
+				</td>
+			</tr>
+			<tr>
+				<td colspan="8"><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="1" height="10" /></td>
+			</tr>
+			<tr>
+			  <td valign="top"><div style="padding-bottom:5px"><strong>{_hide}</strong></div>
+					<div>
+				
+						<table cellpadding="1" cellspacing="0" border="0">
+						<tr>
+							<td valign="top"><input type="checkbox" id="hidelisted" name="hidelisted" value="true" {cb_hidelisted} /></td>
+							<td><label for="hidelisted">{_hide_my_listings}</label></td>
+						</tr>
+						<tr>
+							<td valign="top"><input type="checkbox" id="hideverbose" name="hideverbose" value="true" {cb_hideverbose} /></td>
+							<td><label for="hideverbose">{_hide_verbose_text_from_searches}</label></td>
+						</tr>
+						</table>
+						
+						</div></td>
+			  <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="10" height="1" /></td>
+				<td valign="top"><div style="padding-bottom:5px"><strong>{_advanced}</strong></div>
+					<div><table cellpadding="1" cellspacing="0" border="0">
+						<tr>
+							<td valign="top"><input type="checkbox" id="currencyconvert" name="currencyconvert" value="true" {cb_currencyconvert} /></td>
+							<td><label for="currencyconvert">{_convert_marketplace_prices_to_my_own_currency}</label></td>
+						</tr>
+						<tr>
+							<td valign="top"><input type="checkbox" id="listinglocation" name="listinglocation" value="true" {cb_listinglocation} /></td>
+							<td><label for="listinglocation">{_display_listing_location_under_the_listing_title}</label></td>
+						</tr>
+						</table>
+						</div><div align="center" style="padding-top:10px"></div></td>
+				<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="0" height="1" /></td>
+				<td valign="top"><div style="padding-bottom:5px"><strong>{_show_results_in}</strong></div>
+				<div><table cellpadding="1" cellspacing="0" border="0"><tr><td valign="top"><input type="radio" id="gallery" name="list" value="gallery" {rb_list_gallery} /></td>
+				<td><label for="gallery">{_gallery_view}</label></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td valign="top"><input type="radio" id="gallery2" name="list" value="list" {rb_list_list} /></td>
+				<td><label for="gallery2">{_list_view}</label></td>
+				<td></td>
+			</tr>
+			</table>
+			
+			</div>	</td>
+		</tr>
+		</table>
+		</div></td>
+			</tr>
+            <if condition="$ilconfig['globalauctionsettings_productauctionsenabled']"><tr>
+				<td class="alt2">{_customize_the_search_results_columns_displayed_when_you_search_product_auctions_in_the_marketplace}</td>
+			</tr>
+			<tr>
+				<td class="alt1"><div><!-- available product columns -->
+				<table cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td valign="top"><div style="padding-bottom:5px"><strong>{_available_product_auction_columns}</strong></div><div>{productavailable}</div></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="1" /></td>
+					<td valign="top" width="1"><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="50" /><input type="button" name="moveright_product" onclick="move_right('product')" align="middle" border="0" class="buttons_smaller" value=" &rarr; " /><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="5" /><input type="button" name="moveleft_product" onclick="move_left('product')" align="middle" border="0" class="buttons_smaller" value=" &larr; " /></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="1" /></td>
+					<td valign="top"><div style="padding-bottom:5px"><strong>{_product_auction_columns_youre_displaying}</strong></div><div>{productselected}</div></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="1" /></td>
+					<td valign="top" width="1"><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="50" /><input type="button" name="moveup_product" onclick="move_up(this.form.productselected)" align="middle" border="0" class="buttons_smaller" value=" &uarr; " /><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="5" /><input type="button" name="movedown_product" onclick="move_down(this.form.productselected)" align="middle" border="0" class="buttons_smaller" value=" &darr; " /></td>
+				</tr>
+				</table></div><div align="center" style="padding-top:10px"></div></td>
+			</tr></if>
+			<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']"><tr>
+				<td class="alt2">{_customize_the_search_results_columns_displayed_when_you_search_service_auctions_in_the_marketplace}</td>
+			</tr>
+			<tr>
+				<td class="alt1"><div><!-- available service columns -->
+				<table cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td valign="top"><div style="padding-bottom:5px"><strong>{_available_service_auction_columns}</strong></div><div>{serviceavailable}</div></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="1" /></td>
+					<td valign="top" width="1"><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="50" /><input type="button" name="moveright_service" onclick="move_right('service')" align="middle" border="0" class="buttons_smaller" value=" &rarr; " /><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="5" /><input type="button" name="moveleft_service" onclick="move_left('service')" align="middle" border="0" class="buttons_smaller" value=" &larr; " /></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="1" /></td>
+					<td valign="top"><div style="padding-bottom:5px"><strong>{_service_auction_columns_youre_displaying}</strong></div><div>{serviceselected}</div></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="1" /></td>
+					<td valign="top" width="1"><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="50" /><input type="button" name="moveup_service" onclick="move_up(this.form.serviceselected)" align="middle" border="0" class="buttons_smaller" value=" &uarr; " /><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="5" /><input type="button" name="movedown_service" onclick="move_down(this.form.serviceselected)" align="middle" border="0" class="buttons_smaller" value=" &darr; " /></td>
+				</tr>
+				</table>
+				
+				</div><div align="center" style="padding-top:10px"></div></td>
+			</tr>
+			<tr>
+				<td class="alt2">{_customize_the_search_results_columns_displayed_when_you_search_experts_in_the_marketplace}</td>
+			</tr>
+			<tr>
+				<td><div><!-- available expert columns -->
+				<table cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td valign="top"><div style="padding-bottom:5px"><strong>{_available_experts_columns}</strong></div><div>{expertavailable}</div></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="1" /></td>
+					<td valign="top" width="1"><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="50" /><input type="button" name="moveright_expert" onclick="move_right('expert')" align="middle" border="0" class="buttons_smaller" value=" &rarr; " /><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="5" /><input type="button" name="moveleft_expert" onclick="move_left('expert')" align="middle" border="0" class="buttons_smaller" value=" &larr; " /></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="1" /></td>
+					<td valign="top"><div style="padding-bottom:5px"><strong>{_experts_columns_youre_displaying}</strong></div><div>{expertselected}</div></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="1" /></td>
+					<td valign="top" width="1"><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="50" /><input type="button" name="moveup_expert" onclick="move_up(this.form.expertselected)" align="middle" border="0" class="buttons_smaller" value=" &uarr; " /><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" alt="" border="0" width="20" height="5" /><input type="button" name="movedown_expert" onclick="move_down(this.form.expertselected)" align="middle" border="0" class="buttons_smaller" value=" &darr; " /></td>
+				</tr>
+				</table>
+				</div>
+				<div align="center" style="padding-top:10px"></div></td>
+			</tr>
+			</if>
+			<if condition="!empty($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin']"><tr class="alt3">
+				<td><div>
+				<div style="padding-bottom:5px"><strong>{_admin_control}</strong></div>
+				<div>
+				<table cellpadding="1" cellspacing="0" border="0">
+				<tr>
+					<td valign="top"><input type="checkbox" id="default" name="defaultupdate" value="true" /></td>
+					<td><label for="default">{_tick_this_to_set_the_search_column_structure_as_default_for_all_guests_and_visitors}</label></td>
+				</tr>
+				<tr>
+					<td valign="top"><input type="checkbox" id="members" name="membersupdate" value="true" /></td>
+					<td><label for="members">{_tick_this_to_set_the_search_column_structure_as_default_for_all_registered_members}</label></td>
+				</tr>
+				</table></div>
+				</div>
+				</td>
+			</tr>
+			</if>
+            <tr class="alt2_top">
+            	<td colspan="2"><input type="submit" value=" {_save} " class="buttons" style="font-size:15px" /></td>
+            </tr>
+			</table></div>
+			<div class="block5-footer">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<script type="text/javascript"><!--
+var opt1 = document.searchoptions.serviceavailable;
+var opt2 = document.searchoptions.serviceselected;
+var opt3 = document.searchoptions.productavailable;
+var opt4 = document.searchoptions.productselected;
+var opt5 = document.searchoptions.expertavailable;
+var opt6 = document.searchoptions.expertselected;
+//--></script>
+<if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND $ilconfig['globalauctionsettings_serviceauctionsenabled'] == false">{serviceselectedhidden}{expertselectedhidden}</if>
+<if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] == false AND $ilconfig['globalauctionsettings_serviceauctionsenabled']">{productselectedhidden}</if>
+</form>

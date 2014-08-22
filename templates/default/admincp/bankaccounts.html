@@ -1,0 +1,92 @@
+<div id="v3body4">
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+
+	<div id="content">
+		<h1>{_bank_account_management}</h1><br />
+
+		
+		<div class="tab-pane">
+		
+			<div class="tab-pane" id="bankaccountlistings">
+		
+				<div class="tab-page">
+      				
+        			
+      <h2 class="tab">{_verified}</h2>
+	  <div class="block-wrapper">
+
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{numberactive} {_active_bank_accounts_found}</div>
+				<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_active_bank_accounts_allow_you_to_review_deposit_account_information_without_having_to_contact_the_member}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+					<tr class="alt2"> 
+					  <td width="7%" align="center">{_id}</td>
+					  <td width="19%">{_customer}</td>
+					  <td width="22%">{_bank_name}</td>
+					  <td width="17%" nowrap="nowrap">{_deposit_account_swift_number}</td>
+					  <td width="10%" nowrap="nowrap">{_type}</td>
+					  <td width="14%" nowrap="nowrap">{_destination_currency}</td>
+					  <td width="11%" align="right">{_remove}</td>
+					</tr>
+					<loop name="bankaccounts"> 
+					<tr> 
+					  <td nowrap="nowrap"><div align="center">{bank_id}</div></td>
+					  <td nowrap="nowrap"><span class="blue">{username}</span></td>
+					  <td nowrap="nowrap">{bankname}</td>
+					  <td nowrap="nowrap">{accountnum} / <br />
+						{swiftnum}</td>
+					  <td>{accounttype}</td>
+					  <td>{currency}</td>
+					  <td align="right">{remove}</td>
+					</tr>
+					<tr class="alt1"> 
+					  <td colspan="7" nowrap="nowrap"><div style="font-size:14px"><strong>{_bank_address}: </strong>{address}, {city}, {zipcode}, {country}</div></td>
+					</tr>
+					</loop name="bankaccounts"> 
+					<if condition="isset($show['no_bankaccounts']) AND $show['no_bankaccounts']"> 
+					<tr> 
+					  <td colspan="9" align="center">{_no_results_found}</td>
+					</tr>
+					<else />
+					<tr> 
+					  <td colspan="9">{activeprevnext}</td>
+					</tr>
+					</if> 
+				  </table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+      
+					
+          
+
+    </div>
+
+	</div>
+</div>
+<br /><br />

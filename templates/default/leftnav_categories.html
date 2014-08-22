@@ -1,0 +1,31 @@
+<div style="width:235px">
+    <div class="block-wrapper">
+	<div class="block$block">	
+	    <div class="block$block-top">
+		<div class="block$block-right">
+		    <div class="block$block-left"></div>
+		</div>
+	    </div>
+	    <div class="block$block-header">{_narrow_your_results}</div>
+            <if condition="isset($show['leftnavcategories']) AND $show['leftnavcategories']"><!-- START categories -->
+		<div class="block$block-content-$blockcolor" style="padding-top:9px; padding-bottom:9px" onClick="toggle('leftnav_narrowresults_cat')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+		    <span style="float:{template_textalignment}; padding-top:5px; padding-{template_textalignment_alt}:10px"><img id="collapseimg_leftnav_narrowresults_cat" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_narrowresults_cat]}.gif" border="0" alt="" /></span>
+		    <span class="gray"><strong>$title</strong></span>
+		</div>			
+		<div class="block$block-content" id="collapseobj_leftnav_narrowresults_cat" style="{collapse[collapseobj_leftnav_narrowresults_cat]}">$nav</div><!-- END categories --></if>
+	    <if condition="isset($show['categoryfinder']) AND $show['categoryfinder']"><!-- START category finder -->
+		$categoryfinderhtml<!-- END category finder --></if>
+
+            <!-- START search filters -->
+            $searchfilters<!-- END search filters -->
+
+	    <div class="block$block-footer">
+		<div class="block$block-right">
+		    <div class="block$block-left"></div>
+		</div>
+	    </div>			
+	</div>
+    </div>
+</div>
+
+$legend

@@ -1,0 +1,90 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:5px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class=""><a href="{ilpage[accounting]}">{_accounting}</a></li>
+	<li title="" class="on"><a href="javascript:void(0)">{_preview}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<if condition="isset($show['directpayment']) AND $show['directpayment']">
+{directpaymentform}
+<else />
+<form method="post" action="{ilpage[invoicepayment]}" name="invoicepreview" accept-charset="UTF-8" style="margin: 0px;">
+<input type="hidden" name="cmd" value="_do-invoice-payment" />
+<input type="hidden" name="id" value="{invoiceid}" />
+<input type="hidden" name="amount" value="{amount}" />
+<input type="hidden" name="invoicetype" value="{invoicetype}" />
+<input type="hidden" name="account_id" value="{account_id}" />
+<input type="hidden" name="description" value="{description}" />
+{txn_fee_hidden}
+</if>
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_secure_payment_preview}</div>
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_please_review_your_payment_information_below}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<div>
+				<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%" align="center">
+				<tr class="alt1"> 
+				  <td width="27%" align="right" class="alt1"><span class="gray">{_invoice_id}:</span></td>
+				  <td align="left">#{invoiceid}</td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+				  <td align="right" class="alt1"><span class="gray">{_description}:</span></td>
+				  <td align="left"><span class="black">{description}</span></td>
+				</tr>
+				<tr class="alt1"> 
+				  <td align="right" class="alt1"><span class="gray">{_amount}:</span></td>
+				  <td align="left"><span class="black">{previewamount}</span></td>
+				</tr>		
+				<if condition="$show['transactionfees']"> 
+				<tr class="alt1"> 
+				  <td align="right" class="alt1"><span class="gray">{_gateway_fee}:</span></td>
+				  <td align="left"><span class="black">({transaction_fee_formatted})</span></td>
+				</tr>
+				</if> 
+				{taxlogic}
+				<tr class="alt1"> 
+				  <td align="right" class="alt1"><span class="gray">{_due}:</span></td>
+				  <td align="left"><div>{duedate}</div></td>
+				</tr>
+				<tr class="alt1"> 
+				  <td align="right" class="alt1"><span class="gray">{_payment_method}:</span></td>
+				  <td align="left"><div><span id="paymentmethodtext">{payment_method}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="smaller blue"><a href="javascript:history.go(-1)" style="text-decoration:underline">{_change}</a></span></div></td>
+				</tr>
+				<tr class="alt1"> 
+				  <td align="right" class="alt1"><span class="gray">{_total}:</span></td>
+				  <td align="left"><div style="font-size:15px" class="black"><strong>{totalpreviewamount}</strong></div></td>
+				</tr>
+				<tr class="alt1">
+				  <td align="right" class="alt1"><strong>{_authorize}</strong>:</td>
+				  <td align="left"><label for="agree"> <input name="agreecheck" id="agree" type="checkbox" onclick="agreesubmit(this)" /> {_i_authorize_this_payment_from_my_preferred_payment_method_above}</label></td>
+				</tr>
+                <tr class="alt2_top">
+				  <td colspan="2"><input type="submit" value=" {_pay_invoice} " disabled="disabled" class="buttons" style="font-size:15px" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.go(-1)">{_back}</a></span></td>
+				</tr>
+			  </table>
+			  </div>
+			  
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</form>

@@ -1,0 +1,263 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+	<tr valign="top">
+		<td width="100%">
+
+    	<if condition="$ilconfig['globalauctionsettings_payperpost']">
+			<div>
+				<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+					<tr>
+						<td>
+							<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+									<table border="0" cellpadding="0" cellspacing="0">
+										<tr>
+											<td style="padding-left:5px;" valign="top"></td>
+											<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+											<td style="padding-right:5px;">
+												<div><img src="{template_relativeimagepath}{template_imagesfolder}icons/money.gif" border="0" alt="" id="payasyougo" /></span> {_pay_as_you_go_is_currently_enabled_any_auctions}</div>
+											</td>
+										</tr>
+									</table>
+								</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</if>
+
+		<a name="service"></a>
+
+		{servicetabs}
+
+		<div class="block-wrapper">
+
+			<div class="block2">
+
+                    <div class="block2-top">
+					<div class="block2-right">
+						<div class="block2-left"></div>
+					</div>
+                    </div>
+
+                    <div class="block2-header"><span style="float:left; padding-top:5px; padding-right:10px"><a href="javascript:void(0)" onclick="toggle('service_buying_activity');"><img id="collapseimg_service_buying_activity" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_service_buying_activity]}.gif" border="0" alt="" /></a></span>{service_header_block_title}</div>
+                    <div class="block2-content-blue" style="padding:9px"><div><span style="max-height:0px">
+							<form name="sortswitch_service" id="sortswitch_service" method="get" action="{ilpage[buying]}" accept-charset="UTF-8" style="margin:0px">
+								<input type="hidden" name="cmd" value="management" />
+								<input type="hidden" name="sub" value="{sub}" />
+								<table border="0" cellspacing="0" cellpadding="0" class="smaller">
+									<tr>
+										<td>{_keywords}:&nbsp;</td>
+										<td><input name="keyw" id="keyw" type="text" value="{keyw}" class="smaller" style="font-family: verdana; width:100px" />&nbsp;&nbsp;&nbsp;</td>
+										<td>{_bid_period}:&nbsp;</td>
+										<td>{period_pulldown}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td>{_order_by}:&nbsp;</td>
+										<td>{orderby_pulldown}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td>{_display_order}:&nbsp;</td>
+										<td>{displayorder_pulldown}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td>{_per_page}:&nbsp;</td>
+										<td>{pp_pulldown}&nbsp;</td>
+										<td><input type="submit" value="{_go}" class="buttons_smaller" /></td>
+									</tr>
+								</table>
+							</form>
+						</span></div></div>
+                    <div class="block2-content" style="padding:0px">
+
+
+					<!-- BEGIN service panel buying activity -->
+					<form name="createrfp" method="post" action="{ilpage[buying]}" id="searchrfps" accept-charset="UTF-8" style="margin:0px">
+						<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+							<tbody id="collapseobj_service_buying_activity" style="{collapse[collapseobj_service_buying_activity]}">
+								<tr class="alt2">
+									<td>{_more}</td> 
+									<td><span class="blue"><a href="{php_self}&amp;orderby=project_title">{_title}</a></span></td>
+									<td><span class="blue"><a href="{php_self}&amp;orderby=bids">{_bids}</a></span></td>
+									<td nowrap="nowrap"><span class="blue"><a href="{php_self}&amp;orderby=insertionfee">{_if_short}</a></span> <a href="javascript:void(0)" onmouseover="Tip(phrase['_if_stands_for_insertion_fee_and_is_a_fee_that_is_applied_when_you_list'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+									<td nowrap="nowrap">{_awarded}</td>
+									<td nowrap="nowrap">{_contact}</td>
+							<if condition="$ilconfig['productaward_mediashareafterend']"><td nowrap="nowrap">{_share}</td></if>
+							<td nowrap="nowrap">{_feedback}</td>
+							<td nowrap="nowrap">{_pay} <a href="javascript:void(0)" onmouseover="Tip(phrase['_this_column_lets_you_review_and_pay_for_any_pending_transactions'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+							<td nowrap="nowrap">{_status}</td>
+							<td nowrap="nowrap"><span class="blue"><a href="{php_self}&amp;orderby=date_end"><if condition="isset($ilance->GPC['sub']) AND $ilance->GPC['sub'] == 'ended'">{_end_date}<else />{_time_left}</if></a></span></td>
+							<td align="center" nowrap="nowrap">{_sel}</td>
+							</tr>
+							<loop name="service_buying_activity"> 
+								<tr class="alt1" id="project_{project_id}" valign="top">
+									<td width="4%" align="center"><a href="javascript:void(0)" onclick="return toggle('sellactivity_rfp{project_id}')"><div style="padding-right:5px"><img id="collapseimg_sellactivity_rfp{project_id}" src="{template_relativeimagepath}{template_imagesfolder}expand_collapsed.gif" border="0" alt="" /></div></a></td> 
+									<td width="35%"><div style="padding-bottom:9px; padding-right:6px;"><span style="float:right">{icons}</span><span class="blue"><a href="{ilpage[buying]}?cmd=rfp-management&amp;state=service&amp;id={project_id}" title="{_edit}">{job_title}</a></span>&nbsp;&nbsp;<span class="smaller gray">({project_id})</span>&nbsp;&nbsp;<span class="smaller"><span class="green"><a href="{http_server}{ilpage[rfp]}?id={project_id}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/zoom.gif" border="0" /></a></span></span><div class="smaller gray" style="padding-top:4px">{bidsshortlisted} {_shortlisted_lower}, {bidsdeclined} {_declined_lower}, {bidsretracted} {_retracted_bids_lower}</div><div class="smaller gray">{transfer}</div></div></td>
+									<td nowrap="nowrap" width="8%"><div class="smaller black"><a href="javascript:void(0)" onclick="return toggle('sellactivity_rfp{project_id}')" style=" color: #002398;">{bids} {_bids_lower}</a>{awardedbidsbit}</div></td>
+									<td nowrap="nowrap"><div class="smaller gray">{insfee}</div></td>
+									<td nowrap="nowrap"><div class="smaller blue">{provider}</div></td>
+									<td width="1%"><div class="smaller">{pmb}</div></td>
+								<if condition="$ilconfig['productaward_mediashareafterend']"><td width="1%"><div class="smaller">{work}</div></td></if>
+								<td width="1%"><div class="smaller">{feedback}</div></td>
+								<td width="3%"><div class="smaller">{invoice}</div></td>
+								<td width="12%" nowrap="nowrap"><div class="smaller">{statusmsg}</div></td>
+								<td nowrap="nowrap" width="7%"><div class="smaller">{timeleft}</div></td>
+								<td align="center" class="alt2">{actions}</td>
+								</tr>
+								<tr valign="middle" id="collapseobj_sellactivity_rfp{project_id}" style="display:{style};"> 
+									<td colspan="13" class="alt2_top"> 
+
+										<div class="tab-pane" id="expandrfp{project_id}" style="padding-top:7px; padding-bottom:12px; position:relative; clear:both">
+											<div class="tab-page" style="-webkit-box-shadow: #888 0px 3px 10px">
+												<h2 class="tab" id="0">{_overview}</h2>
+												<div>
+
+													<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="6">
+														<tr>
+															<td width="33.3%" valign="top"><div><strong>{_attachments}</strong> [ <span class="blue"><a href="{ilpage[buying]}?cmd=rfp-management&amp;state=service&amp;id={project_id}#attachments">{_manage}</a></span> ]</div><div class="smaller gray">{_attachments_below_are_available_to_all_service_providers}</div><div style="padding-top:4px">{attach}</div></td>
+															<td width="33.3%" valign="top"><div><strong>{_lowest_bids}</strong></div>
+																<div class="smaller gray">{_lowest_bid_proposals_placed_will_be_visible_below}</div><div style="padding-top:4px" class="smaller blue">{lowest_bid}</div></td>
+
+														<if condition="$ilconfig['escrowsystem_enabled']">
+															<td width="33.3%" valign="top"><div><strong>{_escrow}</strong> [ <span style="padding-top:4px" class="blue">{escrow}</span> ]</div>
+																<div class="smaller gray">{_directly_access_and_manage_your_escrow_account_for_this_project}</div>                                            </td>
+														</if>
+														</tr>
+													</table>
+												</div>
+											</div>
+											<div class="tab-page" style="-webkit-box-shadow: #888 0px 3px 10px">
+												<h2 class="tab" id="0">{_invites}</h2>
+												<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+													<tr class="alt3"> 
+														<td><div class="smaller">{_username}</div></td>
+														<td><div class="smaller">{_invited}</div></td>
+														<td><div class="smaller">{_bid_placed}</div></td>
+														<td><div class="smaller">{_bid_date}</div></td>
+														<td><div class="smaller">{_remind_date}</div></td>
+														<td><div class="smaller">{_remind}</div></td>
+														<td align="center"><div class="smaller">{_remove}</div></td>
+													</tr>
+													<loop name="invitationlist{project_id}"> 
+														<tr class="alt1" valign="top"> 
+															<td height="20"><div class="blue"><strong>{vendor}</strong></div></td>
+															<td height="20"><div class="blue">{invitedate}</div><div class="smaller gray" style="padding-top:3px"><span class="black">{_last_seen}</span> {lastseen}</div></td>
+															<td height="20">{bidplaced}</td>
+															<td height="20">{biddate}</td>
+															<td><div class="blue">{reminddate}</div></td>
+															<td><div class="blue">{remind}</div></td>
+															<td align="center">{action}</td>
+														</tr>
+													</loop name="invitationlist{project_id}">
+													<if condition="isset($no_invitationlist{project_id}) AND $no_invitationlist{project_id}"> 
+														<tr class="alt1"> 
+															<td colspan="10" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_invitations_exist}</div></td>
+														</tr>
+													</if>
+													<tr> 
+														<td colspan="10"><input type="button" class="buttons" value="{_invite_people}" onclick="location.href='{https_server}{ilpage[search]}?mode=experts&amp;sort=112'" /></td>
+													</tr>
+												</table>
+											</div>
+											<div class="tab-page" style="-webkit-box-shadow: #888 0px 3px 10px">
+												<h2 class="tab" id="0">{_bids} ({bids})</h2>
+												<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+													<tr class="alt3"> 
+														<td width="3%" align="center" nowrap="nowrap"><div class="smaller blue"><a href='{https_server}{ilpage[buying]}?cmd=management&type=bid_id&order={order}&display={project_id}&sub={sub}'>{_bid}&nbsp;#</a></div></td>
+														<td width="20%"><div class="smaller blue"><a href='{https_server}{ilpage[buying]}?cmd=management&type=username&order={order}&display={project_id}&sub={sub}'>{_provider}</a></div></td>
+														<td width="15%" nowrap="nowrap"><div class="smaller blue"><a href='{https_server}{ilpage[buying]}?cmd=management&type=bidamount&order={order}&display={project_id}&sub={sub}'>{_bid_amount}</a></div></td>
+														<td width="15%"><div class="smaller blue"><a href='{https_server}{ilpage[buying]}?cmd=management&type=estimate_days&order={order}&display={project_id}&sub={sub}'>{_delivery}</a></div></td>
+														<td width="15%" nowrap="nowrap"><div class="smaller">{_preferred_payment}</div></td>
+														<td width="1%"><div class="smaller">{_contact}</div></td>
+														<td width="5%"><div class="smaller blue"><a href='{https_server}{ilpage[buying]}?cmd=management&type=displayfinancials&display={project_id}&order={order}&sub={sub}'>{_earnings}</a></div></td>
+														<td><div class="smaller blue"><a href='{https_server}{ilpage[buying]}?cmd=management&type=date_added&display={project_id}&order={order}&sub={sub}'>{_date}</a></div></td>
+													</tr>
+													<loop name="service_buying_bidding_activity{project_id}"> 
+														<tr> 
+															<td align="center" valign="top"><span class="smaller black">{bid_id}</span></td>
+															<td align="left" valign="top"><div><span class="blue">{bidder}</span></div></td>
+															<td nowrap="nowrap" valign="top"><div style="font-size:15px" class="black"><strong>{bidamount}</strong></div><div class="smaller gray" style="padding-top:3px">{bidamounttype}</div></td>
+															<td nowrap="nowrap" valign="top"><div class="smaller black">{delivery}</div></td>
+															<td nowrap="nowrap" valign="top"><div class="smaller black">{paymethod2}</div></td>
+															<td nowrap="nowrap" valign="top"><div>{pmb2}</div></td>
+															<td nowrap="nowrap" valign="top"><div class="smaller black">{earnings}</div></td>
+															<td valign="top" nowrap="nowrap"><div class="smaller black">{bid_datetime}</div></td>
+														</tr>
+														<tr class="alt1"> 
+															<td align="center" valign="top" nowrap="nowrap"><div>{award}</div></td>
+															<td colspan="7" valign="top">
+
+																<div class="bubble_container" style="padding-bottom:9px">
+																	<div class="bubble_bl"><div class="bubble_br"><div class="bubble_tl"><div class="bubble_tr"><div style="padding-top:12px; padding-bottom:12px; padding-left:12px; padding-right:12px; font-size:13px">{proposal}<div style="padding-top:12px"><div style="padding-bottom:3px" class="smaller">{_attachments}</div>{bidattach}</div></div></div></div></div></div>
+																	<div class="bubble_b"><div style="padding-top:6px"><!--<span style="float:right; padding-right:10px">{_bid_placed}: <span class="gray">{bid_datetime}</span></span>-->{bidaction}</div></div>
+																</div>
+																<div>{custom_bid_fields}</div></td>
+														</tr>
+													</loop name="service_buying_bidding_activity{project_id}">	 
+													<if condition="isset($no_service_buying_bidding_activity{project_id}) AND $no_service_buying_bidding_activity{project_id}"> 
+														<tr> 
+															<td colspan="8" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_bids_placed}</div></td>
+														</tr>
+													</if>
+												</table>
+											</div>
+										</div>
+										<script type="text/javascript">
+											<!--
+											setupAllTabs();
+											//-->
+										</script></td>
+								</tr>
+							</loop name="service_buying_activity"> 
+							<if condition="isset($show['no_service_buying_activity']) AND $show['no_service_buying_activity']"> 
+								<tr> 
+									<td colspan="13" align="center"><div style="padding-top:8px; padding-bottom:8px;">{_no_results_found}: <span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}buy">{_create_service_auction}</a><else /><a href="{http_server}{ilpage[main]}?cmd=buying">{_create_service_auction}</a></if></span></div></td>
+								</tr>
+								<else /> 
+								<if condition="isset($show['rfppulldownmenu']) AND $show['rfppulldownmenu']">
+									<tr class="alt2_top"> 
+										<td colspan="13" align="right" valign="top"> 
+
+											<table width="100%" border="0" cellspacing="0" cellpadding="5">
+
+												<tr> 
+													<td align="left">
+														<span style="float:left; padding-top:2px; font-size:14px" class="blue">
+															<a href="javascript:void(0)" onclick="inlineCB.check_all(true)" style="text-decoration:underline">{_select_all}</a>&nbsp;&nbsp; 
+															<a href="javascript:void(0)" onclick="inlineCB.check_all(false)" style="text-decoration:underline">{_deselect_all}</a>&nbsp;&nbsp;
+															<a href="javascript:void(0)" onclick="inlineCB.check_all('invert')" style="text-decoration:underline">{_invert}</a>&nbsp;&nbsp;                                    </span>
+														<span style="float:right">
+															<input type="hidden" name="cmd" value="_do-rfp-action" />
+															<select name="rfpcmd" style="font-family: verdana">
+																<optgroup label="{_select_action}">
+																	<option value="">-</option>
+																<if condition="isset($ilance->GPC['sub']) AND $ilance->GPC['sub'] == 'ended'"><option value="relist_sel">{_relist_selected}</option></if>
+																<if condition="isset($ilance->GPC['sub']) AND $ilance->GPC['sub'] == 'ended'"><option value="relist_all">{_relist_all}</option></if>
+																<option value="archive">{_archive_auctions}</option>
+																<option value="transfer">{_transfer_rfps_ownership}</option>
+																<option value="cancel">{_cancel_auctions}</option>
+																</optgroup>
+															</select>
+															&nbsp;&nbsp;<input type="submit" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value="{_go}" id="inlinebutton" />
+														</span>
+														<script type="text/javascript">
+															<!--
+															inlineCB = new iL_Inline('inlineCB', 'service', 'searchrfps', '{_go}');
+															//-->
+														</script></td>
+												</tr>
+											</table></td>
+									</tr></if>
+								<tr>
+									<td colspan="13">{prevnext}</td>
+								</tr></if>
+							</tbody>
+						</table>
+					</form>
+					<!-- END service panel buying activity -->
+                    </div>
+
+                    <div class="block2-footer">
+					<div class="block2-right">
+						<div class="block2-left"></div>
+					</div>
+                    </div>
+
+			</div>
+		</div>
+
+</td>
+</tr>
+</table>

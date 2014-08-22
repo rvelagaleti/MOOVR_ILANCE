@@ -1,0 +1,119 @@
+<!-- START content -->
+<noscript><div id="infobar" style="font-size:11px"><a href="http://www.mozilla.com" rel="nofollow"><strong>{_warning_exclamation}</strong> {_the_web_browser_youre_using_does_not_have_javascript_enabled}</a></div></noscript>
+<if condition="$ilconfig['globalfilters_clientcpnag'] AND !empty($_SESSION['ilancedata']['user']['userid']) AND !empty($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] == '1' AND empty($_COOKIE[COOKIE_PREFIX . 'hideacpnag'])"><!-- start acp nag message --><div id="infobar" style="font-size:11px"><a href="{http_server}{ilpage[main]}?cmd=hideacpnag&amp;returnurl={pageurl_urlencoded}" onclick="return confirm_js(\'{_you_might_loose_the_page_you_are_currently_viewing}\')"><strong>{_warning_exclamation}</strong> &nbsp;{_you_are_viewing_the_marketplace_with_admin_access_priviliages} {_some_features_may_be_overidden_such_as_blind_bidders}</a></div><!-- end acp nag message --></if>
+<if condition="!empty($_SESSION['ilancedata']['user']['active']) AND $_SESSION['ilancedata']['user']['active'] == 'no' AND defined('LOCATION') AND (LOCATION != 'invoicepayment' AND LOCATION != 'forum' AND LOCATION != 'subscription' AND LOCATION != 'ipn' AND LOCATION != 'search') AND !empty($_SESSION['ilancedata']['user']['cost']) AND $_SESSION['ilancedata']['user']['cost'] > 0"><div id="infobar" style="font-size:11px"><a href="{http_server}{ilpage[subscription]}?returnurl={pageurl_urlencoded}"><strong>{_notice}:</strong> &nbsp;{_unpaid_subscription_please_make_subscription_payment}</a></div></if>
+
+{apihook[headerbit_start]}
+
+<!--[if lte IE 6]><div id="infobar" style="width:100%"><a href="http://www.mozilla.com" target="_blank"><strong>{_warning_exclamation}</strong> &nbsp;&nbsp;{_the_browser_you_are_using_is_old_and_no_longer_a_supported}</a></div><![endif]-->
+
+<!-- start header -->
+<header class="header2">
+	<!-- start box -->
+	<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">box3<else />box2</if>">
+    	<!-- start header-right -->
+        <div class="header2-right<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)"><else />-box2</if>">
+        	<!-- start navigation -->
+            <nav class="navigation2<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)"><else />-box2</if>">
+            	<ul>
+                	{apihook[template_headerbit_service_navigation2_li_start]}
+                	<li class="first uppercase"><a href="{http_server}categories/projects" title="{_find_work}">{_find_work}</a></li>
+                	<li class="uppercase"><a href="{http_server}buy" title="{_find_talent}">{_find_talent}</a></li>
+                    <if condition="$ilconfig['portfoliodisplay_enabled']"><li class="uppercase"><a href="{http_server}portfolios" title="{_portfolios}">{_portfolios}</a></li></if>
+                	<li class="last uppercase"><a href="{http_server}main-about" title="{_how_it_works}">{_how_it_works}</a></li>
+                    {apihook[template_headerbit_service_navigation2_li_end]}
+                </ul>
+            </nav>
+            <!-- end navigation -->
+        </div>
+        <!-- end header-right -->
+        <!-- start register-area -->
+        <div class="register-area">
+            <ul>
+            	<li class="text">
+            	  <if condition="isset($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0">{_hello} {user[username]}
+            	    <else />{_welcome} {_guest}</if></li>
+                <if condition="isset($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0">
+                <li class="register"><a href="{https_server}mycp" title="{_account}">{_account}</a></li>
+                <li class="sign-out"><a href="{https_server}signout" title="{_log_out}">{_log_out}</a></li>
+                <else />
+                <li class="register"><a href="{https_server}register" title="{_register}">{_register}</a></li>
+                <li class="sign-in"><a href="{https_server}signin?redirect={pageurl_urlencoded}" title="{_sign_in}">{_sign_in}</a></li></if>
+            </ul>
+        </div>
+        <!-- end register-area -->
+        <div class="clear"></div>
+    </div>
+    <!-- end box -->
+</header>
+<!-- end header -->
+
+<!-- start header -->
+<header class="header3">
+	<!-- start box -->
+	<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">box3<else />box2</if>">
+    	<!-- start logo -->
+        <div class="logo2">
+        	<a href="{http_server}" title="{site_name}"><img src="{template_relativeimagepath}{template_imagesfolder}v4/logo2.png" alt="{site_name}"></a>
+        </div>
+        <!-- end logo -->
+        <!-- start header-right -->
+        <div class="header2-right<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)"><else />-box2</if>">
+        	
+            	<!-- start search -->
+                <div class="search">
+                    <form name="global" id="globalsearch" action="{http_server}search" method="get" dir="{template_textdirection}" accept-charset="UTF-8">
+                        <div class="search-in">
+                            <div class="style-select">
+                                <select name="mode" id="searchmode" class="select3">
+                                    <option selected="selected" value="service">{_jobs}</option>
+                                    <option value="experts">{_freelancers}</option>
+                                    <option value="portfolios">{_portfolios}</option>
+                                </select>
+                            </div>
+                            <input name="q" type="text" id="search_keywords_id" class="input-header<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)"><else />-box2</if>" autocomplete="off" value="{q}">
+                        	<div id="search_autocomplete" class="autocompletev4"></div>
+                        </div>
+                        
+                        <!-- start setting-box -->
+                        <div class="setting-box">
+                            <a href="javascript:;" class="setting"><span>{_settings}</span></a>
+                            <div class="setting-panel">
+                                <div class="title">
+                                    <span><a href="{http_server}search?tab=0" title="{_advanced_search}">{_advanced_search}</a></span>
+                                    <h3>{_search_options}</h3>
+                                </div>
+                                <div class="setting-form">
+                                    <div class="row">
+                                        <label for="cid">{_category}</label>
+                                        {search_category_pulldown_v4}
+                                        <ul class="checkbox-list">
+                                            <li><label for="titlesonly"><input name="titlesonly" id="titlesonly" type="checkbox" value="1" class="checkbox" /> {_search_auction_titles_only}</label></li>
+                                        </ul>
+                                    </div>
+                                    <div class="row">
+                                        <label for="itemnumber">{_auction_id}</label>
+                                        <input name="rfpid" type="text" id="rfpnumber" placeholder="{_eg_placeholder_itemnumber}" class="input" />
+                                    </div>
+                                    <div class="row last">
+                                        <input type="submit" value="{_search}" id="bigsearchbutton" class="button2" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end setting-box -->
+                        <input type="submit" value="{_go}" class="ico button3">
+                    <if condition="isset($ilconfig['fulltextsearch']) AND $ilconfig['fulltextsearch']"><input type="hidden" name="sort" id="searchsort" value="124" /><else /><input type="hidden" name="sort" id="searchsort" value="01" /></if>    
+                    </form>
+                </div>
+                <!-- end search -->
+                <div class="clear"></div>
+                
+        </div>
+        <!-- end header-right -->
+        <div class="clear"></div>
+    </div>
+    <!-- end box -->
+    
+</header>
+<!-- end header -->

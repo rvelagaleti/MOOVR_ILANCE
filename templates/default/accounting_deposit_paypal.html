@@ -1,0 +1,49 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class=""><a href="{https_server}{ilpage[accounting]}">{_accounting}</a></li>
+	<li title="" class="on"><a href="javascript:void(0)">{_deposit}</a></li>
+	<if condition="empty($_SESSION['ilancedata']['user']['active']) OR $_SESSION['ilancedata']['user']['active'] == 'no' OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'withdraw') == 'no'"><else /><li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=withdraw">{_withdraw}</a></li></if>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+{hidden_form_start}
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_fund_your_account_via_paypal}</div>
+			
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_we_now_make_it_easy_to_fund_your_online}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+				<tr>
+					<td>
+						<div style="padding:6px">
+							<div><img src="{template_relativeimagepath}{template_imagesfolder}payment/paypal.gif" border="0" alt="" id="paypal" /></div>
+							<blockquote>{_you_will_leave_the_marketplace_momentarily_to_fill_in_your_Paypal_credit_card} {_paypal_will_then_redirect_you_back_to_our_marketplace}</blockquote>
+						</div>
+					</td>
+				</tr>
+				</table>
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+	</div>
+</div>
+<div style="margin-top:3px"><input type="submit" value=" {_continue} " class="buttons" style="font-size:15px" /></div>
+{hidden_form_end}

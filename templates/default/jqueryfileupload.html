@@ -1,0 +1,118 @@
+<link rel="stylesheet" href="{vars[csspath]}bootstrap.min.css">
+<link rel="stylesheet" href="{vars[csspath]}bootstrap-responsive.min.css">
+<link rel="stylesheet" href="{vars[csspath]}bootstrap-image-gallery.min.css">
+<link rel="stylesheet" href="{vars[csspath]}jquery.fileupload-ui.css">
+<noscript><link rel="stylesheet" href="{vars[csspath]}jquery.fileupload-ui-noscript.css"></noscript>
+<div class="container">
+<form id="fileupload" action="{ilpage[ajax]}" method="post" enctype="multipart/form-data">
+<input type="hidden" name="attachtype" id="attachtype" value="{vars[attachtype]}">
+<input type="hidden" name="project_id" id="project_id" value="{vars[pid]}">
+<input type="hidden" name="maxfiles" id="maxfiles" value="{vars[maximum_files]}">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td>
+    <div class="row fileupload-buttonbar" style="padding-bottom: 5px">
+        <div>
+        <span class="btn btn-success fileinput-button"><span>{_add_files}</span><input type="file" name="files[]" multiple></span>
+        <button type="submit" class="btn btn-primary start"><span>{_start_upload}</span></button>
+        <button type="reset" class="btn btn-warning cancel"><span>{_cancel_upload}</span></button>
+        <button type="button" class="btn btn-danger delete"><span>{_delete}</span></button>
+        <input type="checkbox" class="toggle">
+        </div>
+    </div>
+    </td>
+    <td>
+    <div class="span5 fileupload-progress fade">
+        <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+        <div class="bar" style="width:0%;"></div>
+        <div class="progress-extended" style="position: absolute; float: left"></div>
+        </div>
+    </div>
+    <div class="fileupload-loading"></div>
+    </td>
+</tr>
+</table>
+<div style="height: 175px; overflow-y: scroll">
+    <table role="presentation" class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+</div>
+</form>
+<div style="font-size: 12px; border: 1px solid #ccc; border-radius:4px;padding:10px">
+    
+    <strong>{_maximum_files_can_attach} </strong>{vars[maximum_files]},
+    <strong>{_used}:</strong> {vars[attach_usage_total]},
+    <strong>{_allowed}:</strong> {vars[attach_user_max]},
+    <strong>{_maximum_filesize}:</strong> {vars[max_size]},
+    <strong>{_left}:</strong> {vars[attach_usage_left]},
+    <strong>{_maximum_width}</strong> {vars[max_width]}px,
+    <strong>{_maximum_height}</strong> {vars[max_height]}px,
+    <strong>{_file_extensions}:</strong> {vars[extensions]}
+    {vars[slideshowcost]}
+    
+</div>
+</div>
+
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td class="preview"><span class="fade"></span></td>
+        <td class="name" style="font-size:12px"><span>{%=file.name%}</span></td>
+        <td class="size" nowrap="nowrap" style="font-size:12px"><span>{%=o.formatFileSize(file.size)%}</span></td>
+        {% if (file.error) { %}
+            <td class="error" colspan="2"><span class="label label-important">{_error}</span> {%=file.error%}</td>
+        {% } else if (o.files.valid && !i) { %}
+            <td>
+                <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar" style="width:0%;"></div></div>
+            </td>
+            <td>{% if (!o.options.autoUpload) { %}
+                <button class="btn btn-primary start">
+                    <span>{_start}</span>
+                </button>
+            {% } %}</td>
+        {% } else { %}
+            <td colspan="2"></td>
+        {% } %}
+        <td>{% if (!i) { %}
+            <button class="btn btn-warning cancel">
+                <span>{_cancel}</span>
+            </button>
+        {% } %}</td>
+    </tr>
+{% } %}
+</script> 
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        {% if (file.error) { %}
+            <td></td>
+            <td class="name"><span>{%=file.name%}</span></td>
+            <td class="size" style="width: 90px;"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td class="error" colspan="2"><span class="label label-important">{_error}</span> {%=file.error%}</td>
+        {% } else { %}
+            <td class="preview">{% if (file.thumbnail_url) { %}
+                <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+            {% } %}</td>
+            <td class="name" style="font-size:12px">
+                <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+            </td>
+            <td class="size" nowrap="nowrap" style="font-size:12px"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td colspan="2"></td>
+        {% } %}
+        <td style="width: 90px;">
+            <button class="btn btn-danger delete" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}"{% if (file.delete_with_credentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                <span>{_delete}</span>
+            </button>
+            <input type="checkbox" name="delete" value="1" class="toggle">
+        </td>
+    </tr>
+{% } %}
+</script>
+<script src="{vars[phrases]}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{vars[jspath]}vendor/jquery.ui.widget.js"></script>
+<script src="{vars[jspath]}tmpl.min.js"></script>
+<script src="{vars[jspath]}load-image.min.js"></script>
+<script src="{vars[jspath]}jquery.iframe-transport.js"></script>
+<script src="{vars[jspath]}jquery.fileupload.js"></script>
+<script src="{vars[jspath]}jquery.fileupload-fp.js"></script>
+<script src="{vars[jspath]}jquery.fileupload-ui.js"></script>
+<script src="{vars[jspath]}main.js"></script>

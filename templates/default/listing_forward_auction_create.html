@@ -1,0 +1,894 @@
+{js_start}
+
+<if condition="$ilconfig['globalauctionsettings_payperpost'] AND isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'new-item'"><div>
+	<div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+		<table border="0" cellpadding="0" cellspacing="0">
+		    <tr>
+			<td style="padding-left:5px;" valign="top"></td>
+			<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+			<td style="padding-right:5px;"><img src="{template_relativeimagepath}{template_imagesfolder}icons/money.gif" border="0" alt="" /> {_pay_as_you_go_is_currently_enabled_any_auctions}</td>
+		    </tr>
+		</table>
+	    </div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+    </div></if>
+
+<if condition="isset($show['bidsplaced']) AND $show['bidsplaced'] AND !isset($show['relist'])"><div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+	    <tr>
+		<td>
+		    <div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+			    <table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+				    <td style="padding-left:5px;" valign="top"></td>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+				    <td style="padding-right:5px;"><img src="{template_relativeimagepath}{template_imagesfolder}bid.gif" border="0" alt="" /> {_this_listing_has_received_1_or_more_bids_limited_options_are_available_for_change}</td>
+				</tr>
+			    </table>
+			</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+		</td>
+	    </tr>
+	</table>
+    </div></if>
+
+<if condition="$ilconfig['moderationsystem_disableauctionmoderation'] == 0"><div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+	    <tr>
+		<td>
+		    <div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+			    <table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+				    <td style="padding-left:5px;" valign="top"></td>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+				    <td style="padding-right:5px;"><strong>{_moderation_notice}:</strong> {_auctions_are_currently_being_moderated_and_will_be_posted_after_the_validation_process}</td>
+				</tr>
+			    </table>
+			</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+		</td>
+	    </tr>
+	</table>
+    </div></if>
+
+<if condition="isset($show['noupdateauction']) AND $show['noupdateauction'] AND $_SESSION['ilancedata']['user']['isadmin'] == '0' AND !isset($show['relist'])"><div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+	    <tr>
+		<td>
+		    <div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+			    <table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+				    <td style="padding-left:5px;" valign="top"></td>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+				    <td style="padding-right:5px;"><img src="{template_relativeimagepath}{template_imagesfolder}icons/limited.gif" border="0" alt="" /> {_the_state_of_this_auction_does_not_allow_you_to_save_changes}</td>
+				</tr>
+			    </table>
+			</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+		</td>
+	    </tr>
+	</table>
+    </div></if>
+
+<div class="bigtabs" style="padding-bottom:10px; padding-top:5px">
+    <div class="bigtabsheader">
+	<ul>
+	    <if condition="isset($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] AND isset($ilance->GPC['admincp']) AND $ilance->GPC['admincp'] AND isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'product-management'"><li title="" class=""><a href="{https_server_admin}{ilpage[distribution]}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/selectedcat_back.gif" border="0" alt="{_back}" /> {_return_to_admin_control_panel}</a></li></if>
+	    <if condition="isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'product-management' AND !isset($show['relist'])"><li title="" class=""><a href="{ilpage[merch]}?id={project_id}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/selectedcat_back.gif" border="0" alt="{_back}" /> {_return_to_listing}</a></li></if>
+	    <if condition="$ilconfig['globalfilters_bulkupload']"><li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}bulk/sell">{_sell_bulk_items}</a><else /><a href="{http_server}{ilpage[bulk]}?cmd=sell&amp;cid={cid}">{_sell_bulk_items}</a></if></li></if>
+	</ul>
+    </div>
+</div>
+<div style="clear:both;"></div>
+
+<if condition="isset($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] AND isset($ilance->GPC['admincp']) AND $ilance->GPC['admincp'] AND isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] != 'new-item'"><!-- administrator updating auction --><form method="post" action="{https_server_admin}{ilpage[distribution]}" name="ilacpform" accept-charset="UTF-8" style="margin: 0px;">
+	<input type="hidden" name="cmd" value="auctions" />
+	<input type="hidden" name="do" value="_update-auction" />
+	<input type="hidden" name="return" value="<if condition="PROTOCOL_REQUEST == 'https'">{https_server_admin}<else />{http_server_admin}</if>{ilpage[distribution]}?cmd=auctions&amp;subcmd=_update-auction&amp;id={project_id}&amp;viewtype=product" />
+<input type="hidden" name="project_id" value="{project_id}" />
+<input type="hidden" name="acpcid" id="acpcid" value="{cid}" />
+<div class="block-wrapper">
+
+    <div class="block">
+
+	<div class="block-top">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+	<div class="block-header"><span style="float:left; padding-top:5px; padding-right:10px"><a href="#top" onclick="return toggle('admincpoptions_pn{project_id}')"><img src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_admincpoptions_pn{project_id}]}.gif" alt="" border="0" id="collapseimg_admincpoptions_pn{project_id}" /></a></span>{_adminstrator_control}: {_options}</div>
+	<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_you_are_updating_this_listing_as_an_administrator}</div></div>
+	<div class="block-content" id="collapseobj_admincpoptions_pn{project_id}" style="{collapse[collapseobj_admincpoptions_pn{project_id}]} padding:9px; background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x;">
+
+	    <table border="0" width="100%" align="center">
+		<tbody> 
+		    <tr>
+			<td colspan="10">
+
+			    {apihook[listing_forward_auction_create_admincp_options_start]}
+
+
+			    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+				    <td width="45%" valign="top"><div><strong>{_visible}?</strong></div><div class="gray" style="padding-top:3px">{_set_the_global_visibility_of_this_listing_in_the_marketplace}</div><div style="padding-top:3px">{auctionvisible}</div></td>
+				    <td width="55%" valign="top"><table border="0" cellspacing="0" cellpadding="0">
+					    <tr> 
+						<td><div><strong>{_added}</strong></div><div class="gray" style="padding-top:3px">{_change_date_added}</div><div style="padding-top:3px"><input type="text" name="date_added" value="{date_added}" class="input" /></div></td>
+						<td>&nbsp;</td>
+						<td><div><strong>{_starts}</strong></div><div class="gray" style="padding-top:3px">{_change_start_date}</div><div style="padding-top:3px"><input type="text" name="date_starts" value="{date_starts}" class="input" /></div></td>
+						<td>&nbsp;</td>
+						<td><div><strong>{_ends}</strong></div><div class="gray" style="padding-top:3px">{_change_end_date}</div><div style="padding-top:3px"><input type="text" name="date_end" value="{date_end}" class="input" /></div></td>
+					    </tr>
+					</table></td>
+				</tr>
+			    </table>
+
+			    <hr size="1" width="100%" style="color:#cccccc; margin-top:9px; margin-bottom:9px" />
+
+			    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+				    <td width="45%"><div><strong>{_auction_type}</strong></div><div class="gray" style="padding-top:3px">{_if_you_need_to_change_the_listing_type_please_change_below}</div>
+					<div style="padding-top:3px">{project_state_pulldown}&nbsp;{project_details_pulldown}</div></td>
+				    <td width="55%"><div><strong>{_status}</strong></div><div class="gray" style="padding-top:3px">{_quickly_change_the_status_of_this_listing_to_something_different}</div>
+					<div style="padding-top:3px">{status_pulldown}</div></td>
+				</tr>
+			    </table>
+
+			    <hr size="1" width="100%" style="color:#cccccc; margin-top:9px; margin-bottom:9px" />
+
+			    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+				    <td width="45%" valign="top"><div><strong>{_listing_enhancements}</strong></div><div class="gray" style="padding-top:3px; padding-bottom:4px">{_enable_or_disable_listing_enhancements_without_charge}</div><div style="padding-top:3px">{enhancement_list}</div></td>
+				    <td width="55%" valign="top">
+
+
+				    </td>
+				</tr>
+			    </table>
+
+			    <hr size="1" width="100%" style="color:#cccccc; margin-top:9px; margin-bottom:9px" />
+			    <div><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_note_if_you_selected_a_new_category_for_this_listing_any_category_finder_questions_answered_will_be_lost_with_the_new_category_change}')" /></div>
+
+			    {apihook[listing_forward_auction_create_admincp_options_end]}
+
+
+			</td>
+		    </tr>
+		</tbody>
+	    </table>
+	</div>
+
+	<div class="block-footer">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+    </div>
+</div></form>
+
+<if condition="isset($show['purchase_now']) AND $show['purchase_now'] AND isset($no_purchase_now_activity) AND $no_purchase_now_activity == false"><div class="block-wrapper">
+	<div class="block">
+
+	    <div class="block-top">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	    <div class="block-header"><span style="float:left; padding-top:5px; padding-right:10px"><a href="#top" onclick="return toggle('sellactivity_pn{project_id}')"><img src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_sellactivity_pn{project_id}]}.gif" alt="" border="0" id="collapseimg_sellactivity_pn{project_id}" /></a></span>{_adminstrator_control}: {_purchase_now_activity_for} #{project_id}</div>
+	    <div class="block-content" style="padding:0px">
+
+		<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+		    <tbody id="collapseobj_sellactivity_pn{project_id}" style="{collapse[collapseobj_sellactivity_pn{project_id}]}"> 
+			<tr class="alt2"> 
+			    <td align="center" nowrap="nowrap">{_id}</td>
+			    <td>{_email}</td>
+			    <td nowrap="nowrap" align="center">{_pmb}</td>
+		    <if condition="$ilconfig['productaward_mediashareafterend']"><td nowrap="nowrap" align="center">{_share}</td></if>
+		    <td nowrap="nowrap" align="center">{_feedback}</td>
+		    <td nowrap="nowrap" align="center">{_price}</td>
+		    <td align="center" nowrap="nowrap">{_total}</td>
+		    <if condition="$ilconfig['escrowsystem_enabled']"><td align="center">{_in_escrow}</td></if>
+		    <td align="center">{_fvf}</td>
+		    <td align="center">{_action}</td>
+		    </tr>
+		    <loop name="purchase_now_activity"> 
+			<tr class="alt1"> 
+			    <td align="center"><strong>{orderid}</strong></td>
+			    <td><a href="mailto:{orderemail}" title="{orderemail}">{orderbuyer}</a></td>
+			    <td align="center">{pmb2}</td>
+			<if condition="$ilconfig['productaward_mediashareafterend']"><td align="center">{work2}</td></if>
+			<td align="center">{feedback2}</td>
+			<td align="center">{orderamount}</td>
+			<td align="center">{total}</td>
+			<if condition="$ilconfig['escrowsystem_enabled']"><td align="center"><strong>{escrowamount}</strong></td></if>
+			<td align="center">{sellerfvf}</td>
+			<td align="center" class="{bgcolclass}">{orderactions}</td>
+			</tr>
+			<if condition="$ilconfig['escrowsystem_enabled']">
+			    <tr>
+				<td colspan="3" class="alt2">*{_escrow} {_fee}</td>
+				<td colspan="7" class="alt1">{fees}</td>
+			    </tr>
+			</if>
+			<tr>
+			    <td colspan="3" class="alt2">{_qty}</td>
+			    <td colspan="7" class="alt1">{orderqty}</td>
+			</tr>
+			<tr>
+			    <td colspan="3" class="alt2">{_shipping_costs}</td>
+			    <td colspan="7" class="alt1">{shippinginfo}</td>
+			</tr>
+			<tr>
+			    <td colspan="3" class="alt2">{_order_date}</td>
+			    <td colspan="7" class="alt1">{orderdate}</td>
+			</tr>
+			<tr>
+			    <td colspan="3" class="alt2">{_ships_to}</td>
+			    <td colspan="7" bgcolor="alt1">{orderlocation}</td>
+			</tr>
+		    </loop name="purchase_now_activity">								  
+		    <if condition="isset($no_purchase_now_activity) AND $no_purchase_now_activity">
+			<tr>
+			    <td colspan="10" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_purchase_now_orders_found}</div></td>
+			</tr>
+		    </if>
+		    </tbody>
+		</table>
+
+	    </div>
+
+	    <div class="block-footer">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+	</div></div></if></if>
+
+<form name="formtab" style="margin:0px;"><input type="hidden" name="viewtab" accept-charset="UTF-8" value="{tab}" /></form>
+<form name="ilform" action="<if condition="PROTOCOL_REQUEST == 'https'">{https_server}<else />{http_server}</if>{ilpage[selling]}" method="post" accept-charset="UTF-8" onsubmit="return validate_all(this);" style="margin: 0px;">
+<input type="hidden" name="rfpid" id="rfpid" value="{project_id}" />
+<if condition="$ilance->GPC['cmd'] == 'new-item'"><input type="hidden" name="cmd" value="new-item" /><else /><input type="hidden" name="date_end" value="{date_end}" />
+    <input type="hidden" name="cmd" value="product-management" />{hiddenfields}</if>
+<if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'relist'"><input type="hidden" name="relist_id" value="{old_id}" /></if>
+{preview_pane}
+
+<div class="block-wrapper">
+    <div class="block">
+
+	<div class="block-top">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+	<div class="block-header">{_selling_format}</div>
+        <if condition="isset($show['currencypulldown']) AND $show['currencypulldown']"><div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_preferred_currency}</div></div>
+	    <div class="block-content alt1">{currencypulldown}</div></if>
+
+        <div id="showsellingformat">
+	    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_decide_how_youd_like_to_sell_your_item}</div></div>
+	    <div class="block-content" style="padding:{table_cellpadding}px">
+
+                <div id="sellingformat">
+		    <div style="margin-bottom:12px" class="smaller"><span class="blue"><a href="{http_server}{ilpage[search]}?mode=product&amp;completed=1&amp;sort=01&amp;cid={cid}" target="_blank">{_search_completed_listings}</a></span> {_and_get_ideas_about_pricing}.</div>
+		    <div>{sellingformat}</div></div>
+	    </div>
+	</div>
+
+        <div id="showeventtype">
+	    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_decide_the_auction_event_type_to_host_for_your_listing}</div></div>
+	    <div class="block-content" style="padding:0px">
+                <div>{auctioneventtype}</div>
+	    </div>
+        </div>
+        
+        <if condition="$ilconfig['enablenonprofits']"><div id="donations">
+        <div class="block-content-yellow" style="padding:12px"><div class="smaller">{_donate_a_percentage_of_your_winning_sale_price_to_your_favorite_chairty}</div></div>
+        <div class="block-content" style="padding:0px">    
+            
+            <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+            <tr>
+                <td width="1%"><input type="checkbox" name="donation" id="donation" value="1" onclick="toggle_tr('donationbox');" {donationchecked} /></td>
+                <td width="1%"><span title="{_donate_a_percentage_of_your_winning_sale_price_to_your_favorite_chairty}"><img src="{template_relativeimagepath}{template_imagesfolder}handsup.jpg" border="0" alt="" id="" height="35" /></span></td>
+                <td width="98%"><label for="donation">{_i_would_like_to_donate_a_percentage_of_my_sale_price_to_my_favorite_chairtable_cause}. <span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}nonprofits" target="_blank">{_learn_more}</a><else /><a href="{http_server}{ilpage[nonprofits]}" target="_blank">{_learn_more}</a></if></span></label></td>
+            </tr>
+            </table>
+            <div id="donationbox" style="display:none">
+            <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+            <tr>
+            	<td><strong>{_benefiting_nonprofit}</strong>: {charitiespulldown} &nbsp;&nbsp;&nbsp; <strong>{_percentage}:</strong> {donationpercentage} <div style="padding-top:8px"><span class="smaller gray">{_if_your_item_does_not_sell_a_donation_will_not_be_made}</span></div></td>
+            </tr>
+            </table>
+            </div>
+            
+                
+        </div></div></if>
+
+        <div class="block-footer">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+    </div>
+</div>
+
+<!-- START category selector --><div class="block-wrapper">
+    <div class="block">
+	<div class="block-top">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>			
+	<div class="block-header">{_category}</div>		
+	<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_update_or_change_the_category}</div></div>	
+	<div class="block-content alt1">
+	    <if condition="$ilance->GPC['cmd'] == 'new-item'"><div style="padding-bottom:9px"><span id="selectedcategory"></span><span id="cidstringcb"></span><span class="smaller">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="blue"><a href="javascript:void(0)" onclick="toggle_tr('showcidtable');toggle_tr('showcidtablediv')">{_change}</a></span>)</span></div></if>
+	    <if condition="$ilance->GPC['cmd'] == 'new-item'"><div style="display:none" id="showcidtable"></if>
+	    <table cellpadding="3" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+		<tr>
+		    <td>
+		<if condition="$ilance->GPC['cmd'] == 'new-item'"><div style="display:none; padding-top:12px" id="showcidtablediv"></if>
+		<if condition="$ilance->GPC['cmd'] == 'new-item'"><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #ebebeb; border-left:1px solid #ebebeb; border-right:1px solid #bdbdbd; border-bottom:1px solid #bdbdbd" src="{ajaxurl}?do=categories&mode=product&cid={cid}&showyouselectedstring=0&showcheckmarkafterstring=1&showthumb=0&categoryfinderjs=1&id={project_id}&cmd=new-item"></iframe></if>
+		<if condition="$ilance->GPC['cmd'] == 'product-management'">
+		    <if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'relist'">
+			<iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #ebebeb; border-left:1px solid #ebebeb; border-right:1px solid #bdbdbd; border-bottom:1px solid #bdbdbd" src="{ajaxurl}?do=categories&mode=product&cid={cid}&showyouselectedstring=1&showcontinue=0&showthumb=0&showcidbox=1&showcheckmarkafterstring=1&categoryfinderjs=1&id={project_id}&cmd=product-management&old_id={old_id}"></iframe>
+			<else />
+			<iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #ebebeb; border-left:1px solid #ebebeb; border-right:1px solid #bdbdbd; border-bottom:1px solid #bdbdbd" src="{ajaxurl}?do=categories&mode=product&cid={cid}&showyouselectedstring=1&showcontinue=0&showthumb=0&showcidbox=1&showcheckmarkafterstring=1&categoryfinderjs=1&id={project_id}&cmd=product-management"></iframe>
+		    </if>
+		</if>
+		<if condition="$ilance->GPC['cmd'] == 'new-item'"></div></if>
+		<span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" onchange="calculate_insertionfees()" style="font-family: verdana" size="6" /></span>
+		<if condition="$ilance->GPC['cmd'] == 'new-item'"><else /><div><span id="selectedcategory"></span><span id="cidstringcb"></span></div></if>
+		</td>
+		</tr>
+	    </table>
+	    <if condition="$ilance->GPC['cmd'] == 'new-item'"></div></if>
+	<if condition="$ilance->GPC['cmd'] == 'new-item'"><div style="display:none"></if><div id="categorybutton"></div><if condition="$ilance->GPC['cmd'] == 'new-item'"></div></if>
+</div>
+<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_category_finder_criteria}</div></div>
+<div class="block-content">
+    <div id="categoryfindertext">{project_questions}</div>
+</div>		
+<div class="block-footer">
+    <div class="block-right">
+	<div class="block-left"></div>
+    </div>
+</div>			
+</div>
+</div><!-- END category selector -->
+
+<if condition="isset($show['noupdateauction']) AND $show['noupdateauction'] == 0 AND isset($show['gtc']) AND $show['gtc'] == false OR (isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'new-item') OR isset($show['relist'])">
+    <div class="block-wrapper">
+
+	<div class="block">
+
+	    <div class="block-top">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	    <div class="block-header">{_duration}</div>
+	    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_how_long_will_your_auction_be_listed_on_the_marketplace}</div></div>
+	    <div class="block-content">
+
+		<div id="">
+
+		    <if condition="isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'new-item' OR isset($show['relist'])">
+			<table width="100%" border="0" cellspacing="0" cellpadding="4">
+			    <tr> 
+				<td nowrap="nowrap"><div id="durationwrapper">{duration}</div></td>
+				<td width="100%">{durationbits}</td>
+			    </tr>
+			</table>
+			<div id="durationverbose"></div>
+			<else />
+                        <if condition="isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'product-management'">
+			    <!-- allow owner to extend auction -->
+			    {extendauction}
+                        </if>
+                    </if>
+		</div>
+	    </div>
+
+	    <div class="block-footer">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	</div>
+    </div>
+</if>
+<div class="block-wrapper">
+    <div class="block">
+
+	<div class="block-top">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+	<div class="block-header">{_payment_methods}</div>
+	<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_please_enter_your_accepted_payment_method_and_or_payment_instructions_bidders_will_see_in_the_listing}</div></div>
+	<div class="block-content" style="padding:0px">
+	    <div>{escrowfilter}</div>
+	</div>
+
+	<div class="block-footer">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+    </div>
+</div>
+
+<div class="block-wrapper">
+    <div class="block">
+
+	<div class="block-top">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+	<div class="block-header"><if condition="$ilance->GPC['cmd'] == 'product-management'">{_update_item}<else />{_information}</if></div>
+	<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller"><if condition="$ilance->GPC['cmd'] == 'product-management'">{_any_changes_made_to_this_project_will_be_recorded_in_a_revision_log}<else />{_below_you_will_find_required_information}</if></span></div></div>
+	<div class="block-content">
+	    <div><strong>{_title}</strong></div>
+		<div style="padding-top:3px; padding-bottom:7px">{title}</div>
+		<div style="padding-top:6px"><strong>{_description}</strong></div>
+		<div style="padding-top:3px" class="wysiwyg_wrapper">{wysiwyg_area}</div>
+	</div>
+    <div class="block-content-yellow-top" style="padding:{table_cellpadding}px">
+		<div class="smaller">Add keywords about items being sold from this listing so buyers find it faster</div>
+    </div>
+    <div class="block-content">    
+		<div><strong>{_keywords} / {_tags}</strong></div>
+		<div style="padding-top:3px">{keywordinput}</div>
+    </div>
+    
+    <if condition="$ilconfig['product_publicboard_block']">
+	    <div class="block-content-yellow-top" style="padding:{table_cellpadding}px" id="publicboardheader">
+		<div class="smaller">{_if_you_would_like_to_allow_buyers_to_ask_public_questions_about_this_item}</div></div>
+	    <div class="block-content" style="padding:0px" id="publicboard">
+            {publicboard}
+	    </div>
+	</if>
+    
+    <if condition="$ilconfig['product_videodescription_block']">
+	    <div class="block-content-yellow-top" style="padding:{table_cellpadding}px" id="videodescriptionheader">
+		<div class="smaller">{_add_streaming_video_to_your_listing}</div></div>
+	    <div class="block-content" style="padding:{table_cellpadding}px" id="videodescription">
+            <div>{_enter_the_url_link_to_your_published_youtube_video_and_well_display_it_right_on_your_listing_page} &nbsp;&nbsp;&nbsp;<span class="smaller gray">({videodescriptioncost})</span></div>
+            <div style="padding-top:3px">{description_videourl}<span style="float:left;padding-right:5px"><img src="{template_relativeimagepath}{template_imagesfolder}wysiwyg/youtube.gif" /></span></div>
+            <div style="padding-top:3px" class="smaller gray">{_example}: http://www.youtube.com/watch?v=zxBrbhWntHE</div>
+	    </div>
+	</if>
+    
+
+	<if condition="isset($ilconfig['globalfilters_listinginventory']) AND $ilconfig['globalfilters_listinginventory'] == '1'">
+	    <div class="block-content-yellow-top" style="padding:{table_cellpadding}px" id="inventoryheader">
+		<div class="smaller">{_enter_detailed_info_about_item}</div></div>
+	    <div class="block-content" style="padding:{table_cellpadding}px" id="inventoryrow">
+		<table width="1%" cellpadding="0" cellspacing="0" border="0">
+		    <tr>
+			<td nowrap="nowrap"><span title="{_sku_number}">{_sku} {sku}</span></td>
+			<td><div style="width:50px"></div></td>
+			<td nowrap="nowrap"><span title="{_part_number}">{_part_number_abbrev} {partnumber}</span></td>
+			<td><div style="width:50px"></div></td>
+			<td nowrap="nowrap"><span title="{_model_number}">{_model_number} {modelnumber}</span></td>
+		    </tr>
+		    <tr>
+			<td colspan="3"><div style="height:12px"></div></td>
+		    </tr>
+		    <tr>
+			<td nowrap="nowrap"><span title="{_upc_universal_code}">{_upc} {upc}</span></td>
+			<td><div style="width:50px"></div></td>
+			<td nowrap="nowrap"><span title="{_ean_european_number}">{_ean} {ean}</span></td>
+		    </tr>
+		</table>
+	    </div>
+	</if>
+
+	<div class="block-footer">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+    </div>
+</div>
+
+<if condition="isset($show['enhancements_block']) AND $show['enhancements_block'] == true">
+    <div class="block-wrapper">
+	<div class="block">
+
+	    <div class="block-top">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	    <div class="block-header">
+		<span style="float:right; padding-top:3px" class="smaller gray"></span>{_enhance_your_listing}</div>
+	    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_promotional_tools_to_help_buyers_find_your_listings_quicker}</div></div>
+	    <div class="block-content">
+		<div id="">
+
+		    {enhancements}
+
+
+		</div>
+	    </div>
+
+	    <div class="block-footer">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	</div>
+    </div>
+</if>
+<a name="attachments"></a>
+<div class="block-wrapper">
+    <div class="block">
+
+	<div class="block-top">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+	<div class="block-header">{_upload_product_photo}</div>
+	<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_photo}</div></div>
+	<div class="block-content"style="padding:{table_cellpadding}px;margin:none">
+	    <iframe name="fileuploader_iframe" id="fileuploader_iframe" width="100%" height="300px" scrolling="no" border="0" frameborder="0" class="" style="border:none;padding:none;margin:none" src="{ajaxurl}?do=fileuploaderform&pid={project_id}&attachtype=slideshow"></iframe>
+	</div>
+
+	<div class="block-footer">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+    </div>
+</div>
+
+<a name="itemshipping"></a>
+<div class="block-wrapper">
+    <div class="block">
+
+	<div class="block-top">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+	<div class="block-header">{_shipping_information}</div>
+        <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_item_location}</div></div>
+        <div class="block-content" style="padding:12px">
+	    <div>
+        	<label for="">
+                <input type="hidden" name="city" value="{city}" id="hidden_city" /><span id="hidden_city_text">{city}</span>,
+                <input type="hidden" name="state" value="{state}" id="hidden_state" /><span id="hidden_state_text">{state}</span>,
+                <input type="hidden" name="zipcode" value="{zipcode}" id="hidden_zipcode" /><span id="hidden_zipcode_text">{zipcode}</span>,
+                <input type="hidden" name="country" value="{country}" id="hidden_country" /><span id="hidden_country_text">{country}</span>
+            </label>
+        </div>
+	    <div class="smaller blue" style="padding-top:7px"><a href="javascript:void(0)" onclick="javascript:jQuery('#location_modal').jqm({modal: false}).jqmShow();">{_change_location}</a></div>
+        </div>
+	<div class="block-content-yellow-top" style="padding:{table_cellpadding}px"><div class="smaller">{_decide_how_you_will_ship_this_item_domestically_and_or_internationally}</div></div>
+	<div class="block-content" style="padding:0px">
+	    {shipping}
+        </div>
+        <div class="block-content-yellow-top" style="padding:{table_cellpadding}px" id="handlingfeeheader"><div class="smaller">{_enter_your_ship_handling_fee_if_applicable}</div></div>
+	<div class="block-content" style="padding:12px" id="handlingfeerow">
+	    {shipping_handling}
+        </div>
+        <!-- sales tax : coming soon --><div id="salestaxcontainer" style="display:none">
+	    <div class="block-content-yellow-top" style="padding:{table_cellpadding}px" id="salestaxheader"><div class="smaller">{_define_sales_tax_in_your_region_if_applicable}</div></div>
+	    <div class="block-content" style="padding:12px" id="salestaxrow">
+		{salestax}
+	    </div></div><!-- end sales tax -->
+        <!-- digital download --><div id="digitalfile" style="display:none"><div class="block-content-yellow-top" style="padding:{table_cellpadding}px"><div class="smaller">{_upload_the_product_or_digital_item_you_will_release_to_the_winner_bidder_upon_payment}</div></div>
+	    <div class="block-content" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x;">
+		<div id="">
+                    <div style="padding-top:5px">{uploaddigitalbutton} &nbsp;&nbsp;&nbsp;<span class="smaller gray">{_free}</span></div>
+                    <div style="padding-top:7px" id="digital_attachmentlist">{digital_attachmentlist}</div>
+                </div>
+	    </div></div><!-- end digital download -->
+        <div class="block-footer">
+	    <div class="block-right">
+		<div class="block-left"></div>
+	    </div>
+	</div>
+
+    </div>
+</div>
+
+<if condition="$ilconfig['product_returnpolicy_block']">
+    <div class="block-wrapper">
+	<div class="block">
+
+	    <div class="block-top">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	    <div class="block-header">
+		<span style="float:right; padding-top:3px" class="smaller gray"></span>{_return_policy}</div>
+	    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_describe_your_return_policy_for_bidders_and_buyers_to_review_before_they_purchase}</div></div>
+	    <div class="block-content" style="padding:0px">
+		<div>{returnpolicy}</div>
+	    </div>
+
+	    <div class="block-footer">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	</div>
+    </div>
+</if>
+
+{apihook[listing_forward_auction_create_1]}
+
+<if condition="$ilconfig['product_restrictions_block']">
+    <div class="block-wrapper">
+	<div class="block">
+
+	    <div class="block-top">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	    <div class="block-header">{_restrictions}</div>
+	    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_please_ensure_that_the_coresponding_checkbox_for_the_bid_filter}</div></div>
+	    <div class="block-content" style="padding:0px">
+		<div>{bidfilters}</div>
+	    </div>
+
+	    <div class="block-footer">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	</div>
+    </div>
+</if>
+
+<if condition="$ilconfig['product_invite_block']">
+    <div class="block-wrapper">
+	<div class="block">
+
+	    <div class="block-top">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	    <div class="block-header">{_invite_to_bid}</div>
+	    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_invitation_messages_will_only_be_sent_during_a_new_project_listing}</div></div>
+	    <div class="block-content" style="padding:{table_cellpadding}px">
+		<div id="">
+
+		    <div style="padding-top:5px">{inviteoptions}</div>
+
+
+		</div>
+	    </div>
+
+	    <div class="block-footer">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	</div>
+    </div>
+</if>
+
+<if condition="$ilance->GPC['cmd'] == 'new-item' AND $ilconfig['product_draft_block']">
+    <div class="block-wrapper">
+	<div class="block">
+
+	    <div class="block-top">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	    <div class="block-header">{_draft}</div>
+	    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_saving_as_draft_allows_you_to_edit_and_modify_this_listing_before_its_posted_live_to_the_marketplace}</div></div>
+	    <div class="block-content">
+		{saveasdraft}
+	    </div>
+
+	    <div class="block-footer">
+		<div class="block-right">
+		    <div class="block-left"></div>
+		</div>
+	    </div>
+
+	</div>
+    </div>
+</if>
+
+<if condition="$ilance->GPC['cmd'] == 'new-item' AND $ilconfig['globalauctionsettings_showfees'] OR isset($show['relist']) AND $ilconfig['globalauctionsettings_showfees']">
+    <div>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	    <tr>
+		<td width="50%" valign="top"><div id="insertionfees"></div></td>
+		<td>&nbsp;&nbsp;</td>
+		<td width="50%" valign="top"><div id="finalvaluefees"></div></td>
+	    </tr>
+	</table>
+    </div>
+</if>
+
+<div style="padding-top:12px; padding-bottom:12px; padding-left:9px; background-color:#ebebeb; display:none">
+    <strong>{_fees_to_post_this_listing}:</strong> &nbsp;&nbsp;<a href="javascript:void(0)" onmouseover="Tip('<div>' + phrase['_this_value_represents_the_listing_fees_you_have_selected_so_far'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a> &nbsp;&nbsp;<span id="feetotal">{currencysymbol} {feetotal}</span>
+</div>
+
+<div style="margin-top:{table_cellpadding}px;margin-bottom:{table_cellpadding}px">
+    <if condition="isset($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] AND isset($ilance->GPC['admincp']) AND $ilance->GPC['admincp'] AND $ilance->GPC['cmd'] == 'product-management'">
+	<div><input name="dosave" id="save" type="submit" value=" {_save} " class="buttons" accesskey="s" style="font-size:15px" /></div>
+	<else />
+	<if condition="isset($show['noupdateauction']) AND $show['noupdateauction'] AND !isset($show['relist'])">
+	    <div><input name="dosave" id="save" type="submit" value=" {_save} " class="buttons" accesskey="s" disabled="disabled" style="font-size:15px" /></div>
+	    <else />
+	    <if condition="$ilance->GPC['cmd'] == 'new-item' OR isset($show['relist'])">
+		<div><input name="dosubmit" id="submit" type="submit" value=" {_save} " class="buttons" accesskey="s" style="font-size:15px" /></div>
+		<else />
+		<div><input name="dosave" id="save" type="submit" value=" {_save} " class="buttons" accesskey="s" style="font-size:15px" /></div>
+	    </if>
+	</if>
+    </if>
+</div>
+</form>
+<!-- START location modal -->
+<script type="text/javascript">
+<!--
+function update_shipping_location(country, state, city, zipcode)
+{
+		fetch_js_object('hidden_country').value = fetch_js_object(country).value;
+		fetch_js_object('hidden_country_text').innerHTML = fetch_js_object(country).value;
+		fetch_js_object('hidden_salestaxentirecountry_text').innerHTML = fetch_js_object(country).value;
+		fetch_js_object('hidden_state').value = fetch_js_object(state).value;
+		fetch_js_object('hidden_state_text').innerHTML = fetch_js_object(state).value;
+		fetch_js_object('hidden_city').value = fetch_js_object(city).value;
+		fetch_js_object('hidden_city_text').innerHTML = fetch_js_object(city).value;
+		fetch_js_object('hidden_zipcode').value = fetch_js_object(zipcode).value;
+		fetch_js_object('hidden_zipcode_text').innerHTML = fetch_js_object(zipcode).value;
+		return true;
+}
+function update_dimentions()
+{
+		fetch_js_object('modal_ship_length').value = fetch_js_object('ship_length').value;
+		fetch_js_object('modal_ship_width').value = fetch_js_object('ship_width').value;
+		fetch_js_object('modal_ship_height').value = fetch_js_object('ship_height').value;
+		fetch_js_object('modal_ship_weightlbs').value = fetch_js_object('ship_weightlbs').value;
+		fetch_js_object('modal_ship_weightoz').value = fetch_js_object('ship_weightoz').value;
+}
+//-->
+</script>
+<div id="location_modal" class="modal modal_window"  style="display:none; cursor: default; width: 730px; height: 180px; margin-left:-390px">
+    <div class="bigtabs" style="padding-bottom:5px; padding-top:5px">
+	<div class="bigtabsheader"><span class="smaller gray" style="padding-top:6px; float:right">{_click_away_to_close_and_cancel_this_menu}</span>
+	    <h2>{_item_location}</h2>
+	</div>
+    </div>
+    <div style="clear:both;"></div>
+    <form name="ilform_modal" method="get" action="" accept-charset="UTF-8" style="margin:0px">
+	<div style="padding-left:9px;padding-top:{table_cellpadding}px" id="shippingcontainer">
+	    <table border="0" cellspacing="0" cellpadding="1">
+		<tr>
+		    <td><div>{_country}</div></td>
+		    <td>&nbsp;&nbsp;</td>
+		    <td><div>{_state_or_province}</div></td>
+		    <td>&nbsp;&nbsp;</td>
+		    <td><div>{_city_or_town}</div></td>
+		    <td>&nbsp;&nbsp;</td>
+		    <td><div>{_zip_code} <span class="smaller gray">&nbsp;(no spaces)</span></div></td>
+		</tr>
+		<tr>
+		    <td>{full_country_pulldown}</td>
+		    <td></td>
+		    <td>{full_states_pulldown}</td>
+		    <td></td>
+		    <td>{full_cities_pulldown}</td>
+		    <td></td>
+		    <td><input type="text" name="modal_zipcode" id="modal_zipcode" maxlength="15" size="10" value="{zipcode}" class="input" /></td>
+		</tr>
+	    </table>
+	    <div style="height:1px;width:100%;background-color:#ccc;margin-top:{table_cellpadding}px;margin-bottom:{table_cellpadding}px"></div>
+	    <div><input type="button" value=" {_save} " class="buttons" style="font-size:15px" onclick="update_shipping_location('modal_country', 'modal_state', 'modal_city', 'modal_zipcode');jQuery('#location_modal').jqm({modal: false}).jqmHide()" /></div>
+	</div>
+    </form>
+</div><!-- END location modal -->
+
+<!-- START shipping calculator modal -->
+<div id="shippingcalculator_modal" class="modal modal_window"  style="display:none;cursor: default; width: 610px; height: 470px">
+    <div class="bigtabs" style="padding-bottom:5px; padding-top:5px">
+	<div class="bigtabsheader">
+    
+    	<span class="smaller gray" style="padding-top:0px; float:right"><a href="javascript:;" onclick="javascript:jQuery('#shippingcalculator_modal').jqm({modal: false}).jqmHide();" title="{_close}" class="close">{_close}</a></span>
+    	<h2>{_research_shipping_rates}</a></h2>
+    
+	</div>
+    </div>
+    <div style="clear:both;"></div>
+    <form name="ilform_modal_calculator" method="get" action="" accept-charset="UTF-8" style="margin:0px">
+	<div style="padding-left:9px;padding-top:12px">
+	    <table border="0" cellspacing="0" cellpadding="3">
+		<tr>
+		    <td><div>{_ship_service}</div></td>
+		    <td>&nbsp;&nbsp;</td>
+		    <td nowrap="nowrap"><div id="modal_shipperid_container"><select id="modal_shipperid" name="modal_shipperid" class="input"><option value="0" selected="selected">-</option></select></div></td>
+		</tr>
+		<tr>
+		    <td><div>{_package_type}</div></td>
+		    <td></td>
+		    <td><div id="modal_packagetype_container"><select id="modal_packagetype" name="modal_packagetype" class="input"><option value="0" selected="selected">-</option></select></div></td>
+		</tr>
+		<tr>
+		    <td><div>{_pickup_type}</div></td>
+		    <td></td>
+		    <td><div id="modal_pickuptype_container"><select id="modal_pickuptype" name="modal_pickuptype" class="input"><option value="0" selected="selected">-</option></select></div></td>
+		</tr>
+	    </table>
+	    <div style="height:1px;width:100%;background-color:#ccc;margin-top:12px;margin-bottom:12px"></div>
+	    <table border="0" cellspacing="0" cellpadding="3">
+		<tr>
+		    <td><div>{_ship_from}</div></td>
+		    <td><div>{_state}</div></td>
+            <td><div>{_city}</div></td>
+		    <td nowrap="nowrap"><div>{_zip_code}</div></td>
+		</tr>
+		<tr>
+		    <td>{shipfrom_country_pulldown}</td>
+		    <td>{shipfrom_states_pulldown}</td>
+            <td>{shipfrom_city_pulldown}</td>
+		    <td><input type="text" name="modal_zipcode_from" id="modal_zipcode_from" maxlength="15" size="10" value="{zipcode}" class="input" /></td>
+		</tr>
+	    </table>
+	    <div style="padding-bottom:6px"></div>
+	    <table border="0" cellspacing="0" cellpadding="3">
+		<tr>
+		    <td><div>{_destination}</div></td>
+		    <td><div>{_state}</div></td>
+            <td><div>{_city}</div></td>
+		    <td nowrap="nowrap"><div>{_zip_code}</div></td>
+		</tr>
+		<tr>
+		    <td>{shipto_country_pulldown}</td>
+		    <td>{shipto_states_pulldown}</td>
+            <td>{shipto_city_pulldown}</td>
+		    <td><input type="text" name="modal_zipcode_to" id="modal_zipcode_to" maxlength="15" size="10" value="" class="input" /></td>
+		</tr>
+	    </table>
+	    <div style="height:1px;width:100%;background-color:#ccc;margin-top:12px;margin-bottom:12px"></div>
+	    <span style="float:right;margin-right:20px"><img id="modal_shippingbox" src="{template_relativeimagepath}{template_imagesfolder}shippingbox.png" border="0" alt="" id="" /></span>
+	    <div style="padding-top:3px">{_dimentions} <span class="smaller litegray">&nbsp;&nbsp;({_length_x_width_x_height})</span></div>
+	    <div style="padding-top:3px"><input type="text" id="modal_ship_length" name="modal_ship_length" value="12" class="input" size="5" maxlength="10">&nbsp;{_inches_shortform}&nbsp;&nbsp;&nbsp;X&nbsp;<input type="text" id="modal_ship_width" name="modal_ship_width" value="12" class="input" size="5" maxlength="10">&nbsp;{_inches_shortform}&nbsp;&nbsp;&nbsp;X&nbsp;<input type="text" id="modal_ship_height" name="modal_ship_height" value="12" class="input" size="5" maxlength="10">&nbsp;{_inches_shortform}</div>
+	    <div style="padding-top:9px">{_package_weight}</div>
+	    <div style="padding-top:3px"><input type="text" id="modal_ship_weightlbs" name="modal_ship_weightlbs" value="1.0" style="position:relative" size="5" maxlength="10" class="input">&nbsp;&nbsp;{_lbs}&nbsp;&nbsp;&nbsp;<input type="text" id="modal_ship_weightoz" name="modal_ship_weightoz" value="0" style="position:relative" size="5" maxlength="10" class="input">&nbsp;&nbsp;{_oz}</div>
+	    <div style="height:1px;width:100%;background-color:#ccc;margin-top:12px;margin-bottom:12px"></div>
+	    <div><span style="float:right; font-size:21px; padding-top:3px; padding-right:12px" id="shiprate" class="black"></span><input type="button" id="modal_calculatebutton" value=" {_calculate} " class="buttons" style="font-size:15px" onclick="do_calculate_shipping()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:void(0)" onclick="jQuery('#shippingcalculator_modal').jqm({modal: false}).jqmHide()">{_close}</a></span></div>
+	</div>
+    </form>
+</div><!-- END shipping calculator modal -->
+
+<script type="text/javascript">
+<!--
+			    setupAllTabs();
+//-->
+</script>
+{js_end}

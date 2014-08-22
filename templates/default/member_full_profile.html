@@ -1,0 +1,195 @@
+<loop name="memberinfo">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td width="1" valign="top">{profile_logo}</td>
+	<td>&nbsp;&nbsp;&nbsp;</td>
+	<td width="100%" valign="top"><div style="padding-bottom:6px; padding-top:10px" class="blueonly"><h1>{vendorname}</h1><if condition="isset($show['openingstatement']) AND $show['openingstatement']"><div style="font-size:15px; padding-top:3px" class="black">{openingstatement}</div></if></div>
+	<div class="litegray">{_member_since} {membersince}</div></td>
+</tr>
+</table>
+
+<br />
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class=""><a href="{fullprofileurl}" rel="nofollow">{_feedback}</a></li>
+	<li title="" class="on"><a href="javascript:void(0)">{_full_profile}</a></li>
+    <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']"><!--<li title="" class=""><a href="{jobhistoryurl}">{_job_history}</a></li>--></if>
+	<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND isset($show['portfoliolink']) AND $show['portfoliolink']"><li title="" class=""><a href="{http_server}{ilpage[portfolio]}?id={uid}" rel="nofollow">{_portfolio}</a></li></if>
+	<if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND !empty($uid) AND ($_SESSION['ilancedata']['user']['userid'] == $uid OR $_SESSION['ilancedata']['user']['username'] == $ilance->GPC['id'])"><li title="" class="highlight"><a href="{ilpage[selling]}?cmd=profile">{_edit}</a></li></if>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td width="30%" valign="top">
+	
+		
+		<div class="block-wrapper">
+
+			<div class="block3">
+			
+					<div class="block3-top">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+					<div class="block3-header">{_profile}</div>
+					<div class="block3-content" style="padding:0px">
+					<table width="100%" border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+					<tr class="alt1" valign="top"> 
+						<td align="left"><img src="{template_relativeimagepath}{template_imagesfolder}worldmap_small.png" border="0" alt="{_location}" id="" /></td>
+						<td align="left" nowrap="nowrap"><div>{city_state}, {country}</div><div style="padding-top:6px"><span>{_local_time}:</span> <span class="gray">{localtime}</span></div></td>
+					</tr>
+					<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND $ilconfig['enableskills']"><tr class="alt1" valign="top"> 
+						<td align="left" nowrap="nowrap"><span class="gray">{_skills}</span></td>
+						<td align="left" valign="top"><if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND ($_SESSION['ilancedata']['user']['userid'] == $uid OR $_SESSION['ilancedata']['user']['username'] == $ilance->GPC['id'])"><span style="float:right; padding-left:4px" class="smaller">[ <span class="blue"><a href="{ilpage[selling]}?cmd=skills" rel="nofollow">{_edit}</a></span> ]</span></if><span class="black">{skills}</span></td>
+					</tr></if>
+					<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']"><tr class="alt1"> 
+						<td width="25%" align="left" nowrap="nowrap"><span class="gray">{_hourly_rate}</span>&nbsp;&nbsp; </td>
+						<td width="75%" align="left" nowrap="nowrap"><if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND ($_SESSION['ilancedata']['user']['userid'] ==$uid OR $_SESSION['ilancedata']['user']['username'] == $ilance->GPC['id'])"><span style="float:right" class="smaller">[ <span class="blue"><a href="{ilpage[selling]}?cmd=profile" rel="nofollow">{_edit}</a></span> ]</span></if><strong>{rateperhour}</strong> <span class="smaller litegray">/hr</span></td>
+					</tr></if>
+					<loop name="registration_questions"><tr valign="top" class="alt1">
+						<td align="left"><span class="gray">{question}</span></td>
+						<td align="left"><span class="blue">{answer}</span></td>
+					</tr>
+					</loop name="registration_questions">
+                    <tr valign="top"> 
+						<td align="left" nowrap="nowrap"><span class="gray">{_status}</span></td>
+						<td align="left" nowrap="nowrap">{isonline}<div style="padding-top:4px"><span>{_last_seen}: <span class="gray">{lastseen}</span></span></div></td>
+					</tr>
+					</table>
+					</div>
+					
+					<div class="block3-footer">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+
+		<if condition="isset($show['profilevideo']) AND $show['profilevideo']">
+		<div class="block-wrapper">
+
+			<div class="block3">
+			
+					<div class="block3-top">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+					<div class="block3-header"><if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND ($_SESSION['ilancedata']['user']['userid'] == $uid OR $_SESSION['ilancedata']['user']['username'] == $ilance->GPC['id'])"><span style="float:right; padding-top:2px" class="smaller">[ <span class="blue"><a href="{ilpage[selling]}?cmd=profile" rel="nofollow">{_edit}</a></span> ]</span></if>{_video}</div>
+					
+					<div class="block3-content" style="padding:9px" align="center">
+						
+						{profilevideo}
+						
+					</div>
+					
+					<div class="block3-footer">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+		</if>
+		
+        <h1 style="padding-bottom:6px">{_member_links}</h1>
+			<if condition="isset($show['invite_to_bid']) AND $show['invite_to_bid']"><span class="blue"><a href="{https_server}{ilpage[rfp]}?cmd=rfp-invitation&amp;id={uid}" rel="nofollow"><strong>{_invite_to_bid}</strong></a></span></if>
+			<if condition="$ilconfig['globalauctionsettings_productauctionsenabled']"><div style="padding-top:6px"><span class="blue"><a href="{ilpage[search]}?mode=product&amp;searchuser={vendorname_plain}" rel="nofollow">{_see_items_listed_by_this_member}</a></span></div></if>
+			<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']"><div style="padding-top:6px"><span class="blue"><a href="{ilpage[search]}?mode=service&amp;searchuser={vendorname_plain}" rel="nofollow">{_see_projects_listed_by_this_member}</a></span></div></if>
+        
+		{apihook[leftnav_member]}
+	
+	</td>
+	<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	<td valign="top" width="100%">
+	<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']">
+	
+	<div class="block-wrapper">
+
+		<div class="block4">
+		
+				<div class="block4-top">
+						<div class="block4-right">
+								<div class="block4-left"></div>
+						</div>
+				</div>
+				
+				<div class="block4-header">{_learn_more}</div>
+				
+				<div class="block4-content" style="padding:0px">
+					
+					<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%">
+					<loop name="default_profile_question_groups">
+					<if condition="empty($GLOBALS['no_default_profile_questions{groupid}'])">
+					<loop name="default_profile_questions{groupid}">
+					<tr class="alt1">
+						<td>
+						<div>
+						
+						<if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND ($_SESSION['ilancedata']['user']['userid'] == $uid OR $_SESSION['ilancedata']['user']['username'] == $ilance->GPC['id'])"><span style="float:right" class="smaller">&nbsp;&nbsp;[ <span class="blue"><a href="{ilpage[selling]}?cmd=profile" rel="nofollow">{_edit}</a></span> ]</span></if>
+						<span style="float:right">{is_verified}</span>	
+						<div style="font-size:13px; padding-bottom:4px">{question}</div>
+						<div style="font-size:13px; padding-bottom:4px; font-size: 10px" class="gray">{description}</div>
+						<div style="padding-bottom:2px" class="gray">{answer}</div>
+						<!--<div class="smaller gray" align="right"><em>Answered: <strong>{daysago}</strong> days ago</em></div>-->
+						<!--<div class="smaller gray" align="right"><em>Updated: <strong>{updated}</strong></em></div>-->
+						</div>
+						</td>
+				  </tr>
+				  </loop name="default_profile_questions{groupid}">
+				  </if>
+				  </loop name="default_profile_question_groups">
+				  <loop name="profile_question_groups">
+				  <if condition="empty($GLOBALS['no_profile_questions{groupid}'])">
+				  <tr>
+						<td class="alt2_top"><span style="font-size:13px"><strong>{groupdescription}</strong></span></td>
+				  </tr>
+				  <loop name="profile_questions{groupid}">
+				  <tr class="alt1">
+						<td>
+					  
+						<div>
+						
+						<if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND ($_SESSION['ilancedata']['user']['userid'] == $uid OR $_SESSION['ilancedata']['user']['username'] == $ilance->GPC['id'])"><span style="float:right" class="smaller">&nbsp;&nbsp;[ <span class="blue"><a href="{ilpage[selling]}?cmd=profile-specifics" rel="nofollow">{_edit}</a></span> ]</span></if>
+						<span style="float:right">{is_verified}</span>	
+						<div style="font-size:13px; padding-bottom:4px">{question}</div>
+						<div style="font-size:13px; padding-bottom:4px; font-size: 10px" class="gray">{description}</div>
+						<div style="padding-bottom:2px" class="gray">{answer}</div>
+						<!--<span class="smaller gray" style="float:right"><em>Answered: <strong>{daysago}</strong> days ago</em></span>-->
+						<!--<div class="smaller gray" align="right"><em>Updated: <strong>{updated}</strong></em></div>-->
+						</div></td>
+				  </tr>
+				  </loop name="profile_questions{groupid}">
+				  </if>
+				  </loop name="profile_question_groups">
+				  <tr>
+				  		<td><div style="padding-top:6px"><span class="smaller gray">{_something_not_look_right}</span> <span class="smaller blue"><a href="{https_server}{ilpage[abuse]}?cmd=profile&amp;id={uid}" rel="nofollow">{_report_abuse}</a></span></div></td>
+				  </tr>
+				  </table>
+					
+				</div>
+				
+				<div class="block4-footer">
+						<div class="block4-right">
+								<div class="block4-left"></div>
+						</div>
+				</div>
+				
+		  </div>
+	</div>
+	</if>
+	</td>
+	
+</tr>
+</table>

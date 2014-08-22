@@ -1,0 +1,54 @@
+<div id="v3body4">
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+	<!-- content -->
+	<div id="content">
+	<h1>{_product_addons}</h1><br />
+	
+		<div class="block-wrapper">
+		<div class="block3">
+				<div class="block3-top">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				<div class="block3-header"><span style="float:left; padding-top:4px; padding-right:10px"><a href="javascript:void(0)" onclick="return toggle('components_menu');"><img id="collapseimg_components_menu" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_components_menu]}.gif" border="0" alt="" /></a></span>{_installed_products_and_addons}</div>
+				<div class="block3-content" style="padding:0px">
+					<table width="100%" cellpadding="12" cellspacing="0">
+					<tbody id="collapseobj_components_menu" style="{collapse[collapseobj_components_menu]}">
+					<tr class="alt2">
+						<td width="33%" class="smaller">{_product}</td>
+						<td width="6%" nowrap="nowrap" class="smaller">{_version}</td>
+						<td width="6%" nowrap="nowrap" class="smaller">{_latest_version}</td>
+						<td width="12%" nowrap="nowrap" class="smaller">{_phrases}</td>
+						<td width="11%" nowrap="nowrap" class="smaller">{_css}</td>
+						<td width="12%" nowrap="nowrap" class="smaller">{_email}</td>
+						<td width="12%" nowrap="nowrap" class="smaller">{_tasks}</td>
+						<td width="20%" nowrap="nowrap" class="smaller">{_developer}</td>
+					</tr>
+					{cbaddons}
+					</tbody>
+					</table>
+				</div>
+				<div class="block3-footer">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+		</div>
+	</div>	
+	
+	<div style="padding-top:15px"></div>		
+	<div><loop name="modulegroups"><!-- module pane --><div class="tab-pane" id="{modulegroup}{id}"><loop name="moduletabs{id}">{moduletab}</loop name="moduletabs{id}"></div><!-- / module pane --></loop name="modulegroups"></div>
+	<script type="text/javascript">
+	<!--
+	inlineCB = new iL_Inline('inlineCB', 'single', 'stores', '{_go}');
+	//-->
+    </script>

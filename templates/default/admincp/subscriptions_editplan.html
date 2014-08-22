@@ -1,0 +1,112 @@
+<div id="v3body4"> 
+<!-- sub navigation -->
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+<!-- /sub navigation -->
+<div id="content">
+<h1>{_update_subscription_plan}</h1><br />
+
+<div class="tab-pane" id="editsubscriptionplan">
+	<div class="tab-page">
+    <h2 class="tab">{_details}</h2>
+	<form method="post" action="{ilpage[settings]}" name="updatesubscriptionplan" accept-charset="UTF-8" style="margin: 0px;">
+	<input type="hidden" name="cmd" value="subscriptions" />
+	<input type="hidden" name="subcmd" value="_update-subscription-plan" />
+	<input type="hidden" name="subscriptionid" value="{subscriptionid}" />
+	<input type="hidden" name="return" value="{ilpage[settings]}?cmd=subscriptions" />
+	<div class="block-wrapper">
+	<div class="block">
+	
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{_update_subscription_plan}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_update_the_subscription_plan_using_the_form_below}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					<tr class="alt1"> 
+						<td valign="middle"><span class="gray">{_role_assignment}</span></td>
+						<td nowrap="nowrap">{role_pulldown}</td>
+					</tr>
+					
+					<loop name="languages">
+					<tr class="alt1"> 
+						<td width="35%"><span class="gray">{_subscription_plan_name} {_in} {language}</span></td>
+						<td width="65%"><input type="text" name="title_{languagecode}" size="40" value="{title}" style="width:500px" class="input" /></td>
+					</tr>
+					<tr class="alt1"> 
+						<td valign="top"><span class="gray">{_subscription_plan_description} {_in} {language}</span></td>
+						<td><input type="text" name="description_{languagecode}" size="40" value="{description}" style="width:500px" class="input" /></td>
+					</tr>
+					</loop name="languages">
+					<tr class="alt1"> 
+						<td valign="middle"><span class="gray">{_cost}</span></td>
+						<td width="65%"><input type="text" name="cost" size="10" value="{cost}" style="width:10%" class="input" /></td>
+					</tr>
+					<tr class="alt1"> 
+						<td valign="middle"><span class="gray">{_length}</span></td>
+						<td>{duration_pulldown}</td>
+					</tr>
+					<tr class="alt1"> 
+						<td valign="middle" nowrap="nowrap"><span class="gray">{_units}</span></td>
+						<td nowrap="nowrap">{units_pulldown}</td>
+					</tr>
+					<tr class="alt1"> 
+						<td valign="middle" nowrap="nowrap"><span class="gray">{_permissions_group}</span></td>
+						<td nowrap="nowrap">{permission_group_pulldown}</td>
+					</tr>
+					<tr class="alt1"> 
+						<td valign="middle" nowrap="nowrap"><span class="gray">{_plan_is_active}</span></td>
+						<td nowrap="nowrap">{active_pulldown}</td>
+					</tr>
+					<tr class="alt1"> 
+						<td valign="middle" nowrap="nowrap"><span class="gray">{_plan_is_visible_in}</span></td>
+						<td nowrap="nowrap">{visible_pulldown}</td>
+					</tr>
+					<tr class="alt1"> 
+						<td valign="middle" nowrap="nowrap"><span class="gray">{_subscription_plan_icon}</span></td>
+						<td nowrap="nowrap"><input type="text" name="icon" size="40" value="{icon}" class="input" />
+						<div class="smaller">{_more_icons_can_be_found_in} {http_server}images/default/icons/</div></td>
+					</tr>
+					<tr class="alt1"> 
+						<td valign="middle" nowrap="nowrap"><span class="gray">{_sort}</span></td>
+						<td width="65%"><input type="text" name="sort" size="10" value="{sort}" style="width:10%" class="input" /></td>
+					</tr>
+					<tr class="alt2">
+						<td colspan="2"><strong>{_auto_subscription_migration_options}</strong></td>
+					</tr>
+					<tr class="alt1">
+						<td valign="middle"><span class="gray">{_auto_migrate_plan_to_subscription}</span></td>
+						<td nowrap="nowrap">{migrate_plan_pulldown}</td>
+					</tr>
+					<tr class="alt1">
+						<td valign="middle" nowrap="nowrap"><span class="gray">{_auto_migration_billing_logic}</span></td>
+						<td nowrap="nowrap">{migrate_billing_pulldown}</td>
+					</tr>
+					<tr class="alt2_top">
+						<td colspan="2"><input type="submit" name="save" value=" {_save} " style="font-size:15px" class="buttons" onClick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" />&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[settings]}?cmd=subscriptions">{_cancel}</a></span></td>
+						</tr>
+					</table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>
+</div>
+</div>

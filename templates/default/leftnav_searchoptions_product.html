@@ -1,0 +1,159 @@
+<if condition="isset($show['searchengine']) AND $show['searchengine']"><else />
+{apihook[leftnav_searchoptions_product_start]}
+
+<if condition="isset($ilconfig['search_currency_tab']) AND $ilconfig['search_currency_tab']"><if condition="isset($ilconfig['globalserverlocale_currencyselector']) AND $ilconfig['globalserverlocale_currencyselector']"><!-- START currency selector --><div class="block-content-yellow" style="padding-top:9px; padding-bottom:9px" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+    <span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_currencies}</span></span>
+    <span style="float:{template_textalignment}; padding-top:5px; padding-{template_textalignment_alt}:10px" onClick="toggle('leftnav_currency')"><img id="collapseimg_leftnav_currency" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_currency]}.gif" border="0" alt="" /></span>
+    <span class="gray" onClick="toggle('leftnav_currency')"><strong>{_currency}</strong></span>
+</div>
+<div class="block-content alt1" id="collapseobj_leftnav_currency" style="{collapse[collapseobj_leftnav_currency]} padding:6px">
+<div style="padding-top:6px; padding-bottom:6px">
+{leftnav_currencies}
+</div>
+</div><!-- END currency selector --></if></if>
+
+<if condition="isset($ilconfig['search_price_tab']) AND $ilconfig['search_price_tab']"><!-- START price range -->
+<div class="block-content-yellow" style="padding-top:9px; padding-bottom:9px" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+    <span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_price}</span></span>
+    <span style="float:{template_textalignment}; padding-top:5px; padding-{template_textalignment_alt}:10px" onClick="toggle('leftnav_pricerange')"><img id="collapseimg_leftnav_pricerange" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_pricerange]}.gif" border="0" alt="" /></span>
+    <span class="gray" onClick="toggle('leftnav_pricerange')"><strong>{_price}</strong></span>
+</div>
+<div class="block-content alt1" id="collapseobj_leftnav_pricerange" style="{collapse[collapseobj_leftnav_pricerange]} padding:6px">
+<div style="padding-top:6px; padding-bottom:14px">
+<form name="minisearchprice" method="get" id="searchformleftprice" action="{ilpage[search]}" accept-charset="UTF-8" style="margin:0px">	
+{hiddenfields_leftnav}
+<div style="padding-top:6px">
+    <span class="smaller">
+	<strong>{_from}</strong>
+	{vars[currency_symbol_left]}<input type="text" id="frompricerange" name="fromprice" value="{fromprice}" size="2" class="input" onFocus="submitprice_focus()" onBlur="submitprice_blur('frompricerange')" />{vars[currency_symbol_right]} 
+	<strong>{_to}</strong> 
+	{vars[currency_symbol_left]}<input type="text" id="topricerange" name="toprice" value="{toprice}" size="2" class="input" onFocus="submitprice_focus()" onBlur="submitprice_blur('topricerange')" />{vars[currency_symbol_right]}
+    </span><!--
+    <span class="smaller">
+	<strong>{_between}</strong>
+	{vars[currency_symbol_left]}<input type="text" id="betweenpricerange" name="betweenprice" value="{betweenprice}" size="2" class="input" onFocus="submitprice_focus()" onBlur="submitprice_blur('betweenpricerange')" />{vars[currency_symbol_right]} 
+	<strong>{_and}</strong>
+	{vars[currency_symbol_left]}<input type="text" id="andpricerange" name="andprice" value="{andprice}" size="2" class="input" onFocus="submitprice_focus()" onBlur="submitprice_blur('andpricerange')" />{vars[currency_symbol_right]}
+    </span>-->
+    <if condition="isset($ilance->GPC['fromprice']) OR isset($ilance->GPC['toprice']) OR isset($ilance->GPC['andmprice']) OR isset($ilance->GPC['betweenprice'])">
+	    <span style="float:{template_textalignment_alt};padding-top:3px"><input type="submit" id="submitprice" value="{_go}" class="buttons_smaller" /></span>
+    <else />
+	    <span style="float:{template_textalignment_alt};padding-top:3px"><input type="submit" id="submitprice" value="{_go}" class="buttons_smaller" style="display:none" /></span>
+    </if>
+</div>
+</form>
+</div>
+</div>
+<!-- END price range --></if>
+
+<if condition="isset($ilconfig['search_seller_tab']) AND $ilconfig['search_seller_tab']"><!-- START specific seller --><div class="block-content-yellow" style="padding-top:9px; padding-bottom:9px"" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+    <span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_searchuser}</span></span>
+    <span style="float:{template_textalignment}; padding-top:5px; padding-{template_textalignment_alt}:10px" onClick="toggle('leftnav_specificseller')"><img id="collapseimg_leftnav_specificseller" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_specificseller]}.gif" border="0" alt="" /></span>
+    <span class="gray" onClick="toggle('leftnav_specificseller')"><strong>{_seller}</strong></span>
+</div>
+<div class="block-content alt1" id="collapseobj_leftnav_specificseller" style="{collapse[collapseobj_leftnav_specificseller]} padding:6px">
+<div style="padding-top:6px; padding-bottom:6px">
+<if condition="isset($ilance->GPC['searchuser']) AND !empty($ilance->GPC['searchuser'])"><div style="padding-bottom:4px"><span style="float:{template_textalignment}; padding-top:2px; padding-{template_textalignment_alt}:10px"><img src="{template_relativeimagepath}{template_imagesfolder}leftnav/selected.png" border="0" alt="" id="" name="sel_searchuser1" /></span><span class="black"><a href="{clear_searchuser_url}" onMouseOver="rollovericon('sel_searchuser1', '{template_relativeimagepath}{template_imagesfolder}leftnav/selectedclear.png')" onMouseOut="rollovericon('sel_searchuser1', '{template_relativeimagepath}{template_imagesfolder}leftnav/selected.png')"><strong>{_include}: {searchuser}</strong></a></span></div>
+<else /><form name="minisearchuser" method="get" id="searchformleftuser" action="{ilpage[search]}" accept-charset="UTF-8" style="margin:0px">	
+{hiddenfields_leftnav}
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr> 
+    <td><span style="float:{template_textalignment_alt}; padding-top:3px"><if condition="isset($ilance->GPC['searchuser']) AND !empty($ilance->GPC['searchuser'])"><input type="submit" id="submitseller" value="{_go}" class="buttons_smaller" /><else /><input type="submit" id="submitseller" value="{_go}" class="buttons_smaller" style="display:none" /></if></span><input type="text" id="productsearchuser" name="searchuser" value="{searchuser}" maxlength="50" size="16" class="input" onFocus="if(fetch_js_object('submitseller').style.display = 'none'){fetch_js_object('submitseller').style.display = ''}" onBlur="display_button('productsearchuser')" /></td>
+</tr>
+<tr>
+    <td><div style="padding-top:3px"><label for="exactname"><if condition="isset($ilance->GPC['exactname']) AND $ilance->GPC['exactname']"><input type="checkbox" name="exactname" value="1" id="productexactname" checked="checked" /><else /><input type="checkbox" name="exactname" value="1" id="productexactname" /></if> <span class="smaller black">{_exact_name}</span></label></div></td>
+</tr>
+</table>
+</form></if>
+</div>
+</div><!-- END specific seller --></if>
+
+<if condition="isset($ilconfig['search_location_tab']) AND $ilconfig['search_location_tab']">
+<!-- START region --><div class="block-content-yellow" style="padding-top:9px; padding-bottom:9px" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+    <span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_region}</span></span>
+    <span style="float:{template_textalignment}; padding-top:5px; padding-{template_textalignment_alt}:10px" onClick="toggle('leftnav_regionfilter')"><img id="collapseimg_leftnav_regionfilter" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_regionfilter]}.gif" border="0" alt="" /></span>
+    <span class="gray" onClick="toggle('leftnav_regionfilter')"><strong>{_location}</strong></span>
+</div>
+<div class="block-content alt1" id="collapseobj_leftnav_regionfilter" style="{collapse[collapseobj_leftnav_regionfilter]}padding:6px">
+    <div style="padding-left:2px; padding-bottom:4px">{leftnav_regions}</div>
+    <div style="padding-bottom:6px; padding-left:21px"><span class="blue"><a href="javascript:void(0)" onClick="javascript:jQuery('#zipcode_nag_modal').jqm({modal: false}).jqmShow();"><strong>{_my_region_dot_dot}</strong></a></span></div>    
+</div><!-- END region --></if>
+</if>
+<if condition="isset($ilconfig['search_localsearch_tab']) AND $ilconfig['search_localsearch_tab']"><if condition="!empty($ilance->GPC['country']) OR !empty($ilance->GPC['city']) OR !empty($ilance->GPC['state'])"><!-- START local search --><div class="block-content-yellow" style="padding-top:9px; padding-bottom:9px" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+    <span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_local}</span></span>
+    <span style="float:{template_textalignment}; padding-top:5px; padding-{template_textalignment_alt}:10px" onClick="toggle('leftnav_searchlocal')"><img id="collapseimg_leftnav_searchlocal" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_searchlocal]}.gif" border="0" alt="" /></span>
+    <span class="gray" onClick="toggle('leftnav_searchlocal')"><strong>{_city_or_state}</strong></span>
+</div>
+<div class="block-content alt1" id="collapseobj_leftnav_searchlocal" style="{collapse[collapseobj_leftnav_searchlocal]} padding:6px">
+    <form name="minisearchcitystate" method="get" id="minisearchcitystate" action="{php_self}" accept-charset="UTF-8" style="margin:0px">	
+    {hiddenfields_leftnav}
+    <table cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td align="{template_textalignment_alt}"><div style="padding-bottom:4px;"><span style="float:{template_textalignment_alt}; padding-top:6px;padding-{template_textalignment}:4px"><input type="submit" id="submitlocalsearch" value="{_go}" class="buttons_smaller" /></span><span style="padding-bottom:4px; padding-top:3px; float:{template_textalignment}" class="black">{_city}</span><input type="text" name="city" id="incity3_3" maxlength="100" size="11" value="{city}" class="input" /></div></td>
+    </tr>
+    <tr>
+        <td align="{template_textalignment_alt}"><div style="padding-bottom:4px"><span style="float:{template_textalignment_alt}; padding-top:2px;padding-{template_textalignment}:4px"><input type="submit" id="submitlocalsearch" value="{_go}" class="buttons_smaller" /></span><span style="padding-bottom:4px; padding-top:3px; float:{template_textalignment}" class="black">{_state}</span><input type="text" name="state" id="state3_3" maxlength="100" size="11" value="{state}" class="input" /></div></td>
+    </tr>
+    </table>
+    </form>    
+</div><!-- END local search --></if>
+
+<if condition="isset($ilconfig['search_radius_tab']) AND $ilconfig['search_radius_tab']"><if condition="$ilconfig['globalserver_enabledistanceradius'] AND isset($ilance->GPC['country']) AND !empty($ilance->GPC['country'])"><!-- START distance -->
+<div class="block-content-yellow" style="padding-top:9px; padding-bottom:9px" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+    <span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_distance}</span></span>
+    <span style="float:{template_textalignment}; padding-top:5px; padding-{template_textalignment_alt}:10px" onClick="toggle('leftnav_radiusfilter')"><img id="collapseimg_leftnav_radiusfilter" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_radiusfilter]}.gif" border="0" alt="" /></span>
+    <span class="gray" onClick="toggle('leftnav_radiusfilter')"><strong>{_radius}</strong></span>
+</div>
+<div class="block-content alt1" id="collapseobj_leftnav_radiusfilter" style="{collapse[collapseobj_leftnav_radiusfilter]} padding:6px">    
+  <form name="minisearchdistance" method="get" id="searchformleftprice" action="{php_self}" accept-charset="UTF-8" style="margin:0px">	
+    {hiddenfields_leftnav}
+    <div style="padding-top:5px">{vars[radius_pulldown]}&nbsp;{_of}&nbsp;&nbsp;<span style="float:{template_textalignment_alt}; padding-top:4px"><input type="submit" id="submitdistance" value="{_go}" class="buttons_smaller" /></span><input type="text" id="productradiuszip" name="radiuszip" maxlength="15" size="6" value="{radiuszip}" style="font-family: verdana" />
+    </div>
+    <div style="padding-top:7px; padding-bottom:5px"></div>
+    </form>
+</div><!-- END distance --></if></if>
+
+<if condition="isset($ilconfig['search_bidrange_tab']) AND $ilconfig['search_bidrange_tab']"><!-- START bid range --><div class="block-content-yellow" style="padding-top:9px; padding-bottom:9px" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+    <span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_bidrange}</span></span>
+    <span style="float:{template_textalignment}; padding-top:5px; padding-{template_textalignment_alt}:10px" onClick="toggle('leftnav_productbidrange')"><img id="collapseimg_leftnav_productbidrange" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_productbidrange]}.gif" border="0" alt="" /></span>
+    <span class="gray" onClick="toggle('leftnav_productbidrange')"><strong>{_bid_range}</strong></span>
+</div>
+<div class="block-content alt1" id="collapseobj_leftnav_productbidrange" style="{collapse[collapseobj_leftnav_productbidrange]} padding:6px">						
+    <div>{search_bidrange_pulldown_product}</div>
+</div><!-- END bid range --></if>
+
+
+<if condition="isset($ilconfig['search_options_tab']) AND $ilconfig['search_options_tab']"><!-- START options --><div class="block-content-yellow" style="padding-top:9px; padding-bottom:9px" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+    <span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_options}</span></span>
+    <span style="float:{template_textalignment}; padding-top:5px; padding-{template_textalignment_alt}:10px" onClick="toggle('leftnav_refinesearch')"><img id="collapseimg_leftnav_refinesearch" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_refinesearch]}.gif" border="0" alt="" /></span>
+    <span class="gray" onClick="toggle('leftnav_refinesearch')"><strong>{_options}</strong></span>
+</div>
+<div class="block-content" id="collapseobj_leftnav_refinesearch" style="{collapse[collapseobj_leftnav_refinesearch]} padding:6px"><div>{leftnav_options}</div></div><!-- END options --></if>
+
+<if condition="isset($ilconfig['search_colors_tab']) AND $ilconfig['search_colors_tab']"><!-- START color --><div class="block-content-yellow" style="padding-top:9px; padding-bottom:9px" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">
+    <span style="float:right"><span class="smaller blueonly"></span></span>
+    <span style="float:{template_textalignment}; padding-top:5px; padding-{template_textalignment_alt}:10px" onClick="toggle('leftnav_color')"><img id="collapseimg_leftnav_color" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_leftnav_color]}.gif" border="0" alt="" /></span>
+    <span class="gray" onClick="toggle('leftnav_color')"><strong>{_colour}</strong></span>
+</div>
+<div class="block-content" id="collapseobj_leftnav_color" style="{collapse[collapseobj_leftnav_color]} padding:6px">						
+    <div>{search_color_pulldown}</div>
+</div><!-- END color --></if>
+<script language="javascript" type="application/javascript">
+function display_button(field)
+{
+    if (fetch_js_object(field).value == '')
+    {
+	   fetch_js_object('submitseller').style.display = 'none';
+    }
+}
+function submitprice_focus()
+{
+    if(fetch_js_object('submitprice').style.display = 'none'){fetch_js_object('submitprice').style.display = ''}
+}
+function submitprice_blur(field)
+{
+    if(fetch_js_object('submitprice').style.display == '' && fetch_js_object(field).value == ''){fetch_js_object('submitprice').style.display = 'none'}
+}
+</script>
+{apihook[leftnav_searchoptions_product_end]}
+</if>

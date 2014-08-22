@@ -1,0 +1,36 @@
+{template_htmldoctype}
+<html dir="{template_textdirection}" lang="{template_languagecode}" {template_htmlextra}>
+<head>
+<title>{page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={template_charset}">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+<if condition="PROTOCOL_REQUEST == 'https'"><base href="{https_server}"><else /><base href="{http_server}"></if>
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta name="description" content="{template_metadescription}">
+<meta name="keywords" content="{template_metakeywords}">
+{headinclude}
+</head>
+<body {onload}>
+
+    {headerbit}
+    
+    <!-- top nav -->
+    {navbar}
+    <!-- / top nav -->
+
+    <!-- breadcrumb nav -->
+    {breadcrumbbit}
+    <!-- / breadcrumb nav -->
+	
+    <!-- info bar / ads / etc -->
+    {infobar}
+    <!-- / info bar / ads / etc -->
+
+    <!-- body content-->
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+    <tr valign="top">
+    	<td width="100%">
+
+    		<!-- template content -->

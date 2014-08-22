@@ -1,0 +1,339 @@
+<div id="v3body4"> 
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+
+	<div id="content">
+	<h1>{_transaction_revenue_manager}</h1><br />
+
+		
+		<div class="tab-pane">
+		
+			<div class="tab-pane" id="invoicelistings">
+			
+				<div class="tab-page">
+      				
+        			<h2 class="tab" id="transactionhistory">{_view}</h2>
+					
+		
+		            <form name="invoicesearch" method="get" action="{ilpage[accounting]}" accept-charset="UTF-8" style="margin: 0px;">
+					<input type="hidden" name="cmd" value="invoices" />
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_search} {_transactions}</div>
+							<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_search_transactions_based_on_specific_details_using_the_form_below}</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+								  <tr class="alt1">
+									<td nowrap="nowrap"><span class="gray">{_invoice_id}</span></td>
+									<td width="35%"><input type="text" name="invoiceid" style="font-family: verdana" value="{invid}" class="input"  size="8" /></td>
+								    <td width="12%" nowrap="nowrap"><strong>{_or}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="gray">{_transaction_id}</span></td>
+								    <td width="39%"><input type="text" name="transactionid" style="font-family: verdana"size="10" class="input" /></td>
+								  </tr>						
+								  <tr class="alt1">
+									<td nowrap="nowrap"><span class="gray">{_userid}</span></td>
+									<td width="35%"><input type="text" name="userid" id="userid" style="font-family: verdana" value="{userid}" class="input"  size="8" /></td>
+								    <td nowrap="nowrap"><strong>{_or}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="gray">{_username}</span></td>
+									<td width="35%"><input type="text" name="username" id="username" style="font-family: verdana" value="{username}" class="input"  size="10" /></td>
+								  </tr>
+								  <tr class="alt1"> 
+									<td width="14%" nowrap="nowrap"><span class="gray">{_invoice_type}</span></td>
+									<td>{invoice_type_pulldown}</td>
+									<td><span class="gray">{_status}</span></td>
+									<td>
+										<select name="status" style="font-family: verdana">
+											<option value="" <if condition="!isset($ilance->GPC['status']) OR empty($ilance->GPC['status'])">selected="selected"</if>>{_all}</option>
+											<option value="paid" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'paid'">selected="selected"</if>>{_paid}</option>
+											<option value="unpaid" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'unpaid'">selected="selected"</if>>{_unpaid}</option>
+									        <option value="scheduled" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'scheduled'">selected="selected"</if>>{_unpaid_and_scheduled}</option>
+											<option value="cancelled" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'cancelled'">selected="selected"</if>>{_cancelled}</option>
+										</select>
+									</td>
+								    </tr>
+								  <tr class="alt1"> 
+									<td width="14%" nowrap="nowrap"><span class="gray">{_range}</span></td>
+									<td>{reportfromrange}</td>
+									<td><span class="gray">{_per_page}</span></td>
+									<td colspan="2">
+									  <select name="pp" style="font-family: verdana">
+								        <option value="10" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '10'">selected="selected"</if>>10</option>
+								        <option value="50" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '50'">selected="selected"</if>>50</option>
+								        <option value="100" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '100'">selected="selected"</if>>100</option>
+								        <option value="500" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '500'">selected="selected"</if>>500</option>
+										<option value="1000" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '1000'">selected="selected"</if>>1000</option>
+										<option value="5000" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '5000'">selected="selected"</if>>5000</option>
+                                      </select>
+                                  </td>
+								  </tr>
+								  <tr class="alt1"> 
+									<td width="14%" nowrap="nowrap"><span class="gray">{_price_range}</span></td>
+									<td>
+									    <b>{_from}:</b> <input type="text" name="price_from" id="price_from" style="font-family: verdana" value="{price_from}" class="input"  size="10" /> 
+									    <b>{_to}:</b> <input type="text" name="price_to" id="price_to" style="font-family: verdana" value="{price_to}" class="input"  size="10" /> 
+									</td>
+								  </tr>
+								  <tr class="alt2_top"> 
+									<td colspan="4"><input type="submit" value="{_search}" style="font-size:15px" class="buttons" /></td>
+								  </tr>
+								</table>
+								
+			    </div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+		</form>		
+	
+		
+		<if condition="isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'invoices'">
+		
+		<if condition="isset($ilance->GPC['invoicetype']) AND $ilance->GPC['invoicetype'] == 'p2b'">
+		<div>
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+		<tr>
+			<td>
+					<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+					<table border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td style="padding-left:5px;" valign="top"></td>
+						<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1" border="0" alt="" id="" /></td>
+						<td style="padding-right:5px;">
+							<div style="font-size:14px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning.gif" border="0" alt="" id="" /> <strong>{_you_are_viewing_provider_to_buyer_generated_transactions}</strong></div>
+							<div class="gray" style="padding-left:23px">{_service_providers_generating_this_type_of_invoice_can_update_their_status_manually_these_transactions_are_for_viewing_purposes_only}</div>
+						</td>
+					</tr>
+					</table>
+					</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+			</td>
+		</tr>
+		</table>
+		</div>
+		</if>
+		
+        
+        <if condition="isset($show['no_invoices']) AND $show['no_invoices']"><else /><div style="padding-bottom:6px">{paidprevnext}</div></if>
+        
+		
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{numberpaid} {_transactions_found}</div>
+				<!--<div class="block-content-yellow" style="padding:9px"><div class="smaller"></div></div>-->
+				<div class="block-content" style="padding:0px">
+				  <table width="100%" cellpadding="12" cellspacing="0">
+				    <tr class="alt2">
+				      <td width="4%" align="center">{_more}</td>
+				      
+				      <td width="1%">ID</td>
+				      <td colspan="2">{_customer}</td>
+				      <td width="5%">{_total}</td>
+				      <td width="5%">{_paid}</td>
+				      <td width="12%">{_type}</td>
+				      <td width="24%">{_status}</td>
+				      <td width="6%">{_method}</td>
+				      <td width="6%">{_gateway}</td>
+				      <!--<td width="4%" align="center">{_sel}</td>-->
+			        </tr>
+				    <loop name="invoices">
+                    	
+				      <tr valign="top" class="alt1">
+                            <td align="center" nowrap="nowrap"><a href="#top" onclick="return toggle('invoice_{invoiceid}');"><img src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_invoice_{invoiceid}]}.gif" alt="" border="0" id="collapseimg_invoice_{invoiceid}" /></a></td>
+                            <td nowrap="nowrap"><span class="black">{invoiceid}</span></td>
+                            <td colspan="2" nowrap="nowrap"><span class="blue"><a href="{ilpage[subscribers]}?subcmd=_update-customer&amp;id={user_id}">{username}</a></span></td>
+                            <td nowrap="nowrap"><span class="black">{total}</span></td>
+                            <td nowrap="nowrap"><span class="black">{paid}</span></td>
+                            <td nowrap="nowrap"><span class="black">{invoicetype}</span></td>
+                            <td><span class="blue">{status}</span></td>
+                            <td>{method}</td>
+                            <td><span class="black">{gateway}</span>                              <!-- <div>{archive}</div> --></td>
+                            <!--<td align="center" nowrap="nowrap"><input type="checkbox" name="invoiceid[]" value="{invoiceid}" /></td>-->
+			          </tr>
+                      <tbody id="collapseobj_invoice_{invoiceid}" style="{collapse[collapseobj_invoice_{invoiceid}]}">
+				      
+                      <tr valign="top" class="alt2_top">
+                      		<td colspan="11">
+                      		  
+                      		  	<div><span class="black">{description}</span></div>
+                      		    
+                                <div style="height:1px; background-color:#ccc; width:100%; margin-top:9px"></div>
+                                
+                      		    <div class="smaller" style="padding-top:9px"><strong>{_sub_total}:</strong> {amount}</div>
+                      		    <div class="smaller" style="padding-top:3px"><strong>{_tax}:</strong> {taxamount}</div>
+                      		    <div class="smaller" style="padding-top:3px"><strong>{_created}:</strong> {createdate}</div>
+                      		    <div class="smaller" style="padding-top:3px"><strong>{_paid}:</strong> {paiddate}</div>
+                      		    <div class="smaller" style="padding-top:3px"><strong>{_due}:</strong> {due}</div>
+								<div class="smaller" style="padding-top:3px"><strong>{_last_reminder}:</strong> {date_sent}</div>
+                      		    
+                   		      
+                   		    <div style="padding-top:6px; padding-bottom:12px" class="smaller"><strong>{_take_action}:</strong>&nbsp;&nbsp;{cancel}&nbsp;&nbsp;&nbsp;{remove}&nbsp;&nbsp;&nbsp;<input type="button" value=" {_print} " onclick="popUP('{https_server}{ilpage[invoicepayment]}?cmd=print&amp;id={invoiceid}&amp;uid={user_id}', 'myname', '640', '480', '1', '1');" class="buttons" style="font-size:10px" />&nbsp;&nbsp;&nbsp;{markpaid}{markunpaid}&nbsp;{extrabutton}</div></td>
+			        	</tr>
+                      
+                      </tbody>
+			          </loop name="invoices">
+				    <if condition="isset($show['no_invoices']) AND $show['no_invoices']">
+				      <tr>
+				        	<td colspan="12" align="center">{_no_results_found}</td>
+			          </tr>
+				      <else />
+				      <tr class="alt_top">
+				        <td colspan="3" align="left" nowrap="nowrap"><span style="float:left">{_page_totals}: </span></td>
+				        <td colspan="4" align="left" nowrap="nowrap">
+					        <strong>{_tax}: </strong><span class="black" style="font-size:14px">{taxtotal}</span> 
+					        <br />
+					        <strong>{_total}: </strong><span class="black" style="font-size:14px">{amounttotal}</span>
+					        <br />
+					        <strong>{_paid}: </strong><span class="black" style="font-size:14px">{paidtotal}</span> <span class="smaller gray">{_page_totals_calculate_raw_values_on_a_page_to_page_basis}</span>
+				        </td>
+				        <td colspan="3" align="left" nowrap="nowrap"></td>
+			          </tr>
+				      <tr>
+				        <td colspan="12">{paidprevnext}</td>
+			          </tr>
+			        </if>
+			      </table>
+</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</if>
+	
+    </div>
+	
+	<!--<div class="tab-page">
+      				
+        	<h2 class="tab" id="balanceinfo">{_balance}</h2>
+			
+			<div>
+			<loop name="revenuebalance">
+			<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+			
+		  <tr class="alt2 smaller">
+		    <td>Revenue Type </td>
+		    <td>Total  Generated </td>
+		    <td>Fees Paid </td>
+		    <td>Fees Owing </td>
+		    <td>Fees Overdue </td>
+		  </tr>
+		  <tr class="alt1">
+			<td><span class="gray">{_subscription_fees_revenue}</span></td>
+			<td><span class="gray">{subscription1}</span></td>
+			<td><span class="green">{subscription2}</span></td>
+		    <td><span class="blue">{subscription3}</span></td>
+		    <td><span class="red">{subscription4}</span></td>
+		  </tr>
+		  <tr class="alt1">
+			<td><span class="gray">{_credential_verification_fees_revenue}</span></td>
+			<td><span class="gray">{credential1}</span></td>
+			<td><span class="green">{credential2}</span></td>
+		    <td><span class="blue">{credential3}</span></td>
+		    <td><span class="red">{credential4}</span></td>
+		  </tr>
+		  <tr class="alt1">
+			<td><span class="gray">{_featured_portfolio_fees_revenue}</span></td>
+			<td><span class="gray">{portfolio1}</span></td>
+			<td><span class="green">{portfolio2}</span></td>
+		    <td><span class="blue">{portfolio3}</span></td>
+		    <td><span class="red">{portfolio4}</span></td>
+		  </tr>
+		  <tr class="alt1">
+			<td><span class="gray">{_listing_enhancement_fees_revenue}</span></td>
+			<td><span class="gray">{listing1}</span></td>
+			<td><span class="green">{listing2}</span></td>
+		    <td><span class="blue">{listing3}</span></td>
+		    <td><span class="red">{listing4}</span></td>
+		  </tr>
+		  <tr class="alt1">
+			<td><span class="gray">{_final_value_fees_revenue}</span></td>
+			<td><span class="gray">{fvf1}</span></td>
+			<td><span class="green">{fvf2}</span></td>
+		    <td><span class="blue">{fvf3}</span></td>
+		    <td><span class="red">{fvf4}</span></td>
+		  </tr>
+		  <tr class="alt1">
+			<td><span class="gray">{_insertion_fees_revenue}</span></td>
+			<td><span class="gray">{if1}</span></td>
+			<td><span class="green">{if2}</span></td>
+		    <td><span class="blue">{if3}</span></td>
+		    <td><span class="red">{if4}</span></td>
+		  </tr>
+		  <tr class="alt1">
+			<td><span class="gray">{_escrow_commission_fees_revenue}</span></td>
+			<td><span class="gray">{escrowfees1}</span></td>
+			<td><span class="green">{escrowfees2}</span></td>
+		    <td><span class="blue">{escrowfees3}</span></td>
+		    <td><span class="red">{escrowfees4}</span></td>
+		  </tr>
+		  <tr class="alt1">
+			<td><span class="gray">{_withdraw_fees_revenue}</span></td>
+			<td><span class="gray">{withdraw1}</span></td>
+			<td><span class="green">{withdraw2}</span></td>
+		    <td><span class="blue">{withdraw3}</span></td>
+		    <td><span class="red">{withdraw4}</span></td>
+		  </tr>
+		  <tr class="alt1">
+			<td><span class="gray">{_provider_to_buyer_generated_invoice_fees_revenue}</span></td>
+			<td><span class="gray">{p2b1}</span></td>
+			<td><span class="green">{p2b2}</span></td>
+		    <td><span class="blue">{p2b3}</span></td>
+		    <td><span class="red">{p2b4}</span></td>
+		  </tr>
+		  <tr>
+			<td><span class="gray" style="font-size:14px"><strong>{_totals}</strong></span></td>
+			<td><span class="gray" style="font-size:14px"><strong>{totalsgenerated}</strong></span></td>
+			<td><span class="green" style="font-size:14px"><strong>{paidgenerated}</strong></span></td>
+		    <td><span class="blue" style="font-size:14px"><strong>{owinggenerated}</strong></span></td>
+		    <td><span class="red" style="font-size:14px"><strong>{overduegenerated}</strong></span></td>
+		  </tr>
+		</table>
+		</loop name="revenuebalance">
+			</div>
+					
+	</div>-->
+		
+	<!-- invoice settings -->
+	<div class="tab-page">
+		
+		<h2 class="tab" id="6">{_settings}</h2>
+		<!-- tab pane -->
+		<div class="tab-pane" id="invoicesettings">
+		
+			{configuration_invoicesystem}
+			
+		</div>
+		<!-- / tab pane -->
+		
+	</div>
+	<!-- / invoice settings -->
+				
+	</div>
+</div>
+<br /><br />

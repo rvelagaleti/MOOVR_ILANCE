@@ -1,0 +1,25 @@
+<span style="float:left; padding-right:13px;"><img src="{profile_logo}" border="0" alt="" width="80" /></span>
+<h2>{_detailed_portfolio_for} {provider}</h2>
+<div style="padding-bottom:20px;padding-top:4px"><span class="gray">{_you_are_currently_viewing_a_detailed_portfolio_listing}</span></div>
+
+<div class="bigtabs" style="padding-bottom:10px; padding-top:12px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}portfolios" rel="nofollow"><img src="{template_relativeimagepath}{template_imagesfolder}icons/selectedcat_back.gif" border="0" alt="{_back}" /> {_gallery}</a><else /><a href="{ilpage[portfolio]}" rel="nofollow"><img src="{template_relativeimagepath}{template_imagesfolder}icons/selectedcat_back.gif" border="0" alt="{_back}" /> {_gallery}</a></if></li>
+    <if condition="isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'zoom'"><li title="" class=""><a href="{ilpage[portfolio]}?id={id}" rel="nofollow"><img src="{template_relativeimagepath}{template_imagesfolder}icons/selectedcat_back.gif" border="0" alt="{_back}" /> {_portfolio}</a></li><else /><li title="" class="on"><a href="javascript:void(0)" rel="nofollow">{_portfolio}</a></li></if>
+	<li title="" class=""><a href="{ilpage[members]}?id={id}" rel="nofollow">{_feedback}</a></li>
+</ul>
+<span style="float:left; padding-left:20px; padding-top:5px"><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}portfolios" style="text-decoration:underline">{_view_other_listings_here}</a><else /><a href="{ilpage[portfolio]}" style="text-decoration:underline">{_view_other_listings_here}</a></if></span>&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:void(0)" onclick=Attach("{http_server}{ilpage[watchlist]}?cmd=add&amp;wtype=sprovider&amp;id={id}") style="text-decoration:underline">{_add_to_watchlist}</a></span>&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{http_server}{ilpage[rfp]}?cmd=rfp-invitation&amp;id={id}&amp;trk=u_portfolio" style="text-decoration:underline">{_invite_to_bid}</a></span></span>
+</div>
+</div>
+<div style="clear:both;"></div>
+{portfolio_html}
+		
+<table width="100%" border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+{portfolio_html2}
+<if condition="isset($show['no_portfolio_items']) AND $show['no_portfolio_items']"><tr> 
+    <td valign="bottom" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_portfolio_items_available}</div></td>
+</tr><else /><if condition="!isset($ilance->GPC['cmd'])"><tr>
+    <td>{prevnext}</td>
+</tr></if></if>
+</table>

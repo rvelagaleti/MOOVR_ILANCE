@@ -1,0 +1,50 @@
+<div class="box3"><form method="get" name="ilform" action="<if condition="$ilconfig['globalauctionsettings_seourls']">{https_server}main-converter<else />{https_server}{ilpage[accounting]}</if>" accept-charset="UTF-8" style="margin:0px">
+<div class="block-wrapper">
+
+	<div class="block5">
+	
+			<div class="block5-top">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+			<div class="block5-header">
+			<span style="float:right; padding-top:3px" class="smaller gray">{_currencies_are_based_on_todays_exchange_rates}</span>{_currency_converter}</div>
+			
+			<div class="block5-content">
+				
+				<table width="65%" border="0" cellspacing="0" cellpadding="2">
+				<tr> 
+					<td align="left" valign="bottom"><strong>{_amount}</strong></td>
+					<td valign="bottom"><strong>{_from}</strong></td>
+                  <td valign="bottom"><strong>{_to_upper}</strong></td>
+				</tr>
+				<tr>
+				  <td align="left" nowrap="nowrap"><input type="text" name="amount" value="{amount}" size="12" class="input" /></td>
+				  <td>{convert_from_pulldown}</td>
+				  <td>{convert_to_pulldown}</td>
+                  <td><input type="submit" value="{_calculate}" class="buttons" /></td>
+				  </tr>
+				</table>
+			  <input type="hidden" name="cmd" value="currency-converter" />
+				<input type="hidden" name="subcmd" value="process" />
+				
+			</div>
+			
+			<div class="block5-content">
+				<if condition="isset($show['finalconversion']) AND $show['finalconversion']">
+				<div><strong>{_conversion}</strong></div>
+				<div align="center"><strong>{final_conversion}</strong></div>
+				</if>
+			</div>
+			
+			<div class="block5-footer">
+					<div class="block5-right">
+							<div class="block5-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div></form>
+</div>

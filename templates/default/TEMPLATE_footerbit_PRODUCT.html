@@ -1,0 +1,115 @@
+<!-- start box -->
+<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">box<else />box2</if>">
+    <!-- start footer -->
+    <div class="footer">
+    
+    	<if condition="isset($show['footerwysiwygpopup']) AND $show['footerwysiwygpopup']"><!-- start wysiwyg popup controls -->
+        <div id="insert_pop" style="display:none; position:absolute;"><table class="wysiwyg_popuplayer" border="0" cellpadding="1" cellspacing="6" width="240">
+        <tr>
+            <td id="insert_title" class="wysiwyg_popuplayer_title" style="cursor: move" nowrap="nowrap"><ilayer><layer onmouseover="steditor=1;" onmouseout="steditor=0"><span id="change_title" style="font-size:11px"></span></layer></ilayer></td>
+            <td class="wysiwyg_popuplayer_title" align="right"><span class="smaller blue"><a href="javascript:void(0)" onclick="close_insert_pop(); return false">{_close}</a></span></td>
+        </tr>
+        <tr>
+            <td colspan="2"><iframe onmouseover="hide_it2()" name="insert_elm" id="insert_elm" frameborder="0" width="100%" height="250" src="" scrolling="no"></iframe></td>
+        </tr>
+        </table></div><!-- end wysiwyg popup controls --></if>
+    
+    	{apihook[footerbit_start]}
+        
+    	<!-- start footer-link or footer-link-slim -->
+    	<div class="footer-link<if condition="isset($show['slimfooter']) AND $show['slimfooter']">-slim</if>">
+        	<!-- start column -->
+        	<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">column<else />column2</if>">
+            	<h4>{site_name}</h4>
+                <ul>
+                	{apihook[footerbit_col1_start]}
+                    {apihook[footerbit_col1_end]}
+                </ul>
+            </div>
+            <!-- end column -->
+            <!-- start column -->
+        	<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">column<else />column2</if>">
+            	<h4>{_buy}</h4>
+                <ul>
+                	{apihook[footerbit_col2_start]}
+                    <if condition="$ilconfig['globalauctionsettings_productauctionsenabled']"><li><a href="{http_server}categories/items">{_categories}</a></li><else /><li><a href="{http_server}categories/projects">{_categories}</a></li></if>
+                    <li><a href="{http_server}search">{_search}</a></li>
+                    <li><a href="{template_relativeimagepath}main-converter">{_currency_converter}</a></li>
+                    {apihook[footerbit_col2_end]}
+                </ul>
+            </div>
+            <!-- end column -->
+            <!-- start column -->
+        	<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">column<else />column2</if>">
+            	<h4>{_sell}</h4>
+                <ul>
+                	{apihook[footerbit_col3_start]}
+                    <li><a href="{http_server}sell">{_sell_new_item}</a></li>
+                    <if condition="isset($ilconfig['globalfilters_bulkupload']) AND $ilconfig['globalfilters_bulkupload']"><li><a href="{http_server}bulk/sell">{_sell_bulk_items}</a></li></if>
+                    <if condition="isset($ilconfig['enablenonprofits']) AND $ilconfig['enablenonprofits']"><li><a  href="{http_server}nonprofits">{_nonprofits}</a></li></if>
+                    {apihook[footerbit_col3_end]}
+                </ul>
+            </div>
+            <!-- end column -->
+            <!-- start column -->
+        	<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">column<else />column2</if>">
+            	<h4>{_support}</h4>
+                <ul>
+                	{apihook[footerbit_col4_start]}
+                    <li><a href="{https_server}main-contact">{_contact}</a></li>
+                    <li><a href="{https_server}main-terms">{_terms}</a></li>
+                    <li><a href="{https_server}main-privacy">{_privacy}</a></li>
+                    <li><a href="{http_server}main-rss">{_project_xml_feed_upper}</a></li>
+                    {apihook[footerbit_col4_end]}
+                </ul>
+            </div>
+            <!-- end column -->
+            <!-- start column -->
+        	<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">column<else />column2</if>">
+            	<h4>{_other}</h4>
+                <ul>
+                	{apihook[footerbit_col5_start]}
+                    <if condition="defined('HTTP_SERVER_OTHER') AND HTTP_SERVER_OTHER != ''"><li><a href="{http_server_other}">{_find_work_or_talent}</a></li>
+                    <li><a href="{http_server_other}buy">{_post_a_job}</a></li></if>
+                    <li><a href="{template_relativeimagepath}main-about">{_about_us}</a></li>
+                    <li><a href="{http_server}main-news">{_news}</a></li>
+                    <li><a href="{template_relativeimagepath}main-resources">{_feeds}</a></li>
+                    {apihook[footerbit_col5_end]}
+                </ul>
+            </div>
+            <!-- end column -->
+            <!-- start column -->
+        	<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">column<else />column2</if>">
+            	<h4>{_stay_connected}</h4>
+                <ul>
+                	{apihook[footerbit_col6_start]}
+                    <li class="facebook"><a target="_blank" title="Facebook" href="{facebookurl}">Facebook</a></li>
+                    <li class="twitter"><a target="_blank" title="Twitter" href="{twitterurl}">Twitter</a></li>
+                    <li class="google"><a target="_blank" title="Google Plus" href="{googleplusurl}">Google+</a></li>
+                	{apihook[footerbit_col6_end]}
+                </ul>
+            </div>
+            <!-- end column -->
+            <div class="clear"></div>
+        </div>
+        
+        {apihook[footerbit_end]}
+        <!-- end footer-link -->
+        
+        <div class="locale-tools"><form action="{template_requesturi}" method="get" accept-charset="UTF-8">{template_languagepulldown}{template_stylepulldown}</form></div>
+        <div class="copyright">{_copyright} &copy;{year}, Moovr Inc.</div>
+        <div class="powered-by">{_powered_by}: <if condition="isset($ilconfig['globalserversettings_ilanceaid']) AND !empty($ilconfig['globalserversettings_ilanceaid'])"><a href="http://www.ilance.com" target="_blank" onclick="location.href='http://www.ilance.com/?aid={ilanceaid}'">{site_name}<!-- {template_ilversion}--></a><else />{site_name}<!-- {template_ilversion}--></if></div>
+    </div>
+    <!-- end footer -->
+</div>
+<!-- end box -->
+{new_pmb_popup_js}
+{new_pmb_popup_modal}
+<script type="text/javascript" charset="utf-8">
+<!--
+<if condition="isset($ilconfig['footercronjob']) AND $ilconfig['footercronjob']">iL_Tasks('{template_relativeimagepath}cron.php?type=ajax', {rand()});</if><if condition="isset($ilance->GPC['cid']) AND $ilance->GPC['cid'] > 0 AND isset($categoryname) AND !empty($categoryname)">
+jQuery('#cidfield').val({cid});
+jQuery('#search-menu-selected').html('{categoryname}');</if>
+//-->
+</script>
+<if condition="isset($ilconfig['footercronjob']) AND $ilconfig['footercronjob']"><!-- start automation --><noscript><img src="{template_relativeimagepath}cron.php?type=image" width="1" height="1" alt="" border="0" id="noscriptcron" /></noscript></if>

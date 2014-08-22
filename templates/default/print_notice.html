@@ -1,0 +1,39 @@
+<h1 class="a_active" style="padding-bottom:12px">{header_text}</h1>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="80%" valign="top">
+	
+	<p style="line-height:1.4em">{body_text}</p>
+
+	</td>
+    <td width="3%"></td>
+    <td width="17%" valign="top">
+	
+	<div style="font-size:15px;padding-bottom:7px"><strong>{_where_to}</strong></div>
+	<ul style="line-height:1.5em">
+		<if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0">
+		<li><span class="blue"><a href="{http_server}">{_home}</a></span></li>
+		<li><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}mycp" rel="nofollow">{_my_cp}</a><else /><a href="{http_server}{ilpage[main]}?cmd=cp">{_my_cp}</a></if></span></li>		
+		<li><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}accounting" rel="nofollow">{_accounting}</a><else /><a href="{http_server}{ilpage[accounting]}">{_accounting}</a></if></span></li>
+		<else />
+		<li><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{https_server}signin" rel="nofollow">{_sign_in}</a><else /><a href="{https_server}{ilpage[login]}">{_sign_in}</a></if></span></li>
+		<li><span class="blue"><a href="{http_server}">{_home}</a></span></li>
+		<li><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{https_server}register" rel="nofollow">{_registration}</a><else /><a href="{https_server}{ilpage[registration]}">{_registration}</a></if></span></li>
+		</if>
+	</ul>
+	
+	</td>
+  </tr>
+</table>
+<div style="height:1px;width:100%;background-color:#ccc;margin:20px 0 20px 0"></div>
+<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="2">
+<tr>
+	<td colspan="2"><strong>{_whats_next}</strong></td>
+</tr>
+<tr> 
+	<td width="9%" align="center"><img src="{template_relativeimagepath}{template_imagesfolder}arrow_right.gif" width="18" height="18" alt="" border="0" id="arrowright" /></td>
+	<td width="91%"><span class="blue"><a href="{return_url}">{return_name}</a></span></td>
+</tr>
+</table>
+<div style="margin-bottom:14px"></div>

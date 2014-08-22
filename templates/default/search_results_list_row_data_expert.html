@@ -1,0 +1,7 @@
+<td width="{value[width]}" {value[rowclass]} align="{value[align]}" valign="{value[valign]}" {value[nowrap]}  {value[extra]} {value[colspan]}>
+<span style="float:right" class="smaller">{value[online]}</span>
+<span class="blue" style="font-size:15px">{value[username]}</span>
+<div class="gray" style="padding-top:1px; font-size:11px; font-family: verdana">{value[profileintro]}</div>
+<div style="font-size:10px; font-family: verdana; padding-top:13px"><table border="0" cellpadding="0" cellspacing="0" dir="{template_textdirection}"><tr><td valign="top">{_skills}:</td><td>&nbsp;</td><td><span class="blueonly">{value[skills]}</span></td></tr></table></div>
+<if condition="$ilance->template_columns->can_display_element('latestfeedback') AND !empty($value['latestfeedback'])"><div class="smaller black" style="padding-top:3px">{_latest_feedback}: <span class="gray">{value[latestfeedback]}</span></div></if>
+<div class="smaller black" style="padding-top:3px"><!--{_location}: -->{value[location]}</div></td>

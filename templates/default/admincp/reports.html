@@ -1,0 +1,165 @@
+<div id="v3body4">
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+
+	<div id="content">
+	<h1>{_report_management}</h1><br />
+
+		
+		<div class="tab-pane">
+		
+			<div class="tab-pane" id="reportlistings">
+		
+				<div class="tab-page">
+      				
+        			
+      <h2 class="tab">{_reports}</h2>
+	  
+	  <if condition="empty($ilance->GPC['subcmd'])">
+      <form name="generatereports" method="get" action="{ilpage[accounting]}" accept-charset="UTF-8" style="margin: 0px;">
+	  <input type="hidden" name="cmd" value="reports" />
+	  <input type="hidden" name="subcmd" value="_do-reports" />
+	  <div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{_report_management}</div>
+				<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_report_management_gives_you_direct_access_of_accounting_overview_based_on_the_reporting_you_wish_to_formulate}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="0" cellpadding="12">
+				  <tr class="alt1"> 
+					<td align="right"><span class="gray">{_action}</span></td>
+					<td width="83%">{reportaction}</td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td align="right"><span class="gray">{_report}</span></td>
+					<td><select name="doshow" style="font-family: verdana">
+						<option value="">{_select_report_to_generate}</option>
+						<optgroup label="{_revenue}">
+                        		{apihook[reports_select_report_revenue_option_top]}
+								<option value="subscription" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'subscription'">selected="selected"</if>>{_subscription_fees_revenue}</option>
+								<option value="credential" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'credential'">selected="selected"</if>>{_credential_verification_fees_revenue}</option>
+								<option value="portfolio" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'portfolio'">selected="selected"</if>>{_featured_portfolio_fees_revenue}</option>
+								<option value="enhancements" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'enhancements'">selected="selected"</if>>{_listing_enhancement_fees_revenue}</option>
+								<option value="fvf" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'fvf'">selected="selected"</if>>{_final_value_fees_revenue}</option>
+								<option value="insfee" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'insfee'">selected="selected"</if>>{_insertion_fees_revenue}</option>
+								<option value="escrow" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'escrow'">selected="selected"</if>>{_escrow_commission_fees_revenue}</option>
+								<option value="withdraw" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'withdraw'">selected="selected"</if>>{_withdraw_fees_revenue}</option>
+								<option value="p2b" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'p2b'">selected="selected"</if>>{_provider_to_buyer_generated_invoice_fees_revenue}</option>
+                                <if condition="$ilconfig['enablenonprofits']"><option value="donationfee" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'donationfee'">selected="selected"</if>>{_final_value_donation_fees_collected_nonprofits}</option></if>
+								{apihook[reports_select_report_revenue_option_bottom]}
+                        </optgroup>
+						<optgroup label="{_expenses}">
+                        		{apihook[reports_select_report_expenses_option_top]}
+								<option value="tax" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'tax'">selected="selected"</if>>{_tax_expenses}</option>
+								<option value="registerbonus" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'registerbonus'">selected="selected"</if>>Registration Bonus Expenses</option>
+								{apihook[reports_select_report_expenses_option_bottom]}
+                        </optgroup>
+						<optgroup label="{_loses}">
+                        		{apihook[reports_select_report_loses_option_top]}
+								<option value="refund" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'refund'">selected="selected"</if>>{_refunded_transactions}</option>
+								<option value="cancelled" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'cancelled'">selected="selected"</if>>{_cancelled_transactions}</option>
+								{apihook[reports_select_report_loses_option_bottom]}
+                        </optgroup>
+						<optgroup label="{_disputed}">
+                        		{apihook[reports_select_report_disputed_option_top]}        
+								<option value="disputed" <if condition="isset($ilance->GPC['doshow']) AND $ilance->GPC['doshow'] == 'disputed'">selected="selected"</if>>{_disputed_transactions}</option>
+								{apihook[reports_select_report_disputed_option_bottom]}      
+                        </optgroup>
+						</select></td>
+				  </tr>
+				  <tr class="alt2_top">
+					<td colspan="2">{_customize_your_report_by_viewing_only_desired_transaction_columns}</td>
+				 </tr>
+				  <tr class="alt1"> 
+					<td valign="top" align="right"><span class="gray">{_fields}</span></td>
+					<td>{reportcolumns}</td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td valign="top" align="right"><span class="gray">Tools</span></td>
+					<td><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+					  <td width="3%"><input type="checkbox" name="useridconvert" value="generate" /></td>
+					  <td width="97%"><div align="left"><strong>&nbsp;</strong>{_if_you_would_like_to_convert_the_user_id_field_into_the_actual_username_please_tick_this_checkbox}</div></td>
+					  </tr><tr><td nowrap class="smaller"><input type="checkbox" name="projectidconvert" value="generate" /></td>
+					<td><div align="left"><strong>&nbsp;</strong>{_if_you_would_like_to_convert_the_project_id_field_into_the_actual_listing}</div></td>
+					</tr></table></td>
+				  </tr>
+				  <tr class="alt2_top">
+					<td colspan="2">{_customize_your_report_using_a_wide_variety_of_date_range_options}</td>
+				 </tr>
+				  <tr class="alt1"> 
+					<td width="17%" align="right"> 
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						  <tr> 
+							<td width="74%" align="right"><span class="gray">{_within}</span></td>
+							<td width="26%" align="right">{radiopast}</td>
+						  </tr>
+						</table></td>
+					<td>{reportrange}</td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td valign="top" align="right">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						  <tr> 
+							<td width="74%"><div align="right"><span class="gray">{_from} {_range}</span></div></td>
+							<td width="26%"><div align="right">{radioexact}</div></td>
+						  </tr>
+						</table></td>
+					<td>{reportfromrange}</td>
+				  </tr>
+				  <tr class="alt2_top">
+					<td colspan="2">{_order_your_results_based_on_ascending_or_descending_below}</td>
+				 </tr>
+				  <tr class="alt1"> 
+					<td align="right"><span class="gray">{_order_results}</span></td>
+					<td>{reportorderby}</td>
+				  </tr>
+				  <tr class="alt1">
+					<td align="right"><span class="gray">{_limit} {_results}</span></td>
+					<td><input type="text" name="limit" value="100" style="font-family:verdana; width:35px"  /></td>
+				  </tr>
+				  
+				  <tr class="alt2_top"> 
+					<td colspan="2"><input type="submit" value=" {_create_report} " style="font-size:15px" class="buttons" /></td>
+				  </tr>
+				</table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+    </form>
+	</if>
+	  
+	<if condition="isset($show['showreportoutput']) AND $show['showreportoutput']">
+	<div>{reportoutput}</div>
+	<div>{customprevnext}</div>
+	</if>
+
+    </div>
+
+	</div>
+	</div>
+
+
+	<br />
+<br />

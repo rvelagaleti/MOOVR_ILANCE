@@ -1,0 +1,147 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+<tr valign="top">
+	<td width="100%">
+	
+    	        <div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+        <tr>
+        <td>
+        <div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_gray_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+        <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding-left:5px;" valign="top"></td>
+            <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1" alt="" border="0" /></td>
+            <td style="padding-right:5px;">
+            
+            
+                <div style="font-size:15px"><strong>{_listings_here_are_in_draft_mode_and_have_not_been_publically_listed_to_the_marketplace}</strong></div>
+                <div class="gray"style="padding-top:4px">{_draft_listings_will_be_displayed_below_a_draft_listing_is_one_that_has}</div>
+                <if condition="$ilconfig['globalauctionsettings_payperpost']"><div style="padding-top:3px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/money.gif" border="0" alt="" /> {_pay_as_you_go_is_currently_enabled_any_auctions}</div></if>
+             
+        
+        </td>
+        </tr>
+        </table>
+        </div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+        </td>
+        </tr>
+        </table>
+        </div>
+        
+        {servicetabs}
+        <div class="block-wrapper">
+        
+            <div class="block2">
+            
+                    <div class="block2-top">
+                            <div class="block2-right">
+                                    <div class="block2-left"></div>
+                            </div>
+                    </div>
+                    
+                    <div class="block2-header">{_draft_auctions}</div>
+                    <div class="block2-content-blue" style="padding:9px"><div><span style="max-height:0px">
+        <form name="sortswitch" method="get" action="{ilpage[buying]}" accept-charset="UTF-8" style="margin:0px">
+        <input type="hidden" name="cmd" value="management" />
+        <input type="hidden" name="sub" value="drafts" />
+        <table border="0" cellspacing="0" cellpadding="0" class="smaller">
+          <tr><td>{_keywords}:&nbsp;</td>
+            <td>
+           <input name="keyw" type="text"  value="" />&nbsp;&nbsp;&nbsp;&nbsp;</td>
+           <td>{_listing_period}:&nbsp;</td>
+            <td>
+            <select name="period" class="smaller" style="font-family: verdana">
+                <option value="-1" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == -1">selected="selected"</if>>{_any_date}</option>
+                <option value="7" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 7">selected="selected"</if>>{_last_24_hours}</option>
+                <option value="13" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 13">selected="selected"</if>>{_last_7_days}</option>
+                <option value="14" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 14">selected="selected"</if>>{_last_14_days}</option>
+                <option value="15" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 15">selected="selected"</if>>{_last_30_days}</option>
+                <option value="16" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 16">selected="selected"</if>>{_last_60_days}</option>
+                <option value="17" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == 17">selected="selected"</if>>{_last_90_days}</option>
+            </select>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            
+            <td>{_display_order}:&nbsp;</td>
+            <td>
+            <select name="displayorder" class="smaller" style="font-family: verdana">
+                <option value="desc" <if condition="isset($ilance->GPC['displayorder']) AND $ilance->GPC['displayorder'] == 'desc'">selected="selected"</if>>{_time_newly_listed}</option>
+                <option value="asc" <if condition="isset($ilance->GPC['displayorder']) AND $ilance->GPC['displayorder'] == 'asc'">selected="selected"</if>>{_time_ending_soonest}</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>{_per_page}:&nbsp;</td>
+                        <td>
+                        <select name="pp" class="smaller" style="font-family: verdana">
+                            <option value="10" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '10'">selected="selected"</if>>10</option>
+                            <option value="50" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '50'">selected="selected"</if>>50</option>
+                            <option value="100" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '100'">selected="selected"</if>>100</option>
+                            <option value="500" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '500'">selected="selected"</if>>500</option>
+                            <option value="1000" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '1000'">selected="selected"</if>>1000</option>
+                        </select>&nbsp;</td>
+            <td><input type="submit" value="{_go}" class="buttons_smaller" /></td>
+          </tr>
+        </table>
+        </form>
+        </span></div></div>
+                    <div class="block2-content" style="padding:0px">
+                        
+                        <form name="createrfp" method="post" action="{ilpage[buying]}" accept-charset="UTF-8" style="margin:0px">
+                        <input type="hidden" name="cmd" value="management" />
+                        <input type="hidden" name="sub" value="drafts" />
+                        <input type="hidden" name="do" value="_do-draft-create" />
+                        <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                        <tr> 
+                            <td class="alt2">{_title}</td>
+                            <td width="20%" class="alt2">{_added}</td>
+                            <td width="17%" class="alt2">{_category}</td>
+                            <td width="11%" class="alt2">{_if_short} <a href="javascript:void(0)" onmouseover="Tip(phrase['_if_stands_for_insertion_fee_and_is_a_fee_that_is_applied_when_you_list'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                            <td width="9%" class="alt2">{_status}</td>
+                            <td class="alt2" width="10%" align="right">{_action}</td>
+                        </tr>
+                        <loop name="project_results_rows"> 
+                        <tr class="alt1" valign="top"> 
+                            <td width="33%"><span style="float:right"><a href="{ilpage[buying]}?cmd=rfp-management&amp;id={project_id}&amp;state=service"><img src="{template_relativeimagepath}{template_imagesfolder}icons/pencil.gif" border="0" alt="{_edit}" /></a></span><span class="blue" style="padding-right:6px"><a href="{ilpage[buying]}?cmd=rfp-management&amp;id={project_id}&amp;state={state}">{job_title}</a></span>
+                            <div class="smaller" style="padding-top:3px">{_revision}: <strong>{revisions}</strong>, {_vendors_invited}: <strong>{invitecount}</strong></div></td>
+                            <td>{added}</td>
+                            <td><span class="blue">{category}</span></td>
+                            <td>{insfee}</td>
+                            <td>{status}</td>
+                            <td align="right">{actions}</td>
+                        </tr>
+                        </loop name="project_results_rows">
+                        <if condition="isset($show['no_project_rows_returned']) AND $show['no_project_rows_returned']"> 
+                        <tr> 
+                            <td colspan="8" align="center" class="alt1"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                        </tr>
+                        </if>
+                        <if condition="isset($show['rfppulldownmenu']) AND $show['rfppulldownmenu']"> 
+                        <tr> 
+                            <td colspan="8" align="right" valign="top" class="alt1">
+                                
+                                <select name="rfpcmd" style="font-family: verdana">
+                                <optgroup label="{_select_action}">
+                                <option value="createrfp">{_open_auction_for_bids}</option>
+                                <option value="deleterfp">{_delete_draft_listings}</option>
+                                </optgroup>
+                                </select>
+                                <input type="submit" class="buttons" onclick="if (document.getElementsByName('rfpcmd')[0].selectedIndex == 0) {return confirm_js('{_confirmation_selected_rfps_will_become_open_to_the_public_marketplace}')}; if (document.getElementsByName('rfpcmd')[0].selectedIndex == 1) {return confirm_js('{_confirmation_delete_selected_draft_autions_permanently}')};" value="{_go}">	</td>
+                        </tr>
+                        </if>
+                        <tr>
+                            <td colspan="8">{prevnext}</td>
+                        </tr>
+                        </table>
+                        </form>
+                        
+                    </div>
+                    
+                    <div class="block2-footer">
+                            <div class="block2-right">
+                                    <div class="block2-left"></div>
+                            </div>
+                    </div>
+                    
+            </div>
+        </div>
+    
+	</td>
+</tr>
+</table>

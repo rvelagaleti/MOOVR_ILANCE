@@ -1,0 +1,225 @@
+AddType application/x-httpd-php asp jsp
+AddCharset utf-8 .js
+
+<IfModule mod_security.c>
+SecFilterEngine Off
+SecFilterScanPOST Off
+</IfModule>
+
+<Files ~ "(\.(inc|pl|sh|sql|log|cache|sqlcache|svn)|.svn|templates|Entries|Repositories|Root|CVS|.dist|.new)$">
+Order deny,allow
+Deny from all
+</Files>
+
+#### Mod_rewrite
+<IfModule mod_rewrite.c>
+Options -Indexes
+Options +FollowSymLinks
+DirectoryIndex main.php
+RewriteEngine on
+
+#### duplicate content prevention
+#RewriteCond %{HTTP_HOST} ^domain.com
+#RewriteRule ^(.*)$ http://www.domain.com/$1 [R=301,L]
+
+#### Prevent web and bot scrapers
+RewriteCond %{HTTP_USER_AGENT} ^.*(baidu|craftbot|download|extract|stripper|sucker|ninja|clshttp|webspider|leacher|collector|grabber|webpictures).*$ [NC]
+RewriteRule . - [F,L]
+    
+#### Header Links ##############################################################                                              # Example of SEF URL
+RewriteRule ^([Ss]{1})earch$ search.php?sef=1&%{QUERY_STRING} [L,QSA]                                                         # search
+RewriteRule ^([Rr]{1})egister$ registration.php?sef=1&%{QUERY_STRING} [L,QSA]                                                 # register
+RewriteRule ^([Ww]{1})atchlist$ watchlist.php?sef=1&%{QUERY_STRING} [L,QSA]                                                   # watchlist
+RewriteRule ^([Aa]{1})ccounting$ accounting.php?sef=1&%{QUERY_STRING} [L,QSA]                                                 # accounting
+RewriteRule ^([Pp]{1})references$ preferences.php?sef=1&%{QUERY_STRING} [L,QSA]                                               # preferences
+RewriteRule ^([Mm]{1})essages$ messages.php?sef=1&%{QUERY_STRING} [L,QSA]                                                     # messages
+RewriteRule ^([Pp]{1})ortfolios$ portfolio.php?sef=1&%{QUERY_STRING} [L,QSA]                                                  # portfolios
+RewriteRule ^([Nn]{1})onprofits$ nonprofits.php?sef=1 [L,QSA]                                                                 # nonprofits
+RewriteRule ^([Jj]{1})avascript$ javascript.php?sef=1&%{QUERY_STRING} [L,QSA]                                                 # javascript
+RewriteRule ^([Aa]{1})jax$ ajax.php?sef=1&%{QUERY_STRING} [L,QSA]                                                             # ajax
+RewriteRule ^([Bb]{1})uild$ ajax.php?sef=1&do=build [L,QSA]                                                                   # build
+
+#### Main Menu Handler #########################################################
+RewriteRule ^([Bb]{1})uy$ main.php?cmd=buying&sef=1 [L,QSA]                                                                   # buy
+RewriteRule ^([Bb]{1})uy/([Pp]{1})roducts$ main.php?cmd=buying&mode=product&sef=1 [L,QSA]                                     # buy/products
+RewriteRule ^([Ss]{1})ell$ main.php?cmd=selling&sef=1 [L,QSA]                                                                 # sell
+RewriteRule ^([Bb]{1})ulk/([Ss]{1})ell$ bulk.php?cmd=sell&sef=1 [L,QSA]                                            	      # bulk/sell
+RewriteRule ^([Ss]{1})ell/([Ss]{1})ervices$ main.php?cmd=selling&mode=service&sef=1 [L,QSA]                                   # sell/services
+RewriteRule ^([Ss]{1})ignin$ login.php?sef=1&%{QUERY_STRING} [L,QSA]                                                          # signin
+RewriteRule ^([Ss]{1})ignout$ login.php?cmd=_logout&sef=1 [L,QSA]                                                             # signout
+RewriteRule ^([Nn]{1})ews$ main.php?cmd=news&sef=1 [L,QSA]                                                                    # news
+RewriteRule ^([Cc]{1})ategories$ main.php?cmd=categories&sef=1 [L,QSA]                                                        # categories
+RewriteRule ^([Ll]{1})istings$ main.php?cmd=listings&sef=1 [L,QSA]                                                            # listings
+RewriteRule ^([Cc]{1})lassifieds$ main.php?cmd=classifieds&sef=1&%{QUERY_STRING} [L,QSA]                                      # classifieds
+RewriteRule ^([Cc]{1})lassifieds/(.+)$ main.php?cmd=classifieds&city=$1&sef=1&%{QUERY_STRING} [L,QSA]                         # classifieds/toronto
+RewriteRule ^mycp$ main.php?cmd=cp&sef=1 [L,QSA]                                                                              # mycp
+RewriteRule ^main-rss$ rss.php?sef=1 [L,QSA]                                                                                  # main-rss
+RewriteRule ^main-converter$ accounting.php?cmd=currency-converter&sef=1 [L,QSA]                                              # main-converter
+RewriteRule ^main-([A-Za-z0-9\-]+)$ main.php?cmd=$1&sef=1 [L,QSA]                                                             # main-*
+
+#### Auction Listings ##########################################################
+RewriteRule ^([Pp]{1})roject/([0-9]+)/([Rr]{1})etracted$ rfp.php?id=$2&view=retracted&sef=1&%{QUERY_STRING} [L,QSA]           # project/199/retracted
+RewriteRule ^([Pp]{1})roject/([0-9]+)/([Dd]{1})eclined$ rfp.php?id=$2&view=declined&sef=1&%{QUERY_STRING} [L,QSA]             # project/199/declined
+RewriteRule ^([Pp]{1})roject/([0-9]+)/([Ss]{1})hortlist$ rfp.php?id=$2&view=shortlist&sef=1&%{QUERY_STRING} [L,QSA]           # project/199/shortlist
+RewriteRule ^([Pp]{1})roject/([0-9]+)/(.+)$ rfp.php?id=$2&sef=1&%{QUERY_STRING} [L,QSA]                                       # project/199/title
+RewriteRule ^([Pp]{1})roject/([0-9]+)/$ rfp.php?id=$2&sef=1&%{QUERY_STRING} [L,QSA]                                           # project/199/
+RewriteRule ^([Ii]{1})tem/([0-9]+)/(.+)/(.+)$ merch.php?id=$2&sef=1&tab=$4%{QUERY_STRING} [L,QSA]                             # item/199/title/tab
+RewriteRule ^([Ii]{1})tem/([0-9]+)/(.+)$ merch.php?id=$2&sef=1&%{QUERY_STRING} [L,QSA]                                        # item/199/title
+RewriteRule ^([Ii]{1})tem/([0-9]+)/$ merch.php?id=$2&sef=1&%{QUERY_STRING} [L,QSA]                                            # item/199/
+RewriteRule ^([Ii]{1})tem/(.+)-a([0-9]+)$ merch.php?id=$3&sef=1&%{QUERY_STRING} [L,QSA]                                       # item/title-a199
+
+#### Category Maps #############################################################
+RewriteRule ^([Cc]{1})ategories/([Pp]{1})rojects$ rfp.php?cmd=listings&sef=1 [L,QSA]                                          # categories/projects
+RewriteRule ^([Cc]{1})ategories/([Ii]{1})tems$ merch.php?cmd=listings&sef=1 [L,QSA]                                           # categories/items
+RewriteRule ^([Cc]{1})ategories/([Pp]{1})rojects/([0-9]+)/(.+)$ rfp.php?cmd=listings&cid=$3&sef=1 [L,QSA]                     # categories/projects/199/category
+RewriteRule ^([Cc]{1})ategories/([Pp]{1})rojects/([0-9]+)/$ rfp.php?cmd=listings&cid=$3&sef=1 [L,QSA]                         # categories/projects/199/
+RewriteRule ^([Cc]{1})ategories/([Pp]{1})rojects/(.+)$ rfp.php?cmd=listings&cid=$3&sef=1 [L,QSA]                              # categories/projects/category
+RewriteRule ^([Cc]{1})ategories/([Ii]{1})tems/([0-9]+)/(.+)$ merch.php?cmd=listings&cid=$3&sef=1 [L,QSA]                      # categories/items/199/category
+RewriteRule ^([Cc]{1})ategories/([Ii]{1})tems/([0-9]+)/$ merch.php?cmd=listings&cid=$3&sef=1 [L,QSA]                          # categories/items/199/
+RewriteRule ^([Cc]{1})ategories/([Ii]{1})tems/(.+)$ merch.php?cmd=listings&cid=$3&sef=1 [L,QSA]                               # categories/items/category
+RewriteRule ^(.+)_(.+)-([Ss]{1})ervice-([Cc]{1})ategory-([Mm]{1})ap-([0-9]+)$ search.php?mode=service&cid=$6&q=$1&sef=1 [L,QSA] # keywords_category-service-category-maps-199
+RewriteRule ^([Cc]{1})ategories/([Pp]{1})rojects/([0-9]+)/(.+)_(.+)$ rfp.php?cmd=listings&cid=$3&q=$4&sef=1 [L,QSA]           # categories/projects/199/keywords_category
+RewriteRule ^([Cc]{1})ategories/([Ii]{1})tems/([0-9]+)/(.+)_(.+)$ search.php?mode=product&cid=$3&q=$4&sef=1 [L,QSA]           # categories/items/199/keywords_category
+
+#### Search Results ############################################################
+RewriteRule ^(.+)-([Pp]{1})rojects-([0-9]+)$ search.php?mode=service&cid=$3&sef=1 [L,QSA]                                     # category-projects-199
+RewriteRule ^([Pp]{1})rojects/([0-9]+)/(.+)$ search.php?mode=service&cid=$2&sef=1 [L,QSA]                                     # projects/199/category
+RewriteRule ^([Pp]{1})rojects/([0-9]+)/$ search.php?mode=service&cid=$2&sef=1 [L,QSA]                                         # projects/199/
+RewriteRule ^([Pp]{1})rojects/(.+)$ search.php?mode=service&cid=$2&sef=1 [L,QSA]                                              # projects/category
+RewriteRule ^(.+)-([Ii]{1})tems-([0-9]+)$ search.php?mode=product&cid=$3&sef=1 [L,QSA]                                        # category-items-199
+RewriteRule ^([Ii]{1})tems/([0-9]+)/(.+)$ search.php?mode=product&cid=$2&sef=1 [L,QSA]                                        # items/199/category
+RewriteRule ^([Ii]{1})tems/([0-9]+)/$ search.php?mode=product&cid=$2&sef=1 [L,QSA]                                            # items/199/
+RewriteRule ^([Ii]{1})tems/(.+)$ search.php?mode=product&cid=$2&sef=1 [L,QSA]                                                 # items/category
+RewriteRule ^(.+)-([Ee]{1})xperts-([0-9]+)$ search.php?mode=experts&cid=$3&sef=1 [L,QSA]                                      # category-experts-199
+RewriteRule ^([Ee]{1})xperts/([0-9]+)/(.+)$ search.php?mode=experts&cid=$2&sef=1 [L,QSA]                                      # experts/199/category
+RewriteRule ^([Ee]{1})xperts/([0-9]+)/$ search.php?mode=experts&cid=$2&sef=1 [L,QSA]                                          # experts/199/
+RewriteRule ^([Ee]{1})xperts/(.+)$ search.php?mode=experts&cid=$2&sef=1 [L,QSA]                                               # experts/category
+RewriteRule ^(.+)-([Ss]{1})kills-([0-9]+)$ search.php?mode=experts&sid=$3&sef=1 [L,QSA]                                       # category-skills-199
+RewriteRule ^([Ss]{1})kills/([0-9]+)/(.+)$ search.php?mode=experts&sid=$2&sef=1 [L,QSA]                                       # skills/199/category
+RewriteRule ^([Ss]{1})kills/([0-9]+)/$ search.php?mode=experts&sid=$2&sef=1 [L,QSA]                                           # skills/199/
+RewriteRule ^([Ss]{1})kills/(.+)$ search.php?mode=experts&sid=$2&sef=1 [L,QSA]                                                # skills/category
+RewriteRule ^(.+)_(.+)-([Pp]{1})rojects-([0-9]+)$ search.php?mode=service&cid=$4&sef=1 [L,QSA]                                # keywords_category-projects-199
+RewriteRule ^([Pp]{1})rojects/([0-9]+)/(.+)_(.+)$ search.php?mode=service&cid=$2&sef=1 [L,QSA]                                # projects/199/keywords_category
+RewriteRule ^(.+)_(.+)-([Ii]{1})tems-([0-9]+)$ search.php?mode=product&cid=$4&sef=1 [L,QSA]                                   # keywords_category-items-199
+RewriteRule ^([Ii]{1})tems/([0-9]+)/(.+)_(.+)$ search.php?mode=product&cid=$2&sef=1 [L,QSA]                                   # items/199/keywords_category
+RewriteRule ^(.+)_(.+)-([Ee]{1})xperts-([0-9]+)$ search.php?mode=experts&cid=$4&sef=1 [L,QSA]                                 # keywords_category-experts-199
+RewriteRule ^([Ee]{1})xperts/([0-9]+)/(.+)_(.+)$ search.php?mode=experts&cid=$2&sef=1 [L,QSA]                                 # experts/199/keywords_category
+RewriteRule ^(.+)_(.+)-([Ss]{1})kills-([0-9]+)$ search.php?mode=experts&sid=$4&sef=1 [L,QSA]                                  # keywords_category-skills-199
+RewriteRule ^([Ss]{1})kills/([0-9]+)/(.+)_(.+)$ search.php?mode=experts&sid=$2&sef=1 [L,QSA]                                  # skills/199/keywords_category
+RewriteRule ^([Ee]{1})xperts$ search.php?mode=experts&sef=1 [L,QSA]                                 	                      # experts/
+
+#### Member Profile ############################################################
+RewriteRule ^([Mm]{1})embers/(.+)-([Ff]{1})eedback-([2-4]+)$ members.php?id=$2&feedback=$4&sef=1 [L,QSA]                      # members/peter-feedback-2
+RewriteRule ^([Mm]{1})embers/(.+)/([Pp]{1})rofile$ members.php?id=$2&profile=1&sef=1 [L,QSA]                                  # members/peter/profile
+RewriteRule ^([Mm]{1})embers/(.+)/([Jj]{1})ob-([Hh]{1})istory$ members.php?id=$2&jobhistory=1&sef=1 [L,QSA]                   # members/peter/job-history
+RewriteRule ^([Mm]{1})embers/(.+)$ members.php?id=$2&sef=1&%{QUERY_STRING} [L,QSA]                                            # members/peter
+
+#### Buying Activities #########################################################
+RewriteRule ^([Bb]{1})uying$ buying.php?sef=1&%{QUERY_STRING} [L,QSA]                                                         # buying
+RewriteRule ^([Bb]{1})uying/([Mm]{1})anagement/rfps/(.+)$ buying.php?cmd=management&sub=$3&sef=1&%{QUERY_STRING} [L,QSA]      # buying/management/rfps/active
+RewriteRule ^([Bb]{1})uying/([Mm]{1})anagement/bids/(.+)$ buying.php?cmd=management&bidsub=$3&sef=1&%{QUERY_STRING} [L,QSA]   # buying/management/bids/declined
+
+#### Portfolios ################################################################
+RewriteRule ^([Pp]{1})ortfolios/([0-9]+)/(.+)$ portfolio.php?cid=$2&sef=1 [L,QSA]                                             # portfolios/199/peter
+RewriteRule ^([A-Za-z0-9._\-]+)_([Pp]{1})ortfolios/([0-9]+)/(.+)$ portfolio.php?cid=$3&q=$1&sef=1&%{QUERY_STRING} [L,QSA]     # keywords_portfolios/199/peter
+RewriteRule ^(.+)-([Pp]{1})ortfolio([0-9]+)$ portfolio.php?id=$3&sef=1&%{QUERY_STRING} [L,QSA]                                # category-portfolio199
+
+#### Quick Search Results ######################################################
+RewriteRule ^([Pp]{1})roviders$ search.php?mode=experts&sort=52&sef=1&%{QUERY_STRING} [L,QSA]                                 # providers
+RewriteRule ^([Ss]{1})ervices$ search.php?mode=service&sort=01&sef=1&%{QUERY_STRING} [L,QSA]                                  # services
+RewriteRule ^([Pp]{1})roducts$ search.php?mode=product&sort=01&sef=1&%{QUERY_STRING} [L,QSA]                                  # products
+
+#### Advanced Search Menu ######################################################
+RewriteRule ^([Ss]{1})earch-([Pp]{1})romotion$ search.php?cmd=promotion&sef=1&%{QUERY_STRING} [L,QSA]                         # search-promotion
+RewriteRule ^([Ss]{1})earch-([Oo]{1})ptions$ search.php?cmd=options&sef=1&%{QUERY_STRING} [L,QSA]                             # search-options
+RewriteRule ^([Ss]{1})earch-([Hh]{1})elp$ search.php?cmd=help&sef=1&%{QUERY_STRING} [L,QSA]                                   # search-help
+
+#### ADDONS ####################################################################
+
+#### [iAdvertiser]
+RewriteRule ^([Cc]{1})ampaign$ campaign.php?sef=1&%{QUERY_STRING} [L,QSA]                                                     # campaign
+RewriteRule ^([Cc]{1})ampaign/([Nn]{1})ew$ campaign.php?cmd=create&sef=1 [L,QSA]                                                # campaign/new
+RewriteRule ^([Cc]{1})ampaign/([Nn]{1})ew/ppi$ campaign.php?cmd=create&mode=ppi&sef=1 [L,QSA]                                   # campaign/new/ppi
+RewriteRule ^([Cc]{1})ampaign/([Nn]{1})ew/ppc$ campaign.php?cmd=create&mode=ppc&sef=1 [L,QSA]                                   # campaign/new/ppc
+RewriteRule ^([Cc]{1})ampaign/([Rr]{1})$ redirect.php?sef=1&%{QUERY_STRING} [L,QSA]                                             # campaign/r
+
+#### [iCommunity]
+RewriteRule ^([Ff]{1})orum$ forum.php?sef=1 [L,QSA]                                                                           # forum
+RewriteRule ^([Ff]{1})orum/([Ss]{1})earch$ forum.php?cmd=search&sef=1 [L,QSA]                                                   # forum/search
+RewriteRule ^([Ff]{1})orum/([Ss]{1})earch/$ forum.php?cmd=search&sef=1 [L,QSA]                                                  # forum/search/
+RewriteRule ^([Ff]{1})orum/([Ss]{1})earch/([Tt]{1})oday$ forum.php?cmd=search&view=today&sef=1 [L,QSA]                          # forum/search/today
+RewriteRule ^([Ff]{1})orum/([Ss]{1})earch/([Nn]{1})ew$ forum.php?cmd=search&view=new&sef=1 [L,QSA]                              # forum/search/new
+RewriteRule ^([Ff]{1})orum/([Ss]{1})earch/([Uu]{1})pdated$ forum.php?cmd=search&view=updated&sef=1 [L,QSA]                      # forum/search/updated
+RewriteRule ^([Ff]{1})orum/([Ss]{1})earch/([Uu]{1})nanswered$ forum.php?cmd=search&view=unanswered&sef=1 [L,QSA]                # forum/search/unanswered
+RewriteRule ^([Ff]{1})orum/([Mm]{1})arkforumsread$ forum.php?cmd=markforumsread&sef=1&%{QUERY_STRING} [L,QSA]                   # forum/markforumsread
+RewriteRule ^([Ff]{1})orum/([0-9]+)/([Nn]{1})ewtopic$ forum.php?cmd=newtopic&cid=$2&sef=1 [L,QSA]                               # forum/199/newtopic
+RewriteRule ^([Ff]{1})orum/([0-9]+)/([Ll]{1})astpost$ forum.php?tid=$2&view=lastpost&sef=1 [L,QSA]                              # forum/199/lastpost
+RewriteRule ^([Ff]{1})orum/([Tt]{1})opic/([0-9]+)/([Rr]{1})eply$ forum.php?cmd=reply&tid=$3&sef=1&%{QUERY_STRING} [L,QSA]       # forum/topic/199/reply
+RewriteRule ^([Ff]{1})orum/([Tt]{1})opic/([0-9]+)/(.+)$ forum.php?tid=$3&sef=1&%{QUERY_STRING} [L,QSA]                          # forum/topic/199/title
+RewriteRule ^([Ff]{1})orum/([Tt]{1})opic/([0-9]+)/$ forum.php?tid=$3&sef=1&%{QUERY_STRING} [L,QSA]                              # forum/topic/199/
+RewriteRule ^([Ff]{1})orum/([Cc]{1})ategories/([0-9]+)/(.+)$ forum.php?cid=$3&sef=1&%{QUERY_STRING} [L,QSA]                     # forum/categories/199/title
+RewriteRule ^([Ff]{1})orum/([Cc]{1})ategories/([0-9]+)/$ forum.php?cid=$3&sef=1&%{QUERY_STRING} [L,QSA]                         # forum/categories/199/
+RewriteRule ^([Ff]{1})orum/([0-9]+)/(.+)$ forum.php?fid=$2&sef=1&%{QUERY_STRING} [L,QSA]                                        # forum/199/title
+RewriteRule ^([Ff]{1})orum/([0-9]+)/$ forum.php?fid=$2&sef=1&%{QUERY_STRING} [L,QSA]                                            # forum/199/
+
+#### [Wanted Ads]
+RewriteRule ^([Ww]{1})ant([Aa]{1})ds$ wantads.php?sef=1 [L,QSA]                                                               # wantads
+RewriteRule ^([Ww]{1})ant([Aa]{1})ds/([0-9]+)/(.+)$ wantads.php?id=$3&sef=1 [L,QSA]                                             # wantads/199/title
+RewriteRule ^([Ww]{1})ant([Aa]{1})ds/([Cc]{1})ategories/([0-9]+)/(.+)$ wantads.php?cid=$4&sef=1 [L,QSA]                         # wantads/categories/199/title
+RewriteRule ^([Ww]{1})ant([Aa]{1})ds/([Nn]{1})ew$ wantads.php?cmd=post&sef=1 [L,QSA]                                            # wantads/new
+RewriteRule ^([Ww]{1})ant([Aa]{1})ds/([Pp]{1})ostoffer/([0-9]+)/(.+)$ wantads.php?subcmd=postoffer&id=$4&sef=1 [L,QSA]          # wantads/postoffer/199/title
+RewriteRule ^([Ww]{1})ant([Aa]{1})ds/([Pp]{1})ostoffer/([0-9]+)$ wantads.php?subcmd=postoffer&id=$4&sef=1 [L,QSA]               # wantads/postoffer/199
+RewriteRule ^([Ww]{1})ant([Aa]{1})ds/([Mm]{1})yoffers$ wantads.php?subcmd=myoffers&sef=1 [L,QSA]                                # wantads/myoffers
+RewriteRule ^([Ww]{1})ant([Aa]{1})ds/([Rr]{1})emove/([0-9]+)$ wantads.php?subcmd=remove-wantad&id=$4&sef=1 [L,QSA]              # wantads/remove/199
+RewriteRule ^([Ww]{1})ant([Aa]{1})ds/([Rr]{1})emove/([Oo]{1})ffer/([0-9]+)$ wantads.php?subcmd=remove-offer&id=$5&sef=1 [L,QSA] # wantads/remove/offer/199
+
+#### [Warnings]
+RewriteRule ^([Ww]{1})arnings$ warnings.php?sef=1 [L,QSA]                                                                       # warnings
+
+#### [Stores]
+RewriteRule ^([Ss]{1})tores$ stores.php?sef=1 [L,QSA]                                                                           # stores
+RewriteRule ^([Ss]{1})tores/([0-9]+)/(.*)/([Cc]{1})ategories/([0-9]+)/(.*)$ stores.php?id=$2&cid=$5&sef=1 [L,QSA]               # stores/199/title/categories/199/category
+RewriteRule ^([Ss]{1})tores/([0-9]+)/(.+)/([Cc]{1})ategories/([0-9]+)/$ stores.php?id=$2&cid=$5&sef=1 [L,QSA]                   # stores/199/title/categories/199/
+RewriteRule ^([Ss]{1})tores/([Cc]{1})ategories/([0-9]+)/(.+)$ stores.php?cid=$3&sef=1 [L,QSA]                                   # stores/categories/199/title
+RewriteRule ^([Ss]{1})tores/([Cc]{1})ategories/([0-9]+)/$ stores.php?cid=$3&sef=1 [L,QSA]                                       # stores/categories/199/
+RewriteRule ^([Ss]{1})tores/([0-9]+)/(.+)/([Vv]{1})iewcart$ stores.php?cmd=viewcart&id=$2&sef=1 [L,QSA]                         # stores/199/title/viewcart
+RewriteRule ^([Ss]{1})tores/([0-9]+)/(.+)/([Tt]{1})rackorder$ stores.php?cmd=trackorder&id=$2&sef=1 [L,QSA]                     # stores/199/title/trackorder
+RewriteRule ^([Ss]{1})tores/([0-9]+)/(.+)/([Hh]{1})ome$ stores.php?cmd=homepage&id=$2&sef=1 [L,QSA]                             # stores/199/title/home
+RewriteRule ^([Ss]{1})tores/([0-9]+)/(.+)/([Aa]{1})bout$ stores.php?cmd=about&id=$2&sef=1 [L,QSA]                               # stores/199/title/about
+RewriteRule ^([Ss]{1})tores/([0-9]+)/(.+)/([Tt]{1})erms$ stores.php?cmd=terms&id=$2&sef=1 [L,QSA]                               # stores/199/title/terms
+RewriteRule ^([Ss]{1})tores/([0-9]+)/(.+)/([Pp]{1})ayments$ stores.php?cmd=methods&id=$2&sef=1 [L,QSA]                          # stores/199/title/payments
+RewriteRule ^([Ss]{1})tores/([0-9]+)/(.+)/([Cc]{1})ontact$ stores.php?cmd=contact&id=$2&sef=1 [L,QSA]                           # stores/199/title/contact
+RewriteRule ^([Ss]{1})tores/([0-9]+)/(.+)$ stores.php?id=$2&sef=1 [L,QSA]                                                       # stores/199/title
+RewriteRule ^([Ss]{1})tores/([0-9]+)/$ stores.php?id=$2&sef=1 [L,QSA]                                                           # stores/199/
+RewriteRule ^([Ss]{1})tores/([Ii+]tem)/([0-9]+)/(.+)$ stores.php?cmd=viewitem&itemid=$3&sef=1 [L,QSA]                           # stores/item/199/title
+RewriteRule ^([Ss]{1})tores/([Ii+]tem)/([0-9]+)/$ stores.php?cmd=viewitem&itemid=$3&sef=1 [L,QSA]                               # stores/item/199/
+RewriteRule ^([Ss]{1})tores/([Nn]{1})ew$ stores.php?cmd=create-store&sef=1 [L,QSA]                                              # stores/new
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement$ stores.php?cmd=management&sef=1 [L,QSA]                                         # stores/management
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Ii]{1})nventory$ stores.php?cmd=management&subcmd=inventory&sef=1 [L,QSA]      # stores/management/inventory
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Ii]{1})nventory/([Aa]{1})dd$ stores.php?cmd=management&subcmd=inventory&action=new-item&sef=1 [L,QSA] # stores/management/inventory/add
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Ii]{1})nventory/([Aa]{1})dd/([Bb]{1})ulk$ stores.php?cmd=management&subcmd=inventory&action=new-item&bulk=1&sef=1 [L,QSA] # stores/management/inventory/add/bulk
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Cc]{1})ategories$ stores.php?cmd=management&subcmd=categories&sef=1 [L,QSA]    # stores/management/categories
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Oo]{1})rders$ stores.php?cmd=management&subcmd=orders&sef=1 [L,QSA]            # stores/management/orders
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Ss]{1})hipping$ stores.php?cmd=management&subcmd=shipping&sef=1 [L,QSA]        # stores/management/shipping
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Tt]{1})axzones$ stores.php?cmd=management&subcmd=taxzones&sef=1 [L,QSA]        # stores/management/taxzones
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Ss]{1})ubscription$ stores.php?cmd=management&subcmd=upgrade&sef=1 [L,QSA]     # stores/management/subscription
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Ss]{1})ubscription/([Cc]{1})ancel$ stores.php?cmd=subscription&subcmd=cancel&sef=1 [L,QSA] # stores/management/subscription/cancel
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Ss]{1})ubscription/([Cc]{1})lose$ stores.php?cmd=subscription&subcmd=close&sef=1 [L,QSA] # stores/management/subscription/close
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Hh]{1})omepage$ stores.php?cmd=management&subcmd=homepage&sef=1 [L,QSA]        # stores/management/homepage
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Pp]{1})aymethods$ stores.php?cmd=management&subcmd=paymentmethods&sef=1 [L,QSA]  # stores/management/paymethods
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Tt]{1})erms$ stores.php?cmd=management&subcmd=terms&sef=1 [L,QSA]              # stores/management/terms
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Ee]{1})mails$ stores.php?cmd=management&subcmd=emails&sef=1 [L,QSA]            # stores/management/emails
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Uu]{1})pgrade$ stores.php?cmd=management&subcmd=upgrade&sef=1 [L,QSA]          # stores/management/upgrade
+RewriteRule ^([Ss]{1})tores/([Mm]{1})anagement/([Ii]{1})nventory/([Uu]{1})pdate/([0-9]+)$ stores.php?cmd=management&subcmd=inventory&action=update-item&itemid=$5&sef=1 [L,QSA] # stores/management/inventory/update/199
+
+#### [Images Rewrite]
+RewriteRule ^i/(.+)/(.+)/(.+)/([0-9]+)x([0-9]+)_(.+)$ attachment.php?cmd=$1&subcmd=$2&id=$3&w=$4&h=$5&sef=1 [L,QSA]             # i/[thumb]/[itemphoto]/filehash/[width]x[height]_[filename]
+RewriteRule ^i/(.+)/(.+)/original/(.+)/([0-9]+)x([0-9]+)_(.+)$ attachment.php?cmd=$1&subcmd=$2&id=$3&w=$4&h=$5&original=1&sef=1 [L,QSA] # i/[thumb]/[itemphoto]/original/filehash/[width]x[height]_[filename]
+RewriteRule ^i/(.+)/(.+)/([0-9]+)x([0-9]+)_(.+)$ attachment.php?cmd=$1&id=$2&w=$3&h=$4&sef=1 [L,QSA]                            # i/[profile]/filehash/[width]x[height]_[filename]
+RewriteRule ^i/(.+)/(.+)$ attachment.php?id=$1&sef=1 [L,QSA]                                                                    # i/filehash/[filename]
+
+RewriteCond %{REQUEST_URI} ^(/(.+)/(.{1}))
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(\.html|\.php|\.)
+RewriteRule ^(.*)$ main.php?sef=1 [L,QSA]
+</IfModule>

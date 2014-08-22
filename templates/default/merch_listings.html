@@ -1,0 +1,45 @@
+<if condition="!empty($category)"><h1 class="a_active">{category} {seeall}</h1>
+<div>{recursivecategory}</div>
+<div style="padding-bottom:12px">{categoryresults}</div>
+<if condition="isset($featuredproductauctions) AND count($featuredproductauctions) > 0 AND defined('TEMPLATE_NEWUI_MODE') AND TEMPLATE_NEWUI_MODE == 'PRODUCT'"><!-- start featured product -->
+<div style="height:1px;width:100%;background-color:#eaeaea;margin-bottom:20px"></div>
+<div class="product">
+    <h3 style="margin-left:-10px">{_featured_items_in} {category}</h3>
+    <a href="javascript:;" class="prev" id="c1l">prev</a>
+    <a href="javascript:;" class="next" id="c1r">next</a>
+    <div class="carousel_home_featured_product">
+        <ul>
+            <loop name="featuredproductauctions"><li>
+                {photoplain}
+                <i></i>
+                <span>{title}</span> 
+                <if condition="$ilconfig['lowestpricecombined']"><strong>{lowestprice}</strong><else /><strong>{price}</strong></if>
+                <if condition="$ilconfig['timeleftblocks']"><span class="timeleft">{timeleft}</span></if>
+            </li></loop name="featuredproductauctions">
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+<!-- end featured product --><div class="clear"></div></if>
+<if condition="isset($productsendingsoon) AND count($productsendingsoon) > 0 AND defined('TEMPLATE_NEWUI_MODE') AND TEMPLATE_NEWUI_MODE == 'PRODUCT'"><!-- start ending soon product -->
+<div class="product">
+    <h3 style="margin-left:-10px">{_bid_on_ending_soon_items_now_before_theyre_gone}</h3>
+    <a href="javascript:;" class="prev" id="c4l">prev</a>
+    <a href="javascript:;" class="next" id="c4r">next</a>
+    <div class="carousel_home_endingsoon_product">
+        <ul>
+            <loop name="productsendingsoon"><li>
+                {photoplain}
+                <i></i>
+                <span>{title}</span>
+                <if condition="$ilconfig['lowestpricecombined']"><strong>{lowestprice}</strong><else /><strong>{price}</strong></if>
+                <if condition="$ilconfig['timeleftblocks']"><span class="timeleft">{timeleft}</span></if>
+            </li></loop name="productsendingsoon">
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+<!-- end ending soon product --><div class="clear"></div></if><else />
+<h1 class="a_active">{_categories}</h1>
+<div>{recursivecategory}</div>
+<div style="padding-bottom:12px">{categoryresults}</div></if>

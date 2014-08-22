@@ -1,0 +1,97 @@
+<if condition="(isset($show['withdraw_nofunds_error']) AND $show['withdraw_nofunds_error']) OR (isset($show['withdraw_errors']) AND $show['withdraw_errors']) OR (isset($show['withdraw_badamount_error']) AND $show['withdraw_badamount_error'])">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td>
+        <div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;">
+            <div class="n">
+                <div class="e">
+                    <div class="w"></div>
+                </div>
+            </div>
+
+            <div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span>
+                <if condition="isset($show['withdraw_nofunds_error']) AND $show['withdraw_nofunds_error']"><div>{_were_sorry_you_have_insufficient_funds}</div></if>
+                <if condition="isset($show['withdraw_errors']) AND $show['withdraw_errors']"><div>{_were_sorry_you_did_not_supply_valid_withdraw_credentials}</div></if>
+                <if condition="isset($show['withdraw_badamount_error']) AND $show['withdraw_badamount_error']"><div>{_were_sorry_amount_requested_does_not_comply}</div></if>		
+            </div>
+
+            <div class="s">
+                <div class="e">
+                    <div class="w"></div>
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>
+</table>
+<div style="padding-bottom:12px"></div></if>
+
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+    <div class="bigtabsheader">
+        <ul>
+            <li title="" class=""><a href="{ilpage[accounting]}">{_accounting}</a></li>
+            <if condition="empty($_SESSION['ilancedata']['user']['active']) OR $_SESSION['ilancedata']['user']['active'] == 'no' OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'deposit') == 'no'"><else /><li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=deposit">{_deposit}</a></li></if>
+            <li title="" class="on"><a href="javascript:void(0)">{_withdraw}</a></li>
+            <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=transactions">{_transactions}</a></li>
+            <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=sch-transactions">{_scheduled_transactions}</a></li>
+        </ul>
+    </div>
+</div>
+<div style="clear:both;"></div>
+<form name="ilform" action="{ilpage[accounting]}" method="post" accept-charset="UTF-8" onsubmit="return validate_withdraw_form(this);" style="margin: 0px">
+<input type="hidden" name="cmd" value="_secure-withdraw" />
+<input type="hidden" name="do" value="preview" />
+<div class="block-wrapper">
+
+    <div class="block">
+
+        <div class="block-top">
+                <div class="block-right">
+                    	<div class="block-left"></div>
+                </div>
+        </div>
+
+        <div class="block-header">{_withdraw_funds_menu}</div>
+        <div class="block-content-yellow" style="padding:9px"><div class="smaller">{_use_this_page_to_withdraw_funds}</div></div>
+        <div class="block-content" style="padding:0px">
+
+            <table border="0" width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr class="alt1">
+                    <td>
+                        <div>{_method}</div>
+                        <div style="padding-top:3px">{withdraw_method_pulldown}</div>
+                        <div style="padding-top:6px" class="smaller litegray">{_this_payment_method_cannot_be_changed_once_submitted}</div>
+
+                    </td>
+                </tr>
+                <tr class="alt1">
+                    <td>
+                        <div>{_available_balance}</div>
+                        <div style="padding-top:3px">{available_balance}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>{_amount}</div>
+                        <div style="padding-top:3px">{currencysymbol} <input type="text" size="8" name="withdraw_amount" class="input" /> <img name="withdraw_amounterror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /></div>
+                        <div style="padding-top:6px" class="smaller gray">{_minimum_withdraw_amount_from_your_account_is} <span class="black">{min_withdraw_amount}</span></div>
+                        <div style="padding-top:3px" class="smaller gray">{_maximum_withdraw_request_from_your_account_is} <span class="black">{max_withdraw_amount}</span></div>
+
+                    </td>
+                </tr>
+                <tr class="alt2_top">
+                    <td><input type="submit" value=" {_continue} " class="buttons" style="font-size:15px" /></td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="block-footer">
+            <div class="block-right">
+                <div class="block-left"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</form>

@@ -1,0 +1,72 @@
+<script language="javascript">
+<!--
+function validate_mb_email(form)
+{
+	if (form.pay_from_email.value == '')
+	{
+		alert_js(phrase['_you_must_enter_your_verified_moneybookers_member_email_address_to_continue']);
+		return false;
+	}
+	return true;
+}
+//-->
+</script>
+{hidden_form_start}
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_subscribe_to_our_marketplace_via_moneybookers_recurring_subscriptions}</div>
+			<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_you_must_have_or_be_eligible_for_a_moneybookers_account_before_using_our_recurring_subscription_service}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+				<tr>
+					<td>
+					
+						<div>
+							<div><img src="{template_relativeimagepath}{template_imagesfolder}payment/moneybookers.gif" border="0" alt="" id="moneybookers" /></div>
+							<blockquote><div>
+							{_during_this_subscription_upgrade_process_you_will_leave_our_web_site_momentarily_to_be_redirected_over_to_moneybookers}
+							<br />
+							<br />
+							{_moneybookers_will_continue_to_bill_you_for_the_duration_you_selected}
+							<br />
+							<br />
+							{_this_will_be_an_automated_process_whereby_moneybookers_will_notify_us}
+							<div class="gray"><br />
+							{_please_note_if_you_manually_cancel_your_subscription_plan_on_moneybookerscom_before_your_renew_date}</div>
+						</div></blockquote>
+						</div>
+					
+						<hr size="1" width="100%" style="color:#cccccc; margin-top:6px" />
+					
+						<div>
+							<div><strong>{_enter_your_moneybookers_email_address}</strong></div>
+							<div class="gray">{_please_enter_your_verified_moneybookers_email_address_you_will_be_sending_payment_with_below}</div>
+							<div><input type="text" size="5" name="pay_from_email" value="" class="input" style="width:250px" /> </div>
+						</div>
+						<br />
+						
+					</td>
+				</tr>
+				</table>
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div><input type="submit" value=" {_subscribe} " style="font-size:15px" class="buttons" /></div>
+{hidden_form_end}

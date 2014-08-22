@@ -1,0 +1,31 @@
+{template_htmldoctype}
+<html dir="{template_textdirection}" xml:lang="{template_languagecode}" lang="{template_languagecode}" xmlns="http://www.w3.org/1999/xhtml" {template_htmlextra} {apihook[template_shell_html_tag_end]}>
+<head>
+<title>{page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={template_charset}" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+<if condition="PROTOCOL_REQUEST == 'https'"><base href="{https_server}" /><else /><base href="{http_server}" /></if>
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta name="description" content="{template_metadescription}" />
+<meta name="keywords" content="{template_metakeywords}" />
+{js_phrases_content}
+{headinclude}
+</head>
+<body{onload}>
+
+{headerbit}
+
+{navbar}
+
+{breadcrumbbit}
+
+{infobar}
+
+<!-- START template content -->{maincontent}<!-- END template content -->
+
+{footerbit}
+{footinclude}
+</body>
+</html>

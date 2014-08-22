@@ -1,0 +1,91 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+<tr valign="top">
+	<td>{v3left_nav}</td>
+	<td><div style="width:10px"></div></td>
+	<td width="100%">
+	        <div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+        <div class="bigtabsheader">
+        <ul>
+            <li title="" class="on"><a href="javascript:void(0)">{_preferences}</a></li>
+        </ul>
+        </div>
+        </div>
+        <div style="clear:both;"></div>
+        
+        <div class="block-wrapper">
+        
+            <div class="block">
+            
+                    <div class="block-top">
+                            <div class="block-right">
+                                    <div class="block-left"></div>
+                            </div>
+                    </div>
+                    
+                    <div class="block-header">{_my_preferences}</div>
+                    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_overview}</div></div>
+                    <div class="block-content" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x;">
+                        
+                        <div class="listcolumnwrapper" style="margin-top:12px; width:100%">
+                          
+                          {apihook[preferences_listcolumns_start]}
+                          
+                          <div class="listcolumn" style="line-height:1.6em">
+                                
+                                <ol>
+                                <li><span class="blue"><a href="{https_server}{ilpage[preferences]}?cmd=profile">{_personal_profile}</a></span></li>
+                                <li><span class="blue"><a href="{ilpage[preferences]}?cmd=currency">{_currency_preference}</a></span></li>                                <if condition="isset($show['language_diasble']) AND $show['language_diasble'] == 'true'">
+                                <li><span class="blue"><a href="{ilpage[preferences]}?cmd=language">{_language_preference}</a></span></li>
+                                </if>
+                                {apihook[preferences_listcolumns_first]}
+                                </ol>
+                          </div>
+                        
+                          <div class="listcolumn" style="line-height:1.6em">
+                                
+                                <ol>
+                                <li><span class="blue"><a href="{ilpage[preferences]}?cmd=timezone">{_time_zone_management}</a></span></li>
+                                <li><span class="blue"><a href="{https_server}{ilpage[preferences]}?cmd=ip-restrict">{_ip_restrict_management}</a></span></li>
+                                <li><span class="blue"><a href="{ilpage[preferences]}?cmd=notifications">{_category_notifications}</a></span></li>
+                                {apihook[preferences_listcolumns_second]}
+                                </ol>
+                          </div>
+                        
+                          <div class="listcolumn" style="line-height:1.6em">
+                                
+                                <ol>
+                                <li><span class="blue"><a href="{ilpage[preferences]}?cmd=login">{_start_page_management}</a></span></li>
+                                <li><span class="blue"><a href="{ilpage[preferences]}?cmd=email">{_email_preferences}</a></span></li>
+                                <if condition="$ilconfig['globalserver_enabledistanceradius']"><li><span class="blue"><a href="{ilpage[preferences]}?cmd=distance">{_distance_management}</a></span></li></if>
+                               	{apihook[preferences_listcolumns_third]}
+                                </ol>
+                          </div>
+                          
+                          <div class="listcolumn" style="line-height:1.6em">
+                                
+                                <ol>
+                                <!--<li><span class="blue"><a href="{https_server}{ilpage[preferences]}?cmd=cookies">{_cookie_management}</a></span></li>-->
+                                <li><span class="blue"><a href="{ilpage[preferences]}?cmd=attachments">{_attachment_manager}</a></span></li>
+                                <li><span class="blue"><a href="{https_server}{ilpage[preferences]}?cmd=password-renewal">{_request_new_password}</a></span></li>
+                                {apihook[preferences_listcolumns_forth]}
+                                </ol>
+                          </div>
+                          
+                          {apihook[preferences_listcolumns_end]}
+                          
+                          <div class="clearleft"></div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="block-footer">
+                            <div class="block-right">
+                                    <div class="block-left"></div>
+                            </div>
+                    </div>
+                    
+            </div>
+        </div>
+	</td>
+</tr>
+</table>

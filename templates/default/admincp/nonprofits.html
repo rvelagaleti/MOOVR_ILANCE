@@ -1,0 +1,253 @@
+<div id="v3body4">
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+	<!-- /sub navigation -->
+
+	<div id="content">
+	<h1>{_nonprofit_manager}</h1><br />
+		
+		<div class="tab-pane" id="abusereportsmain">
+
+			<!-- begin tab page -->
+			<div class="tab-page">
+	
+				<h2 class="tab">{_charities}</h2>
+				
+				<!-- begin tab pane -->
+				<div class="tab-pane">
+				
+					<!-- categories view -->
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_nonprofits}</div>
+							<div class="block-content-yellow" style="padding:{table_cellpadding}px">
+							<div class="smaller">{_nonprofit_at_least_one}</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+								<tr class="alt2">
+									<td width="30%" align="left">{_title}</td>
+									<td width="33%" align="left">URL </td>
+									<td width="7%" align="right">{_donations}</td>
+									<td width="14%" align="right" nowrap="nowrap">{_earnings}</td>
+									<td width="16%" align="right" nowrap="nowrap">{_action}</td>
+								  </tr>
+								<loop name="nonprofits">
+								<tr align="center" class="alt1" valign="top">
+									<td align="left">{title}<!--<div class="smaller gray">{description}</div>--></td>
+								  <td align="left" nowrap="nowrap"><div class="blue"><a href="{url}" target="_blank">{url}</a></div></td>
+									<td align="right" nowrap="nowrap"><span>{donations}</span></td>
+									<td align="right" nowrap="nowrap"><span class="green">{earnings}</span></td>
+									<td align="right">{action}</td>
+								  </tr>
+								</loop name="nonprofits">
+								<if condition="isset($show['charities']) AND $show['charities'] == false">
+								<tr>
+									<td colspan="5" align="center">{_no_results_found}</td>
+								</tr>
+								<else />
+								<tr class="alt2_top">
+									<td><span><strong>{_totals}</strong></span></td>
+									<td></td>
+									<td align="right"><span><strong>{total1}</strong></span></td>
+									<td align="right"><span><strong>{total2}</strong></span></td>
+									<td></td>
+								</tr>
+								</if>
+								</table>
+								
+							</div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+					
+					<a name="updatenonprofit"></a>
+					<form name="ilform" action="{ilpage[subscribers]}" method="post" accept-charset="UTF-8" style="margin: 0px;">
+					<input type="hidden" name="cmd" value="nonprofits" />
+					<input type="hidden" name="subcmd" value="{hiddenfieldsubcmd}" />
+					{hiddendo}
+					{hiddenid}
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_add_update_nonprofit}</div>
+							<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_add_update_allows_sellers_to_choose}</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+								<tr class="alt1">
+									<td width="27%" align="left"><span class="gray">{_title}</span></td>
+							  	  <td width="73%" align="left" nowrap="nowrap"><input type="text" name="title" class="input" size="35" value="{title}" /></td>
+								</tr>
+								<tr class="alt1">
+									<td align="left"><span class="gray">{_description}</span></td>
+								  	<td align="left" nowrap="nowrap"><input type="text" name="description" class="input" size="35" value="{description}" /></td>
+								</tr>
+								<tr class="alt1">
+									<td align="left"><span class="gray">{_website_url_include_http}</span></td>
+								  	<td align="left" nowrap="nowrap"><input type="text" name="url" class="input" size="45" value="{url}" /></td>
+								</tr>
+								<tr class="alt2_top">
+									<td align="left" colspan="2"><input type="submit" value=" {_save} " class="buttons" style="font-size:15px" /></td>
+								</tr>
+								</table>
+								
+							</div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+				</form>
+				<!-- /categories view -->
+									
+				</div>
+				<!-- /begin tab pane -->
+				
+			</div>
+			<!-- /begin tab page -->
+			
+			
+				<div class="tab-page">
+				<h2 class="tab">{_balance}</h2>
+				
+				<div class="tab-pane" id="escrowbalance">
+				
+                	
+					<div class="block-wrapper">
+						<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_nonprofit_balance}</div>
+							<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_nonprofit_payments_breakdown}</div></div>
+							<div class="block-content" style="padding:0px">
+							    <form name="ilform" action="{ilpage[subscribers]}" method="post" accept-charset="UTF-8" style="margin: 0px;">
+							    <input type="hidden" name="cmd" value="nonprofits" />
+								<table width="100" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+								    <tr valign="top">
+									<td width="1%" nowrap="nowrap"><strong>{_range}:</strong></td>
+									<td width="200">{reportfromrange}</td><td class="alt1_left"><input type="submit" name="submit" value=" {_submit} " class="buttons" /></td>
+								    </tr>
+								</table>
+							    </form>
+							</div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+						</div>
+					</div>
+              
+                                  
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_nonprofit_balance}</div>
+							<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_nonprofit_payments_breakdown}</div></div>
+							<div class="block-content" style="padding:0px">
+							    
+								<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+								<tr class="alt2">
+								    <td>{_listing_type}</td>
+								    <td align="right">{_total_donation_earnings_collected}</td>
+								    <td align="right">{_total_unpaid_by_sellers}</td>
+								    <td align="right">{_total_paid_by_sellers}</td>
+								</tr>
+								<tr class="alt1">
+								    <td><span>{_product_auction}</span></td>
+								    <td align="right"><span class="blue">{regular_total}</span></td>
+								    <td align="right"><span class="red">{regular_unpaid}</span></td>
+								    <td align="right"><span class="green">{regular_paid}</span></td>
+								</tr>
+								<tr class="alt1">
+								    <td><span>{_buy_now}</span></td>
+								    <td align="right"><span class="blue">{fixed_total}</span></td>
+								    <td align="right"><span class="red">{fixed_unpaid}</span></td>
+								    <td align="right"><span class="green">{fixed_paid}</span></td>
+								</tr>
+								<tr class="alt2_top">
+								    <td><span><strong>{_totals}</strong></span></td>
+								    <td align="right"><span><strong>{total_nonprofit}</strong></span></td>
+								    <td align="right"><span><strong>{total_unpaid}</strong></span></td>
+								    <td align="right"><span><strong>{total_paid}</strong></span></td>
+								</tr>
+								<!--<tr class="alt2_top">
+								    <td>&nbsp;</td>
+								    <td colspan="4" valign="top"><img src="{template_relativeimagepath}{template_imagesfolder}trail.gif" border="0" alt="" /> <span class="smaller">You should have at least this amount within a seperate business account to pay charities yearly </span></td>
+								</tr>-->
+								</table>
+								
+							</div>
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+	
+				</div>
+				
+				</div>
+			
+			<!-- begin tab page -->
+			<div class="tab-page">
+	
+				<h2 class="tab">{_settings}</h2>
+				
+				<!-- begin tab pane -->
+				<div class="tab-pane">
+				
+					{configuration_nonprofits}
+									
+				</div>
+				<!-- /begin tab pane -->
+				
+			</div>
+			<!-- /begin tab page -->
+			
+		</div>

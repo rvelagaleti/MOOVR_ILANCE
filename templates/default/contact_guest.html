@@ -1,0 +1,61 @@
+<form action="{ilpage[merch]}" method="post" name="ilform" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="contact" />
+<input type="hidden" name="subcmd" value="submit_contact_guest" />
+<input type="hidden" name="username" value="{username}" />
+<input type="hidden" name="userid" value="{userid}" />
+<input type="hidden" name="id" value="{id}" />
+<input type="hidden" name="subject_title" value="{project_title}" />
+
+
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_submit_contact_report}</div>
+			<div class="block-content-yellow"><div class="smaller">{_you_can_submit_an_contact_report_using_the_form_below}</div></div>
+			
+			<div class="block-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="0" cellpadding="12">
+				<tr>
+					<td><strong>{_contact_form}</strong><br />				
+						<div class="gray" style="padding-bottom:3px">{_email}</div>
+						<input type="text" name="email_address" id="email_address" size="80" />
+
+					<if condition="!empty($id)">
+						<div class="gray" style="padding-bottom:3px">{_subject}</div>
+						<input type="text" name="subject_title" id="subject_title" value="{_question_about}: {project_title}" size="80" />
+					<else />
+						<div class="gray" style="padding-bottom:3px">{_subject}</div>
+						<input type="text" name="subject_title" id="subject_title" value="" size="80" />
+					</if>
+					<div class="gray" style="padding-bottom:3px">{_please_include_your_request_below}</div><div>
+					<if condition="!empty($id)">
+						<textarea name="contact_message" style="width: 525px; height: 84px; font-family: verdana" wrap="physical">{_auction_url}: {link}</textarea></div></td>
+					<else />
+						<textarea name="contact_message" style="width: 525px; height: 84px; font-family: verdana" wrap="physical"></textarea></div></td>
+					</if>
+				</tr>
+				<tr>
+					<td><div><input type="checkbox" value="{_email}" name="email" checked="checked">{_send_me_copy_of_this_mail}</div></td>
+				</tr>
+				</table>
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div align="right"><input type="submit" value=" {_submit} " class="buttons" style="font-size:14px" /></div>
+</form>

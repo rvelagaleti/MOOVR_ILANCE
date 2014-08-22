@@ -1,0 +1,26 @@
+<if condition="isset($show['no_rows_returned']) AND $show['no_rows_returned'] == false"><tr class="alt2_top">
+    <td colspan="{value[colspan]}" class="{value[tdfooterclass]}"><span style="float:left; padding-top:4px;"><span class="blue" style="font-size:14px"><a href="javascript:void(0)" onclick="inlineCB.check_all(true)" style="text-decoration:underline">{_select_all}</a></span>&nbsp;&nbsp; <span class="blue" style="font-size:14px"><a href="javascript:void(0)" onclick="inlineCB.check_all(false)" style="text-decoration:underline">{_deselect_all}</a></span>&nbsp;&nbsp;<span class="blue" style="font-size:14px"><a href="javascript:void(0)" onclick="inlineCB.check_all(\'invert\')" style="text-decoration:underline">{_invert}</a></span>&nbsp;&nbsp;</span><span style="float:right">
+    <select name="action" style="font-family: verdana">
+    <optgroup label="{_select_action}">
+    <if condition="isset($ilance->GPC['mode']) AND $ilance->GPC['mode'] != 'experts'"><option value="compare">{_compare}</option></if>
+    <if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0"><option value="watchlist">{_add_to_watchlist}</option></if>
+    <if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0 AND isset($ilance->GPC['mode']) AND $ilance->GPC['mode'] == 'experts'"><option value="invite">{_invite_to_bid}</option></if>
+	<if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0 AND isset($ilance->GPC['mode']) AND $ilance->GPC['mode'] == 'experts' AND !empty($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] == 1"><option value="delete">{_delete}</option></if>
+    </optgroup>
+    <if condition="!empty($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] == '1' AND (isset($ilance->GPC['mode']) AND $ilance->GPC['mode'] == 'service' OR $ilance->GPC['mode'] == 'product')"><optgroup label="{_moderation_tools}">
+    <option value="delist">{_delist}</option>
+    <option value="featured">{_featured}</option>
+    <option value="highlite">{_highlight}</option>
+    <option value="bold">{_bold}</option>
+    <option value="relist">{_autorelist}</option>
+    <option value="extend">{_extend_duration}</option>
+    <option value="movecategory">{_category_move}</option>
+    <option value="email">{_send_email}</option>
+    </optgroup></if>
+    </select>&nbsp;<input type="submit" class="buttons" value=" {_go} " id="inlinebutton" />
+    <script type="text/javascript"><!--
+    inlineCB = new iL_Inline('inlineCB', '{value[mode]}', 'searchform', '{_go}');
+    //--></script>
+    
+    </span></td>
+</tr></if>

@@ -1,0 +1,17 @@
+<h1>{_transfer_of_project_ownership}</h1><br />
+<form method="post" name="ilform" action="{ilpage[buying]}" accept-charset="UTF-8">
+<input type="hidden" name="cmd" value="_do-transfer-type" />
+{transfer_hidden_inputs} 
+<input type="hidden" name="transfertype" value="userid" />
+<table border="0" cellpadding="2" cellspacing="0" width="100%" align="center">
+<tr valign="top"> 
+	<td colspan="2" align="center"></td>
+</tr>
+<tr> 
+	<td colspan="2"><strong>{_rfp_transfer_list}</strong>: {_transferring_the_ownership_of_selected_projects_projects_below} <ul>{rfp_list}</ul></td>
+</tr>
+<tr> 
+	<td><if condition="isset($show['submit']) AND $show['submit']"><input type="submit" value="{_continue}" class="buttons" /><else /><input type="submit" value="{_continue}" class="buttons" disabled="disabled" /></if></td>
+</tr>
+</table>
+</form>

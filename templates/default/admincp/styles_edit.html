@@ -1,0 +1,61 @@
+<div id="v3body4"> 
+    <div id="sub">
+	<div id="subnav">
+	    <loop name="subnav_settings"><a href="{url}" {class}><span>{name}</span></a> <span> | </span></loop name="subnav_settings">
+	</div>
+    </div>
+
+    <div id="content">
+	<h1>{_templates_css_manager}</h1><br />
+
+		<form action="{ilpage[styles]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return validate_all();">
+		    <input type="hidden" name="cmd" value="_save-style" /> 
+		    <input type="hidden" name="id" value="{id}" /> 
+		    <input type="hidden" name="return" value="{ilpage[styles]}" />
+		    <div class="block-wrapper">
+			<div class="block3">
+
+			    <div class="block3-top">
+				<div class="block3-right">
+				    <div class="block3-left"></div>
+				</div>
+			    </div>
+
+			    <div class="block3-header">{_edit} {name}</div>
+			    <div class="block3-content-gray" style="padding:9px"><div class="smaller">{_edit}</div></div>
+			    <div class="block3-content" style="padding:0px">
+
+				<table cellpadding="{table_cellpadding}" border="0" width="100%">
+                <tr class="alt1">
+                    <td width="70%" class="alt1_left"><strong>{_name}</strong></td>
+                    <td width="30%"><input type="text" name="name" id="name" value="{name}" class="input" /></td>
+                    <td width="0%"></td>
+                    <td width="0%"></td>
+                </tr>
+                <tr class="alt1">
+                    <td class="alt1_left"><strong>{_sort}</strong></td>
+                    <td><input type="text" name="sort" id="sort" value="{sort}" class="input" /></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {style_template_vars}
+                <tr class="alt2_top">
+					<td colspan="4"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value="{_save}" style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" value="{_save}" style="font-size:15px" /></if></td>
+				</tr>
+				</table>
+
+			    </div>
+
+			    <div class="block3-footer">
+				<div class="block3-right">
+				    <div class="block3-left"></div>
+				</div>
+			    </div>
+
+			</div>
+		    </div>
+		</form>
+		
+	</div>
+
+	<!-- / templates -->

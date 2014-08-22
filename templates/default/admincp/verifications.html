@@ -1,0 +1,170 @@
+<div id="v3body4"> 
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+	
+<!-- start content -->
+<div id="content">
+<h1>{_verification_manager}</h1><br />
+
+	<!-- templates -->
+	<div class="tab-pane">
+		
+		<div class="tab-pane" id="verifications">
+		
+			<div class="tab-page">
+			
+	        	<h2 class="tab">{_activity}</h2>
+				<form method="get" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="verifications" />
+				<input type="hidden" name="subcmd" value="search" />
+				<div class="block-wrapper">
+
+				<div class="block">
+				
+						<div class="block-top">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+						<div class="block-header">{_search}</div>
+						<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_search_credential_verifications_using_the_form_below}</div></div>
+						<div class="block-content" style="padding:0px">
+							
+							<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+							<tr class="alt1"> 
+								<td nowrap="nowrap"><span class="gray">{_search_by_verification_id}</span></td>
+								<td><input type="text" name="answerid" style="width: 98%;" value="{answerid}" /></td>
+								<td width="6%" align="right" nowrap="nowrap"><span class="gray">{_user_id}</span></td>
+								<td align="left" nowrap="nowrap"> <input name="user_id" type="text" style="width: 98%;" value="{user_id}" /></td>
+							</tr>
+							<tr class="alt1"> 
+								<td width="16%" nowrap="nowrap"><span class="gray">{_search_by_status}</span></td>
+								<td width="16%">
+								<select name="isverified" style="font-family: verdana">
+								<option value="-1" {isverified1}>{_all}</option>
+								<option value="1" {isverified2}>{_verified_requests}</option>
+								<option value="0" {isverified3}>{_pending_verification_requests}</option>
+								</select></td>
+								<td colspan="2"><span class="gray">{_sort_results_by}</span><strong>&nbsp;&nbsp;&nbsp; 
+								<input type="radio" name="orderby" value="ASC" {orderby1} /> </strong>{_ascending}<strong>&nbsp;&nbsp;
+								<input type="radio" name="orderby" value="DESC" {orderby2} /> </strong>{_descending}</td>
+							</tr>
+							<tr class="alt2_top">
+								<td colspan="4"><input type="submit" value="{_search}" style="font-size:15px" class="buttons" /></td>
+							</tr>
+							</table>
+							
+						</div>
+						
+						<div class="block-footer">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+          		
+				</form>
+				
+			
+				<form action="{ilpage[distribution]}" name="ilform" method="post" accept-charset="UTF-8" style="margin:0px">
+				<input type="hidden" name="cmd" value="verifications" />
+				<input type="hidden" name="subcmd" value="verification-manage" />
+				<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=verifications" />
+				<div class="block-wrapper">
+				<div class="block">
+				
+						<div class="block-top">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+						<div class="block-header">{_profile} {_verifications}</div>
+						<div class="block-content-yellow" style="padding:9px"><div class="smaller">{number} {status} {_verifications_found}</div></div>
+						<div class="block-content" style="padding:0px">
+							
+							<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+							<tr class="alt2"> 
+								<td width="13%">{_username}</td>
+								<td width="27%" align="left">{_request_date} </td>
+								<td width="13%" align="left">{_expiry_date}</td>
+								<td width="8%">{_price}</td>
+								<td width="9%" nowrap="nowrap">Inv #</td>
+								<td width="5%" align="center">{_paid}</td>
+								<td width="6%" align="center">{_verified}</td>
+								<td width="15%" align="center">{_action}</td>
+                                <td width="4%" align="center">{_sel}</td>
+							</tr>
+							<loop name="verifications"> 
+							<tr valign="top" class="alt1"> 
+								<td><span class="blue"><a href="{ilpage[subscribers]}?subcmd=_update-customer&amp;id={user_id}">{username}</a></span></td>
+								<td nowrap="nowrap" align="left"><span class="smaller gray">{date}</span></td>
+								<td nowrap="nowrap" align="left"><span class="smaller black">{verifyexpiry}</span></td>
+								<td nowrap="nowrap"><span class="blue">{verifycost}</span></td>
+								<td nowrap="nowrap">{invoiceid}</td>
+								<td align="center" nowrap="nowrap">{payout} </td>
+								<td align="center" nowrap="nowrap">{verified}</td>
+								<td align="center" nowrap="nowrap">{actions}</td>
+                                <td align="center" class="alt2"><input type="checkbox" name="answerid[]" value="{answerid}" /></td>
+							</tr>
+							<tr align="left" class="alt2"> 
+								<td colspan="9" align="left" valign="middle">								  <div>
+								    
+								    <div><span class="gray">{question}</span>: <span class="blue"><strong>{answer}</strong></span></div>
+								    <div style="padding-top:3px"><span class="gray">{_verify_contact}:</span> <span class="black">{contactname}</span>, <span class="black">{contactnumber}</span></div>
+								    <div style="padding-top:3px; padding-bottom:9px"><span class="gray">{_notes}:</span> <span class="black">{contactnotes}</span></div>
+						        </div></td>
+						      </tr>
+							</loop name="verifications">
+							<if condition="isset($show['no_verifications']) AND $show['no_verifications']"> 
+							<tr> 
+								<td colspan="9" align="center">{_no_verifications_found}</td>
+							</tr>
+							<else />
+							<if condition="$show['no_verifications'] == false">
+							<tr valign="top" class="alt2_top"> 
+								<td colspan="9"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" name="delete" value="{_remove}" style="font-size:15px" onclick="return confirm_js('{_you_are_about_to_delete_selected_verifications_continue}');" disabled="disabled" /><else /><input type="submit" class="buttons" name="delete" value="{_remove}" style="font-size:15px" onclick="return confirm_js('{_you_are_about_to_delete_selected_verifications_continue}');" /></if></td>
+							</tr>
+							</if>
+							<tr valign="top"> 
+								<td colspan="9">{prevnext}</td>
+							</tr>
+							</if>
+							</table>
+							
+		    </div>
+						
+						<div class="block-footer">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+          		
+				</form>
+		</div>
+		
+		<!-- begin verification settings -->
+		<div class="tab-page">
+			<h2 class="tab">{_settings}</h2>
+			
+			{configuration_verificationsettings}
+			
+		</div>
+		<!-- /begin verification settings -->
+
+	
+	</div>
+	<!-- / templates -->
+		
+</div>

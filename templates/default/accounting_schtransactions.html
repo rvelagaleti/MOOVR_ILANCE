@@ -1,0 +1,66 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+<div class="bigtabsheader">
+<ul>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}">{_accounting}</a></li>
+    <if condition="empty($_SESSION['ilancedata']['user']['active']) OR $_SESSION['ilancedata']['user']['active'] == 'no' OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'deposit') == 'no'"><else /><li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=deposit">{_deposit}</a></li></if>
+    <if condition="empty($_SESSION['ilancedata']['user']['active']) OR $_SESSION['ilancedata']['user']['active'] == 'no' OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'withdraw') == 'no'"><else /><li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=withdraw">{_withdraw}</a></li></if>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=transactions">{_transactions}</a></li>	
+    <li title="" class="on"><a href="javascript:void(0)">{_scheduled_transactions}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<div class="block-wrapper">
+    
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header">{_scheduled_transaction_history}</div>
+            <div class="block-content" style="padding:0px">
+                
+                <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                <tr> 
+                    <td width="7%" class="alt2">{_source}</td>
+                    <td width="7%" class="alt2">{_target}</td>
+                    <td width="41%" class="alt2">{_title}</td>
+                    <td width="21%" class="alt2">{_created}</td>
+                    <td width="12%" class="alt2">{_amount}</td>
+                    <td width="3%" class="alt2">{_action}</td>
+                    <td width="15%" align="right" class="alt2">{_status}</td>
+                </tr>
+                <loop name="schtransaction_rows"> 
+                <tr class="alt1" valign="top"> 
+                    <td>{paysource}</td>
+                    <td>{paymethod}</td>
+                    <td><div class="a_active">{description}</div><div class="smaller gray" style="padding-top:4px">{transactionid}</div></td>
+                    <td nowrap="nowrap">{createdate}</td>
+                    <td>{amount}</td>
+                    <td>{action}</td>
+                    <td align="right" nowrap="nowrap">{status}</td>
+                </tr>
+                </loop name="schtransaction_rows">
+                <if condition="isset($show['no_rows_returned']) AND $show['no_rows_returned']"> 
+                <tr> 
+                    <td colspan="8" align="center" class="alt1"><div style="padding-top:8px; padding-bottom:8px">{_no_scheduled_transactions_found}</div></td>
+                </tr>
+                </if>
+                <tr>
+                    <td colspan="8">{prevnext}</td>
+                </tr>
+                </table>
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>

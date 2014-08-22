@@ -1,0 +1,149 @@
+<if condition="$ilconfig['registrationdisplay_dob']"><script type="text/javascript">
+<!--
+function checkform(formobj)
+{
+		if (formobj.month.selectedIndex == 0)
+		{
+				alert_js("{_select_the_month_you_were_born}");
+				return false;
+		}
+		if (formobj.day.selectedIndex == 0)
+		{
+				alert_js("{_select_the_day_you_were_born}");
+				return false;
+		}
+		if (! formobj.year.value.match(/^\d{4}$/))
+		{
+				alert_js("{_please_enter_the_proper_year_you_were_born_yyyy}");
+				return false;
+		}
+		return true;
+}
+//-->
+</script><else /><script type="text/javascript">
+<!--
+function checkform(formobj)
+{
+		return true;
+}
+//-->
+</script></if>
+<if condition="isset($ilance->GPC['fb']) AND $ilance->GPC['fb']">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td><div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div>
+    
+    <div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span>
+    {_before_using_facebook_account}</div>		
+    
+    <div class="s"><div class="e"><div class="w"></div></div></div></div>
+</td>
+</tr>
+</table><div style="margin-bottom:12px"></div></if>
+
+<form method="post" action="{https_server}{ilpage[preferences]}" name="updateprofile" id="updateprofile" style="margin:0px" accept-charset="UTF-8" onsubmit="return validatecustomform(this);">
+<input type="hidden" name="cmd" value="_do-profile-change" />
+<input type="hidden" name="redirect" value="{redirect}" />
+<if condition="$ilconfig['globalserversettings_dunsoption']"><else /><input type="hidden" name="dnbnumber" id="dnbnumber" value="" /></if>
+<if condition="$ilconfig['globalserversettings_vatregistrationoption']"><else /><input type="hidden" name="vatnumber" id="vatbnumber" value="" /></if>
+<h1 class="a_active">{_personal_profile}</h1>
+
+<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">         
+<tr>
+    <td>
+    
+              <table cellpadding="5" cellspacing="0" border="0">
+              <tr> 
+                    <td align="right"><strong>{_first_name}:</strong></td>
+                    <td><input type="text" name="first_name" id="first_name" value="{first_name}" maxlength="49" size="50"  class="input" /></td>
+              </tr>
+              <tr> 
+                    <td align="right"><strong>{_last_name}:</strong></td>
+                    <td><input type="text" name="last_name" id="last_name" value="{last_name}" maxlength="49" size="50" class="input" /></td>
+              </tr>
+              <if condition="$ilconfig['registrationdisplay_dob']"><tr>
+                    <td align="right"><strong>{_please_enter_your_date_of_birth}:</strong></td>
+                    <td><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                        <td width="10%"><div style="padding-right:5px"><select name="month" class="select-75"><option value="">-</option>{month}</select></div><div style="padding-top:3px" class="smaller gray">{_month}</div></td>
+                        <td width="10%"><div style="padding-right:5px"><select name="day" class="select-75"><option value="" selected="selected">-</option>{day}</select></div><div style="padding-top:3px" class="smaller gray">{_day}</div></td>
+                        <td width="50%"><div style="padding-right:5px"><input type="text" class="input" name="year" size="10" maxlength="4" value="{dob_year}" /></div><div style="padding-top:3px" class="smaller gray">{_year}</div></td>
+                    </tr>
+                    </table></td>
+              </tr></if>
+              <if condition="$ilconfig['genderactive']"><tr>
+                    <td align="right"><strong>{_gender}:</strong></td>
+                    <td><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                        <td width="109" nowrap="nowrap"><div style="padding-bottom:3px"><input type="radio" name="gender" value="" {cb_gender_undecided} /> {_undecided}</div><div style="padding-right:5px"></div></td>
+                        <td width="75" nowrap="nowrap"><div style="padding-bottom:3px"><input type="radio" name="gender" value="male" {cb_gender_male} /> {_male}</div><div style="padding-right:5px"></div></td>
+                        <td width="289" nowrap="nowrap"><div style="padding-bottom:3px"> <input type="radio" name="gender" value="female" {cb_gender_female} /> {_female}</div><div style="padding-right:5px"></div></td>
+                    </tr>
+                    </table></td>
+              </tr></if>
+              <tr>
+                    <td align="right" valign="middle"><strong>{_address}:</strong></td>
+                    <td><input type="text" name="address" id="address" value="{address}" maxlength="150" size="50" class="input" />
+                	<div class="smaller gray" style="padding-top:3px">Street address, P.O. box, company name, c/o</div></td>
+              </tr>
+              <tr>
+                    <td align="right" valign="middle"><strong>{_address_two_optional}:</strong></td>
+                    <td><input type="text" name="address2" id="address2" value="{address2}" maxlength="150" size="50" class="input" />
+                    <div class="smaller gray" style="padding-top:3px">Apartment, suite, unit, building, floor, etc.</div></td>
+              </tr>
+              <tr> 
+                    <td align="right"><strong>{_phone_number}:</strong></td>
+                    <td><input type="text" id="phone" name="phone" value="{phone}" maxlength="49" size="25" class="input" /></td>
+              </tr>
+              <tr>
+                    <td align="right"><strong>{_country}:</strong></td>
+                    <td>{country_js_pulldown}</td>
+              </tr>
+              <tr>
+                    <td align="right"><strong>{_state_or_province}:</strong></td>
+                    <td>{state_js_pulldown}</td>
+              </tr>
+              <tr>
+                    <td align="right"><strong>{_city_or_town}:</strong></td>
+                    <td><input type="text" name="city" id="city" value="{city}" maxlength="49" size="25"  class="input" /></td>
+              </tr>
+              <tr>
+                    <td align="right"><strong>{_zip_or_postal_code}:</strong></td>
+                    <td><input type="text" name="zipcode" id="zipcode" value="{zipcode}" maxlength="49" size="25"  class="input" /></td>
+              </tr>
+              </table>
+              <div style="height:1px; background-color:#cccccc;width:100%;margin-top:12px;margin-bottom:12px"></div>
+            
+              <table cellpadding="5" cellspacing="0" border="0">
+              <tr> 
+                    <td align="right"><strong>{_company_name}:</strong></td>
+                    <td><input type="text" name="companyname" id="companyname" value="{companyname}" maxlength="49" size="50" class="input" /></td>
+              </tr>
+              <tr> 
+                    <td align="right"><strong>{_company_registration_number}:</strong></td>
+                    <td><input type="text" name="regnumber" id="regnumber" value="{regnumber}" maxlength="49" size="50" class="input" /></td>
+              </tr>
+              <if condition="$ilconfig['globalserversettings_vatregistrationoption']"><tr> 
+                    <td align="right"><strong>{_vat_registration_number}:</strong></td>
+                    <td><input type="text" name="vatnumber" id="vatnumber" value="{vatnumber}" maxlength="49" size="50" class="input" /></td>
+              </tr></if>
+              <if condition="$ilconfig['globalserversettings_dunsoption']"><tr> 
+                    <td align="right"><strong>{_dun_and_bradstreet_number_duns}:</strong></td>
+                    <td><input type="text" name="dnbnumber" id="dnbnumber" value="{dnbnumber}" maxlength="49" size="50" class="input" /></td>
+              </tr></if>
+              </table>
+       		  <div style="height:1px; background-color:#cccccc;width:100%;margin-top:12px;margin-bottom:12px"></div>
+              
+      		  <if condition="!empty($customquestions)">{customquestions}</if>
+    
+    </td>
+</tr>
+<tr>
+    <td colspan="2"><input type="submit" class="buttons" value=" {_save} " accesskey="s" style="font-size:15px" /></td>
+</tr>
+</table>
+
+{apihook[preferences_profile_town]}
+
+</form>
+{dynamic_js_bodyend}

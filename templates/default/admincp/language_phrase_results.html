@@ -1,0 +1,249 @@
+<div id="v3body4">
+
+	<!-- sub navigation -->
+	<div id="sub">
+		<div id="subnav">
+			<a href="{ilpage[language]}" class="sel"><span>{_languages}</span></a> <span> | </span>
+		</div>
+	</div>
+	<!-- /sub navigation --> 
+
+	<!-- div content -->
+	<div id="content">
+	
+	<h1>{_viewing} {limit} {_phrases_per_page_within} {phrasegroupname}</h1><br />
+	
+	<!-- view phrases -->
+	<div class="tab-pane">
+
+			<!-- view phrases tab -->
+			<div class="tab-page">
+			
+				<h2 class="tab">{_view}</h2>
+				
+				<form name="searchlanguage" method="get" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="search" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_view_phrases}</div>
+								<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_you_can_view_language_phrases_in_a_particular_phrase_group}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1">
+										<td width="29%"><span class="gray">{_choose_language}</span></td>
+										<td width="71%"> {language_pulldown}</td>
+									</tr>
+									<tr class="alt1">
+										<td><span class="gray">{_choose_phrase_group}</span></td>
+										<td> {phrasegroup_pulldown}</td>
+									</tr>
+									<tr class="alt1">
+										<td><span class="gray">{_results}</span></td>
+										<td>{limit_pulldown}</td>
+									</tr>
+									<tr class="alt2_top">
+										<td colspan="2"><input type="submit" style="font-size:15px" value=" {_view} " class="buttons" /></td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+				
+			</div>
+			<!-- /view phrases tab -->
+
+			<!-- search phrases -->
+			<div class="tab-page">
+			
+				<h2 class="tab">{_search}</h2>
+				
+				<form name="searchlanguage" method="get" action="{ilpage[language]}" accept-charset="UTF-8" style="margin: 0px;">
+					<input type="hidden" name="cmd" value="search" />
+					<div class="block-wrapper">
+					<div class="block">
+					
+							<div class="block-top">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+							<div class="block-header">{_search_phrases}</div>
+							<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_you_can_search_language_phrases_within_the_database_below}</div></div>
+							<div class="block-content" style="padding:0px">
+								
+								<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+								<tr class="alt1"> 
+									<td><span class="gray">{_choose_language}</span></td>
+									<td>{language_pulldown}</td>
+								</tr>
+								<tr class="alt1"> 
+									<td><span class="gray">{_choose_phrase_group}</span></td>
+									<td>{phrasegroup_pulldown}</td>
+								</tr>
+								<tr class="alt1"> 
+									<td><span class="gray"><em>{_search_all_phrase_groups}</em></span></td>
+									<td><input type="checkbox" name="allgroups" value="1" checked="checked" /></td>
+								</tr>
+								<tr class="alt1"> 
+									<td width="29%"><span class="gray">{_by_keyword}</span></td>
+									<td><input type='text' name='keyword' size='65' value="{keyword}" style="font-family: verdana" /></td>
+								</tr>
+								<tr class="alt1"> 
+									<td><span class="gray"><em>{_find_exact_keyword_match}</em></span></td>
+									<td><input type="checkbox" name="exactmatch" value="1" /></td>
+								</tr>
+								<tr class="alt1"> 
+									<td><span class="gray">{_how_many_phrases_per_page}</span></td>
+									<td><strong>{limit_pulldown}</strong></td>
+								</tr>
+								<tr class="alt1"> 
+									<td nowrap="nowrap"><span class="gray">{_show_untranslated_phrases_only}</span></td>
+									<td><input type="checkbox" name="untranslated" value="1" /></td>
+								</tr>
+								<tr class="alt2_top"> 
+									<td colspan="2"><input type="submit" value=" {_search_phrases} " style="font-size:15px" class="buttons" /></td>
+								</tr>
+								</table>
+								
+							</div>
+							
+							<div class="block-footer">
+									<div class="block-right">
+											<div class="block-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+				</form>
+
+			</div>
+			<!-- /search phrases -->
+	
+	</div>
+	<!-- /view phrases tab pane -->
+	
+	<div align="center">{prevnext}</div>
+	
+	<br />
+	
+	<form method="post" action="{ilpage[language]}" name="update" accept-charset="UTF-8" style="margin:0px;">
+	<input type="hidden" name="cmd" value="update" />
+	<input type="hidden" name="languageid" value="{languageid}" />
+	<input type="hidden" name="phrasegroup" value="{phrasegroup}" />
+	<input type="hidden" name="keyword" value="{keyword}" />
+	<input type="hidden" name="return" value="{request_uri}" />
+	<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{_viewing} {limit} {_phrases_per_page_within} {phrasegroupname}</div>
+				<div class="block-content" style="padding:0px">
+					
+								<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+								<loop name="phrase_search_results">
+								<tr class="alt2"> 
+									<td width="3%">{_sel}</td>
+									<td width="35%">{_phrase_information}</td>
+									<td width="60%">{_manage_phrase_content}</td>
+								</tr>
+								<tr> 
+									<td valign="top" class="alt1"><div align="center" class="smaller"><span class="smaller" title="{varname}" style="word-spacing:-6px"><input type="checkbox" name="phrasesid[]" value="{phraseid}"></span></div></td>
+									<td valign="top" class="alt1">
+								
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tr> 
+											<td width="12%" valign="top" align="center"><span class="smaller" title="{varname}" style="word-spacing:-6px">{isupd}</span></td>
+											<td width="88%" valign="middle"><span class="gray">{_phrase_was_modified}</span></td>
+										</tr>
+										<tr> 
+											<td valign="top"><div align="center"><span class="smaller" title="{varname}" style="word-spacing:-6px">{ismov}</span></div></td>
+											<td valign="middle"><span class="gray">{_phrase_moved_to_new_group}</span></td>
+										</tr>
+										</table>
+									</td>
+									<td class="alt1"> 
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tr> 
+											<td valign="top">{phraseinfo}<br /></td>
+										</tr>
+										<tr> 
+											<td>
+												  <div><strong>{_modify_actual_phrase}</strong></div>
+												  <div><textarea name="phrvarname[{phraseid}]" style="width: 425px; height: 84px; font-family: verdana" wrap="physical">{phrasetext}</textarea></div>
+													 
+												  <br />
+									
+												  <div><strong>{_modify_template_variable}</strong></div>
+												  <div><input type="text" name="phrvartplname[{phraseid}]" value="{varname}" maxlength="250" size="60" style="font-family: verdana" /></div>
+												  
+												  <br />
+												  <div><strong>{_move_phrase_into_new_phrase_group}</strong></div>
+												  {phrasegroupname_pulldown}
+												  
+											<!--
+											<br />
+												  <fieldset class="fieldset">
+													<legend>Phrase exists in template(s)</legend>
+													  {templates_scan}&nbsp;
+													  </fieldset><br /> -->
+													  </td>
+									</tr>
+							
+								  </table></td>
+							  </tr>
+							  
+							  </loop name="phrase_search_results"> 
+							  <if condition="isset($show['no_phrase_search_results']) AND $show['no_phrase_search_results']"> 
+							  <tr> 
+								<td colspan="3" align="center">{_no_results_found}</td>
+							  </tr>
+							  <else />
+							  <tr>
+								<td colspan="3" class="alt2_top"> 
+									<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="removevarnames" style="font-size:15px" value=" {_delete_selected} " class="buttons" onclick="return confirm_js('{_you_are_about_to_remove_a_selected_template_variable_continue}')" disabled="disabled" /><else /><input type="submit" name="removevarnames" style="font-size:15px" value=" {_delete_selected} " class="buttons" onclick="return confirm_js('{_you_are_about_to_remove_a_selected_template_variable_continue}')" /></if>
+									<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_you_are_about_to_save_any_changes_made_in_this_search_result}')" disabled="disabled" /><else /><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_you_are_about_to_save_any_changes_made_in_this_search_result}')" /></if>
+								</td>
+							  </tr>
+							  </if>
+							</table>
+
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+
+	</form>
+	<br />
+	<div align="center">{prevnext}</div>
+<!-- /div content -->

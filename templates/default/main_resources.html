@@ -1,0 +1,50 @@
+<div class="box3"><h1 style="padding-bottom:12px">{_marketplace_resources}</h1>
+<form action="<if condition="$ilconfig['globalauctionsettings_seourls']">main-resources<else />{ilpage[main]}</if>" method="get" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="resources" />
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_feeds}</div>
+			
+			<div class="block-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" align="center">
+				<tr class="alt2">
+					<td class="">{_rss_feed_viewer}</td>
+					<td><strong>{rssname}</strong></td>
+				</tr>
+				<tr>
+					<td width="250" valign="top">
+				
+					<div style="padding-left:1px; padding-right:1px; padding-top:1px">
+					<select name="id" ondblclick="this.form.submit();" size="10" style="width:250px; font-family: Verdana">
+					{feedoptions}
+					</select>
+					</div>
+					</td>
+					<td valign="top">{code2}</td>
+				</tr>
+                <tr class="alt2_top">
+                	<td colspan="2"><input type="submit" value=" {_go} " class="buttons" style="font-size:15px" /></td>
+                </tr>
+				</table>
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</form>
+</div>

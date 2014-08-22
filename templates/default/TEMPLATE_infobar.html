@@ -1,0 +1,14 @@
+{apihook[infobar]}
+<if condition="$ilconfig['globalfilters_clientcpnag'] AND !empty($_SESSION['ilancedata']['user']['userid']) AND !empty($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] == '1' AND empty($_COOKIE[COOKIE_PREFIX . 'hideacpnag'])">
+<!-- START ACP NAG MESSAGE --><div><table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;" dir="{template_textdirection}">
+<tr>
+		<td><div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" dir="{template_textdirection}">
+		<tr>
+			<td style="padding-{template_textalignment}:5px;" valign="top"></td>
+			<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1" border="0" alt="" id="" /></td>
+			<td style="padding-{template_textalignment_alt}:5px;"><div style="font-size:14px"><span style="float:{template_textalignment_alt}; padding-{template_textalignment_alt}:5px" class="blue"><a href="{http_server}{ilpage[main]}?cmd=hideacpnag&amp;returnurl={pageurl_urlencoded}" onclick="return confirm_js(\'{_you_might_loose_the_page_you_are_currently_viewing}\')">{_dismiss}</a></span><img src="{template_relativeimagepath}{template_imagesfolder}infowarning.gif" border="0" alt="" id="" /> <strong>{_you_are_viewing_the_marketplace_with_admin_access_priviliages}</strong></div><div class="gray" style="padding-left:23px">{_some_features_may_be_overidden_such_as_blind_bidders}</div></td>
+		</tr>
+		</table></div><div class="s"><div class="e"><div class="w"></div></div></div></div></td>
+</tr>
+</table></div><!-- END ACP NAG MESSAGE --></if>

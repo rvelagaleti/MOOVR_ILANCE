@@ -1,0 +1,7 @@
+<if condition="isset($show['noresults']) AND $show['noresults'] == false"><table cellpadding="12" cellspacing="0" width="100%">
+<loop name="favouritesellers"><tr valign="top">
+<td class="smaller" width="33.3%" style="border-bottom:1px dotted #e5e5e5"><div class="blueonly">{username}</div></td>
+<td class="smaller" width="33.3%" style="border-bottom:1px dotted #e5e5e5" nowrap="nowrap"><div>{score}% {_feedback}</div></td>
+<td class="smaller" width="33.3%" style="border-bottom:1px dotted #e5e5e5" nowrap="nowrap" align="right"><div class="blueonly"><a href="{http_server}{ilpage[search]}?mode=product&amp;sort=01&searchuser={usernameplain}&exactname=1">{_view_items}</a></div></td>
+</tr></loop name="favouritesellers">
+</table><else /><div style="padding:13px">{_no_results_found}</div></if>

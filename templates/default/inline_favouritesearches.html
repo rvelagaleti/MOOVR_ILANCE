@@ -1,0 +1,5 @@
+<if condition="isset($show['noresults']) AND $show['noresults'] == false"><table cellpadding="16" cellspacing="0" width="100%">
+<loop name="favouritesearches"><tr valign="top">
+<td class="smaller blueonly" width="50%" style="padding-bottom:12px;padding-top:12px;border-bottom:1px dotted #e5e5e5"><div class="blueonly">{title}</div><div style="padding-top:4px" class="gray">{searchoptionstext}</div></td>
+</tr></loop name="favouritesearches">
+</table><else /><div style="padding:13px">{_no_results_found}</div></if>

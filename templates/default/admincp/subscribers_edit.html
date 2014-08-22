@@ -1,0 +1,841 @@
+<script language="javascript" type="text/javascript">
+function admincp_customer(f)
+{
+	 haveerrors = 0;
+	 if($.trim(jQuery("#username").val()).length < 1)  {
+	  jQuery("#usernameerror").css({"display":"block"});
+	  haveerrors = 1;
+	 }
+	 else
+	 {
+		jQuery("#usernameerror").css({"display":"none"});  
+	 }
+	 if($.trim(jQuery("#email").val()).length < 1)  {
+	  jQuery("#emailerror").css({"display":"block"});
+	   haveerrors = 1;
+	 }
+	 else
+	 {
+	   jQuery("#emailerror").css({"display":"none"});
+	 }
+	 if($.trim(jQuery("#password").val()).length < 1)  {
+	  jQuery("#passworderror").css({"display":"block"});
+	   haveerrors = 1;
+	 }
+	 else
+	 {
+		 jQuery("#passworderror").css({"display":"none"});
+	 }
+	 if($.trim(jQuery("#password2").val()) != $.trim(jQuery("#password").val()) )  {
+	  jQuery("#password2error").css({"display":"block"});
+	   haveerrors = 1;
+	 }
+	 else
+	 {
+		 jQuery("#password2error").css({"display":"none"});
+	 }
+	if(haveerrors == 1)
+	{
+	jQuery("#totalerror").css({"display":"block"});
+	return false;
+	}
+	else
+	{
+	jQuery("#totalerror").css({"display":"none"});
+	return true;	
+	}
+}
+function add_customer(f1)
+{
+	$.ajax({
+				 type: "POST",
+				 url: "{ajaxurl}?do=check_email&email_user="+$.trim(jQuery("#email").val())+jQuery("#f1").serialize(),
+				 data: "do=check_email&email_user="+$.trim(jQuery("#email").val()),
+				 success: function(msg){
+					if(msg==0)
+					{
+					alert_js("{_email_address_already_in_use}");	
+					}
+					if(msg==1)
+					{
+					alert_js("{_were_sorry_that_username_is_taken}");	
+					}
+					if(msg==2)
+					{
+					alert_js("{_were_sorry_that_username_is_taken} \n {_email_address_already_in_use}");	
+					}
+					if(msg==3)
+					{
+					window.location = "subscribers.php?"+jQuery("#f1").serialize();	
+					}
+				  }
+		 });
+}
+</script>
+<div id="v3body4">
+
+	<div id="sub">
+	
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+		
+	</div>
+
+	<div id="content">
+	<h1>{_subscriber_management} {customername}</h1><br />
+			
+			<div class="tab-pane">
+				<div class="tab-pane" id="updatesubscriber">
+					<div class="tab-page">
+						<h2 class="tab">{_profile}</h2>
+						<form name="updateprofile" action="{ilpage[subscribers]}" method="post" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="updateprofile" />
+						<input type="hidden" name="subcmd" value="_update-customer-profile" />
+						<input type="hidden" name="id" value="{id}" />
+						<loop name="profile"> 
+						<div class="block-wrapper">
+						<div class="block3">
+						
+								<div class="block3-top">
+										<div class="block3-right">
+												<div class="block3-left"></div>
+										</div>
+								</div>
+								
+								<div class="block3-header">{_update} {username}</div>
+								<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_update_personal_profile_information} {_for} {username}</div></div>
+								<div class="block3-content" style="padding:0px">
+									
+									<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%" align="center">
+									{apihook[admincp_subscribers_update_custom_fields_static_start]}
+									<tr class="alt1">
+										<td><span class="gray">{_registration_date}</span></td>
+										<td>{added}</td>
+									</tr>
+                                    <if condition="isset($show['referredby']) AND $show['referredby']">
+                                    <tr class="alt1">
+										<td><span class="gray">{_referred_by}</span></td>
+										<td><span class="blue">{referredby}</span></td>
+									</tr></if>
+									<tr class="alt1">
+										<td><span class="gray">{_last_seen}</span></td>
+										<td>{lastseen}</td>
+									</tr>
+                                    <tr class="alt1">
+										<td><span class="gray">{_local_time}</span></td>
+										<td>{localtime}</td>
+									</tr>
+                                    <if condition="isset($show['usernamehistory']) AND $show['usernamehistory']"><tr class="alt1" valign="top">
+										<td><span class="gray">{_username_history}</span></td>
+										<td>{usernamehistory}</td>
+									</tr></if>
+                                    {apihook[admincp_subscribers_update_custom_fields_static_end]}
+                                    <tr class="alt2_top">
+                                    	<td colspan="2"><span style="float:left; padding-top:4px; padding-right:10px"><a href="javascript:void(0)" onclick="toggle('customer_personal');"><img id="collapseimg_customer_personal" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_customer_personal]}.gif" border="0" alt="" /></a></span><strong>{_personal}</strong></td>
+                                    </tr>
+                                    <tbody id="collapseobj_customer_personal" style="{collapse[collapseobj_customer_personal]}">
+                                    {apihook[admincp_subscribers_update_custom_fields_personal_start]}
+									<tr class="alt1"> 
+										<td><span class="gray">{_username}</span></td>
+										<td><input type="text" name="username" value="{username}" class="input" style="width:275px" autocomplete="off" /><input type="hidden" name="oldusername" value="{username}" id="oldusername" /></td>
+									</tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_email}</span></td>
+										<td><if condition="$show['ADMINCP_TEST_MODE']"><input type="text" name="email" value="{email}" class="input blurry" style="width:275px" autocomplete="off" /><else /><input type="text" name="email" value="{email}" class="input" style="width:275px" autocomplete="off" /></if><input type="hidden" name="oldemail" value="{email}" id="oldemail" /></td>
+									</tr>
+                                    <tr class="alt1"> 
+										<td><span class="gray">{_company_name}</span></td>
+										<td><input type="text" name="companyname" value="{companyname}" class="input" style="width:275px" /></td>
+									</tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_first_name}</span></td>
+										<td><input type="text" name="first_name" value="{first_name}" class="input" style="width:275px" /></td>
+									</tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_last_name}</span></td>
+										<td><input type="text" name="last_name" value="{last_name}" class="input" style="width:275px" /></td>
+									</tr>
+									<tr class="alt1">
+										<td><span class="gray">{_date_of_birth} (Y-M-D)</span></td>
+										<td><input type="text" name="dob" value="{dob}" class="input" style="width:275px" /></td>
+									</tr>
+                                    <if condition="$ilconfig['genderactive']"><tr class="alt1">
+                                    	<td><div style="padding-bottom:3px; padding-top:3px" class="black"><span class="gray">{_gender}</span></div></td>
+                                        <td>
+                                           <div style="width:240px"><table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                            <tr>
+                                                <td nowrap="nowrap"><div style="padding-bottom:3px"><label for=""><input type="radio" name="gender" value="" {cb_gender_undecided} /> {_undecided}</label></div></td>
+                                                <td nowrap="nowrap"><div style="padding-bottom:3px"><label for=""><input type="radio" name="gender" value="male" {cb_gender_male} /> {_male}</label></div></td>
+                                                <td nowrap="nowrap"><div style="padding-bottom:3px"><label for=""><input type="radio" name="gender" value="female" {cb_gender_female} /> {_female}</label></div></td>
+                                            </tr>
+                                            </table></div></td>
+                                    </tr></if>
+									<tr class="alt1"> 
+										<td width="25%"><span class="gray">{_phone_number}</span></td>
+										<td width="75%"> <input type="text" name="phone" value="{phone}" class="input" style="width:275px" /></td>
+									</tr>
+                                    <tr class="alt1"> 
+										<td width="25%"><span class="gray">{_language}</span></td>
+										<td width="75%">{user_language_pulldown}</td>
+									</tr>
+                                    {apihook[admincp_subscribers_update_custom_fields_personal_end]}
+                                    </tbody>
+                                    <tr class="alt2_top">
+                                    	<td colspan="2"><span style="float:left; padding-top:4px; padding-right:10px"><a href="javascript:void(0)" onclick="toggle('customer_location');"><img id="collapseimg_customer_location" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_customer_location]}.gif" border="0" alt="" /></a></span><strong>{_location}</strong></td>
+                                    </tr>
+                                    <tbody id="collapseobj_customer_location" style="{collapse[collapseobj_customer_location]}">
+                                    {apihook[admincp_subscribers_update_custom_fields_location_start]}
+									<tr class="alt1"> 
+										<td valign="top"><span class="gray">{_address}</span></td>
+										<td><input type="text" name="address" value="{address}" class="input" style="width:275px" /></td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="top"><span class="gray">{_address_two_optional}</span></td>
+										<td> <input type="text" name="address2" value="{address2}" class="input" style="width:275px" /></td>
+									</tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_country}</span></td>
+										<td>{country_js_pulldown}{geoipcountry}</td>
+									</tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_state_or_province}</span></td>
+										<td>{geoipstate}{state_js_pulldown}</td>
+									</tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_city_or_town}</span></td>
+										<td>{geoipcity}{city_js_pulldown}</td>
+									</tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_zip_or_postal_code}</span></td>
+										<td> <input type="text" name="zip_code" value="{zip_code}" class="input" style="width:275px" />{geoipzip}</td>
+									</tr>
+                                    <tr class="alt1"> 
+										<td><span class="gray">{_time_zone}</span></td>
+										<td>{timezonepulldown}</td>
+									</tr>
+                                    {apihook[admincp_subscribers_update_custom_fields_location_end]}
+                                    </tbody>
+                                    <tr class="alt2_top">
+                                    	<td colspan="2"><span style="float:left; padding-top:4px; padding-right:10px"><a href="javascript:void(0)" onclick="toggle('customer_security');"><img id="collapseimg_customer_security" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_customer_security]}.gif" border="0" alt="" /></a></span><strong>{_account_security_features}</strong></td>
+                                    </tr>
+                                    <tbody id="collapseobj_customer_security" style="{collapse[collapseobj_customer_security]}">
+                                    {apihook[admincp_subscribers_update_custom_fields_security_start]}
+                                    <tr class="alt1">
+										<td><span class="gray">{_password}</span></td>
+										<td><input type="password" name="password" value="" class="input" style="width:275px" /><div style="padding-top:3px"><label for="emailuser"><input type="checkbox" id="emailuser" name="emailuser" value="1" /> {_dispatch_email_to_customer_with_new_password}</label></div></td>
+									</tr>
+                                    <tr class="alt1"> 
+										<td><span class="gray">{_secret_question}</span></td>
+										<td> <input type="text" name="secretquestion" value="{secretquestion}" class="input" style="width:275px" /></td>
+									</tr>
+                                    <tr class="alt1"> 
+										<td><span class="gray">{_secret_answer}</span></td>
+										<td> <input type="text" name="secretanswer" value="" class="input" style="width:275px" /></td>
+									</tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_ip_address}</span></td>
+										<td class="alt1">
+					
+											<table width="100%" border="0" cellspacing="0" cellpadding="0">
+												<tr> 
+												  <td><input type="text" name="ipaddress" value="{ipaddress}" class="input" style="width:275px" /> <div style="padding-top:3px"><label>{restrict}&nbsp;{_restrict_ip_address_to_customers_account}</label></div></td>
+											  </tr>
+										  </table>
+										</td>
+									</tr>
+                                    <tr class="alt1">
+										<td><span class="gray">{_referral_code}</span></td>
+										<td><input type="text" name="rid" value="{rid}" class="input" style="width:275px" /></td>
+									</tr>
+                                    {apihook[admincp_subscribers_update_custom_fields_security_end]}
+                                    </tbody>
+                                    <tr class="alt2_top">
+                                    	<td colspan="2"><span style="float:left; padding-top:4px; padding-right:10px"><a href="javascript:void(0)" onclick="toggle('customer_permissions');"><img id="collapseimg_customer_permissions" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_customer_permissions]}.gif" border="0" alt="" /></a></span><strong>{_membership_and_permissions}</strong></td>
+                                    </tr>
+                                    <tbody id="collapseobj_customer_permissions" style="{collapse[collapseobj_customer_permissions]}">
+                                    {apihook[admincp_subscribers_update_membership_fields_start]}
+                                    <tr class="alt1">
+										<td><span class="gray">{_role}</span></td>
+										<td>{rolepulldown}</td>
+									</tr>
+                                    <tr class="alt1">
+										<td><span class="gray">{_status}</span></td>
+										<td>{userstatus}</td>
+									</tr>
+                                    <tr class="alt1">
+										<td><span class="gray">{_can_post_html}</span></td>
+										<td><div>{cbposthtml} 
+										    <label for="posthtml">{_tick_checkbox_to_allow_html_posting}</label></div></td>
+									</tr>
+									<tr class="alt1">
+										<td><span class="gray">{_is_admin}</span></td>
+										<td><div>{isadministrator} <label for="isadmin">{_tick_checkbox_to_give_admin_permissions}</label></div></td>
+									</tr>
+                                    {apihook[admincp_subscribers_update_membership_fields_end]}
+                                    </tbody>
+                                    <if condition="!empty($customquestions)">
+                                    <tr class="alt2_top">
+                                    	<td colspan="2"><span style="float:left; padding-top:4px; padding-right:10px"><a href="javascript:void(0)" onclick="toggle('customer_register_questions');"><img id="collapseimg_customer_register_questions" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_customer_register_questions]}.gif" border="0" alt="" /></a></span><strong>{_registration_questions}</strong></td>
+                                    </tr>
+                                    <tbody id="collapseobj_customer_register_questions" style="{collapse[collapseobj_customer_register_questions]}">
+                                    {customquestions}
+                                    </tbody></if>
+                                    <if condition="!empty($profilequestions)">
+                                    <tr class="alt2_top">
+                                    	<td colspan="2"><span style="float:left; padding-top:4px; padding-right:10px"><a href="javascript:void(0)" onclick="toggle('customer_profile_questions');"><img id="collapseimg_customer_profile_questions" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_customer_profile_questions]}.gif" border="0" alt="" /></a></span><strong>{_profile_questions}</strong></td>
+                                    </tr>
+                                    <tbody id="collapseobj_customer_profile_questions" style="{collapse[collapseobj_customer_profile_questions]}">
+                                    {profilequestions}
+                                    </tbody></if>
+									<tr class="alt2_top"> 
+										<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input name="submit" type="submit" value=" {_save} " style="font-size:15px" disabled="disabled" class="buttons" /><else /><input name="submit" type="submit" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></if></td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block3-footer">
+										<div class="block3-right">
+												<div class="block3-left"></div>
+										</div>
+								</div>
+								
+						</div>
+						</div>
+						</loop name="profile"> 
+						</form>
+			</div>
+			
+			
+			<div class="tab-page"> 
+			<h2 class="tab">{_account}</h2>
+			
+			<div class="block-wrapper">
+			<div class="block3">
+			
+					<div class="block3-top">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+					<div class="block3-header">{_summary}</div>
+					<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_account_and_balance_information}</div></div>
+					<div class="block3-content" style="padding:0px">
+						
+						<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%" align="center">
+						<loop name="profileaccount"> 
+						<tr> 
+							<td width="15%" rowspan="2" valign="top"><span class="gray">{_account_number}</span></td>
+							<td width="46%" rowspan="2" valign="top">{accountnumber}</td>
+							<td width="18%" class="alt1"><span class="black">{_available_balance}</span></td>
+							<td width="21%" class="alt1"><span class="black">{availablebalance}</span></td>
+						</tr>
+						<tr> 
+							<td><span class="gray">{_total_balance}</span></td>
+							<td><span class="gray">{totalbalance}</span></td>
+						</tr>
+						</loop name="profileaccount"> 
+						</table>
+						
+					</div>
+					
+					<div class="block3-footer">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+		
+			<form method="post" action="{ilpage[subscribers]}" accept-charset="UTF-8" style="margin: 0px;">
+			<input type="hidden" name="subcmd" value="_create-transaction" />
+			<input type="hidden" name="id" value="{id}" />
+			<div class="block-wrapper">
+			<div class="block3">
+			
+					<div class="block3-top">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+					<div class="block3-header">{_account_functions}</div>
+					<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_create_new_transaction}</div></div>
+					<div class="block3-content" style="padding:0px">
+						
+						<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%" align="center">
+						<tr class="alt1"> 
+							<td><span class="gray">{_amount}</span></td>
+							<td><span style="float:left; padding-right:4px; padding-top:4px">{currencysymbol}</span><input name="amount" type="text" style="width:65px;" /></td>
+						</tr>
+						<tr class="alt1"> 
+							<td width="24%"><span class="gray">{_transaction_type}</span></td>
+							<td width="76%">
+						
+							<select name="action" style="font-family: verdana">
+							<option value="credit" selected="selected">{_account_credit_add_funds_to_online_account}</option>
+							<option value="debit">{_account_debit_remove_funds_from_online_account}</option>
+						  </select></td>
+						</tr>
+						<tr class="alt1"> 
+							<td valign="top"><span class="gray">{_transaction_description}</span></td>
+							<td><textarea name="description" style="width: 98%; height: 54px; font-family: verdana" wrap="physical"></textarea></td>
+						</tr>
+						<tr class="alt1">
+							<td valign="top"><span class="gray">{_invoices_notes_or_custom_message}</span></td>
+							<td><textarea name="custom" style="width: 98%; height: 54px; font-family: verdana" wrap="physical"></textarea></td>
+						</tr>
+						<tr class="alt2_top">
+							<td colspan="2"><input type="submit" value=" {_create_transaction} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></td>
+						</tr>
+						</table>
+
+						
+					</div>
+					
+					<div class="block3-footer">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+		</form>
+
+		  </div>
+			
+			<div class="tab-page">
+				
+				<h2 class="tab">{_transactions}</h2>
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_transaction_history}</div>
+						<!--<div class="block3-content-gray" style="padding:9px"><div class="smaller"></div></div>-->
+						<div class="block3-content" style="padding:0px">
+							
+						<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+						<tr class="alt2"> 
+							<td width="8%">{_id}</td>
+							<td width="58%">{_description}</td>
+							<td width="5%">{_amount}</td>
+							<td width="8%">{_tax}</td>
+							<td width="6%">{_paid}</td>
+							<td width="8%">{_source}</td>
+							<td width="8%">{_target}</td>
+							<td width="8%">{_method}</td>
+							<td width="7%">{_action}</td>
+						</tr>
+						<loop name="transaction_rows"> 
+                        <tbody class="alt_top" onmouseover="this.className='alt2_top'" onmouseout="this.className='alt_top'">
+						<tr valign="top"> 
+							<td><div class="smaller blue"><a href="{ilpage[accounting]}?cmd=invoices&amp;invoiceid={invoiceid}&amp;invoicetype={invoicetype}">{invoiceid}</a></div></td>
+							<td><div class="blue"><a href="{ilpage[accounting]}?cmd=invoices&amp;invoiceid={invoiceid}&amp;invoicetype={invoicetype}">{description}</a></div><div class="smaller black" style="padding-top:5px"><span class="gray">{_created}:</span> {createdate}</div><div style="padding-top:3px" class="smaller black"><span class="gray">{_paid}:</span> {paiddate}</div></td>
+							<td><div class="smaller black">{amount}</div></td>
+							<td><div class="smaller black">{tax}</div></td>
+							<td nowrap="nowrap"><div class="smaller black">{paid}</div></td>
+							<td nowrap="nowrap"><div class="smaller black">{source}</div></td>
+							<td nowrap="nowrap"><div class="smaller black">{target}</div></td>
+							<td nowrap="nowrap"><div class="smaller black">{method}</div></td>
+							<td nowrap="nowrap"><div>{action}</div></td>
+						</tr>
+						
+                        </tbody>
+						</loop name="transaction_rows"> 
+						<if condition="isset($show['no_rows_returned']) AND $show['no_rows_returned']"> 
+						<tr> 
+							<td colspan="7">{_no_transactions_recorded}</td>
+						</tr>
+						</if>
+						<tr> 
+							<td colspan="9">{transactionsprevnext}</td>
+						</tr>
+						</table>
+
+							
+</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+				
+			</div>
+			
+			<div class="tab-page">
+				
+				<h2 class="tab">{_subscription}</h2>
+				
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_subscription}</div>
+						<!--<div class="block3-content-gray" style="padding:9px"><div class="smaller"></div></div>-->
+						<div class="block3-content" style="padding:0px">
+							
+						<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+						<tr class="alt2"> 
+							<td width="20%">{_title}</td>
+							<td width="19%">{_start_date}</td>
+							<td width="17%">{_renew_date}</td>
+							<td width="5%">{_cost}</td>
+							<td width="11%" nowrap="nowrap">{_source}</td>
+							<td width="9%">{_length}</td>
+							<td width="11%">{_status}</td>
+						</tr>
+						<loop name="subscription_rows"> 
+						<tr valign="top"> 
+							<td align="left"><span class="black">{title}</span></td>
+							<td nowrap="nowrap"><span class="black">{startdate}</span></td>
+							<td nowrap="nowrap"><span class="black">{renewdate}</span></td>
+							<td><span class="blue">{cost}</span></td>
+							<td>{paymethod}</td>
+							<td>{length}{units}</td>
+							<td>{status}</td>
+						</tr>
+						</loop name="subscription_rows"> 
+						<if condition="isset($show['no_subscription_rows']) AND $show['no_subscription_rows']">
+						<tr>
+							<td colspan="8" align="center">{_no_subscription_plan_tied_to_customers_account_customer_has_not_chosen_one_yet}</td>
+						</tr>
+						</if>
+						</table>
+
+							
+				  </div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+				
+				<form method="post" action="{ilpage[subscribers]}" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="subcmd" value="_create-subscription" />
+				<input type="hidden" name="id" value="{id}" />
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_create_subscription}</div>
+						<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_create_subscription_plan_new_changes_will_reflect_the_subscription_plan_table_above}</div></div>
+						<div class="block3-content" style="padding:0px">
+							
+						<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+						<tr class="alt1"> 
+							<td width="33%" align="right" valign="top"><span class="gray">{_assign_subscription_plan}</span></td>
+							<td width="67%">{subscription_plan_pulldown}<div class="smaller blue" style="padding-top:3px"><a href="{ilpage[settings]}?cmd=subscriptions">{_manage_subscription_plans}</a></div></td>
+						</tr>
+						<tr class="alt1"> 
+							<td align="right"><span class="gray">{_action}</span></td>
+							<td>
+								<select name="action" style="font-family: verdana">
+								<option value="active">{_mark_active_new_waived_transaction_will_create}</option>
+								<option value="activepaid">{_mark_active_paid_payment_made_outside_of_marketplace}</option>
+								<option value="inactive">{_mark_inactive_new_unpaid_transaction_will_create}</option>
+								</select></td>
+						</tr>
+						<tr class="alt1">
+						  <td align="right" valign="top"><span class="gray">{_transaction_description_appears_on_customer_transaction_statement}</span></td>
+						  <td><textarea name="txndescription" style="width: 98%; height: 84px; font-family: verdana" wrap="physical"></textarea></td>
+						</tr>
+						<tr class="alt2_top">
+							<td colspan="2"><input type="submit" style="font-size:15px" value=" {_create} " onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></td>
+						</tr>
+						</table>
+
+							
+						</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+				</form>
+				
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_subscription_permission_exemptions}</div>
+						<!--<div class="block3-content-gray" style="padding:9px"><div class="smaller"></div></div>-->
+				  		<div class="block3-content" style="padding:0px">
+							
+							<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+							<tr class="alt2"> 
+								<td width="15%">{_permission}</td>
+								<td width="12%">{_value}</td>
+								<td width="20%" nowrap="nowrap">{_start_date}</td>
+								<td width="20%">{_end_date}</td>
+								<td width="7%">{_cost}</td>
+								<td width="10%" nowrap="nowrap">{_invoice}</td>
+								<td width="8%">{_status}</td>
+							    <td align="right" width="8%">{_remove}</td>
+							</tr>
+							<loop name="exemptions"> 
+							<tr class="alt1" valign="top"> 
+								<td align="left"><span class="blue">{accessname}</span></td>
+								<td><span class="blue">{accessvalue}</span></td>
+								<td nowrap="nowrap"><span class="gray">{exemptfrom}</span></td>
+								<td nowrap="nowrap"><span class="gray">{exemptto}</span></td>
+								<td><span class="blue">{cost}</span></td>
+								<td>#{invoiceid}</td>
+								<td>{status}</td>
+							    <td align="right"><div style="padding-top:3px" class="blue">{action}</div></td>
+							</tr>
+							</loop name="exemptions">
+							<if condition="isset($show['no_exemptions']) AND $show['no_exemptions']"> 
+							<tr> 
+								<td colspan="9" align="center">{_no_subscription_exemptions_found}</td>
+							</tr>
+							</if> 
+							</table>
+							
+				  </div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+				
+				
+				<form method="post" action="{ilpage[subscribers]}" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="subcmd" value="_create-exemption" />
+				<input type="hidden" name="id" value="{id}" />
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_subscription_permission_exemptions}</div>
+						<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_create_new_subscription_permission_exemptions_allowing_customers}</div></div>
+						<div class="block3-content" style="padding:0px">
+							
+							  <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+							  <tr class="alt1"> 
+								<td width="19%" align="right" nowrap="nowrap"><span class="gray">{_select_exemption}</span></td>
+								<td width="81%">{subscription_permissions_pulldown}</td>
+							  </tr>
+							  <tr class="alt1">
+								<td align="right" nowrap="nowrap"><span class="gray">{_custom_exempt_value}</span></td>
+								<td><input type="text" name="exemptvalue" value="" title="{_1_for_yes_0_for_no_additionally_int_types_require_only_integers}" class="input" /> </td>
+							  </tr>
+							  <tr class="alt1">
+								<td align="right" nowrap="nowrap"><span class="gray">{_cost_for_exemption}</span></td>
+								<td><span style="float:left; padding-right:4px; padding-top:4px">{currencysymbol}</span><input type="text" name="exemptcost" value="0.00" class="input" style="width:60px" /></td>
+							  </tr>
+							  <tr class="alt1">
+								<td align="right" nowrap="nowrap"><span class="gray">{_exempt_days_duration}</span></td>
+								<td><input type="text" name="exemptdays" value="30" class="input" /></td>
+							  </tr>
+							  <tr class="alt1"> 
+								<td align="right"><span class="gray">{_action}</span></td>
+								<td><select name="logic" style="font-family: verdana">
+									<option value="active">{_mark_active_new_waived_transaction_will_create}</option>
+									<option value="activepaid">{_mark_active_paid_payment_made_outside_of_marketplace}</option>
+									<option value="activedebit">{_live_debit_attempt_to_debit_amount_from_online_account_and_mark_active}</option>
+								  </select></td>
+							  </tr>
+							  <tr class="alt1">
+								<td align="right" valign="top"><span class="gray">{_transaction_description_appears_on_customer_transaction_statement}</span></td>
+								<td><textarea name="description" style="width: 98%; height: 84px; font-family: verdana" wrap="physical"></textarea></td>
+							  </tr>
+							  <tr class="alt2_top">
+								<td colspan="2"><input type="submit" style="font-size:15px" value=" {_create} " onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></td>
+							  </tr>
+							</table>
+							
+						</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+			</form>
+			</div>
+			
+			<if condition="isset($ilconfig['save_credit_cards']) AND $ilconfig['save_credit_cards']"><div class="tab-page">
+				
+				<h2 class="tab">{_credit_cards}</h2>
+				
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_credit_cards}</div>
+						<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_credit_card_accounts_info}</div></div>
+				  		<div class="block3-content" style="padding:0px">
+							
+							<table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+							<tr class="alt2"> 
+								<td width="39%" nowrap="nowrap">{_card_number}</td>
+								<td align="center" nowrap="nowrap" width="10%">{_type}</td>
+								<td width="7%" align="center">{_expiry}</td>
+								<td align="center" width="10%">{_authorized}</td>
+								<td width="23%">{_status}</td>
+								<td align="right" width="11%">{_action}</td>
+							</tr>
+							<loop name="creditcards"> 
+							<tr class="alt1" valign="top"> 
+								<td nowrap="nowrap"><span class="blue">{ccnum}</span></td>
+							  <td align="center">{cardtype}</td>
+								<td align="center"><span class="gray">{expiry}</span></td>
+								<td align="center">{authenticated}</td>
+								<td>{status}</td>
+								<td align="right">{remove}</td>
+							</tr>
+							</loop name="creditcards">
+							<if condition="isset($show['no_creditcards']) AND $show['no_creditcards']"> 
+							<tr> 
+								<td colspan="6" align="center">{_no_results_found}</td>
+							</tr>
+							</if> 
+							</table>
+							
+				  </div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+			
+			</div></if>
+			
+			<if condition="isset($ilconfig['enable_bank_deposit_support']) AND $ilconfig['enable_bank_deposit_support']"><div class="tab-page">
+			
+				<h2 class="tab">{_bank_info}</h2>
+				
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_bank_deposit_accounts}</div>
+						<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_bank_deposit_accounts_info}</div></div>
+						<div class="block3-content" style="padding:0px">
+							
+							<table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+							<tr class="alt2"> 
+								<td align="center" width="7%">{_bankid}</td>
+								<td width="8%">{_bank}</td>
+								<td width="11%" nowrap="nowrap">{_account_swift}</td>
+								<td width="10%" nowrap="nowrap">{_type}</td>
+								<td width="18%">{_address}</td>
+								<td width="5%">{_city}</td>
+								<td width="9%" nowrap="nowrap">{_zip_code}</td>
+								<td width="9%">{_country}</td>
+								<td width="10%">{_currency}</td>
+								<td align="right" width="13%">{_action}</td>
+							</tr>
+							<loop name="bankaccounts"> 
+							<tr class="alt1" valign="top"> 
+								<td align="center" nowrap="nowrap">{bank_id}</td>
+								<td nowrap="nowrap">{bankname}</td>
+								<td nowrap="nowrap">{accountnum} / <br /> {swiftnum}</td>
+								<td>{accounttype}</td>
+								<td>{address}</td>
+								<td>{city}</td>
+								<td>{zipcode}</td>
+								<td>{country}</td>
+								<td>{currency}</td>
+								<td align="right">{remove}</td>
+							</tr>
+							</loop name="bankaccounts"> 
+							<if condition="isset($show['no_bankaccounts']) AND $show['no_bankaccounts']"> 
+							<tr> 
+								<td colspan="10" align="center">{_no_results_found}</td>
+							</tr>
+							</if> 
+							</table>
+							
+						</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+			</div></if>
+            
+			<!--
+			<div class="tab-page">
+				<h2 class="tab">{_referrals}</h2>
+			</div>
+			
+			<div class="tab-page">
+				<h2 class="tab">{_verifications}</h2>
+			</div>
+			//-->
+		
+	</div>
+	</div>
+
+<br />
+<br />

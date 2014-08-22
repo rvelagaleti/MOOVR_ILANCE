@@ -1,0 +1,48 @@
+<h1 style="padding-bottom:5px">{_revision_log}</h1>
+<div class="blue" style="margin-bottom:15px">{_back_to} <a href="{returnurl}">{project_title}</a></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+    <td valign="top" width="100%">
+    
+            <table border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" width="100%">
+            <tr>
+                <td width="21%" style="border-bottom:1px dotted #ccc"><strong>{_date}</strong></td>
+              	<td width="79%" style="border-bottom:1px dotted #ccc"><strong>{_revised_information}</strong></td>
+            </tr>
+            <loop name="revisions">
+            <tr>
+                <td nowrap="nowrap" valign="top" style="border-bottom:1px dotted #ccc">{datetime}</td>
+                <td style="border-bottom:1px dotted #ccc">{changelog}</td>
+            </tr>
+            </loop name="revisions">
+            </table>
+	</td>
+            
+</tr>
+</table>
+<div style="margin-bottom:20px"></div>
+<h2 class="separator">
+    
+    <div class="title" style="text-transform:uppercase">{_notice}</div>
+
+</h2>
+
+<div><strong>{_if_the_auction_event_has_not_received_any_bids_the_owner_of_the_listing_can}</strong>
+<ul style="list-style: square; margin-top:4px">
+    <li class="gray" style="margin-left: 2em; padding-top:7px">{_update_or_modify_the_selling_format_to_auction_or_fixed_price}</li>
+    <li class="gray" style="margin-left: 2em; padding-top:7px">{_revise_anything_including_description_starting_price_shipping_costs_and_or_reserve_price_option}</li>
+    <li class="gray" style="margin-left: 2em; padding-top:7px">{_update_or_modify_the_listing_item_specifics}</li>
+    <li class="gray" style="margin-left: 2em; padding-top:7px">{_add_optional_listing_features_to_increase_the_items_visibility}</li>
+</ul>
+
+
+<div style="margin-top:15px"><strong>{_if_the_sellers_has_received_1_or_more_bids_the_seller_can}</strong></div>
+<ul style="list-style: square; margin-top:4px">
+    <li class="gray" style="margin-left: 2em; padding-top:7px">{_extend_the_duration_of_the_listing_1_3_or_7_days}</li>
+    <li class="gray" style="margin-left: 2em; padding-top:7px">{_add_additional_slideshow_pictures_to_the_listing}</li>
+    <li class="gray" style="margin-left: 2em; padding-top:7px">{_update_the_shipping_partner_only}</li>
+    <li class="gray" style="margin-left: 2em; padding-top:7px">{_enable_or_disable_the_public_message_board_option}</li>
+    <li class="gray" style="margin-left: 2em; padding-top:7px">{_add_optional_listing_features_to_increase_the_items_visibility}</li>
+</ul>
+
+</div>

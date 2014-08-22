@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+	<plug key="fb_initend" addon="fbbridge">
+		<title>init_configuration_end</title>
+		<api>init_configuration_end</api>
+		<php><![CDATA[global $ilance, $show;
+$ilance->fb = construct_object('api.fbbridge');
+$ilance->commonlocation = construct_object('api.common_location');
+$show['fbbridge'] = (!empty($ilance->fb->config) AND $ilance->fb->config['enabled']) ? 1 : 0;
+$default['phrasegroups'] = array('fbbridge');
+if (!empty($phrase['groups']) AND is_array($phrase['groups']) AND count($phrase['groups']) > 0)
+{
+	$phrase['groups'] = array_merge($phrase['groups'], $default['phrasegroups']);
+	$phrase['groups'] = array_unique($phrase['groups']);
+}]]></php>
+	</plug>
+	
+	<plug key="fb_login_include_end" addon="fbbridge">
+		<title>login_include_end</title>
+		<api>login_include_end</api>
+		<php><![CDATA[global $ilance, $ilpage, $show, $ilconfig;
+if (isset($show['fbbridge']) AND $show['fbbridge'] AND defined('LOCATION') AND LOCATION != 'admin' AND defined('TEMPLATE_NEWUI') AND TEMPLATE_NEWUI == false)
+{
+	$ilance->fb->initialize();
+	if (isset($ilance->fb->uid) AND $ilance->fb->uid > 0 AND !empty($_SESSION['ilancedata']['user']['username']))
+	{
+		$login_include = $greeting . ' ' . $_SESSION['ilancedata']['user']['username'];
+		$login_include .= '<span style="float:left"><span id="fblogin_working" style="margin-right:14px;display:none;float:right"><img src="' . $ilconfig['template_relativeimagepath'] . $ilconfig['template_imagesfolder'] . 'working.gif" width="13" height="13" border="0" alt="" id="" /></span>' . $ilance->fb->print_fbbutton() . '</span>';
+	}
+	else
+	{
+		if (empty($_SESSION['ilancedata']['user']['userid']) OR empty($_SESSION['ilancedata']['user']['username']))
+		{
+			$login_include .= '<span style="float:left"><span id="fblogin_working" style="margin-right:14px;display:none;float:right"><img src="' . $ilconfig['template_relativeimagepath'] . $ilconfig['template_imagesfolder'] . 'working.gif" width="13" height="13" border="0" alt="" id="" /></span>' . $ilance->fb->print_fbbutton() . '</span>';
+		}
+	}
+}]]></php>
+	</plug>
+	
+	<plug key="fb_initend" addon="fbbridge">
+		<title>init_configuration_end</title>
+		<api>init_configuration_end</api>
+		<php><![CDATA[global $ilance, $show;
+$ilance->fb = construct_object('api.fbbridge');
+$ilance->commonlocation = construct_object('api.common_location');
+$show['fbbridge'] = (!empty($ilance->fb->config) AND $ilance->fb->config['enabled']) ? 1 : 0;
+$default['phrasegroups'] = array('fbbridge');
+if (!empty($phrase['groups']) AND is_array($phrase['groups']) AND count($phrase['groups']) > 0)
+{
+	$phrase['groups'] = array_merge($phrase['groups'], $default['phrasegroups']);
+	$phrase['groups'] = array_unique($phrase['groups']);
+}]]></php>
+	</plug>
+	
+	<plug key="fb_login_parse_template_variables_templatebits" addon="fbbridge">
+		<title>parse_template_variables_templatebits</title>
+		<api>parse_template_variables_templatebits</api>
+		<php><![CDATA[if (isset($show['fbbridge']) AND $show['fbbridge'] AND defined('TEMPLATE_NEWUI') AND TEMPLATE_NEWUI == true)
+{
+	$ilance->fb->initialize();
+	if (isset($ilance->fb->uid) AND $ilance->fb->uid > 0 AND !empty($_SESSION['ilancedata']['user']['username']))
+	{
+		$this->templatebits['facebook_button'] = '<div align="center">' . $ilance->fb->print_fbbutton() . '<span id="fblogin_working" style="margin-left:7px;display:none"><img src="' . $ilconfig['template_relativeimagepath'] . $ilconfig['template_imagesfolder'] . 'working.gif" width="13" height="13" border="0" alt="" id="" /></span></div>';
+		$this->templatebits['facebook_button_login'] = $ilance->fb->print_fbbutton() . '<span id="fblogin_working" style="margin-left:7px;display:none"><img src="' . $ilconfig['template_relativeimagepath'] . $ilconfig['template_imagesfolder'] . 'working.gif" width="13" height="13" border="0" alt="" id="" /></span>';
+	}
+	else
+	{
+		if (empty($_SESSION['ilancedata']['user']['userid']))
+		{
+			$this->templatebits['facebook_button'] = '<div align="center">' . $ilance->fb->print_fbbutton() . '<span id="fblogin_working" style="margin-left:7px;display:none"><img src="' . $ilconfig['template_relativeimagepath'] . $ilconfig['template_imagesfolder'] . 'working.gif" width="13" height="13" border="0" alt="" id="" /></span></div>';
+			$this->templatebits['facebook_button_login'] = $ilance->fb->print_fbbutton() . '<span id="fblogin_working" style="margin-left:7px;display:none"><img src="' . $ilconfig['template_relativeimagepath'] . $ilconfig['template_imagesfolder'] . 'working.gif" width="13" height="13" border="0" alt="" id="" /></span>';
+		}
+	}
+}]]></php>
+	</plug>
+	
+	
+	<plug key="fb_login_guest_after_register" addon="fbbridge">
+		<title>top_links_guest_after_register</title>
+		<api>top_links_guest_after_register</api>
+		<html><![CDATA[<if condition="isset($show['fbbridge']) AND $show['fbbridge'] AND defined('LOCATION') AND (LOCATION != 'admin' AND LOCATION != 'login') AND defined('TEMPLATE_NEWUI') AND TEMPLATE_NEWUI == true">
+<div class="user-login">{facebook_button}</div>
+</if>]]></html>
+	</plug>
+	
+	<plug key="fb_ajax_start" addon="fbbridge">
+		<title>ajax_start</title>
+		<api>ajax_start</api>
+		<php><![CDATA[global $ilance, $ilconfig, $show;
+if (isset($show['fbbridge']) AND $show['fbbridge'] AND isset($ilance->fb->config['fbregister']) AND $ilance->fb->config['fbregister'] AND isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'fbbridge')
+{	
+	$ilance->fb->initialize();
+	$user = array();
+	if (!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0) 
+	{
+		echo json_encode(array('success' => TRUE, 'message' => '', 'redirect' => HTTPS_SERVER . (($ilconfig['globalauctionsettings_seourls']) ? 'mycp?fb=1' : $ilpage['main'] . '?cmd=cp&fb=1')));
+		exit();
+	}
+	if (isset($ilance->fb->uid) AND $ilance->fb->uid > 0)
+	{
+		$user = $ilance->fb->conn->api('/me');
+	}
+	else
+	{
+		echo json_encode(array('success' => FALSE, 'message' => 'Sorry, we could not locate your Facebook information.', 'redirect' => HTTPS_SERVER . (($ilconfig['globalauctionsettings_seourls']) ? 'register' : $ilpage['registration'])));
+		exit();
+	}
+	if (!isset($user['first_name']) OR !isset($user['last_name']) OR !isset($user['email']))
+	{
+		echo json_encode(array('success' => FALSE, 'message' => 'Sorry there was insufficient permission to import your Facebook account to ' . SITE_NAME . '.  Minimum requirements are first name, last name and email address.', 'redirect' => HTTPS_SERVER . (($ilconfig['globalauctionsettings_seourls']) ? 'register' : $ilpage['registration'])));
+		exit();
+	}
+	if (!empty($user['username']))
+	{
+		$username = $user['username'];
+	}
+	else
+	{
+		$username = $user['first_name'] . '_' . $user['last_name'];
+	}
+	$unicode_name = $username;
+	if (isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'login' AND isset($user['id']) AND !empty($user['id']))
+	{
+		$sqlusercheck = $ilance->db->query("
+			SELECT user_id
+			FROM " . DB_PREFIX . "users
+			WHERE facebookid IN ('" . $ilance->db->escape_string($user['id']) . "')
+			LIMIT 1
+		", 0, null, __FILE__, __LINE__);
+		if ($ilance->db->num_rows($sqlusercheck) > 0)
+		{
+			if ($ilance->fb->login_via_facebookid($user['id']))
+			{
+				echo json_encode(array('success' => TRUE, 'message' => '', 'redirect' => HTTPS_SERVER . (($ilconfig['globalauctionsettings_seourls']) ? 'mycp?fb=1' : $ilpage['main'] . '?cmd=cp&fb=1')));
+				exit();
+			}
+		}
+		$sqlusercheck = $ilance->db->query("
+			SELECT user_id, username
+			FROM " . DB_PREFIX . "users
+			WHERE email IN ('" . $ilance->db->escape_string($user['email']) . "')
+			LIMIT 1
+		", 0, null, __FILE__, __LINE__);
+		if ($ilance->db->num_rows($sqlusercheck) > 0)
+		{
+			$res = $ilance->db->fetch_array($sqlusercheck, DB_ASSOC);
+			$ilance->db->query("
+				UPDATE " . DB_PREFIX . "users
+				SET facebookid = '" . $ilance->db->escape_string($user['id']) . "'
+				WHERE user_id = '" . $res['user_id'] . "'
+				LIMIT 1
+			", 0, null, __FILE__, __LINE__);
+			if ($ilance->fb->login_via_facebookid($user['id']))
+			{
+				echo json_encode(array('success' => TRUE, 'message' => '', 'redirect' => HTTPS_SERVER . (($ilconfig['globalauctionsettings_seourls']) ? 'mycp?fb=1' : $ilpage['main'] . '?cmd=cp&fb=1')));
+				exit();
+			}
+		}
+		$sqlusercheck = $ilance->db->query("
+			SELECT *
+			FROM " . DB_PREFIX . "users
+			WHERE username IN ('" . addslashes(htmlspecialchars_uni($username)) . "', '" . addslashes(htmlspecialchars_uni($unicode_name)) . "')
+		", 0, null, __FILE__, __LINE__);
+		if ($ilance->db->num_rows($sqlusercheck) > 0)
+		{
+			$res = $ilance->db->fetch_array($sqlusercheck, DB_ASSOC);
+			$ilance->db->query("
+				UPDATE " . DB_PREFIX . "users
+				SET facebookid = '" . $ilance->db->escape_string($user['id']) . "'
+				WHERE user_id = '" . $res['user_id'] . "'
+				LIMIT 1
+			", 0, null, __FILE__, __LINE__);
+			if ($ilance->fb->login_via_facebookid($user['id']))
+			{
+				echo json_encode(array('success' => TRUE, 'message' => '', 'redirect' => HTTPS_SERVER . (($ilconfig['globalauctionsettings_seourls']) ? 'mycp?fb=1' : $ilpage['main'] . '?cmd=cp&fb=1')));
+				exit();
+			}
+		}
+		// require geoip backend to build a better user profile
+		if (!function_exists('geoip_open'))
+		{
+			require_once(DIR_CORE . 'functions_geoip.php');
+		}
+		$geoip = geoip_open(DIR_CORE . 'functions_geoip_city.dat', GEOIP_STANDARD);
+		$geo = geoip_record_by_addr($geoip, IPADDRESS);
+		$randomPassword = construct_password(8);
+		$newuser = $subscription = $questions = $preferences = array();	
+		$newuser['roleid'] = '1';
+		$newuser['username'] = trim($username);
+		$newuser['password'] = $randomPassword;
+		$newuser['secretquestion'] = '{_what_is_my_email_address}';
+		$newuser['secretanswer'] = $user['email'];
+		$newuser['email'] = $user['email'];
+		$newuser['firstname'] = (!empty($user['first_name'])) ? $user['first_name'] : 'Unknown';
+		$newuser['lastname'] = (!empty($user['last_name'])) ? $user['last_name'] : 'Unknown';
+		$newuser['address'] = (!empty($user['website'])) ? $user['website'] : 'Unknown';
+		$newuser['city'] = ((!empty($geo->city) AND $geo->city != '') ? $geo->city : $ilconfig['registrationdisplay_defaultcity']);
+		$newuser['state'] = ((!empty($GEOIP_REGION_NAME[$geo->country_code][$geo->region]) AND $GEOIP_REGION_NAME[$geo->country_code][$geo->region] != '') ? $GEOIP_REGION_NAME[$geo->country_code][$geo->region] : $ilconfig['registrationdisplay_defaultstate']);
+		$newuser['zipcode'] = (!empty($geo->postal_code) ? $geo->postal_code : '00000');
+		$newuser['phone'] = '000-000-0000';
+		$newuser['styleid'] = $_SESSION['ilancedata']['user']['styleid'];
+		$newuser['slng'] = $_SESSION['ilancedata']['user']['slng'];
+		$newuser['languageid'] = $_SESSION['ilancedata']['user']['languageid'];
+		$newuser['countryid'] = ((!empty($geo->country_code) AND $geo->country_code != '') ? $ilance->common_location->fetch_country_id_by_code($geo->country_code) : fetch_country_id($newuser['country']));
+		if (!empty($user['birthday']))
+		{
+			$dob = explode('/', $user['birthday']);
+			$newuser['dob'] = $dob[2] . '-' . $dob[0] . '-' . $dob[1]; // mm-dd-yyyy
+			unset($dob);
+		}
+		$newuser['gender'] = (!empty($user['gender'])) ? $user['gender'] : 'male';
+		$subscription['subscriptionid'] = (isset($ilance->GPC['subscriptionid'])) ? intval($ilance->GPC['subscriptionid']) : '1';
+		$subscription['subscriptionpaymethod'] = (isset($ilance->GPC['subscriptionpaymethod'])) ? $ilance->GPC['subscriptionpaymethod'] : 'account';        
+		$subscription['promocode'] = '';
+		geoip_close($geoip);
+		$final = $ilance->registration->build_user_datastore($newuser, $preferences, $subscription, $questions, 'return_userarray', 1, 'Facebook');
+		if (!empty($final))
+		{
+			// add the facebook id to user record
+			$ilance->db->query("
+				UPDATE " . DB_PREFIX . "users
+				SET facebookid = '" . $ilance->db->escape_string($user['id']) . "'
+				WHERE user_id = '" . $final['userid'] . "'
+				LIMIT 1
+			", 0, null, __FILE__, __LINE__);
+			set_cookie('username', $ilance->crypt->three_layer_encrypt($final['username'], $ilconfig['key1'], $ilconfig['key2'], $ilconfig['key3']), true);
+			set_cookie('lastvisit', DATETIME24H, true);
+			set_cookie('lastactivity', DATETIME24H, true);
+			switch ($final['status'])
+			{
+				case 'active':
+				{
+					if (!empty($_SESSION['ilancedata']['user']['password_md5']))
+					{
+						$_SESSION['ilancedata']['user']['password'] = $_SESSION['ilancedata']['user']['password_md5'];
+						session_unregister($_SESSION['ilancedata']['user']['password_md5']);
+					}
+					$ilance->email->mail = $newuser['email'];
+					$ilance->email->slng = $_SESSION['ilancedata']['user']['slng'];
+					$ilance->email->get('fbbridge_password_email');		
+					$ilance->email->set(array(
+						'{{username}}' => $newuser['username'],
+						'{{password}}' => $randomPassword,
+						'{{sitename}}' => SITE_NAME,
+					));
+					$ilance->email->send();
+					echo json_encode(array('success' => TRUE, 'message' => 'Welcome ' . $newuser['firstname'] . '.  Please check your email for your sign-in password so you can review and update your profile next.', 'redirect' => HTTPS_SERVER . (($ilconfig['globalauctionsettings_seourls']) ? 'signin' : $ilpage['login']) . '?error=checkemailpassword&redirect=' . urlencode($ilpage['preferences'] . '?cmd=profile&fb=1')));	
+					exit();
+					break;        
+				}
+				case 'unverified':
+				{
+					// display email link code information
+					$ilance->email->mail = $newuser['email'];
+					$ilance->email->slng = $_SESSION['ilancedata']['user']['slng'];
+					$ilance->email->get('fbbridge_password_email');		
+					$ilance->email->set(array(
+						'{{username}}' => $newuser['username'],
+						'{{password}}' => $randomPassword,
+						'{{sitename}}' => SITE_NAME,
+					));
+					$ilance->email->send();
+					echo json_encode(array('success' => TRUE, 'message' => 'Welcome ' . $newuser['firstname'] . '. We sent you an email to verify your account.', 'redirect' => HTTPS_SERVER . (($ilconfig['globalauctionsettings_seourls']) ? 'signin' : $ilpage['login']) . '?error=checkemail'));	
+					exit();
+					break;
+				}
+			}
+		}
+		else
+		{
+			echo json_encode(array('success' => FALSE, 'message' => 'Sorry there was a problem completing your registration via Facebook, reverting to normal registration.', 'redirect' => HTTPS_SERVER . (($ilconfig['globalauctionsettings_seourls']) ? 'register' : $ilpage['registration'])));								
+			exit();
+		}
+	}
+}]]></php>
+	</plug>
+	
+	<plug key="fb_template_shell_html_tag" addon="fbbridge">
+		<title>Facebook Main Shell HTML Template Bit</title>
+		<api>template_shell_html_tag_end</api>
+		<html><![CDATA[<if condition="isset($show['fbbridge']) AND $show['fbbridge'] AND isset($ilance->fb->config['fbregister']) AND $ilance->fb->config['fbregister'] AND defined('LOCATION') AND LOCATION != 'admin'">xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"</if>]]></html>
+	</plug>
+
+	<plug key="fb_template_shell_html_tag" addon="fbbridge">
+		<title>Facebook Main Shell HTML Template Bit</title>
+		<api>template_shell_html_tag_end</api>
+		<html><![CDATA[<if condition="isset($show['fbbridge']) AND $show['fbbridge'] AND isset($ilance->fb->config['fbregister']) AND $ilance->fb->config['fbregister'] AND defined('LOCATION') AND LOCATION != 'admin'">xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"</if>]]></html>
+	</plug>
+	
+	<plug key="fb_registration_page_button" addon="fbbridge">
+		<title>Facebook on Login/Sign In Page Under Remember Me</title>
+		<api>login_signin_right</api>
+		<html><![CDATA[<if condition="isset($show['fbbridge']) AND $show['fbbridge'] AND isset($ilance->fb->config['fbregister']) AND $ilance->fb->config['fbregister'] AND defined('LOCATION') AND LOCATION == 'login'"><span style="float:right;padding-right:49px;padding-top:6px">{facebook_button_login}</span></if>]]></html>
+	</plug>
+</plugin>

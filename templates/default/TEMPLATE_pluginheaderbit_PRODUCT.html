@@ -1,0 +1,24 @@
+{template_htmldoctype}
+<html dir="{template_textdirection}" xml:lang="{template_languagecode}" lang="{template_languagecode}" xmlns="http://www.w3.org/1999/xhtml" {template_htmlextra} {apihook[template_shell_html_tag_end]}>
+<head>
+<title>{page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={template_charset}" />
+<if condition="PROTOCOL_REQUEST == 'https'"><base href="{https_server}" /><else /><base href="{http_server}" /></if>
+<meta name="description" content="{template_metadescription}" />
+<meta name="keywords" content="{template_metakeywords}" />
+<link href="{template_relativeimagepath}functions/css/v4.css" rel="stylesheet" type="text/css" />
+<!--[if IE 7]><link rel="stylesheet" type="text/css" href="{template_relativeimagepath}functions/css/ie7.css" media="screen" /><![endif]-->
+<!--[if IE 8]><link rel="stylesheet" type="text/css" href="{template_relativeimagepath}functions/css/ie8.css" media="screen" /><![endif]-->
+{headinclude}
+</head>
+<body {onload}>
+
+{headerbit}
+
+{navbar}
+
+<if condition="(!isset($show['nobreadcrumb'])) OR (isset($show['nobreadcrumb']) AND $show['nobreadcrumb'] == false)">{breadcrumbbit}</if>
+
+{infobar}
+
+<!-- START template content --><div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">box<else />box2</if>">

@@ -1,0 +1,29 @@
+{template_htmldoctype}
+<html dir="{template_textdirection}" xml:lang="{template_languagecode}" lang="{template_languagecode}" xmlns="http://www.w3.org/1999/xhtml" {template_htmlextra} {apihook[template_shell_html_tag_end]}>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={template_charset}" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>{page_title}</title>
+<if condition="isset($topnavlink[0]) AND $topnavlink[0] == 'merch_viewitem'"><meta content="{project_title_plain}" property="og:title" /><else /><meta content="{page_title}" property="og:title" /></if>
+<if condition="!empty($metadescription)"><meta content="{template_metadescription}" property="og:description" /></if>
+<meta content="{pageurl}" property="og:url" />
+<meta content="website" property="og:type" />
+<meta content="{site_name}" property="og:site_name" />
+<if condition="isset($topnavlink[0]) AND $topnavlink[0] == 'merch_viewitem' AND isset($show['productimage']) AND $show['productimage']"><meta content="{productimage} property="og:image"" /><else /><meta content="{http_server}{template_imagesfolder}v4/logo.png" property="og:image" /></if>
+<if condition="!empty($metadescription)"><meta content="{template_metadescription}" name="description" /></if>
+<if condition="!empty($metakeywords)"><meta content="{template_metakeywords}" name="keywords" /></if>
+<meta content="NOODP" name="robots" />
+<if condition="PROTOCOL_REQUEST == 'https'"><base href="{https_server}" /><else /><base href="{http_server}" /></if>
+{js_phrases_content}
+{headinclude}
+</head>
+<body{onload}>
+{headerbit}
+{navbar}
+<if condition="(!isset($show['nobreadcrumb'])) OR (isset($show['nobreadcrumb']) AND $show['nobreadcrumb'] == false)">{breadcrumbbit}</if>
+{infobar}
+<!-- START template content --><div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">box<else />box2</if>">{maincontent}</div><!-- END template content -->
+{footerbit}
+{footinclude}
+</body>
+</html>

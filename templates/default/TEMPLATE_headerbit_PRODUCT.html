@@ -1,0 +1,235 @@
+<!-- START content -->
+<noscript><div id="infobar" style="font-size:11px"><a href="http://www.mozilla.com" rel="nofollow"><strong>{_warning_exclamation}</strong> {_the_web_browser_youre_using_does_not_have_javascript_enabled}</a></div></noscript>
+<if condition="$ilconfig['globalfilters_clientcpnag'] AND !empty($_SESSION['ilancedata']['user']['userid']) AND !empty($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] == '1' AND empty($_COOKIE[COOKIE_PREFIX . 'hideacpnag'])"><!-- start acp nag message --><div id="infobar" style="font-size:11px"><a href="{http_server}{ilpage[main]}?cmd=hideacpnag&amp;returnurl={pageurl_urlencoded}" onclick="return confirm_js(\'{_you_might_loose_the_page_you_are_currently_viewing}\')"><strong>{_warning_exclamation}</strong> &nbsp;{_you_are_viewing_the_marketplace_with_admin_access_priviliages} {_some_features_may_be_overidden_such_as_blind_bidders}</a></div><!-- end acp nag message --></if>
+<if condition="!empty($_SESSION['ilancedata']['user']['active']) AND $_SESSION['ilancedata']['user']['active'] == 'no' AND defined('LOCATION') AND (LOCATION != 'invoicepayment' AND LOCATION != 'forum' AND LOCATION != 'subscription' AND LOCATION != 'ipn' AND LOCATION != 'search') AND !empty($_SESSION['ilancedata']['user']['cost']) AND $_SESSION['ilancedata']['user']['cost'] > 0"><div id="infobar" style="font-size:11px"><a href="{http_server}{ilpage[subscription]}?returnurl={pageurl_urlencoded}"><strong>{_notice}:</strong> &nbsp;{_unpaid_subscription_please_make_subscription_payment}</a></div></if>
+
+{apihook[headerbit_start]}
+
+<!--[if lte IE 6]><div id="infobar" style="width:100%"><a href="http://www.mozilla.com" target="_blank"><strong>{_warning_exclamation}</strong> &nbsp;&nbsp;{_the_browser_you_are_using_is_old_and_no_longer_a_supported}</a></div><![endif]-->
+
+<!-- start top-bar -->
+<div class="top-bar<if condition="isset($show['slimheader']) AND $show['slimheader']">-slim</if>">
+	<if condition="isset($show['slimheader']) AND $show['slimheader']"><div style="margin:0 10px 0 5px"><span style="float:left;margin:2px 10px 0 0"><a href="{http_server}" title="{site_name}"><img src="{template_relativeimagepath}{template_imagesfolder}v4/logo-slim.png" height="13" alt="{site_name}" /></a></span><p class="top-bar-info"><span class="left">{apihook[top_bar_info]}</span>{login_include}</p></div></if>
+	<!-- start box -->
+	<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">box<else />box2</if>">
+    	<if condition="isset($show['slimheader']) AND $show['slimheader']"><else /><p class="top-bar-info"><span class="left">{apihook[top_bar_info]}</span>{login_include}</p></if>
+    </div>
+    <!-- end box -->
+</div>
+<!-- end top-bar -->
+<!-- start header -->
+<div class="header<if condition="isset($show['slimheader']) AND $show['slimheader']">-slim</if>">
+	<!-- start box -->
+	<div class="<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)">box<else />box2</if>">
+    	<!-- start header-top -->
+    	<div class="header-top">
+            <!-- start logo -->
+            <div class="logo">
+                <a href="{http_server}" title="{site_name}"><img src="{template_relativeimagepath}{template_imagesfolder}v4/logo.png" alt="{site_name}" /></a>
+            </div>
+            <!-- end logo -->
+            <!-- start top-link -->
+            <div class="top-link">
+            	<ul>
+                	{apihook[top_links_start]}
+                    
+                    <li class="sell-hover"><a href="{http_server}sell" class="sell"><span>{_sell}</span></a>
+                    	<!-- start top-dropdown -->
+                        <div class="top-dropdown">
+                        	<if condition="empty($_SESSION['ilancedata']['user']['username'])"><div class="user-login">
+                                <a class="login-link" href="{https_server}signin">{_login}</a>
+                                <span class="new-user">{_dont_have_an_account} <a href="{https_server}register">{_register} ›</a></span>
+                            </div>
+                            {apihook[top_links_sell_guest_after_register]}
+                            <else />
+                        	<div class="user-login">
+                            	<h3>{_sell} {_on} {site_name}</h3>
+                            </div>
+                            <ul>
+                            	{apihook[topnav_sell_links_start]}
+                                <li><a href="{http_server}sell">{_sell_new_item}</a></li>
+                    			<if condition="isset($ilconfig['globalfilters_bulkupload']) AND $ilconfig['globalfilters_bulkupload']"><li><a href="{http_server}bulk/sell">{_sell_bulk_items}</a></li></if>
+                                <li><a href="{https_server}{ilpage[feedback]}?cmd=_leave-feedback&view=2">{_leave_feedback_for_buyers}</a></li>
+                                <li><a href="{https_server}{ilpage[selling]}?cmd=management&amp;displayorder=desc">{_im_selling}</a></li>
+                                <li><a href="{https_server}{ilpage[selling]}?cmd=management&amp;sub=sold&amp;displayorder=desc">{_items_ive_sold}</a></li>
+                                {apihook[topnav_sell_links_end]}
+                            </ul>
+                            </if>
+                        </div>
+                        <!-- end top-dropdown -->
+                    </li>
+                    
+                	<li class="login-hover"><if condition="empty($_SESSION['ilancedata']['user']['username'])"><a href="{https_server}signin" class="login"><span>{_login}</span></a><else /><a href="{http_server}mycp" class="mycp"><span>{_my_cp}</span></a></if>
+                    	<!-- start top-dropdown -->
+                        <div class="top-dropdown">
+                            <if condition="empty($_SESSION['ilancedata']['user']['username'])"><div class="user-login">
+                                <a class="login-link" href="{https_server}signin">{_login}</a>
+                                <span class="new-user">{_dont_have_an_account} <a href="{https_server}register">{_register} ›</a></span>
+                            </div>
+                            {apihook[top_links_guest_after_register]}
+                            <else />
+                            {apihook[top_links_member_before_navigation]}
+                            <div class="user-login">
+                            <h3>{_navigation}</h3>
+                            </div>
+                            <ul>
+                            	{apihook[topnav_links_start]}
+                                <li><a href="{ilpage[buying]}?cmd=management">{_buying_activity}</a></li>
+                                <li><a href="{ilpage[selling]}?cmd=management">{_selling_activity}</a></li>
+                                <li><a href="{https_server}messages">{_messages}</a>{new_messages_nav}</li>
+                                <li><a href="{http_server}watchlist">{_watchlist}</a></li>
+                                <li><a href="{https_server}accounting">{_accounting}</a></li>
+                                <li class="divider"><a href="{ilpage[subscription]}?cmd=management">{_subscription}</a></li>
+                                <li><a href="{ilpage[feedback]}?cmd=_leave-feedback">{_leave_feedback}</a></li>
+                                {apihook[topnav_links_end]}
+                            </ul>
+                            </if>
+                            
+                        </div><!-- end top-dropdown -->
+                    </li>
+                    
+                    {apihook[top_links_mid]}
+                    
+                    <li class="favorite-hover"><a href="javascript:;" class="favorite"><span>{_favourite}</span></a>
+                    	<!-- start top-dropdown -->
+                        <div class="top-dropdown2">
+                        	<div class="user-login" style="border-bottom:none">
+                            	<h3>{_favorites}</h3>
+                                <p style="margin:10px 15px 0 0;font-size:12px;line-height:17px" class="gray">{_your_favorites_hold_items}</p>
+                            </div>
+                        	<div class="tab-cont">
+                            		<h4><span style="float:right;margin-top:1px;margin-right:10px;display:block" class="smaller gray"><a href="javascript:;" onclick="location.href='{https_server}{ilpage[watchlist]}?cmd=management&amp;tab=0'">{_manage}</a></span><a href="javascript:;" class="link">{_products}</a></h4>
+                                	<if condition="empty($_SESSION['ilancedata']['user']['username'])"><div class="txtb">
+                                    <p>{_you_must_be_logged_in_to}</p>
+                                    <a class="login-link" href="{https_server}signin">{_login}</a>
+                                    <div style="clear:both"></div><span class="new-user">{_dont_have_an_account} <a href="{https_server}register">{_register} ›</a></span>
+                                    </div><else /><div class="txtb nopadding"><div id="favouriteitems"><span style="padding:{table_cellpadding}px"><img src="{template_relativeimagepath}{template_imagesfolder}working.gif" width="13" height="13" alt="{_loading}" /></span></div></div></if>
+                            </div>
+                            <div class="tab-cont">
+                            		<h4><span style="float:right;margin-top:1px;margin-right:10px;display:block" class="smaller gray"><a href="javascript:;" onclick="location.href='{https_server}{ilpage[watchlist]}?cmd=management&amp;tab=1'">{_manage}</a></span><a href="javascript:;" class="link">{_sellers}</a></h4>
+                                	<if condition="empty($_SESSION['ilancedata']['user']['username'])"><div class="txtb">
+                                    <p>{_you_must_be_logged_in_to}</p>
+                                    <a class="login-link" href="{https_server}signin">{_login}</a>
+                                    <div style="clear:both"></div><span class="new-user">{_dont_have_an_account} <a href="{https_server}register">{_register} ›</a></span>
+                                    </div><else /><div class="txtb nopadding"><div id="favouritesellers" style="min-height:395px"><span style="padding:{table_cellpadding}px"><img src="{template_relativeimagepath}{template_imagesfolder}working.gif" width="13" height="13" alt="{_loading}" /></span></div></div></if>
+                            </div>
+                            <div class="tab-cont">
+                            		<h4><span style="float:right;margin-top:1px;margin-right:10px;display:block" class="smaller gray"><a href="javascript:;" onclick="location.href='{https_server}{ilpage[preferences]}?cmd=favorites'">{_manage}</a></span><a href="javascript:;" class="link">{_searches}</a></h4>
+                                	<if condition="empty($_SESSION['ilancedata']['user']['username'])"><div class="txtb">
+                                    <p>{_you_must_be_logged_in_to}</p>
+                                    <a class="login-link" href="{https_server}signin">{_login}</a>
+                                    <div style="clear:both"></div><span class="new-user">{_dont_have_an_account} <a href="{https_server}register">{_register} ›</a></span>
+                                    </div><else /><div class="txtb nopadding"><div id="favouritesearches" style="min-height:395px"><span style="padding:{table_cellpadding}px"><img src="{template_relativeimagepath}{template_imagesfolder}working.gif" width="13" height="13" alt="{_loading}" /></span></div></div></if>
+                            </div>
+                        </div>
+                        <!-- end top-dropdown -->
+                    </li>
+                    
+                    {apihook[top_links_end]}
+                    
+                </ul>
+            </div>
+            <!-- end top-link -->
+        </div>
+        <!-- end header-top -->
+        <!-- start header-bot -->
+        <div class="header-bot">
+        	<!-- start navigation -->
+<!--         	<div class="navigation">
+            	<ul>
+                	<li<if condition="!isset($show['categorynav']) OR isset($show['categorynav']) AND $show['categorynav'] == false"><else /> class="active"</if>><a href="{http_server}categories/items"><span>{_shop_by_category}</span></a>
+                    	<ul>
+                        	<li aria-haspopup="true"><a href="{http_server}categories/items" title="{_all_categories}" role="menuitem" class="nav-menu-link"><strong>{_all_categories}</strong></a>{categorynavdropdownall}</li>
+                            {categorynavigation}
+                        </ul>
+                    </li>
+                </ul>
+            </div> -->
+            <!-- end navigation -->
+            <!-- start search -->
+            <div class="search<if condition="(!isset($show['widescreen'])) OR (isset($show['widescreen']) AND $show['widescreen'] == false)"><else /> search2</if>">
+            	<form name="global" id="globalsearch" action="{http_server}search" method="get" dir="{template_textdirection}" accept-charset="UTF-8">
+                	<input type="hidden" name="mode" id="searchmode" value="product" />
+                	<label>{_search}</label>
+                    <!-- start search-box -->
+                    <div class="search-box">
+                        <input type="submit" value="" class="button" />
+                        <!-- start setting-box -->
+                        <div class="setting-box">
+                        	<a href="javascript:;" class="setting"><span>{_settings}</span></a>
+                            <div class="setting-panel">
+                            	<div class="title">
+                                	<span><a href="{http_server}search" title="{_advanced_search}">{_advanced_search}</a></span>
+                                	<h3>{_search_options}</h3>
+                                </div>
+                                <div class="setting-form">
+                                	<div class="row">
+                                        <label for="cid">{_category}</label>
+                                        {search_category_pulldown_v4}
+                                        <ul class="checkbox-list">
+                                        	<li><label for="titlesonly"><input name="titlesonly" id="titlesonly" type="checkbox" value="1" class="checkbox" /> {_search_auction_titles_only}</label></li>
+                                        	<li><label for="imagesonly"><input name="images" id="imagesonly" type="checkbox" value="1" class="checkbox" /> {_show_only_with_images}</label></li>
+                                            <li><label for="freeshipping"><input name="freeshipping" id="freeshipping" type="checkbox" value="1" class="checkbox" /> {_show_items_with_free_shipping}</label></li>
+                                        </ul>
+                                    </div>
+                                    <!--<div class="row">
+                                        <label for="keywords">{_keywords}</label>
+                                        <input name="q" type="text" id="keywords" value="" class="input" />
+                                        
+                                    </div>-->
+                                    
+                                    <div class="row">
+                                        <label for="itemnumber">{_item_number}</label>
+                                        <input name="itemid" type="text" id="itemnumber" placeholder="{_eg_placeholder_itemnumber}" class="input" />
+                                    </div>
+                                    <div class="row last">
+                                        <input type="submit" value="{_search}" id="bigsearchbutton" class="button2" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end setting-box 
+                    	<div class="search-menu">
+                        	<a href="javascript:;" title="{_all_categories}" class="menu-link"><span id="search-menu-selected">{_all_categories}</span></a>
+                        </div>-->
+                        <div class="input-field"><input name="q" id="search_keywords_id" type="text" value="{q}" autocomplete="off" spellcheck="false" class="input" /></div>
+                        <div id="search_autocomplete" class="autocompletev4"></div>
+                    	<div class="search-menu-list" id="search-menu">
+                            <ul>
+                                {categorypulldownpopup}
+                            </ul>
+                            <!--<span class="user-link"><a href="{http_server_other}">{_find_work_or_talent}</a></span>-->
+                        </div>
+                        
+                    </div>
+                    <!-- end search-box -->
+                <if condition="isset($ilconfig['fulltextsearch']) AND $ilconfig['fulltextsearch']"><input type="hidden" name="sort" id="searchsort" value="124" /><else /><input type="hidden" name="sort" id="searchsort" value="01" /></if>
+                </form>
+            </div>
+            <!-- end search -->
+    		<div class="arrow-bot">
+                <a href="javascript:;" class="arrow-link" title="{_recently_viewed_items}">arrow-bot</a>
+                <!-- start product-list -->
+                <div class="product-list">
+                    <a href="javascript:;" class="arrow-bot2 arrow-link">arrow-bot</a>
+                    <!-- row -->
+                    <div class="row">
+                        <strong><a href="javascript:;" title="{_close}" class="close">{_close}</a> {_recently_viewed_items}</strong>
+                    </div>
+                    <!-- row -->
+                    <div id="recentviewedtoploader">
+                    <div class="row2">
+                        <ul>
+                            <li class="active" style="padding: 0 17px 0 0" title="{_loading}"><img src="{template_relativeimagepath}{template_imagesfolder}working.gif" width="13" height="13" alt="{_loading}" /></li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                <!-- end product-list -->
+        	</div>
+        </div>
+        <!-- end header-bot -->
+    </div>
+    <!-- end box -->
+</div>
+<!-- end header -->

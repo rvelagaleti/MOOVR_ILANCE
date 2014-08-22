@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Official ClientCP English (US) Left-Navigation menu system for ILance.
+For SEO purposes, please update the .htaccess within the root folder of ILance if you plan on adding seolink="" urls below.
+If you get stuck in this department, check out http://www.ilance.com/forum/ for more resources and information on this topic.
+//-->
+<clientnavgroups languagecode="eng">
+	{apihook[nav_group_start]}
+	<clientnavgroup phrase="_my_cp" link="" seolink="" config="" permission1="" permission2="" header="true" sort="10" roles="" locations="" subscriptionpermission="">
+		<option phrase="_dashboard" link="main.php?cmd=cp" seolink="" config="" permission1="" permission2="" sort="60" roles="" locations="dashboard" subscriptionpermission=""></option>
+		<option phrase="_leave_feedback" link="feedback.php?cmd=_leave-feedback" seolink="" config="" permission1="" permission2="" sort="60" roles="" locations="feedback" subscriptionpermission=""></option>
+		<option phrase="_selling_profile" link="selling.php?cmd=profile" seolink="" config="" permission1="" permission2="" sort="10" roles="" locations="profile" subscriptionpermission="createserviceprofile"></option>
+		<option phrase="_favorite_searches" link="preferences.php?cmd=favorites" seolink="" config="" permission1="savedsearches" permission2="" sort="20" roles="" locations="saved_searches" subscriptionpermission=""></option>
+		<option phrase="_watchlist_manager" link="watchlist.php?cmd=management" seolink="" config="" permission1="" permission2="" sort="20" roles="" locations="watchlist" subscriptionpermission=""></option>
+		<option phrase="_messages" link="messages.php?cmd=management" seolink="" config="" permission1="" permission2="" sort="30" roles="" locations="messages" subscriptionpermission=""></option>
+		<option phrase="_subscription_manager" link="subscription.php" seolink="" config="" permission1="" permission2="" sort="40" roles="" locations="subscription" subscriptionpermission=""></option>
+		<option phrase="_attachment_manager" link="preferences.php?cmd=attachments" seolink="" config="" permission1="" permission2="" sort="70" roles="" locations="attachments" subscriptionpermission=""></option>
+		{apihook[nav_option_mycp]}
+	</clientnavgroup>
+	<clientnavgroup phrase="_accounting" link="" seolink="" config="" permission1="" permission2="" header="true" sort="40" roles="" locations="" subscriptionpermission="">
+		<option phrase="_my_account_manager" link="accounting.php?cmd=management" seolink="" config="" permission1="" permission2="" sort="10" roles="" locations="accounting" subscriptionpermission=""></option>
+		<option phrase="_deposit_funds" link="accounting.php?cmd=deposit" seolink="" config="" permission1="" permission2="" sort="40" roles="" locations="deposit" subscriptionpermission="deposit"></option>
+		<option phrase="_withdraw_funds" link="accounting.php?cmd=withdraw" seolink="" config="" permission1="" permission2="" sort="50" roles="" locations="withdraw" subscriptionpermission="withdraw"></option>
+		{apihook[nav_option_accounting]}
+	</clientnavgroup>
+	<clientnavgroup phrase="_buying_activity" link="" seolink="" config="" permission1="" permission2="" header="true" sort="20" roles="" locations="" subscriptionpermission="createserviceauctions OR productbid OR buynow">
+		<option phrase="_create_service_auction" link="main.php?cmd=buying" seolink="buy" config="" permission1="globalauctionsettings_serviceauctionsenabled" permission2="" sort="20" roles="" locations="" subscriptionpermission="createserviceauctions"></option>
+		<option phrase="_buying_activity_dashboard" link="buying.php?cmd=management" seolink="" config="" permission1="" permission2="" sort="10" roles="" locations="buying" subscriptionpermission="productbid OR buynow"></option>
+		<option phrase="_bid_proposals_ive_awarded" link="buying.php?cmd=management&amp;sub=awarded" seolink="" config="" permission1="globalauctionsettings_serviceauctionsenabled" permission2="" sort="10" roles="" locations="buying_awarded" subscriptionpermission="createserviceauctions"></option>
+		<option phrase="_items_ive_won" link="buying.php?cmd=management&amp;bidsub=awarded" seolink="" config="" permission1="" permission2="" sort="10" roles="" locations="buying_won" subscriptionpermission="productbid OR buynow"></option>
+		<option phrase="_service_escrow_payments_out" link="escrow.php?cmd=management&amp;sub=rfp-escrow" seolink="" config="" permission1="escrowsystem_enabled" permission2="globalauctionsettings_serviceauctionsenabled" sort="10" roles="" locations="servicebuyingescrow" subscriptionpermission="createserviceauctions"></option>
+		<option phrase="_purchase_now_escrow_buying_activity" link="escrow.php?cmd=management&amp;bidsub=buynow-escrow" seolink="" config="" permission1="escrowsystem_enabled" permission2="globalauctionsettings_productauctionsenabled" sort="10" roles="" locations="buynowbuyingescrow" subscriptionpermission="buynow"></option>
+		<option phrase="_product_escrow_payments_out" link="escrow.php?cmd=management&amp;bidsub=product-escrow" seolink="" config="" permission1="escrowsystem_enabled" permission2="" sort="10" roles="" locations="productbuyingescrow" subscriptionpermission="productbid OR buynow"></option>
+		{apihook[nav_option_buying]}
+	</clientnavgroup>
+	<clientnavgroup phrase="_selling_activity" link="" seolink="" config="" permission1="" permission2="" header="true" sort="30" roles="" locations="" subscriptionpermission="createproductauctions OR servicebid">
+		<option phrase="_create_product_auction" link="main.php?cmd=selling" seolink="sell" config="" permission1="globalauctionsettings_productauctionsenabled" permission2="" sort="10" roles="" locations="" subscriptionpermission="createproductauctions"></option>
+		<option phrase="_selling_activity_dashboard" link="selling.php?cmd=management" seolink="" config="" permission1="" permission2="" sort="10" roles="" locations="selling" subscriptionpermission="createproductauctions OR servicebid"></option>
+		<option phrase="_items_ive_sold" link="selling.php?cmd=management&amp;sub=sold" seolink="" config="" permission1="" permission2="" sort="10" roles="" locations="selling_sold" subscriptionpermission="createproductauctions"></option>
+		<option phrase="_reverse_auctions_awarded" link="selling.php?cmd=management&amp;bidsub=awarded" seolink="" config="" permission1="globalauctionsettings_serviceauctionsenabled" permission2="" sort="10" roles="" locations="selling_awarded" subscriptionpermission="servicebid"></option>
+		<option phrase="_service_escrow_payments_in" link="escrow.php?cmd=management&amp;bidsub=rfp-escrow" seolink="" config="" permission1="escrowsystem_enabled" permission2="globalauctionsettings_serviceauctionsenabled" sort="10" roles="" locations="servicesellingescrow" subscriptionpermission="servicebid"></option>
+		<option phrase="_product_escrow_payments_in" link="escrow.php?cmd=management&amp;sub=product-escrow" seolink="" config="" permission1="escrowsystem_enabled" permission2="globalauctionsettings_productauctionsenabled" sort="10" roles="" locations="productsellingescrow" subscriptionpermission="createproductauctions"></option>
+		<option phrase="_portfolio_manager" link="portfolio.php?cmd=management" seolink="" config="" permission1="portfoliodisplay_enabled" permission2="globalauctionsettings_serviceauctionsenabled" sort="50" roles="" locations="portfolio_manage" subscriptionpermission="addportfolio"></option>
+		{apihook[nav_option_selling]}
+	</clientnavgroup>
+	<clientnavgroup phrase="_preferences" link="" seolink="" config="" permission1="" permission2="" header="true" sort="50" roles="" locations="" subscriptionpermission="">
+		<option phrase="_my_preferences" link="preferences.php?cmd=management" seolink="" config="" permission1="" permission2="" sort="10" roles="" locations="preferences" subscriptionpermission=""></option>
+		<option phrase="_personal_profile" link="preferences.php?cmd=profile" seolink="" config="" permission1="" permission2="" sort="20" roles="" locations="preferencesprofile" subscriptionpermission=""></option>
+		<option phrase="_category_notifications" link="preferences.php?cmd=notifications" seolink="" config="" permission1="" permission2="" sort="30" roles="" locations="newsletters" subscriptionpermission=""></option>
+		<option phrase="_email_preferences" link="preferences.php?cmd=email" seolink="" config="" permission1="" permission2="" sort="60" roles="" locations="preferencesemail" subscriptionpermission=""></option>
+		{apihook[nav_option_preferences]}
+	</clientnavgroup>
+	{apihook[nav_group_end]}
+</clientnavgroups>

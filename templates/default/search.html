@@ -1,0 +1,661 @@
+{js_start}
+
+{apihook[search_start_html]}
+
+<if condition="$ilconfig['globalserver_enabledistanceradius'] AND !empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0">
+    <script language="JavaScript">
+    <!--
+	function validate_radius(f)
+	{
+	    if (document.forms[f].radius.value > 0)
+	    {
+		if (document.forms[f].radiuszip.value.length == 0)
+		{
+		    alert_js(phrase['_you_must_now_enter_a_zip_us_or_postal_code_canada_within_the_filter_by_radius_selection_area_and_submit_your_search_to_continue']);
+		    return(false);
+		}
+
+		return(true);
+	    }
+
+	    return(true);
+	}
+
+	function validate_all(f)
+	{
+	    return validate_radius(f);
+	}
+    //-->
+    </script>
+    <else />
+    <script language="JavaScript">
+    <!--
+	function validate_all(f)
+	{
+	    return(true);
+	}
+    //-->
+    </script>
+</if>
+<form name="formtab" accept-charset="UTF-8" style="margin:0px;">
+    <input type="hidden" name="viewtab" value="{tab}" />
+</form>
+
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+    <div class="bigtabsheader">
+	<ul>
+	    <li title="" class="on"><a href="javascript:void(0)">{_search}</a></li>
+	    <li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search-options">{_options}</a><else /><a href="{http_server}{ilpage[search]}?cmd=options">{_options}</a></if></li>
+	    <li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search-promotion">{_search_promotion}</a><else /><a href="{http_server}{ilpage[search]}?cmd=promotion">{_search_promotion}</a></if></li>
+	    <if condition="isset($ilconfig['fulltextsearch']) AND $ilconfig['fulltextsearch']"><li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search-help">{_help}</a><else /><a href="{http_server}{ilpage[search]}?cmd=help">{_help}</a></if></li></if>
+	</ul>
+    </div>
+</div>
+<div style="clear:both;"></div>
+
+<if condition="isset($show['searcherror']) AND $show['searcherror']">
+    <div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;">
+	<div class="n">
+	    <div class="e">
+		<div class="w"></div>
+	    </div>
+	</div>
+
+	<div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span> <div><strong>{_the_following_errors_occurred_with_your_search}</strong></div> <ul style="padding-top:2px"><li>{searcherror}</li></ul></div>		
+
+	<div class="s">
+	    <div class="e">
+		<div class="w"></div>
+	    </div>
+	</div>
+    </div>
+    <div style="padding-bottom:20px"></div>
+</if>
+
+
+<div class="tab-pane" id="search">
+    <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']">
+	<div class="tab-page">
+	    <h2 class="tab" id="0">{_service}</h2>
+	    <form method="get" action="{ilpage[search]}" id="searchform" name="searchprojects" accept-charset="UTF-8" onsubmit="return validate_all('searchprojects');" style="margin: 0px;">
+		<input type="hidden" name="mode" value="service" />
+		<div class="block-wrapper">
+
+		    <div class="block2">
+
+			<div class="block2-top">
+			    <div class="block2-right">
+				<div class="block2-left"></div>
+			    </div>
+			</div>
+
+			<div class="block2-header">{_find_work}</div>
+			<div class="block2-content" style="padding:0px">
+
+			    <div>
+				<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%" align="center">
+				    <tbody id="collapseobj_search_serviceauctions" style="{search_serviceauctions_collapse}">
+					<tr> 
+					    <td align="left" valign="top" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_blue_1x1000.gif) repeat-x"> 
+
+						<div style="padding-bottom:5px"><strong>{_keywords}</strong></div>
+
+						<table cellpadding="0" cellspacing="0" border="0">
+						    <tr> 
+							<td><input type="text" name="q" value="{q}" maxlength="100" size="35" class="input" /></td>
+							<td>&nbsp;&nbsp;&nbsp;<select name="titlesonly" class="select-250">
+								<option value="-1">{_search_entire_auctions}</option>
+								<option value="1">{_search_auction_titles_only}</option>
+							    </select>&nbsp;&nbsp;<input type="submit" value=" {_search} " class="buttons" /><div></div></td>
+						    </tr>
+						</table>
+
+						<div style="height:1px; background-color:#cccccc;width:100%;margin-top:12px;margin-bottom:1px"></div>
+
+						<div style="padding-bottom:5px; padding-top:12px"><strong>{_category}</strong></div>
+						<div style="padding-bottom:9px">{service_category_selection}</div>
+
+						<div style="padding-bottom:5px; padding-top:9px"><strong>{_display_order}</strong></div>
+						<div style="padding-bottom:9px">{sortpulldown}</div>
+
+						<div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:1px"></div>
+
+						<div style="padding-bottom:5px; padding-top:9px"><input type="checkbox" id="cb_serviceoptions" onclick="enable_input_group('serviceoptions', this.checked, false)" /> <strong>{_filters}</strong></div>
+				    <if condition="$ilconfig['escrowsystem_enabled']"><div class="gray" style="padding-left:23px" id="css_escrow1_1"><label for="escrow1_1"><input type="checkbox" name="escrow" value="1" id="escrow1_1" /> {_show_projects_that_use_secure_escrow}</label></div></if>
+				    <div class="gray" style="padding-left:23px" id="css_budget1_1"><label for="budget1_1"><input type="checkbox" name="budget" value="1" id="budget1_1" /> {_only_show_projects_with_nondisclosed_budgets}</label></div>
+				    <div class="gray" style="padding-left:23px" id="css_pboard1_1"><label for="pboard1_1"><input type="checkbox" name="publicboard" value="1" id="pboard1_1" /> {_show_projects_with_active_public_message_boards}</label></div>
+				    <div style="padding-bottom:9px"></div>
+
+				    <div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:1px"></div>
+
+				    <div style="padding-bottom:5px; padding-top:12px"><input type="checkbox" id="cb_servicelistingtype" onclick="enable_input_group('servicelistingtype', this.checked, false)" /> <strong>{_listing_type}</strong></div>
+				    <div style="padding-bottom:9px; padding-left:23px">
+
+					<div class="gray" id="css_cb_buyingformat1_1"><label for="cb_buyingformat1_1"><input type="checkbox" name="auction" value="1" id="cb_buyingformat1_1" /> {_reverse_auction}</label></div>
+					<div class="gray" id="css_cb_buyingformat1_2"><label for="cb_buyingformat1_2"><input type="checkbox" name="inviteonly" value="1" id="cb_buyingformat1_2" /> {_find_invite_only_auctions}</label></div>
+					<div class="gray" id="css_cb_buyingformat1_3"><label for="cb_buyingformat1_3"><input type="checkbox" name="scheduled" value="1" id="cb_buyingformat1_3" /> {_upcoming} / {_find_realtime_auctions}</label></div>
+					<div class="gray" id="css_cb_buyingformat1_4"><label for="cb_buyingformat1_4"><input type="checkbox" name="completed" value="1" id="cb_buyingformat1_4" /> {_completed}</label></div>
+
+				    </div>
+
+				    <div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:1px"></div>
+
+				    <div style="padding-bottom:5px; padding-top:9px"><input type="checkbox" id="cb_servicelisted" onclick="enable_input_group('servicelisted', this.checked, false)" /> <strong>{_date_range}</strong> <select id="serviceendstart" name="endstart" class="select">
+					    <option value="1" selected="selected">{_ending_within}</option>
+					    <option value="2">{_ending_in_more_than}</option>
+					    <option value="3">{_started_within}</option></select>&nbsp;&nbsp;&nbsp;{serviceendstart_filter_pulldown}</div>
+				    
+
+				    <div style="padding-bottom:5px; padding-top:9px"><input type="checkbox" id="cb_servicebidrange" onclick="enable_input_group('servicebidrange', this.checked, false)" /> <strong>{_bids}</strong></div>
+				    <div style="padding-bottom:9px; padding-left:23px">{search_bidrange_pulldown_service}</div>
+
+				    <div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:9px"></div>
+
+				    <div style="padding-bottom:3px; padding-top:1px"><input type="checkbox" id="cb_servicesearchuser" onclick="enable_input_group('servicesearchuser', this.checked, false)" /> <strong>{_search_by_specific_buyer}</strong></div>
+				    <div style="padding-left:23px">
+					<table cellpadding="0" cellspacing="0" border="0">
+					    <tr> 
+						<td><input type="text" id="servicesearchuser" name="searchuser" value="" maxlength="100" size="25" class="input" /></td>
+						<td>&nbsp;&nbsp;&nbsp;<label for="exactname"><input type="checkbox" name="exactname" value="1" id="serviceexactname" /> <span class="gray">{_exact_name}</span></label></td>
+					    </tr>
+					</table>
+				    </div>
+				    <div style="padding-bottom:9px"></div>
+
+				    <div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:9px"></div>
+
+				    <div style="padding-top:9px">
+					<table border="0" cellpadding="0" cellspacing="0" width="100%">
+					    <tr>
+
+						<td width="35%" align="left" rowspan="2" valign="top">
+                                                    <div style="padding-bottom:5px"><input type="checkbox" id="cb_serviceregion" onclick="enable_input_group('region_service', this.checked, false)" /> 
+							<strong>{_region}</strong></div>
+                                                    <div style="padding-left:16px">
+							<table cellpadding="0" cellspacing="0" width="100%">
+							    <tr valign="top">
+								<td><div style="padding-bottom:8px"><span style="float:right; padding-right:10px">{region_pulldown_service} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_from_region'] + '</strong></div><div>' + phrase['_you_can_search_results_based_on_a_specific_region_or_continent'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><input type="radio" id="rb_serviceregionfrom" name="regiontype" value="1" checked="checked" onclick="enable_input_group('radio_serviceregion', this.checked, false)" />&nbsp;{_from_region}</div></td>
+							    </tr>
+							    <tr valign="top">
+								<td><div style="padding-bottom:8px"><span style="float:right; padding-right:10px">{availableto_pulldown_service} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_available_to'] + '</strong></div><div>' + phrase['_if_you_would_like_to_only_include_results_based_on_listings_that_are_available_to'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><input type="radio" id="rb_serviceregionto" name="regiontype" value="2" onclick="enable_input_group('radio_serviceregion', this.checked, false)" />&nbsp;{_available_to}</div></td>
+							    </tr>
+							    <tr valign="top">
+								<td><div><span style="float:right; padding-right:10px">{locatedin_pulldown_service} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_located_in_upper'] + '</strong></div><div>' + phrase['_if_you_would_like_to_only_show_results_which_are_physically_located_in'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><input type="radio" id="rb_serviceregionin" name="regiontype" value="3" onclick="enable_input_group('radio_serviceregion', this.checked, false)" />&nbsp;{_located_in_upper}</div></td>
+							    </tr>
+							</table>
+                                                    </div>
+
+						</td>	
+						<td rowspan="2" align="center" width="70">&nbsp;</td>
+						<td rowspan="2"><div style="padding-bottom:8px"><input type="checkbox" id="cb_servicelocation" onclick="enable_input_group('location_service', this.checked, false)" /> <strong>{_specific_location}</strong></div>
+						    <table cellpadding="0" cellspacing="0" width="300">
+							<tr>
+							    <td><div style="margin-bottom:12px; padding-left:23px"><span style="float:right">{search_country_pulldown_service}</span>{_country}</div></td>
+							</tr>
+							<tr>
+							    <td><div style="margin-bottom:12px; padding-left:23px"><span style="float:right"><input type="text" name="state" id="state1_3" maxlength="100" size="15" value="" class="input" /></span>{_state}</div></td>
+							</tr>
+							<tr>
+							    <td><div style="margin-bottom:12px; padding-left:23px"><span style="float:right"><input type="text" name="city" id="incity1_3" maxlength="100" size="15" value="" class="input" /></span>{_city}</div></td>
+							</tr>
+							<tr>
+							    <td><div style="padding-left:23px"><span style="float:right"><input type="text" name="zip_code" id="zipcode1_3" maxlength="15" size="7" value="" /></span>{_zip_code}</div></td>
+							</tr>
+						    </table>
+						    <div style="padding-top:5px"></div></td>
+					    </tr>
+					</table>
+				    </div>
+
+				    <if condition="$ilconfig['globalserver_enabledistanceradius']">
+					<div id="toggleradiusservice" style="display:none">
+					    <div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:9px"></div>
+					    <div style="padding-bottom:8px"><input type="checkbox" id="cb_servicedistance" onclick="enable_input_group('distance_service', this.checked, false)" /> <strong>{_services_close_to_me}</strong></div>
+					    <table cellpadding="0" cellspacing="0" width="220">
+                                                <!--<tr>
+							<td><div style="margin-bottom:6px; padding-left:23px"><span style="float:right">{search_radius_country_pulldown_service}</span>{_country}</div></td>
+                                                </tr>-->
+                                                <tr>
+						    <td><div style="margin-bottom:6px; padding-left:23px"><span style="float:right; padding-right:8px">{serviceradius_pulldown}&nbsp;&nbsp;{_miles_of}</span>{_within}</div></td>
+                                                </tr>
+                                                <tr>
+						    <td><div style="margin-bottom:6px; padding-left:23px"><span style="float:right"><input type="text" id="serviceradiuszip" name="radiuszip" maxlength="15" size="7" value="" /> <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_zip_code'] + ' &amp; ' + phrase['_distance'] + '</strong></div><div>' + phrase['_in_order_to_view_search_results_based_on_distance_away_from_you'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span>{_zip_code}</div></td>
+                                                </tr>
+					    </table>
+					    <div style="padding-top:5px"></div>
+					</div>
+				    </if>
+
+
+				    </td>
+				    </tr>
+				    </tbody>
+				</table>
+			    </div>
+
+			</div>
+
+			<div class="block2-footer">
+			    <div class="block2-right">
+				<div class="block2-left"></div>
+			    </div>
+			</div>
+
+		    </div>
+		</div>
+
+
+		<script type="text/javascript">
+<!--
+		escrowCB = new iL_Inline('escrowCB', 'escrow1', 'searchform', '');
+pboardCB = new iL_Inline('pboardCB', 'pboard1', 'searchform', '');
+undageCB = new iL_Inline('undageCB', 'undage1', 'searchform', '');
+budgetCB = new iL_Inline('budgetCB', 'budget1', 'searchform', '');
+
+enable_input_group('servicelisted', false, false);
+enable_input_group('servicelistingtype', false, false);
+enable_input_group('servicebidrange', false, false);
+enable_input_group('servicesearchuser', false, false);
+<if condition="$ilconfig['globalserver_enabledistanceradius']"> enable_input_group('distance_service', false, false); </if>
+enable_input_group('location_service', false, false);
+enable_input_group('region_service', false, false);
+enable_input_group('serviceoptions', false, false);
+//-->
+		</script>
+
+		<div style="margin-top:4px; padding-bottom:9px"><input type="submit" value=" {_search} " class="buttons" style="font-size:15px" /></div>
+	    </form>
+	</div>
+    </if>
+
+    <if condition="$ilconfig['globalauctionsettings_productauctionsenabled']">
+	<div class="tab-page">
+	    <h2 class="tab" id="1">{_product}</h2>
+	    <form method="get" action="{ilpage[search]}" id="searchform2" name="searchproducts" accept-charset="UTF-8" onsubmit="return validate_all('searchproducts');" style="margin: 0px;">
+		<input type="hidden" name="mode" value="product" />
+		<div class="block-wrapper">
+
+		    <div class="block">
+
+			<div class="block-top">
+			    <div class="block-right">
+				<div class="block-left"></div>
+			    </div>
+			</div>
+
+			<div class="block-header">{_find_products}</div>
+			<div class="block-content" style="padding:0px">
+
+
+			    <table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%" align="center">
+				<tbody id="collapseobj_search_productauctions" style="{search_productauctions_collapse}">
+				    <tr> 
+					<td width="100%" align="left" valign="top" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x"> 
+
+					    <div style="padding-bottom:5px"><strong>{_keywords}</strong></div>
+
+					    <table cellpadding="0" cellspacing="0" border="0">
+						<tr> 
+						    <td><input type="text" name="q" value="{q}" maxlength="100" size="35" class="input" /></td>
+						    <td>&nbsp;&nbsp;&nbsp;<select name="titlesonly" class="select-250">
+							    <option value="-1">{_search_entire_auctions}</option>
+							    <option value="1">{_search_auction_titles_only}</option>
+							</select>&nbsp;&nbsp;<input type="submit" value=" {_search} " class="buttons" /><div></div></td>
+						</tr>
+					    </table>
+
+					    <div style="height:1px; background-color:#cccccc;width:100%;margin-top:12px;margin-bottom:1px"></div>
+
+					    <div style="padding-bottom:5px; padding-top:12px"><strong>{_category}</strong> &nbsp;{product_category_selection}</div>
+					    
+
+					    <div style="padding-bottom:5px; padding-top:9px"><strong>{_display_order}</strong> &nbsp;{sortpulldown}</div>
+					    
+
+					    <div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:1px"></div>
+
+					    <div style="padding-bottom:5px; padding-top:9px"><input type="checkbox" id="cb_pricerange" onclick="enable_input_group('pricerange', this.checked, false)" /> <strong>{_price_range}</strong></div>
+					    <div style="padding-left:23px">
+						<table cellpadding="0" cellspacing="0" border="0">
+						    <tr>
+							<td>{_from}&nbsp;&nbsp;&nbsp;{currency_symbol_left}&nbsp;</td> 
+							<td><input type="text" id="frompricerange" name="fromprice" value="0.01" maxlength="49" size="7" class="input" /></td>
+							<td>&nbsp;{currency_symbol_right}</td> 
+							<td>&nbsp;&nbsp;&nbsp;{_to_upper}&nbsp;&nbsp;&nbsp;{currency_symbol_left}&nbsp;</td>
+							<td><input type="text" id="topricerange" name="toprice" value="" maxlength="49" size="7" class="input" /></td>
+							<td>&nbsp;{currency_symbol_right}</td>
+						    </tr>
+						</table>
+					    </div>
+					    <div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:1px"></div>
+
+					    <div style="padding-bottom:5px; padding-top:9px"><input type="checkbox" id="cb_productoptions" onclick="enable_input_group('productoptions', this.checked, false)" /> <strong>{_filters}</strong></div>
+					    <div class="gray" style="padding-left:23px" id="css_buynow2_1"><label for="buynow2_1"><input type="checkbox" name="buynow" id="buynow2_1" value="1" /> {_show_only_purchase_now_availability} </label></div>
+					    <div class="gray" style="padding-left:23px" id="css_images2_1"><label for="images2_1"><input type="checkbox" name="images" id="images2_1" value="1" /> {_show_only_with_images}</label></div>
+				<if condition="$ilconfig['escrowsystem_enabled']"><div class="gray" style="padding-left:23px" id="css_escrow2_1"><label for="escrow2_1"><input type="checkbox" name="escrow" value="1" id="escrow2_1" /> {_show_items_that_sellers_require_secure_escrow} </label></div></if>
+				<div class="gray" style="padding-left:23px" id="css_freesh2_1"><label for="freesh2_1"><input type="checkbox" name="freeshipping" value="1" id="freesh2_1" /> {_show_items_with_free_shipping} </label></div>
+				<div class="gray" style="padding-left:23px" id="css_pboard2_1"><label for="pboard2_1"><input type="checkbox" name="publicboard" value="1" id="pboard2_1" /> {_show_listings_with_active_public_message_boards}</label></div>
+				<div class="gray" style="padding-left:23px" id="css_laslot2_1"><label for="laslot2_1"><input type="checkbox" name="listedaslots" value="1" id="laslot2_1" /> {_show_items_listed_as_lots} </label></div>
+
+				<div style="padding-bottom:9px"></div>
+				<div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:1px"></div>
+
+				<div style="padding-bottom:5px; padding-top:12px"><input type="checkbox" id="cb_productlistingtype" onclick="enable_input_group('productlistingtype', this.checked, false)" /> <strong>{_listing_type}</strong></div>
+				<div style="padding-bottom:9px; padding-left:23px">
+
+				    <div class="gray" id="css_cb_buyingformat2_1"><label for="cb_buyingformat2_1"><input type="checkbox" name="auction" value="1" id="cb_buyingformat2_1" /> {_auction}</label></div>
+				    <div class="gray" id="css_cb_buyingformat2_2"><label for="cb_buyingformat2_2"><input type="checkbox" name="auction" value="1" id="cb_buyingformat2_2" /> {_fixed_price}</label></div>
+				    <div class="gray" id="css_cb_buyingformat2_3"><label for="cb_buyingformat2_3"><input type="checkbox" name="inviteonly" value="1" id="cb_buyingformat2_3" /> {_find_invite_only_auctions}</label></div>
+				    <div class="gray" id="css_cb_buyingformat2_4"><label for="cb_buyingformat2_4"><input type="checkbox" name="scheduled" value="1" id="cb_buyingformat2_4" /> {_upcoming} / {_scheduled}</label></div>
+				    <div class="gray" id="css_cb_buyingformat2_6"><label for="cb_buyingformat2_6"><input type="checkbox" name="completed" value="1" id="cb_buyingformat2_6" /> {_completed}</label></div>
+
+				</div>
+                
+                <div style="height:1px; background-color:#cccccc;width:100%;margin-top:12px;margin-bottom:12px"></div>
+
+				<div style="padding-bottom:5px"><input type="checkbox" id="cb_productlisted" onclick="enable_input_group('productlisted', this.checked, false)" /> <strong>{_date_range}</strong> &nbsp;<select id="productendstart" name="endstart" class="select">
+					<option value="1" selected="selected">{_ending_within}</option>
+					<option value="2">{_ending_in_more_than}</option>
+					<option value="3">{_started_within}</option></select>&nbsp;&nbsp;&nbsp;{productendstart_filter_pulldown}</div>
+				
+
+				<div style="padding-bottom:5px; padding-top:9px"><input type="checkbox" id="cb_productbidrange" onclick="enable_input_group('productbidrange', this.checked, false)" /> <strong>{_bids}</strong> &nbsp;{search_bidrange_pulldown_product}</div>
+				
+
+				<div style="height:1px; background-color:#cccccc;width:100%;margin-top:12px;margin-bottom:12px"></div>
+
+				<div><input type="checkbox" id="cb_productsearchuser" onclick="enable_input_group('productsearchuser', this.checked, false)" /> <strong>{_search_by_specific_merchant}</strong> &nbsp;<input type="text" id="productsearchuser" name="searchuser" value="" maxlength="100" size="25" class="input" /> &nbsp;&nbsp;&nbsp;<label for="exactname2"><input type="checkbox" name="exactname" value="1" id="productexactname" /> {_exact_name}</label></div>
+				
+
+				<div style="height:1px; background-color:#cccccc;width:100%;margin-top:12px;margin-bottom:12px"></div>
+
+				<div>
+				    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+
+					    <td width="35%" align="left" rowspan="2" valign="top">
+						<div style="padding-bottom:5px"><input type="checkbox" id="cb_productregion" onclick="enable_input_group('region_product', this.checked, false)" /> 
+						    <strong>{_region}</strong></div>
+						<div style="padding-left:16px">
+						    <table cellpadding="0" cellspacing="0" width="100%">
+							<tr valign="top">
+							    <td><div style="padding-bottom:8px"><span style="float:right; padding-right:10px">{region_pulldown_product} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_from_region'] + '</strong></div><div>' + phrase['_you_can_search_results_based_on_a_specific_region_or_continent'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><input type="radio" id="rb_productregionfrom" name="regiontype" value="1" checked="checked" onclick="enable_input_group('radio_productregion', this.checked, false)" />&nbsp;{_from_region}</div></td>
+							</tr>
+							<tr valign="top">
+							    <td><div style="padding-bottom:8px"><span style="float:right; padding-right:10px">{availableto_pulldown_product} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_available_to'] + '</strong></div><div>' + phrase['_if_you_would_like_to_only_include_results_based_on_listings_that_are_available_to'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><input type="radio" id="rb_productregionto" name="regiontype" value="2" onclick="enable_input_group('radio_productregion', this.checked, false)" />&nbsp;{_available_to}</div></td>
+							</tr>
+							<tr valign="top">
+							    <td><div><span style="float:right; padding-right:10px">{locatedin_pulldown_product} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_located_in_upper'] + '</strong></div><div>' + phrase['_if_you_would_like_to_only_show_results_which_are_physically_located_in'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><input type="radio" id="rb_productregionin" name="regiontype" value="3" onclick="enable_input_group('radio_productregion', this.checked, false)" />&nbsp;{_located_in_upper}</div></td>
+							</tr>
+						    </table>
+						</div>
+
+					    </td>	
+					    <td rowspan="2" align="center" width="70">&nbsp;</td>
+					    <td rowspan="2"><div style="padding-bottom:8px"><input type="checkbox" id="cb_productlocation" onclick="enable_input_group('location_product', this.checked, false)" /> <strong>{_specific_location}</strong></div>
+						<table cellpadding="0" cellspacing="0" width="300">
+						    <tr>
+							<td><div style="margin-bottom:12px; padding-left:23px"><span style="float:right">{search_country_pulldown_product}</span>{_country}</div></td>
+						    </tr>
+						    <tr>
+							<td><div style="margin-bottom:12px; padding-left:23px"><span style="float:right"><input type="text" name="city" id="incity2_3" maxlength="100" size="15" value="" class="input" /></span>{_city}</div></td>
+						    </tr>
+						    <tr>
+							<td><div style="margin-bottom:12px; padding-left:23px"><span style="float:right"><input type="text" name="state" id="state2_3" maxlength="100" size="15" value="" class="input" /></span>{_state}</div></td>
+						    </tr>
+						    <tr>
+							<td><div style="padding-left:23px"><span style="float:right"><input type="text" name="zip_code" id="zipcode2_3" maxlength="15" size="7" value="" /></span>{_zip_code}</div></td>
+						    </tr>
+						</table>
+						<div style="padding-top:5px"></div></td>
+					</tr>
+				    </table>
+				</div>
+
+
+				<if condition="$ilconfig['globalserver_enabledistanceradius']">
+				    <div id="toggleradiusproduct" style="display:none">
+					<div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:9px"></div>
+					<div style="padding-bottom:8px"><input type="checkbox" id="cb_productdistance" onclick="enable_input_group('distance_product', this.checked, false)" /> <strong>{_items_close_to_me}</strong></div>
+					<table cellpadding="0" cellspacing="0">
+					    <tr valign="top">
+						<td><div style="margin-bottom:6px; padding-left:23px"><span style="float:right; padding-right:8px">{productradius_pulldown}&nbsp;&nbsp;{_miles_of}</span>{_within}</div></td>
+						<td><div style="margin-bottom:6px; padding-left:23px"><span style="float:right"><input type="text" id="productradiuszip" name="radiuszip" maxlength="15" size="7" value="" /> <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_zip_code} &amp; {_distance}</strong></div><div>{_in_order_to_view_search_results_based_on_distance_away_from_you}</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><span style="float:left; padding-top:3px">{_zip_code}</span></div></td>
+					    </tr>
+					</table>
+					<div style="padding-top:5px"></div>
+				    </div>
+				</if>
+				<div align="center" style="padding-top:5px"></div></td>
+				</tr>
+				</tbody>
+			    </table>
+
+			</div>
+
+			<div class="block-footer">
+			    <div class="block-right">
+				<div class="block-left"></div>
+			    </div>
+			</div>
+
+		    </div>
+		</div>
+		<script type="text/javascript">
+		<!--
+		    escrowCB2 = new iL_Inline('escrowCB2', 'escrow2', 'searchform2', '');
+		    pboardCB2 = new iL_Inline('pboardCB2', 'pboard2', 'searchform2', '');
+		    buynowCB2 = new iL_Inline('buynowCB2', 'buynow2', 'searchform2', '');
+		    imagesCB2 = new iL_Inline('imagesCB2', 'images2', 'searchform2', '');
+		    freeshCB2 = new iL_Inline('freeshCB2', 'freesh2', 'searchform2', '');
+		    laslotCB2 = new iL_Inline('laslotCB2', 'laslot2', 'searchform2', '');
+		    undageCB2 = new iL_Inline('undageCB2', 'undage2', 'searchform2', '');
+		    enable_input_group('productbidrange', false, false);
+		    enable_input_group('productlisted', false, false);
+		    enable_input_group('pricerange', false, false);
+		    enable_input_group('productoptions', false, false);
+		    enable_input_group('productlistingtype', false, false);
+		    enable_input_group('productsearchuser', false, false);
+		    <if condition="$ilconfig['globalserver_enabledistanceradius']"> enable_input_group('distance_product', false, false); </if>
+			    enable_input_group('location_product', false, false);
+		    enable_input_group('region_product', false, false);
+		//-->
+		</script>
+		<div style="margin-top:4px; padding-bottom:9px"><input type="submit" value=" {_search} " class="buttons" style="font-size:15px" /></div>
+	    </form>
+	</div>
+    </if>
+
+    <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']">
+	<div class="tab-page">
+	    <h2 class="tab" id="2">{_experts}</h2>
+
+	    <form method="get" action="{ilpage[search]}" id="searchform3" name="searchproviders" accept-charset="UTF-8" onsubmit="return validate_all('searchproviders');" style="margin: 0px;">
+		<input type="hidden" name="mode" value="experts" />
+		<div class="block-wrapper">
+
+		    <div class="block3">
+
+			<div class="block3-top">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+
+			<div class="block3-header">{_find_professionals}</div>
+			<div class="block3-content" style="padding:0px">
+
+			    <div>
+				<table border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%" align="center">
+				    <tbody id="collapseobj_search_providers" style="{search_providers_collapse}">
+					<tr> 
+					    <td width="100%" align="left" valign="top" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_gray_1x1000.gif) repeat-x"> 
+
+						<div style="padding-bottom:5px"><strong>{_keywords}</strong></div>
+
+						<table cellpadding="0" cellspacing="0" border="0">
+						    <tr> 
+							<td><input type="text" name="q" value="{q}" maxlength="100" size="35" class="input" /></td>
+							<td>&nbsp;&nbsp;<input type="submit" value=" {_search} " class="buttons" /></td>
+						    </tr>
+						</table>
+
+						<div style="height:1px; background-color:#cccccc;width:100%;margin-top:12px;margin-bottom:1px"></div>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						    <tr> 
+							<td width="50%" valign="top"><div style="padding-bottom:5px; padding-top:12px"><strong>{_category}</strong></div><div class="gray" style="padding-bottom:3px">{_some_categories_may_contain_different_profile_filters_than_others}</div><div style="padding-bottom:9px">{provider_category_selection}</div></td>
+							<td width="50%" valign="top">
+
+
+
+							    <div style="padding-bottom:5px; padding-top:9px"><strong>{_display_order}</strong></div>
+							    <div style="padding-bottom:9px">{sortpulldown2}</div>
+							    <div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:1px"></div>
+							    <div style="padding-bottom:5px; padding-top:9px"><input type="checkbox" id="cb_expertoptions" onclick="enable_input_group('expertoptions', this.checked, false)" /> <strong>{_filters}</strong></div>
+							    <!--<div class="gray" style="padding-left:20px" id="css_portfo1_1"><label for="portfo1_1"><input type="checkbox" name="portfolios" id="portfo1_1" value="1" /> {_include_within_portfolios}</label></div>-->
+							    <div class="gray" style="padding-left:20px" id="css_islogd1_1"><label for="islogd1_1"><input type="checkbox" name="isonline" id="islogd1_1" value="1" /> {_only_show_members_that_are_online_and_logged_in}</label></div>
+							    <div class="gray" style="padding-left:20px" id="css_images3_1"><label for="images3_1"><input type="checkbox" name="images" id="images3_1" value="1" /> {_only_show_members_with_active_profile_logos}</label></div>
+							    <div style="padding-bottom:9px"></div>
+							</td>
+						    </tr>
+						</table>
+
+
+
+						<div style="padding-top:10px; padding-bottom:10px">{profilebidfilters}</div>
+
+						<div style="height:1px; background-color:#cccccc;width:100%;margin-top:12px;margin-bottom:12px"></div>
+						<div style="padding-bottom:4px"><input type="checkbox" id="cb_hourly" onclick="enable_input_group('hourly', this.checked, false)" /> <strong>{_hourly_rate}</strong></div>
+						<div style="padding-left:23px"><table cellpadding="0" cellspacing="{table_cellspacing}">
+							<tr>
+							    <td>{_from}</td>
+							    <td>&nbsp;&nbsp;&nbsp;</td>
+							    <td>{_to_upper}</td>
+							</tr>
+							<tr>
+							    <td><span class="gray" style="float:left; padding-top:4px">{currency_symbol_left}&nbsp;</span><input type="text" id="hourlyfromprice" name="fromprice" value="{fromprice}" size="8" class="input" /></td>
+							    <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							    <td><span class="gray" style="float:left; padding-top:4px">{currency_symbol_left}&nbsp;</span><input type="text" id="hourlytoprice" name="toprice" value="{toprice}" size="8" class="input" /></td>
+							</tr>
+						    </table></div>
+
+						<div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:1px"></div>
+
+						<div style="padding-bottom:5px; padding-top:12px"><input type="checkbox" id="cb_awardrange" onclick="enable_input_group('awardrange', this.checked, false)" /> <strong>{_award_range}</strong></div>
+						<div style="padding-bottom:9px; padding-left:23px">{search_awardrange_pulldown}</div>
+
+						<div style="padding-bottom:5px; padding-top:9px"><input type="checkbox" id="cb_ratingrange" onclick="enable_input_group('ratingrange', this.checked, false)" /> <strong>{_rating_range}</strong></div>
+						<div style="padding-bottom:9px; padding-left:23px">{search_ratingrange_pulldown}</div>
+
+						<div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:9px"></div>
+
+						<div style="padding-top:9px">
+						    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+							<tr>
+
+							    <td width="35%" align="left" rowspan="2" valign="top">
+								<div style="padding-bottom:5px"><input type="checkbox" id="cb_expertregion" onclick="enable_input_group('region_experts', this.checked, false)" /> 
+								    <strong>{_region}</strong></div>
+								<div style="padding-left:16px">
+								    <table cellpadding="0" cellspacing="0" width="100%">
+									<tr valign="top">
+									    <td><div style="padding-bottom:8px"><span style="float:right; padding-right:10px">{region_pulldown_experts} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_from_region'] + '</strong></div><div>' + phrase['_you_can_search_results_based_on_a_specific_region_or_continent'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><input type="radio" id="rb_expertregionfrom" name="regiontype" value="1" checked="checked" onclick="enable_input_group('radio_expertregion', this.checked, false)" />&nbsp;{_from_region}</div></td>
+									</tr>
+									<tr valign="top">
+									    <td><div style="padding-bottom:8px"><span style="float:right; padding-right:10px">{availableto_pulldown_experts} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_available_to'] + '</strong></div><div>' + phrase['_if_you_would_like_to_only_include_results_based_on_listings_that_are_available_to'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><input type="radio" id="rb_expertregionto" name="regiontype" value="2" onclick="enable_input_group('radio_expertregion', this.checked, false)" />&nbsp;{_available_to}</div></td>
+									</tr>
+									<tr valign="top">
+									    <td><div><span style="float:right; padding-right:10px">{locatedin_pulldown_experts} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_located_in_upper'] + '</strong></div><div>' + phrase['_if_you_would_like_to_only_show_results_which_are_physically_located_in'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><input type="radio" id="rb_expertregionin" name="regiontype" value="3" onclick="enable_input_group('radio_expertregion', this.checked, false)" />&nbsp;{_located_in_upper}</div></td>
+									</tr>
+								    </table>
+								</div>
+
+                                                            </td>	
+                                                            <td rowspan="2" width="70" align="center">&nbsp;</td>
+                                                            <td rowspan="2"><div style="padding-bottom:8px"><input type="checkbox" id="cb_expertlocation" onclick="enable_input_group('location_experts', this.checked, false)" /> <strong>{_specific_location}</strong></div>
+								<table cellpadding="0" cellspacing="0" width="300">
+								    <tr>
+									<td><div style="margin-bottom:12px; padding-left:23px"><span style="float:right">{search_country_pulldown_experts}</span>{_country}</div></td>
+								    </tr>
+								    <tr>
+									<td><div style="margin-bottom:12px; padding-left:23px"><span style="float:right"><input type="text" name="city" id="incity3_3" maxlength="100" size="15" value="" class="input" /></span>{_city}</div></td>
+								    </tr>
+								    <tr>
+									<td><div style="margin-bottom:12px; padding-left:23px"><span style="float:right"><input type="text" name="state" id="state3_3" maxlength="100" size="15" value="" class="input" /></span>{_state}</div></td>
+								    </tr>
+								    <tr>
+									<td><div style="padding-left:23px"><span style="float:right"><input type="text" name="zip_code" id="zipcode3_3" maxlength="15" size="7" value="" /></span><span style="float:left; padding-top:3px">{_zip_code}</span></div></td>
+								    </tr>
+								</table>
+								<div style="padding-top:5px"></div></td>
+							</tr>
+						    </table>
+						</div>
+
+				    <if condition="$ilconfig['globalserver_enabledistanceradius']">
+					<div id="toggleradiusexperts" style="display:none">
+					    <div style="height:1px; background-color:#cccccc;width:100%;margin-top:6px;margin-bottom:9px"></div>
+					    <div style="padding-bottom:8px"><input type="checkbox" id="cb_expertdistance" onclick="enable_input_group('distance_experts', this.checked, false)" /> <strong>{_experts_close_to_me}</strong></div>
+					    <table cellpadding="0" cellspacing="0" width="220">
+                                                <tr>
+                                                    <td><div style="margin-bottom:6px; padding-left:23px"><span style="float:right; padding-right:8px">{expertradius_pulldown}&nbsp;&nbsp;{_miles_of}</span><span style="float:left; padding-top:3px">{_within}</span></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div style="margin-bottom:6px; padding-left:23px; padding-top:6px"><span style="float:right"><input type="text" id="expertradiuszip" name="radiuszip" maxlength="15" size="7" value="" /> <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_zip_code'] + ' &amp; ' + phrase['_distance'] + '</strong></div><div>' + phrase['_in_order_to_view_search_results_based_on_distance_away_from_you'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><span style="float:left; padding-top:3px">{_zip_code}</span></div></td>
+                                                </tr>
+					    </table>
+					    <div style="padding-top:5px"></div>
+					</div>
+				    </if>
+
+				    <if condition="isset($ilconfig['enableskills']) AND $ilconfig['enableskills']">
+					<div style="height:1px; background-color:#cccccc;width:100%;margin-top:12px;margin-bottom:1px"></div>
+					<div><div style="padding-bottom:5px; padding-top:9px"><input type="checkbox" name="" onclick="toggle_tr('expertskills')" /> <strong>{_skills} &amp; {_specifics}</strong></div></div>
+					<div id="expertskills" style="display:none">{skills_selection}</div>
+				    </if>
+				    <div align="center" style="padding-top:5px"></div>
+
+				    </td>
+
+				    </tr>
+				    </tbody>
+				</table>
+			    </div>
+
+
+
+			</div>
+
+			<div class="block3-footer">
+			    <div class="block3-right">
+				<div class="block3-left"></div>
+			    </div>
+			</div>
+
+		    </div>
+		</div>
+
+		<script type="text/javascript">
+		<!--
+		    islogdCB3 = new iL_Inline('islogdCB3', 'islogd1', 'searchform3', '');
+		    imagesCB3 = new iL_Inline('imagesCB3', 'images3', 'searchform3', '');
+		    portfoCB3 = new iL_Inline('portfoCB3', 'portfo1', 'searchform3', '');
+		    enable_input_group('awardrange', false, false);
+		    enable_input_group('ratingrange', false, false);
+		    <if condition="$ilconfig['globalserver_enabledistanceradius']"> enable_input_group('distance_experts', false, false); </if>
+			    enable_input_group('location_experts', false, false);
+		    enable_input_group('region_experts', false, false);
+		    enable_input_group('hourly', false, false);
+		    enable_input_group('expertoptions', false, false);
+		//-->
+		</script>
+		<div style="margin-top:4px; padding-bottom:9px"><input type="submit" value=" {_search} " class="buttons" style="font-size:15px" /></div>
+	    </form>
+	</div></if>
+    {apihook[search_end]}
+</div>
+<script type="text/javascript">
+<!--
+    setupAllTabs();
+//-->
+</script>

@@ -1,0 +1,85 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:5px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class=""><a href="{ilpage[accounting]}">{_accounting}</a></li>
+	<li title="" class="on"><a href="javascript:void(0)">{_deposit}</a></li>
+	<if condition="empty($_SESSION['ilancedata']['user']['active']) OR $_SESSION['ilancedata']['user']['active'] == 'no' OR $ilance->permissions->check_access($_SESSION['ilancedata']['user']['userid'], 'withdraw') == 'no'"><else /><li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=withdraw">{_withdraw}</a></li></if>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=transactions">{_transactions}</a></li>
+    <li title="" class=""><a href="{https_server}{ilpage[accounting]}?cmd=sch-transactions">{_scheduled_transactions}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<form action="{ilpage[accounting]}" method="post" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="_deposit-funds" /> 
+<input type="hidden" name="deposit_amount" value="{deposit_amount}" />
+<input type="hidden" name="credit_amount" value="{credit_amount}" />
+<input type="hidden" name="account_id" value="{account_id}" />
+<input type="hidden" name="ppemail" value="{ppemail}" />
+<input type="hidden" name="do" value="submit" />
+<input type="hidden" name="returnurl" value="{returnurl}" />
+{hidden}
+<if condition="isset($ilance->GPC['account_id']) AND $ilance->GPC['account_id'] == 'ccform'">
+<input type="hidden" name="creditcard_type" value="{creditcard_type}" />
+<input type="hidden" name="creditcard_number" value="{creditcard_number}" />
+<input type="hidden" name="creditcard_cvv2" value="{creditcard_cvv2}" />
+<input type="hidden" name="creditcard_month" value="{creditcard_month}" />
+<input type="hidden" name="creditcard_year" value="{creditcard_year}" />
+<input type="hidden" name="creditcard_name" value="{creditcard_name}" />
+<input type="hidden" name="creditcard_billing" value="{creditcard_billing}" />
+<input type="hidden" name="creditcard_postal" value="{creditcard_postal}" />
+</if>
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_deposit_funds_preview}</div>
+			
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_after_deposit_is_complete}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+				<tr class="alt1"> 
+                    <td width="14%" align="right" class="alt2"><span class="gray">{_source}</span></td>
+                    <td>{payment_method}</td>
+                </tr>
+                <tr class="alt1"> 
+                    <td align="right" class="alt2"><span class="gray">{_target}</span></td>
+                    <td nowrap="nowrap">{_online_account_balance}</td>
+                </tr>
+                <tr class="alt1"> 
+                    <td width="14%" align="right" class="alt2"><span class="gray">{_account_credit}</span></td>
+                    <td width="86%" align="left">{credit_amount_formatted} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_account_credit'] + '</strong></div><div>' + phrase['_account_credit_denotes_the_total_amount_that_will_ultimately'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                </tr>
+                <if condition="isset($show['use_transaction_fees']) AND $show['use_transaction_fees']">
+                <tr class="alt1"> 
+                    <td width="14%" align="right" class="alt2"><span class="gray">{_gateway_fee}</span></td>
+                    <td width="86%" align="left">{transaction_fee}</td>
+                </tr>
+                </if>
+                <tr class="alt1"> 
+                    <td width="14%" align="right" class="alt2"><span class="gray">{_cost}</span></td>
+                    <td width="86%" align="left">{deposit_amount_formatted} <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_cost'] + '</strong></div><div>' + phrase['_cost_denotes_the_total_amount_it_will_cost_to_forward_funds'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                </tr>
+                <tr class="alt2_top">
+                    <td colspan="2"><input type="submit" value=" {_confirm} " class="buttons" style="font-size:15px" /></td>
+                </tr>
+				</table>
+                
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+	</div>
+</div>
+</form>

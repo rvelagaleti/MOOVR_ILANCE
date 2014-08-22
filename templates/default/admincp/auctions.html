@@ -1,0 +1,445 @@
+<div id="v3body4">
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+	</div>
+
+<div id="content">
+<h1>{_auctions_distribution}</h1><br />
+
+	<div class="tab-pane" id="auctions">
+	
+	<div class="tab-page" id="moderate">
+		<h2 class="tab">{_moderated}</h2>
+		<form name="invoicesearch" method="get" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="auctions" />
+		<input type="hidden" name="viewtype" value="moderate" />
+		<div class="block-wrapper">
+		<div class="block3">
+		
+				<div class="block3-top">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+				<div class="block3-header"><span style="float:right"><a href="javascript:void(0)" onclick="return toggle('acpmoderatelistings');"><img id="collapseimg_acpmoderatelistings" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_acpmoderatelistings]}.gif" border="0" alt="" /></a></span>{_search} {_moderated_listings}</div>
+				<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_search_pending_listings_based_on_their_status_using_the_form_below}</div></div>
+				<div class="block3-content" id="collapseobj_acpmoderatelistings" style="{collapse[collapseobj_acpmoderatelistings]}; padding:0px">
+					
+				  <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				  <tr class="alt1"> 
+					<td nowrap="nowrap"><span class="gray">{_id}</span></td>
+					<td width="16%"><input type="text" name="project_id" value="{project_id}" style="font-family: verdana;" class="input" /></td>
+					<td width="6%" align="right" nowrap="nowrap"><span class="gray">{_user_id}</span></td>
+					<td width="6%" align="left" nowrap="nowrap"> <input type="text" name="user_id" value="{user_id}" size="9" style="font-family: verdana;" class="input" /></td>
+					<td width="5%" align="left" nowrap="nowrap"><span class="gray">{_title} / {_keywords}</span></td>
+					<td width="51%" align="left" nowrap="nowrap"><input type="text" name="project_title" value="{project_title}" style="font-family: verdana;" class="input" /></td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td nowrap="nowrap"><span class="gray">{_status}</span></td>
+					<td>{auction_status_pulldown2}</td>
+                                        <td nowrap="nowrap" align="right"><span class="gray">{_type}</span></td>
+                                        <td colspan="1">{auctiontype_pulldown2}</td>
+                                        <td nowrap="nowrap"><span class="gray">{_category} ID</span></td>
+                                        <td nowrap="nowrap"><input type="text" name="cid" value="{cid}" size="7" style="font-family: verdana;" class="input" /></td>
+				    </tr>
+				  </tr>
+				  <tr class="alt1"> 
+					<td width="16%" nowrap="nowrap"><span class="gray">{_type}</span></td>
+					<td>{auction_type_pulldown}</td>
+					<td align="right"><span class="gray">{_sort}</span></td>
+					<td colspan="1" nowrap="nowrap"><label for="ascending1"><input type="radio" name="orderby" id="ascending1" value="ASC" /> {_ascending}</label>
+					<label for="descending1"><input type="radio" name="orderby" id="descending1" value="DESC" checked="checked" /> {_descending}</label></td>
+					<td><span class="gray">{_per_page}</span></td>
+					<td>
+						{perpage_pulldown}
+					</td>
+					</tr>
+				  	<tr class="alt2_top">
+					<td colspan="6"><input type="submit" value="{_search}" style="font-size:15px" class="buttons" /></td>
+				</tr>
+				</table>
+					
+    </div>
+				
+				<div class="block3-footer">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>
+		
+		
+		<form method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin:0px">
+		<input type="hidden" name="subcmd" value="moderate-action" />
+		<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=auctions&amp;viewtype=moderate&amp;{pagetype}={page}" />
+		<input type="hidden" name="actioncmd" value="moderate-action" />
+		<div class="block-wrapper">
+		<div class="block3">
+		
+				<div class="block3-top">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+				<div class="block3-header">{numbermoderation} {_auctions_pending_approval}</div>
+				<div class="block3-content" style="padding:0px">
+					
+					<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+					<tr class="alt2"> 
+					  <td width="73%" nowrap="nowrap">{_title}</td>
+					  <td width="11%" nowrap="nowrap">{_status}</td>
+					  <td width="11%" nowrap="nowrap" align="right">{_if_short} <a href="javascript:void(0)" onmouseover="Tip(phrase['_if_stands_for_insertion_fee_and_is_a_fee_that_is_applied_when_you_list'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+					  <td width="5%" align="center">{_sel}</td>
+					</tr>
+					<loop name="moderateauctions"> 
+					<tr class="alt1" valign="top"> 
+					  <td valign="top"><span class="blue"><a href="{ilpage[distribution]}?cmd=auctions&amp;subcmd=_update-auction&amp;id={project_id}&amp;pagetype={pagetype}&amp;page={page}&amp;viewtype={type}">{project_title} <img src="{template_relativeimagepath}{template_imagesfolder}icons/pencil.gif" border="0" alt="{_edit}" /></a></span> <span class="smaller">({project_id})</span><div class="smaller" style="padding-top:9px"><span style="float:left;padding-right:6px;margin-top:-4px">{pmb}</span><span class="blue">{owner}</span></div><div class="smaller" style="padding-top:3px"><strong>{_type}:</strong> {auctiontype}</div><div class="smaller" style="padding-top:3px"><strong>{_added}:</strong> {added}</div></td>
+					  <td nowrap="nowrap">{_pending_approval}</td>
+					  <td align="right"><div class="smaller">{insertionfee}</div></td>
+					  <td align="center" nowrap="nowrap" class="alt2">{r3}</td>
+					</tr>
+					</loop name="moderateauctions"> 
+					<if condition="isset($show['no_moderateauctions']) AND $show['no_moderateauctions']"> 
+					<tr> 
+					  <td colspan="4" align="center">{_no_results_found}</td>
+					</tr>
+					<else />
+					<tr> 
+					  <td colspan="4" class="alt2_top"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="remove" value="{_remove}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_physically_remove_selected_auctions_continue}')" disabled="disabled" /><input type="submit" name="removeall" value="{_remove_all}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_physically_remove_all_moderate_auctions_continue}')" disabled="disabled"/><else /><input type="submit" name="remove" value="{_remove}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_physically_remove_selected_auctions_continue}')" /><input type="submit" name="removeall" value="{_remove_all}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_physically_remove_all_moderate_auctions_continue}')" /></if> <input type="submit" name="validate" value=" {_validate} " style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_validate_selected_auctions_as_a_result_the_auctions_will_be_able_to_accept_bids_continue}')" /></td>
+					</tr>
+					<tr> 
+					  <td colspan="4">{moderateprevnext}</td>
+					</tr>
+					</if> 
+					</table>
+					
+</div>
+				
+				<div class="block3-footer">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+		
+		</form>
+		
+		
+	</div>
+	
+	
+	<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']">
+	<div class="tab-page" id="service">
+	
+		<h2 class="tab">{_service}</h2>
+		<form name="invoicesearch" method="get" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="auctions" />
+		<input type="hidden" name="viewtype" value="service" />
+		<div class="block-wrapper">
+		<div class="block2">
+		
+				<div class="block2-top">
+						<div class="block2-right">
+								<div class="block2-left"></div>
+						</div>
+				</div>
+				
+				<div class="block2-header"><span style="float:right"><a href="javascript:void(0)" onclick="return toggle('acpservices');"><img id="collapseimg_acpservices" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_acpservices]}.gif" border="0" alt="" /></a></span>{_search} {_jobs}</div>
+				<div class="block2-content-blue" style="padding:{table_cellpadding}px"><div class="smaller">{_search_service_auctions_based_on_their_status_using_the_form_below}</div></div>
+				<div class="block2-content" id="collapseobj_acpservices" style="{collapse[collapseobj_acpservices]}; padding:0px">
+					
+				  <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				  <tr class="alt1"> 
+					<td nowrap="nowrap"><span class="gray">{_id}</span></td>
+					<td width="16%"><input type="text" name="project_id" value="{project_id}" style="font-family: verdana;" class="input" /></td>
+					<td width="6%" align="right" nowrap="nowrap"><span class="gray">{_user_id}</span></td>
+					<td align="left" nowrap="nowrap"> <input type="text" name="user_id" value="{user_id}" size="9" style="font-family: verdana;" class="input" /></td>
+					<td width="5%" align="left" nowrap="nowrap"><span class="gray">{_title} / {_keywords}</span></td>
+					<td width="51%" align="left" nowrap="nowrap"><input type="text" name="project_title" value="{project_title}" style="font-family: verdana;" class="input" /></td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td nowrap="nowrap"><span class="gray">{_status}</span></td>
+					<td colspan="3">{auction_status_pulldown}</td>
+                                        <td nowrap="nowrap"><span class="gray">{_category} ID</span></td>
+                                        <td nowrap="nowrap"><input type="text" name="cid" value="{cid}" size="7" style="font-family: verdana;" class="input" /></td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td width="16%" nowrap="nowrap"><span class="gray">{_type}</span></td>
+					<td>{auction_type_pulldown}</td>
+					<td><span class="gray">{_sort}</span></td>
+					<td nowrap="nowrap"><label for="ascending2"><input type="radio" name="orderby" id="ascending2" value="ASC" /> {_ascending} </label>
+					 <label for="descending2"><input type="radio" name="orderby" id="descending2" value="DESC" checked="checked" /> {_descending}</label>
+				   </td>
+				   <td><span class="gray">{_per_page}</span></td>
+					<td colspan="2">
+						{perpage_pulldown}
+					</td>
+				  </tr>
+				  <tr class="alt2_top">
+					<td colspan="6"><input type="submit" value="{_search}" class="buttons" style="font-size:15px" /></td>
+				  </tr>
+				</table>
+					
+		</div>
+				
+				<div class="block2-footer">
+						<div class="block2-right">
+								<div class="block2-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>
+
+		<form method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin:0px">
+		<input type="hidden" name="cmd" value="auctions" />
+		<input type="hidden" name="subcmd" value="auction-action" />
+		<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=auctions&amp;viewtype=service&amp;{pagetype}={page}" />
+		<input type="hidden" name="actioncmd" value="service-action" />
+		<div class="block-wrapper">
+		<div class="block2">
+		
+				<div class="block2-top">
+						<div class="block2-right">
+								<div class="block2-left"></div>
+						</div>
+				</div>
+				
+				<div class="block2-header">{numberservice} {_jobs}</div>
+				<!--<div class="block2-content-blue" style="padding:{table_cellpadding}px"><div class="smaller"></div></div>-->
+				<div class="block2-content" style="padding:0px">
+					
+				  <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+				  <tr class="alt2"> 
+					  <td width="78%" nowrap="nowrap">{_title}</td>
+					  <td width="5%" nowrap="nowrap">{_bids}</td>
+					  <td width="6%" nowrap="nowrap">{_status}</td>
+					  <td width="7%" nowrap="nowrap">{_time_left}</td>
+					  <td align="right" width="4%" nowrap="nowrap"><input type="checkbox" onclick="check_uncheck_all_id('project_id[]', 'service');return false" /></td>
+					</tr>
+					<loop name="serviceauctions"> 
+					<tr valign="top" class="alt1"> 
+					  <td valign="top"><div class="blue" title="{_edit} / {_update}"><span style="float:left;padding-right:6px;margin-top:-4px">{pmb}</span><a href="{ilpage[distribution]}?cmd=auctions&amp;subcmd=_update-auction&amp;id={project_id}&amp;pagetype={pagetype}&amp;page={page}&amp;viewtype=service">{project_title}</a> <span class="smaller black">({project_id})</span></div>
+					  <div class="smaller black" style="padding-top:9px"><strong>{_buyer}:</strong> <span class="blue">{owner}</span></div>
+                      <div class="smaller black" style="padding-top:3px"><strong>{_provider}:</strong> <span class="blue">{awarded}</span></div>
+					  <div class="smaller black" style="padding-top:3px"><strong>{_escrow}:</strong> <span>{escrow}</span></div>
+                      <div class="smaller black" style="padding-top:3px"><strong>URL:</strong> <span class="smaller blue"><a href="{http_server}{ilpage[rfp]}?id={project_id}" target="_blank">{_view}</a></span></div></td>
+					  <td valign="top"><div class="smaller black">{bids}</div></td>
+					  <td valign="top"><div class="smaller black">{status}</div></td>
+					  <td valign="top" nowrap="nowrap"><div class="smaller black">{timeleft}</div></td>
+					  
+					  <td align="right" nowrap="nowrap" valign="top" class="alt2">{r1}</td>
+					</tr>
+					</loop name="serviceauctions"> 
+					<if condition="isset($show['no_serviceauctions']) AND $show['no_serviceauctions']"> 
+					<tr> 
+					  <td colspan="8" align="center">{_no_results_found}</td>
+					</tr>
+					<else />
+					<tr class="alt2_top"> 
+					  <td colspan="8">  
+						<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="close" value="{_close}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_close_selected_auctions_closed_auctions_are_unable_to_accept_bids_continue}')" disabled="disabled" /><else /><input type="submit" name="close" value="{_close}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_close_selected_auctions_closed_auctions_are_unable_to_accept_bids_continue}')" /></if> 
+						<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="delist" value="{_delist}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_delist_selected_auctions_delisted_auctions_are_unable_to_receive_bids_continue}')" disabled="disabled" /><else /><input type="submit" name="delist" value="{_delist}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_delist_selected_auctions_delisted_auctions_are_unable_to_receive_bids_continue}')" /></if> 
+						<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="archive" value="{_archive}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_archive_selected_auctions_archived_auctions_are_unable_to_receive_bids_continue}')" disabled="disabled" /><else /><input type="submit" name="archive" value="{_archive}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_archive_selected_auctions_archived_auctions_are_unable_to_receive_bids_continue}')" /></if> 
+						<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="remove" value="{_remove}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_physically_remove_selected_auctions_the_auction_will_be_removed_from_the_entire_marketplace_continue}')" disabled="disabled" />
+                        <input type="submit" name="removeall" value="{_remove_all}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_physically_remove_all_service_auctions_continue}')" disabled="disabled"/><else /><input type="submit" name="remove" value="{_remove}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_physically_remove_selected_auctions_the_auction_will_be_removed_from_the_entire_marketplace_continue}')" />
+                        <input type="submit" name="removeall" value="{_remove_all}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_physically_remove_all_service_auctions_continue}')" /></if>
+						<a href="#" style="font-size:15px; float: right;" class="buttons" onclick="check_uncheck_all_id('project_id[]', 'service');return false" >{_select_all}</a>
+						</td>
+					</tr>
+					<tr> 
+					  <td colspan="8" align="center">{serviceprevnext}</td>
+					</tr>
+					</if> 
+				  </table>
+					
+</div>
+				
+				<div class="block2-footer">
+						<div class="block2-right">
+								<div class="block2-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>
+	
+	</div>
+	</if>
+	
+	<if condition="$ilconfig['globalauctionsettings_productauctionsenabled']">
+	<div class="tab-page" id="product">
+	
+		<h2 class="tab">{_product}</h2>
+		<form name="invoicesearch" method="get" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="auctions" />
+		<input type="hidden" name="viewtype" value="product" />
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header"><span style="float:right"><a href="javascript:void(0)" onclick="return toggle('acpitems');"><img id="collapseimg_acpitems" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_acpitems]}.gif" border="0" alt="" /></a></span>{_search} {_products}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_search_product_auctions_based_on_their_status_using_the_form_below}</div></div>
+				<div class="block-content" id="collapseobj_acpitems" style="{collapse[collapseobj_acpitems]}; padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				  <tr class="alt1"> 
+					<td nowrap="nowrap"><span class="gray">{_id}</span></td>
+					<td width="16%"><input type="text" name="project_id" value="{project_id}" style="font-family: verdana;" class="input" /></td>
+					<td width="6%" align="right" nowrap="nowrap"><span class="gray">{_user_id}</span></td>
+					<td align="left" nowrap="nowrap"> <input type="text" name="user_id" value="{user_id}" size="9" style="font-family: verdana;" class="input" /></td>
+					<td width="5%" align="left" nowrap="nowrap"><span class="gray">{_title} / {_keywords}</span></td>
+					<td width="51%" align="left" nowrap="nowrap"><input type="text" name="project_title" value="{project_title}" style="font-family: verdana;" class="input" /></td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td nowrap="nowrap"><span class="gray">{_status}</span></td>
+					<td>{auction_status_pulldown2}</td>
+                    <td nowrap="nowrap" align="right"><span class="gray">{_type}</span></td>
+				    <td colspan="1">{auctiontype_pulldown2}</td>
+				    <td nowrap="nowrap"><span class="gray">{_category} ID</span></td>
+				    <td colspan="2"><input type="text" name="cid" value="{cid}" size="7" style="font-family: verdana;" class="input" /></td>
+				  </tr>
+				  <tr class="alt1"> 
+					<td width="16%" nowrap="nowrap"><span class="gray">{_type}</span></td>
+					<td>{auction_type_pulldown2}</td>
+					<td align="right"><span class="gray">{_sort}</span></td>
+					<td colspan="1" nowrap="nowrap"><label for="ascending3"><input type="radio" name="orderby" id="ascending3" value="ASC" /> {_ascending} </label>
+					 <label for="descending3"><input type="radio" name="orderby" id="descending3" value="DESC" checked="checked" /> {_descending}</label>
+					 </td>
+					 <td><span class="gray">{_per_page}</span></td>
+					<td>
+						{perpage_pulldown}
+					</td>
+					</tr>
+					 <tr class="alt1">
+					<td width="6%" nowrap="nowrap"><span class="gray">{_pictures}</span></td>
+					<td>{picture_pulldown}</td>
+					</tr>
+					<tr class="alt2_top">
+					<td colspan="6"><input type="submit" value="{_search}" style="font-size:15px" class="buttons" /></td>
+				</tr>
+				</table>
+					
+		</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>
+	
+	
+		<form method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin:0px">
+		<input type="hidden" name="cmd" value="auctions" />		
+		<input type="hidden" name="subcmd" value="auction-action" />
+		<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=auctions&amp;viewtype=product&amp;{pagetype}={page}" />
+		<input type="hidden" name="actioncmd" value="product-action" />
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{numberproduct} {_items}</div>
+				<!--<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller"></div></div>-->
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0"  cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+					<tr class="alt2">
+					  	<td width="1%" nowrap="nowrap">{_item}</td> 
+						<td width="53%" nowrap="nowrap"></td>
+						<td width="5%" nowrap="nowrap">{_bids}</td>
+						<td>{_sales}</td>
+						<td width="10%">{_status}</td>
+						<td width="10%" nowrap="nowrap">{_time_left}</td>
+						<td align="center" width="1%" nowrap="nowrap"><input type="checkbox" onclick="check_uncheck_all_id('project_id[]', 'product');return false" /></td>
+					</tr>
+					<loop name="productauctions"> 
+					<tr class="alt1" valign="top">
+					  	<td valign="top"><div align="center">{photo}</div></td> 
+						<td valign="top"><div class="blue"><a href="{ilpage[distribution]}?cmd=auctions&amp;subcmd=_update-auction&amp;id={project_id}&amp;pagetype={pagetype}&amp;page={page}&amp;viewtype=product">{project_title}</a> <span class="smaller black">({project_id})</span></div>
+					  <div class="smaller" style="padding-top:9px"><strong>{_seller}:</strong> <span class="blue">{merchant}</span></div>
+                      <div class="smaller" style="padding-top:3px"><strong>{_winner}:</strong> <span class="blue">{winner}</span></div>
+                      <if condition="$ilconfig['escrowsystem_enabled']"><div class="smaller" style="padding-top:3px"><strong>{_escrow}:</strong> {escrow}</div></if>
+                      <div class="smaller" style="padding-top:3px"><strong>URL:</strong> <span class="smaller blue"><a href="{http_server}{ilpage[merch]}?id={project_id}" target="_blank">{_view}</a></span></div></td>
+						<td><div class="smaller black">{bids}</div></td>
+						<td width="5%"><div class="smaller black">{sales}</div></td>
+						<td><div class="smaller black">{status}</div></td>
+						<td nowrap="nowrap"><div class="smaller black">{timeleft}</div></td>
+						<td align="center" nowrap="nowrap" class="alt2">{r2}</td>
+					</tr>
+					</loop name="productauctions">
+					<if condition="isset($show['no_productauctions']) AND $show['no_productauctions']"> 
+					<tr> 
+						<td colspan="10" align="center">{_no_results_found}</td>
+					</tr>
+					<else />
+					<tr class="alt2_top"> 
+						<td colspan="10">		
+							<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="close" value="{_close}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_you_are_about_to_close_selected_auctions_closed_auctions_are_unable_to_accept_bids_continue}')" disabled="disabled" /><else /><input type="submit" name="close" value="{_close}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_you_are_about_to_close_selected_auctions_closed_auctions_are_unable_to_accept_bids_continue}')" /></if> 
+							<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="delist" value="{_delist}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_you_are_about_to_delist_selected_auctions_delisted_auctions_are_unable_to_receive_bids_continue}')" disabled="disabled" /><else /><input type="submit" name="delist" value="{_delist}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_you_are_about_to_delist_selected_auctions_delisted_auctions_are_unable_to_receive_bids_continue}')" /></if> 
+							<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="archive" value="{_archive}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_you_are_about_to_archive_selected_auctions_archived_auctions_are_unable_to_receive_bids_continue}')" disabled="disabled" /><else /><input type="submit" name="archive" value="{_archive}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_you_are_about_to_archive_selected_auctions_archived_auctions_are_unable_to_receive_bids_continue}')" /></if> 
+							<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="remove" value="{_remove}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_you_are_about_to_physically_remove_selected_auctions_the_auction_will_be_removed_from_the_entire_marketplace_continue}')" disabled="disabled" />
+                            <input type="submit" name="removeall" value="{_remove_all}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_physically_remove_all_product_auctions_continue}')" disabled="disabled"/><else /><input type="submit" name="remove" value="{_remove}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_you_are_about_to_physically_remove_selected_auctions_the_auction_will_be_removed_from_the_entire_marketplace_continue}')" />
+                            <input type="submit" name="removeall" value="{_remove_all}" style="font-size:15px" class="buttons" onClick="return confirm_js('{_you_are_about_to_physically_remove_all_product_auctions_continue}')" /></if>
+							<a href="#" style="font-size:15px; float: right;" class="buttons" onclick="check_uncheck_all_id('project_id[]', 'product');return false" >{_select_all}</a>
+							</td>
+					</tr>
+					<tr> 
+						<td colspan="10">{productprevnext}</td>
+					</tr>
+					</if> 
+					</table>
+
+					
+			</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>
+	
+	</div>
+	</if>
+	
+	<!-- begin marketplace moderation settings tab -->
+	<div class="tab-page">
+		
+		<h2 class="tab">{_settings}</h2>
+		
+		{global_auctionoptions}	
+		
+	</div>
+	<!-- /begin marketplace moderation settings tab -->
+	
+	</div>

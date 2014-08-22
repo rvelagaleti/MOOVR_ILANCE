@@ -1,0 +1,461 @@
+<div id="v3body4"> 
+    <!-- sub navigation -->
+    <div id="sub">
+	<div id="subnav">
+	    <loop name="subnav_settings">
+		<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+	    </loop name="subnav_settings">
+	</div>
+    </div>
+    <!-- /sub navigation -->
+    <div id="content">
+	<h1>{_subscription_plan_management}</h1><br />
+	<div class="tab-pane">
+	    <div class="tab-pane" id="subscription_overview">
+
+		<div class="tab-page">
+		    <h2 class="tab">{_roles}</h2>
+
+		    <div class="block-wrapper">
+			<div class="block">
+
+			    <div class="block-top">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+
+			    <div class="block-header">{_roles}</div>
+			    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_when_a_member_selects_a_desired_role_below_they_are_presented}</div></div>
+			    <div class="block-content" style="padding:0px">
+
+				<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+				    <tr class="alt2"> 
+					<td width="1%" nowrap="nowrap">{_role} {_id}</td>
+					<td width="35%">{_title}</td>
+					<td width="9%" nowrap="nowrap">{_role_type}</td>
+					<td width="13%" nowrap="nowrap">{_role_user_type}</td>
+					<td width="34%">{_plans_using_this_role_type} </td>
+					<td align="center" width="1%">{_active}</td>
+					<td align="center" width="1%">{_edit}</td>
+					<td align="center" width="1%">{_remove}</td>
+				    </tr>
+				    <loop name="subscription_roles"> 
+					<tr class="alt1" valign="top"> 
+					    <td>{roleid}</td>
+					    <td><div class="blueonly">{rtitle}</div><div class="black" style="padding-top:3px">{rpurpose}</div></td>
+					    <td><span class="smaller">{roletype}</span></td>
+					    <td><span class="smaller">{roleusertype}</span></td>
+					    <td><span class="smaller">{plans_in_role}</span></td>
+					    <td align="center">{active}</td>
+					    <td align="center">{edit}</td>
+					    <td align="center">{remove}</td>
+					</tr>
+				    </loop name="subscription_roles"> 
+				    <if condition="isset($show['no_subscription_roles']) AND $show['no_subscription_roles']"> 
+					<tr> 
+					    <td colspan="8" align="center">{_no_roles_found}</td>
+					</tr>
+				    </if> 
+				</table>
+
+			    </div>
+
+			    <div class="block-footer">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+
+			</div>
+		    </div>
+
+		    <script language="javascript">
+			<!--
+			function validate_title3(f)
+			{
+			    haveerrors = 0;
+			    (window.document.addrolegroup.title_eng.value == '') ? showImage("titleerror_eng3", "{template_relativeimagepath}{template_imagesfolder}icons/fieldempty.gif", true) : showImage("titleerror_eng3", "{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif", false);
+			    return (!haveerrors);
+			}
+			
+			function validate_description3(f)
+			{
+			    haveerrors = 0;
+			    (window.document.addrolegroup.purpose_eng.value == '') ? showImage("descriptionerror_eng3", "{template_relativeimagepath}{template_imagesfolder}icons/fieldempty.gif", true) : showImage("descriptionerror_eng3", "{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif", false);
+			    return (!haveerrors);
+			}
+			
+			function validate_all3()
+			{	
+			    return validate_title3(); 
+			}
+			//-->
+		    </script>
+		    <form method="post" action="{ilpage[settings]}" name="addrolegroup" style="margin: 0px;" accept-charset="UTF-8" onsubmit="return validate_all3()">
+			<input type="hidden" name="cmd" value="subscriptions" />
+			<input type="hidden" name="subcmd" value="_add-role" />
+			<input type="hidden" name="return" value="{ilpage[settings]}?cmd=subscriptions" />
+
+			<div class="block-wrapper">
+			    <div class="block">
+
+				<div class="block-top">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+				<div class="block-header">{_new_role}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_and_customize_subscription_roles_that_are_tied_to_predefined_subscription_plans_you_create_and_manage}</div></div>
+				<div class="block-content" style="padding:0px">
+
+				    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+
+					<loop name="languages_role">
+					    <tr class="alt1"> 
+						<td width="25%">{_title} {_in} {language}</td>
+						<td width="75%"><input type="text" name="title_{languagecode}" style="width:500px" class="input" /> <img name="titleerror_{languagecode}3" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="" /></td>
+					    </tr>
+					    <tr class="alt1"> 
+						<td valign="top">{_role_purpose} {_in} {language}</td>
+						<td><input type="text" name="purpose_{languagecode}" style="width:500px" class="input" />  <img name="descriptionerror_{languagecode}3" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="" /></td>
+					    </tr>
+					</loop name="languages_role">
+					<tr class="alt1">
+					    <td valign="top">{_custom_username_display}</td>
+					    <td><input type="text" value="( [fbscore] ) [fbpercent] [fbimport] [stars] [verified] [subscription]" name="custom" style="width:500px" class="input" />
+						<div class="smaller" style="padding-top:4px">{_objects_available}: [<strong>fbscore</strong>] [<strong>fbpercent</strong>] [<strong>fbimport</strong>] [<strong>stars</strong>] [<strong>verified</strong>] [<strong>subscription</strong>] {apihook[subscriptions_admincp_newrole_objects]}</div></td>
+					</tr>
+					<tr class="alt1"> 
+					    <td width="25%">{_role_type_key}</td>
+					    <td width="75%">{roletypepulldown}</td>
+					</tr>
+					<tr class="alt1"> 
+					    <td width="25%">{_role_user_type_key}</td>
+					    <td width="75%">{roleusertypepulldown}</td>
+					</tr>
+					<tr class="alt1">
+					    <td>{_role_is_active}</td>
+					    <td>
+						<select name="visible" class="select-75">
+						    <option value="1" selected="selected">{_yes}</option>
+						    <option value="0">{_no}</option>
+						</select></td>
+					</tr>
+					<tr class="alt2_top">
+					    <td colspan="2"><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')"></td>
+					</tr>
+				    </table>
+
+				</div>
+
+				<div class="block-footer">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+			    </div>
+			</div>
+
+
+		    </form>
+		</div>
+		<div class="tab-page">
+		    <h2 class="tab">{_plans}</h2>
+
+		    <div class="block-wrapper">
+
+			<div class="block">
+
+			    <div class="block-top">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+
+			    <div class="block-header">{_subscription_plans}</div>
+			    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_subscription_plans_define_cost_and_membership_duration_control}</div></div>
+			    <div class="block-content" style="padding:0px">
+
+				<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+				    <tr class="alt2"> 
+					<td width="1%" align="center">{_icon}</td>
+					<td width="35%">{_title}</td>
+					<td width="16%">{_roles}</td>
+					<td width="12%">{_cost}</td>
+					<td width="1%" align="center" nowrap="nowrap"><span title="{_shown_during_user_registration}">R</span></td>
+					<td width="1%" align="center" nowrap="nowrap"><span title="{_shown_on_membership_upgrade}">U</span></td>
+					<td width="15%">{_permissions}</td>
+					<td width="9%">{_migrate}</td>
+					<td align="center" width="1%">{_edit}</td>
+					<td align="center" width="1%">{_remove}</td>
+					<td align="center" width="1%">{_sort}</td>
+				    </tr>
+				    <loop name="subscription_rows"> 
+					<tr class="alt1" valign="top"> 
+					    <td align="center" valign="top"><img src="{https_server}{icon}" border="0" alt="" /></td>
+					    <td><div><strong>{title}</strong> <span class="smaller gray">(ID {subscriptionid})</span></div><div class="smaller gray" style="padding-top:3px">{active} {_users}</div></td>
+					    <td><span class="smaller">{usingrole}</span></td>
+					    <td nowrap="nowrap"><div class="smaller">{cost} <span class="gray">({length}{units})</span></div></td>
+					    <td align="center"><strong></strong>{isvisible_registration}</td>
+					    <td align="center"><strong></strong>{isvisible_upgrade}</td>
+					    <td><span class="smaller">{access}</span></td>
+					    <td nowrap="nowrap"><span class="smaller blue">{move}</span></td>
+					    <td align="center" nowrap="nowrap">{edit}</td>
+					    <td align="center">{remove}</td>
+					    <td align="center">{sort}</td>
+					</tr>
+				    </loop name="subscription_rows"> 
+				    <if condition="isset($show['no_subscription_rows']) AND $show['no_subscription_rows']"> 
+					<tr> 
+					    <td colspan="8" align="center">{_no_subscription_plans_found}</td>
+					</tr>
+				    </if> 
+				</table> 
+
+			    </div>
+
+			    <div class="block-footer">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+
+			</div>
+		    </div>
+
+		    <form method="post" action="{ilpage[settings]}" name="addsubscriptionplan" style="margin: 0px;" accept-charset="UTF-8" onsubmit="return validate_all()">
+			<input type="hidden" name="cmd" value="subscriptions" />
+			<input type="hidden" name="subcmd" value="_add-subscription-plan" />
+			<input type="hidden" name="return" value="{ilpage[settings]}?cmd=subscriptions" />
+			<div class="block-wrapper">
+			    <div class="block">
+
+				<div class="block-top">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+				<div class="block-header">{_new_plan}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_and_customize_subscription_plans_using_the_form_below}</div></div>
+				<div class="block-content" style="padding:0px">
+
+				    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					<tr class="alt1"> 
+					    <td valign="middle" nowrap="nowrap">{_role_assignment} </td>
+					    <td nowrap="nowrap">{role_pulldown}</td>
+					</tr>
+					<tr class="alt1"> 
+					    <td valign="middle" nowrap="nowrap" class="alt1">{_permissions_group}</td>
+					    <td nowrap="nowrap">{permission_group_pulldown}</td>
+					</tr>
+					<loop name="languages_plan">
+					    <tr class="alt1"> 
+						<td width="19%" class="alt1">{_title} {_in} {language}</td>
+						<td width="81%"><input type="text" id="title_{languagecode}" name="title_{languagecode}" style="width:500px" class="input"> <img name="titleerror_{languagecode}" id="titleerror_{languagecode}" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="" /></td>
+					    </tr>
+					    <tr class="alt1"> 
+						<td valign="top" class="alt1">{_description} {_in} {language}</td>
+						<td><textarea id="description_{languagecode}" name="description_{languagecode}" style="width: 500px; height: 84px" class="input" wrap="physical"></textarea> <img name="descriptionerror_{languagecode}" id="descriptionerror_{languagecode}" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="" /></td>
+					    </tr>
+					</loop name="languages_plan">
+					<tr class="alt1"> 
+					    <td valign="middle" class="alt1">{_cost}</td>
+					    <td width="81%"><input type="text" name="cost" value="0.00" style="width:10%" class="input"></td>
+					</tr>
+					<tr class="alt1"> 
+					    <td valign="middle" class="alt1">{_length}</td>
+					    <td>{durationpulldown}</td>
+					</tr>
+					<tr class="alt1"> 
+					    <td valign="middle" nowrap="nowrap" class="alt1">{_units}</td>
+					    <td nowrap="nowrap"><select name="units" class="select-75">
+						    <option value="D">{_days}</option>
+						    <option value="M">{_months}</option>
+						    <option value="Y">{_years}</option>
+						</select> </td>
+					</tr>
+					<tr class="alt1"> 
+					    <td valign="middle" nowrap="nowrap" class="alt1">{_plan_is_active}</td>
+					    <td nowrap="nowrap"><select name="active" class="select-75">
+						    <option value="yes" selected="selected">{_yes}</option>
+						    <option value="no">{_no}</option>
+						</select></td>
+					</tr>
+					<tr class="alt1"> 
+					    <td valign="middle" nowrap="nowrap" class="alt1">{_plan_is_visible_in}</td>
+					    <td nowrap="nowrap">
+						<select name="visible" class="select">
+						    <option value="1" selected="selected">{_registration}</option>
+						    <option value="2">{_upgrade}</option>
+						    <option value="3">{_all}</option>
+						    <option value="4">{_none}</option>
+						</select>
+					    </td>
+					</tr>
+
+					<tr class="alt1"> 
+					    <td valign="middle" nowrap="nowrap" class="alt1">{_subscription_plan_icon}</td>
+					    <td nowrap="nowrap"><strong><b> 
+							<input type="text" name="icon" value="{template_imagesfolder}icons/default.gif" style="width:500px" class="input" />
+						    </b></strong></td>
+					</tr>
+					<tr class="alt1"> 
+					    <td valign="middle" nowrap="nowrap">{_sort}</td>
+					    <td width="65%"><input type="text" name="sort" size="10" value="{sort}" style="width:10%" class="input" /></td>
+					</tr>
+					<tr class="alt2">
+					    <td colspan="2"><strong>{_auto_subscription_migration_options}</strong></td>
+					</tr>
+					<tr class="alt1">
+					    <td valign="middle" nowrap="nowrap" class="alt1">{_auto_migrate_plan_to_subscription}</td>
+					    <td nowrap="nowrap">{migrate_plan_pulldown}</td>
+					</tr>
+					<tr class="alt1">
+					    <td valign="middle" nowrap="nowrap" class="alt1">{_auto_migration_billing_logic}</td>
+					    <td nowrap="nowrap">{migrate_billing_pulldown}</td>
+					</tr>
+					<tr class="alt2_top">
+					    <td colspan="2"><input type="submit" name="save" class="buttons" value=" {_save} " style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></td>
+					</tr>
+				    </table>
+
+				</div>
+
+				<div class="block-footer">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+			    </div>
+			</div>
+		    </form>
+
+		</div>
+
+		<div class="tab-page">
+		    <h2 class="tab">{_permissions}</h2>
+		    <!-- view access rights per resources -->
+
+		    <div class="block-wrapper">
+			<div class="block">
+
+			    <div class="block-top">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+
+			    <div class="block-header">{_groups_and_permissions}</div>
+			    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_subscription_groups_hold_all_permissions_for_subscription_plans} {_click_the_pencil_icon_to_manage_permissions_for_any_specific_group}</div></div>
+			    <div class="block-content" style="padding:0px">
+
+				<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+				    <tr class="alt2">
+					<td width="41%">{_permissions_group}</td>
+					<td width="44%">{_plans_using_this_permission_group} </td>
+					<td align="center" width="1%">{_permissions}</td>
+					<td align="center" width="1%">{_remove}</td>
+				    </tr>
+				    <loop name="subscription_group_rows"> 
+					<tr class="alt1" valign="top"> 
+					    <td>{gtitle}</td>
+					    <td><span class="smaller">{plans_in_group}</span></td>
+					    <td nowrap="nowrap" align="center">{edit}</td>
+					    <td align="center">{remove}</td>
+					</tr>
+				    </loop name="subscription_group_rows">
+				    <if condition="isset($show['no_subscription_group_rows']) AND $show['no_subscription_group_rows']"> 
+					<tr> 
+					    <td colspan="4" align="center">{_no_subscription_groups_found}</td>
+					</tr>
+				    </if> 
+				</table>
+
+
+			    </div>
+
+			    <div class="block-footer">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+
+			</div>
+		    </div><!-- /view access rights per resources -->
+		    <script language="javascript" type="text/javascript">
+			<!--
+			function validate_title2(f)
+			{
+			    haveerrors = 0;
+			    (window.document.addsubscriptiongroup.title_eng.value == '') ? showImage("titleerror2", "{template_relativeimagepath}{template_imagesfolder}icons/fieldempty.gif", true) : showImage("titleerror2", "{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif", false);
+			    return (!haveerrors);
+			}
+
+			function validate_description2(f)
+			{
+			    haveerrors = 0;
+			    (window.document.addsubscriptiongroup.description_eng.value == '') ? showImage("descriptionerror2", "{template_relativeimagepath}{template_imagesfolder}icons/fieldempty.gif", true) : showImage("descriptionerror2", "{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif", false);
+			    return (!haveerrors);
+			}
+
+			function validate_all2()
+			{	
+			    return validate_title2() && validate_description2(); 
+			}
+			//-->
+		    </script>
+		    <form method="post" action="{ilpage[settings]}" name="addsubscriptiongroup" style="margin: 0px;" accept-charset="UTF-8" onsubmit="return validate_all2()">
+			<input type="hidden" name="cmd" value="subscriptions" />
+			<input type="hidden" name="subcmd" value="_add-subscription-group" />
+			<input type="hidden" name="return" value="{ilpage[settings]}?cmd=subscriptions" />
+			<div class="block-wrapper">
+			    <div class="block">
+
+				<div class="block-top">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+				<div class="block-header">{_new_permission}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_and_customize_permission_groups_used_within_specific_subscription_plans_using_the_form_below}</div></div>
+				<div class="block-content" style="padding:0px">
+
+				    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					<loop name="languages_permission_group"><tr class="alt1"> 
+						<td width="25%" nowrap="nowrap">{_title} {_in} {language}</td>
+						<td width="75%"><input type="text" name="title_{languagecode}" style="width:500px" class="input" /> <img name="titleerror2" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="" /></td>
+					    </tr>
+					    <tr class="alt1"> 
+						<td valign="top">{_description} {_in} {language}</td>
+						<td><textarea name="description_{languagecode}" style="width: 500px; height: 84px" class="input" wrap="physical"></textarea> <img name="descriptionerror2" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="" />
+						</td>
+					    </tr></loop name="languages_permission_group">
+					<tr class="alt2_top">
+					    <td colspan="2"><input type="submit" name="save" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')"></td>
+					</tr>
+				    </table>
+
+				</div>
+				<div class="block-footer">
+				    <div class="block-right">
+					<div class="block-left"></div>
+				    </div>
+				</div>
+
+			    </div>
+			</div>
+		    </form>
+		</div>
+
+
+		<div class="tab-page">
+	    <h2 class="tab">{_settings}</h2>
+			{subscriptions_settings}
+		</div>
+	    </div>
+	</div>

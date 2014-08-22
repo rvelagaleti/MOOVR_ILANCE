@@ -1,0 +1,426 @@
+<!-- start box2 -->
+<div class="box2">
+
+<if condition="isset($locationdefault) AND $locationdefault AND isset($locationcookie) AND $locationcookie">
+	  <div style="border:2px solid #a6cc98;border-radius:6px;background-color:#d0f2c4;padding:15px;margin-bottom:12px;margin-top:12px"><span style="float:left;margin-right:10px;margin-top:-11px"><img src="{template_relativeimagepath}{template_imagesfolder}v4/bigcheckbox.png" height="36" /></span>This location is now being remembered.  Please click reset location to default (within the location filter) if you'd like to show results from all locations.</div></if>
+	
+    <!-- start container -->
+    <div class="container inner">
+    
+        <if condition="isset($show['searchengine']) AND $show['searchengine']"><else /><!-- start leftcol -->
+        <div class="leftcol">
+        	<!-- start widget2 -->
+            <div class="widget2">
+            	<h3>{_narrow_your_results}</h3>
+                <div class="widget2-in">
+                	<!-- start filters -->
+                	<div class="filter">
+                    	<if condition="isset($show['leftnavcategories']) AND $show['leftnavcategories']"><!-- start categories --><div class="filter-content">
+                        	<div class="filter-content-block">
+                                <h4>{_category}</h4>
+                                {categories}
+                            </div>
+                            <div class="clear"></div>
+                        </div><!-- end categories --></if>
+                        
+                        <if condition="isset($show['categoryfinder']) AND $show['categoryfinder']"><!-- start category finder -->
+						{categoryfinderhtml}<!-- end category finder --></if>
+        
+                        <div class="apihook">{apihook[leftnav_searchoptions_product_start]}</div>
+                        
+                        <if condition="isset($ilconfig['search_price_tab']) AND $ilconfig['search_price_tab']"><!-- start price-form --><div class="filter-content">
+                        	<div class="price-form">
+                                <h4 style="margin-bottom:11px"><span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_price}</span></span><span onClick="toggle('leftnav_pricerange')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">{_price}</span></h4>
+                                <div id="collapseobj_leftnav_pricerange" style="{collapse[collapseobj_leftnav_pricerange]}"><form name="minisearchprice" method="get" id="searchformleftprice" action="{ilpage[search]}" accept-charset="UTF-8">{hiddenfields_leftnav_price}
+                                	<label></label>
+                                    <input id="frompricerange" name="fromprice" value="{fromprice}" type="text" class="input" autocomplete="off" placeholder="{_from}" /> <span>-</span> 
+                                    <input id="topricerange" name="toprice" value="{toprice}" type="text" class="input" autocomplete="off" placeholder="{_to_upper}" />
+                                    <input type="submit" class="button" />
+                                </form></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div><!-- end price-form --></if>
+                        
+                        <if condition="isset($ilconfig['search_currency_tab']) AND $ilconfig['search_currency_tab']"><if condition="isset($ilconfig['globalserverlocale_currencyselector']) AND $ilconfig['globalserverlocale_currencyselector']"><!-- start currency selector -->
+                        <div class="filter-content">
+                        	<div class="filter-content-block">
+                            	<h4><span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_currencies}</span></span><span onClick="toggle('leftnav_currency')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">{_currency}</span></h4>
+                                <div id="collapseobj_leftnav_currency" style="{collapse[collapseobj_leftnav_currency]}">{leftnav_currencies}</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div><!-- end currency selector --></if></if>
+                        
+                        <if condition="isset($ilconfig['search_seller_tab']) AND $ilconfig['search_seller_tab']"><!-- start seller search --><div class="filter-content">
+                        	<div class="seller-form">
+                                <h4 style="margin-bottom:11px"><span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_searchuser}</span></span><span onClick="toggle('leftnav_specificseller')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">{_seller}</span></h4>
+                                <div id="collapseobj_leftnav_specificseller" style="{collapse[collapseobj_leftnav_specificseller]}">
+                                
+                                <if condition="isset($ilance->GPC['searchuser']) AND !empty($ilance->GPC['searchuser'])"><div style="padding-bottom:4px"><span style="float:{template_textalignment}; padding-top:2px; padding-{template_textalignment_alt}:10px"><img src="{template_relativeimagepath}{template_imagesfolder}leftnav/selected.png" border="0" alt="" id="" name="sel_searchuser1" /></span><span class="black" style="font-size:12px"><a href="{clear_searchuser_url}" onMouseOver="rollovericon('sel_searchuser1', '{template_relativeimagepath}{template_imagesfolder}leftnav/selectedclear.png')" onMouseOut="rollovericon('sel_searchuser1', '{template_relativeimagepath}{template_imagesfolder}leftnav/selected.png')"><strong>{searchuser}</strong></a></span></div>
+                                <else /><form name="minisearchuser" method="get" id="searchformleftuser" action="{ilpage[search]}" accept-charset="UTF-8">	
+                                {hiddenfields_leftnav_seller}
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <tr> 
+                                    <td><span style="float:{template_textalignment_alt}; padding-top:3px"><if condition="isset($ilance->GPC['searchuser']) AND !empty($ilance->GPC['searchuser'])"><input type="submit" class="button" id="submitseller" /><else /><input type="submit" class="button" id="submitseller" /></if></span><input type="text" id="productsearchuser" name="searchuser" value="{searchuser}" maxlength="50" size="16" class="input" onFocus="if(fetch_js_object('submitseller').style.display = 'none'){fetch_js_object('submitseller').style.display = ''}" placeholder="{_seller}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><div style="padding-top:3px"><label for="exactname"><if condition="isset($ilance->GPC['exactname']) AND $ilance->GPC['exactname']"><input type="checkbox" name="exactname" value="1" id="productexactname" checked="checked" /><else /><input type="checkbox" name="exactname" value="1" id="productexactname" /></if> {_exact_name}</label></div></td>
+                                </tr>
+                                </table>
+                                </form></if>
+                                
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div><!-- end seller search --></if>
+                        
+                        <if condition="isset($ilconfig['search_location_tab']) AND $ilconfig['search_location_tab']"><!-- start region selector --><div class="filter-content">
+                        	<div class="filter-content-block">
+                            	<h4><span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_region}</span></span><span onClick="toggle('leftnav_regionfilter')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">{_region}</span></h4>
+                                <div id="collapseobj_leftnav_regionfilter" style="{collapse[collapseobj_leftnav_regionfilter]}">{leftnav_regions}</div>
+                            </div>
+                            <div class="clear"></div>
+                        </div><!-- end region selector --></if>
+                        
+                        <if condition="!empty($ilance->GPC['country']) OR !empty($ilance->GPC['city']) OR !empty($ilance->GPC['state'])"></if>
+						<if condition="isset($ilconfig['search_localsearch_tab']) AND $ilconfig['search_localsearch_tab']"><!-- start location search -->
+                        <div class="filter-content">
+                            <div class="filter-content-block">
+                            	<h4><span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_local}</span></span><span onClick="toggle('leftnav_searchlocal')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">{_location}</span></h4>
+                                <div class="seller-form" style="margin-top:5px">
+                                    <div id="collapseobj_leftnav_searchlocal" style="{collapse[collapseobj_leftnav_searchlocal]}">
+                                    <form name="minisearchcitystate" method="get" id="minisearchcitystate" action="{ilpage[search]}" accept-charset="UTF-8">	
+                                    {hiddenfields_leftnav_location}
+                                    <!--<table cellpadding="0" cellspacing="0" width="100%">
+                                    <tr>
+                                        <td align="{template_textalignment_alt}"><div style="padding-bottom:4px"><span style="float:{template_textalignment_alt}; padding-top:2px;padding-{template_textalignment}:4px"><input type="submit" id="submitlocalsearch" class="button" /></span><span style="padding-bottom:4px; padding-top:3px; float:{template_textalignment}; width:21px;margin-right:7px" class="black">{_state}</span><input type="text" name="state" id="state3_3" maxlength="50" size="9" value="{state}" class="input_95" /></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="{template_textalignment_alt}"><div style="padding-bottom:4px;"><span style="float:{template_textalignment_alt}; padding-top:6px;padding-{template_textalignment}:4px"><input type="submit" id="submitlocalsearch" class="button" /></span><span style="padding-bottom:4px; padding-top:3px; float:{template_textalignment}; width:21px;margin-right:7px" class="black">{_city}</span><input type="text" name="city" id="incity3_3" maxlength="50" size="9" value="{city}" class="input_95" /></div></td>
+                                    </tr>
+                                    </table>-->
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                    <tr id="pulldowncountry">
+                                      <td align="{template_textalignment}" title="{_country}"><div style="height:30px"><span style="float:{template_textalignment_alt}; padding-top:2px;padding-{template_textalignment}:4px"><input type="submit" id="submitlocalsearch" class="button" /></span>{countrypulldown}</div></td>
+                                    </tr>
+                                    <tr id="pulldownstate">
+                                      <td align="{template_textalignment}" title="{_state_or_province}"><div style="height:30px"><span style="float:{template_textalignment_alt}; padding-top:2px;padding-{template_textalignment}:4px"><input type="submit" id="submitlocalsearch" class="button" /></span>{statepulldown}</div></td>
+                                    </tr>
+                                    <tr id="pulldowncity">
+                                      <td align="{template_textalignment}" title="{_city_or_village}"><div style="height:30px"><span style="float:{template_textalignment_alt}; padding-top:2px;padding-{template_textalignment}:4px"><input type="submit" id="submitlocalsearch" class="button" /></span>{citypulldown}</div></td>
+                                    </tr>
+                                    <tr id="freehandcity" style="display:none">
+                                        <td align="{template_textalignment_alt}"><div style="padding-bottom:4px;"><span style="float:{template_textalignment_alt}; padding-top:6px;padding-{template_textalignment}:4px"><input type="submit" id="submitlocalsearch" class="button" /></span><span style="padding-bottom:4px; padding-top:3px; float:{template_textalignment}; width:21px;margin-right:7px" class="black">{_city}</span><input type="text" name="city" id="incity3_3" maxlength="50" size="9" value="{city}" class="input_95" disabled="disabled" /></div></td>
+                                    </tr>
+                                    <tr id="locationsave">
+                                        <td align="{template_textalignment_alt}"><span style="float:{template_textalignment_alt}; padding-top:1px;padding-{template_textalignment}:4px"><input type="submit" id="submitlocalsearch" class="button" /></span><label for="ld"><if condition="isset($locationdefault) AND $locationdefault"><span class="blue"><a href="{pageurl}&amp;rl=1">Reset location to default</a> <a href="javascript:void(0)" onmouseover="Tip('<div><strong>Reset location to default</strong></div><div>You are currently showing results in search based on a Country you are filtering. If you would like to display results from all Countries please click this link.</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span><else /><input type="checkbox" name="ld" value="1" id="ld" /> 
+                                        Remember Country <a href="javascript:void(0)" onmouseover="Tip('<div><strong>Remember Country</strong></div><div>If you would like to display search results from a specific Country only please choose the country and tick this checkbox to remember and set your location default otherwise another search may yeild results from all countries available.</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></if></label></td>
+                                    </tr>
+                                    </table>
+                                    </form>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div><!-- end location search --></if>
+                        
+                        <if condition="$ilconfig['globalserver_enabledistanceradius'] AND isset($ilance->GPC['country']) AND !empty($ilance->GPC['country'])"><!-- start radius --><div class="filter-content">
+                        	<div class="filter-content-block">
+                            <h4><span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_distance}</span></span><span onClick="toggle('leftnav_radiusfilter')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">{_radius}</span></h4>
+                            <div class="price-form" style="margin-top:5px">
+                                <script type="text/javascript">
+								<!--
+								function check_distance_form(selectid)
+								{
+									if (fetch_js_object(selectid).options[fetch_js_object(selectid).selectedIndex].value == '')
+									{
+										alert_js('{_please_select_distance_value_filter}');
+										return false;	
+									}
+									return true;
+								}
+								//-->
+								</script>
+                                <div id="collapseobj_leftnav_radiusfilter" style="{collapse[collapseobj_leftnav_radiusfilter]}"><form name="minisearchradius" method="get" id="searchformleftradius" action="{ilpage[search]}" accept-charset="UTF-8" onsubmit="return check_distance_form('productradius')">{hiddenfields_radius_leftnav}
+                                	<label></label>
+                                    <select id="productradius" name="radius" class="select" style="width:72px;height:25px">
+                                    <option value="" <if condition="!isset($ilance->GPC['radius']) OR empty($ilance->GPC['radius'])">selected="selected"</if>>{_distance}</option>
+                                    <option value="5" <if condition="isset($ilance->GPC['radius']) AND $ilance->GPC['radius'] == 5">selected="selected"</if>>5 {distancesymbol} / 8 km</option>
+                                    <option value="10" <if condition="isset($ilance->GPC['radius']) AND $ilance->GPC['radius'] == 10">selected="selected"</if>>10 {distancesymbol} / 16 km</option>
+                                    <option value="20" <if condition="isset($ilance->GPC['radius']) AND $ilance->GPC['radius'] == 20">selected="selected"</if>>20 {distancesymbol} / 32 km</option>
+                                    <option value="50" <if condition="isset($ilance->GPC['radius']) AND $ilance->GPC['radius'] == 50">selected="selected"</if>>50 {distancesymbol} / 80 km</option>
+                                    <option value="100" <if condition="isset($ilance->GPC['radius']) AND $ilance->GPC['radius'] == 100">selected="selected"</if>>100 {distancesymbol} / 160 km</option>
+                                    <option value="250" <if condition="isset($ilance->GPC['radius']) AND $ilance->GPC['radius'] == 250">selected="selected"</if>>250 {distancesymbol} / 402 km</option>
+                                    <option value="500" <if condition="isset($ilance->GPC['radius']) AND $ilance->GPC['radius'] == 500">selected="selected"</if>>500 {distancesymbol} / 804 km</option>
+                                    <option value="1000" <if condition="isset($ilance->GPC['radius']) AND $ilance->GPC['radius'] == 1000">selected="selected"</if>>1000 {distancesymbol} / 1609 km</option>
+                                    <option value="2000" <if condition="isset($ilance->GPC['radius']) AND $ilance->GPC['radius'] == 2000">selected="selected"</if>>2000 {distancesymbol} / 3218 km</option>
+                                    <option value="5000" <if condition="isset($ilance->GPC['radius']) AND $ilance->GPC['radius'] == 5000">selected="selected"</if>>5000 {distancesymbol} / 8046 km</option>
+                                	</select> <span style="margin:0 2px 0 2px">{_of}</span> <span style="float:{template_textalignment_alt}"><input type="submit" class="button" /></span><input type="text" id="productradiuszip" name="radiuszip" value="{radiuszip}" class="input" style="width:45px" placeholder="{_zipcode}" />
+                                    
+                                </form></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div></div><!-- end radius --></if>
+                        
+                        <if condition="isset($ilconfig['search_options_tab']) AND $ilconfig['search_options_tab']"><!-- start options --><div class="filter-content">
+                        	<div class="filter-content-block">
+                            	<h4><span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_options}</span></span><span onClick="toggle('leftnav_options')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">{_options}</span></h4>
+                                <div id="collapseobj_leftnav_options" style="{collapse[collapseobj_leftnav_options]}">{leftnav_options}<div></div></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div><!-- end options --></if>
+                        
+                        <if condition="isset($ilconfig['search_bidrange_tab']) AND $ilconfig['search_bidrange_tab']"><if condition="isset($ilance->GPC['auction'])"><!-- start bid range -->
+                        <div class="filter-content">
+                        	<div class="filter-content-block">
+                            	<h4><span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_bidrange}</span></span><span onClick="toggle('leftnav_bidrange')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">{_bid_range}</span></h4>
+                                <div id="collapseobj_leftnav_bidrange" style="{collapse[collapseobj_leftnav_bidrange]}">{search_bidrange_pulldown_product}<div></div></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div><!-- end bid range --></if></if>
+                        
+                        <if condition="isset($ilconfig['search_colors_tab']) AND $ilconfig['search_colors_tab']"><!-- start colour --><div class="filter-content">
+                        	<div class="price-form">
+                                <h4 style="margin-bottom:11px"><span style="float:{template_textalignment_alt}"><span class="smaller blueonly">{clear_color}</span></span><span onClick="toggle('leftnav_color')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">{_colour}</span></h4>
+                                <div id="collapseobj_leftnav_color" style="{collapse[collapseobj_leftnav_color]}">
+                                
+                                	{search_color_pulldown}
+                                
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div><!-- end colour --></if>
+                        
+                        <if condition="$ilconfig['legend_tab_search_results']"><!-- start legend --><div class="filter-content">
+                        	<div class="price-form">
+                                <h4 style="margin-bottom:11px"><span onClick="toggle('leftnav_legend')" onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor=''">{_legend}</span></h4>
+                                <div id="collapseobj_leftnav_legend" style="{collapse[collapseobj_leftnav_legend]}">
+                                
+                                	<table>
+                                    {apihook[main_template_legend_start]}
+                                    <if condition="isset($ilconfig['enableclassifiedtab']) AND $ilconfig['enableclassifiedtab'] AND $ilconfig['globalauctionsettings_productauctionsenabled']"><tr valign="top">
+                                        <td align="center"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_phone.png" border="0" alt="" /></td><td>{_classified_ad}</td>
+                                    </tr></if>
+                                    <if condition="$ilconfig['escrowsystem_enabled']"><tr valign="top">
+                                        <td align="center"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_escrow.png" border="0" alt="" /></td><td valign="middle">{_escrow}</td>
+                                    </tr></if>
+                                    <if condition="isset($ilconfig['enablenonprofits']) AND $ilconfig['enablenonprofits'] AND $ilconfig['globalauctionsettings_productauctionsenabled']"><tr valign="top">
+                                        <td align="center"><img src="{template_relativeimagepath}{template_imagesfolder}icons/nonprofits.png" border="0" alt="" /></td><td valign="middle">{_nonprofits}</td>
+                                    </tr></if>
+                                    <if condition="$ilconfig['globalauctionsettings_productauctionsenabled']"><tr valign="top">
+                                    	<td align="center"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_reserve.png" border="0" alt="" /></td><td valign="middle">{_reserve_price}</td>
+                                    </tr></if>
+                                    <tr valign="top">
+                                    	<td align="center"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_clock.png" border="0" alt="" /></td><td valign="middle">{_invitation_event_realtime}</td>
+                                    </tr>
+                                    <tr valign="top">
+                                    	<td align="center"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_video.png" border="0" alt="" /></td><td valign="middle">{_contains_video_description}</td>
+                                    </tr>
+                                    <tr valign="top">
+                                    	<td align="center"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_lot.png" border="0" alt="" /></td><td valign="middle">{_listed_as_lot}</td>
+                                    </tr>
+                    				{apihook[main_template_legend_end]}
+                                </table>
+                                
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div><!-- end legend --></if>
+                        
+                    </div>
+                    <!-- end filters -->
+                </div>
+            </div>
+            <!-- end widget2 -->
+        </div>
+        <!-- end leftcol -->
+        </if>
+        
+        <!-- start rightcol -->
+        <div class="rightcol">
+        
+        	<!-- start content -->
+        	<div class="content">
+            
+            	{apihook[search_results_start]}
+            
+            	<!--<span style="padding-{template_textalignment}:15px" id="searchresultoptions">
+                <if condition="isset($ilance->GPC['classifieds']) AND $ilance->GPC['classifieds'] AND $ilconfig['enableclassifiedtab']">
+                    <span style="float:{template_textalignment_alt}; padding-bottom:6px" class="blue"><span class="black" style="font-size:14px"><strong><if condition="isset($ilance->GPC['city']) AND !empty($ilance->GPC['city'])">{city}, </if><if condition="isset($ilance->GPC['state']) AND !empty($ilance->GPC['state'])">{state}</if></strong></span>&nbsp;&nbsp;<span style="font-size:10px; font-family: verdana"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}classifieds">{_change}</a><else /><a href="{http_server}{ilpage[main]}?cmd=classifieds">{_change}</a></if></span></span>
+                <else />
+                    <if condition="!empty($_SESSION['ilancedata']['user']['postalzip'])">
+                        <span style="float:{template_textalignment_alt}; padding-bottom:6px" class="gray"><span style="font-size:10px; font-family: verdana">{_shipping_to}:</span>&nbsp;<span class="blue"><span class="blue" style="font-size:14px"><a href="{ilpage[preferences]}?cmd=profile&amp;redirect={php_self_urlencoded}#address" rel="nofollow"><strong>{user[postalzip]}, {user[countryshort]}</strong></a></span> <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_shipping_to'] + '</strong></div><div>' + phrase['_if_you_are_registered_and_signed_in_this_postal_code_will_also_be_used'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span></span>
+                    <else />
+                        <if condition="!empty($ilance->GPC['radiuszip'])">
+                            <span style="float:{template_textalignment_alt}; padding-bottom:6px" class="gray"><span style="font-size:10px; font-family: verdana">{_shipping_to}:</span>&nbsp;<span class="blue"><span class="blue" style="font-size:14px"><a href="javascript:void(0)" rel="nofollow" onclick="javascript:jQuery('#zipcode_nag_modal').jqm({modal: false}).jqmShow();"><strong>{radiuszip}, {countryshort}</strong></a></span> <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_shipping_to'] + '</strong></div><div>' + phrase['_if_you_are_registered_and_signed_in_this_postal_code_will_also_be_used'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span></span>
+                        <else />
+                            <span style="float:{template_textalignment_alt}; padding-bottom:6px" class="gray"><span style="font-size:10px; font-family: verdana">{_shipping_to}:</span>&nbsp;<span class="blue"><span class="blue"><a href="javascript:void(0)" rel="nofollow" onclick="javascript:jQuery('#zipcode_nag_modal').jqm({modal: false}).jqmShow();"><strong>{_my_region_dot_dot}</strong></a></span> <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_shipping_to'] + '</strong></div><div>' + phrase['_if_you_are_registered_and_signed_in_this_postal_code_will_also_be_used'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></span></span>
+                        </if>
+                    </if>
+                </if>
+                </span>-->
+            	<h1 class="a_active"><if condition="!empty($categoryname)">{categoryname}<else />{_search}</if></h1>
+                <!-- start verbose output -->
+                <div class="category-numb">
+                	{text}
+                    {didyoumean}
+                	<if condition="isset($show['showfewerkeywords']) AND $show['showfewerkeywords']">{fewer_keywords}</if>
+                </div><!-- end verbose output -->
+                
+                <if condition="isset($searchfilters) AND !empty($searchfilters)">
+                <!-- start filters -->
+                <div class="filters">
+                	<span>{_filters}:</span>
+                    <ul>
+                        {searchfilters}
+                    </ul>
+                    <div class="smaller blueonly"><a href="{showallurl}" rel="nofollow">{_show_all}</a></div>
+                </div><!-- end filters --></if>
+                
+                <div class="category-numb">
+                
+                	<if condition="isset($ilconfig['savedsearches']) AND $ilconfig['savedsearches']">{savesearchlink}<span class="smaller blue"><a href="{http_server}{ilpage[preferences]}?cmd=favorites&amp;returnurl={php_self_urlencoded}" rel="nofollow" class="alert">{_view_saved_searches}<span></span></a></span></if>&nbsp;&nbsp;&nbsp; <span class="smaller gray">|</span> &nbsp;&nbsp;&nbsp;<span class="smaller blue"><a href="{http_server}search-options?returnurl={php_self_urlencoded}" rel="nofollow" class="alert">{_display_options}<span></span></a></span>&nbsp;&nbsp;&nbsp; <span class="smaller gray">|</span> &nbsp;&nbsp;&nbsp;<span class="smaller blue"><a href="{http_server}search?returnurl={php_self_urlencoded}" rel="nofollow" class="alert">{_advanced_search}<span></span></a></span><if condition="isset($ilance->GPC['cid']) AND $ilance->GPC['cid'] > 0 AND isset($show['allowlisting']) AND $show['allowlisting']">&nbsp;&nbsp;&nbsp; <span class="smaller gray">|</span> &nbsp;&nbsp;&nbsp;<span class="smaller blue"><a href="{ilpage[selling]}?cmd=new-item&amp;cid={cid}" rel="nofollow" class="alert">{_sell_your_item_in_this_category}<span></span></a></span></if>
+                
+                </div>
+                
+                <!-- start search-result -->
+                <div class="search-result">
+                	<!-- start search-result-nav -->
+                	<div class="search-result-nav">
+                    	<div class="result-form">
+                        	<form method="get" action="{php_self}" accept-charset="UTF-8" id="search-display-order">
+                            {hiddenfields}
+                            <label>{_display_order}</label>
+                            {sortpulldown}
+                            <input type="submit" value="{_go}" class="button" />
+                            {prevnextmini}
+                            </form>
+                        </div>
+                        <!-- start tab rows -->
+                    	<ul class="tab-row-header">
+                        	<li<if condition="!isset($ilance->GPC['auction']) AND !isset($ilance->GPC['buynow']) AND !isset($ilance->GPC['scheduled']) AND !isset($ilance->GPC['classifieds'])"> class="active"</if>><a href="{tab_everything}" title="{_everything}">{_everything}</a></li>
+                            <li<if condition="isset($ilance->GPC['auction'])"> class="active"</if>><a href="{tab_auction}" title="{_auction}">{_auction}</a></li>
+                            <li<if condition="isset($ilance->GPC['buynow'])"> class="active"</if>><a href="{tab_fixedprice}" title="{_fixed_price}">{_fixed_price}</a></li>
+                            <if condition="isset($ilconfig['product_scheduled_bidding_block']) AND $ilconfig['product_scheduled_bidding_block']"><li<if condition="isset($ilance->GPC['scheduled'])"> class="active"</if>><a href="{tab_scheduled}" title="{_upcoming}">{_upcoming}</a></li></if>
+                        	<if condition="isset($ilconfig['enableclassifiedtab']) AND $ilconfig['enableclassifiedtab'] AND $ilconfig['globalauctionsettings_productauctionsenabled']"><li<if condition="isset($ilance->GPC['classifieds'])"> class="active"</if>><a href="{tab_classifieds}" title="{_classifieds}">{_classifieds}</a></li></if>
+                        </ul>
+                        <!-- end tab rows-->
+                        <div class="clear"></div>
+                    </div>
+                    <!-- end search-result-nav -->
+                    
+                    <!-- start view-list-box -->
+                    <div class="view-list-box">
+                        <span class="left">{_display_mode}:</span>
+                        <ul class="view-list">
+                       	  	<li class="list{searchlistactive}"><a href="{searchlisturl}" title="{_list_view}">{_list_view}</a></li>
+                            <li class="gallery{searchgalleryactive}"><a href="{searchgalleryurl}" title="{_gallery_view}">{_gallery_view}</a></li>
+                      	</ul>
+                        <if condition="isset($selected['list']) AND $selected['list'] == 'gallery' OR isset($ilance->GPC['list']) AND $ilance->GPC['list'] == 'gallery'"><else /><span class="right">{_time_left}</span>
+                        <ul class="price">
+                            <li>{_price}</li>
+                            <li>{_shipping}</li>
+                        </ul></if>
+                  	</div>
+                    <!-- end view-list-box -->
+                    
+                    <!-- start search-result-content -->
+                    <form method="get" action="{ilpage[rfp]}" accept-charset="UTF-8" style="margin: 0px;" id="searchform">
+                    <input type="hidden" name="cmd" value="auctioncmd" />
+                    <input type="hidden" name="mode" value="product" />
+                    <input type="hidden" name="returnurl" value="{php_self_urlencoded}" />
+                	<div class="search-result-content">
+                    
+                    	<!-- start results -->
+                        {search_results_table}
+                    	<!-- end search results -->
+                        
+                    </div><!-- end search-result-content -->
+                    
+                    <if condition="isset($show['no_rows_returned']) AND $show['no_rows_returned'] == false"><!-- start inline tools -->
+                    <div class="view-counter">
+                        <span><span class="control-box-icons"><a href="javascript:;" onclick="inlineCB.check_all(true)"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_selectall.png" border="0" alt="{_select_all}" title="{_select_all}" /></a>&nbsp;&nbsp;<a href="javascript:;" onclick="inlineCB.check_all(false)"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_deselectall.png" border="0" alt="{_deselect_all}" title="{_deselect_all}" /></a>&nbsp;&nbsp;<a href="javascript:;" onclick="inlineCB.check_all('invert')"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_invert.png" border="0" alt="{_invert}" title="{_invert}" /></a></span></span>
+                        <span class="search-tools">
+                        <select name="action" class="select">
+                        <optgroup label="{_select_action}">
+                        <option value="compare">{_compare}</option>
+                        <if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0"><option value="watchlist">{_add_to_watchlist}</option></if>
+                        </optgroup>
+                        <if condition="!empty($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] == '1'"><optgroup label="{_moderation_tools}">
+                        <option value="delist">{_delist}</option>
+                        <option value="physically_remove">{_physically_remove}</option>
+                        <option value="featured">{_featured_homepage}</option>
+                        <option value="featured_search">{_featured_search}</option>
+                        <option value="highlite">{_highlight}</option>
+                        <option value="bold">{_bold}</option>
+                        <option value="relist">{_autorelist}</option>
+                        <option value="extend">{_extend_duration}</option>
+                        <option value="movecategory">{_category_move}</option>
+                        <option value="email">{_send_email}</option>
+                        </optgroup></if>
+                        </select> <input type="submit" value="" class="button" id="inlinebutton" />
+                        <script type="text/javascript"><!--
+                        inlineCB = new iL_Inline('inlineCB', 'product', 'searchform', '{_go}');
+                        //--></script></span>
+                    </div>
+                    <!-- end inline tools --></if>
+                    </form>
+                    
+                    {prevnext}
+                    
+                </div><!-- end search-result -->
+                
+                {apihook[search_results_end]}
+                
+            </div><!-- end content -->
+            
+        </div><!-- end rightcol -->
+        
+        <div class="clear"></div>
+        
+    </div><!-- end container -->
+    
+</div><!-- end box2 -->
+
+<!-- start save this search modal -->
+<div id="saved_search_modal" class="modal modal_window"  style="display:none; cursor: default; width: 570px; height: 230px;">
+    <div class="bigtabs" style="padding-bottom:5px; padding-top:5px">
+    	<div class="bigtabsheader">
+    		<span class="smaller gray" style="padding-top:0px; float:right"><a href="javascript:;" onclick="javascript:jQuery('#saved_search_modal').jqm({modal: false}).jqmHide();" title="{_close}" class="close">{_close}</a></span>
+    		<h2>{_save_this_search}</a></h2>
+    	</div>
+    </div>
+    <div style="clear:both;"></div>            
+    <div style="padding-top:6px;line-height:1.4em">{_you_can_now_save_this_search_into_an_orgainzed_folder}</div>
+    <if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0">
+    <form name="ilform_modal" method="post" action="{https_server}{ilpage[preferences]}" accept-charset="UTF-8" style="margin:0px">
+    <div style="padding-top:20px"><strong>{_title_of_this_saved_search}</strong></div>
+    <div style="padding-top:3px"><input type="text" name="title" value="{q}" class="input" style="font-family: verdana; width:300px" /></div>
+    <div style="padding-top:9px"><input type="submit" value=" {_save} " class="buttons" style="font-size:15px" /></div>
+    <input type="hidden" name="cmd" value="favorites" />
+    <input type="hidden" name="subcmd" value="save" />
+    <input type="hidden" name="fav" value="{favoritesearchurl}" />
+    <input type="hidden" name="verbose" value="{favtext}" />
+    </form>
+    <else />
+    <div style="padding-top:12px"><strong><span class="a_active"><a href="{https_server}{ilpage[login]}{redirect_not_login}">{_please_login_or_register_to_save_this_search}</a></span></strong></div>
+    
+    </if>
+</div><!-- end save this search modal -->
+
+<!-- start region modal -->
+<div id="zipcode_nag_modal" class="modal modal_window" style="display:none; cursor: default; width: 560px; height: 200px;">       
+    <div class="bigtabs" style="padding-bottom:5px; padding-top:5px"><div class="bigtabsheader"><span class="smaller gray" style="padding-top:0px; float:right"><a href="javascript:;" onclick="javascript:jQuery('#zipcode_nag_modal').jqm({modal: false}).jqmHide();" title="{_close}" class="close">{_close}</a></span>
+    <h2>{_enter_your_location}</h2></div></div><div style="clear:both;"></div>
+    <form name="ilform2_modal" method="get" action="{php_self}" accept-charset="UTF-8" style="margin:0px">
+    <input type="hidden" name="do" value="saveregion" />
+    {hiddenfields_leftnav}
+    <if condition="empty($ilance->GPC['sef'])"><input type="hidden" name="mode" value="{mode}" /><input type="hidden" name="sort" value="{sort}" /></if>
+    <div style="padding-top:9px">
+        <div style="padding-top:4px;padding-left:9px;">{full_country_pulldown}</div>
+        <div style="height:1px;background-color:#cccccc;width:100%;margin-top:18px;margin-bottom:12px"></div>
+        <span style="float:left; padding:6px 3px 0 9px">{_zip_slash_postal_code}</span><input type="text" name="radiuszip" id="radiuszip" maxlength="10" size="9" value="{radiuszip}" class="input" /><input type="hidden" name="state" value="" /> {_for_the_cheapest_shipping_rate_near_you}<input type="hidden" name="city" value="" />
+		<div style="padding-top:12px"><input type="submit" value=" {_save} " class="buttons" style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="smaller blue"><a href="javascript:void(0)" onclick="javascript:jQuery('#zipcode_nag_modal').jqm({modal: false}).jqmHide();">{_cancel}</a></span></div>
+    </div>
+    <input type="hidden" name="returnurl" value="{pageurl_urlencoded}" />
+    </form>
+</div><!-- end region modal -->

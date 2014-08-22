@@ -1,0 +1,40 @@
+<h1>{_compare_items}</h1>
+
+<p class="blue"><a href="{returnurl}">{_return_to_the_previous_page}</a></p>
+
+<form name="compare" id="compareform" method="post" action="{ilpage[rfp]}" accept-charset="UTF-8">
+<input type="hidden" name="cmd" value="auctioncmd" />
+{hidden_input_fields}
+<table border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" width="100%">
+				{compare_html}
+				<tr>
+					<td colspan="{comparecount}">
+					<div class="view-counter" style="padding-right:0px;">
+                        <span><span class="control-box-icons"><a href="javascript:;" onclick="inlineCB.check_all(true)"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_selectall.png" border="0" alt="{_select_all}" title="{_select_all}" /></a>&nbsp;&nbsp;<a href="javascript:;" onclick="inlineCB.check_all(false)"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_deselectall.png" border="0" alt="{_deselect_all}" title="{_deselect_all}" /></a>&nbsp;&nbsp;<a href="javascript:;" onclick="inlineCB.check_all('invert')"><img src="{template_relativeimagepath}{template_imagesfolder}v4/ico_invert.png" border="0" alt="{_invert}" title="{_invert}" /></a></span></span>
+                        <span class="search-tools">
+                        <select name="action" class="select">
+                        <optgroup label="{_select_action}">
+                        <option value="compare">{_compare}</option>
+                        <if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0"><option value="watchlist">{_add_to_watchlist}</option></if>
+                        </optgroup>
+                        <if condition="!empty($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] == '1'"><optgroup label="{_moderation_tools}">
+                        <option value="delist">{_delist}</option>
+                        <option value="physically_remove">{_physically_remove}</option>
+                        <option value="featured">{_featured_homepage}</option>
+                        <option value="featured_search">{_featured_search}</option>
+                        <option value="highlite">{_highlight}</option>
+                        <option value="bold">{_bold}</option>
+                        <option value="relist">{_autorelist}</option>
+                        <option value="extend">{_extend_duration}</option>
+                        <option value="movecategory">{_category_move}</option>
+                        <option value="email">{_send_email}</option>
+                        </optgroup></if>
+                        </select> <input type="submit" value="" class="button" id="inlinebutton" />
+                        <script type="text/javascript"><!--
+                        inlineCB = new iL_Inline('inlineCB', '{mode}', 'compareform', '{_go}');
+                        //--></script></span>
+                    </div>
+					
+					</td>
+				</tr>
+				</table></form>

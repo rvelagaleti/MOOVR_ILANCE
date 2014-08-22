@@ -1,0 +1,20 @@
+<if condition="!empty($_SESSION['ilancedata']['user']['username'])"><h3>{_recently_viewed_items}</h3>
+<if condition="isset($show['norecentitems']) AND $show['norecentitems'] == false"><div class="product product-1col">
+    <a href="javascript:;" class="prev disabled" id="c7l">prev</a>
+    <a href="javascript:;" class="next" id="c7r">next</a>
+    <div class="carousel_recentviewed_1col">
+        <ul>
+        	<loop name="recentlyviewedtopitems"><li>
+                {photoplain}
+                <i></i>
+                <span>{title}</span> 
+                <if condition="$ilconfig['lowestpricecombined']"><strong>{lowestprice}</strong><else /><strong>{price}</strong></if>
+                <if condition="$ilconfig['timeleftblocks']"><span class="timeleft">{timeleft}</span></if>
+            </li></loop name="recentlyviewedtopitems">
+        </ul>
+    </div>
+</div><else /><div class="gray" style="font-size:13px;margin: 0 0 14px 0">{_no_results_found}</div></if>
+<else /><h3>{_sign_in}</h3>
+<p>{_sign_in_account_to_manage}</p>
+<a href="{https_server}signin" class="button">{_login}</a>
+<span>{_dont_have_an_account} <a href="{https_server}register">{_register} &rsaquo;</a></span></if>

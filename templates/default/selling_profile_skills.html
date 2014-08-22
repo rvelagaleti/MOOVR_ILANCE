@@ -1,0 +1,43 @@
+<div class="bigtabs" style="padding-bottom:15px; padding-top:5px">
+<div class="bigtabsheader">
+<ul>
+    <li title="" class=""><a href="{ilpage[selling]}?cmd=profile">{_my_profile}</a></li>
+    <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND isset($ilconfig['enableskills']) AND $ilconfig['enableskills']"><li title="" class="on"><a href="javascript:void(0)">{_skills}</a></li></if>
+    <li title="" class=""><a href="{ilpage[members]}?id={user[username]}">{_view} {_selling_profile}</a></li>
+  <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']"><li title=""><a href="{ilpage[selling]}?cmd=profile-specifics">{_profile_specifics}</a></li></if>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+<form method="post" action="{ilpage[selling]}" name="ilform" accept-charset="UTF-8" style="margin: 0px;">
+<input type="hidden" name="cmd" value="skills" />
+<input type="hidden" name="subcmd" value="update" />
+<div class="block-wrapper">
+
+    <div class="block3">
+    
+            <div class="block3-top">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block3-header">{_skills}</div>
+            <div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_skills_optin_limit}: <strong>{maxskillscat}</strong>. {_if_you_require_your_profile_to_be_listed_in_additional_categories_please_upgrade}</div></div>
+            <div class="block3-content" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_gray_1x1000.gif) repeat-x; padding:6px;">
+                {skills_selection}
+            
+                
+            </div>
+            <div class="block3-content" style="padding:0px">
+                <div style="padding:{table_cellpadding}px" class="alt2_top"><input type="reset" class="buttons" value=" {_reset} " accesskey="r" style="font-size:15px" /> <input type="submit" value=" {_save} " class="buttons" style="font-size:15px" /></div>
+            </div>
+            <div class="block3-footer">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>

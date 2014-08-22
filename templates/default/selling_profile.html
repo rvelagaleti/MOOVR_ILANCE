@@ -1,0 +1,150 @@
+{apihook[selling_profile_template_start]}
+<div class="bigtabs" style="padding-bottom:15px; padding-top:5px">
+<div class="bigtabsheader">
+<ul>
+    <li title="" class="on"><a href="javascript:void(0)">{_my_profile}</a></li>
+    <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND isset($ilconfig['enableskills']) AND $ilconfig['enableskills']"><li title="" class=""><a href="{ilpage[selling]}?cmd=skills">{_skills}</a></li></if>
+    <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']"><li title=""><a href="{ilpage[selling]}?cmd=profile-specifics">{_profile_specifics}</a></li></if>
+    <li title="" class=""><a href="{ilpage[members]}?id={user[username]}">{_view} {_selling_profile}</a></li>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<form method="post" action="{ilpage[selling]}" name="sellingprofile" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return validatecustomform(this)">
+<input type="hidden" name="cmd" value="_do-profile-preview" />
+<div class="block-wrapper">
+
+    <div class="block3">
+    
+            <div class="block3-top">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block3-header">{_service_selling_profile}</div>
+            
+            <div class="block3-content" style="padding:{table_cellpadding}px">
+                   
+                
+                    <h3>{_opening_statement}</h3>
+                    <div class="gray" style="padding-bottom:3px;padding-top:3px">{_your_opening_statement_will_be_presented_on_the_search_results_when_your_profile_appears}</div>
+                    
+                    <div class="ilance_wysiwyg">
+                        {profileintro_wysiwyg}
+                  </div>
+    
+                  <div style="height:1px; background-color:#cccccc;width:100%;margin-top:18px;margin-bottom:18px"></div>
+                 
+                  
+                  {apihook[selling_profile_logo]}
+                  
+                  <div> 
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                        <td width="50%" valign="top">
+                            <h3>{_profile_logo_or_image}</h3>
+                            <div class="gray" style="padding-bottom:6px;padding-top:3px">{_upload_a_picture_or_logo_to_maximize_your_exposure}</div>
+                            <div id="current_picture"><img src="{profile_logo}" alt="" id="" width="" height="" /></div><div id="attachmentlist"></div> 
+                            <div style="padding-top:12px">{uploadlogo} {apihook[selling_profile_upload_photo]}</div>
+                        </td>
+                        <td>&nbsp;&nbsp;</td>
+                        <td width="50%" valign="top">
+                        </td>
+                  </tr>
+                  </table>
+                  </div>
+                  
+                  <div style="height:1px; background-color:#cccccc;width:100%;margin-top:18px;margin-bottom:18px"></div>
+                  
+                  <div> 
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                        <td width="100%" valign="top">
+                            <h3><img src="{template_relativeimagepath}{template_imagesfolder}wysiwyg/youtube.gif" /> {_video_profile_url}</h3>
+                            <div class="gray" style="padding-bottom:3px;padding-top:3px">{_enter_the_url_link_to_your_published_youtube_video}</div>
+                            <div><input type="input" name="profilevideourl" value="{profilevideourl}" class="input" style="width:530px" /></div>
+                        </td>
+                        
+                  </tr>
+                  </table>
+                  </div>
+                  
+                  {apihook[selling_profile_mid]}
+                  
+                  <if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']">
+                  <div style="height:1px; background-color:#cccccc;width:100%;margin-top:18px;margin-bottom:18px"></div>
+                  
+                  
+                  <h3>{_categories_your_profile_will_be_visible}</h3>
+                  <div class="gray" style="padding-bottom:3px;padding-top:3px">{_hold_down_the_ctrl_key_on_your_keyboard}</div>
+                
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                        <td valign="top">{multiple_category_select}</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td valign="top"><strong>{_category} {_subscription}</strong><div class="gray" style="padding-top:3px">{_currently_your_subscription_allows_you} <strong>{profilecatlimit}</strong> {_categories}</div><div style="padding-top:6px"><span class="blue"><a href="{ilpage[subscription]}?focus=profilecatlimit">{_upgrade}</a></span></div></td>
+                  </tr>
+                  </table>
+                <!-- 
+                  <div style="padding-top:20px"><strong>{_vacation_mode}</strong></div>
+                  
+                  <div><label for="displayprofile">
+                  <input type="checkbox" name="displayprofile" id="displayprofile" value="{displayprofile}" {displayprofile_cb} /> <span class="gray">{_display_my_profile_in_the_categories_ive_selected_above} - {_required}</span></label></div>
+                  -->
+                  
+                  <div style="height:1px; background-color:#cccccc;width:100%;margin-top:18px;margin-bottom:18px"></div>
+                  
+                  
+                  <h3>{_hourly_rate}</h3>
+                  <div class="gray" style="padding-bottom:3px;padding-top:3px">{_what_is_your_minimum_rate_per_hour}</div>
+                  <div><span style="float:left; padding-top:5px; padding-right:2px">{currencysymbol}</span><input type="input" name="rateperhour" value="{rateperhour}" class="input" size="7" /></div>
+                  <div class="smaller gray" style="padding-top:3px">{_your_rate_per_hour_will_appear_when_users_are_searching_results_with_hourly_rate_column_visible_from_the_search_results}</div>
+                  </if>
+                  
+                  <div>
+                      <loop name="default_profile_question_groups">
+                            <if condition="isset($show['defaultprofilequestions']) AND $show['defaultprofilequestions']">
+                            <div style="height:1px; background-color:#cccccc;width:100%;margin-top:18px;margin-bottom:18px"></div>
+                            
+                            
+                            <table cellpadding="0" cellspacing="3" border="0" width="100%">
+                            <tr> 
+                                <td colspan="3"><a name="{groupname}"></a><h2>{groupname}</h2></td>
+                            </tr>
+
+                            <loop name="default_profile_questions{groupid}">
+                            <tr> 
+                                <td colspan="2"><h3 style="padding-bottom:3px;padding-top:6px">{question_description}</h3><div>{question_answer_input} <span>{question_answer_error}</span></div></td>
+                                <td align="right" valign="middle" nowrap="nowrap" colspan="2">{verify1}</td>
+                            </tr>
+                            <tr> 
+                                <td colspan="3" height="3"></td>
+                            </tr>
+                            </loop name="default_profile_questions{groupid}">
+                            </table>
+                            
+                            
+                        </if>
+                        </loop name="default_profile_question_groups">
+                  </div>
+                  
+                  {apihook[selling_profile_end]}
+                
+            </div>
+            <div class="block3-content" style="padding:0px">
+                <div class="alt2_top" style="padding:{table_cellpadding}px"><input type="submit" value=" {_save} " class="buttons" style="font-size:15px" /></div></div>
+            
+            
+            <div class="block3-footer">
+                    <div class="block3-right">
+                            <div class="block3-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>
+
+{apihook[selling_profile_template_end]}

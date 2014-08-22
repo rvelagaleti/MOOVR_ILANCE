@@ -1,0 +1,86 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+    <div class="bigtabsheader">
+	<ul>
+	    <li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search">{_search}</a><else /><a href="{http_server}{ilpage[search]}">{_search}</a></if></li>
+	    <li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search-options">{_options}</a><else /><a href="{http_server}{ilpage[search]}?cmd=options">{_options}</a></if></li>
+	    <li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search-promotion">{_search_promotion}</a><else /><a href="{http_server}{ilpage[search]}?cmd=promotion">{_search_promotion}</a></if></li>
+	    <li title="" class="on"><a href="javascript:void(0)">{_help}</a></li>
+	</ul>
+    </div>
+</div>
+<div style="clear:both;"></div>
+
+<div class="block-wrapper">
+
+    <div class="block3">
+
+	<div class="block3-top">
+	    <div class="block3-right">
+		<div class="block3-left"></div>
+	    </div>
+	</div>
+
+	<div class="block3-header">{_advanced_search_commands}</div>
+	<div class="block3-content" style="padding:0px">
+
+	    <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%">
+		<tr class="alt3">
+		    <td width="40%"><strong>{_to_search_for}</strong></td>
+		    <td width="40%"><strong>{_do_this}</strong></td>
+		    <td width="20%"><strong>{_example}</strong></td>
+		</tr>
+		<tr class="alt1" valign="top">
+		    <td><p>{_listings_where_more_than_one_keyword_is_present}</p></td>
+		    <td><p class="gray">{_enter_keywords_using_a_space_to_separate_each_word}</p></td>
+		    <td><p><strong>{_used_dvd_player}</strong></p></td>
+		</tr>
+		<tr class="alt1" valign="top">
+		    <td><p>{_listings_that_contain_specific_words_in_a_specific_display_order}</p></td>
+		    <td><p class="gray">{_use_quotation_marks_around_the_words_or_phrases}</p></td>
+		    <td><p><strong>{_quote_new_dvd_player_endquote}</strong></p></td>
+		</tr>
+		<tr class="alt1" valign="top">
+		    <td><p>{_listings_that_do_not_contain_a_specific_word_or_phrase}</p></td>
+		    <td><p class="gray">{_use_the_minus_operator_before_the_word_to_be_excluded}</p></td>
+		    <td><p><strong>{_php_programmer_minus_asp}</strong></p></td>
+		</tr>
+		<tr class="alt1" valign="top">
+		    <td><p>{_listings_that_match_a_specific_country_and_or_industry}</p></td>
+		    <td><p class="gray">{_type_full_country_name_and_words_separated_by_spaces}</p></td>
+		    <td><p><strong>{_canada_web_designer}</strong></td>
+		</tr>
+		<tr class="alt1" valign="top">
+		    <td><p>{_listings_that_do_not_contain_several_words_or_phrases}</p></td>
+		    <td><p class="gray">{_use_the_minus_sign_before_the_group_of_words_separated_by_commas}</p></td>
+		    <td><p><strong>{_shirt_black_green_purple}</strong></p></td>
+		</tr>
+		<tr class="alt1" valign="top">
+		    <td><p>{_listings_where_one_word_or_another_is_present}</p></td>
+		    <td><p class="gray">{_enter_keywords_in_parentheses_separated_by_commas}</p></td>
+		    <td><p><strong>{_shoes_socks_pants}</strong></p></td>
+		</tr>
+		<tr class="alt1" valign="top">
+		    <td><p>{_listings_with_words_starting_with_a_particular_sequence_of_letters}</p></td>
+		    <td><p class="gray">{_enter_the_letter_sequence_followed_by_an_asterisk}</p></td>
+		    <td><p><strong>{_movie_asterisk}</strong></p></td>
+		</tr>
+		<tr class="alt1" valign="top">
+		    <td><p>{_listings_that_contain_only_a_specific_spelling_of_a_word}</p></td>
+		    <td><p class="gray">{_enter_the_keywords_or_phrases_in_quotes}</p></td>
+		    <td><p><strong>{_quote_movie_endquote}</strong></p></td>
+		</tr>
+		<tr valign="top">
+		    <td><p>{_listings_that_match_the_exact_words}</p></td>
+		    <td><p class="gray">{_place_quotes_around_any_single_keyword}</p></td>
+		    <td><p><strong>{_quote_horror_quote_dvd}</strong></td>
+		</tr>
+	    </table>				
+	</div>
+
+	<div class="block3-footer">
+	    <div class="block3-right">
+		<div class="block3-left"></div>
+	    </div>
+	</div>
+    </div>
+</div>

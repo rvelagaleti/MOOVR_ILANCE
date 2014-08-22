@@ -1,0 +1,26 @@
+<if condition="isset($show['type']) AND $show['type'] == 'reset'"><div class="row2">
+    <ul>
+        <li class="active" style="padding: 0 17px 0 0" title="{_loading}"><img src="{template_relativeimagepath}{template_imagesfolder}working.gif" width="13" height="13" alt="{_loading}" /></li>
+    </ul>
+</div><else /><if condition="isset($show['norecentitems']) AND $show['norecentitems'] == false"><div class="product-list-in">
+    <a href="javascript:;" class="prev disabled" id="c6l">prev</a>
+    <a href="javascript:;" class="next" id="c6r">next</a>
+    <div class="carousel_recentviewed_3col">      
+          <ul>
+                <loop name="recentlyviewedtopitems"><li>
+                    {photoplain}
+                    <i></i>
+                    <span>{title}</span> 
+                    <if condition="$ilconfig['lowestpricecombined']"><strong>{lowestprice}</strong><else /><strong>{price}</strong></if>
+                    <if condition="$ilconfig['timeleftblocks']"><span class="timeleft">{timeleft}</span></if>
+                </li></loop name="recentlyviewedtopitems">
+           </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="row2">
+    <ul>
+        <li class="active"><!--<a href="#"><span id="recentitemscount"></span> {_items_lower}</a>--></li>
+        <li><a href="{https_server}{ilpage[preferences]}?cmd=favorites&amp;do=recentlyreviewed&amp;subcmd=clearproductlist&amp;returnurl={returnurl}" onclick="return confirm_js('{_are_you_sure_you_would_like_to_clear_your_recently_reviewed_product_auctions_list}')">{_clear}</a></li>
+    </ul>
+</div><else /><div class="gray" style="font-size:13px;margin: 14px 0 14px 14px">{_no_results_found}</div></if></if>

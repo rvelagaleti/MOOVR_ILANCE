@@ -1,0 +1,180 @@
+<div id="v3body4">
+<div id="sub">
+	<div id="subnav"><loop name="subnav_settings"><a href="{url}" {class}><span>{name}</span></a> <span> | </span></loop name="subnav_settings"></div>
+</div>
+<div id="content">
+<h1>{_product_addons_manager}</h1><br />
+
+<div class="tab-pane" id="installcomponents">
+	<div class="tab-page">
+		<h2 class="tab">{_install}</h2>
+
+		<form method="post" action="{ilpage[components]}" accept-charset="UTF-8" enctype="multipart/form-data" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="install" />
+		<input type="hidden" name="subcmd" value="mod" />
+		<div class="block-wrapper">
+		<div class="block3">
+		
+				<div class="block3-top">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+				<div class="block3-header">{_install}</div>
+				<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_please_locate_the_software_addon_package_and_click_continue}</div></div>
+				<div class="block3-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					<tr class="alt1">
+						<td><input type="file" class="input" name="xml_file" />
+					<div class="smaller gray">{_file_supported_admincp_xxxxml}</div>
+					
+					</td>
+					</tr>
+					<tr><td class="alt1"><div><strong>{_product_version_dependency}</strong></div>
+						<div class="gray"><label for="ignoreversion"><input type="checkbox" name="ignoreversion" id="ignoreversion" value="1" /> 
+					{_tick_this_checkbox_if_you_are_attempting_to_install_a_product_that_was_designed_for_an_older_version}</label></div></td>
+					</tr>
+					<tr>
+						<td class="alt1"><div><strong>{_phrases_installation_logic}</strong></div>
+						  <div style="padding-bottom:8px" class="gray"><label for="movephrases"><input type="checkbox" name="movephrases" id="movephrases" value="1" />
+						  {_if_a_phrase_exists_in_your_marketplace_and_exists_in_the_addon_tick_this_to_move}</label>
+						  </div>
+						<div class="gray"><label for="updatephrases"><input type="checkbox" name="updatephrases" id="updatephrases" value="1" /> 
+						{_tick_this_to_change_phrases_in_the_marketplace_to_the_phrases}</label>
+						</div></td>
+					</tr>
+					<tr class="alt2_top">
+						<td><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value="{_continue_installation}" style="font-size:15px" class="buttons" disabled="disabled" /><else /><input type="submit" value="{_continue_installation}" style="font-size:15px" class="buttons" /></if></td>
+					</tr>
+					</table>
+					
+				</div>
+				
+				<div class="block3-footer">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>
+
+	</div>
+	<div class="tab-page">
+		<h2 class="tab">{_upgrade}</h2>
+
+		<form method="post" action="{ilpage[components]}" accept-charset="UTF-8" enctype="multipart/form-data" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="upgrade" />
+		<input type="hidden" name="subcmd" value="mod" />
+		<div class="block-wrapper">
+		<div class="block3">
+		
+				<div class="block3-top">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+				<div class="block3-header">{_upgrade}</div>
+				<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_please_locate_the_software_addon_package_and_click_upgrade}</div></div>
+				<div class="block3-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					<tr class="alt1"><td><input type="file" name="xml_file" class="input" />
+					<div class="smaller gray">{_file_supported_admincp_xxxxml}</div>
+					
+					</td>
+					</tr>
+					<tr>
+						<td class="alt1"><div><strong>{_phrases_upgrade_logic}</strong></div>
+						  <div style="padding-bottom:8px" class="gray"><label for="movephrases"><input type="checkbox" name="movephrases" id="movephrases" value="1" checked="checked" /> 
+						  {_if_a_phrase_exists_in_your_marketplace_and_also_exists_in_the_upgraded_addon}</label>
+						  </div>
+						<div class="gray"><label for="updatephrases"><input type="checkbox" name="updatephrases" id="updatephrases" value="1" /> 
+						{_tick_this_checkbox_to_change_phrases_in_the_marketplace_to_the_phrases_from_xml_file_if}</label>
+						</div></td>
+					</tr>
+					<tr>
+						<td class="alt1"><div><strong>{_email_templates_upgrade_logic}</strong></div>
+						  <div class="gray"><label for="updateemails"><input type="checkbox" name="updateemails" id="updateemails" value="1" /> {_tick_this_checkbox_to_change_email_templates_in_the_marketplace_to}</label></div></td>
+					</tr>
+					
+					<tr>
+					  <td class="alt1"><strong>{_notes}:</strong> <br />
+					  {_a_you_may_also_need_to_upload_new_php_scripts}<br />
+					  {_b_this_process_will_also_scan_for_the_following_new_settings}
+					  
+						<ul class="gray">
+							<li />{_new_database_schema_alterations}
+							<li />{_new_configuration_settings}
+							<li />{_new_language_phrases}
+							<li />{_new_email_templates}
+							<li />{_new_scheduled_tasks}
+                            <li />{_new_css_elements}
+					  </ul>
+					  </td>
+					</tr>
+					
+					<tr class="alt2_top">
+						<td><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value="{_upgrade}" style="font-size:15px" class="buttons" disabled="disabled" /><else /><input type="submit" value="{_upgrade}" style="font-size:15px" class="buttons" /></if></td>
+					</tr>
+					</table>
+					
+				</div>
+				
+				<div class="block3-footer">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>
+
+	</div>
+	<div class="tab-page">
+
+    	<h2 class="tab">{_uninstall}</h2>
+		<form method="post" action="{ilpage[components]}" accept-charset="UTF-8" enctype="multipart/form-data" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="uninstall" />
+		<div class="block-wrapper">
+		<div class="block3">
+		
+				<div class="block3-top">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+				<div class="block3-header">{_uninstall}</div>
+				<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_please_locate_the_software_addon_package_to_uninstall_below}</div></div>
+				<div class="block3-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					<tr>
+						<td class="alt1">{modulespulldown}</td>
+					</tr>
+					<tr>
+						<td class="alt1">
+						  <div class="gray"><label for="showfiles"><input type="checkbox" name="showfiles" id="showfiles" value="1" checked="checked" /> {_tick_this_checkbox_to_see_what_system_files_need_to_be_removed}</label></div></td>
+					</tr>
+					<tr class="alt2_top">
+						<td><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value="{_continue_uninstall}" class="buttons" onclick="return confirm_js('{_by_uninstalling_this_product_you_are_dropping_all_associated}');" disabled="disabled" style="font-size:15px" /><else /><input type="submit" value="{_continue_uninstall}" class="buttons" onclick="return confirm_js('{_by_uninstalling_this_product_you_are_dropping_all_associated}');" <if condition="isset($show['productsavailable']) AND $show['productsavailable'] == false">disabled="disabled"</if> style="font-size:15px" /></if></td>
+					</tr>
+					</table>
+					
+				</div>
+				
+				<div class="block3-footer">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+</form></div>

@@ -1,0 +1,170 @@
+<!-- start box -->
+<div class="box">
+	<!-- start container -->
+    <div class="container">
+    	<!-- start showcase -->
+        <div class="showcase">
+        	<div class="slider">
+            	<div class="slides_container">
+                	<loop name="homepageheros">
+                    <img usemap="#hero_{id}" src="{template_relativeimagepath}{template_imagesfolder}heros/{filename}" width="770" height="265" alt="" id="hero_{id}" />
+                   	</loop name="homepageheros">
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        {heroimagemaps}
+        <!-- end showcase -->
+        <!-- start feature -->
+        <div class="feature">
+        	<!-- start feature-box -->
+        	<div class="feature-box">
+            	<!-- start column1 -->
+            	<div class="column1">
+                
+                	<h3>{_welcome}</h3>
+                    <p>{_even_if_youre_experienced} {site_name}.</p>
+                    {apihook[main_mid_firstcolumn_end]}
+                    
+                </div>
+                <!-- end column1 -->
+                <!-- start column2 -->
+            	<div class="column2">
+                	<div id="recentviewedmidloader">
+                    	<if condition="empty($_SESSION['ilancedata']['user']['username'])"><h3>{_sign_in}</h3>
+                            <p>{_sign_in_account_to_manage}</p>
+                            <a href="{https_server}signin" class="button">{_login}</a>
+                            <span>{_dont_have_an_account} <a href="{https_server}register">{_register} &rsaquo;</a></span>
+                        <else /><ul>
+                            <li style="padding: 0 17px 0 0" title="{_loading}"><img src="{template_relativeimagepath}{template_imagesfolder}working.gif" width="13" height="13" alt="{_loading}" /></li>
+                        </ul></if>
+                    </div>
+                </div>
+                <!-- end column2 -->
+                <!-- start column3 -->
+            	<div class="column3">
+                	<if condition="isset($ilconfig['keywords_tab']) AND $ilconfig['keywords_tab'] AND isset($show['recentkeywords']) AND $show['recentkeywords'] AND !empty($_SESSION['ilancedata']['user']['username'])">
+                    <h3>{_your_recent_searches}</h3>
+                    <ul class="link"><loop name="recentkeywords"><li><a href="{ilpage[search]}?mode={searchmode}&amp;q={keywordurlencoded}&amp;nkw=1" rel="nofollow" title="{keywordfull}">{keyword}</a></li></loop name="recentkeywords"></ul>
+                    <else />
+                	<h3>{_shop_with_confidence}</h3>
+                    <ul class="link2">
+                        <li class="guaranteed-shipping">
+                        	<span class="black"><strong>{_completely_safe}</strong></span>
+                        	<p>{_bid_or_buy_items_youre_watching_or_bidding_on}</p>
+                        </li>			
+                        <li class="premium-user">
+                        	<span class="black"><strong>{_premium_sellers}</strong></span>
+                        	<p>{_great_service_and_best_delivery}</p>
+                        </li>
+                        <li class="rating-system">
+                        	<span class="black"><strong>{_feedback_rating_system}</strong></span>
+                        	<p>{_view_seller_history_and}</p>
+                        </li>
+                    </ul></if>
+                </div>
+                <!-- end column3 -->
+            </div>
+            <!-- end feature-box -->
+        	<!-- start banner -->
+        	<div class="column4" id="hpa">
+            	<a href="{hpadurl}"><img src="{template_relativeimagepath}{template_imagesfolder}v4/img_banner_deals.jpg" width="300" height="258" alt="" /></a>
+            </div>
+            <!-- end banner -->
+            <div class="clear"></div>
+        </div>
+        <!-- end feature -->
+        
+        <div class="apihook">{apihook[main_template_start]}</div>
+        <div class="apihook">{apihook[main_templatemid_featured_start]}</div>
+        
+        <!-- end feature -->
+        <if condition="isset($featuredproductauctions) AND count($featuredproductauctions) > 0"><!-- start featured product -->
+        <div class="product">
+        	<h3>{_featured}</h3>
+        	<a href="javascript:;" class="prev disabled" id="c1l">prev</a>
+            <a href="javascript:;" class="next" id="c1r">next</a>
+            <div class="carousel_home_featured_product">
+                <ul>
+                    <loop name="featuredproductauctions"><li>
+                        {photoplain}
+                        <i></i>
+                        <span>{title}</span> 
+                        <if condition="$ilconfig['lowestpricecombined']"><strong>{lowestprice}</strong><else /><strong>{price}</strong></if>
+                    	<if condition="$ilconfig['timeleftblocks']"><span class="timeleft">{timeleft}</span></if>
+                    </li></loop name="featuredproductauctions">
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!-- end featured product --><div class="clear"></div></if>
+        
+        <div class="apihook">{apihook[main_templatemid_featured_end]}</div>
+        
+        <if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['userid'] > 0 AND isset($itemsfromsellerwatchlist) AND count($itemsfromsellerwatchlist) > 0"><!-- start seller watchlist product -->
+        <div class="product">
+        	<h3>{_items_from_seller_watchlist}</h3>
+        	<a href="javascript:;" class="prev disabled" id="c2l">prev</a>
+            <a href="javascript:;" class="next" id="c2r">next</a>
+            <div class="carousel_home_seller_watchlist">
+                <ul>
+                    <loop name="itemsfromsellerwatchlist"><li>
+                        {photoplain}
+                        <i></i>
+                        <span>{title}</span>
+                        <if condition="$ilconfig['lowestpricecombined']"><strong>{lowestprice}</strong><else /><strong>{price}</strong></if>
+                        <if condition="$ilconfig['timeleftblocks']"><span class="timeleft">{timeleft}</span></if>
+                    </li></loop name="itemsfromsellerwatchlist">
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!-- end seller watchlist product --><div class="clear"></div></if>
+        
+        <if condition="$ilconfig['showlatestlistings'] AND isset($latestproductauctions) AND count($latestproductauctions) > 0"><!-- start latest product -->
+        <div class="product">
+        	<h3>{_bid_on_new_items_for_sale}</h3>
+        	<a href="javascript:;" class="prev disabled" id="c3l">prev</a>
+            <a href="javascript:;" class="next" id="c3r">next</a>
+            <div class="carousel_home_latest_product">
+                <ul>
+                    <loop name="latestproductauctions"><li>
+                        {photoplain}
+                        <i></i>
+                        <span>{title}</span> 
+                        <if condition="$ilconfig['lowestpricecombined']"><strong>{lowestprice}</strong><else /><strong>{price}</strong></if>
+                    	<if condition="$ilconfig['timeleftblocks']"><span class="timeleft">{timeleft}</span></if>
+                    </li></loop name="latestproductauctions">
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!-- end latest product --><div class="clear"></div></if>
+        
+        <if condition="isset($productsendingsoon) AND count($productsendingsoon) > 0"><!-- start ending soon product -->
+        <div class="product">
+        	<h3>{_bid_on_ending_soon_items_now_before_theyre_gone}</h3>
+        	<a href="javascript:;" class="prev disabled" id="c4l">prev</a>
+            <a href="javascript:;" class="next" id="c4r">next</a>
+            <div class="carousel_home_endingsoon_product">
+                <ul>
+                    <loop name="productsendingsoon"><li>
+                        {photoplain}
+                        <i></i>
+                        <span>{title}</span>
+                        <if condition="$ilconfig['lowestpricecombined']"><strong>{lowestprice}</strong><else /><strong>{price}</strong></if>
+                    	<if condition="$ilconfig['timeleftblocks']"><span class="timeleft">{timeleft}</span></if>
+                    </li></loop name="productsendingsoon">
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!-- end ending soon product --><div class="clear"></div></if>
+        {apihook[main_template_v4_mid_bigtabs_top]}
+        <div class="apihook" style="display:none">{apihook[main_template_mid_bigtabs_top]}</div>
+		{apihook[main_templatemid_end]}
+        {apihook[main_template_end]}
+    </div>
+    <!-- end container -->
+</div>
+<!-- end box -->

@@ -1,0 +1,159 @@
+<div id="v3body4"> 
+<!-- sub navigation -->
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+<!-- /sub navigation -->
+
+<script type="text/javascript">
+<!--
+function validate_all()
+{	
+	fetch_bbeditor_data();
+	return(true);
+}
+//-->
+</script>
+<div id="content">
+<h1>{_bulk_email_manager}</h1><br />
+
+<div class="tab-pane">
+	<div class="tab-pane" id="bulkemail">
+	<div class="tab-page">
+		
+      <h2 class="tab">{_bulk}</h2>
+		
+				<form method="post" action="{ilpage[distribution]}" name="ilform" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return validate_all();">
+				<input type="hidden" name="cmd" value="bulkemail" />
+				<input type="hidden" name="subcmd" value="_send-bulk-email" />
+				<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=bulkemail" />
+				<div class="block-wrapper">
+				<div class="block">
+				
+						<div class="block-top">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+						<div class="block-header">{_dispatch_bulk_email}</div>
+						<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_test_mode_will_allow_you_to_send_a_test_email_to_the_administrators}</div></div>
+						<div class="block-content" style="padding:0px">
+							
+						<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+						<tr class="alt1" valign="top"> 
+						  <td><span style="float:left; padding-right:6px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning.gif" border="0" alt="" id="" /></span><span class="gray">{_test_mode}</span></td>
+						  <td>
+						  <label for="yes">
+						  <input type="radio" id="yes" name="testmode" value="1" />
+							{_yes}</label>&nbsp;&nbsp;
+							<label for="no">
+							<input type="radio" id="no" name="testmode" value="0" checked="checked" />
+							{_no}</label></td>
+						</tr>
+                        {apihook[bulkemail_template_form_input_start]}
+						<tr class="alt1" valign="top"> 
+						  <td width="25%"><span class="gray">{_from} {_email}</span></td>
+						  <td width="75%"><input type="text" name="from" value="{site_email}" style="font-family: verdana;" class="input" size="45" /> </td>
+						</tr>
+						<tr class="alt1" valign="top"> 
+						  <td class="alt1"><span class="gray">{_email} {_subject}</span></td>
+						  <td><input type="text" name="subject" style="font-family: verdana;" value="{subject}" class="input" size="45" /></td>
+						</tr>
+						
+						<!--<tr class="alt1" valign="top"> 
+						  <td><span class="gray">{_emails_to_send_at_once}</span></td>
+						  <td><input type="text" name="batch" value="250" class="input" size="3" />
+							&nbsp;{_with}&nbsp; 
+							<input type="text" name="pause" value="10" class="input" size="3" />
+							&nbsp;{_second_pause_in_between}</td>
+						</tr>-->
+						
+						<tr valign="top"> 
+						  <td><span class="gray">{_specific_subscription_plan}</span></td>
+						  <td>{subscription_pulldown}</td>
+						</tr>
+						<tr class="alt1" valign="top">
+						  <td><strong>{_or_upper}</strong> &nbsp;&nbsp;&nbsp;&nbsp;<span class="gray">{_username}</span></td>
+						  <td><input type="text" name="users" style="font-family: verdana;" class="input" /> 
+						  <div class="smaller gray" style="padding-top:3px">separate usernames like: user1<strong>|</strong>user2<strong>|</strong>user3 </div></td>
+						</tr>
+                        <!--<tr class="alt1" valign="top">
+						  <td><span class="gray">Users who have been inactive for</span></td>
+						  <td><input type="text" name="inactivedays" style="font-family: verdana;" size="2" class="input" /> &nbsp;{_days}
+                          <div class="smaller gray" style="padding-top:3px">leave this value blank if you are not sending email to user inactive in the past x days</div>
+						 </td>
+						</tr>-->
+                        {apihook[bulkemail_template_form_input_end]}
+						<tr class="alt1" valign="top"> 
+						  <td><span class="gray">{_email_objects_available}</span></td>
+						  <td><div><strong>{{username}}&nbsp;&nbsp;&nbsp;{{firstname}}&nbsp;&nbsp;&nbsp;{{lastname}}</strong></div>
+                          <div class="smaller gray" style="padding-top:3px">email objects are tags you enter which are replaced when the email template you create is processed and dispatched</div></td>
+						</tr>                
+						<tr> 
+						  <td colspan="2" valign="top">{wysiwyg_area}
+						  <!--<div style="padding-top:12px"><label for="sendashtml"><input type="checkbox" name="sendashtml" value="1" id="sendashtml" /> <span class="blue">{_i_wish_to_send_this_email_formatted_as_html}</span></label></div></td>-->
+						</tr>
+					  </table>
+						</div>
+						
+						<div class="block-footer">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+			<div>
+			<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" name="send" value="{_send_bulk_email}" style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}')" class="buttons" disabled="disabled" /><else /><input type="submit" name="send" value="{_send_bulk_email}" style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}')" class="buttons" /></if></div>
+			</form>
+			
+	</div>
+	
+	<div class="tab-page">
+      <h2 class="tab">{_export}</h2>
+	  
+		<form method="get" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="bulkemail" />
+		<input type="hidden" name="subcmd" value="email-export" />
+		<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{_export_email_database}</div>
+				<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_from_this_section_you_can_export_your_email_contact_database}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					<tr class="alt1"> 
+						<td width="21%" valign="middle" nowrap="nowrap">{_export} {emailcount} {_addresses_lc}:</td>
+						<td width="100%">{emailmethod_pulldown}</td>
+					</tr>
+					<tr class="alt2_top"> 
+						<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" style="font-size:15px" class="buttons" value="{_export}" disabled="disabled" /><else /><input type="submit" style="font-size:15px" class="buttons" value="{_export}" /></if></td>
+					</tr>
+					</table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+		</form>
+	</div>
+</div>

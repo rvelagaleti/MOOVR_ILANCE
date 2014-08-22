@@ -1,0 +1,37 @@
+<div class="block-wrapper">
+
+	<div class="block2">
+	
+			<div class="block2-top">
+					<div class="block2-right">
+							<div class="block2-left"></div>
+					</div>
+			</div>
+			
+			<div class="block2-header">{_congratulations_rfp_was_awarded_to_a_vendor}</div>
+			
+			<div class="block2-content" style="padding:16px">
+				
+				<div><if condition="$ilconfig['escrowsystem_enabled'] AND isset($show['escrow']) AND $show['escrow']">{_you_have_successfully_awarded_a_vendors_bid} <a href="{https_server}{ilpage[escrow]}?cmd=management&amp;sub=rfp-escrow">{_escrow_account}</a> {_for_the_exact_amount_of_the_bid}<br /><br />{_this_process_ensures_that_funds_will_be_available}<else />{_you_have_successfully_awarded_a_vendors_bid_for_your_rfp_before_any_work_can_begin}</if></div>
+				<div style="padding-top:9px">{_please_use_private_message_board_for_communication}</div>
+				
+			</div>
+			
+			<div class="block2-footer">
+					<div class="block2-right">
+							<div class="block2-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="2">
+<tr>
+	<td colspan="2"><strong>{_whats_next}</strong></td>
+</tr>
+<tr> 
+	<td width="9%" align="center"><img src="{template_relativeimagepath}{template_imagesfolder}arrow_right.gif" width="18" height="18"></td>
+	<td width="91%"><span class="blue"><a href="{ilpage[buying]}?cmd=management&amp;sub=awarded">{_buying_activity}</a></span></td>
+</tr>
+</table>

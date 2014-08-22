@@ -1,0 +1,18 @@
+<div style="padding:6px">
+	<div style="height:55px">
+		<span style="float:right">{data[sel]}</span>
+		<span style="font-size:13px; font-weight:<if condition="$bold">strong</if>" class="blue">{data[title]}</span>
+		<div class="smaller gray" style="padding-top:3px">{data[additional_info]}</div>
+		<!--<div style="padding-top:6px">{data[icons]}</div>-->
+	</div>
+	</div>
+	<div>
+	<if condition="isset($bids) AND ($bids > 0 OR $bids != '-')"><div style="padding:2px"><span style="float:right"><span>{_average_bid}</span> <strong>{data[averagebid]}</strong></span><strong>{data[bids]}</strong></div></if>
+	<div style="height:1px;background-color:#eeeeee;width:100%;margin-top:6px;margin-bottom:6px"></div></div>
+	<div style="padding:2px"><span style="float:right; font-size:14px"><strong>{data[timeleft]}</strong></span> <span class="gray">{_time_left}</span></div>
+	<div style="height:1px;background-color:#eeeeee;width:100%;margin-top:6px;margin-bottom:6px"></div></div>
+	<div style="padding:2px"><span style="float:right" class="black">{data[budget]}</span> <span class="gray">{_budget}</span></div>
+	</div>
+	<!--<div align="left" style="padding:2px"><span style="float:right" class="black">{data[distance]}</span><span class="gray">{_distance}</span></div>-->
+	</div>
+</div>

@@ -1,0 +1,230 @@
+<div id="v3body4"> 
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+	
+<!-- start content -->
+<div id="content">
+<h1>{_feedback_manager}</h1><br />
+
+<div class="tab-pane">
+		<div class="tab-page">
+			<h2 class="tab">{_view}</h2>
+			<form method="get" action="{ilpage[settings]}" accept-charset="UTF-8" style="margin: 0px;">
+			<input type="hidden" name="cmd" value="feedback" />
+			<input type="hidden" name="subcmd" value="search" />
+			<div class="block-wrapper">
+			<div class="block">
+			
+					<div class="block-top">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+					<div class="block-header">{_search_feedback}</div>
+					<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_use_the_form_below_to_search_through_various_feedback_submitted_by_users}</div></div>
+					<div class="block-content" style="padding:0px">
+						
+					  <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					  <tr class="alt1">
+						<td nowrap="nowrap">{_listing_id}</td>
+						<td><input type="text" name="project_id" style="font-family: verdana" class="input" size="10" /></td>
+					  </tr>
+					  <tr class="alt1"> 
+						<td width="13%" nowrap="nowrap">{_report_range}</td>
+						<td width="87%">{reportrange}</td>
+					  </tr>
+					  <tr class="alt2_top">
+							<td colspan="2"><input type="submit" value=" {_search} " class="buttons" style="font-size:15px" /></td>
+					  </tr>
+					</table>
+						
+					</div>
+					
+					<div class="block-footer">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+			
+			</form>
+			
+			<!--<form name="language" method="post" action="{ilpage[settings]}" accept-charset="UTF-8" style="margin:0px">
+			<input type="hidden" name="cmd" value="feedback" />
+			<input type="hidden" name="subcmd" value="removefeedback" />-->
+			<div class="block-wrapper">
+			<div class="block">
+			
+					<div class="block-top">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+					<div class="block-header">{_viewing_feedback}</div>
+					<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_an_overview_of_feedback_ratings_submitted_from_users_buying_and_selling_within_the_marketplace}</div></div>
+					<div class="block-content" style="padding:0px">
+					
+						<form name="feedback_form" method="post" action="{ilpage[settings]}" accept-charset="UTF-8" style="margin:0px">
+						<input type="hidden" name="cmd" value="feedback" />
+						<table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+						<tr class="alt2"> 
+							<td width="10%">{_from}</td>
+							<td width="10%">{_to_upper}</td>
+							<td width="12%" nowrap="nowrap">{_response}</td>
+							<td width="53%" nowrap="nowrap">{_listing} / {_comment}</td>
+							<td width="10%" nowrap="nowrap">{_date}</td>
+							<td width="1%" align="center">{_sel}</td>
+						</tr>
+						<loop name="latestfeedback"> 
+						<tr class="alt1" valign="top"> 
+							<td nowrap="nowrap"><div>{userby}</div></td>
+							<td align="left"><div>{userfor}</div></td>
+							<td><div class="green">{response}</div></td>
+							<td><div class="blue">{auction}</div><div style="padding-top:3px">{comments}</div></td>
+							<td nowrap="nowrap"><div class="black">{date}</div></td>
+							<td align="center" nowrap="nowrap"><div>{cb}</div></td>
+						</tr>
+						</loop name="latestfeedback">
+						<if condition="isset($show['nolatestfeedback']) AND $show['nolatestfeedback']">
+						<tr>
+							<td colspan="6" align="center">{_no_results_found}</td>
+						</tr>
+						<else />
+						<tr class="alt1">
+							<td colspan="6" align="center">{prevnext}</td>
+						</tr>
+						<tr class="alt2_top">
+							<td colspan="6"><input type="submit" name="remove" value="{_remove}" style="font-size:15px" class="buttons" />&nbsp;&nbsp;&nbsp;<input type="submit" name="update" value="{_update}" style="font-size:15px" class="buttons" /></td>
+						</tr>
+						</if>
+						</table>
+						</form>
+					</div>
+					
+					<div class="block-footer">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+		<!--</form>-->
+			
+		</div>
+		<div class="tab-page">
+			<h2 class="tab">Criteria</h2>
+			
+				<form action="{ilpage[settings]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="feedback" />
+				<input type="hidden" name="subcmd" value="update" />
+				<input type="hidden" name="return" value="{ilpage[settings]}?cmd=feedback" />
+				<div class="block-wrapper">
+				<div class="block">
+				
+						<div class="block-top">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+						<div class="block-header">{_feedback_criteria_rating_specifics}</div>
+						<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_below_you_can_add_remove_or_edit_existing_feedback_rating_criteria}</div></div>
+						<div class="block-content" style="padding:0px">
+							
+							<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+							<tr class="alt2"> 
+								<td width="77%">{_title}</td>
+								<td width="8%" nowrap="nowrap" align="center">{_ratings_left}</td>
+								<td width="6%" align="center" nowrap="nowrap">{_display_order}</td>
+								<td width="9%" align="center">{_action}</td>
+							</tr>
+							<loop name="feedback"> 
+							<tr class="alt1"> 
+								<td>{title}</td>
+								<td align="center"><span class="gray">{ratings}</span></td>
+								<td align="center">{sortaction}</td>
+								<td align="center">{action}</td>
+							</tr>
+							</loop name="feedback">
+							<if condition="isset($show['no_feedback_rows']) AND $show['no_feedback_rows']"> 
+							<tr> 
+								<td colspan="4" align="center">{_no_feedback_criteria_found}</td>
+							</tr>
+							</if>
+							<tr class="alt2_top">
+								<td colspan="4"><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></td>
+							</tr>
+							</table>
+							
+						</div>
+						
+						<div class="block-footer">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+			</form>
+			
+		
+			<form action="{ilpage[settings]}" name="ilform" method="post" onsubmit="return validate_add_criteria();" accept-charset="UTF-8" style="margin: 0px;">
+			<input type="hidden" name="cmd" value="feedback" />
+			<input type="hidden" name="subcmd" value="add" />
+			<input type="hidden" name="return" value="{ilpage[settings]}?cmd=feedback" />
+			<div class="block-wrapper">
+			<div class="block">
+			
+					<div class="block-top">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+					<div class="block-header">{_add_new_feedback_criteria}</div>
+					<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_if_you_would_like_to_give_buyers_more_options_for_rating_their_trading_partners_then_use_the_form_below}</div></div>
+					<div class="block-content" style="padding:0px">
+						
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					<tr class="alt1"> 
+						<td width="25%">{_title}</td>
+						<td width="75%">{titlesinput}</td>
+					</tr>
+					<tr class="alt1"> 
+						<td width="25%">{_display_order}</td>
+						<td width="75%"><input type="text" name="sort" class="input" size="4" /></td>
+					</tr>
+					<tr class="alt2_top">
+						<td colspan="2" valign="top"><input type="submit" name="save" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></td>
+					</tr>
+					</table>
+
+						
+					</div>
+					
+					<div class="block-footer">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+			</form>
+			
+		</div>
+		
+		{apihook[feedback_tab_end]}
+		
+</div>

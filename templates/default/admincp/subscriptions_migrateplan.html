@@ -1,0 +1,93 @@
+<div id="v3body4"> 
+<!-- sub navigation -->
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+<!-- /sub navigation -->
+<div id="content">
+<h1>{_migrate_subscription_plan_customers}</h1><br />
+
+<div class="tab-pane" id="migrateusers">
+<div class="tab-page">
+    <h2 class="tab">{_migration}</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<tr> 
+	<td>
+	<form method="post" action="{ilpage[settings]}" name="migratecommissionplan" accept-charset="UTF-8">
+	<input type="hidden" name="cmd" value="subscriptions" />
+	<input type="hidden" name="subcmd" value="_migrate-subscription-users" />
+	<input type="hidden" name="migratefromid" value="{subscriptionid}" />
+	<input type="hidden" name="return" value="{ilpage[settings]}?cmd=subscriptions" />
+	<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_migration}</div>
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_subscription_plan_migration_allows_you_to_move_customers_from_one_subscription_plan_to_another}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				<tr class="alt1"> 
+					<td colspan="2">{_migrate} <strong>{count}</strong> {_customers_from} {subscription_group_name} (<strong>{subscription_duration} {subscription_units}</strong>)</td>
+				</tr>
+				<tr class="alt1"> 
+					<td width="17%" nowrap="nowrap"><strong>{_migrate_customers_to}</strong></td>
+					<td width="83%">{migrate_plan_pulldown} &nbsp;&nbsp;{_note_customers_will_inherit_new_plans_permissions}</td>
+				</tr>
+				<tr class="alt2_top">
+					<td colspan="2"><input type="submit" name="save" value="{_migrate}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" />&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[settings]}?cmd=subscriptions">{_cancel}</a></span></td>
+				</tr>
+				</table>
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+	</div>
+	</form>
+	
+	</td>
+</tr>
+</table>
+</div>
+<div class="tab-page">
+<h2 class="tab">{_about}</h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+
+<tr> 
+<td> <div align="left"> 
+<p>{_subscription_plan_migration_allows_the_administrator_to_move_all}</p>
+<p>{_if_the_new_plan_you_will_be_migrating_to_is_a_paid_subscription}</p>
+<p>{_subscription_plan_migration_is_a_transparent_process_that_will_not}</p>
+</div>
+<ul>
+<li> 
+<div align="left">{_send_bulk_email_to_customers_of_the_existing_subscription_plan_informing_ahead_of_time}</div>
+</li>
+<li>{_find_out_the_exact_details_of_the_old_plans_duration_and_units_be_sure_the_new_plan_is_the_same}</li>
+</ul>
+<p>{_when_the_migration_process_is_complete_the_old_subscription_plan}</p></td>
+</tr>
+<tr> 
+<td></td>
+</tr>
+</table>
+</div>
+</div>
+
+<br /><br /><br />

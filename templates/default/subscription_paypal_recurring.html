@@ -1,0 +1,74 @@
+<script language="javascript">
+<!--
+function validate_pp_email(form)
+{
+	if (form.payer_email.value == '')
+	{
+		alert_js(phrase['_you_must_enter_your_verified_paypal_member_email_address_to_continue']);
+		return false;
+	}
+	return true;
+}
+//-->
+</script>
+{hidden_form_start}
+<div class="block-wrapper">
+
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_subscribe_to_our_marketplace_via_paypal_recurring_subscriptions}</div>
+			<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_you_must_have_or_be_eligible_for_a_paypal_account_before_using_our_recurring_subscription_service}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+				<tr>
+					<td>
+					
+					
+						<div>
+							<div><img src="{template_relativeimagepath}{template_imagesfolder}payment/paypal.gif" border="0" alt="" id="paypal" /></div>
+							
+						
+					
+						<blockquote><div>
+							{_subscription_details_at_paypal_once_payment_over_at_paypal_is_verified}
+							<br />
+							<br />
+							{_paypal_will_continue_to_bill_you_for_the_duration_you_selected_on_the_previous_menu}
+							<br />
+							<br />
+							{_this_will_be_an_automated_process_whereby_paypal_will_notify_us_upon_successful_subscription_payments_from_you}
+							<div class="gray"><br />{_please_note_if_you_manually_cancel_your_subscription_plan_on_paypalcom}</div>
+						</div></blockquote>
+						
+						<hr size="1" width="100%" style="color:#cccccc; margin-top:6px" />
+						
+						<div><strong>{_enter_your_paypal_email_address}</strong></div>
+						<div class="gray" style="padding-bottom:3px">{_please_enter_your_verified_paypal_email_address_you_will_be_sending_payment_with_below}</div>
+						<div><input type="text" size="5" name="payer_email" value="" class="input" style="width:250px" /> </div>
+						
+						</div>
+						
+					</td>
+				</tr>
+				</table>
+				
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<div><if condition="(isset($show['subscriptionmodify']) AND $show['subscriptionmodify'])"><input type="submit" value=" {_modify_subscription} " class="buttons" style="font-size:15px" /><else /><input type="submit" value=" {_subscribe} " style="font-size:15px" class="buttons" /></if></div>
+{hidden_form_end}

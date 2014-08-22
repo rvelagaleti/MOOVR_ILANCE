@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html dir="{template_textdirection}" lang="{template_languagecode}">
+<head>
+<title>{page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={template_charset}">
+<meta name="revisit-after" content="0">
+<meta name="robots" content="noindex, nofollow"> 
+{headinclude}
+</head>
+
+<body>
+<style type="text/css">
+.diff-unchanged
+{
+	background-color: #D9D9D9;
+	color: #000000;
+}
+.diff-deleted
+{
+	background-color: #EE8585;
+	color: #000000;
+}
+.diff-notext
+{
+	background-color: #B9B9B9;
+	color: #000000;
+}
+.diff-changed
+{
+	background-color: #EEEE54;
+	color: #000000;
+}
+.diff-added
+{
+	background-color: #85EE85;
+	color: #000000;
+}
+</style>
+<noparse>
+<div class="block-wrapper">
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{_comparison}</div>
+			<!--<div class="block-content-yellow" style="padding:9px"><div class="smaller">xxx</div></div>-->
+			<div class="block-content" style="padding:0px">
+			
+			<table border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" width="100%">
+			<tr class="alt2"> 
+				<td align="left">{_your_version}</td>
+				<td align="left">{_new_version}</td>
+			</tr>
+			{html}
+			</table>
+
+			
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</noparse>
+
+</body>
+</html>

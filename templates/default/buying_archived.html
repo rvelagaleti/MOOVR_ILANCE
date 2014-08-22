@@ -1,0 +1,126 @@
+<table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+<tr valign="top">
+	<td width="100%">
+	
+    	        <div>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px;">
+        <tr>
+        <td>
+        <div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_gray_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+        <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td style="padding-left:5px;" valign="top"></td>
+            <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1" alt="" border="0" /></td>
+            <td style="padding-right:5px;">
+            
+            
+                <div style="font-size:15px"><strong>Listings here have been archived by you for review purposes only.</strong></div>
+                <div class="gray"style="padding-top:4px">{_archived_auctions_are_for_review_purposes_only_you_cannot}</div>
+             
+        
+        </td>
+        </tr>
+        </table>
+        </div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+        </td>
+        </tr>
+        </table>
+        </div>
+        
+        {servicetabs}
+        <div class="block-wrapper">
+        
+            <div class="block2">
+            
+                    <div class="block2-top">
+                            <div class="block2-right">
+                                    <div class="block2-left"></div>
+                            </div>
+                    </div>
+                    
+                    <div class="block2-header">{_archived_auctions_menu}</div>
+                    <div class="block2-content-blue" style="padding:9px"><div><span style="max-height:0px">
+        <form name="sortswitch" method="get" action="{ilpage[buying]}" accept-charset="UTF-8" style="margin:0px">
+        <input type="hidden" name="cmd" value="management" />
+        <input type="hidden" name="sub" value="archived" />
+        <table border="0" cellspacing="0" cellpadding="0" class="smaller">
+          <tr>
+            <td>{_keywords}:&nbsp;</td>
+            <td>
+           <input name="keyw" type="text"  value="{keyw}" />&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>{_display_order}:&nbsp;</td>
+            <td>
+            <select name="displayorder" class="smaller" style="font-family: verdana">
+                <option value="desc" <if condition="isset($ilance->GPC['displayorder']) AND $ilance->GPC['displayorder'] == 'desc'">selected="selected"</if>>{_time_newly_listed}</option>
+                <option value="asc" <if condition="isset($ilance->GPC['displayorder']) AND $ilance->GPC['displayorder'] == 'asc'">selected="selected"</if>>{_time_ending_soonest}</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>{_per_page}:&nbsp;</td>
+                        <td>
+                        <select name="pp" class="smaller" style="font-family: verdana">
+                            <option value="10" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '10'">selected="selected"</if>>10</option>
+                            <option value="50" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '50'">selected="selected"</if>>50</option>
+                            <option value="100" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '100'">selected="selected"</if>>100</option>
+                            <option value="500" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '500'">selected="selected"</if>>500</option>
+                            <option value="1000" <if condition="isset($ilance->GPC['pp']) AND $ilance->GPC['pp'] == '1000'">selected="selected"</if>>1000</option>
+                        </select>&nbsp;</td>
+            <td><input type="submit" value="{_go}" class="buttons_smaller" /></td>
+          </tr>
+        </table>
+        </form>
+        </span></div></div>
+                    <div class="block2-content" style="padding:0px">
+                        
+                        <form method="post" action="{ilpage[buying]}" style="margin:0px">
+                        <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+                        <tr> 
+                            <td class="alt2" width="30%">{_title}</td>
+                            <td class="alt2" align="center">{_bids}</td>
+                            <td class="alt2">{_if_short} <a href="javascript:void(0)" onmouseover="Tip(phrase['_if_stands_for_insertion_fee_and_is_a_fee_that_is_applied_when_you_list'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+                            <td class="alt2" align="center">{_views}</td>
+                            <td class="alt2">{_provider}</td>
+                            <td class="alt2">{_pmb}</td>
+                            <td class="alt2">{_work}</td>
+                            <td class="alt2">{_pay}</td>
+                            <td class="alt2">{_feedback}</td>
+                            <td class="alt2" width="1%">&nbsp;</td>
+                        </tr>
+                        <loop name="project_results_rows"> 
+                        <tr class="alt1"> 
+                            <td><span class="blue" style="padding-right:6px"><a href="{ilpage[rfp]}?id={project_id}">{job_title}</a></span></td>
+                            <td align="center"><span style="font-size:14px" class="blue">{bids}</span></td>
+                            <td>{insfee}</td>
+                            <td align="center">{views}</td>
+                            <td>{provider}</td>
+                            <td>{pmb}</td>
+                            <td>{work}</td>
+                            <td>{invoice}</td>
+                            <td>{feedback}</td>
+                            <td>{actions}</td>
+                        </tr>
+                        </loop name="project_results_rows"> 
+                        <if condition="isset($show['no_project_rows_returned']) AND $show['no_project_rows_returned']"> 
+                        <tr> 
+                            <td colspan="10" align="center" class="alt1"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found}</div></td>
+                        </tr>
+                        </if>
+                        <tr> 
+                            <td colspan="10">{prevnext}</td>
+                        </tr>
+                        </table>
+                        </form>
+                        
+                    </div>
+                    
+                    <div class="block2-footer">
+                            <div class="block2-right">
+                                    <div class="block2-left"></div>
+                            </div>
+                    </div>
+                    
+            </div>
+        </div>
+    
+	</td>
+</tr>
+</table>

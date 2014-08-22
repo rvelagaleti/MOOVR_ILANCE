@@ -1,0 +1,708 @@
+<script language="javascript" type="text/javascript">
+function admincp_customer(f)
+{
+	haveerrors = 0;
+	if($.trim(jQuery("#username").val()).length < 1)  {
+		jQuery("#usernameerror").css({"display":"block"});
+		haveerrors = 1;
+	}
+	else
+	{
+		jQuery("#usernameerror").css({"display":"none"});
+	}
+	if($.trim(jQuery("#email").val()).length < 1)  {
+		jQuery("#emailerror").css({"display":"block"});
+		haveerrors = 1;
+	}
+	else
+	{
+		jQuery("#emailerror").css({"display":"none"});
+	}
+	if($.trim(jQuery("#password").val()).length < 1)  {
+		jQuery("#passworderror").css({"display":"block"});
+		haveerrors = 1;
+	}
+	else
+	{
+		jQuery("#passworderror").css({"display":"none"});
+	}
+	if($.trim(jQuery("#password2").val()) != $.trim(jQuery("#password").val()) )  {
+		jQuery("#password2error").css({"display":"block"});
+		haveerrors = 1;
+	}
+	else
+	{
+		jQuery("#password2error").css({"display":"none"});
+	}
+	if(haveerrors == 1)
+	{
+		jQuery("#totalerror").css({"display":"block"});
+		return false;
+	}
+	else
+	{
+		jQuery("#totalerror").css({"display":"none"});
+		return true;
+	}
+}
+function add_customer(f1)
+{
+	$.ajax({
+		type: "POST",
+		url: "{ajaxurl}?do=check_email&email_user="+$.trim(jQuery("#email").val())+jQuery("#f1").serialize(),
+		data: "do=check_email&email_user="+$.trim(jQuery("#email").val()),
+		success: function(msg){
+			if(msg==0)
+			{
+				alert_js("{_email_address_already_in_use}");
+			}
+			if(msg==1)
+			{
+				alert_js("{_were_sorry_that_username_is_taken}");
+			}
+			if(msg==2)
+			{
+				alert_js("{_were_sorry_that_username_is_taken} \n {_email_address_already_in_use}");
+			}
+			if(msg==3)
+			{
+				window.location = "subscribers.php?"+jQuery("#f1").serialize();
+			}
+		}
+	});
+}
+</script>
+<div id="v3body4">
+
+	<div id="sub">
+	
+		<div id="subnav">
+			<loop name="subnav_settings">
+				<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+			</loop name="subnav_settings">
+		</div>
+		
+	</div>
+
+	<div id="content">
+	<h1>{_subscriber_management} {customername}</h1><br />
+
+		<div class="tab-pane" id="userlistings">
+        
+        		{apihook[admincp_subscribers_tabs_start]}
+        
+				<div class="tab-page">
+        			<h2 class="tab">{_listings}</h2>
+                    
+                    <form method="get" action="{ilpage[subscribers]}" accept-charset="UTF-8" id="subscribers" style="margin: 0px;">
+                    <input type="hidden" name="cmd" value="search" />
+                    <div class="block-wrapper">
+                    <div class="block3">
+                    
+                            <div class="block3-top">
+                                    <div class="block3-right">
+                                            <div class="block3-left"></div>
+                                    </div>
+                            </div>
+                            
+                            <div class="block3-header">{_search}</div>
+                            <div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_search_and_filter_subscribers_of_the_marketplace_using_the_following_form_below}</div></div>
+                            <div class="block3-content" style="padding:0px">
+                                
+                                <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+                                <tr class="alt1">
+                                  <td width="10%"><span class="gray">{_filter_by}</span>
+                                  <td width="90%">
+                                        <select name="filterby" style="font-family: Verdana">
+                                        <optgroup label="{_filter_by}">
+                                        <option value=""></option>
+                                        <option value="user_id" <if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'user_id'">selected="selected"</if>>{_user_id}</option>
+                                        <option value="username" <if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'username' OR !isset($ilance->GPC['filterby'])">selected="selected"</if>>{_username}</option>
+                                        <option value="email" <if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'email'">selected="selected"</if>>{_email}</option>
+                                        <option value="first_name" <if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'first_name'">selected="selected"</if>>{_first_name}</option>
+                                        <option value="last_name" <if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'last_name'">selected="selected"</if>>{_last_name}</option>
+                                        <option value="phone" <if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'phone'">selected="selected"</if>>{_phone}</option>
+                                        <option value="city" <if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'city'">selected="selected"</if>>{_city}</option>
+                                        <option value="zip_code" <if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'zip_code'">selected="selected"</if>>{_zip_code}</option>
+                                        </optgroup>
+                                        </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <input type="text" name="filtervalue" size="75" value="{get_filtervalue}" class="input" /></td>
+                                </tr>
+                                <tr class="alt1">
+                                  <td nowrap="nowrap"><span class="gray">{_status}</span></td> 
+                                    <td>
+                                        <select name="status" class="input">
+                                        <optgroup label="{_filter_by} {_status}">
+                                        <option value="active" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'active'">selected="selected"</if>>{_active}</option>
+                                        <option value="moderated" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'moderated'">selected="selected"</if>>Moderated</option>
+                                        <option value="suspended" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'suspended'">selected="selected"</if>>{_suspended}</option>
+                                        <option value="cancelled" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'cancelled'">selected="selected"</if>>{_cancelled}</option>
+                                        <option value="unverified" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'unverified'">selected="selected"</if>>{_email} {_unverified}</option>
+                                        <option value="banned" <if condition="isset($ilance->GPC['status']) AND $ilance->GPC['status'] == 'banned'">selected="selected"</if>>{_banned}</option>
+                                        </optgroup>
+                                        </select><span style="float:left;padding-top:3px;padding-right:3px"><input type="checkbox" name="searchstatus" value="1" <if condition="isset($ilance->GPC['searchstatus']) AND $ilance->GPC['searchstatus'] == '1'">checked="checked"</if> /></span>
+										<span class="gray" style="padding-left:20px">{_period}</span>
+										<select name="period" class="input">
+                                        <optgroup label="{_filter_by} {_period}">
+                                        <option value="0" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == '0'">selected="selected"</if>>{_any_date}</option>
+                                        <option value="1" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == '1'">selected="selected"</if>>{_last_hour}</option>
+                                        <option value="12" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == '12'">selected="selected"</if>>{_last_12_hours}</option>
+										<option value="24" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == '24'">selected="selected"</if>>{_last_24_hours}</option>
+                                        <option value="168" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == '168'">selected="selected"</if>>{_last_7_days}</option>
+                                        <option value="336" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == '336'">selected="selected"</if>>{_last_14_days}</option>
+                                        <option value="720" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == '720'">selected="selected"</if>>{_last_30_days}</option>
+										<option value="1440" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == '1440'">selected="selected"</if>>{_last_60_days}</option>
+										<option value="2160" <if condition="isset($ilance->GPC['period']) AND $ilance->GPC['period'] == '2160'">selected="selected"</if>>{_last_90_days}</option>
+                                        </optgroup>
+                            			</select></td>
+										</td>
+                                </tr>
+                                <tr class="alt1">
+                                  <td nowrap="nowrap"><span class="gray">{_sort_results_by}</span></td>
+                                  <td><label for="orderbyasc"><input type="radio" id="orderby" name="orderbysearch" value="ASC" <if condition="isset($ilance->GPC['orderbysearch']) AND $ilance->GPC['orderbysearch'] == 'ASC'">checked="checked"</if> /> {_ascending}</label>
+                                        <label for="orderbydesc"><input type="radio" name="orderbysearch" value="DESC"  <if condition="isset($ilance->GPC['orderbysearch']) AND $ilance->GPC['orderbysearch'] == 'DESC'">checked="checked"</if> /> {_descending}</label></td>
+                                  </tr>
+                                	<tr class="alt2_top">
+                                  <td colspan="2"><input type="submit" class="buttons" value=" {_search} " style="font-size:15px" /></td> 
+                                  </tr>
+                                </table>
+                                <script type="text/javascript">
+                                <!--
+                                inlineCB = new iL_Inline('inlineCB', 'members', 'subscribers', '{_go}');
+                                //-->
+                                </script>							
+                            </div>
+                            
+                            <div class="block3-footer">
+                                    <div class="block3-right">
+                                            <div class="block3-left"></div>
+                                    </div>
+                            </div>
+                            
+                    </div>
+                </div>
+                    </form>
+                    
+      				
+		 		
+      
+      				<form id="subscriber_search" method="post" action="{ilpage[subscribers]}" accept-charset="UTF-8" style="margin:0px">
+					<div class="block-wrapper">
+					<div class="block3">
+					
+							<div class="block3-top">
+									<div class="block3-right">
+											<div class="block3-left"></div>
+									</div>
+							</div>
+							
+							<div class="block3-header">{number} {_customers_found}</div>
+							<div class="block3-content" style="padding:0px">
+								
+							<table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+							  <tr class="alt2">
+								<td width="7%" nowrap="nowrap"><span class="blue"><a href="{scriptpage}&amp;orderby=user_id">{_id}</a></span></td>
+								<td width="23%" align="left"><span class="blue"><a href="{scriptpage}&amp;orderby=username">{_username}</a></span></td>
+								<td width="12%">{_bought}</td>
+								<td width="12%">{_sold}</td>
+								<td><span class="blue"><a href="{scriptpage}&amp;orderby=total_balance">{_balance}</a></span></td>
+								<td>{_role}</td>
+								<td width="5%" align="center" nowrap="nowrap">S <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_suspended}</strong></div><div>This column represents users that are currently suspended (cannot sign-in)</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+								<td width="5%" align="center" nowrap="nowrap">B <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_banned}</strong></div><div>This column represents users that are currently banned (cannot sign-in)</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+								<td width="5%" align="center" nowrap="nowrap">A <a href="javascript:void(0)" onmouseover="Tip('<div><strong>{_administrator}</strong></div><div>This column represents users that are currently administrators</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+								<td nowrap="nowrap">{_actions}</td>
+								<td width="5%" align="center">{_sel}</td>
+							  </tr>
+							  <loop name="customers">
+								<tr class="alt1" valign="top">
+								  <td nowrap="nowrap" valign="top"><if condition="isset($no_activity{user_id}) AND $no_activity{user_id}"><img id="collapseimg_activity{user_id}" src="{template_relativeimagepath}{template_imagesfolder}expand_gray.gif" border="0" alt="" style="padding-right:8px;"/><else /><a href="javascript:void(0)" onclick="return toggle('activity{user_id}')"><img id="collapseimg_activity{user_id}" src="{template_relativeimagepath}{template_imagesfolder}expand_collapsed.gif" border="0" alt="" style="padding-right:8px;"/></a></if><span style="font-size:16px; font-weight:bold" class="black"><span style="font-size:16px; font-weight:bold" class="black">{user_id}</span></td>
+								  <td nowrap="nowrap"><div class="blue" title="{first_name} {last_name}">{username}</div>
+									<div class="smaller" style="padding-top:3px"><span class="red"><a href="{ilpage[accounting]}?cmd=invoices&userid={user_id}&status=unpaid" title="{_unpaid_invoices}">{unpaid_amount}</a></span></div>
+								  <if condition="$show['ADMINCP_TEST_MODE']">
+                                    <div class="smaller" style="padding-top:3px"><span class="blurry">{emailshort}</span></div>
+                                  <else />
+                                    <div class="smaller" style="padding-top:3px"><span class="blue"><a href="mailto:{email}">{emailshort}</a></span></div>
+                                  </if></td>
+								  <td nowrap="nowrap">{bought}</td>
+								  <td nowrap="nowrap">{sold}</td>
+								  <td><div class="smaller black">{balance}</div></td>
+								  <td><div class="smaller gray">{role}</div></td>
+								  <td align="center">{status}</td>
+								  <td align="center">{status2}</td>
+								  <td align="center">{isadmin}</td>
+								  <td align="center" nowrap="norwap">{login}&nbsp;&nbsp;&nbsp;{edit}&nbsp;&nbsp;{remove}</td>
+								  <td align="center" class="alt2">{action}</td>
+								</tr>								
+								<tr valign="middle" id="collapseobj_activity{user_id}" style="display:none;" class="alt2">
+                                 <td colspan="11">
+								<div class="tab-pane" id="userlistings" >
+        			            <div class="tab-page">
+        			               <h2 class="tab">{_listings}</h2>
+                                    <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" >
+                                    <tr class="alt3"> 
+                                      <td width="31%" nowrap="nowrap"><span class="smaller">{_title}</span></td> 
+									  <td width="16%" nowrap="nowrap"><span class="smaller">
+                                      </span></td> 
+                                      <td width="16%" nowrap="nowrap"><span class="smaller">{_bids}</span></td>                            
+                                      <td width="13%"  nowrap="nowrap"><span class="smaller">{_status}</span></td>
+									  <td width="20%"  nowrap="nowrap"><span class="smaller">{_type}</span></td>
+                                      <td width="20%" nowrap="nowrap"><span class="smaller">{_time_left}</span></td> 									  
+                                    </tr>									
+                                    <loop name="auctions{user_id}"> 
+                                    <tr valign="top" class="alt1"> 
+                                      <td colspan="2" align="left"><span class="smaller blue"><a href="{ilpage[distribution]}?cmd=auctions&amp;subcmd=_update-auction&amp;viewtype={viewtype}&amp;id={project_id}&amp;returnurl={pageurl_urlencoded}" title="{project_title}">{project_title}</a> <span class="smaller black">({project_id})</span></span></td>
+                                      <td><span class="smaller">{bids}</span></td>                          
+                                      <td nowrap="nowrap"><span class="smaller">{project_status}</span></td>
+									  <td nowrap="nowrap"><span class="smaller">{type}</span></td>
+                                      <td nowrap="nowrap"><span class="smaller">{timeleft}</span></td>                                       
+                                    </tr>					
+                                  </loop name="auctions{user_id}">                                  							  
+                                  </table>
+    			                 </div></div>
+								 </td>
+                                </tr>								  	
+							  </loop name="customers">
+							  <if condition="isset($show['no_customers']) AND $show['no_customers']">
+								<tr class="alt1">
+								  <td colspan="11" nowrap="nowrap" align="center">{_no_results_found}</td>
+								</tr>
+							  </if>
+							  <if condition="isset($show['advancedsearch']) AND $show['advancedsearch']">
+								<tr class="alt1">
+								  <td colspan="11" nowrap="nowrap" align="center">{_currently_listing_accounts_via_advanced_search} - <span class="blue"><a href="{ilpage[subscribers]}">{_return_to_regular_view}</a></span></td>
+								</tr>
+							  </if>
+							  <tr class="alt2_top">
+								<td colspan="11" align="right">
+									<span style="float:left; padding-top:2px; font-size:14px" class="blue">
+										<a href="javascript:void(0)" onclick="inlineCB.check_all(true)" style="text-decoration:underline">{_select_all}</a>&nbsp;&nbsp; 
+										<a href="javascript:void(0)" onclick="inlineCB.check_all(false)" style="text-decoration:underline">{_deselect_all}</a>&nbsp;&nbsp;
+										<a href="javascript:void(0)" onclick="inlineCB.check_all('invert')" style="text-decoration:underline">{_invert}</a>&nbsp;&nbsp;
+									</span>
+		                            
+									<select name="subcmd" style="font-family: verdana">
+			                            <optgroup label="{_select_action}">
+				                            <option value="activateusers">{_activate_users}</option>
+				                            <option value="suspendusers">{_suspend_users}</option>
+				                            <option value="unsuspendusers">{_unsuspend_users}</option>
+				                            <option value="unverified">{_unverify_users}</option>
+				                            <option value="banusers">{_ban_users}</option>
+				                            <option value="cancelusers">{_cancel_users}</option>
+				                            <option value="deleteusers">{_delete_users}</option>
+			                            </optgroup>
+		                            </select>
+
+									<if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value="{_go}" id="inlinebutton" disabled="disabled" /><else /><input type="submit" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" value="{_go}" id="inlinebutton" /></if>
+									<script type="text/javascript">
+									<!--
+									inlineCB = new iL_Inline('inlineCB', 'members', 'subscriber_search', '{_go}');
+									//-->
+									</script>
+								</td>
+							  </tr>
+							  <tr>
+								<td colspan="11">{prevnext}</td>
+							</tr>
+							</table>
+
+								
+</div>
+							
+							<div class="block3-footer">
+									<div class="block3-right">
+											<div class="block3-left"></div>
+									</div>
+							</div>
+							
+					</div>
+				</div>
+      				</form>
+			
+			</div>
+			
+			<div class="tab-page">	
+          		<h2 class="tab">{_create}</h2>
+		 			
+				<form method="post" action="javascript:add_customer(this);" accept-charset="UTF-8" name="ilform" style="margin: 0px;" onsubmit="return admincp_customer(this);" id="f1">
+				<input type="hidden" name="subcmd" value="_create-new-customer" />
+				<input type="hidden" name="return" value="{ilpage[subscribers]}" />
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_create}</div>
+						<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_manually_create_a_subscribers_account_using_the_quick_form}</div></div>
+						<div class="block3-content" style="padding:0px">
+                        <div id="email_check" style="display:none" align="center"></div>
+                           <div id="user_check" style="display:none" align="center"></div>
+							<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+							{apihook[admincp_subscribers_create_custom_fields1]}
+                            <tr class="alt1"> 
+								<td nowrap="nowrap" class="alt1"><span class="gray">{_username}</span><img name="usernameerror" src="{template_relativeimagepath}{template_imagesfolder}icons/fieldempty.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" style="float:right;display:none;" id="usernameerror" /></td>
+								<td><input type="text" name="username" id="username" style="width:275px" class="input" /></td>
+								<td nowrap="nowrap" class="alt1"><span class="gray">{_email}</span><img name="emailerror" src="{template_relativeimagepath}{template_imagesfolder}icons/fieldempty.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" style="float:right;display:none;" id="emailerror" /></td>
+								<td><input type="text" name="email" id="email" style="width:275px" class="input" /></td>
+							</tr>
+                            <tr class="alt1">
+								<td width="5%" nowrap="nowrap"><span class="gray">{_first_name}</span></td>
+								<td><input type="text" name="firstname" id="firstname" style="width:275px" class="input" /></td>
+								<td width="5%" nowrap="nowrap" class="alt1"><span class="gray">{_last_name}</span></td>
+								<td><input type="text" name="lastname" id="lastname" style="width:275px" class="input" /></td>
+							</tr>
+							<tr class="alt1"> 
+								<td nowrap="nowrap" class="alt1"><span class="gray">{_address}</span></td>
+								<td>
+								<input type="text" name="address" id="address" style="width:275px" class="input" /></td>
+								<td nowrap="nowrap" class="alt1"><span class="gray">{_address} 2</span></td>
+								<td><input type="text" name="address2" id="address2" style="width:275px" class="input" /></td>
+							</tr>
+                            <tr class="alt1"> 
+								<td width="5%" nowrap="nowrap" class="alt1"><span class="gray">{_country}</span></td>
+								<td>{country_js_pulldown}</td>
+								<td width="5%" nowrap="nowrap" class="alt1"><span class="gray">{_state}</span></td>
+								<td>{state_js_pulldown}</td>
+							</tr>
+							<tr class="alt1"> 
+								<td nowrap="nowrap" class="alt1"><span class="gray">{_city}</span></td>
+								<td><!--<input type="text" name="city" id="city" style="width:275px" class="input" />-->{city_js_pulldown}</td>
+								<td nowrap="nowrap" class="alt1"><span class="gray">{_zip_code}</span></td>
+								<td><input type="text" name="zipcode" id="zipcode" style="width:95px" class="input" /></td>
+							</tr>
+                            <tr class="alt1">
+								<td nowrap="nowrap" class="alt1"><span class="gray">{_phone}</span></td>
+								<td><input type="text" name="phone" id="phone" style="width:275px" class="input" /></td>
+								<td><span class="gray">{_company_name}</span></td>
+								<td><input type="text" name="companyname" id="companyname" style="width:275px" class="input" /></td>
+							</tr>
+                            <tr class="alt1">
+								<td nowrap="nowrap" class="alt1"><span class="gray">{_language}</span></td>
+								<td>{user_language_pulldown}</td>
+								<td></td>
+								<td></td>
+							</tr>
+                            {apihook[admincp_subscribers_create_custom_fields2]}
+                            <tr class="alt2_top">
+                            	<td colspan="4"><strong>{_account_security}</strong></td>
+                            </tr>
+                            <tr class="alt1"> 
+								<td nowrap="nowrap" class="alt1"><span class="gray">{_password}</span><img name="passworderror" src="{template_relativeimagepath}{template_imagesfolder}icons/fieldempty.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" style="float:right;display:none;" id="passworderror" /></td>
+								<td><input type="password" name="password" id="password" style="width:275px" class="input" /></td>
+								<td nowrap="nowrap" class="alt1"><span class="gray">{_verify_password}</span><img name="password2error" src="{template_relativeimagepath}{template_imagesfolder}icons/fieldempty.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" style="float:right;display:none;" id="password2error" /></td>
+								<td><input type="password" name="password2" id="password2" style="width:275px" class="input" /></td>
+							</tr>
+                            <tr class="alt1"> 
+								<td width="1%" nowrap="nowrap" class="alt1"><span class="gray">{_secret_question}</span></td>
+								<td width="34%"><input type="text" name="secretquestion" id="secretquestion" value="{_what_is_my_email_address}" style="width:275px" class="input" /></td>
+								<td width="1%" nowrap="nowrap" class="alt1"><span class="gray">{_secret_answer}</span></td>
+								<td width="35%"><input type="password" name="secretanswer" id="secretanswer" style="width:275px" class="input" /></td>
+							</tr>
+                            <tr class="alt2_top">
+                            	<td colspan="4"><strong>{_subscription}</strong></td>
+                            </tr>
+							<tr class="alt1">
+							  <td width="13%" nowrap="nowrap" class="alt1"><span class="gray">{_subscription_plan}</span></td>
+							  <td width="87%" colspan="3">{subscription_plan_pulldown}</td>
+							</tr>
+							<tr class="alt1">
+							  <td nowrap="nowrap" class="alt1"><span class="gray">{_subscription_role}</span></td>
+							  <td colspan="3">{subscription_role_pulldown}</td>
+							</tr>
+                            <tr class="alt2_top">
+                            	<td colspan="4"><strong>{_other}</strong></td>
+                            </tr>
+                            {apihook[admincp_subscribers_create_custom_fields3]}
+                      		<tr class="alt1"> 
+								<td colspan="4" class="alt1"><input name="notifyregister" type="checkbox" value="1" id="notifyregister" checked="checked" /> {_notify_customer_via_email_regarding_new_account_creation}&nbsp;&nbsp;&nbsp;<span class="smaller gray">[ <span class="blue"><a href="{ilpage[settings]}?cmd=emailtemplates&amp;subcmd=_update-email-template&amp;id=register_welcome_email_admincp">{_view_email_template}</a></span> ]</span></td>
+							</tr>
+                            <tr class="alt1"> 
+							  <td colspan="4" class="alt1"><input name="notifywelcome" type="checkbox" value="1" id="notifywelcome" checked="checked" /> 
+							    {_notify_administrator_via_email_regarding_new_account_creation}&nbsp;&nbsp;&nbsp;<span class="smaller gray">[ <span class="blue"><a href="{ilpage[settings]}?cmd=emailtemplates&amp;subcmd=_update-email-template&amp;id=register_welcome_email_admin_admincp">{_view_email_template}</a></span> ]</span></td>
+							</tr>
+							<if condition="$ilconfig['registrationupsell_bonusactive']">
+                            <tr class="alt1"> 
+								<td colspan="4" class="alt1"><input name="bonusdisable" type="checkbox" id="bonusdisable" value="1" /> {_if_new_account_bonuses_are_active_tick_this_checkbox_to_disable_new_registration_account_bonus_for_this_member_only}</td>
+							</tr>
+							</if>
+							<tr class="alt1">
+								<td colspan="4"><input name="isadmin" id="isadmin" type="checkbox"value="1" /> <label for="isadmin">{_tick_this_checkbox_to_give_admin_permissions_for_this_new_account_can_login_to_the_admin_cp}</label></td>
+							</tr>
+                            {apihook[admincp_subscribers_create_custom_fields4]}
+					  		<tr class="alt2_top"> 
+								<td colspan="4"><input type="submit" value=" {_save} "  style="font-size:15px" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /></td>
+							</tr>
+							</table>
+						</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+            <if condition="$ilconfig['registrationupsell_bonusactive']"><else /><input name="bonusdisable" type="hidden" value="1" /></if>
+			</form>
+			
+		</div>
+        
+        {apihook[admincp_subscribers_tabs_mid]}
+		
+		<!-- audit log -->
+		<div class="tab-page">
+		
+				<h2 class="tab">{_audit_log}</h2>
+				
+				<form action="{ilpage[subscribers]}" name="auditlog" accept-charset="UTF-8" method="post" style="margin:0px">
+				<input type="hidden" name="cmd" value="auditlog" />
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_search_audit_history}</div>
+						<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_view_the_marketplace_audit_history_log_and_see_how_users_are_interacting_with_various_scripts}</div></div>
+						<div class="block3-content" style="padding:0px">
+							
+							<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+							<tr class="alt1">
+								<td width="34%">{_entries_to_show_per_page}</td>
+								<td width="66%">
+									<table cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr valign="top">
+										<td>
+											<select name="pp" class="input">
+											<option value="5">5</option>
+											<option value="10">10</option>
+											<option value="15" selected="selected">15</option>
+											<option value="20">20</option>
+											<option value="25">25</option>
+											<option value="30">30</option>
+											<option value="40">40</option>
+											<option value="50">50</option>
+											<option value="100">100</option>
+											</select>
+										</td>
+								</tr>
+								</table>
+							</td>
+							</tr>
+							<tr valign="top" class="alt1">
+								<td>{_show_only_entries_generated_by_script}</td>
+								<td><table cellpadding="0" cellspacing="0" border="0" width="100%">
+								<tr valign="top">
+									<td>{scripts_pulldown}</td>
+								</tr>
+								</table></td>
+							</tr>
+							<tr valign="top" class="alt1">
+								<td>{_show_only_entries_generated_by_user} ID</td>
+								<td>
+									<table cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr valign="top">
+										<td>{members_pulldown}</td>
+									</tr>
+									</table>
+								</td>
+							</tr>
+							<tr valign="top" class="alt1">
+								<td>{_show_only_entries_generated_by_admin}</td>
+								<td>
+									<table cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr valign="top">
+										<td>{admins_pulldown}</td>
+									</tr>
+									</table>
+								</td>
+							</tr>
+							<tr class="alt1" valign="top">
+								<td>{_order_by}</td>
+								<td>
+									<table cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr valign="top">
+										<td>
+											<select name="orderby" class="input">
+											<option value="datetime">{_date}</option>
+											<option value="script">{_script}</option>
+											<option value="cmd">{_action}</option>
+											<option value="subcmd">{_event}</option>
+											<option value="user_id">{_user}</option>
+											<option value="admin_id">{_admin}</option>
+											</select>
+											
+											<select name="order" class="input">
+											<option value="ASC">{_ascending}</option>
+											<option value="DESC">{_descending}</option>
+											</select>
+										</td>
+								</tr>
+								</table></td>
+							</tr>
+							<tr class="alt2_top">
+								<td colspan="2"><input type="submit" class="buttons" tabindex="1" value=" {_view} " style="font-size:15px" accesskey="s" />
+							</td>
+							</tr>
+							</table>
+							
+						</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+				
+				<input type="hidden" name="do" value="view" />
+				</form>
+				
+				<if condition="isset($ilance->GPC['do']) AND $ilance->GPC['do'] == 'view'">
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_search_results}</div>
+						<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_audit_log_viewer}</div></div>
+						<div class="block3-content" style="padding:0px">
+							
+							<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+							<tr valign="top" class="alt2">
+								<td align="left">{_id}</td>
+								<td>{_user}</td>
+								<td>{_admin}</td>
+								<td>{_script}</td>
+								<td>{_action}</td>
+								<td>{_date}</td>
+								<td>{_event}</td>
+								<td>{_details}</td>
+							</tr>
+							<loop name="auditlog">
+							<tr align="center" class="{class}">
+								<td align="left"><span class="small gray">{logid}</span></td>
+								<td align="left" nowrap="nowrap">{user}</td>
+								<td align="left" nowrap="nowrap">{admin}</td>
+								<td align="left" nowrap="nowrap"><span class="small gray">{script}</span></td>
+								<td align="left" nowrap="nowrap"><span class="small gray">{cmd}</span></td>
+								<td align="left" nowrap="nowrap"><span class="small gray">{datetime}</span></td>
+								<td align="left"><span class="small gray">{eventss}</span></td>
+								<td align="left"><span class="small gray">{otherinfo}</span></td>
+							</tr>
+							</loop name="auditlog">
+							<tr>
+								<td colspan="7">{prevnext}</td>
+							</tr>
+							</table>
+							
+						</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+				</if>
+	
+		</div>
+		<!-- / task log -->
+		
+		<!-- prune log -->
+		<div class="tab-page">
+		
+				<h2 class="tab">{_prune_log}</h2>
+				<form action="{ilpage[subscribers]}" name="auditlog" accept-charset="UTF-8" method="post" style="margin:0px">
+				<input type="hidden" name="cmd" value="auditlog" />
+				<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_prune_audit_log}</div>
+						<div class="block3-content-gray" style="padding:9px"><div class="smaller">{_you_can_prune_your_audit_log_to_remove_old_entries_as_you_require}</div></div>
+						<div class="block3-content" style="padding:0px">
+							
+							<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+							<tr class="alt1">
+								<td width="35%">{_remove_logs_relating_to_script} </td>
+								<td width="65%">
+								  <table cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr>
+									  <td>{scripts_pulldown}</td>
+								</tr>
+								</table></td>
+							</tr>
+							<tr class="alt1">
+								<td class="alt1">{_remove_logs_relating_to_user}</td>
+								<td>
+									<table cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr valign="top">
+										<td>{members_pulldown}</td>
+									</tr>
+									</table>
+								</td>
+							</tr>
+							<tr class="alt1">
+								<td class="alt1">{_remove_logs_relating_to_admin} </td>
+								<td>
+									<table cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr valign="top">
+										<td>{admins_pulldown}</td>
+									</tr>
+									</table>
+								</td>
+							</tr>
+							<tr class="alt1">
+								<td class="alt1">{_remove_logs_older_than_days}</td>
+								<td><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td><input type="text" class="input" name="days" id="days" value="30" size="10" dir="ltr" tabindex="1" /></td>
+								</tr>
+								</table></td>
+							</tr>
+							<tr class="alt2_top">
+								<td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" tabindex="1" value="{_prune}" style="font-size:15px" accesskey="s" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}');" disabled="disabled" /><else /><input type="submit" class="buttons" tabindex="1" value="{_prune}" style="font-size:15px" accesskey="s" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}');" /></if></td>
+							</tr>
+							</table>
+							
+						</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+			<input type="hidden" name="do" value="prune" /><input type="hidden" name="return" value="{ilpage[subscribers]}?cmd=auditlog" />
+			</form>
+	
+		</div>
+		<!-- / prune log -->
+        
+        {apihook[admincp_subscribers_tabs_end]}
+						
+		</div>
+		
+
+

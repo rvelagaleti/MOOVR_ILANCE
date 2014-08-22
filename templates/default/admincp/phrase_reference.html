@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html dir="{template_textdirection}" lang="{template_languagecode}">
+<head>
+<title>{page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset={template_charset}">
+<meta name="revisit-after" content="0">
+<meta name="robots" content="noindex, nofollow"> 
+{headinclude}
+</head>
+
+<body onLoad="{onload}">
+
+<form action="{ilpage[language]}" name="ilform" method="get" accept-charset="UTF-8" style="margin: 0px;">
+<input type="hidden" name="cmd" value="phrase-reference" />
+<div class="block-wrapper" align="left">
+	<div class="block">
+	
+			<div class="block-top">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+			<div class="block-header">{language} {phrasegroup}</div>
+			<div class="block-content-yellow" style="padding:9px"><div class="smaller">{_quickly_view_phrases_and_preview_intended_phrase_output}</div></div>
+			<div class="block-content" style="padding:0px">
+				
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+				<tr valign="top">
+					<td width="43%">
+					{phraselist}
+					</td>
+					  <td width="57%" class="alt1"> <span><strong>{_phrase_template_variable}</strong></span><br />
+						<input type="text" style="font-family: verdana; width: 100%; background-color: #fff;" name="varname" size="35" /><br />
+						<span><strong>{_phrase_preview}</strong></span><br />
+						<textarea name="textbox" style="font-family: verdana; width: 100%; background-color: #fff;" rows="8" cols="35"></textarea>
+						</td>
+				</tr>
+				<tr valign="top">
+					<td colspan="2">
+						<center>
+						  {language_pulldown} {phrasegroup_pulldown} 
+						  <input type="submit" class="buttons" value="{_view}" />
+						<input type="button" class="buttons" value="{_close}" onClick="self.close()" />
+						</center>
+					</td>
+				</tr>
+				</table>
+				
+			</div>
+			
+			<div class="block-footer">
+					<div class="block-right">
+							<div class="block-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</form>
+
+</body>
+</html>

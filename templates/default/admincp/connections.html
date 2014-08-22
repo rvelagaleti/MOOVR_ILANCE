@@ -1,0 +1,285 @@
+<div id="v3body4">
+<div id="sub">
+	<div id="subnav">
+		<a href="{ilpage[connections]}" class="sel"><span>{_whos_online}</span></a> <span> | </span> 
+	</div>
+</div>
+
+<div id="content">
+	<h1>{_connections_marketplace_activity}</h1><br />
+
+	<div class="tab-pane">
+		<div class="tab-page">
+			<h2 class="tab">{_guests} ({guestsonline})</h2>
+			<form name="connections_guests" method="post" action="{ilpage[connections]}" accept-charset="UTF-8" style="margin:0px">
+			<input type="hidden" name="cmd" value="_kick-session" />
+			<div class="block-wrapper">
+			<div class="block">
+			
+					<div class="block-top">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+					<div class="block-header">{_guests}</div>
+					<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_an_overview_of_web_visitors_and_guests_connected_to_the_marketplace}</div></div>
+					<div class="block-content" style="padding:0px">
+						
+					<table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+					<tr class="alt2"> 
+						<td width="15%" nowrap="nowrap">{_ip_address}</td>
+						<td width="35%">{_exact_location}</td>
+						<td width="1%" nowrap="nowrap">OS</td>
+						<td width="1%" nowrap="nowrap">{_browser}</td>
+						<td width="10%" nowrap="nowrap">{_last_click}</td>
+						<td width="8%">{_duration}</td>
+						<td width="8%">{_expires}</td>
+						<td width="1%" nowrap="nowrap">Site ID</td>
+                        <td width="1%">{_action}</td>
+					</tr>
+					<loop name="guest_connection_results"> 
+					<tr class="alt1" valign="top"> 
+						<td nowrap="nowrap"><span class="black">{ip_address} (<span title="{connects} {_connections_total}">{connects}</span>)</span>{country}</span></td>
+						<td align="left"><span class="blue">{location}</span></td>
+						<td nowrap="nowrap">{os}</td>
+						<td nowrap="nowrap">{browser}</td>
+						<td nowrap="nowrap">{lastclick}</td>
+						<td nowrap="nowrap">{duration}</td>
+						<td nowrap="nowrap">{expiresin}</td>
+						<td nowrap="nowrap">{siteid}</td>
+                        <td nowrap="nowrap" align="center" width="1%">{checkbox}</td>
+					</tr>
+					</loop name="guest_connection_results"> 
+					<if condition="isset($show['noguests']) AND $show['noguests']">
+					<tr>
+						<td colspan="9" align="center">{_no_results_found}</td>
+					</tr>
+					<else />
+					<tr class="alt2_top">
+						<td colspan="9"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value="{_kick_sessions}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" disabled="disabled" /><else /><input type="submit" value="{_kick_sessions}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></if></td>
+					</tr>
+					</if>
+					</table>
+
+						
+	    </div>
+					
+					<div class="block-footer">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+			</form>
+		</div>
+		<div class="tab-page">
+			<h2 class="tab">{_users} ({membersonline})</h2>
+			<form name="connections_members" method="post" action="{ilpage[connections]}" accept-charset="UTF-8" style="margin:0px">
+			<input type="hidden" name="cmd" value="_kick-session" />
+			<div class="block-wrapper">
+			<div class="block">
+			
+					<div class="block-top">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+					<div class="block-header">{_members}</div>
+					<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_an_overview_of_loggedin_registered_members_connected_to_the_marketplace}</div></div>
+					<div class="block-content" style="padding:0px">
+						
+					<table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+					<tr class="alt2">
+						
+						<td>{_username}</td>
+						<td width="35%">{_exact_location}</td>
+						<td width="1%" nowrap="nowrap">OS</td>
+						<td width="1%" nowrap="nowrap">{_browser}</td>
+						<td width="10%" nowrap="nowrap">{_last_click}</td>
+						<td width="8%">{_duration}</td>
+						<td width="8%">{_expires}</td>
+						<td width="1%" nowrap="nowrap">Site ID</td>
+                        <td width="1%">{_action}</td>
+					</tr>
+					<loop name="member_connection_results">
+					<tr class="alt1" valign="top">
+						<td nowrap="nowrap"><span class="blue">{username}{country}</span><div style="padding-top:3px" class="smaller litegray"><span>{ip_address} (<span title="{connects} {_connections_total}">{connects}</span>)</span></span></div></td>
+						<td align="left"><span class="blue">{location}</span></td>
+						<td nowrap="nowrap">{os}</td>
+						<td nowrap="nowrap">{browser}</td>
+						<td nowrap="nowrap">{lastclick}</td>
+						<td nowrap="nowrap">{duration}</td>
+						<td nowrap="nowrap">{expiresin}</td>
+						<td nowrap="nowrap">{siteid}</td>
+                        <td nowrap="nowrap" width="1%">{checkbox}</td>
+					</tr>
+					</loop name="member_connection_results">
+					<if condition="isset($show['nomembers']) AND $show['nomembers']">
+					<tr>
+						<td colspan="9" align="center">{_no_results_found}</td>
+					</tr>
+					<else />
+					<tr class="alt2_top">
+						<td colspan="9"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit"  value="{_kick_sessions}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" disabled="disabled" /><else /><input type="submit"  value="{_kick_sessions}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></if></td>
+					</tr>
+					</if>
+					</table>
+
+						
+</div>
+					
+					<div class="block-footer">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+			</form>
+		</div>
+		<div class="tab-page">
+			<h2 class="tab">{_staff} ({staffonline})</h2>
+			<form name="connections_staff" method="post" action="{ilpage[connections]}" accept-charset="UTF-8" style="margin:0px">
+			<input type="hidden" name="cmd" value="_kick-session" />
+			<div class="block-wrapper">
+			<div class="block">
+			
+					<div class="block-top">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+					<div class="block-header">{_staff}</div>
+					<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_an_overview_of_loggedin_staff_and_support_agents_connected_to_the_marketplace}</div></div>
+					<div class="block-content" style="padding:0px">
+						
+						<table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+						<tr class="alt2"> 
+							
+							<td>{_username}</td>
+							<td width="35%">{_exact_location}</td>
+							<td width="1%" nowrap="nowrap">OS</td>
+							<td width="1%" nowrap="nowrap">{_browser}</td>
+							<td width="10%" nowrap="nowrap">{_last_click}</td>
+							<td width="8%">{_duration}</td>
+							<td width="8%">{_expires}</td>
+							<td width="1%" nowrap="nowrap">Site ID</td>
+                            <td width="1%">{_action}</td>
+						</tr>
+						<loop name="admin_connection_results"> 
+						<tr class="{class}" valign="top"> 
+							
+							<td nowrap="nowrap"><span class="blue">{username}{country}</span><div style="padding-top:3px" class="smaller litegray"><span>{ip_address} (<span title="{connects} {_connections_total}">{connects}</span>)</span></span></div></td>
+							<td align="left"><span class="blue">{location}</span></td>
+							<td nowrap="nowrap">{os}</td>
+							<td nowrap="nowrap">{browser}</td>
+							<td nowrap="nowrap">{lastclick}</td>
+							<td nowrap="nowrap">{duration}</td>
+							<td nowrap="nowrap">{expiresin}</td>
+							<td nowrap="nowrap">{siteid}</td>
+                            <td nowrap="nowrap" width="1%">{checkbox}</td>
+						</tr>
+						</loop name="admin_connection_results"> 
+						<if condition="isset($show['noadmins']) AND $show['noadmins']">
+						<tr>
+							<td colspan="9" align="center">{_no_results_found}</td>
+						</tr>
+						<else />
+						<tr class="alt2_top">
+							<td colspan="9"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value="{_kick_sessions}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" disabled="disabled" /><else /><input type="submit" value="{_kick_sessions}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></if></td>
+						</tr>
+						</if>
+						</table>
+
+						
+</div>
+					
+					<div class="block-footer">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+		</form>
+		</div>
+	
+		<div class="tab-page">
+			<h2 class="tab">{_bots} ({robotsonline})</h2>
+			<form name="connections_crawlers" method="post" action="{ilpage[connections]}" accept-charset="UTF-8" style="margin:0px">
+			<input type="hidden" name="cmd" value="_kick-session" />
+			<div class="block-wrapper">
+			<div class="block">
+			
+					<div class="block-top">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+					<div class="block-header">{_crawlers}</div>
+					<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_an_overview_of_tagged_search_engine_robots_connected_to_the_marketplace}</div></div>
+					<div class="block-content" style="padding:0px">
+						
+					<table width="100%" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+					<tr class="alt2"> 
+						
+						<td>{_name}</td>
+						<td width="35%">{_exact_location}</td>
+						
+						<td width="1%" nowrap="nowrap">{_browser}</td>
+						<td width="9%" nowrap="nowrap">{_last_click}</td>
+						<td width="8%">{_duration}</td>
+						<td width="8%">{_expires}</td>
+						<td width="1%" nowrap="nowrap">Site ID</td>
+                        <td width="1%">{_action}</td>
+					</tr>
+					<loop name="crawler_connection_results"> 
+					<tr class="alt1" valign="top"> 
+						
+						<td nowrap="nowrap"><span class="blue">{username}{country}</span><div style="padding-top:3px" class="smaller litegray"><span>{ip_address} (<span title="{connects} {_connections_total}">{connects}</span>)</span></div></td>
+						<td align="left"><span class="blue">{location}</span></td>
+						
+						<td nowrap="nowrap">{browser}</td>
+						<td nowrap="nowrap">{lastclick}</td>
+						<td nowrap="nowrap">{duration}</td>
+						<td nowrap="nowrap">{expiresin}</td>
+						<td nowrap="nowrap">{siteid}</td>
+                        <td nowrap="nowrap" width="1%">{checkbox}</td>
+					</tr>
+					</loop name="crawler_connection_results"> 
+					<if condition="isset($show['nocrawlers']) AND $show['nocrawlers']">
+					<tr>
+						<td colspan="8" align="center">{_no_results_found}</td>
+					</tr>
+					<else />
+					<tr class="alt2_top">
+						<td colspan="8"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" value="{_kick_sessions}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" disabled="disabled" /><else /><input type="submit" value="{_kick_sessions}" style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></if></td>
+					</tr>
+					</if>
+					</table>
+
+						
+</div>
+					
+					<div class="block-footer">
+							<div class="block-right">
+									<div class="block-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+			</form>
+		</div>
+		
+		{apihook[connections_tab_end]}
+		
+	</div><br /><br /><br />

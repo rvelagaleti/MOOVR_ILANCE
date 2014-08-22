@@ -1,0 +1,1919 @@
+<div id="v3body4">
+	<div id="sub">
+		<div id="subnav">
+			<loop name="subnav_settings"><a href="{url}" {class}><span>{name}</span></a> <span> | </span> </loop name="subnav_settings">
+		</div><!-- subnav -->
+	</div><!-- sub -->
+
+	<div id="content">
+	
+	<h1>{_marketplace_configuration}</h1><br />
+	
+		<!-- begin tab pane -->
+		<div class="tab-pane">
+		
+			<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled']"><!-- begin tab page -->
+			<div class="tab-page">
+	
+				<h2 class="tab">{_service}</h2>
+				<!-- begin tab pane -->
+				<div class="tab-pane" id="servicesettings">
+				
+					<!-- service final value fee logic -->
+					<div class="tab-page">
+						
+						<h2 class="tab">{_budget}</h2>
+						
+						<!-- begin marketplace profile groups tab pane -->
+						<div class="tab-pane" id="budgetgroups">
+					
+						<!-- begin marketplace profile groups tab page -->
+						<div class="tab-page">
+							<h2 class="tab">{_groups}</h2>
+                            
+                            <script type="text/javascript">
+							<!--
+							function validate_new_budget_group()
+							{
+									haveerrors = 0;
+									
+									if (window.document.newbudgetgroup.groupname.value.length == 0)
+									{
+											alert_js(phrase['_the_new_budget_group_title_cannot_be_empty']);
+											haveerrors = 1;
+									} 
+									if (window.document.newbudgetgroup.description.value.length == 0)
+									{
+											alert_js(phrase['_the_new_budget_group_description_cannot_be_empty']);
+											haveerrors = 1;
+									} 
+	
+									return (!haveerrors);
+							}
+							//-->
+							</script>
+							
+							<form method="post" action="{ilpage[settings]}" name="newbudgetgroup" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return validate_new_budget_group()">
+							<input type="hidden" name="cmd" value="marketplace" />
+							<input type="hidden" name="subcmd" value="{subcmdbudgetgroup}" />
+							<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+							{hiddenbudgetgroupid2}
+							<a name="editbudgetgroup"></a>
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_new_budget_group}</div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_creating_new_budget_groups_allow_you_to_define_budget_ranges_within_them}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt1"> 
+											<td width="9%" nowrap="nowrap">{_title}</td>
+											<td width="91%"> <input type="text" name="groupname" value="{budgetgroupname}" class="input" size="20" /> <span class="gray smaller">{_required}</span></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="9%" nowrap="nowrap">{_description}</td>
+											<td width="91%"> <input type="text" name="description" value="{budgetgroupdescription}" class="input" size="50" /> <span class="gray smaller">{_required}</span> </td>
+										</tr>
+										<tr class="alt2_top"> 
+											<td colspan="2" nowrap="nowrap">{submitbudget}</td>
+										</tr>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+							</div>
+							</form>
+							
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_budget_groups}</div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_and_manage_budget_groups_that_hold_budget_ranges}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt2"> 
+											<td width="65%">{_group}</td>
+											<td width="21%">{_quick_assign}</td>
+											<td width="5%" align="center">{_edit}</td>
+											<td width="9%" align="center">{_remove}</td>
+										</tr>
+										<loop name="budget1_groups"> 
+										<tr class="alt1" valign="top"> 
+											<td><div class="blue"><strong>{groupname}</strong></div><div class="smaller" style="padding-top:3px; padding-bottom:3px">{description}</div><div class="smaller gray">{groupcount} {_categories_using_this_budget_group} </div></td>
+											<td><a href="{ilpage[settings]}?cmd=marketplace&amp;subcmd=assign-budget&amp;title={groupnameplain}"><span class="blue">{_assign_to_all_categories}</span></a></td>
+											<td align="center">{edit}</td>
+											<td align="center">{remove_group}</td>
+										</tr>
+										</loop name="budget1_groups"> 
+										<if condition="isset($show['no_budget1_groups']) AND $show['no_budget1_groups']"> 
+										<tr> 
+											<td colspan="4" align="center">{_no_groups_exist}</td>
+										</tr>
+										</if>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+							</div>
+							
+						</div>
+						<!-- /begin marketplace profile groups tab page -->
+						
+						<!-- begin marketplace profile questions tab -->
+						<div class="tab-page">
+						  <h2 class="tab">{_ranges}</h2>
+							
+							<script type="text/javascript">
+							<!--
+							function validate_budget()
+							{
+									var Chars = "0123456789.,-";
+									haveerrors = 0;
+									for (var i = 0; i < window.document.insertbudget.budgetfrom.value.length; i++)
+									{
+											if (Chars.indexOf(window.document.insertbudget.budgetfrom.value.charAt(i)) == -1)
+											{
+													alert_js(phrase['_invalid_currency_characters_only_numbers_and_a_period_are_allowed_in_this_field']);
+													haveerrors = 1;
+											}
+									}
+									for (var i = 0; i < window.document.insertbudget.budgetto.value.length; i++)
+									{
+											if (Chars.indexOf(window.document.insertbudget.budgetto.value.charAt(i)) == -1)
+											{
+													alert_js(phrase['_invalid_currency_characters_only_numbers_and_a_period_are_allowed_in_this_field']);
+													haveerrors = 1;
+											}
+									}
+									
+									if (window.document.insertbudget.groupid.selectedIndex == 0)
+									{
+											alert_js(phrase['_you_must_choose_an_existing_budget_group_in_order_to_assign_this_new_budget_range']);
+											haveerrors = 1;
+									} 
+									
+									if (window.document.insertbudget.title.value.length == 0)
+									{
+											alert_js(phrase['_you_must_enter_a_budget_range_title']);
+											haveerrors = 1;
+									} 
+									
+									if (window.document.insertbudget.budgetfrom.value.length == 0)
+									{
+											alert_js(phrase['_you_must_enter_a_budget_from_range_value']);
+											haveerrors = 1;
+									} 
+									
+									if (window.document.insertbudget.budgetto.value.length == 0)
+									{
+											alert_js(phrase['_you_must_enter_a_budget_to_range']);
+											haveerrors = 1;
+									}
+	
+									return (!haveerrors);
+							}
+							//-->
+							</script>
+							
+							<form method="post" action="{ilpage[settings]}" name="insertbudget" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return validate_budget();">
+							<input type="hidden" name="cmd" value="marketplace" />
+							<input type="hidden" name="subcmd" value="{budgetsubcmd}" />
+							<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+							{budgethidden}
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_add_a_new_budget_range_to_a_specific_budget_group}</div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_please_remember_that_insertion_groups_may_also_be_defined_on_a_category_by_category_basis}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+									<table border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td>{_budget_group}</td>
+										<td>{budgetgrouppulldown} <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td>IF {_group} <a href="javascript:void(0)" onmouseover="Tip(phrase['_if_stands_for_insertion_fee_and_this_column_represents_which_insertion_fee_group_is_currently_assigned_to_that_budget_range'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+										<td>{insertiongrouppulldown} <span class="gray smaller">{_optional}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="109" nowrap="nowrap">{_title}</td>
+										<td width="576"><input class="input" name="title" value="{title}" size="50" /> <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="109">{_budget_from}</td>
+										<td width="576"><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span> <input class="input" name="budgetfrom" value="{budgetfrom}" size="10" /> <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="109">{_budget_to}</td>
+										<td width="576"><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span> <input class="input" name="budgetto" value="{budgetto}" size="10" /> <span class="gray smaller">{_you_can_enter_1_to_define_an_unlimited_range_value_for_example_from_1000_or_more}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="109">{_display_order}</td>
+										<td width="576"><input class="input" name="sort" value="{budgetsort}" size="3" /></td>
+									</tr>
+									<tr class="alt2_top"> 
+										<td colspan="2" valign="middle">{budgetsubmit}</td>
+									</tr>
+									</table>
+
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+							</div>
+							</form>
+							
+							<loop name="budget_groups">
+							<form method="post" action="{ilpage[settings]}" name="updateinsertion" accept-charset="UTF-8" style="margin:0px">
+							<input type="hidden" name="cmd" value="marketplace" />
+							<input type="hidden" name="subcmd" value="_update-budget-sort" />
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_budget_group}: <span class="blue">{groupname}</span></div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_to_enable_this_budget_range_structure_below_be_sure}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+										<tr class="alt2"> 
+											<td width="16%" nowrap="nowrap">{_title}</td>
+											<td width="14%" nowrap="nowrap">{_budget_from} </td>
+											<td width="17%" nowrap="nowrap">{_budget_to} </td>
+											<td width="8%" nowrap="nowrap">IF {_group} <a href="javascript:void(0)" onmouseover="Tip(phrase['_if_stands_for_insertion_fee_and_this_column_represents_which_insertion_fee_group_is_currently_assigned_to_that_budget_range'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+											<td width="5%" align="center" nowrap="nowrap">{_sort}</td>
+											<td align="center" width="12%" nowrap="nowrap">{_action}</td>
+										</tr>
+										<loop name="budgetfees{groupid}">
+										<tr class="alt1"> 
+											<td align="left"><span class="blue">{title}</span></td>
+											<td align="left">{from}</td>
+											<td align="left">{to}</td>
+											<td><span class="gray">{insgroup}</span></td>
+											<td align="center"><input type="text" name="sort[{budgetid}]" value="{sort}" size="5" style="text-align:center" class="input" /></td>
+											<td align="center">{actions}</td>
+										</tr>
+										</loop name="budgetfees{groupid}"> 
+										<if condition="isset($no_budgetfees{groupid}) AND $no_budgetfees{groupid}"> 
+										<tr> 
+											<td colspan="7" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found} {_in} <strong>{groupname}</strong></div></td>
+										</tr>
+										</if>
+										<tr class="alt2_top"> 
+											<td colspan="7"><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" /> </td>
+										</tr>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+							</form>
+							</loop name="budget_groups">
+							
+						</div>					
+						<!-- begin marketplace profile questions tab -->
+					
+					</div>
+					<!-- /begin marketplace profile groups tab pane -->
+					
+					</div>
+					<!-- / service final value fee logic -->
+
+					<div class="tab-page">
+					<h2 class="tab">{_insertion}</h2>
+				
+					<!-- begin marketplace profile groups tab pane -->
+					<div class="tab-pane" id="insertiongroups">
+					
+						<!-- begin marketplace profile groups tab page -->
+						<div class="tab-page">
+							<h2 class="tab">{_groups}</h2>
+							
+                            <script type="text/javascript">
+							<!--
+							function validate_new_service_insertion_group()
+							{
+									haveerrors = 0;
+									
+									if (window.document.newserviceinsertiongroup.groupname.value.length == 0)
+									{
+											alert_js(phrase['_the_new_insertion_group_title_cannot_be_empty']);
+											haveerrors = 1;
+									} 
+									if (window.document.newserviceinsertiongroup.description.value.length == 0)
+									{
+											alert_js(phrase['_the_new_insertion_group_description_cannot_be_empty']);
+											haveerrors = 1;
+									} 
+	
+									return (!haveerrors);
+							}
+							//-->
+							</script>
+                            
+							<form method="post" action="{ilpage[settings]}" name="newserviceinsertiongroup" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return validate_new_service_insertion_group()">
+							<input type="hidden" name="cmd" value="marketplace" />
+							<input type="hidden" name="subcmd" value="{subcmdinsertion}" />
+							<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+							<input type="hidden" name="state" value="service" />
+							{hiddengroupid}
+							<a name="editgroup"></a>
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_insertion_group_management}</div>
+									<div class="block-content" style="padding:0px">
+										
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td width="9%" nowrap="nowrap"><span>{_title}</span></td>
+										<td width="91%"> <input type="text" name="groupname" value="{groupname2}" class="input" size="20" />  <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="9%" nowrap="nowrap"><span>{_description}</span></td>
+										<td width="91%"> <input type="text" name="description" value="{description2}" class="input" size="50" />  <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt2_top"> 
+										<td colspan="2">{submitinsertion}</td>
+									</tr>
+									</table>
+
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+							</div>
+							</form>
+							
+							<a name="editgroup"></a>
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_insertion_groups}</div>
+									<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_and_manage_insertion_fees_and_groups_used_within}</div></div>
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt2"> 
+											<td width="65%">{_group}</td>
+											<td width="21%">{_quick_assign}</td>
+											<td width="5%" align="center">{_edit}</td>
+											<td width="9%" align="center">{_remove}</td>
+										</tr>
+										<loop name="serviceinsertion1_groups"> 
+										<tr class="alt1" valign="top"> 
+											<td><div class="blue"><strong>{groupname}</strong> <span class="smaller">(GID {groupid})</span></div>
+											<div class="smaller" style="padding-top:3px; padding-bottom:5px">{description}</div>
+											<div class="smaller gray">{groupcount} {_categories_using_this_fee_structure}</div>
+                                            <div class="smaller gray" style="padding-top:3px">{budgetgroupcount} {_budget_groups_using_this_fee_structure}</div>
+                                            <div class="smaller gray" style="padding-top:3px">{groupcount2} {_membership_permission_groups_using_this_fee_structure}</div></td>
+											<td><a href="{ilpage[settings]}?cmd=marketplace&amp;subcmd=assign-service-insertion&amp;title={groupnameplain}"><span class="blue">{_assign_to_all_categories}</span></a></td>
+											<td align="center">{edit}</td>
+											<td align="center">{remove_group}</td>
+										</tr>
+										</loop name="serviceinsertion1_groups"> 							
+										<if condition="isset($show['no_serviceinsertion1_groups']) AND $show['no_serviceinsertion1_groups']"> 
+										<tr> 
+											<td colspan="4" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_groups_exist}</div></td>
+										</tr>
+										</if>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+							</div>
+							
+						</div>
+						<!-- /begin marketplace profile groups tab page -->
+						
+						<!-- begin marketplace profile questions tab -->
+						<div class="tab-page">
+						  <h2 class="tab">{_fees}</h2>
+							
+                            <script type="text/javascript">
+							<!--
+							function validate_new_service_insertion_fee()
+							{
+									haveerrors = 0;
+									
+									if (window.document.newinsertionfee.groupid.selectedIndex == 0)
+									{
+											alert_js(phrase['_you_must_choose_an_existing_insertion_group_in_order_to_create_this_new_insertion_fee']);
+											haveerrors = 1;
+									}
+									if (window.document.newinsertionfee.amount.value.length == 0 || window.document.newinsertionfee.amount.value == '0.00')
+									{
+											alert_js(phrase['_the_new_insertion_fee_amount_cannot_be_empty_or_zero_in_value']);
+											haveerrors = 1;
+									} 
+	
+									return (!haveerrors);
+							}
+							//-->
+							</script>
+                            
+							<a name="#question"></a>
+							<form method="post" action="{ilpage[settings]}" name="newinsertionfee" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return validate_new_service_insertion_fee()">
+							<input type="hidden" name="cmd" value="marketplace" />
+							<input type="hidden" name="subcmd" value="{insform2}" />
+							<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+							<input type="hidden" name="insertion_from" value="0" />
+							<input type="hidden" name="insertion_to" value="0" />
+							<input type="hidden" name="state" value="service" />
+							{inshidden2}
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_add_new_insertion_fee}</div>
+									<!--<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller"></div></div>-->
+									<div class="block-content" style="padding:0px">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt1"> 
+											<td><span>{_group}</span></td>
+											<td>{insertiongroupservicepulldown} <span class="gray smaller">{_required}</span></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="109"><span>{_insertion_fee}</span></td>
+											<td width="576"><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span>  <input class="input" name="amount" value="{insamount2}" size="5" /> <span class="gray smaller">{_required}</span></td>
+										</tr>
+										<tr class="alt1"> 
+											<td width="109"><span>{_sort}</span></td>
+											<td width="576"><input class="input" name="sort" value="{inssort2}" size="3" /></td>
+										</tr>
+										<tr class="alt2_top"> 
+											<td colspan="2">{inssubmit2}</td>
+										</tr>
+										</table>
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+
+							
+							</form>
+							
+							<loop name="serviceinsertion_groups">
+							<form method="post" action="{ilpage[settings]}" name="updateinsertion" accept-charset="UTF-8" style="margin:0px">
+							<input type="hidden" name="cmd" value="marketplace" />
+							<input type="hidden" name="subcmd" value="_update-insertion-sort" />
+							<div class="block-wrapper">
+							<div class="block">
+							
+									<div class="block-top">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+									<div class="block-header">{_insertion_fee_group}: <span class="blue">{groupname}</span></div>
+									<!--<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller"></div></div>-->
+									<div class="block-content" style="padding:0px">
+										
+									<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+									<tr class="alt2"> 
+										<td width="78%" nowrap="nowrap">{_insertion_fee}</td>
+										<td width="7%" align="center" nowrap="nowrap" >{_sort}</td>
+										<td align="center" width="15%" nowrap="nowrap">{_action}</td>
+									</tr>
+									<loop name="serviceinsertionfees{groupid}">
+									<tr class="alt1"> 
+										<td align="left">{amount}</td>
+										<td align="center"><input type="text" name="sort[{insertionid}]" value="{sort}" size="5" style="text-align:center" class="input" /></td>
+										<td align="center">{actions}</td>
+									</tr>
+									</loop name="serviceinsertionfees{groupid}"> 
+									<tr class="alt2_top"> 
+										<td colspan="7"><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" /> </td>
+									</tr>
+									<if condition="isset($no_serviceinsertionfees{groupid}) AND $no_serviceinsertionfees{groupid}"> 
+									<tr> 
+										<td colspan="4" align="center">{_no_results_found} {_in} <strong>{groupname}</strong></td>
+									</tr>
+									</if>
+									</table>
+
+										
+									</div>
+									
+									<div class="block-footer">
+											<div class="block-right">
+													<div class="block-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+
+							</form>
+							</loop name="serviceinsertion_groups">
+						</div>					
+						<!-- begin marketplace profile questions tab -->
+					
+					</div>
+					<!-- /begin marketplace profile groups tab pane -->
+				
+				</div>
+					
+					
+					<!-- begin final value groups tab -->
+			<div class="tab-page">
+				<h2 class="tab">{_final_value}</h2>
+				
+				<!-- begin marketplace profile groups tab pane -->
+				<div class="tab-pane" id="finalvaluegroups">
+					
+					<!-- begin marketplace profile groups tab page -->
+					<div class="tab-page">
+						<h2 class="tab">{_groups}</h2>
+						
+						<a name="editgroup"></a>
+						<form method="post" action="{ilpage[settings]}" name="ilform" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="{subcmdfv}" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+						<input type="hidden" name="state" value="service" />
+						{hiddenfvgroupid}
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_final_value_group_management}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_new_final_value_groups_and_associate_final_value_fees_within_tiers}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td width="9%"><span class="gray">{_title}</span></td>
+										<td width="91%"> <input type="text" name="groupname" value="{groupnamefv}" class="input" size="20" /> <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="9%"><span class="gray">{_description}</span></td>
+										<td width="91%"><input type="text" name="description" value="{descriptionfv}" class="input" size="70" /> <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt2_top"> 
+										<td colspan="2">{submitfv}</td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+						
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_final_value_groups}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_and_manage_final_value_fees_and_groups_used_within_the_service_category_distribution_system}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt2"> 
+										<td width="64%">{_group}</td>
+										<td width="22%">{_quick_assign} </td>
+										<td width="5%" align="center">{_edit}</td>
+										<td width="9%" align="center">{_remove}</td>
+									</tr>
+									<loop name="servicefv1_groups"> 
+									<tr class="alt1" valign="top"> 
+										<td><div class="blue"><strong>{groupname}</strong> <span class="smaller">(GID {groupid})</span></div>
+										<div class="smaller" style="padding-top:3px">{description}</div>
+										<div class="smaller gray" style="padding-top:3px">{groupcount} {_categories_using_this_fee_structure}</div>
+                                        <div class="smaller gray" style="padding-top:3px">{groupcount2} {_membership_permission_groups_using_this_fee_structure}</div>
+                                        </td>
+									    <td><a href="{ilpage[settings]}?cmd=marketplace&amp;subcmd=assign-service-finalvalue&amp;title={groupnameplain}"><span class="blue">{_assign_to_all_categories}</span></a></td>
+								      <td align="center">{edit}</td>
+										<td align="center">{remove_group}</td>
+									</tr>
+									</loop name="servicefv1_groups"> 
+									<if condition="isset($show['no_servicefv_groups']) AND $show['no_servicefv_groups']"> 
+									<tr> 
+										<td colspan="4" align="center">{_no_final_value_groups_exist}</td>
+									</tr>
+									</if>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+						
+					</div>
+					<!-- /begin marketplace profile groups tab page -->
+					
+					<!-- begin marketplace profile questions tab -->
+					<div class="tab-page">
+					  <h2 class="tab">{_fees}</h2>
+						
+						<a name="question"></a>
+						<a name="edit"></a>
+						<form method="post" action="{ilpage[settings]}" name="insertion" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="{fvsubcmd}" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+						<input type="hidden" name="state" value="service" />
+						{fvhidden}
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_create_final_value_fee_tier}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_add_a_new_fee_range_to_a_specific_final_value_group}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td><span class="gray">{_fvf} {_group}</span></td>
+										<td width="84%">{finalvaluegroupservicepulldown} <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="16%" nowrap="nowrap"><span class="gray">{_from} {_amount}</span></td>
+										<td><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span>  <input class="input" name="finalvalue_from" value="{fvfrom}" size="10" /> <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_to_upper} {_amount}</span></td>
+										<td><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span>  <input class="input" name="finalvalue_to" value="{fvto}" size="10" /> <span class="smaller gray">{_required} - {_enter_1_to_flag_this_tier_as_an_unlimited_range}</span></td>
+									  </tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_fixed} {_amount}</span></td>
+										<td><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span> <input class="input" name="amountfixed" value="{fvamountfixed}" size="10" /> <span class="smaller gray">{_if_you_will_charge_a_fixed_rate_for_a_single_tier_enter_it_here}</span></td>
+									  </tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_percent}</span></td>
+										<td><input class="input" name="amountpercent" value="{fvamountpercent}" size="5" />&nbsp;% <span class="smaller gray">{_if_you_will_charge_a_percent_rate_for_multiple_tiers_enter_it_here}</span></td>
+									  </tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_sort}</span></td>
+										<td><input class="input" name="sort" value="{fvsort2}" size="3" /></td>
+									  </tr>
+									
+									<tr class="alt2_top"> 
+										<td colspan="2">{fvsubmit}</td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+						
+						<loop name="servicefv_groups">
+						<form name="sort" method="post" action="{ilpage[settings]}" accept-charset="UTF-8" style="margin:0px">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="_update-fv-sort" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_final_value_group}: <span class="blue">{groupname}</span></div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_to_enable_this_fee_structure_below_be_sure_the_categories_have_this_as_the_primary_final_value_group_from_your_category_management_area_located_within_the_service}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+									<tr class="alt2"> 
+										<td nowrap="nowrap" align="center">{_tier}</td>
+										<td nowrap="nowrap">{_from}</td>
+										<td nowrap="nowrap">{_to_upper}</td>
+										<td width="20%" nowrap="nowrap">{_fixed} {_fee}</td>
+										<td width="20%" nowrap="nowrap">{_percent} {_fee}</td>
+                                        <td align="center" width="14%" nowrap="nowrap">{_sort}</td>
+										<td align="center" width="14%" nowrap="nowrap">{_action}</td>
+									</tr>
+									<loop name="servicefvfees{groupid}">
+									<tr class="alt1" valign="top"> 
+										<td width="5%" align="center">{tier}</td>
+										<td width="21%">{from}</td>
+										<td width="20%">{to}</td>
+										<td>{amountfixed}</td>
+										<td>{amountpercent}</td>
+										<td align="center"><input type="text" name="sort[{tierid}]" value="{sort}" style="width:50px; text-align:center" class="input" /></td>
+                                        <td align="center" nowrap="nowrap">{actions}</td>
+									</tr>
+									</loop name="servicefvfees{groupid}"> 
+									<tr class="alt2_top"> 
+										<td colspan="7" valign="middle"><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" /> </td>
+									</tr>
+									<if condition="isset($no_servicefvfees{groupid}) AND $no_servicefvfees{groupid}"> 
+									<tr> 
+										<td colspan="8" align="center">{_no_results_found} {_in} <strong>{groupname}</strong></td>
+									</tr>
+									</if>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+					</loop name="servicefv_groups">
+					
+					</div>					
+					<!-- begin marketplace profile questions tab -->
+					
+				</div>
+				<!-- /begin marketplace profile groups tab pane -->
+				
+			</div>
+			<!-- /begin marketplace profile settings tab -->
+					
+					
+					<!-- begin service rating logic -->
+					<div class="tab-page">
+						<h2 class="tab">{_rating_logic}</h2>
+						
+						{configuration_servicerating}
+						
+					</div>
+					<!-- /begin service rating logic -->
+					
+					<!-- begin service bid logic settings -->
+					<div class="tab-page">
+						<h2 class="tab">{_award_logic}</h2>
+						
+						{configuration_servicebid}
+						
+					</div>
+					<!-- /begin service bid logic settings -->
+					
+					<!-- begin service fee logic -->
+					<div class="tab-page">
+						<h2 class="tab">{_upsell}</h2>
+						
+						{configuration_serviceupsell}
+						
+					</div>
+					<!-- /begin service fee logic -->
+					
+				
+					
+				</div>
+				<!-- /begin tab pane -->
+				
+			</div>
+			<!-- /begin tab page --></if>
+			
+			<if condition="$ilconfig['globalauctionsettings_productauctionsenabled']"><!-- begin marketplace product settings tab -->
+			<div class="tab-page"> 
+				<h2 class="tab">{_product}</h2>
+				
+				<!-- begin tab pane -->
+				<div class="tab-pane" id="productratingweight">
+					
+					<!-- begin marketplace profile settings tab -->
+			<div class="tab-page">
+				<h2 class="tab">{_insertion}</h2>
+				
+				<!-- begin marketplace profile groups tab pane -->
+				<div class="tab-pane" id="insertiongroups">
+					
+					<!-- begin marketplace profile groups tab page -->
+					<div class="tab-page">
+						<h2 class="tab">{_groups}</h2>
+						
+						<form method="post" action="{ilpage[settings]}" name="ilform" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="{subcmdinsertion}" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+						<input type="hidden" name="state" value="product" />
+						{hiddengroupid}
+						
+						<a name="editgroup"></a>
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_insertion_group_management}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_creating_new_insertion_groups_allow_you_to_define_insertion_fees_within_tiers}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" align="center" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td width="9%" nowrap="nowrap">{_group_title} </td>
+										<td width="91%"> <input type="text" name="groupname" value="{groupname}" class="input" /> <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+											<td width="9%" nowrap="nowrap">{_description} </td>
+											<td width="91%"> <input type="text" name="description" value="{insertiongroupdescription}" class="input" size="70" /> <span class="gray smaller">{_required}</span></td>
+									  </tr>
+									<tr class="alt2_top"> 
+									<td colspan="2" nowrap="nowrap">{submitinsertion}</td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+						
+						</form>
+						
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_insertion_groups}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_and_manage_insertion_fees_and_groups_used_within}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" align="center">
+									<tr class="alt2"> 
+										<td width="62%">{_group}</td>
+										<td width="24%">{_quick_assign}</td>
+										<td width="5%" align="center">{_edit}</td>
+										<td width="9%" align="center">{_remove}</td>
+									</tr>
+									<loop name="productinsertion1_groups"> 
+									<tr class="alt1" valign="top"> 
+										<td><div class="blue"><strong>{groupname}</strong> <span class="smaller">(GID {groupid})</span></div>
+										<div class="smaller" style="padding-top:3px">{description}</div>
+										<div class="smaller gray" style="padding-top:3px">{groupcount} {_categories_using_this_fee_structure}</div>
+                                        <div class="smaller gray" style="padding-top:3px">{groupcount2} {_membership_permission_groups_using_this_fee_structure}</div></td>
+										<td><a href="{ilpage[settings]}?cmd=marketplace&amp;subcmd=assign-product-insertion&amp;title={groupnameplain}"><span class="blue">{_assign_to_all_categories}</span></a></td>
+										<td align="center">{edit}</td>
+										<td align="center">{remove_group}</td>
+									</tr>
+									</loop name="productinsertion1_groups"> 
+									<if condition="isset($show['no_productinsertion1_groups']) AND $show['no_productinsertion1_groups']"> 
+									<tr> 
+										<td colspan="4" align="center">{_no_groups_exist}</td>
+									</tr>
+									</if>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+						
+
+					</div>
+					<!-- /begin marketplace profile groups tab page -->
+					
+					<!-- begin marketplace profile questions tab -->
+					<div class="tab-page">
+					  <h2 class="tab">{_fees}</h2>
+						
+						<a name="question"></a>
+						<a name="edit"></a>
+						<form method="post" action="{ilpage[settings]}" name="insertion" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="{insform}" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+						<input type="hidden" name="state" value="product" />
+						{inshidden}
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_add_new_insertion_fee_range}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_add_a_new_insertion_fee_range_to_a_specific_insertion_group}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td><span class="gray">IF {_group}</span></td>
+										<td>{insertiongroupproductpulldown} <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="17%" class="alt1"><span class="gray">{_from} {_amount}</span></td>
+									  <td width="83%"><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span>  <input class="input" name="insertion_from" value="{insfrom}" size="10" />  <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td class="alt1"><span class="gray">{_to_upper} {_amount}</span></td>
+										<td><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span>  <input class="input" name="insertion_to" value="{insto}" size="10" />  <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td class="alt1" nowrap="nowrap"><span class="gray">{_insertion_fee} {_amount}</span></td>
+										<td><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span>  <input class="input" name="amount" value="{insamount}" size="10" /> <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td class="alt1"><span class="gray">{_sort}</span></td>
+										<td><input class="input" name="sort" value="{inssort}" size="5" /></td>
+									</tr>
+									<tr class="alt2_top"> 
+										<td colspan="2" valign="middle">{inssubmit}</td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+						</form>
+						
+						<loop name="productinsertion_groups">
+						<form method="post" action="{ilpage[settings]}" name="updateinsertion" accept-charset="UTF-8" style="margin:0px">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="_update-insertion-sort" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_insertion_fee_group}: <span class="blue">{groupname}</span></div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_to_enable_this_fee_structure_below_product}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+									<tr class="alt2"> 
+										<td nowrap="nowrap">{_from}</td>
+										<td nowrap="nowrap">{_to_upper}</td>
+										<td width="14%" nowrap="nowrap">{_insertion_fee}</td>
+										<td width="5%" align="center" nowrap="nowrap">{_sort}</td>
+										<td align="center" width="12%" nowrap="nowrap">{_action}</td>
+									</tr>
+									<loop name="productinsertionfees{groupid}">
+									<tr class="alt1" valign="top"> 
+										<td width="26%" align="left">{from}</td>
+										<td width="33%">{to}</td>
+										<td>{amount}</td>
+										<td align="center"><input type="text" name="sort[{insertionid}]" value="{sort}" size="5" style="text-align:center" class="input" /></td>
+										<td align="center">{actions}</td>
+									</tr>
+									</loop name="productinsertionfees{groupid}"> 
+									<tr class="alt2_top"> 
+										<td colspan="7" valign="middle"><input type="submit" style="font-size:15px" value=" {_save} " class="buttons" /> </td>
+									</tr>
+									<if condition="isset($no_productinsertionfees{groupid}) AND $no_productinsertionfees{groupid}"> 
+									<tr> 
+										<td colspan="6" align="center"><div style="padding-top:8px; padding-bottom:8px">{_no_results_found} {_in} <strong>{groupname}</strong></div></td>
+									</tr>
+									</if>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+						
+						</form>
+						</loop name="productinsertion_groups">
+
+					</div>					
+					<!-- begin marketplace profile questions tab -->
+					
+				</div>
+				<!-- /begin marketplace profile groups tab pane -->
+				
+			</div>
+			<!-- /begin marketplace profile settings tab -->
+					
+					
+					<!-- begin final value groups tab -->
+			<div class="tab-page">
+				<h2 class="tab">{_final_value}</h2>
+				
+				<!-- begin marketplace profile groups tab pane -->
+				<div class="tab-pane" id="finalvaluegroups">
+					
+					<!-- begin marketplace profile groups tab page -->
+					<div class="tab-page">
+						<h2 class="tab">{_groups}</h2>
+						
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_final_value_groups}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_and_manage_final_value_fees_and_groups_used_within_the_product_category_distribution_system}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt2"> 
+										<td width="62%">{_group}</td>
+										<td width="24%">{_quick_assign} </td>
+										<td width="5%" align="center">{_edit}</td>
+										<td width="9%" align="center">{_remove}</td>
+									</tr>
+									<loop name="productfv1_groups"> 
+									<tr class="alt1" valign="top"> 
+										<td><div class="blue"><strong>{groupname}</strong> <span class="smaller">(GID {groupid})</span></div>
+										<div class="smaller" style="padding-top:3px">{description}</div>
+										<div class="smaller gray" style="padding-top:3px">{groupcount} {_categories_using_this_fee_structure}</div>
+                                        <div class="smaller gray" style="padding-top:3px">{groupcount2} {_membership_permission_groups_using_this_fee_structure}</div></td>
+									    <td><a href="{ilpage[settings]}?cmd=marketplace&amp;subcmd=assign-product-finalvalue&amp;title={groupnameplain}"><span class="blue">{_assign_to_all_categories}</span></a></td>
+								      <td align="center">{edit}</td>
+										<td align="center">{remove_group}</td>
+									</tr>
+									</loop name="productfv1_groups"> 
+									<if condition="isset($show['no_productfv_groups']) AND $show['no_productfv_groups']"> 
+									<tr> 
+										<td colspan="4" align="center">{_no_final_value_groups_exist}</td>
+									</tr>
+									</if>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					
+					<a name="editgroup"></a>
+						<form method="post" action="{ilpage[settings]}" name="ilform" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="{subcmdfv}" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+						<input type="hidden" name="state" value="product" />
+						{hiddenfvgroupid}
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_final_value_group_management}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_create_new_final_value_groups_and_associate_final_value_fees_within_tiers}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td width="9%">{_title}</td>
+										<td width="91%"><input type="text" name="groupname" value="{groupnamefv}" class="input" /> <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="9%">{_description}</td>
+										<td width="91%"><input type="text" name="description" value="{descriptionfv}" class="input" size="70" /> <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt2_top"> 
+										<td colspan="2" valign="middle" nowrap="nowrap">{submitfv}</td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+						
+						</form>
+					
+					</div>
+					<!-- /begin marketplace profile groups tab page -->
+					
+					<!-- begin marketplace profile questions tab -->
+					<div class="tab-page">
+					  <h2 class="tab">{_fees}</h2>
+						
+						<a name="question"></a>
+						<loop name="productfv_groups">
+						<form name="sort" method="post" action="{ilpage[settings]}" accept-charset="UTF-8" style="margin:0px">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="_update-fv-sort" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_final_value_group}: <span class="blue">{groupname}</span></div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_to_enable_this_fee_structure_below_be_sure_the_categories_have_this_as_the_primary_final_value_group_from_your_category_management_area_located_within_the_product}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+									<tr class="alt2"> 
+										<td nowrap="nowrap" align="center">{_tier}</td>
+										<td nowrap="nowrap">{_from}</td>
+										<td nowrap="nowrap">{_to_upper}</td>
+										<td width="17%" nowrap="nowrap">{_fixed} {_fee} </td>
+										<td width="17%" nowrap="nowrap">{_percent} {_fee} </td>
+										<td align="center" width="9%" nowrap="nowrap">{_sort}</td>
+										<td align="right" width="18%" nowrap="nowrap">{_action}</td>
+									</tr>
+									<loop name="productfvfees{groupid}">
+									<tr class="alt1" valign="top"> 
+										<td width="4%" align="center">{tier}</td>
+										<td width="18%">{from}</td>
+										<td width="17%">{to}</td>
+										<td>{amountfixed}</td>
+										<td>{amountpercent}</td>
+										<td align="center"><input type="text" name="sort[{tierid}]" value="{sort}" size="3" style="text-align:center" class="input" /></td>
+										<td align="right">{actions}</td>
+									</tr>
+									</loop name="productfvfees{groupid}"> 
+									<tr class="alt2_top"> 
+										<td colspan="7" valign="middle"><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" /> </td>
+									</tr>
+									<if condition="isset($no_productfvfees{groupid}) AND $no_productfvfees{groupid}"> 
+									<tr> 
+										<td colspan="8" align="center">{_no_results_found} {_in} <strong>{groupname}</strong></td>
+									</tr>
+									</if>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+						</form>
+						</loop name="productfv_groups">
+						
+						<a name="productfvf"></a>
+						<form method="post" action="{ilpage[settings]}" name="insertion" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="{fvsubcmd}" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+						<input type="hidden" name="state" value="product" />
+						{fvhidden}
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_create_final_value_fee_tier}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_add_a_new_fee_range_to_a_specific_final_value_group}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td>FVF {_group}</td>
+										<td>{finalvaluegroupproductpulldown} <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="15%" class="alt1">{_from} {_amount} </td>
+										<td><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span>  <input class="input" name="finalvalue_from" value="{fvfrom}" size="10" /> <span class="smaller gray">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td class="alt1">{_to_upper} {_amount} </td>
+										<td><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span>  <input class="input" name="finalvalue_to" value="{fvto}" size="10" /> <span class="smaller gray">{_required} - {_enter_1_to_flag_this_tier_as_an_unlimited_range}</span></td>
+									  </tr>
+									<tr class="alt1"> 
+										<td class="alt1">{_fixed} {_amount} </td>
+										<td><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span>  <input class="input" name="amountfixed" value="{fvamountfixed}" size="10" /> <span class="smaller gray">{_if_you_will_charge_a_fixed_rate_for_a_single_tier_enter_it_here}</span></td>
+									  </tr>
+									<tr class="alt1"> 
+										<td class="alt1">{_percent}</td>
+										<td><span style="float:left; padding-top:5px">&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;</span>  <input class="input" name="amountpercent" value="{fvamountpercent}" size="10" /> <span class="smaller gray">{_if_you_will_charge_a_percent_rate_for_multiple_tiers_enter_it_here}</span></td>
+									  </tr>
+									<tr class="alt1"> 
+										<td class="alt1">{_sort}</td>
+										<td><input class="input" name="sort" value="{fvsort}" size="5" /></td>
+									  </tr>
+									<tr class="alt2_top"> 
+										<td colspan="2" valign="middle">{fvsubmit}</td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+						
+					</div>					
+					<!-- begin marketplace profile questions tab -->
+					
+				</div>
+				<!-- /begin marketplace profile groups tab pane -->
+				
+			</div>
+			<!-- /begin marketplace profile settings tab -->
+					
+					<!-- begin product fee logic -->
+					<div class="tab-page">
+						
+						<h2 class="tab">{_upsell}</h2>
+						
+						{configuration_productupsell}
+						
+					</div>
+					<!-- /begin product fee logic -->
+					
+					<!-- begin product award settings -->
+					<div class="tab-page">
+						<h2 class="tab">{_bid_award}</h2>
+						
+						{configuration_productaward}
+						
+					</div>
+					<!-- /begin product award settings -->
+					
+					<!-- begin shipping partners -->
+					<div class="tab-page">
+						<h2 class="tab">{_shipping}</h2>
+						
+						{configuration_shippingsettings}
+						
+						{configuration_shippingapiservices}
+                        
+						<form action="{ilpage[settings]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="update-shippers" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />						
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_shipping_services_api}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_below_you_can_manage_shipping_partners_which_sellers_can_chose_from_when_posting_product_auctions}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+									<tr class="alt2"> 
+										<td width="65%">{_title} / {_tracking_url}</td>
+										<td width="5%">{_carrier}</td>
+										<td width="5%" nowrap="nowrap">{_carrier_code}</td>
+										<td width="1%" nowrap="nowrap">{_domestic}</td>
+										<td width="1%" nowrap="nowrap">{_intl}</td>
+										<td width="1%" align="center">{_action}</td>
+										<td width="1%" align="center">{_sort}</td>
+									</tr>
+									<loop name="shippers"> 
+									<tr class="{class}" valign="top"> 
+										<td nowrap="nowrap">{title}<div style="padding-top:3px" class="smaller litegray">{trackurl}</div></td>
+										<td nowrap="nowrap">{carrier}</td>
+										<td nowrap="nowrap">{shipcode}</td>
+										<td>{domestic}</td>
+										<td>{international}</td>
+										<td align="center">{action}</td>
+										<td align="center">{sort}</td>
+									</tr>
+									</loop name="shippers">
+									<if condition="isset($show['no_shippers_rows']) AND $show['no_shippers_rows']"> 
+									<tr> 
+										<td colspan="7" align="center">{_no_shipping_partners_found}</td>
+									</tr>
+									</if>
+									<tr class="alt2_top">
+										<td colspan="7"><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></td>
+									</tr>
+									</table>
+									
+  </div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+						</form>
+						
+						
+						<form action="{ilpage[settings]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="insert-shipper" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+						<div class="block-wrapper">
+						<div class="block">
+						
+								<div class="block-top">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+								<div class="block-header">{_add_new_shipping_partner}</div>
+								<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_please_create_a_new_shipping_partner_sellers_will_be_able_to_choose}</div></div>
+								<div class="block-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td nowrap="nowrap">{_title}</td>
+										<td><input type="text" name="title" style="width:165px" class="input" /></td>
+										<td>{_carrier}</td>
+										<td><input type="text" name="carrier" style="width:50px" class="input" /></td>
+										<td nowrap="nowrap">{_carrier_code}</td>
+										<td><input type="text" name="shipcode" style="width:80px;text-align:center" class="input" /></td>
+										<td nowrap="nowrap"><span title="{_domestic_shipping_service}"><input type="checkbox" name="domestic" value="1" checked="checked" /> {_domestic}</span></td>
+										<td nowrap="nowrap"><span title="{_intl_shipping_service}"><input type="checkbox" name="international" value="1" /> {_intl}</span></td>
+									</tr>
+									<tr>
+										<td nowrap="nowrap">{_tracking_url} </td>
+										<td colspan="5"><input type="text" name="trackurl" style="width:400px" class="input" /></td>
+										<td nowrap="nowrap">{_sort} </td>
+										<td><input type="text" name="sort" style="width:60px" class="input" /></td>
+									</tr>
+									<tr class="alt2_top">
+										<td colspan="8" valign="top"><div><input type="submit" name="save" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" /></div></td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block-footer">
+										<div class="block-right">
+												<div class="block-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+						
+					</div>
+					<!-- /begin shipping partners -->
+					
+					<!-- begin blocks -->
+					<div class="tab-page">
+						<h2 class="tab">{_blocks_visibility}</h2>
+						{configuration_productblocks}
+					</div>
+					<!-- /begin blocks -->
+						
+                        
+					
+				</div>
+				<!-- /begin tab pane -->
+				
+			</div>
+			<!-- /begin marketplace product settings tab -->
+			</if>
+			
+            <!-- begin marketplace profile settings tab -->
+				<div class="tab-page">
+				<script type="text/javascript">
+                        <!--
+                        function validate_profile_group_form()
+                        {
+                                haveerrors = 0;
+                                if (fetch_js_object('name').value == '')
+                                {
+                                    alert_js(phrase['_the_new_profile_group_title_cannot_be_empty']);
+                                    haveerrors = 1;
+                                }
+                                return (!haveerrors);
+                        }
+                        //-->
+                        </script>
+				<h2 class="tab">{_profile}</h2>
+				
+				<!-- begin marketplace profile groups tab pane -->
+				<div class="tab-pane" id="profilegroups">
+					
+					<!-- begin marketplace profile groups tab page -->
+					<div class="tab-page">
+						<h2 class="tab">{_groups}</h2>
+						<form method="post" action="{ilpage[settings]}" name="profilemanagement" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return validate_profile_group_form();">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="{subcmd}" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+						{hiddengroupid}
+						<a name="editgroup"></a>
+						<div class="block-wrapper">
+						<div class="block3">
+						
+								<div class="block3-top">
+										<div class="block3-right">
+												<div class="block3-left"></div>
+										</div>
+								</div>
+								
+								<div class="block3-header">{_profile_group_management}</div>
+								<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_create_a_new_profile_group_and_select_the_category_it_will_appear_in}</div></div>
+								<div class="block3-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1">
+										<td><span class="gray">{_profile_category}</span></td>
+										<td>{category_pulldown} <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td width="42%" class="alt1"><span class="gray">{_title}</span></td>
+										<td width="58%"> <input type="text" name="name" id="name" value="{name}" size="50" class="input" /> <span class="gray smaller">{_required}</span></td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="top" class="alt1"><span class="gray">{_description}</span></td>
+										<td><textarea name="description" style="width: 500px; height: 84px" class="input" wrap="physical">{description}</textarea></td>
+									</tr>
+									<tr class="alt1"> 
+										<td><span class="gray">{_group} {_active}?</span></td>
+										<td><label for="profile_group_active"><input type="checkbox" name="profile_group_active" id="profile_group_active" value="1" {checked_profile_group_active} /> {_yes} </label></td>
+									</tr>
+									<tr class="alt2_top"> 
+										<td colspan="2">{submit}</td>
+									</tr>
+									</table>
+									
+								</div>
+								
+								<div class="block3-footer">
+										<div class="block3-right">
+												<div class="block3-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+						
+						<a name="editgroup"></a>
+						<div class="block-wrapper">
+						<div class="block3">
+						
+								<div class="block3-top">
+										<div class="block3-right">
+												<div class="block3-left"></div>
+										</div>
+								</div>
+								
+								<div class="block3-header">{_profile_groups}</div>
+								<div class="block3-content" style="padding:0px">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt2"> 
+										<td width="1%" align="center">GID</td>
+										<td width="57%">{_profile_group_name}</td>
+										<td width="7%" align="center">{_active}</td>
+										<td width="10%" align="center">{_questions}</td>
+										<td width="6%" align="center">{_edit}</td>
+										<td width="12%" align="center">{_remove}</td>
+									</tr>
+									<loop name="profile_groups"> 
+									<tr class="alt1" valign="top"> 
+										<td align="center">{groupid}</td>
+										<td><div><strong>{name}</strong></div>
+										<div class="smaller gray" style="padding-top:3px">{description}</div>
+										<div class="smaller" style="padding-top:3px">{_in}: <span class="smaller">{category}</span></div></td>
+										<td align="center">{active}</td>
+										<td align="center">{questions}</td>
+										<td align="center">{edit}</td>
+										<td align="center">{remove_group}</td>
+									</tr>
+									</loop name="profile_groups"> 						
+									<if condition="isset($show['no_profile_groups']) AND $show['no_profile_groups']"> 
+									<tr> 
+										<td colspan="6" align="center">{_no_profile_groups_exist}</td>
+									</tr>
+									</if>
+                                    <tr>
+                                    	<td colspan="6"><div class="gray">{_create_and_manage_profile_groups_connected_to_your_category}</div></td>
+                                    </tr>
+									</table>
+									
+								</div>
+								
+								<div class="block3-footer">
+										<div class="block3-right">
+												<div class="block3-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+						
+					</div>
+					<!-- /begin marketplace profile groups tab page -->
+					
+					<!-- begin marketplace profile questions tab -->
+					<div class="tab-page"><h2 class="tab">{_questions}</h2>
+						<script type="text/javascript">
+						<!--
+						function validate_all()
+						{
+							var Chars = "0123456789,.";
+							haveerrors = 0;
+							if (fetch_js_object('profile_question_canverify').checked == true)
+							{
+							    for (var i = 0; i < fetch_js_object('verifycost').value.length; i++)
+							    {
+								    if (Chars.indexOf(fetch_js_object('verifycost').value.charAt(i)) == -1)
+								    {
+									    alert_js(phrase['_invalid_currency_characters_only_numbers_and_a_period_are_allowed_in_this_field']);
+									    haveerrors = 1;
+								    }
+							    }
+							}
+							return (!haveerrors);
+						}
+						//-->
+						</script>
+						<a name="profilequestion"></a>
+						<form method="post" action="{ilpage[settings]}" name="addprofilequestion" accept-charset="UTF-8" style="margin: 0px;" onsubmit="return validate_all();">
+						<input type="hidden" name="cmd" value="marketplace" />
+						<input type="hidden" name="subcmd" value="{question_subcmd}" />
+						<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+						{question_id_hidden}
+						<div class="block-wrapper">
+						<div class="block3">
+						
+								<div class="block3-top">
+										<div class="block3-right">
+												<div class="block3-left"></div>
+										</div>
+								</div>
+								
+								<div class="block3-header"><span style="float:left; padding-top:2px; padding-right:10px"><a href="javascript:void(0)" onclick="return toggle('profile_question_addform');"><span style="padding-right:5px"><img id="collapseimg_profile_question_addform" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_profile_question_addform]}.gif" border="0" alt="" /></span></a></span>{_add}</div>
+								<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_profile_question_management}</div></div>
+								<div class="block3-content" id="collapseobj_profile_question_addform" style="padding:0px;"{collapse[collapseobj_profile_question_addform]}"">
+									
+									<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+									<tr class="alt1"> 
+										<td width="23%" class="alt1"><span class="gray">{_select_profile_group}</span> <a href="javascript:void(0)" onmouseover="Tip(phrase['_because_market_niches_vary_you_can_use_this_feature_to_categorize'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+										<td width="77%">{profile_group_pulldown}</td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="top" class="alt1"><span class="gray">{_question}</span></td>
+										<td><input class="input" name="question" value="{question}" size="50" /></td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="top" class="alt1"><span class="gray">{_question_description}</span></td>
+										<td><textarea name="description" style="width: 98%; height: 84px" class="input" wrap="physical">{question_description}</textarea></td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="middle" class="alt1"><span class="gray">{_type}</span></td>
+										<td>{profile_inputtype_pulldown}</td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="middle" class="alt1"><span class="gray">{_display_values}</span> <a href="javascript:void(0)" onmouseover="Tip(phrase['_only_use_this_option_if_you_selected_the_question_type_of_pulldown_or_multiple_choice_for_each_menu_item'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+										<td><input class="input" name="multiplechoice" value="{multiplechoiceprofile}" style="width:50%" /> option1<strong>|</strong>option2<strong>|</strong>option3</td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="middle" class="alt1"><span class="gray">{_display_order}</span></td>
+										<td><input class="input" name="sort" value="{sort}" size="3" /></td>
+									</tr>
+									<tr class="alt1"> 
+									  <td valign="middle" class="alt1"><span class="gray">{_active}</span></td>
+									  <td class=""><label for="profile_question_active"><input type="checkbox" id="profile_question_active" name="profile_question_active" value="1" {checked_profile_question_active} /> {_yes}</label></td>
+									</tr>
+									<tr class="alt2_top"> 
+										<td colspan="2"><strong>{_set_a_price_on_this_question_and_allow_the_user_to_request}</strong></td>
+									</tr>
+									<tr class="alt1">
+									  <td valign="middle" class="alt1"><span class="gray">{_required}</span> <a href="javascript:void(0)" onmouseover="Tip(phrase['_if_enabled_the_user_will_need_to_answer_this_question_before_the_form_on_the_page_can_be_submitted'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+									  <td><label for="profile_question_required"><input type="checkbox" id="profile_question_required" name="required" value="1" {checked_profile_question_required} /> {_yes}</label></td>
+									</tr>
+									<tr class="alt1"> 
+									  <td valign="middle" class="alt1"><span class="gray">{_verifiable}</span> <a href="javascript:void(0)" onmouseover="Tip(phrase['_if_enabled_the_user_will_be_able_to_click_a_verify_my_answer_button'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+									  <td><label for="profile_question_canverify"><input type="checkbox" id="profile_question_canverify" name="canverify"  value="1" {checked_profile_question_canverify} />{_yes}</label></td>
+									</tr>
+									<tr class="alt1">
+									  <td valign="middle" class="alt1"><span class="gray">{_verify_cost}</span> <a href="javascript:void(0)" onmouseover="Tip(phrase['_the_cost_will_only_be_present_if_you_enable_the_this_question_as_verifiable'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+									  <td align="left"><span style="float:left; padding-top:5px; padding-right:4px">{currencysymbol}</span>  <input class="input" name="verifycost" id="verifycost" value="{verifycost}" size="8" /></td>
+									</tr>
+									<tr class="alt2_top"> 
+										<td colspan="2"><strong>{_maximize_your_niche_and_transform_this_profile_question}</strong></td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="middle" class="alt1"><span class="gray">{_can_be_auction_filter}</span> <a href="javascript:void(0)" onmouseover="Tip(phrase['_you_can_enable_this_question_to_act_like_an_auction_filter_a_new_question'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+										<td><label for="profile_question_isfilter"><input type="checkbox" id="profile_question_isfilter" name="isfilter" value="1" {checked_profile_question_isfilter} />{_yes}</label></td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="middle" class="alt1"><span class="gray">{_filter_type}</span> <a href="javascript:void(0)" onmouseover="Tip(phrase['_this_option_will_define_what_type_of_question_input_type_to_serve'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+										<td>{filter_type_pulldown}</td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="middle" class="alt1"><span class="gray">{_filter_category}</span> <a href="javascript:void(0)" onmouseover="Tip(phrase['_you_may_choose_a_single_category_or_you_can_choose_to_have_this_filter_assigned_to_all'], BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+										<td>{filter_category_pulldown}</td>
+									</tr>
+									<tr class="alt1"> 
+										<td valign="middle" class="alt1"><span class="gray">{_guests_can_view}</span> 
+										<td><label for="guests"><input type="checkbox" name="guests" id="guests" value="1" {regchecked_guests} /> {_yes}</label></td>
+									</tr>
+									<tr class="alt2_top"> 
+										<td colspan="2">{submit_profile_question}</td>
+									</tr>
+									</tbody>
+									</table>
+									
+								</div>
+								
+								<div class="block3-footer">
+										<div class="block3-right">
+												<div class="block3-left"></div>
+										</div>
+								</div>
+								
+						</div>
+					</div>
+					</form>
+						
+						<loop name="profile_question_groups">
+							<form method="post" action="{ilpage[settings]}" name="updatesort" accept-charset="UTF-8" style="margin: 0px;">
+							<input type="hidden" name="cmd" value="marketplace" />
+							<input type="hidden" name="subcmd" value="_update-questions-sort" />
+							<input type="hidden" name="return" value="{ilpage[settings]}?cmd=marketplace" />
+							<input type="hidden" name="groupid" value="{groupid}" />
+							<div class="block-wrapper">
+							<div class="block3">
+							
+									<div class="block3-top">
+											<div class="block3-right">
+													<div class="block3-left"></div>
+											</div>
+									</div>
+									
+									<div class="block3-header"><span style="float:left; padding-top:2px; padding-right:10px"><a href="javascript:void(0)" onclick="return toggle('profile_question_{groupid}');"><span style="padding-right:5px"><img id="collapseimg_profile_question_{groupid}" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_profile_question_{groupid}]}.gif" border="0" alt="" /></span></a></span>{groupname}</div>
+									<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_available_to}: <span class="green"><em>{category}</em></span></div></div>
+									<div class="block3-content" style="padding:0px;{collapse[collapseobj_profile_question_{groupid}]}" id="collapseobj_profile_question_{groupid}">
+										
+										<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+										<tr class="alt3"> 
+											<td align="center" width="9%">QID</td>
+											<td align="center" width="8%">{_sort}</td>
+											<td width="35%">{_question}</td>
+											<td align="center" width="7%" nowrap="nowrap">{_verifiable}</td>
+											<td width="8%" nowrap="nowrap">{_cost}</td>
+											<td align="center" width="9%" nowrap="nowrap">{_type}</td>
+											<td align="center" width="6%">{_active}</td>
+											<td align="center" width="6%">{_required}</td>
+											<td align="center" width="6%" nowrap="nowrap">{_is_filter}</td>
+											<td align="center" width="6%">{_guests}</td>
+											<td align="center" width="6%">{_action}</td>
+										</tr>							
+										<loop name="profile_questions{groupid}"> 
+										<tr class="alt1" valign="top"> 
+											<td align="center">{questionid}</td>
+											<td align="center">{sortinput}</td>
+											<td><div class="blue"><strong>{question}</strong></div><div class="smaller gray">{question_description}</div></td>
+											<td align="center">{canverify}</td>
+											<td><div class="smaller">{cost}</div></td>
+											<td align="center"><div class="smaller"><strong>{inputtype}</strong></div></td>
+											<td align="center">{question_active}</td>
+											<td align="center">{isrequired}</td>
+											<td align="center">{isfilter}</td>
+											<td align="center" width="6%">{guests}</td>
+											<td align="center">{edit}&nbsp;&nbsp;{remove}</td>
+										</tr>
+										</loop name="profile_questions{groupid}"> 
+										<if condition="isset($no_profile_questions{groupid}) AND $no_profile_questions{groupid}"> 
+										<tr> 
+											<td colspan="11" align="center">{_no_questions_currently_exist_in_this_profile_group}</td>
+											</tr>
+										</if> 
+										<tr class="alt2_top"> 
+											<td colspan="11"><input name="savesort" type="submit" value=" {_save} " style="font-size:15px" class="buttons" /></td>
+										</tr>
+										</table>
+										
+									</div>
+									
+									<div class="block3-footer">
+											<div class="block3-right">
+													<div class="block3-left"></div>
+											</div>
+									</div>
+									
+							</div>
+						</div>
+							
+							</form>
+							</loop name="profile_question_groups">
+					</div>					
+					<!-- begin marketplace profile questions tab -->
+					
+				</div>
+				<!-- /begin marketplace profile groups tab pane -->
+				
+			</div>
+			<!-- /begin marketplace profile settings tab -->
+            
+			<!-- begin portfolio settings -->
+			<div class="tab-page">
+				
+				<h2 class="tab">{_portfolio}</h2>
+				<!-- begin tab pane -->
+				<div class="tab-pane" id="portfolio">
+				
+					<!-- begin service rating logic -->
+					<div class="tab-page">
+						
+			  		<h2 class="tab">{_display}</h2>
+						
+						{configuration_portfoliodisplay}
+						
+					</div>
+					<!-- /begin service rating logic -->
+					
+					<!-- begin service fee logic -->
+					<div class="tab-page">
+						<h2 class="tab">{_fees}</h2>
+						
+						{configuration_portfolioupsell}
+						
+					</div>
+					<!-- /begin service fee logic -->
+	
+				</div>
+				<!-- /begin tab pane -->
+	
+			</div>
+			<!-- /begin portfolio settings -->
+			
+		</div>
+		<!-- /begin tab pane -->

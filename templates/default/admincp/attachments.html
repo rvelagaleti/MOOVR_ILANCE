@@ -1,0 +1,378 @@
+<div id="v3body4"> 
+<div id="sub">
+	<div id="subnav">
+		<loop name="subnav_settings">
+			<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+		</loop name="subnav_settings">
+	</div>
+</div>
+	
+<!-- start content -->
+<div id="content">
+<h1>{_attachment_manager}</h1><br />
+
+	<!-- templates -->
+	<div class="tab-pane">
+		<div class="tab-pane" id="attachments">
+		
+			<div class="tab-page">
+				
+				
+        <h2 class="tab">{_moderate}</h2>
+		<form action="{ilpage[distribution]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="attachments" />
+		<input type="hidden" name="subcmd" value="attachment-moderate-manage" />
+		<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=attachments" />
+		<div class="block-wrapper">
+		<div class="block3">
+		
+				<div class="block3-top">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+				<div class="block3-header">{_attachment_moderation}</div>
+				<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_search_verify_or_remove_attachments_waiting_to_be_moderated_within_this_area}</div></div>
+				<div class="block3-content" style="padding:0px">
+					
+					<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+					<tr class="alt2"> 
+					  <td width="1%" align="center">&nbsp;</td>
+					  <td width="25%">{_attachment}</td>
+					  <td width="17%">{_username}</td>
+					  <td width="12%">{_date}</td>
+					  <td width="12%">{_size}&nbsp;</td>
+					  <td width="14%">{_views}</td>
+					  <td width="12%" align="right">{_type}</td>
+					</tr>
+					<loop name="moderateattachments">
+					<tr class="alt1"> 
+					  <td align="center" class="alt2"><input type="checkbox" name="attachid[]" value="{attachid}" /></td>
+					  <td><span class="blue" title="{filenamefull}"><a href="../{ilpage[attachment]}?id={attachid}">{filename}</a></span></td>
+					  <td><a href="{ilpage[subscribers]}?subcmd=_update-customer&amp;id={user_id}">{subscriber}</a><div class="smaller gray">{_user_id}: <span class="black">{user_id}</span></div></td>
+					  <td>{date}</td>
+					  
+              			<td>{filesize}</td>
+					  
+              			<td><span class="blue">{counter}</span></td>
+					  
+              			<td align="right"> {attachtype}</td>
+					</tr>
+					</loop name="moderateattachments">
+					<if condition="isset($show['no_moderateattachments']) AND $show['no_moderateattachments']">
+					<tr> 					  
+              			<td colspan="7" align="center">{_no_attachments_require_moderation}</td>
+					</tr>
+					</if>
+					<if condition="$show['no_moderateattachments'] == false">
+					<tr> 
+					  <td colspan="7" align="left" class="alt2_top">
+					  
+					  <input type="submit" class="buttons" name="verify" value="{_verify_selected}" onClick="return confirm_js('{_you_are_about_to_verify_approve_selected_attachments_continue}');"/>
+                	  <if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" name="delete" value="{_delete_selected}" onClick="return confirm_js('{_you_are_about_to_delete_selected_attachments_continue}');" disabled="disabled" /><else /><input type="submit" class="buttons" name="delete" value="{_delete_selected}" onClick="return confirm_js('{_you_are_about_to_delete_selected_attachments_continue}');" /></if>
+					  
+					  </td>
+					</tr>
+					<tr> 
+					  <td colspan="7" align="left">{prevnext}</td>
+					</tr>
+					</if>
+				  </table>
+					
+				</div>
+				
+				<div class="block3-footer">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+	</form>
+	
+			</div>
+			
+	
+			
+			<div class="tab-page">
+				
+				
+      		<h2 class="tab">{_manage}</h2>
+				
+				<form method="get" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="attachments" />
+				<input type="hidden" name="subcmd" value="search" />
+				<div class="block-wrapper">
+				<div class="block">
+				
+						<div class="block-top">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+						<div class="block-header">{_search} {_attachments}</div>
+						<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_all_marketplace_attachments_can_be_reviewed_and_managed_below}</div></div>
+						<div class="block-content" style="padding:0px">
+							
+							<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+							<tr class="alt1" valign="top"> 
+							<td width="11%" nowrap="nowrap"><span class="gray">{_filter_by}</span></td>
+							<td width="23%"><select name="filterby" class="input" id="attachments_filterby" onchange="if (fetch_js_object('attachments_filterby').selectedIndex==2){toggle_show('attachtypes_text')}else{toggle_hide('attachtypes_text')}">
+							<optgroup label="{_please_select}">
+							<option value=""<if condition="!isset($ilance->GPC['filterby'])"> selected="selected"</if>>{_all}</option>
+							<option value="filename"<if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'filename'"> selected="selected"</if>>{_attachment_name}</option>
+							<option value="attachtype"<if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'attachtype'"> selected="selected"</if>>{_attachment_type}</option>
+							<option value="attachid"<if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'attachid'"> selected="selected"</if>>{_attachment_id}</option>
+							<option value="user_id"<if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'user_id'"> selected="selected"</if>>{_user_id} {_or} {_username}</option>
+							</optgroup>
+							</select></td>
+							<td colspan="2"><input type="text" name="filtervalue" size="25" style="width: 35%;" value="{filtervalue}" /> <div id="attachtypes_text" style="padding-top:4px<if condition="isset($ilance->GPC['filterby']) AND $ilance->GPC['filterby'] == 'attachtype'"><else />;display:none</if>" class="smaller gray">(Valid types: profile, itemphoto, slideshow, digital, project, bid, portfolio, pmb, ws{apihook[attachments_attachtypes_valid_types]})</div></td>
+							</tr>
+                            
+                            
+                            <tr class="alt1" valign="top"> 
+							<td width="11%" nowrap="nowrap"><span class="gray">{_options}</span></td>
+							<td width="23%"><select name="options" class="input" id="attachments_options">
+							<optgroup label="{_please_select}">
+                            <option value=""<if condition="!isset($ilance->GPC['options'])"> selected="selected"</if>>{_show_all}</option>
+							<option value="onlyended"<if condition="isset($ilance->GPC['options']) AND $ilance->GPC['options'] == 'onlyended'"> selected="selected"</if>>{_show_only_pictures_from_ended_listings}</option>
+							<option value="onlyopen"<if condition="isset($ilance->GPC['options']) AND $ilance->GPC['options'] == 'onlyopen'"> selected="selected"</if>>{_show_only_pictures_from_open_listings}</option>
+							</optgroup>
+							</select></td>
+							<td colspan="2"></td>
+							</tr>
+                            
+                            
+							<tr class="alt1">
+							<td nowrap="nowrap"><span class="gray">{_sort_results_by}</span></td>
+							<td nowrap="norwap"><input type="radio" name="orderby" value="ASC" /> {_ascending} &nbsp;&nbsp;&nbsp;<input type="radio" name="orderby" value="DESC" checked /> {_descending}</td>
+							<td width="8%" nowrap="nowrap"><span class="gray">{_per_page}</span></td>
+					<td width="58%">
+						{perpage_pulldown}
+					</td>
+							</tr>
+							<tr class="alt2_top">
+							<td colspan="4"><input type="submit" class="buttons" value="{_search}" style="font-size:15px" /></td>
+							</tr>
+							</table>
+							
+						</div>
+						
+						<div class="block-footer">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+			</form>
+				
+				<!-- / attachment search -->
+				<form action="{ilpage[distribution]}" name="ilform" accept-charset="UTF-8" method="post" style="margin: 0px;">
+				<input type="hidden" name="cmd" value="attachments" />
+				<input type="hidden" name="subcmd" value="attachment-manage" />
+				<input type="hidden" name="return" value="{pageurl_urlencoded}" />
+				<div class="block-wrapper">
+				<div class="block">
+				
+						<div class="block-top">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+						<div class="block-header">{_manage}</div>
+						<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_you_can_search_review_and_remove_verified_attachments_within_the_marketplace_from_this_area}</div></div>
+						<div class="block-content" style="padding:0px">
+							
+							<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+					<tr class="alt2"> 
+					  <td width="1%" align="center">&nbsp;</td>
+					  <td align="left">{_attachment}</td>
+					  <td width="8%">{_username}</td>
+					  <td width="18%" nowrap="nowrap">{_date}</td>
+					  <td width="1%" align="right">{_views}</td>
+					  <td width="25%">{_type}</td>
+                      <td width="5%" align="center"><input type="checkbox" onclick="check_uncheck_all_id('attachid[]', 'attachment');return false" /></td>
+					</tr>
+					<loop name="attachments">
+					<tr class="alt1" valign="top"> 
+					  <td align="center">{attachextension}</td>
+					  <td>
+                      	
+                        <div class="blue" title="{filenamefull}"><a href="{http_server}{ilpage[attachment]}?id={filehash}">{filename}</a></div>
+                        <div style="padding-top:3px" class="smaller">{sizes}</div>
+                        
+                        </td>
+					  <td><div class="smaller blue"><a href="{ilpage[subscribers]}?subcmd=_update-customer&amp;id={user_id}">{subscriber}</a></div></td>
+					  <td nowrap="nowrap"><div class="smaller black">{date}</div><div class="smaller black" style="padding-top:9px"><strong>IP:</strong> {ipaddress}</div></td>
+		              <td align="right"><div class="smaller black">{counter}</div></td>
+					  <td><div class="gray">{attachtype}</div></td>
+                      <td align="center" width="5%" class="alt2"><input class="attachment_checkbox" type="checkbox" name="attachid[]" value="{attachid}" /></td>
+					</tr>
+					</loop name="attachments">
+					<if condition="isset($show['no_attachments']) AND $show['no_attachments']">
+					<tr> 
+					  <td colspan="7" align="center">{_no_attachments_found}</td>
+					</tr>
+					</if>
+					<if condition="$show['no_attachments'] == false">
+					<tr valign="top" class="alt2_top"> 
+					  <td colspan="7" align="left"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" name="delete" value="{_delete}" onclick="return confirm_js('{_you_are_about_to_delete_selected_attachments_continue}');" style="font-size:15px" disabled="disabled" /> <input type="submit" class="buttons" name="rebuild" value="Rebuild" onclick="return confirm_js('You are about to rebuild photo dimensions for selected attachments. Continue?');" style="font-size:15px" disabled="disabled" /><else /><input type="submit" class="buttons" name="delete" value="{_delete}" onclick="return confirm_js('{_you_are_about_to_delete_selected_attachments_continue}');" style="font-size:15px" /> <input type="submit" class="buttons" name="rebuild" value="Rebuild" onclick="return confirm_js('You are about to rebuild photo dimensions for selected attachments. Continue?');" style="font-size:15px" /></if>
+                      <a href="#" style="font-size:15px; float: right;" class="buttons" onclick="check_uncheck_all_id('attachid[]', 'attachment');return false">{_select_all}</a></td>
+					</tr>
+					</if>
+					<tr valign="top"> 
+					  <td colspan="7" align="left">{prevnext2}</td>
+					</tr>
+				  </table>
+				  </div>
+						
+						<div class="block-footer">
+								<div class="block-right">
+										<div class="block-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+				
+				</form>
+			</div>
+			
+			<div class="tab-page">
+				
+				
+      <h2 class="tab">{_statistics}</h2>
+	  
+	  	<div class="block-wrapper">
+		<div class="block">
+		
+				<div class="block-top">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+				<div class="block-header">{_statistics}</div>
+				<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_attachment_statistics_can_be_reviewed_below}</div></div>
+				<div class="block-content" style="padding:0px">
+					
+					<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+					<tr class="alt1"> 
+					  <td width="31%"> {_total_attachments}</td>
+					  <td width="69%"><strong>{totalattachments}</strong></td>
+					</tr>
+					<tr class="alt1"> 
+					  <td class="alt1">{_total_disk_space}</td>
+					  <td><strong>{totaldiskspace}</strong></td>
+					</tr>
+					<tr class="alt2_top">
+					  <td>{_total_downloads}</td>
+					  <td><strong>{totaldownloads}</strong></td>
+					</tr>
+				  </table>
+					
+				</div>
+				
+				<div class="block-footer">
+						<div class="block-right">
+								<div class="block-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+      
+	 
+			</div>
+            
+			<!-- begin attachment settings -->
+			<div class="tab-page">
+				<h2 class="tab">{_settings}</h2>
+				<!-- begin tab pane -->
+				<div class="tab-pane" id="attachmentsettings">
+				
+					<!-- begin service rating logic -->
+					<div class="tab-page">
+						
+			  			<h2 class="tab">{_storage}</h2>
+						
+                        	<!-- begin advanced storage type -->
+                            <form action="{ilpage[distribution]}" name="ilform" method="post" accept-charset="UTF-8" style="margin: 0px;">
+                            <input type="hidden" name="cmd" value="attachments" />
+                            <input type="hidden" name="subcmd" value="attachment-manage-storagetype" />
+                            <input type="hidden" name="return" value="{ilpage[distribution]}?cmd=attachments" />
+                            <div class="block-wrapper">
+                            <div class="block">
+                            <div class="block-top">
+                                    <div class="block-right">
+                                            <div class="block-left"></div>
+                                    </div>
+                            </div>
+                            <div class="block-header">{_advanced}</div>
+                            <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_attachment_storage_type_configuration_and_other_settings_can_be_performed_below}</div></div>
+                            <div class="block-content" style="padding:0px">
+                            <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+                            <tr class="alt1"> 
+                                  <td width="31%">{_storage_type}</td>
+                                  <td><span>{storagetype}</span></td>
+                            </tr>
+                            <tr class="alt1" valign="top"> 
+                                  <td>{_action}</td>
+                                  <td>{storagetypeaction}</td>
+                            </tr>
+                            <tr class="alt2_top"> 
+                                  <td colspan="2"><if condition="$show['ADMINCP_TEST_MODE']"><input type="submit" class="buttons" value="{_continue}" style="font-size:15px" onclick="return confirm_js('{_you_are_about_to_perform_the_selected_action_for_this_attachment_storage_type_continue}');" disabled="disabled" /><else /><input type="submit" class="buttons" value="{_continue}" style="font-size:15px" onclick="return confirm_js('{_you_are_about_to_perform_the_selected_action_for_this_attachment_storage_type_continue}');" /></if></td>        
+                            </tr>
+                            </table>
+                            </div>
+                            <div class="block-footer">
+                                    <div class="block-right">
+                                            <div class="block-left"></div>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                            </form>
+                            <!-- end advanced storage type -->
+                        
+							{configuration_attachmentsettings}
+							
+					</div>
+					<!-- /begin service rating logic -->
+					
+					<!-- begin service fee logic -->
+					<div class="tab-page">
+						
+			  			<h2 class="tab">{_moderation}</h2>
+						
+						{configuration_attachmentmoderation}
+						
+					</div>
+					<!-- /begin service fee logic -->
+					
+					<!-- begin service options -->
+					<div class="tab-page">
+						
+						<h2 class="tab">{_limits}</h2>
+						
+						{configuration_attachmentlimits}
+					
+					</div>
+					<!-- /begin service options -->
+					
+				</div>
+				<!-- /begin tab pane -->
+				
+			</div>
+			<!-- /begin attachment settings -->
+	
+		</div>
+		<!-- / templates -->
+		
+	</div>

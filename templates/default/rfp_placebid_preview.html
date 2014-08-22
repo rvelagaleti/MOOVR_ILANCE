@@ -1,0 +1,127 @@
+<form method="post" action="{ilpage[rfp]}" name="previewbid" accept-charset="UTF-8" style="margin: 0px;">
+	<input type="hidden" name="cmd" value="_do-bid-submit" />
+	<input type="hidden" name="subcmd" value="service-bid" />
+	<input type="hidden" name="bidamount" value="{current_bidamount}" />
+	<input type="hidden" name="bidamounttype" value="{current_bidamounttype}" />
+	<input type="hidden" name="estimate_days" value="{current_estimate_days}" />
+	<input type="hidden" name="proposal" value="{current_proposal}" />
+	<input type="hidden" name="id" value="{project_id}" />
+	<input type="hidden" name="project_user_id" value="{project_user_id}" />
+	<input type="hidden" name="cid" value="{cid}" />
+	<input type="hidden" name="lowbidnotify" value="{current_lowbidnotify}" />
+	<input type="hidden" name="lasthournotify" value="{current_lasthournotify}" />
+	<input type="hidden" name="subscribed" value="{current_subscribed}" />
+	<input type="hidden" name="state" value="service" />
+	<input type="hidden" name="bidcustom" value="{bidcustom}" />
+	<input type="hidden" name="paymethod" value="{paymethod}" />
+	<div class="block-wrapper">
+		<div class="block3">
+
+			<div class="block3-top">
+				<div class="block3-right">
+					<div class="block3-left"></div>
+				</div>
+			</div>
+
+			<div class="block3-header">{_preview}</div>
+			<div class="block3-content" style="padding:{table_cellpadding}px">
+				<div style="line-height:1.3em">{current_proposal_preview}</div>
+
+
+
+				<div style="padding-top:12px">{uploadbutton}</div>
+				<div id="attachmentlist" style="padding-top:6px">{previewattachmentlist}</div>
+			</div>
+
+			<div class="block3-footer">
+				<div class="block3-right">
+					<div class="block3-left"></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="block-wrapper">
+		<div class="block3">
+
+			<div class="block3-top">
+				<div class="block3-right">
+					<div class="block3-left"></div>
+				</div>
+			</div>
+
+			<div class="block3-header">{_confirm_your_bid}</div>
+			<div class="block3-content" style="padding:0px">
+
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					<tr class="alt1"> 
+						<td>
+							<div>
+								<table border="0" cellspacing="0" cellpadding="0" width="100%">
+									<tr>
+										<td width="33%" valign="top">
+											<div style="padding-bottom:3px"><strong>{_budget}</strong></div>
+											<div class="gray" style="padding-top:3px">{budget} <if condition="isset($show['filter_bidtype']) AND $show['filter_bidtype']">{_with_bids_only_being_accepted_on_a} <strong>{bidamounttype}</strong> {_rate_lc}</if></div>
+
+										</td>
+										<td width="33%" valign="top">
+											<div style="padding-bottom:3px"><strong>{_final_value_fee}</strong></div>
+											<div class="gray" style="padding-top:3px">{fvf}</div>
+										</td>
+										<td width="33%" valign="top">
+											<div style="padding-bottom:3px"><strong>{_pay_method}</strong></div>
+											<div class="gray" style="padding-top:3px">{paymethod_preview}</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+
+
+
+							<div style="padding-top:9px">
+								<table border="0" cellspacing="0" cellpadding="0" width="100%">
+									<tr valign="top">
+										<td width="33%">
+
+											<table border="0" cellspacing="0" cellpadding="0">
+												<tr>
+													<td><div style="padding-bottom:3px"><strong>{_bid_amount}</strong></div><div class="gray" style="padding-top:3px">{current_calculated_amount}</div></td>
+												</tr>
+											</table>
+										</td>
+										<td width="33%">
+											<table border="0" cellspacing="0" cellpadding="0">
+												<tr>
+													<td><div style="padding-bottom:3px"><strong>{_delivery}</strong> <span class="gray">({bidamounttype_formatted})</span></div><div class="gray" style="padding-top:3px">{current_estimate_days} {method}</div></td>
+												</tr>
+											</table>
+										</td>
+										<td width="33%">
+											<table border="0" cellspacing="0" cellpadding="0">
+												<tr>
+													<td><div style="padding-bottom:3px"></div></td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+								</table>
+							</div>
+					<if condition="isset($show['bidfieldstable']) AND $show['bidfieldstable']"><div style="padding-top:9px">{custom_bid_fields_preview}</div></if></td>
+					</tr>
+					<tr class="alt2_top">
+						<td><input type="submit" value=" {_place_bid} " class="buttons" style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[rfp]}?id={project_id}">{_cancel}</a></span></td>
+					</tr>
+				</table>
+
+			</div>
+			<div class="block3-footer">
+				<div class="block3-right">
+					<div class="block3-left"></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!--<div>{finalvaluefees}</div>-->
+</form>

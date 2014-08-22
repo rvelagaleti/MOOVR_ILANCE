@@ -1,0 +1,372 @@
+<div id="v3body4">
+    <!-- sub navigation -->
+    <div id="sub">
+	<div id="subnav">
+	    <loop name="subnav_settings">
+		<a href="{url}" {class}><span>{name}</span></a> <span> | </span> 
+	    </loop name="subnav_settings">
+	</div>
+    </div>
+    <!-- /sub navigation -->
+
+    <div id="content">
+	<h1><if condition="isset($ilance->GPC['subcmd']) AND ($ilance->GPC['subcmd'] == 'servicequestions' OR $ilance->GPC['subcmd'] == 'productquestions')"> {_question_management} </if></h1><br />
+
+	<if condition="$ilconfig['globalauctionsettings_serviceauctionsenabled'] AND isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'servicequestions'">
+
+	    <!-- edit category questions -->
+		<form method="post" name="ilsearchform" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+		    <input type="hidden" name="cmd" value="categories" />
+		    <input type="hidden" name="subcmd" value="_update-category-questions-sort" />
+		    <input type="hidden" name="type" value="service" />
+		    <input type="hidden" name="return" value="{ilpage[distribution]}?cmd=categories&amp;subcmd=servicequestions&amp;cid={cid}" />
+		    <div class="block-wrapper">
+			<div class="block2">
+
+			    <div class="block2-top">
+				<div class="block2-right">
+				    <div class="block2-left"></div>
+				</div>
+			    </div>
+
+			    <div class="block2-header">{categoryname} {_category_specifics}</div>
+			    <div class="block2-content" style="padding:0px">
+
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				    <tr class="alt2"> 
+					<td width="1%" align="center">QID</td>
+					<td width="1%" align="center">{_sort}</td>
+					<td width="34%">{_question}</td>
+					<td width="7%">{_recursive}</td>
+					<td width="7%">{_required}</td>
+					<td width="7%">{_searchable}</td>
+					<td width="7%">{_active}</td>
+					<td width="11%">{_input_type}</td>
+					<td width="7%" align="center">{_guests}</td>
+					<td width="6%" align="center">{_edit}</td>
+					<td width="7%" align="center">{_remove}</td>							
+				    </tr>
+				    <loop name="servicequestions">
+					<tr class="alt1" valign="top">
+					    <td align="center">{questionid}</td>
+					    <td align="center">{sort}</td>
+					    <td><div class="black">{question}</div><div class="smaller gray" style="padding-top:3px">{category}</div></td>
+					    <td>{recursive}</td>
+					    <td>{isrequired}</td>
+					    <td>{cansearch}</td>
+					    <td>{active}</td>
+					    <td>{inputtype}</td>
+					    <td align="center">{guests}</td>
+					    <td align="center">{edit}</td>
+					    <td align="center">{remove}</td>						 
+					</tr>
+				    </loop name="servicequestions">  
+				    <if condition="isset($show['noservicequestions']) AND $show['noservicequestions']"> 
+					<tr> 
+					    <td colspan="11" align="center">{_no_custom_questions_currently_exist_in_this_category}</td>
+					</tr>
+					<else />
+					<tr class="alt2_top"> 
+					    <td colspan="11"><input name="savesort" type="submit" style="font-size:15px" value="{_save}" class="buttons" /></td>
+					</tr>
+				    </if> 
+				</table>
+			    </div>
+
+			    <div class="block2-footer">
+				<div class="block2-right">
+				    <div class="block2-left"></div>
+				</div>
+			    </div>
+
+			</div>
+		    </div></form>
+
+	    <a name="question"></a>
+	    <form name="ilform" method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="categories" />
+		<input type="hidden" name="subcmd" value="{question_subcmd}" />
+		<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=categories&amp;subcmd=servicequestions&amp;cid={cid}">
+		<input type="hidden" name="qid" value="{questionid}" />
+		<input type="hidden" name="formname" value="{formname}" />
+		<div class="block-wrapper">
+		    <div class="block2">
+
+			<div class="block2-top">
+			    <div class="block2-right">
+				<div class="block2-left"></div>
+			    </div>
+			</div>
+
+			<div class="block2-header">{_create_or_update_category_question} {_for} {question} {_in} {categoryname}</div>
+			<div class="block2-content-blue" style="padding:{table_cellpadding}px"><div class="smaller">{_category_questions_allows_you_to_define_specific_questions_to_be_answered_about_auctions_listed}</div></div>
+			<div class="block2-content" style="padding:0px">
+
+			    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				<tr class="alt1" valign="top"> 
+				    <td width="27%" class="alt2"><span class="gray">{_select_question_category}</span></td>
+				    <td width="73%" class="alt">
+					<div><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #fff; border-left:1px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #fff" src="{ajaxurl}?do=categories&mode=service&cid={cid}&showyouselectedstring=0&showcontinue=0&showthumb=0&showcidbox=0&showcheckmarkafterstring=0"></iframe></div>
+					<div style="display:none"><span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" style="font-family: verdana" size="6" /></span></div>
+					<div style="display:none"><div id="categorybutton"></div></div>
+					<div style="padding-top:6px"><strong>{_youve_selected}:</strong> <span id="selectedcategory" class="blue"></span><span id="cidstringcb"></span></div>
+				    </td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+				    <td width="27%" class="alt2"><span class="gray">{_assign_to_all_subcategories}</span></td>
+				    <td width="73%" class="alt"><input type="checkbox" name="recursive" value="1" {checked_question_recursive} />
+			          {_yes}
+<div class="smaller litegray" style="padding-top:3px">{_for_example_if_you_have_web_design_logos_and_web_design_graphics_you_can_add_common_questions_like_vector_to_children_categories}</div></td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+					<td class="alt2"><span class="gray">{_question}</span></td>
+					<td><loop name="servicequestiontitles"><div style="padding:2px 0 2px 0"><span class="litegray">{languageiso}</span> <input class="input" name="question[{slng}]" value="{question}" style="width:50%" placeholder="{language}" /></div></loop name="servicequestiontitles"></td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+					<td class="alt2"><span class="gray">{_description}</span></td>
+					<td><loop name="servicequestiondescription"><div style="padding:2px 0 2px 0"><span class="litegray">{languageiso}</span> <input class="input" name="description[{slng}]" value="{description}" style="width:90%" placeholder="{language}" /></div></loop name="servicequestiondescription"></td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+				    <td class="alt2"><span class="gray">{_input_type}</span></td>
+				    <td>{question_inputtype_pulldown}
+					<div class="smaller litegray" style="padding-top:3px">{_this_option_will_be_the_method_the_user_answers_the_question_by}</div></td>
+				</tr>
+				<tr class="alt1" id="displayvalues" valign="top" {searchablecb_style}>
+				    <td class="alt2"><span class="gray">{_display_values}</span></td>
+				    <td>{multiplechoice}</td>
+				</tr>
+				<tr class="alt1" style="" id="defaultdisplayvalue" valign="top">
+				    <td class="alt2"><span class="gray">{_form_field_default_value} ({_optional_lower})</span></td>
+				    <td><input class="input" name="formdefault" value="{formdefault}" style="width:50%" /></td>
+				</tr>
+
+
+				<tr class="alt1" valign="top"> 
+				    <td class="alt2"><span class="gray">{_sort_display_order}</span></td>
+				    <td><input class="input" size="3" name="sort" value="{sort}" /></td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+				    <td class="alt2"><span class="gray">{_active}</span></td>
+				    <td>
+
+					<input type="checkbox" name="visible" value="1" {checked_question_active} />
+					 {_yes}					 <div class="smaller litegray" style="padding-top:3px">{_if_this_question_is_active_members_will_be_able_to_answer_this_question}</div>
+				    </td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+				    <td class="alt2"><span class="gray">{_required}</span></td>
+				    <td> <input type="checkbox" name="required" value="1" {checked_question_required} /> 
+					{_yes}					<div class="smaller litegray" style="padding-top:3px">{_if_required_the_auction_poster_will_be_required_to_answer_this_question}</div>
+				    </td>
+				</tr>
+				<tr class="alt1" valign="top" id="searchablecb_service" style="display:none"> 
+				    <td class="alt2"><span class="gray">{_searchable}</span></td>
+				    <td> <input type="checkbox" name="cansearch" value="1" {checked_question_cansearch} /> 
+					{_yes}
+<div class="smaller litegray" style="padding-top:3px">{_if_this_category_is_viewed_show_a_linkable_url_under_this_category}</div>
+					<!--<div class="litegray" style="padding-top:3px">{_additionally_if_enabled_will_appear_within_the_category_search_map_areas_as_well}</div>-->
+				    </td>
+				</tr>
+				<tr class="alt1">
+				    <td valign="middle" class="alt1"><span class="gray">{_guests_can_view}</span></td>
+				    <td><label for="guests"><input type="checkbox" name="guests" id="guests" value="1" {regchecked_guests} /> {_yes}</label></td>
+				</tr>
+
+				<tr class="alt2_top"> 
+				    <td colspan="2">{submit_category_question} &nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back();">{_cancel}</a></span></td></tr>
+			    </table>
+
+			</div>
+
+			<div class="block2-footer">
+			    <div class="block2-right">
+				<div class="block2-left"></div>
+			    </div>
+			</div>
+
+		    </div>
+		</div>
+	    </form></if>
+
+	<if condition="$ilconfig['globalauctionsettings_productauctionsenabled'] AND isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'productquestions'">
+	    <!-- begin marketplace product settings tab -->
+
+	    <form method="post" name="ilsearchform" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+		    <input type="hidden" name="cmd" value="categories" />
+		    <input type="hidden" name="subcmd" value="_update-category-questions-sort" />
+		    <input type="hidden" name="type" value="product" />
+		    <input type="hidden" name="return" value="{ilpage[distribution]}?cmd=categories&amp;subcmd=productquestions&amp;cid={cid}" />
+		    <div class="block-wrapper">
+			<div class="block">
+
+			    <div class="block-top">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+
+			    <div class="block-header">{categoryname} {_category_specifics}</div>
+			    <div class="block-content" style="padding:0px">
+
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				    <tr class="alt2"> 
+					<td width="1%" align="center">QID</td>
+					<td width="1%" align="center">{_sort}</td>
+					<td width="30%">{_question}</td>
+					<td width="6%">{_recursive}</td>
+					<td width="6%">{_required}</td>
+					<td width="6%">{_searchable}</td>
+					<td width="7%">{_active}</td>
+					<td width="10%">{_input_type}</td>
+					<td width="6%" align="right">{_guests}</td>
+					<td width="6%" align="center">{_edit}</td>
+					<td width="6%" align="right">{_remove}</td>							
+				    </tr>
+				    <loop name="productquestions">
+					<tr class="alt1" valign="top">
+					    <td align="center">{questionid}</td>
+					    <td align="center">{sort}</td>
+					    <td><div class="black">{question}</div><div class="smaller gray" style="padding-top:3px">{category}</div></td>
+					    <td>{recursive}</td>
+					    <td>{isrequired}</td>
+					    <td>{cansearch}</td>
+					    <td>{active}</td>
+					    <td>{inputtype}</td>
+					    <td align="center">{guests}</td>
+					    <td align="center">{edit}</td>
+					    <td align="center">{remove}</td>						  
+					</tr>
+				    </loop name="productquestions">
+				    <if condition="isset($show['noproductquestions']) AND $show['noproductquestions']"> 
+					<tr> 
+					    <td colspan="11" align="center">{_no_custom_questions_currently_exist_in_this_category}</td>
+					</tr>
+					<else />
+					<tr class="alt2_top"> 
+					    <td colspan="11"><input name="savesort" type="submit" value="{_save}" style="font-size:15px" class="buttons" /></td>
+					</tr>
+				    </if>
+				</table>
+
+
+			    </div>
+
+			    <div class="block-footer">
+				<div class="block-right">
+				    <div class="block-left"></div>
+				</div>
+			    </div>
+
+			</div>
+		    </div>
+		</form>
+
+	    <a name="question"></a>
+	    <form name="ilform" method="post" action="{ilpage[distribution]}" accept-charset="UTF-8" style="margin: 0px;">
+		<input type="hidden" name="cmd" value="categories" />
+		<input type="hidden" name="subcmd" value="{question_subcmd}" />
+		<input type="hidden" name="return" value="{ilpage[distribution]}?cmd=categories&amp;subcmd=productquestions&amp;cid={cid}" />
+		<input type="hidden" name="qid" value="{questionid}" />
+		<input type="hidden" name="formname" value="{formname}" />		
+		<div class="block-wrapper">
+		    <div class="block">
+
+			<div class="block-top">
+			    <div class="block-right">
+				<div class="block-left"></div>
+			    </div>
+			</div>
+
+			<div class="block-header"><if condition="isset($ilance->GPC['qid']) AND $ilance->GPC['qid'] > 0">{question} {_in} {categoryname}<else />{_create_or_update_category_question} {_for} {question} {_in} {categoryname}</if></div>
+			<div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_category_questions_allows_you_to_define_specific_questions_to_be_answered_about_auctions_listed_within_this_category_an}</div></div>
+			<div class="block-content" style="padding:0px">
+
+			    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				<tr class="alt1" valign="top"> 
+				    <td width="27%"  class="alt2"><span class="gray">{_select_question_category}</span></td>
+				    <td width="73%" class="alt1">
+					<div><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #fff; border-left:1px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #fff" src="{ajaxurl}?do=categories&mode=product&cid={cid}&showyouselectedstring=0&showcontinue=0&showthumb=0&showcidbox=0&showcheckmarkafterstring=0"></iframe></div>
+					<div style="display:none"><span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" style="font-family: verdana" size="6" /></span></div>
+					<div style="display:none"><div id="categorybutton"></div></div>
+					<div style="padding-top:6px"><strong>{_youve_selected}:</strong> <span id="selectedcategory" class="blue"></span><span id="cidstringcb"></span></div>
+				    </td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+				    <td width="27%"  class="alt2"><span class="gray">{_assign_to_all_subcategories}</span></td>
+				    <td width="73%" class="alt"><input type="checkbox" name="recursive" value="1" {checked_question_recursive} />
+			          {_yes}
+<div class="smaller litegray" style="padding-top:3px">{_for_example_if_you_have_web_design_logos_and_web_design_graphics_you_can_add_common_questions_like_vector_to_children_categories}</div></td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+					<td class="alt2"><span class="gray">{_question}</span></td>
+					<td><loop name="productquestiontitles"><div style="padding:2px 0 2px 0"><span class="litegray">{languageiso}</span> <input class="input" name="question[{slng}]" value="{question}" style="width:50%" placeholder="{language}" /></div></loop name="productquestiontitles"></td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+					<td class="alt2"><span class="gray">{_description}</span></td>
+					<td><loop name="productquestiondescription"><div style="padding:2px 0 2px 0"><span class="litegray">{languageiso}</span> <input class="input" name="description[{slng}]" value="{description}" style="width:90%" placeholder="{language}" /></div></loop name="productquestiondescription"></td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+				    <td class="alt2"><span class="gray">{_input_type}</span></td>
+				    <td>{question_inputtype_pulldown}
+					<div class="smaller litegray" style="padding-top:3px">{_this_option_will_be_the_method_the_user_answers_the_question_by}</div></td>
+				</tr>
+				<tr class="alt1" id="displayvalues" valign="top" {searchablecb_style}>
+				    <td  class="alt2"><span class="gray">{_display_values}</span></td>
+				    <td>{multiplechoice}</td>
+				</tr>
+				<tr class="alt1" style="" id="defaultdisplayvalue" valign="top">
+				    <td class="alt2"><span class="gray">{_form_field_default_value} ({_optional_lower})</span></td>
+				    <td><input class="input" name="formdefault" value="{formdefault}" style="width:50%" /></td>
+				</tr>
+
+
+				<tr class="alt1" valign="top"> 
+				    <td class="alt2"><span class="gray">{_sort_display_order}</span></td>
+				    <td><input class="input" size="3" name="sort" value="{sort}" /></td>
+				</tr>
+				<tr class="alt1" valign="top"> 
+				    <td class="alt2"><span class="gray">{_active}</span></td>
+				    <td>
+					<input type="checkbox" name="visible" value="1" {checked_question_active} />
+					 {_yes}					 <div class="smaller litegray" style="padding-top:3px">{_if_this_question_is_active_members_will_be_able_to_answer_this_question}</div>
+				    </td>
+				</tr>
+
+				<tr class="alt1" valign="top"> 
+				    <td class="alt2"><span class="gray">{_required}</span></td>
+				    <td> <input type="checkbox" name="required" value="1" {checked_question_required} /> 
+					{_yes}					<div class="smaller litegray" style="padding-top:3px">{_if_required_the_auction_poster_will_be_required_to_answer_this_question}</div>
+				    </td>
+				</tr>
+				<tr class="alt1" valign="top" id="searchablecb_product" {searchablecb_style}> 
+				    <td class="alt2"><span class="gray">{_searchable}</span></td>
+				    <td> <input type="checkbox" name="cansearch" value="1" {checked_question_cansearch} /> 
+					{_yes}
+<div class="smaller litegray" style="padding-top:3px">{_if_this_category_is_viewed_show_a_linkable_url_under_this_category}</div>
+					<!--<div class="litegray" style="padding-top:3px">{_additionally_if_enabled_will_appear_within_the_category_search_map_areas_as_well}</div>--></td>
+
+				</tr>
+				<tr class="alt1">
+				    <td valign="middle" class="alt2"><span class="gray">{_guests_can_view}</span></td>
+				    <td><label for="guests"><input type="checkbox" name="guests" id="guests" value="1" {regchecked_guests} /> {_yes}</label></td>
+				</tr>
+				<tr> 
+				    <td colspan="2" class="alt2_top">
+					{submit_category_question} &nbsp;&nbsp;&nbsp;<span class="blue"><a href="{ilpage[distribution]}?cmd=categories">{_cancel}</a></span></td>
+				</tr>
+			    </table>
+
+
+			</div>
+
+			<div class="block-footer">
+			    <div class="block-right">
+				<div class="block-left"></div>
+			    </div>
+			</div>
+
+		    </div>
+		</div>
+	    </form>
+	    <!-- / edit category questions -->
+	</if>

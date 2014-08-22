@@ -1,0 +1,100 @@
+<script type="text/javascript">
+<!--
+function show_custom(selObj)
+{
+	if (selObj.value == "weight")
+	{
+			fetch_js_object("custom").style.display = "";
+	}
+	else
+	{
+			fetch_js_object("custom").style.display = "none";
+	}
+}
+//-->
+</script>
+<form method="post" action="{http_server}{ilpage[buying]}" name="ilform" accept-charset="UTF-8" style="margin:0px">
+<div class="block-wrapper">
+
+	<div class="block2">
+	
+			<div class="block2-top">
+					<div class="block2-right">
+							<div class="block2-left"></div>
+					</div>
+			</div>
+			
+			<div class="block2-header">{_award_bid_preview}</div>
+			<div class="block2-content-blue" style="padding:9px"><div class="smaller">{_preview_bid_award_details_for_this_project}</div></div>
+			<div class="block2-content" style="padding:0px">
+			
+                    <div style="padding-top:9px">
+                    <table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="6">
+                    <tr> 
+                        <td align="right"><span class="gray">{_listing}:</span></td>
+                        <td nowrap="nowrap"><span class="black"><strong>{project_title}</strong></span></td>
+                    </tr>
+                    <tr> 
+                        <td align="right"><span class="gray">{_bid_id} #:</span></td>
+                        <td align="left"><span class="black"><strong>{bid_id}</strong></span></td>
+                    </tr>
+                    <tr> 
+                        <td align="right" width="15%"><span class="gray">{_expert}:</span></td>
+                        <td><span class="black"><strong>{winner_user_username}</strong></span></td>
+                    </tr>
+                    <tr> 
+                        <td align="right"><span class="gray">{_bid_amount}:</span></td>
+                        <td align="left"><span><span class="black">{winner_bid_price}</span> : <span class="gray">{bidamounttype}</span></span></td>
+                    </tr>
+                    <tr> 
+                        <td align="right"><span class="gray">{_delivery}:</span></td>
+                        <td align="left"><div class="black">{winner_bid_estimate_days} {measure}</div></td>
+                    </tr>
+                    <tr> 
+                        <td align="right" nowrap="nowrap"><span class="gray">{_total_award_amount}:</span></td>
+                        <td align="left"><span style="font-size:15px"><span class="black"><strong>{awardamount}</strong></span></span></td>
+                    </tr>
+                    <tr> 
+                        <td align="right" nowrap="nowrap"><span class="gray">{_payment_method}:</span></td>
+                        <td align="left"><span class="black"><strong>{paymethod}</strong></span></td>
+                    </tr>
+                    <tr> 
+                        <td align="right" valign="top" nowrap="nowrap"><span class="gray">{_bid_proposal}:</span></td>
+                        <td align="left">
+                        
+                            <div class="bubble_container">
+                                <div class="bubble_bl"><div class="bubble_br"><div class="bubble_tl"><div class="bubble_tr"><div style="padding:9px">{winner_bid_message}</div></div></div></div></div>
+                                <div class="bubble_b"><div style="padding-top:6px">
+                                
+                                <div style="font-size:13px; padding-bottom:5px; padding-top:6px"><strong>{_advanced_award_controls}</strong></div>
+                                <table width="100%" border="0" align="center" cellpadding="1" cellspacing="0">
+                                <tr> 
+                                    <td height="1" colspan="2" align="left" valign="middle"><input type="checkbox" name="notifybidders" id="notifybidders" value="1" /> <label for="notifybidders">{_notify_other_bidders_project_was_awarded}</label></td>
+                                </tr>						
+                                </table>
+                                </div></div>
+                                
+                            </div>
+                        
+                      </td>
+                    </tr>
+                    </table>
+                </div>
+
+				
+			</div>
+			
+			<div class="block2-footer">
+					<div class="block2-right">
+							<div class="block2-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+<input type="hidden" name="cmd" value="_award-bid" />
+<input type="hidden" name="bid_id" value="{bid_id}" />
+<input type="hidden" name="project_id" value="{winner_project_id}" />
+<input type="hidden" name="vendor_id" value="{winner_user_id}" />
+<if condition="isset($show['disableaward']) AND $show['disableaward']"><input name="awardthisbid" type="submit" value=" {_award_bid} " class="buttons" style="font-size:15px" disabled="disabled" /><else /><input name="awardthisbid" type="submit" value=" {_award_bid} " class="buttons" style="font-size:15px" /></if> &nbsp;&nbsp;&nbsp;<span class="blue"><a href="javascript:history.back(-1)">{_back}</a></span>
+</form>

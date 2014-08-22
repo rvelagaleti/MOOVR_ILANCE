@@ -1,0 +1,666 @@
+{js_start}
+
+<if condition="$ilconfig['globalauctionsettings_payperpost'] AND $ilance->GPC['cmd'] == 'new-rfp'"><div>
+<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td style="padding-left:5px;" valign="top"></td>
+	<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+	<td style="padding-right:5px;"><img src="{template_relativeimagepath}{template_imagesfolder}icons/money.gif" border="0" alt="" /> {_pay_as_you_go_is_currently_enabled_any_auctions}</td>
+</tr>
+</table>
+</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+</div></if>
+
+<if condition="isset($show['bidsplaced']) AND $show['bidsplaced']">
+<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;">
+	<div class="n">
+		<div class="e">
+			<div class="w"></div>
+		</div>
+	</div>
+	
+	<div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span><strong>{_this_listing_has_received_1_or_more_bids_limited_options_are_available_for_change}</strong></div>		
+	
+	<div class="s">
+		<div class="e">
+			<div class="w"></div>
+		</div>
+	</div>
+</div>
+<div style="padding-bottom:12px"></div></if>
+ 
+<if condition="$ilconfig['moderationsystem_disableauctionmoderation'] == 0">
+<!-- moderated auction alert -->
+<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;">
+	<div class="n">
+		<div class="e">
+			<div class="w"></div>
+		</div>
+	</div>
+	
+	<div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span><strong>{_moderation_notice}:</strong> {_auctions_are_currently_being_moderated_and_will_be_posted_after_the_validation_process}</div>		
+	
+	<div class="s">
+		<div class="e">
+			<div class="w"></div>
+		</div>
+	</div>
+</div>
+<div style="padding-bottom:12px"></div></if>
+
+<if condition="isset($show['noupdateauction']) AND $show['noupdateauction'] AND $_SESSION['ilancedata']['user']['isadmin'] == '0'">
+<!-- cannot save changes alert -->
+<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;">
+	<div class="n">
+		<div class="e">
+			<div class="w"></div>
+		</div>
+	</div>
+	
+	<div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}infowarning3.gif" border="0" alt="" id="error" /></span><strong>{_the_state_of_this_auction_does_not_allow_you_to_save_changes}</strong></div>		
+	
+	<div class="s">
+		<div class="e">
+			<div class="w"></div>
+		</div>
+	</div>
+</div>
+<div style="padding-bottom:12px"></div></if>
+
+<div class="bigtabs" style="padding-bottom:10px; padding-top:5px">
+<div class="bigtabsheader">
+<ul>
+	<li title="" class="on"><a href="javascript:void(0)"><if condition="$ilance->GPC['cmd'] == 'rfp-management'">{_update_item}<else />{_post_project}</if></a></li>
+	<if condition="isset($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] AND isset($ilance->GPC['admincp']) AND $ilance->GPC['admincp'] AND isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'rfp-management'"><li title=""><a href="{https_server_admin}{ilpage[distribution]}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/selectedcat_back.gif" border="0" alt="{_back}" /> {_return_to_admin_control_panel}</a></li></if>
+	<if condition="$ilance->GPC['cmd'] == 'rfp-management'"><li title=""><a href="{http_server}{ilpage[rfp]}?id={project_id}"><img src="{template_relativeimagepath}{template_imagesfolder}icons/selectedcat_back.gif" border="0" alt="{_back}" /> {_return_to_listing}</a></li></if>
+</ul>
+</div>
+</div>
+<div style="clear:both;"></div>
+
+<if condition="isset($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] AND isset($ilance->GPC['admincp']) AND $ilance->GPC['admincp'] AND isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'rfp-management'">
+<!-- START admin update listing --><form method="post" action="{https_server_admin}{ilpage[distribution]}" name="ilacpform" accept-charset="UTF-8" style="margin: 0px;">
+<input type="hidden" name="cmd" value="auctions" />
+<input type="hidden" name="do" value="_update-auction" />
+<input type="hidden" name="return" value="{https_server_admin}{ilpage[distribution]}?cmd=auctions&amp;subcmd=_update-auction&amp;id={project_id}&amp;viewtype=service" />
+<input type="hidden" name="project_id" value="{project_id}" />
+<input type="hidden" name="acpcid" id="acpcid" value="{cid}" />
+<div class="block-wrapper">
+
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header"><span style="float:left; padding-top:5px; padding-right:10px"><a href="#top" onclick="return toggle('admincpoptions_pn{project_id}')"><img src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_admincpoptions_pn{project_id}]}.gif" alt="" border="0" id="collapseimg_admincpoptions_pn{project_id}" /></a></span>{_adminstrator_control}: {_options}</div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_you_are_updating_this_listing_as_an_administrator}</div></div>
+			<div class="block3-content" id="collapseobj_admincpoptions_pn{project_id}" style="{collapse[collapseobj_admincpoptions_pn{project_id}]} padding:9px; background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_blue_1x1000.gif) repeat-x;">
+                <table border="0" width="100%" align="center">
+				<tbody> 
+				<tr>
+					  <td colspan="10">
+					  
+                      	  {apihook[listing_reverse_auction_create_admincp_options_start]}
+                      
+						  
+                          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+						  <tr>
+							<td width="45%" valign="top"><div><strong>{_visible}?</strong></div><div class="gray" style="padding-top:3px">{_set_the_global_visibility_of_this_listing_in_the_marketplace}</div><div style="padding-top:3px">{auctionvisible}</div></td>
+							<td width="55%" valign="top"><table border="0" cellspacing="0" cellpadding="0">
+								<tr> 
+									<td><div><strong>{_added}</strong></div><div class="gray" style="padding-top:3px">{_change_date_added}</div><div style="padding-top:3px"><input type="text" name="date_added" value="{date_added}" class="input" /></div></td>
+									<td>&nbsp;</td>
+									<td><div><strong>{_starts}</strong></div><div class="gray" style="padding-top:3px">{_change_start_date}</div><div style="padding-top:3px"><input type="text" name="date_starts" value="{date_starts}" class="input" /></div></td>
+									<td>&nbsp;</td>
+									<td><div><strong>{_ends}</strong></div><div class="gray" style="padding-top:3px">{_change_end_date}</div><div style="padding-top:3px"><input type="text" name="date_end" value="{date_end}" class="input" /></div></td>
+								</tr>
+								</table></td>
+						  </tr>
+						  </table>
+						  
+						  <hr size="1" width="100%" style="color:#cccccc; margin-top:9px; margin-bottom:9px" />
+						  
+						  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+						  <tr>
+							<td width="45%"><div><strong>{_auction_type}</strong></div><div class="gray" style="padding-top:3px">{_if_you_need_to_change_the_listing_type_please_change_below}</div>
+							<div style="padding-top:3px">{project_state_pulldown}&nbsp;{project_details_pulldown}</div></td>
+							<td width="55%"><div><strong>{_status}</strong></div><div class="gray" style="padding-top:3px">{_quickly_change_the_status_of_this_listing_to_something_different}</div>
+							<div style="padding-top:3px">{status_pulldown}</div></td>
+							</tr>
+						</table>
+						
+						 <hr size="1" width="100%" style="color:#cccccc; margin-top:9px; margin-bottom:9px" />
+						
+						  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+						  <tr>
+							<td width="45%" valign="top"><div><strong>{_listing_enhancements}</strong></div><div class="gray" style="padding-top:3px; padding-bottom:4px">{_enable_or_disable_listing_enhancements_without_charge}</div><div style="padding-top:3px">{enhancement_list}</div></td>
+							<td width="55%" valign="top"><div><strong>{_transfer_of_ownership_details}</strong></div><div>{transfer_ownership}</div></td>
+							</tr>
+						</table>
+                        
+                        <hr size="1" width="100%" style="color:#cccccc; margin-top:9px; margin-bottom:9px" />
+                        <div><input type="submit" value=" {_save} " style="font-size:15px" class="buttons" onclick="return confirm_js('{_note_if_you_selected_a_new_category_for_this_listing_any_category_finder_questions_answered_will_be_lost_with_the_new_category_change}')" /></div>
+                        
+                        {apihook[listing_reverse_auction_create_admincp_options_end]}
+                        
+                        
+					  </td>
+				</tr>
+				</tbody>
+				</table>
+				
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+</div></div></form><!-- END admin update listing --></if>
+
+<form name="formtab" style="margin:0px;"><input type="hidden" name="viewtab" value="{tab}" accept-charset="UTF-8" /></form>
+<form name="ilform" id="ilform" action="{http_server}{ilpage[buying]}" method="post" onsubmit="return validate_all();" accept-charset="UTF-8" style="margin: 0px;">
+<if condition="$ilance->GPC['cmd'] == 'new-rfp'"><input type="hidden" name="cmd" value="new-rfp" /><else />{hiddenfields}
+<input type="hidden" name="date_end" value="{date_end}" />
+<input type="hidden" name="cmd" value="rfp-management" /></if>
+<input type="hidden" name="rfpid" value="{project_id}" />
+
+{preview_pane}
+
+<div class="block-wrapper">
+	<div class="block3">
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			<div class="block3-header">{_buying_format}</div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_select_a_bidding_type_your_project_will_be_accepting}</div></div>
+			<div class="block3-content" style="padding:{table_cellpadding}px">
+				<div id="bidtypefilterbox">{bidtypefilter}</div>
+			</div>
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+	</div>
+</div>
+
+<!-- START category selector --><div class="block-wrapper">
+	<div class="block3">
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>			
+			<div class="block3-header">{_category}</div>		
+            <div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_update_or_change_the_category}</div></div>	
+			<div class="block3-content alt1">
+            	<if condition="$ilance->GPC['cmd'] == 'new-rfp'"><div style="padding-bottom:9px"><span id="selectedcategory"></span><span id="cidstringcb"></span><span class="smaller">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="blue"><a href="javascript:void(0)" onclick="toggle_tr('showcidtable'); toggle_tr('showcidtablediv')">{_change}</a></span>)</span></div></if>
+                <if condition="$ilance->GPC['cmd'] == 'new-rfp'"><div style="display:none" id="showcidtable"></if>
+				<table cellpadding="3" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+				<tr>
+					<td>
+                    	<if condition="$ilance->GPC['cmd'] == 'new-rfp'"><div style="display:none; padding-top:12px" id="showcidtablediv"></if>
+				    	<if condition="$ilance->GPC['cmd'] == 'new-rfp'"><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #ebebeb; border-left:1px solid #ebebeb; border-right:1px solid #bdbdbd; border-bottom:1px solid #bdbdbd" src="{ajaxurl}?do=categories&mode=service&cid={cid}&showyouselectedstring=0&showcheckmarkafterstring=1&showthumb=0&categoryfinderjs=1&id={project_id}&cmd=new-rfp"></iframe></if>
+                        <if condition="$ilance->GPC['cmd'] == 'rfp-management'"><iframe name="category_iframe" id="category_iframe" width="100%" scrolling-bottom="yes" border="0" frameborder="0" class="" style="height:240px; border-top:1px solid #ebebeb; border-left:1px solid #ebebeb; border-right:1px solid #bdbdbd; border-bottom:1px solid #bdbdbd" src="{ajaxurl}?do=categories&mode=service&cid={cid}&showyouselectedstring=1&showcontinue=0&showthumb=0&showcidbox=1&showcheckmarkafterstring=1&categoryfinderjs=1&id={project_id}&cmd=rfp-management"></iframe></if>
+                        <if condition="$ilance->GPC['cmd'] == 'new-rfp'"></div></if>
+						<if condition="$ilance->GPC['cmd'] == 'new-rfp'"><div style="display:none"></if><span style="float:right; font-family: Arial; font-size: 13px; padding-top:5px">{_category_number}: <input type="text" id="cid" name="cid" style="font-family: verdana" size="6" /></span><if condition="$ilance->GPC['cmd'] == 'new-rfp'"></div></if>
+						<if condition="$ilance->GPC['cmd'] == 'new-rfp'"><else /><div><span id="selectedcategory"></span><span id="cidstringcb"></span></div></if>
+					</td>
+				</tr>
+				</table>
+                <if condition="$ilance->GPC['cmd'] == 'new-rfp'"></div></if>
+				<if condition="$ilance->GPC['cmd'] == 'new-rfp'"><div style="display:none"></if><div id="categorybutton"></div><if condition="$ilance->GPC['cmd'] == 'new-rfp'"></div></if>
+			</div>
+            <div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_category_finder_criteria}</div></div>
+			<div class="block3-content">
+					<div id="categoryfindertext">{project_questions}</div>
+			</div>		
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>			
+	</div>
+</div><!-- END category selector -->
+
+<div class="block-wrapper">
+	<div class="block3">
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>			
+			<div class="block3-header">{_type_of_event_for_your_auction}</div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_decide_the_auction_event_type_to_host_for_your_listing}</div></div>
+			<div class="block3-content">
+				
+				<div>{auctioneventtype}</div>
+				
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<div class="block-wrapper">
+	<div class="block3">
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>			
+			<div class="block3-header">{_budget_range}</div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_select_a_budget_range_you_will_be_accepting_bids_between}</div></div>
+			<div class="block3-content">
+				
+				<div id="budgetfilterbox">{budgetfilter}</div>
+				
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<div class="block-wrapper">
+	<div class="block3">
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>			
+			<div class="block3-header">{_duration}</div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_how_long_will_your_auction_be_listed_on_the_marketplace}</div></div>
+			<div class="block3-content">
+				
+				<div id="">
+					<if condition="$ilance->GPC['cmd'] == 'new-rfp'">
+						<div style="padding-top:4px"></div>
+						<table width="100%" border="0" cellspacing="0" cellpadding="2">
+						<tr> 
+							<td width="1%" nowrap="nowrap"><div id="durationwrapper">{duration}</div></td>
+							<td width="77%">{durationbits}</td>
+						</tr>
+						</table>
+						<div id="durationverbose"></div>
+					<else />
+							<if condition="isset($show['noupdateauction']) AND $show['noupdateauction'] == 0 AND isset($ilance->GPC['cmd']) AND $ilance->GPC['cmd'] == 'rfp-management'">
+							<!-- allow owner to extend auction -->
+							{extendauction}
+							</if>
+					</if>
+
+				
+				</div>
+				
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<div class="block-wrapper">
+
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header">{_payment_methods}</div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_please_decide_how_you_would_like_to_pay_for_services}</div></div>
+			<div class="block3-content">
+				
+				<div>{escrowfilter}</div>
+				
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<div class="block-wrapper">
+
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header"><if condition="$ilance->GPC['cmd'] == 'rfp-management'">{_update_project}<else />{_information}</if></div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller"><if condition="$ilance->GPC['cmd'] == 'rfp-management'">{_any_changes_made_to_this_project_will_be_recorded_in_a_revision_log}<else />{_below_you_will_find_required_information}</if></div></div>
+			<div class="block3-content" style="padding:0px">
+				
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+				<tr valign="top">
+					<td>
+
+					<div>
+						<div>
+							
+							<div style="padding-bottom:3px"><strong>{_title}</strong></div>
+							<div style="padding-bottom:7px">{title}</div>
+							
+							<div style="padding-top:7px; padding-bottom:3px"><strong>{_description}</strong></div>
+							{wysiwyg_area}
+							
+							<div style="padding-top:20px; padding-bottom:3px"><strong>{_questions_or_additional_requirements}</strong></div>
+							<div style="padding-bottom:7px">{additional}</div>
+                            
+						  <div style="padding-top:12px;padding-bottom:3px"><strong>{_keywords} / {_tags}</strong></div>
+							
+							<div>{keywordinput}</div>
+							
+						</div>
+					</div>
+					
+					
+					
+					</td>
+                    <!--<td>&nbsp;&nbsp;</td>
+                    <td class="alt1_left" width="40%">
+                    <div style="padding-bottom:3px"><strong>{_select_required_skills}</strong></div>
+							<div style="padding-bottom:7px">{skillselect}</div>
+                    
+                    </td>-->
+				</tr>
+				</table>
+				
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<div class="block-wrapper">
+
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header">{_enhance_your_listing}</div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_promotional_tools_to_help_professionals_find_your_listing_quicker}</div></div>
+			<div class="block3-content">
+				{enhancements}
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<a name="attachments"></a>
+<div class="block-wrapper">
+    <div class="block3">
+
+	<div class="block3-top">
+	    <div class="block3-right">
+		<div class="block3-left"></div>
+	    </div>
+	</div>
+
+	<div class="block3-header">{_attachment_manager}</div>
+	<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_photo}</div></div>
+	<div class="block3-content">
+	    <iframe name="fileuploader_iframe" id="fileuploader_iframe" width="100%" height="280px" scrolling="no" border="0" frameborder="0" class="" style="border:none;" src="{https_server}{ilpage[ajax]}?do=fileuploaderform&pid={project_id}&attachtype=project"></iframe>
+	</div>
+
+	<div class="block3-footer">
+	    <div class="block3-right">
+		<div class="block3-left"></div>
+	    </div>
+	</div>
+
+    </div>
+</div>
+
+
+<div class="block-wrapper">
+<div class="block3">
+
+		<div class="block3-top">
+				<div class="block3-right">
+						<div class="block3-left"></div>
+				</div>
+		</div>
+		
+		<div class="block3-header">
+		<span style="float:right; padding-top:3px" class="smaller gray"></span>{_add_streaming_video_to_your_listing}</div>
+    <div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_increase_the_chances_of_people_viewing_your_listing_by_supplying_a_video_description}</div></div>
+		
+		<div class="block3-content">
+				<div id="">
+				
+				<div><img src="{template_relativeimagepath}{template_imagesfolder}wysiwyg/youtube.gif" /> {_enter_the_url_link_to_your_published_youtube_video_and_well_display_it_right_on_your_listing_page} &nbsp;&nbsp;&nbsp;<span class="smaller gray">({videodescriptioncost})</span></div>
+				<div style="padding-top:3px">{description_videourl}</div>
+				</div>
+		</div>
+		
+		<div class="block3-footer">
+				<div class="block3-right">
+						<div class="block3-left"></div>
+				</div>
+		</div>
+		
+</div>
+</div>
+
+<div class="block-wrapper">
+
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header">{_public_message_board}</div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_if_you_would_like_to_allow_buyers_to_ask_public_questions_about_this_item}</div></div>
+<div class="block3-content">
+				{publicboard}
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<div class="block-wrapper">
+
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header">{_bidding_privacy}</div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_determine_what_type_of_bidding_and_or_bidder_privacy_you_would_like_your_listing_to_adhere_to}</div></div>
+<div class="block3-content">
+				{biddingprivacy}
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<div class="block-wrapper">
+
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header">{_restrictions}</div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_please_ensure_that_the_coresponding_checkbox_for_the_bid_filter}</div></div>
+<div class="block3-content">
+				<div>{bidfilters}</div>
+				<if condition="isset($show['profile_filters']) AND $show['profile_filters']">
+				<hr size="1" width="100%" style="color:#dedede" />
+				<div>{profilebidfilters}</div>
+				</if>
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<if condition="$ilance->GPC['cmd'] == 'new-rfp'">
+<div id="invitecontain" style="display:inline;">
+	<div class="block-wrapper">
+
+		<div class="block3">
+		
+				<div class="block3-top">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+				<div class="block3-header">{_invite_to_bid}</div>
+				<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_invitation_messages_will_only_be_sent_during_a_new_project_listing}</div></div>
+				<div class="block3-content" style="padding:0px">
+					<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+					<tr>
+						
+						<td valign="top">
+						
+						<div style="padding-top:5px" id="orginvite">{inviteoptions}</div>
+						
+						</td>
+					</tr>
+					</table>
+				</div>
+				
+				<div class="block3-footer">
+						<div class="block3-right">
+								<div class="block3-left"></div>
+						</div>
+				</div>
+				
+		</div>
+	</div>
+</div>
+</if>
+
+<if condition="$ilance->GPC['cmd'] == 'new-rfp'">
+<div class="block-wrapper">
+
+	<div class="block3">
+	
+			<div class="block3-top">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+			<div class="block3-header">{_draft}</div>
+			<div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_saving_as_draft_allows_you_to_edit_and_modify_this_listing_before_its_posted_live_to_the_marketplace}</div></div>
+<div class="block3-content">
+				{saveasdraft}
+			</div>
+			
+			<div class="block3-footer">
+					<div class="block3-right">
+							<div class="block3-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+</if>
+
+<if condition="$ilance->GPC['cmd'] == 'new-rfp' AND $ilconfig['globalauctionsettings_showfees']">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td width="50%" valign="top"><div style="padding-bottom:10px">{insertionfees}</div></td>
+	<td>&nbsp;&nbsp;</td>
+	<td width="50%" valign="top"><div style="padding-bottom:10px">{budgetinsertionfees}</div></td>
+</tr>
+</table>
+</if>
+
+<div style="padding-top:12px; padding-bottom:12px; padding-left:9px; background-color:#ebebeb; display:none">
+<strong>{_fees_to_post_this_listing}:</strong> &nbsp;&nbsp;<a href="javascript:void(0)" onmouseover="Tip('<div>' + phrase['_this_value_represents_the_listing_fees_you_have_selected_so_far'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a> &nbsp;&nbsp;<span id="feetotal">{currencysymbol} {feetotal}</span>
+</div>
+
+<div style="margin-top:6px">
+<if condition="isset($_SESSION['ilancedata']['user']['isadmin']) AND $_SESSION['ilancedata']['user']['isadmin'] AND isset($ilance->GPC['admincp']) AND $ilance->GPC['admincp'] AND $ilance->GPC['cmd'] == 'rfp-management'">
+<input name="dosave" id="save" type="submit" value=" {_save} " class="buttons" accesskey="s" style="font-size:15px" />
+<else />
+<if condition="isset($show['noupdateauction']) AND $show['noupdateauction']">
+<input name="dosave" id="save" type="submit" value=" {_save} " class="buttons" accesskey="s" disabled="disabled" style="font-size:15px" />
+<else />
+<if condition="$ilance->GPC['cmd'] == 'new-rfp'">
+<input name="dosubmit" id="submit" type="submit" value=" {_save} " class="buttons" accesskey="s" style="font-size:15px" />
+<else />
+<input name="dosave" id="save" type="submit" value=" {_save} " class="buttons" accesskey="s" style="font-size:15px" />
+</if>
+</if>
+</if>
+</div>
+</form>
+
+{js_end}

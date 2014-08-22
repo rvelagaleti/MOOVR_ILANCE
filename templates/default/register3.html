@@ -1,0 +1,86 @@
+<form method="post" action="{ilpage[registration]}" accept-charset="UTF-8" onsubmit="return subscription_check() && validatecustomform(this);" name="newsubscription" style="margin:0px">
+<input type="hidden" name="cmd" value="register" />
+<input type="hidden" name="step" value="4" />
+<input type="hidden" name="paymethod" value="account" />
+<div class="block-wrapper">
+
+	<div class="block4">
+	
+			<div class="block4-top">
+					<div class="block4-right">
+							<div class="block4-left"></div>
+					</div>
+			</div>
+			
+			<div class="block4-header"><span style="float:right"><img src="{template_relativeimagepath}{template_imagesfolder}icons/project_5.gif" border="0" alt="" /></span>{_subscription}</div>
+			
+			<div class="block4-content" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_yellow_1x1000.gif) repeat-x; padding:0px">
+				
+				
+				<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%">
+				<tr> 
+					<td width="1%" class="alt2" align="center">{_choose}</td>
+					<td width="42%" class="alt2">{_title} / {_description}</td>
+					<td width="13%" class="alt2">{_role}  <a href="javascript:void(0)" onmouseover="Tip('<div><strong>' + phrase['_roles'] + '</strong></div><div>' + phrase['_roles_represent_specific_resources_in_the_marketplace_we_have_created'] + '</div>', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a></td>
+					<td width="14%" class="alt2">{_cost}</td>
+					<td width="9%" align="center" class="alt2">{_length}</td>
+					<td width="15%" class="alt2" align="right">{_access}</td>
+				</tr>
+				<loop name="subscription"> 
+				<tr class="alt1" valign="top"> 
+					<td align="center" class="alt2">{action}</td>
+					<td><div><strong>{title}</strong></div><div class="litegray" style="padding-top:4px">{description}</div></td>
+					<td nowrap="nowrap">{roletype}</td>
+					<td>{cost}</td>
+					<td align="center" nowrap="nowrap">{length} {units}</td>
+					<td nowrap="nowrap" align="right"><span class="blue">{access}</span></td>
+				</tr>
+				</loop name="subscription">
+				<if condition="isset($show['no_subscription']) AND $show['no_subscription']"> 
+				<tr> 
+					<td colspan="6" align="center"><div style="padding:8px">{_no_results_found}</div></td>
+				</tr>
+				</if>
+				<if condition="!empty($customquestions)">
+				<tr>
+					<td class="alt2" colspan="6"><div style="padding:6px">{_questions}</div></td>
+				</tr>
+				<tr> 
+					<td colspan="6"><div style="padding:6px">{customquestions}</div></td>
+				</tr>
+				</if>
+				<tr class="alt2_top">
+					<td colspan="6"><input type="submit" class="buttons" value=" {_finish} " accesskey="s" style="font-size:15px" /></td>
+				</tr>
+				</table>
+
+				
+				
+			</div>
+			
+			<div class="block4-footer">
+					<div class="block4-right">
+							<div class="block4-left"></div>
+					</div>
+			</div>
+			
+	</div>
+</div>
+
+<div id="free"></div>
+
+<!--				
+<br />
+<fieldset class="fieldset">
+<legend>{_enter_promotional_code}</legend>
+<table width="100%"  border="0" cellspacing="6" cellpadding="0">
+<tr>
+	<td width="100%"><input type="text" class="input" size="20" name="promocode" /> <div>{_if_you_have_a_promotional_code_please_enter_it_here}</div></td>
+</tr>
+</table>
+</fieldset>
+//-->
+<input type="hidden" name="promocode" value="" />
+</form>
+
+{js}

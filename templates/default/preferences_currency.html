@@ -1,0 +1,46 @@
+<form method="post" action="{ilpage[preferences]}" name="ilform" accept-charset="UTF-8" style="margin:0px">
+<input type="hidden" name="cmd" value="_do-currency-change" />
+<div class="block-wrapper">
+
+    <div class="block">
+    
+            <div class="block-top">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+            <div class="block-header">{_currency_preference}</div>
+            <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_please_select_the_currency_you_do_business_with_on_the_marketplace}</div></div>
+            <div class="block-content" style="padding:0px">
+                
+                <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" width="100%" align="center">
+                <tr>
+                    <td>
+                    <div>
+                            
+                            <div style="padding-bottom:12px">{_default_site_currency}: <strong>{currencysymbol}</strong></div>
+                            <div style="padding-bottom:4px"><strong>{_currency_selection}</strong></div>
+                            <div>{currency_pulldown}</div>
+                        
+                    </div>
+                    
+                    </td>
+                </tr>
+                <tr class="alt2_top">
+                    <td><input type="submit" class="buttons" value=" {_save} " accesskey="s" style="font-size:15px" /></td>
+                </tr>
+                </table>
+
+                
+            </div>
+            
+            <div class="block-footer">
+                    <div class="block-right">
+                            <div class="block-left"></div>
+                    </div>
+            </div>
+            
+    </div>
+</div>
+</form>

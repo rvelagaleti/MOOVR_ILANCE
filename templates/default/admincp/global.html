@@ -1,0 +1,286 @@
+<!-- begin v3body4 -->
+<div id="v3body4">
+    <!-- sub navigation -->
+    <div id="sub">
+	<div id="subnav">
+	    <loop name="subnav_settings"><a href="{url}" {class}><span>{name}</span></a> <span> | </span></loop name="subnav_settings">
+	</div>
+    </div>
+    <!-- /sub navigation -->
+
+    <!-- begin content -->
+    <div id="content">
+	<h1>{_global_configuration}</h1><br />
+
+	<!-- tab pane -->
+	<div class="tab-pane">
+
+	    <!-- server settings tab page -->
+	    <div class="tab-page"> 
+
+		<h2 class="tab">{_server}</h2>
+
+		<!-- server tab pane -->
+		<div class="tab-pane" id="serversettings">
+
+		    <!-- server owner -->
+		    <div class="tab-page">
+
+			<h2 class="tab">{_owner}</h2>
+
+			{global_serversettings}
+
+		    </div>
+		    <!-- / server owner -->
+
+		    <!-- distance api -->
+		    <div class="tab-page">
+
+			<h2 class="tab">{_distance}</h2>
+
+			{global_serverdistanceapi}
+
+			<form method="post" action="{ilpage[language]}" name="managelanguage" accept-charset="UTF-8" style="margin: 0px;">
+			    <input type="hidden" name="cmd" value="managelanguage" />
+			    <input type="hidden" name="return" value="{ilpage[language]}" />
+			    <div class="block-wrapper">
+				<div class="block">
+
+				    <div class="block-top">
+					<div class="block-right">
+					    <div class="block-left"></div>
+					</div>
+				    </div>
+
+				    <div class="block-header">{_distance_databases_installed}</div>
+				    <div class="block-content-yellow" style="padding:{table_cellpadding}px"><div class="smaller">{_review_existing_distance_longitude_and_latitude_data_installed_in_the_marketplace}</div></div>
+				    <div class="block-content" style="padding:0px">
+
+					<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+					    <tr class="alt2">
+						<td width="47%">{_country}</td>
+						<td width="16%" nowrap="nowrap">{_cities}</td>
+						<td width="14%" nowrap="nowrap">{_states}</td>
+						<td width="8%" nowrap="nowrap">{_zip_codes}</td>
+					    </tr>
+					    <loop name="installedcountries">
+						<tr class="alt1">
+						    <td>{title}</td>
+						    <td>{cities}</td>
+						    <td>{states}</td>
+						    <td>{zipcodecount}</td>
+						</tr>
+					    </loop name="installedcountries">
+					    <if condition="isset($show['nodistancerows']) AND $show['nodistancerows']">
+						<tr>
+						    <td colspan="4" align="center"><div style="padding-top:9px; padding-bottom:9px">{_no_results_found}</div></td>
+						</tr>
+					    </if>
+					</table>
+
+
+				    </div>
+
+				    <div class="block-footer">
+					<div class="block-right">
+					    <div class="block-left"></div>
+					</div>
+				    </div>
+
+				</div>
+			    </div>
+			</form>
+
+		    </div>
+		    <!-- / distance api -->
+
+		    <!-- server locale -->
+		    <div class="tab-page">
+
+			<h2 class="tab">{_locale}</h2>
+
+			{global_serverlocale}
+
+		    </div>
+		    <!-- / server locale -->
+
+		    <!-- server smtp -->
+		    <div class="tab-page">
+
+			<h2 class="tab">{_smtp}</h2>
+
+			{global_serversmtp}
+
+		    </div>
+		    <!-- / server smtp -->
+		    
+		    <!-- server cache -->
+		    <div class="tab-page">
+
+			<h2 class="tab">{_cache}</h2>
+
+			{global_servercache}
+
+		    </div>
+		    <!-- / server cache -->
+
+		    <!-- server session -->
+		    <div class="tab-page">
+
+			<h2 class="tab">{_session}</h2>
+
+			{global_serversession}
+
+		    </div>
+		    <!-- / server session -->
+		    
+		</div>
+		<!-- / server tab pane -->
+
+	    </div>
+	    <!-- / server settings tab page -->
+
+	    <!-- filter tab page -->
+	    <div class="tab-page">
+
+		<h2 class="tab">{_filter}</h2>
+
+		<!-- filter tab pane -->
+		<div class="tab-pane" id="filtersettings">
+
+		    <!-- filter settings page -->
+		    <div class="tab-page">
+
+			<h2 class="tab">{_settings}</h2>
+
+			{global_filtersettings}
+
+		    </div>
+		    <!-- / filter settings page -->
+
+		    <!-- filter results -->
+		    <div class="tab-page">
+
+			<h2 class="tab">{_results}</h2>
+
+			{global_filterresults}
+
+		    </div>
+		    <!-- / filter results -->
+
+		    <!-- filter results -->
+		    <div class="tab-page">
+
+			<h2 class="tab">{_general_block_visibility}</h2>
+
+			{global_tab_visibility}
+
+		    </div>
+		    <!-- / filter results -->
+
+		</div>
+		<!-- / filter tab pane -->
+	    </div>
+	    <!-- / filter tab page -->
+
+	    <!-- security tab page -->
+	    <div class="tab-page">
+
+		<h2 class="tab">{_security}</h2>
+
+		{global_securitysettings}
+
+	    </div>
+	    <!-- / security tab page -->
+
+	    <!-- search -->
+	    <div class="tab-page">
+
+		<h2 class="tab">{_search}</h2>
+
+		{global_search}
+
+	    </div>
+	    <!-- / search -->
+
+	    <!-- SEO -->
+	    <div class="tab-page">
+
+		<h2 class="tab">{_seo}</h2>
+
+		<div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_gray_1x1000.gif) repeat-x;">
+		    <div class="n">
+			<div class="e">
+			    <div class="w"></div>
+			</div>
+		    </div>
+
+		    <div style="padding:6px"><span style="float:left; padding-right:10px; padding-left:10px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/checkmark.gif" border="0" alt="" id="" /></span>{_url_objects}: <span class="smaller"><strong>{HTTP_SERVER}, {DOMAIN}, {KEYWORDS}, {CATEGORY}, {CATEGORYLOWERCASE}, {IDENTIFIER}, {CID}, {ID}</strong></span></div>		
+
+		    <div class="s">
+			<div class="e">
+			    <div class="w"></div>
+			</div>
+		    </div>
+		</div>
+
+
+		<div style="padding:9px"></div>
+
+		{global_seo}
+        
+        <form method="post" action="{ilpage[settings]}" name="managehtaccess" accept-charset="UTF-8" style="margin: 0px;">
+        <input type="hidden" name="cmd" value="savehtaccess" />
+        <input type="hidden" name="return" value="{ilpage[settings]}" />
+        <div class="block-wrapper">
+        <div class="block">
+
+            <div class="block-top">
+            <div class="block-right">
+                <div class="block-left"></div>
+            </div>
+            </div>
+
+            <div class="block-header">.htaccess Editor</div>
+            <div class="block-content" style="padding:0px">
+
+			<div><textarea name="htaccess" id="htaccess" style="font: 10pt consolas, 'courier new', courier, monospace; width: 869px; height: 500px; background-color: #fff; color:#000;white-space:nowrap;" wrap="physical" spellcheck="false">{global_htaccess}</textarea></div>
+            <div class="alt2_top" style="padding:{table_cellpadding}px"><input type="submit" name="save" style="font-size:15px" value=" {_save} " onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')" class="buttons" /> <input type="button" name="revert" style="font-size:15px" value=" Revert Original " onclick="if (confirm_js('Are you sure you want to revert the .htaccess file back to original state?')) {location.href='{ilpage[settings]}?cmd=reverthtaccess';}" class="buttons" /></div>
+            </div>
+
+            <div class="block-footer">
+            <div class="block-right">
+                <div class="block-left"></div>
+            </div>
+            </div>
+
+        </div>
+        </div>
+        </form>
+        
+
+	    </div>
+	    <!-- / SEO -->
+
+	    <!-- ckeditor -->
+	    <div class="tab-page">
+
+		<h2 class="tab">{_wysiwyg}</h2>
+
+		{global_wysiwygsettings}
+
+	    </div>
+	    <!-- / ckeditor -->
+
+	    <!-- terms privacy about registrationterms -->
+	    <div class="tab-page">
+
+		<h2 class="tab">{_cms_editor}</h2>
+
+		{global_wysiwygeditor}
+
+	    </div>
+	    <!-- / terms privacy about registrationterms -->
+
+	</div>
+	<!-- / tab pane -->

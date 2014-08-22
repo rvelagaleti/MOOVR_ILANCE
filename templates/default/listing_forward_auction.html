@@ -1,0 +1,1071 @@
+{apihook[item_notices_start]}
+<style type="text/css">
+    .slidegif
+    {
+	background-image:url({template_relativeimagepath}{template_imagesfolder}working.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    }
+    .ipics-cell-0 
+    {
+	display:table-cell;
+	vertical-align: middle;
+	border:0px;
+	border-spacing:0px;
+	border-collapse:collapse;
+    }
+    .image
+    {
+	border: 1px solid #ECECEC;
+	width:{limit_productphotowidth}px;
+    height:{limit_productphotoheight}px;	
+    }
+</style>
+<if condition="isset($show['ended']) AND $show['ended']"><div id="topendedrow"><table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+	    <tr>
+		<td>
+		    <div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+			    <table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+				    <td valign="top"></td>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1" border="0" id="" /></td>
+				    <td style="padding-right:5px; padding-left:3px"><h2>{_the_bidding_has_ended_for_this_item}</h2><div class="gray" style="padding-top:4px"><span class="blue"><a href="{http_server}{ilpage[merch]}?cid={cid}">{_no_more_bids_can_be_placed_at_this_time_find_similar_items_in_this_category}</a></span>&nbsp;&nbsp;<span class="gray">|</span>&nbsp;&nbsp;<span class="blue"><a href="{http_server}{ilpage[selling]}?cmd=new-item&amp;cid={cid}">{_sell_a_similar_item_in_this_category}</a></span>&nbsp;&nbsp;<span class="gray">|</span>&nbsp;&nbsp;<span class="blue"><a href="{http_server}{ilpage[search]}?mode=product&amp;searchuser={sellerplain}">{_see_other_items_listed_by_this_seller}</a></span></div>
+
+				    </td>
+				</tr>
+			    </table>
+			</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+		</td>
+	    </tr>
+	</table></div>
+    <else /><if condition="isset($show['itemcanshiptouser']) AND $show['itemcanshiptouser'] == false AND !empty($_SESSION['ilancedata']['user']['userid']) AND $show['is_owner'] == false">
+	<div id="cantshiptolocation"><table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+		<tr>
+		    <td>
+			<div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+				<table border="0" cellpadding="0" cellspacing="0">
+				    <tr>
+					<td valign="top"></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+					<td style="padding-right:5px; padding-left:3px"><h2><img src="{template_relativeimagepath}{template_imagesfolder}infowarning.gif" width="16" height="16" /> {_were_sorry_it_appears_this_item_does_not_ship_to_your_location_in} {user[country]}.</h2>
+					    <div style="padding-top:4px;padding-left:22px">{_you_can}: <span class="blue"><a href="{http_server}{ilpage[selling]}?cmd=new-item&amp;cid={cid}">{_sell_a_similar_item_in_this_category}</a></span>&nbsp;&nbsp;<span class="gray">|</span>&nbsp;&nbsp;<span class="blue"><a href="{http_server}{ilpage[merch]}?cid={cid}&amp;q={project_title}">{_see_similar_items_offered_by_other_sellers}</a></span></div></td>
+				    </tr>
+				</table>
+			    </div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+		    </td>
+		</tr>
+	    </table></div></if>
+
+    <if condition="isset($show['is_high_bidder']) AND $show['is_high_bidder']"><div id="topcongratsrow"><table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+		<tr>
+		    <td>
+			<div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+				<table border="0" cellpadding="0" cellspacing="0">
+				    <tr>
+					<td valign="top"></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1" border="0" alt="" id="" /></td>
+					<td style="padding-right:5px; padding-left:3px"><if condition="isset($bids) AND $bids == '1'"><h2><img src="{template_relativeimagepath}{template_imagesfolder}bid.gif" border="0" alt="" id="" /> {_congratulations} {user[username]}, {_youre_the_first_bidder_good_luck}</h2><else /><h2><img src="{template_relativeimagepath}{template_imagesfolder}bid.gif" border="0" alt="" id="" /> {_congratulations_you_are_currently_the_highest_bidder_for_this_auction}</h2></if><div class="black" style="padding-top:4px">{_however_another_bidder_might_place_a_higher_bid}</div></td>
+				    </tr>
+				</table>
+			    </div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+		    </td>
+		</tr>
+	    </table></div></if></if>
+
+<if condition="isset($show['is_winner']) AND $show['is_winner']"><div id="youwoncongrats">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+	    <tr>
+		<td>
+		    <div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+			    <table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+				    <td valign="top"></td>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1" id="" alt="" /></td>
+				    <td style="padding-right:5px; padding-left:3px"><h2><img src="{template_relativeimagepath}{template_imagesfolder}bid_awarded_small.gif" width="16" height="19" id="" alt="" /> {_congratulations_this_item_is_yours}</h2><if condition="isset($show['ended']) AND $show['ended'] == false"><!--<div style="padding-top:4px" class="gray">({_with_the_opportunity_to_purchase_more_items_if_you_desire})</div>--></if></td>
+				</tr>
+				<if condition="isset($show['directpay']) AND $show['directpay']"><tr>
+					<td valign="top"></td>
+					<td>&nbsp;</td>
+					<td style="padding-right:5px;" valign="top">
+				    <if condition="isset($show['directpaycompleted']) AND $show['directpaycompleted']">
+					<div style="padding-top:9px">{directpaybit}</div>
+					<else />
+					<div style="padding-top:9px"><input type="button" value=" {_pay_now} " onclick="location.href='{directpayurl}'" class="buttons" style="font-size:13px" /></div>
+				    </if></td>
+				    </tr><else /><tr>
+					<td valign="top"></td>
+					<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1" id="" alt="" /></td>
+					<td style="padding-right:5px; padding-left:3px" valign="top">
+				    <if condition="isset($show['markpaidcompleted']) AND $show['markpaidcompleted'] == false">
+					<div style="padding-top:6px" class="black">{transactionstatus}</div>
+					<div style="padding-top:9px"><input type="button" value=" {_pay_now} " onclick="location.href='{https_server}{ilpage[merch]}?cmd=directpay&amp;subcmd=choose&amp;id={project_id}'" class="buttons" style="font-size:13px" /></div>
+					<else />
+					<div style="padding-top:6px" class="black">{transactionstatus}</div>
+				    </if></td>
+				    </tr></if>
+			    </table>
+			</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+		</td>
+	    </tr>
+	</table>
+    </div></if>
+
+<if condition="isset($ilance->GPC['invited']) AND $ilance->GPC['invited']"><div id="registertobid">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+	    <tr>
+		<td>
+		    <div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+			    <table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+				    <td valign="top"></td>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+				    <td style="padding-right:5px; padding-left:3px"><strong>{_register_to_bid}</strong>: {_congratulations_you_have_been_selected_to_place_a_bid_on_this_auction} [ <span class="blue"><a href="{https_server}{ilpage[registration]}?invited=1&amp;id={project_id}"><strong>{_please_register_here}</strong></a></span> ]</td>
+				</tr>
+			    </table>
+			</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+		</td>
+	    </tr>
+	</table>
+    </div></if>
+
+<if condition="isset($show['bidderuninvited']) AND $show['bidderuninvited'] AND empty($ilance->GPC['invited'])"><div id="invitationonly">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+	    <tr>
+		<td>
+		    <div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+			    <table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+				    <td valign="top"></td>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+				    <td style="padding-right:5px; padding-left:3px"><strong>{_invitation_only}</strong>: {_in_order_to_place_bids_and_interact_product}</td>
+				</tr>
+			    </table>
+			</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+		</td>
+	    </tr>
+	</table>
+    </div></if>
+
+<if condition="isset($show['is_owner']) AND $show['is_owner'] AND (isset($show['soldbypurchase']) AND $show['soldbypurchase'] > 0 OR isset($show['soldbyauction']) AND $show['soldbyauction'] > 0)"><div id="yousoldcongrats">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+	    <tr>
+		<td>
+		    <div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+			    <table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+				    <td valign="top"></td>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+				    <td style="padding-right:5px; padding-left:3px"><h2>{_congratulations_youve_sold_this_item}</h2><div class="gray" style="padding-top:4px">{transactionstatus}</div>
+					<!--<div style="padding-top:6px" class="smaller">{_visit}: <span class="blue"><a href="{http_server}{ilpage[selling]}?cmd=management&amp;sub=sold">{_items_ive_sold}</a></span><if condition="isset($ilconfig['escrowsystem_enabled']) AND $ilconfig['escrowsystem_enabled']">&nbsp;&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;&nbsp;<span class="blue"><a href="{http_server}{ilpage[escrow]}?cmd=management&amp;sub=product-escrow">{_product_escrow_payments_in}</a></span></if></div>--></td>
+				</tr>
+			    </table>
+			</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+		</td>
+	    </tr>
+	</table>
+    </div></if>
+
+<if condition="isset($show['is_outbid']) AND $show['is_outbid'] AND $show['is_owner'] == false AND $show['is_bid_owner']"><div id="outbidnotice">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 15px 0px">
+	    <tr>
+		<td>
+		    <div class="grayborder" style="background:url({template_relativeimagepath}{template_imagesfolder}icons/bg_gradient_red_1x1000.gif) repeat-x;"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+			    <table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+				    <td valign="top"></td>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1" border="0" id="" alt="" /></td>
+				    <td style="padding-right:5px; padding-left:3px"><h2>{_you_were_outbid_by_another_bidder_place_a_new_maximum_bid}</h2>
+					<div class="black" style="padding-top:4px">{_it_appears_another_bidder_has_placed_a_higher_bid_than_your_last_one}</div></td>
+				</tr>
+			    </table>
+			</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+		</td>
+	    </tr>
+	</table>
+    </div></if>
+{apihook[item_notices_end]}
+
+<div>
+
+    {apihook[project_title_start]}
+
+    <h1>{project_title}&nbsp;<span>{apihook[project_title_icons_start]}{icons}{apihook[project_title_icons_end]}</span></h1></div>
+<div style="padding-top:3px; font-size:10px; font-family:verdana; font-weight:bold">{_item} <span class="black">#{project_id}</span></div>
+<div class="smaller gray" style="padding-bottom:15px">{additional_info}</div>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+	<td width="40%" valign="top">
+
+
+
+	    <div class="bigtabs" style="padding-bottom:10px; padding-top:10px">
+		<div class="bigtabsheader">
+                    <span class="smaller gray" style="padding-top:6px; float:right; padding-right:6px"></span>
+                    <ul id="decideview">
+                        <li id="tabpicture" class="on"><a href="javascript:void(0)" onclick="toggle_tab('decideview', 'tabpicture', 'pictures', 'mediaviewtext')">{_pictures}</a></li>
+                        <if condition="(isset($show['donation']) AND $show['donation'] AND $ilconfig['enablenonprofits'])"><li id="tabnonprofit" class=""><a href="javascript:void(0)" onclick="toggle_tab('decideview', 'tabnonprofit', 'nonprofit', 'mediaviewtext')">{_nonprofit}</a></li></if>
+                        <if condition="isset($show['videodescription']) AND $show['videodescription']"><li id="tabvideo" class=""><a href="javascript:void(0)" onclick="toggle_tab('decideview', 'tabvideo', 'video', 'mediaviewtext'); fo.write('videoapplet-description');">{_video}</a></li></if>
+                        <if condition="isset($show['ended']) AND $show['ended'] == false AND isset($show['is_owner']) AND $show['is_owner']"><li id="tabtools" class=""><a href="javascript:void(0)" onclick="toggle_tab('decideview', 'tabtools', 'tools', 'mediaviewtext')">{_promote}</a></li></if>
+                        {apihook[merch_detailed_left_tabs]}
+                    </ul>
+
+		</div>
+	    </div>
+	    <div style="clear:both;"></div>
+
+	    <div>
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 2px 0px 0px">
+                    <tr>
+                        <td><div><div class="n"><div class="e"><div class="w"></div></div></div>
+
+				<div>
+				    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+
+					    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1" border="0" alt="" id="" /></td>
+					    <td>
+
+						<div id="mediaviewtext" style="display:inline"></div>
+
+						<div style="padding-right:5px">
+
+						    <div style="padding-left:5px; padding-right:5px; padding-top:6px" class="smaller">
+
+						    </div>
+
+						</div>
+
+						<!-- START pictures content -->
+						<div id="pictures" style="display:none">
+						    <if condition="isset($ilconfig['globalfilters_slideshowimages']) AND $ilconfig['globalfilters_slideshowimages'] == '0'">
+							<if condition="isset($show['productimage']) AND $show['productimage']">
+							    <form id="slideform" name="slideform" accept-charset="UTF-8" style="margin: 0px">
+								<if condition="isset($show['slideshow']) AND $show['slideshow']">
+								    <div style="padding-left:3px;">
+									<input type="button" onclick="first();" value=" |&larr; " title="{_beginning}" class="buttons" />
+									<input type="button" onclick="previous();" value=" &larr; " title="{_previous}" class="buttons" />
+									<input type="button" id="slidebutton" name="slidebutton" onclick="ap(this.value);" value=" {_start} " title="{_start}" class="buttons" /> 
+									<input type="button" onclick="next();" value=" &rarr; " title="{_next}" class="buttons" />
+									<input type="button" onclick="last();" value=" &rarr;| " title="{_end}" class="buttons" />
+								    </div>
+								    <div style="padding-bottom:10px"></div>
+								</if>
+								<table cellspacing="{table_cellspacing}" cellpadding="4" width="100%">
+								    <tr>
+									<td align="center"><span class="photo_wrapper"><img id="slide_show_image" name="show" src="{slideimage1}" alt="" border="0" /></span></td>
+								    </tr>
+								    <if condition="isset($show['slideshow']) AND $show['slideshow']">
+									<tr>
+
+									    <td align="left">{slideshowpulldown1}</td>
+									</tr></if>
+								</table>
+							    </form>
+
+							    {apihook[merch_detailed_left_tabs_content_haspicture]}
+
+							    <else />
+
+							    <div style="padding-left:4px; padding-top:6px; padding-bottom:15px">{_no_pictures_or_documents_uploaded_by_the_seller_for_this_item}.</div>
+
+							    {apihook[merch_detailed_left_tabs_content_nopicture]}
+
+							</if>
+							<else />
+							<if condition="isset($show['productimage']) AND $show['productimage']">
+							    <table cellspacing="0" border="0"  cellpadding="0" width="420" align="center">
+								<tr>
+								    <td class="ipics-cell-0 image" align="center"><img id="slide_show_image" name="show" src="{slideimage1}" alt="" border="0" style="position:relative;z-index:1px;" /></td>
+								</tr>
+								<if condition="isset($show['slideshow']) AND $show['slideshow']"><tr>
+									<td class="ipics-cell-0" align="center">{slideshowpulldown1}</td> 
+								    </tr></if>
+							    </table>
+							    <else />
+							    <div style="padding-left:4px; padding-top:6px; padding-bottom:15px">{_no_pictures_or_documents_uploaded_by_the_seller_for_this_item}.</div>
+							    {apihook[merch_detailed_left_tabs_content_nopicture]}                                
+							</if>
+						    </if>
+						</div><!-- END pictures content -->
+
+						<!-- START nonprofit content --><div id="nonprofit" style="display:none">
+						    <div style="padding-bottom:4px"></div>
+						    <div><table width="100%" border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+							    <tr valign="top">
+								<td width="35%" nowrap="nowrap"><span style="font-size:15px" class="blue"><strong>{donationto}</strong></span><div class="smaller blue" style="padding-top:5px"><a href="{donationurl}" target="_blank">{donationurl}</a></div></td>
+								<td width="65%"><div class="gray"><span class="black">{_donation_percentage}:</span> <span style="font-family: arial;font-size:15px" class="green"><strong>{donationpercentage}%</strong></span>  <a href="javascript:void(0)" onmouseover="Tip('<div><strong>Give by Selling</strong></div>The seller has opted to pass along a percentage of this items final sale price to this particular nonprofit organization.', BALLOON, true, ABOVE, true, OFFSETX, -17, FADEIN, 600, FADEOUT, 600, PADDING, 8)" onmouseout="UnTip()"><img src="{template_relativeimagepath}{template_imagesfolder}icons/tip.gif" border="0" alt="" /></a><div class="smaller blue" style="padding-top:6px"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}nonprofits">{_learn_more}</a><else /><a href="{http_server}{ilpage[nonprofits]}">{_learn_more}</a></if></span></div>
+								</td>
+							    </tr>
+							    <tr valign="top">
+								<td><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}nonprofits">{_view_other_nonprofits}</a><else /><a href="{http_server}{ilpage[nonprofits]}">{_view_other_nonprofits}</a></if></span></td>
+								<td><div class="smaller">{donationtransaction}</div></td>
+							    </tr>
+							</table></div>
+
+						    {apihook[merch_detailed_left_tabs_content_nonprofit]}
+
+						</div><!-- END nonprofit content -->
+
+						<!-- START video content --><div id="video" style="display:none">
+						    <div style="padding-left:5px; padding-right:5px">{videodescription}</div>
+
+						    {apihook[merch_detailed_left_tabs_content_video]}
+
+						</div><!-- END video content -->
+
+						<!-- START seller tools content --><div id="tools" style="display:none">
+						    <div style="padding-right:5px">
+
+							<div style="font-size:13px; padding-bottom:6px; padding-top:6px; padding-left:6px" class="black"><strong>{user[username]}, {_promote_and_enhance_this_listing}</strong></div>
+
+							<form action="{http_server}{ilpage[merch]}" method="get" name="toolsenhancement" style="margin:0px">
+							    <input type="hidden" name="cmd" value="sellertools" />
+							    <input type="hidden" name="subcmd" value="enhancements" />                               
+							    <input type="hidden" name="pid" value="{project_id}" />
+
+							    <div>{enhancements}</div>
+							    <div style="padding-left:5px; padding-top:4px; padding-bottom:6px"><input type="submit" value=" {_go} " class="buttons" style="font-size:15px" onclick="return confirm_js('{_i_understand_an_invoice_will_be_generated_to_my_account_for_the_enhancement}');" {disabled_button} /></div>
+							    <input type="hidden" name="old[featured]" value="{featured}" />
+							    <input type="hidden" name="old[featured_searchresults]" value="{featured_searchresults}" />
+							    <input type="hidden" name="old[featured_date]" value="{featured_date}" />                               
+							    <input type="hidden" name="old[highlite]" value="{highlite}" />
+							    <input type="hidden" name="old[bold]" value="{bold}" />
+							    <input type="hidden" name="old[autorelist]" value="{autorelist}" />                               
+							</form>
+
+						    </div>
+
+						    {apihook[merch_detailed_left_tabs_content_tools]}
+
+						</div><!-- END seller tools content -->
+
+						{apihook[merch_detailed_left_tabs_content]}
+
+					    </td>
+					</tr>
+				    </table>
+				</div><div class="s"><div class="e"><div class="w"></div></div></div></div>
+
+			</td>
+                    </tr>
+		</table>
+	    </div>
+
+
+	</td>
+	<td><div style="width:50px"></div></td>
+	<td width="60%" valign="top">
+	    {apihook[merch_control_panel_table]}
+	    <div class="block-wrapper">
+
+		<div class="block">
+
+		    <div class="block-top">
+			<div class="block-right">
+			    <div class="block-left"></div>
+			</div>
+		    </div>
+
+		    <div class="block-header">
+			<if condition="isset($show['ended']) AND $show['ended'] == false AND !empty($_SESSION['ilancedata']['user']['userid'])">
+			    <if condition="isset($show['addedtowatchlist']) AND $show['addedtowatchlist']">
+				<span style="float:{template_textalignment_alt}; font-size:13px" id="itemwatchlistresponse" class="gray"><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}watchlist">{_you_are_watching_this_item}</a><else /><a href="{http_server}{ilpage[watchlist]}">{_you_are_watching_this_item}</a></if></span></span>
+			    <else />
+			    <span style="float:{template_textalignment_alt}; font-size:13px" id="itemwatchlistresponse" class="blue"><a href="javascript:void(0)" onclick="add_item_to_watchlist('{project_id}', '{user[userid]}')">{_watch_this_item}</a></span>
+			</if>
+			</if>
+			<span id="blockheadertext">
+			    <if condition="isset($show['ended']) AND $show['ended']">
+				{_this_listing_has_ended}
+                <else />
+				<if condition="isset($auctiontype) AND $auctiontype == 'fixed'">{_buy_it_now}<else />{_take_action_on_this_item}</if>
+			    </if>
+			</span>
+			<if condition="isset($show['is_owner']) AND $show['is_owner']">&nbsp;<span class="smaller gray">[&nbsp;<span class="blue"><a href="{https_server}{ilpage[selling]}?cmd=product-management&amp;id={project_id}">{_edit_item}</a></span>&nbsp;]</span></if>
+		    </div>
+
+		    <div class="block-content" style="padding:0px">
+			<div id="takeaction" style="width:100%">
+
+			    <div class="bigtabs" style="padding-bottom:10px; padding-top:10px">
+                                <div class="bigtabsheader">
+				    <span class="smaller gray" style="padding-top:6px; float:right; padding-right:6px"></span>
+				    <ul id="decideview2">
+					<li id="tabplacebid" class="on"><a href="javascript:void(0)" onclick="toggle_tab('decideview2', 'tabplacebid', 'placebid', 'mediaviewtext2'); <if condition="isset($auctiontype) AND $auctiontype == 'fixed'">refresh_item_details('fixed');</if><if condition="isset($auctiontype) AND $auctiontype == 'regular'">refresh_item_details('regular');</if> show_listing_shipping_rows('qty')"><if condition="isset($auctiontype) AND $auctiontype == 'fixed'">{_buy_now}<else />{_place_a_bid}</if></a></li>
+					<if condition="isset($auctiontype) AND $auctiontype != 'fixed'"><li id="tabbidhistory" class=""><a href="javascript:void(0)" onclick="toggle_tab('decideview2', 'tabbidhistory', 'bidhistory', 'mediaviewtext2')">{_bid_history}</a></li></if>
+					<if condition="isset($show['buynow']) AND $show['buynow']"><li id="tabbuyhistory" class=""><a href="javascript:void(0)" onclick="toggle_tab('decideview2', 'tabbuyhistory', 'buyhistory', 'mediaviewtext2')">{_purchase_history}</a></li></if>
+					{apihook[merch_detailed_left_tabs]}
+				    </ul>
+                                </div>
+			    </div>
+			    <div style="clear:both;"></div>
+
+			    <div id="mediaviewtext2" style="display:inline"></div>
+
+			    <div id="placebid" style="display:none">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				    <tr>
+					<td width="100%" valign="top">
+					    <table width="100%" border="0" cellpadding="6" cellspacing="{table_cellspacing}" style="margin:0px">
+						<tr id="bidsrow" valign="top">
+						    <td align="right" nowrap="nowrap" width="100"><span class="gray">{_bid_history_lc}:</span></td>
+						    <td><span class="black"><span id="bidstext">{bids}</span> {_bids_lower}</span></td>
+						</tr>
+						<tr id="endsrow" valign="top">
+						    <td align="right" nowrap="nowrap" width="100"><span class="gray" id="timeleftphrase">{_time_left}:</span></td>
+						    <td><div style="font-size:14px; font-weight:bold;" id="timelefttext" class="blueonly"><if condition="isset($show['ended']) AND $show['ended']">{timeleft}</if></div><div style="padding-top:4px" class="smaller litegray"><span><if condition="isset($show['ended']) AND $show['ended']">{_ended}<else />{_ends}</if></span>&nbsp;<span id="endstext">{ends}</span><input type="hidden" name="dnow" id="dnow" value="" /><input type="hidden" name="dstart" id="dstart" value="" /><input type="hidden" name="dthen" id="dthen" value="" /><input type="hidden" name="isecs" id="isecs" value="" /></div></td>
+						</tr>
+						<tr id="startpricerow" style="display:none" valign="top">
+						    <td align="right" nowrap="nowrap" width="100"><span class="gray" id="startbidphrase">{_starting_bid}:</span></td>
+						    <td><span style="font-size:14px; font-weight:bold" id="startbidtext">{startprice}</span></td>
+						</tr>
+						<tr id="currentpricerow" style="display:none" valign="top">
+						    <td align="right" nowrap="nowrap" width="100"><span class="gray" id="currentbidphrase">{_current_bid}:</span></td>
+						    <td><span style="font-size:15px; font-weight:bold" id="currentbidtext">{currentbid}</span> <if condition="isset($show['reserve_auction']) AND $show['reserve_auction']">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="reservemettext" class="gray">{reserve_met}</span></if><div class="smaller litegray" style="padding-top:3px">{proxybit}</div></td>
+				    </tr>
+				    <tr id="winningbidderrow" style="display:none" valign="top">
+					<td align="right" nowrap="nowrap" width="100"><span class="gray">{_winning_bidder}:</span></td>
+					<td><span class="black" style="font-size:13px;" id="winningbiddertext">{winningbidder}</span></td>
+				    </tr>                              
+				    <tr id="winningbidrow" style="display:none" valign="top">
+					<td align="right" nowrap="nowrap" width="100"><span class="gray">{_winning_bid}:</span></td>
+					<td><span style="font-size:14px; font-weight:bold" id="winningbidamounttext" class="black">{winningbid}</span></td>
+				    </tr>
+				    <tbody id="placebidrow" style="display:none">
+					<tr width="100" valign="top">
+					    <td align="right" nowrap="nowrap" valign="top" width="100"><div class="gray" style="padding-top:4px">{_enter_max_bid}:</div></td>
+					    <td><span style="float:{template_textalignment}; padding-right:4px; padding-top:6px; font-family: arial; font-size:13px;">{currency}</span><input type="text" size="10" id="bidamount_temp" name="bidamount_temp" value="" style="font-family: verdana" onkeypress="return update_bid_amount()" autocomplete="off" /> &nbsp;&nbsp;
+						<if condition="isset($show['is_owner']) AND $show['is_owner'] == false">
+							<if condition="isset($show['itemcanshiptouser']) AND $show['itemcanshiptouser'] == false AND !empty($_SESSION['ilancedata']['user']['userid'])">
+                            <input type="button" disabled="disabled" id="place_bid_button" name="disabled" value="{_place_bid}" class="buttons" style="font-size:13px" onclick="javascript:jQuery('#place_bid_modal').jqm({modal: false}).jqmShow();"/>
+                            <else />
+                                <if condition="empty($_SESSION['ilancedata']['user']['userid'])"><input type="button" value="{_register_to_bid}" id="place_bid_button" class="buttons" style="font-size:13px"  onclick="location.href='{https_server}{ilpage[login]}?redirect={pageurl_urlencoded}'" />
+                                <else /><input type="button" id="place_bid_button" value="{_place_bid}" class="buttons" style="font-size:13px" onclick="javascript:jQuery('#place_bid_modal').jqm({modal: false}).jqmShow();" />
+                                </if>
+                            </if>
+              			<else /><input type="button" id="place_bid_button" value="{_place_bid}" class="buttons" style="font-size:13px" onclick="javascript:jQuery('#place_bid_modal').jqm({modal: false}).jqmShow();" disabled="disabled" /></if>
+						<div class="smaller" style="padding-top:4px">({_enter} <span id="minimumbidtext">{min_bidamountformatted}</span> {_or_more})</div></td>
+				    <tr width="100" valign="top">
+				    <if condition="isset($show['buynow']) AND $show['buynow'] == false AND isset($show['lot']) AND $show['lot']">
+					<tr>
+					    <td align="right" nowrap="nowrap"><span class="gray"><if condition="isset($show['lot']) AND $show['lot']">{_price} {_per_lot}:<else /><!--{_price} {_per_item_lower}--></if></span></td>
+					    <td><div class="black" style="padding-top:3px;padding-bottom:3px"><if condition="isset($show['lot']) AND $show['lot'] AND isset($items_in_lot) AND $items_in_lot > 0">{items_in_lot} {_items_lower} {_per_lot}</if></div>
+					</tr>
+				    </if>
+				    </tbody>
+				    <tbody id="buynowrow" style="display:none">
+					<tr id="buynowactionrow" style="display:none" width="100" valign="top">
+					    <td align="right" nowrap="nowrap"><span class="gray">{_price} <if condition="isset($show['lot']) AND $show['lot']">{_per_lot}<else />{_per_item_lower}</if>:</span></td>
+					    <td><span style="font-size:15px; float:{template_textalignment}; padding-{template_textalignment_alt}:30px;" class="black"><strong>{buynow_price}</strong></span>
+						<div style="clear:both"></div>
+						<div class="smaller black" style="padding-top:3px;padding-bottom:3px"><if condition="isset($show['lot']) AND $show['lot'] AND isset($items_in_lot) AND $items_in_lot > 0">{items_in_lot} {_items_in_lot_lower}<else />{buynow_qty} {_available}</if></div>
+						<div><form name="ilform_buynow" method="get" action="{https_server}{ilpage[merch]}" accept-charset="UTF-8" style="margin:0px">
+							{apihook[merch_buynow_form_start]}
+							<input type="hidden" name="cmd" value="purchase-confirm" /><input type="hidden" name="pid" value="{project_id}" />
+							<div>{qty_pulldown}&nbsp;<if condition="isset($show['bidderuninvited']) AND $show['bidderuninvited']"><input type="submit" id="purchase_now_button" value="{_purchase_now}" class="buttons" disabled="disabled" style="font-size:13px" /><else /><if condition="isset($show['is_owner']) AND $show['is_owner'] == false"><if condition="isset($show['itemcanshiptouser']) AND $show['itemcanshiptouser'] == false AND !empty($_SESSION['ilancedata']['user']['userid'])"><span title="{_this_item_does_not_ship_to} {user[country]}"><input type="submit" id="purchase_now_button" value="{_purchase_now}" class="buttons" style="font-size:13px" disabled="disabled" /></span><else /><input type="submit" value="{_purchase_now}" id="purchase_now_button" class="buttons" style="font-size:13px" />{apihook[merch_buynow_form_enabled_button]}</if><else /><input type="submit" id="purchase_now_button"  value="{_purchase_now}" class="buttons" style="font-size:13px" disabled="disabled" />{apihook[merch_buynow_form_disabled_button]}</if></if></div>
+						    </form>{apihook[merch_selling_td_row_end]}</div></td>
+					</tr>
+				    </tbody>
+				    {apihook[merch_selling_tbody_row_end]}
+				    <tr valign="top">
+					<td align="right" nowrap="nowrap"><span class="gray">{_prefered_payment_methods}:</span></td>
+					<td><div>{paymentmethods}</div></td>
+				    </tr>
+				    <tr id="highbidderrow" style="display:none" valign="top">
+					<td align="right" nowrap="nowrap" width="100"><span class="gray">{_high_bidder}:</span></td>
+					<td><span class="black" id="highbiddertext">{highbidder}</span></td>
+				    </tr>
+				    <if condition="isset($filter_permissions) AND !empty($filter_permissions)"><tr valign="top">
+					    <td align="right" nowrap="nowrap"><span class="gray">{_restrictions}:</span></td>
+					    <td>{filter_permissions}</td>
+					</tr></if>
+				    <if condition="isset($show['revision']) AND $show['revision']"><tr valign="top">
+					    <td align="right" nowrap="nowrap"><span class="gray">{_listing_revision}:</span></td>
+					    <td><span class="blue" style="font-family: arial; font-size:13px;">{updateid}</span></td>
+					</tr></if>
+				    <tr valign="top">
+					<td align="right" nowrap="nowrap" width="100"><span class="gray">{_traffic}:</span></td>
+					<td><span id="viewstext">{views}</span> {_views_lower}<if condition="$show['publicboard']">, <span id="messagespostedtext">{msgcount}</span> {_questions_lower}</if></td>
+				    </tr>
+				    <tr valign="top">
+					<td align="right" nowrap="nowrap" width="100"><span class="gray">{_item_location}:</span></td>
+					<td>{location}</td>
+				    </tr>
+				    <tr valign="top" id="shippinginforow" style="display:none">
+					<td align="right"><span class="gray">{_shipping}:</span></td>
+					<td><div id="shippinginfobit_1">{shippinginfobit_1}</div>
+					    <div id="shippinginfobit_2" style="padding-top:3px">{shippinginfobit_2}</div>
+					    <div id="showmoreshippers_{project_id}" style="display:none">
+						<div id="shippinginfobit_3" style="padding-top:3px">{shippinginfobit_3}</div>
+						<div id="shippinginfobit_4" style="padding-top:3px">{shippinginfobit_4}</div>
+						<div id="shippinginfobit_5" style="padding-top:3px">{shippinginfobit_5}</div>
+						<div id="shippinginfobit_6" style="padding-top:3px">{shippinginfobit_5}</div>
+					    </div>
+				    <if condition="isset($shippinginfobit_3) AND !empty($shippinginfobit_3)"><span id="showmoreicon_{project_id}"></span><div class="blue" style="padding-top:3px"><a href="javascript:void(0)" onclick="toggle_more('showmoreshippers_{project_id}', 'moretext_{project_id}', '{_more}...', '{_less}', 'showmoreicon_{project_id}')"><span id="moretext_{project_id}" style="font-weight:bold; text-decoration:none">{_more}...</span></a></div></if>
+				    </td>
+				    </tr>
+				    <!--<tr valign="top" id="categoryinforow">
+					    <td align="right" nowrap="nowrap"><span class="gray">{_category}:</span></td>
+						    <td><div class="blue">{listingcategory}</div></td>
+				    </tr>-->
+				</table>
+				</td>
+				</tr>
+				</table>
+
+				{apihook[merch_detailed_right_nav]}
+			    </div>
+
+			    <!-- START bid history -->
+			    <div id="bidhistory" style="display:none">
+                                <div style="padding-top:4px;padding-left:10px"><span class="gray" style="font-family: arial; font-size:13px"><span style="float:right; padding-right:12px" class="blue"><a href="javascript:void(0)" onclick="Attach('{http_server}{ilpage[rfp]}?msg=bid-increments&amp;c={cid}')">{_bid_increments}</a></span>{_bids}: <span class="black" id="bidstext_tab">{bids}</span>, {_time_left}: <span class="black" id="timelefttext_tab">{timeleft}</span></span></div>
+                                <div style="padding:10px">
+				    <div id="refreshbidders"></div>
+                                </div>
+			    </div><!-- END bid history -->
+
+			    <!-- START purchase history -->
+			    <div id="buyhistory" style="display:none">
+                                <div id="purchasesrow" style="display: none; padding-left:10px;padding-top:4px"><span class="gray">{_purchases}: <span class="black" id="purchasestext">{purchases}</span></span></div>
+                                <div style="padding:10px">
+				    <table width="100%" border="0" align="center" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+					<tr class="alt2"> 
+					    <td width="16%" nowrap="nowrap" class="smaller">{_buyer}</td>
+					    <td width="15%" nowrap="nowrap" class="smaller">{_price}</td>
+					    <td width="1%" class="smaller">{_qty}</td>	
+					    <td width="27%" nowrap="nowrap" class="smaller">{_date}</td>
+					</tr>
+					<loop name="purchase_now_activity"> 
+					    <tr class="{class}" valign="top"> 
+						<td><span class="smaller black"><strong>{orderbuyer}</strong></span></td>
+						<td><span class="smaller black">{orderamount}</span></td>
+						<td><span class="smaller black">{orderqty}</span></td>
+						<td><span class="smaller black">{orderdate}</span></td>
+					    </tr>
+					</loop name="purchase_now_activity">
+				    </table>
+                                </div>
+			    </div><!-- END purchase history -->
+
+
+			</div>
+		    </div>
+
+		    <div class="block-footer">
+			<div class="block-right">
+			    <div class="block-left"></div>
+			</div>
+		    </div>
+
+		</div>
+	    </div>
+
+	    <div style="padding-bottom:4px"></div>
+
+	    <div class="block-wrapper">
+
+		<div class="block">
+
+		    <div class="block-top">
+			<div class="block-right">
+			    <div class="block-left"></div>
+			</div>
+		    </div>
+
+		    <div class="block-header">
+			<if condition="!empty($_SESSION['ilancedata']['user']['userid'])">
+			    <if condition="isset($show['selleraddedtowatchlist']) AND $show['selleraddedtowatchlist']">
+				<span style="float:{template_textalignment_alt}; font-size:13px" id="sellerwatchlistresponse" class="gray"><span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}watchlist?tab=2">{_seller_is_in_favorites}</a><else /><a href="{http_server}{ilpage[watchlist]}?tab=2">{_seller_is_in_favorites}</a></if></span></span>
+			    <else />
+			    <span style="float:{template_textalignment_alt}; font-size:13px" id="sellerwatchlistresponse" class="blue"><a href="javascript:void(0)" onclick="add_seller_to_watchlist('{project_user_id}', '{user[userid]}', '')">{_add_seller_to_favorites}</a></span>
+			</if>
+			</if>{_meet_the_seller}
+		    </div>
+
+		    <div class="block-content" style="padding:0px">
+			<div id="meetseller">
+
+			    {apihook[seller_infobit_table_start]}
+
+			    <table width="100%" border="0" cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}">
+				<tr>
+				    <td><div class="blue"><strong>{seller}</strong></div>
+					<div class="smaller" style="padding-top:5px">{_member_since} <span class="black">{memberstart}</span>&nbsp;&nbsp;&nbsp;<span class="smaller litegray">|</span>&nbsp;&nbsp;&nbsp;<span>{_positive_feedback}: <span class="blue"><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}members/{sellerplain}">{merchantscore}%</a><else /><a href="{http_server}{ilpage[members]}?id={project_user_id}">{merchantscore}%</a></if></span></span></div><!--<if condition="$show['publicboard']"><a href="javascript:void(0)" onclick="toggle_tab('listingtabs', 'tabmessages', 'listingmessages', 'listingtabtext')">{_ask_seller_a_question}</a></if>--></td>
+				</tr>
+			    </table>
+
+			    {apihook[seller_infobit_table_end]}
+
+			</div>
+		    </div>
+
+		    <div class="block-footer">
+			<div class="block-right">
+			    <div class="block-left"></div>
+			</div>
+		    </div>
+
+		</div>
+
+	    </div>
+
+	</td>
+    </tr>
+</table>
+<div style="padding-bottom:12px"></div>
+
+<div class="bigtabs" style="padding-bottom:15px; padding-top:0px">
+    <div class="bigtabsheader">
+	<ul id="listingtabs">
+	    <li id="tabdescription" class="on"><a href="javascript:void(0)" onclick="toggle_tab('listingtabs', 'tabdescription', 'listingdescription', 'listingtabtext')">{_description}</a></li>
+	    <li id="tabshipping" class=""><a href="javascript:void(0)" onclick="toggle_tab('listingtabs', 'tabshipping', 'listingshipping', 'listingtabtext')">{_shipping_and_return_policy}</a></li>
+	    <if condition="$show['publicboard']"><li id="tabmessages" class=""><a href="javascript:void(0)" onclick="toggle_tab('listingtabs', 'tabmessages', 'listingmessages', 'listingtabtext')">{_questions_about_this_item}</a></li></if>
+	    <!--<li id="tabtrackback" class=""><a href="javascript:void(0)" onclick="toggle_tab('listingtabs', 'tabtrackback', 'listingtrackbacks', 'listingtabtext')">Trackbacks</a></li>-->
+	    {apihook[merch_detailed_mid_tabs]}
+	    <span style="float:{template_textalignment};margin-top:7px;margin-{template_textalignment}:16px" class="smaller"><span class="blue"><a href="{http_server}{ilpage[abuse]}?cmd=listing&amp;id={project_id}&amp;type=product">{_report_abuse}</a></span> &nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp; 
+		<if condition="isset($ilconfig['globalfilters_contactform_listing']) AND $ilconfig['globalfilters_contactform_listing']">
+		    <span class="blue"><a href="{https_server}{ilpage[merch]}?cmd=contact&uid={project_user_id}&pid={project_id}">{_contact_form}</a></span> &nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp; 
+		</if>
+		<span class="blue"><a href="{http_server}{ilpage[selling]}?cmd=new-item&amp;cid={cid}">{_sell_a_similar_item_in_this_category}</a></span> <if condition="isset($show['is_owner']) AND $show['is_owner']">&nbsp;&nbsp;<span class="smaller gray">|</span>&nbsp;&nbsp;<span class="blue"><a href="{http_server}{ilpage[selling]}?cmd=management">{_selling_activity}</a></span></if></span>
+	</ul>
+    </div>
+</div>
+<div style="clear:both;"></div>
+
+<div id="listingtabtext" style="padding-bottom:15px"></div>
+
+<if condition="isset($otherlistings) AND count($otherlistings) > 0"><!-- sellers other items --><div style="font-size:13px;padding-bottom:9px;font-weight:bold" class="gray">{_sellers_other_items} &nbsp;&nbsp;<span class="smaller blue"><a href="{http_server}{ilpage[search]}?mode=product&amp;searchuser={sellerplain}">{_more}</a></span></div>
+			<div id="amazon_scroller_other_items" class="amazon_scroller">
+			    <div class="amazon_scroller_mask">
+				<ul>
+				    <loop name="otherlistings"><li><div class="iphotowrapper">
+						{photo}
+						<div class="ititle"><span class="blue">{title}</span></div>
+						<if condition="isset($ilconfig['lowestpricecombined']) AND $ilconfig['lowestpricecombined']"><div class="icurrentprice">{lowestprice}</div><else />
+						    <div class="icurrentprice">{price}</div>
+						</if>
+						<if condition="isset($ilconfig['timeleftblocks']) AND $ilconfig['timeleftblocks']"><div class="itimeleft">{timeleft}</div></if>
+					    </div><div style="clear:both;"></div></li></loop name="otherlistings">
+				</ul>
+			    </div>
+			    <ul class="amazon_scroller_nav">
+				<li></li>
+				<li></li>
+			    </ul>
+			    <div style="clear: both"></div>
+			</div>
+			<div style="clear:both;margin-bottom:14px"></div><!-- end sellers other items --></if>
+
+<!-- place bid modal -->
+<div id="place_bid_modal" class="modal modal_window" style="display: none; cursor: default; width:570px; height:300px">
+
+    <div class="bigtabs" style="padding-bottom:5px; padding-top:12px">
+	<div class="bigtabsheader">
+	    <span class="smaller gray" style="padding-top:6px; float:right">{_click_away_to_close_and_cancel_this_menu}</span>
+	    <ul id="bidtabs">
+		<li title="" class="highlight"><a href="javascript:void(0)">{_confirm_your_bid}</a></li>
+	    </ul>
+	</div>
+    </div>
+    <div style="clear:both;"></div>
+
+    <if condition="isset($show['is_owner']) AND $show['is_owner'] == false">
+	<div style="margin-top:20px">
+	    <form method="post" action="{ilpage[rfp]}" name="placebid" accept-charset="UTF-8" onsubmit="return validate_place_bid_product(this);" style="margin:0px">
+		<input type="hidden" name="cmd" value="_do-bid-preview" />
+		<input type="hidden" name="subcmd" value="product-bid" />
+		<input type="hidden" name="id" value="{project_id}" />
+		<input type="hidden" name="state" value="product" />
+		<input type="hidden" name="minimum" value="{min_bidamount}" id="hiddenfieldminimum" />
+		<if condition="$ilconfig['productbid_enableproxybid'] AND isset($show['categoryuseproxybid']) AND $show['categoryuseproxybid']"><input type="hidden" name="isproxy" value="1" /><else /><input type="hidden" name="isproxy" value="0" /></if>
+		<if condition="isset($show['reserve_auction']) AND $show['reserve_auction']">
+		    <input type="hidden" name="reserve" value="1" id="hiddenfieldreserve" />
+		    <if condition="isset($show['reserve_met']) AND $show['reserve_met']"><input type="hidden" name="reservemet" value="1" id="hiddenfieldreservemet" /><else /><input type="hidden" name="reservemet" value="0" id="hiddenfieldreservemet" /></if>
+		    <else />
+		    <input type="hidden" name="reserve" value="0" id="hiddenfieldreserve" />
+		    <input type="hidden" name="reservemet" value="1" id="hiddenfieldreservemet" />
+		</if>
+		<if condition="isset($show['buynow']) AND $show['buynow']"><input type="hidden" name="buynow" value="1" id="hiddenfieldbuynow" /><input type="hidden" name="buynowprice" value="{buynow_price_plain}" id="hiddenfieldbuynowprice" /><else /><input type="hidden" name="buynow" value="0" id="hiddenfieldbuynow" /><input type="hidden" name="buynowprice" value="0.00" id="hiddenfieldbuynowprice" /></if>
+		<if condition="isset($show['localpickuponly']) AND $show['localpickuponly'] == false AND isset($show['digital_download_delivery']) AND $show['digital_download_delivery'] == false AND isset($shippercount) AND $shippercount == 1"><input type="hidden" name="shipperid" value="{shipperid}" id="hiddenfieldshipperid" /></if>
+		<table border="0" cellpadding="5" cellspacing="{table_cellspacing}" width="100%">
+		    <tr>
+			<td align="right">{_time_left}:</td>
+			<td nowrap="nowrap"><span class="blueonly" style="font-family: arial; font-size:14px; font-weight:bold" id="timelefttext_modal">{timeleft}</span></td>
+		    </tr>
+		    <tr>
+			<td align="right">{_bid_history_lc}:</td>
+			<td nowrap="nowrap"><span class="black" id="bidstext_modal">{bids}</span>&nbsp;<span>{_bids_lower}</span></td>
+		    </tr>
+		    <if condition="!empty($proxybit)"><tr> 
+			    <td align="right" nowrap="nowrap">{_your_maximum_bid}:</td>
+			    <td colspan="3" nowrap="nowrap"><span style="padding-top:3px">{proxybit2}</span></td>
+			</tr></if>
+		    <!--<tr> 
+			<td align="right" nowrap="nowrap"><span class="black">{_minimum_bid_amount}:</span></td>
+			<td nowrap="nowrap"><span class="black">{min_bidamountformatted}</span></td>
+		    </tr>-->
+		    <if condition="isset($show['localpickuponly']) AND $show['localpickuponly'] == false AND isset($show['digital_download_delivery']) AND $show['digital_download_delivery'] == false AND isset($shippercount) AND $shippercount == 1">
+			<tr> 
+			    <td align="right">{_your_ship_service}:</td>
+			    <td nowrap="nowrap">{shipservicepulldown}<span style="float:{template_textalignment};margin-top:3px"><img src="{template_relativeimagepath}{template_imagesfolder}icons/shipbox.png" border="0" alt="" id="" /></span></td>
+			</tr>
+		    </if>
+		    <if condition="isset($buynow_qty) AND $buynow_qty > 0"><tr> 
+			    <td align="right">{_quantity}:</td>
+			    <td nowrap="nowrap">1 &nbsp;&nbsp;&nbsp;<span class="smaller litegray">({buynow_qty} {_available})</span></td>
+			</tr></if>
+		    <tr valign="top"> 
+			<td align="right"><div style="padding-top:7px">{_enter_max_bid}:</div></td>
+			<td><span style="float:{template_textalignment}; padding-top:7px; padding-right:4px" class="black">{currency}</span> <input type="text" class="input" id="bidamount_modal" name="bidamount" value="" onkeypress="return noenter()" size="10" autocomplete="off" />&nbsp;<img name="bidamounterror" src="{template_relativeimagepath}{template_imagesfolder}icons/blankimage.gif" width="21" height="13" border="0" alt="{_this_form_field_is_required}" /><input type="submit" value=" {_confirm_bid} " class="buttons" style="font-size:13px" id="placebidmodal_button" />&nbsp;<span id="placebidmodal_waiting" style="display:none"></span><div style="padding-top:3px" class="smaller"><span class="black">{_enter} <span id="minimumbidtext_modal">{min_bidamountformatted}</span>&nbsp;<strong>{_or_more}</strong></span></div></td>
+		    </tr>
+		</table>
+		<input type="hidden" name="qty" value="1" id="qty" />
+	    </form>
+	</div><else /><div>{_it_appears_you_are_the_seller_of_this_listing_in_this_case_you_cannot_bid_or_purchase_items_from_your_own_listing}</div>
+	<div id="timelefttext_modal" style="display:none"></div>
+	<div id="bidstext_modal" style="display:none"></div>
+	<div id="minimumbidtext_modal" style="display:none"></div>
+	<input type="hidden" name="minimum" value="{min_bidamount}" id="hiddenfieldminimum" />
+	<input type="hidden" name="bidamount" id="bidamount_modal" /></if>
+
+</div>
+
+<!-- START listing description pane -->
+<div id="listingdescription" style="display:none">
+    <if condition="isset($show['itemspecifics']) AND $show['itemspecifics']">
+
+	<!-- START listing specifics -->
+	<div>
+	    <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 0px 5px 0px;">
+		<tr>
+		    <td>
+			<div class="grayborder">
+			    <div class="n">
+				<div class="e">
+				    <div class="w"></div>
+				</div>
+			    </div>
+			    <div>
+				<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				    <tr>
+					<td style="padding-left:15px; padding-right:5px;"><span class="gray" style="font-family: arial; font-size:13px; font-weight:bold">{_specifics}</span></td>
+				    </tr>
+				    <tr>
+					<td style="padding-left:15px; padding-right:5px; padding-top:10px; max-width:900px;">{project_questions}</td>
+				    </tr>
+				</table>
+			    </div>
+			    <div class="s">
+				<div class="e">
+				    <div class="w"></div>
+				</div>
+			    </div>
+			</div>
+		    </td>
+		</tr>
+	    </table>
+	</div><!-- END listing specifics -->
+	<div style="padding-bottom:12px"></div>
+    </if>
+
+    <!-- START listing description -->
+    <div>
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 0px 5px 0px;">
+	    <tr>
+		<td>
+		    <div class="grayborder">
+			<div class="n">
+			    <div class="e">
+				<div class="w"></div>
+			    </div>
+			</div>
+			<div style="overflow-x:scroll; overflow-y:hidden;">
+			    <table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="10" height="1"></td>
+				    <td valign="top"></td>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+				    <td style="padding-right:5px;"><span class="gray" style="font-family: arial; font-size:13px; font-weight:bold">{_sellers_description}</span></td>
+				</tr>
+				<tr>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="10" height="1"></td>
+				    <td valign="top"></td>
+				    <td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+				    <td style="padding-right:5px; padding-top:10px; max-width:900px;"><div>{description}</div></td>
+				</tr>
+			    </table>
+			</div>
+			<div class="s">
+			    <div class="e">
+				<div class="w"></div>
+			    </div>
+			</div>
+		    </div>
+		</td>
+	    </tr>
+	</table>
+    </div><!-- END listing description -->
+</div><!-- END listing description pane -->
+
+<!-- START shipping and return policy -->
+<div id="listingshipping" style="display:none;">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 5px 5px 0px;">
+	<tr>
+	    <td><div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div><div>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			    <tr>
+				<td><img src="{template_relativeimagepath}{template_imagesfolder}spacer.gif" width="5" height="1"></td>
+				<td style="padding-right:18px; padding-left:6px"><div class="gray" style="font-family: arial; font-size:13px; font-weight:bold; padding-bottom:9px">{_shipping}</div>
+
+				    <table border="0" cellspacing="{table_cellspacing}" cellpadding="6">
+					<tr valign="top">
+					    <td align="right" nowrap="nowrap"><div class="gray">{_item_location}:</div></td>
+					    <td nowrap="nowrap" colspan="4"><div class="black">{location}</div></td>
+					</tr>
+					<tr valign="top">
+					    <td align="right" nowrap="nowrap"><div class="gray">{_shipping_to}:</div></td>
+					    <td colspan="4"><div class="black">{shiptocountries}
+						    <if condition="isset($show['ended']) AND $show['ended'] == false AND isset($show['itemcanshiptouser']) AND $show['itemcanshiptouser'] == false AND !empty($_SESSION['ilancedata']['user']['userid'])">
+							<if condition="isset($show['digital_download_delivery']) AND $show['digital_download_delivery'] == false">
+							    &nbsp;&nbsp;&nbsp;&nbsp;<span class="red">({_this_item_does_not_ship_to} {user[country]})</span>
+							</if>
+						    </if>
+						    <if condition="isset($show['is_owner']) AND $show['is_owner']">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="smaller black">{_seller}:</span> <span class="smaller blue"><a href="{https_server}{ilpage[selling]}?cmd=product-management&amp;id={project_id}#itemshipping">{_manage_ship_services_and_costs}</a></span></if></div></td>
+					</tr>
+					<if condition="isset($show['localpickuponly']) AND $show['localpickuponly'] == false AND isset($show['digital_download_delivery']) AND $show['digital_download_delivery'] == false">
+
+					    <tr valign="top"><if condition="isset($show['multipleqty']) AND $show['multipleqty']">
+						<td align="right" nowrap="nowrap" valign="middle"><div class="black">{_quantity}:</div></td>
+						<td width="25" nowrap="nowrap"><input name="ship_qty" id="ship_qty" type="text" value="1" class="input" style="font-family: verdana" size="3" /></td></if>
+					    <td align="right" width="120" nowrap="nowrap" valign="middle"><div class="black">{_change_location}:</div></td>
+					    <td nowrap="nowrap">{changelocationpulldown}</td>
+					    <td align="right" width="160" nowrap="nowrap" valign="middle"><div class="black">{_zip_or_postal_code}:</div></td>
+					    <td nowrap="nowrap"><input name="shipradiuszip" id="shipradiuszip" type="text" value="" class="input" style="font-family: verdana" size="8" /></td>
+					    <td>&nbsp;<if condition="isset($show['multipleqty']) AND $show['multipleqty']"><else /><input name="ship_qty" id="ship_qty" type="hidden" value="1" /></if><input type="button" value="{_get_rates}" class="buttons" id="ship_getratesbutton" onclick="show_listing_shipping_rows('ship_qty')" /></td>
+					    </tr></if>
+				    </table>
+
+			    <if condition="isset($show['localpickuponly']) AND $show['localpickuponly'] == false AND isset($show['digital_download_delivery']) AND $show['digital_download_delivery'] == false">
+				<div style="padding-top:9px"></div>
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" id="ship_options_summary">
+				    <tr class="alt2">
+					<td width="25%"><div class="smaller">{_shipping_and_handling}</div></td>
+					<td width="25%"><div class="smaller">{_to_upper}</div></td>
+					<td width="25%"><div class="smaller">{_service}</div></td>
+					<td width="25%"><div class="smaller">{_estimated_delivery}</div></td>
+				    </tr>
+				    <tr class="alt1" valign="top" id="ship_options_1">
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_amount_1">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_countries_1">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_service_1">-</div></td>
+					<td width="25%" nowrap="nowrap"><div id="ship_estimate_1">-</div></td>
+				    </tr>
+				    <tr class="alt1" valign="top" id="ship_options_2" style="display:none">
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_amount_2">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_countries_2">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_service_2">-</div></td>
+					<td width="25%" nowrap="nowrap"><div id="ship_estimate_2">-</div></td>
+				    </tr>
+				    <tr class="alt1" valign="top" id="ship_options_3" style="display:none">
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_amount_3">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_countries_3">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_service_3">-</div></td>
+					<td width="25%" nowrap="nowrap"><div id="ship_estimate_3">-</div></td>
+				    </tr>
+				    <tr class="alt1" valign="top" id="ship_options_4" style="display:none">
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_amount_4">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_countries_4">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_service_4">-</div></td>
+					<td width="25%" nowrap="nowrap"><div id="ship_estimate_4">-</div></td>
+				    </tr>
+				    <tr class="alt1" valign="top" id="ship_options_5" style="display:none">
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_amount_5">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_countries_5">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_service_5">-</div></td>
+					<td width="25%" nowrap="nowrap"><div id="ship_estimate_5">-</div></td>
+				    </tr>
+				    <tr class="alt1" valign="top" id="ship_options_6" style="display:none">
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_amount_6">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_countries_6">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_service_6">-</div></td>
+					<td width="25%" nowrap="nowrap"><div id="ship_estimate_6">-</div></td>
+				    </tr>
+				    <tr class="alt1" valign="top" id="ship_options_7" style="display:none">
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_amount_7">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_countries_7">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_service_7">-</div></td>
+					<td width="25%" nowrap="nowrap"><div id="ship_estimate_7">-</div></td>
+				    </tr>
+				    <tr class="alt1" valign="top" id="ship_options_8" style="display:none">
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_amount_8">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_countries_8">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_service_8">-</div></td>
+					<td width="25%" nowrap="nowrap"><div id="ship_estimate_8">-</div></td>
+				    </tr>
+				    <tr class="alt1" valign="top" id="ship_options_9" style="display:none">
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_amount_9">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_countries_9">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_service_9">-</div></td>
+					<td width="25%" nowrap="nowrap"><div id="ship_estimate_9">-</div></td>
+				    </tr>
+				    <tr class="alt1" valign="top" id="ship_options_10" style="display:none">
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_amount_10">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_countries_10">-</div></td>
+					<td width="25%" nowrap="nowrap"><div class="black" style="padding-top:3px" id="ship_service_10">-</div></td>
+					<td width="25%" nowrap="nowrap"><div id="ship_estimate_10">-</div></td>
+				    </tr>
+				</table>
+				<div class="black" style="padding-top:9px; padding-bottom:9px"><if condition="isset($show['shipsworldwide']) AND $show['shipsworldwide']"><!--{_will_ship_to_worldwide}  <span class="blue"><a href="{http_server}{ilpage[messages]}?cmd=compose&amp;username={sellerplain}&amp;project_id={project_id}&amp;subject=Worldwide+Shipping+Cost+Inquiry" style="text-decoration:underline">{_contact_seller}</a></span> {_for_additional_shipping_costs_and_services}--></if></div>
+			    </if>
+			    <if condition="$ilconfig['product_returnpolicy_block']">
+				<div class="gray" style="font-family: arial; font-size:13px; font-weight:bold; padding-top:15px; padding-bottom:12px">{_return_policy}</div>
+				<table width="100%" border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}">
+				    <tr class="alt2">
+					<td><div class="smaller">{_returns_accepted}</div></td>
+					<td><div class="smaller">{_item_must_be_returned_within}</div></td>
+					<td><div class="smaller">{_refund_will_be_provided_as}</div></td>
+					<td><div class="smaller">{_return_policy}</div></td>
+				    </tr>
+				    <tr valign="top">
+					<td><div class="black" style="padding-top:3px">{returnsaccepted}</div></td>
+					<td><div class="black" style="padding-top:3px"><if condition="isset($show['returnpolicy']) AND $show['returnpolicy']">{returnwithin} {_days}<else />-</if></div></td>
+					<td><div class="black" style="padding-top:3px"><if condition="isset($show['returnpolicy']) AND $show['returnpolicy']">{returngivenas}<else />-</if></div></td>
+					<td width="300"><div class="black" style="padding-top:3px"><if condition="isset($show['returnpolicy']) AND $show['returnpolicy']">{returnpolicy}<else />-</if></div></td>
+				    </tr>
+				</table>
+
+				<if condition="isset($show['returnpolicy']) AND $show['returnpolicy']"><div class="smaller">{_return_shipping_paid_by} {returnshippingpaidby}</div></if>
+			    </if>
+
+			    </td>
+			    </tr>
+			</table>
+		    </div><div class="s"><div class="e"><div class="w"></div></div></div></div></td>
+	</tr>
+    </table>
+</div><!-- END shipping and return policy -->
+
+<if condition="$show['publicboard']"><!-- START messages posted -->
+    <div id="listingmessages" style="display:none;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" style="padding:0px 0px 5px 0px">
+	    <tr>
+		<td><div class="grayborder"><div class="n"><div class="e"><div class="w"></div></div></div>
+			<div>
+			    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tr>
+				    <td style="padding-left:15px;"><span class="gray" style="font-family: arial; font-size:13px; font-weight:bold">{_ask_the_seller_a_question}</span></td>
+				</tr>
+				<if condition="!empty($_SESSION['ilancedata']['user']['userid'])">
+				    <tr>
+					<td style="padding-left:8px; padding-right:10px;">
+
+					    <a name="messages"></a>
+					    <form name="ilform" action="{https_server}{ilpage[merch]}" method="post" accept-charset="UTF-8" style="margin:0px">
+						<table border="0" cellspacing="{table_cellspacing}" cellpadding="{table_cellpadding}" width="100%">
+
+						    <loop name="messages">
+							<tr class="alt1">
+							    <td>
+
+								<span style="float:right" class="smaller"><if condition="!empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['isadmin']"><span class="gray">{_admin}</span>: <span class="blue"><a href="{ilpage[merch]}?cmd=removemessage&amp;messageid={messageid}&amp;pid={project_id}" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action_continue}')" style="text-decoration:underline">{_remove_post}</a></span></if></span>
+							<if condition="isset($show['is_owner']) AND $show['is_owner'] OR !empty($_SESSION['ilancedata']['user']['userid']) AND $_SESSION['ilancedata']['user']['isadmin']"><div class="smaller black">{username} {_on} {date}</div></if>
+							<div class="gray" style="padding-top:6px">{message}</div>
+
+							</td>
+							</tr>
+						    </loop name="messages">
+						    <if condition="!empty($_SESSION['ilancedata']['user']['userid'])">
+							<tr>
+							    <td><div class="litegray" style="padding-bottom:3px">{_do_not_include_your_personal_information_such_as}</div><div class="ilance_wysiwyg"><textarea name="message" id="message" style="width: 450px; height: 64px; font-family: Verdana" wrap="physical"></textarea></div></td>
+							</tr>
+						    </if>
+						    <if condition="isset($show['ended']) AND $show['ended'] == false AND !empty($_SESSION['ilancedata']['user']['userid'])">
+							<tr>
+							    <td align="right"><div style="float:{template_textalignment}"><input type="submit" class="buttons" value=" {_submit} " style="font-size:15px" /></div></td>
+							</tr>
+						    </if>
+						</table>
+						<input type="hidden" name="cmd" value="insertmessage" /><input type="hidden" name="pid" value="{project_id}" /><input type="hidden" name="sellerid" value="{project_user_id}" />
+					    </form></td>
+				    </tr>
+				    <else />
+				    <tr>
+					<td style="padding-left:15px; padding-right:10px;padding-top:12px">
+					    {_please_signin_or_register_to_post_a_question_to_the_seller_about_this_item}
+					</td>
+				    </tr>
+				</if>
+			    </table>
+			</div>
+			<div class="s">
+			    <div class="e">
+				<div class="w"></div>
+			    </div>
+			</div>
+		    </div>
+		</td>
+	    </tr>
+	</table>
+    </div><!-- END messages posted -->
+</if>
+
+<div id="listingtrackbacks" style="display:none">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+	    <td>
+		<div class="grayborder">
+		    <div class="n">
+			<div class="e">
+			    <div class="w"></div>
+			</div>
+		    </div>
+		    <div style="padding-left:10px"><span class="gray" style="font-family: arial; font-size:13px; font-weight:bold">Trackbacks</span><div class="gray">{_the_seller_has_chosen_to_track_outside_external_links_connecting_to_this_listing_publically_visible}</div></div>
+		    <div style="padding:10px" align="left">{trackbacks}</div>
+		    <div style="padding-left:10px"><span class="gray" style="font-family: arial; font-size:13px; font-weight:bold">{_would_you_like_to_trackback_your_link_to_this_listing}</span><div class="blue" style="padding-top:4px"><a href="{http_server}{ilpage[merch]}?cmd=trackback&amp;id={project_id}">{_trackback_your_url_to_this_listing_here}</a></div></div>
+		    <div class="s">
+			<div class="e">
+			    <div class="w"></div>
+			</div>
+		    </div>
+		</div>
+	    </td>
+	</tr>
+    </table>
+</div>
+
+<if condition="empty($_SESSION['ilancedata']['user']['postalzip'])"><!-- START region modal -->
+    <div id="zipcode_nag_modal" class="modal modal_window" style="display:none; cursor: default; width: 560px; height: 200px;">
+	<div class="bigtabs" style="padding-bottom:5px; padding-top:5px"><div class="bigtabsheader"><span class="smaller gray" style="padding-top:6px; float:right">{_click_away_to_close_and_cancel_this_menu}</span><ul id="skilltabs"><li title="" class="highlight"><a href="javascript:void(0)" rel="nofollow">{_enter_your_location}</a></li></ul></div></div><div style="clear:both;"></div>
+	<form name="ilform2_modal" method="get" action="{pageurl}" accept-charset="UTF-8" style="margin:0px">
+	    <input type="hidden" name="id" value="{project_id}" />
+	    <div style="padding-left:9px">
+		<div class="black">{_please_select_your_country} {_for_the_cheapest_shipping_rate_near_you}</div>
+		<div style="padding-top:4px">{full_country_pulldown}</div>
+		<hr size="1" width="100%" style="color:#ccc; margin-top:6px; margin-bottom:6px" />
+		<span style="float:{template_textalignment}; padding-right:10px; padding-top:3px" class="black">{_zip_slash_postal_code}:</span><input type="text" name="radiuszip" id="radiuszip" maxlength="15" size="13" value="" />
+		<div style="padding-top:16px"><input type="submit" value=" {_save} " class="buttons" style="font-size:15px" /> &nbsp;&nbsp;&nbsp;<span class="blue"><!--<a href="javascript:void(0)" onclick="javascript:jQuery('#zipcode_nag_modal').jqm({modal: false}).jqmHide();">{_cancel}</a>--></span></div>
+	    </div>
+	    <input type="hidden" name="do" value="saveregion" />
+	</form>
+
+    </div><!-- END region modal --></if>
+
+{apihook[merch_detailed_mid_tabs_content]}
+
+<script type="text/javascript">
+    <!--
+    mediapane = fetch_js_object('pictures').innerHTML;
+    fetch_js_object('mediaviewtext').innerHTML = mediapane;
+    fetch_js_object('pictures').className = 'on';
+
+    mediapane2 = fetch_js_object('placebid').innerHTML;
+    fetch_js_object('mediaviewtext2').innerHTML = mediapane2;
+    fetch_js_object('placebid').className = 'on';
+
+    listingpane = fetch_js_object('listingdescription').innerHTML;
+    fetch_js_object('listingtabtext').innerHTML = listingpane;
+    fetch_js_object('tabdescription').className = 'on';
+    //-->
+</script>
+{jsend}

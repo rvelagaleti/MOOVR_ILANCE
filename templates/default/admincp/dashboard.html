@@ -1,0 +1,637 @@
+<if condition="isset($show['footerwysiwygpopup']) AND $show['footerwysiwygpopup']"><!-- START wysiwyg popup controls -->
+<div id="insert_pop" style="display:none; width:50; position:absolute;z-index:100; left: 268px; top: 133px; width: 235px"><table class="wysiwyg_popuplayer" border="0" cellpadding="1" cellspacing="6">
+<tr>
+    <td id="insert_title" class="wysiwyg_popuplayer_title" style="cursor: move" width="*"><ilayer><layer onmouseover="steditor=1;" onmouseout="steditor=0"><span id="change_title" style="font-size:11px;padding:5px"></span></layer></ilayer></td>
+    <td width="1%" class="wysiwyg_popuplayer_title"><span class="smaller blue" style="padding-right:5px"><a href="javascript:void(0)" onclick="close_insert_pop(); return false">{_close}</a></span></td>
+</tr>
+<tr>
+    <td width="100%" colspan="2"><iframe onmouseover="hide_it2()" name="insert_elm" id="insert_elm" frameborder="0" width="100%" height="250" src="" scrolling="no"></iframe></td>
+</tr>
+</table></div><!-- END wysiwyg popup controls --></if>
+<div id="v3body4">
+	<!--<div id="sub">
+		<div id="subnav"></div>
+	</div>-->
+	
+	<script language="JavaScript">
+	<!--
+	function validate_all()
+	{	
+		fetch_bbeditor_data();
+		return(true);
+	}
+	//-->
+	</script>
+	
+	<!-- content -->
+	<div id="content">
+	
+	<h1 style="padding-bottom:6px">{site_name} {_dashboard}</h1>
+	
+	{apihook[dashboard_template_start]}
+	
+	<br />
+	
+	
+	
+	<div class="tab-pane">
+		<div class="tab-page" id="dashboard">
+			<h2 class="tab">{_overview}</h2>
+            
+            <if condition="isset($show['admincpnews']) AND $show['admincpnews'] AND isset($ilconfig['showadmincpnews']) AND $ilconfig['showadmincpnews']">
+            	<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_newscast}</div>
+                        <div class="block3-content" style="padding:0px">
+							
+                        <div>{admincpnews}</div>
+                        
+						</div>
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						</div>
+			</div></if>
+            
+            <div class="block-wrapper">
+			<div class="block3">
+			
+					<div class="block3-top">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+					<div class="block3-header">{_server_and_marketplace_information}</div>
+					
+					<div class="block3-content" style="padding:0px">
+						
+						<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+						<tr class="alt2_top">
+							<td colspan="2" align="left"><span style="float:left; padding-right:10px"><a href="javascript:void(0)" onclick="return toggle('acpinfo');"><div style="padding-right:5px; padding-top:3px"><img id="collapseimg_acpinfo" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_acpinfo]}.gif" border="0" alt="" /></div></a></span><strong>{_information_from_your_server_gathered_below}</strong></td>
+							<td colspan="2" align="left"><strong>{_php_information}</strong></td>
+						</tr>
+                        <tbody id="collapseobj_acpinfo" style="{collapse[collapseobj_acpinfo]}">
+						<loop name="dashboard">
+						{apihook[dashboard_template_tablerow_start]}
+						<tr align="center" class="alt1">
+							<td width="32%" align="left" class="alt1">{_server_type}</td>
+							<td width="18%" align="left">{servertype}</td>
+							<td width="33%" align="left" class="alt1">{_gd_available}</td>
+							<td width="17%" align="left">{gd}</td>
+						</tr>
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_web_server}</td>
+							<td align="left">{webserver}</td>
+							<td class="alt1" align="left">{_mbstring_available}</td>
+							<td align="left">{mbstring}</td>
+						</tr>
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">PHP</td>
+							<td align="left">{phpversion}</td>
+							<td class="alt1" align="left">{_openssl_available}</td>
+							<td align="left">{openssl}</td>
+						</tr>
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_php_max_post_size}</td>
+							<td align="left">{phpmaxpost}</td>
+							<td class="alt1" align="left">{_ftp_available}</td>
+							<td align="left">{ftp}<a href="{ilpage[accounting]}?tab=2"></a></td>
+						</tr>
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_php_maximum_upload_size}</td>
+							<td align="left">{phpmaxupload}</td>
+							<td class="alt1" align="left">{_safe_mode}</td>
+							<td align="left">{safemode}</td>
+						</tr>
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_php_memory_limit}</td>
+							<td align="left">{phpmemorylimit}</td>
+							<td class="alt1" align="left">{_register_globals}</td>
+							<td align="left">{registerglobals}</td>
+						</tr>
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_mysql_version}</td>
+							<td align="left">{mysqlversion}</td>
+							<td class="alt1" align="left">{_mysql_packet_size}</td>
+							<td align="left">{mysqlpacketsize}</td>
+						</tr>
+                        <tr align="center" class="alt1">
+							<td class="alt1" align="left">{_time_zone}</td>
+							<td align="left">{phptimezone}</td>
+							<td class="alt1" align="left"></td>
+							<td align="left"></td>
+						</tr>
+						{apihook[dashboard_template_tablerow_end]}
+						</tbody>
+                        <tr align="center" class="alt2_top">
+						  <td colspan="4" align="left"><span style="float:left; padding-right:10px"><a href="javascript:void(0)" onclick="return toggle('cachectrl');"><div style="padding-right:5px; padding-top:3px"><img id="collapseimg_cachectrl" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_cachectrl]}.gif" border="0" alt="" /></div>
+						  </a></span><strong>{_server_cache_information}</strong></td>
+						</tr>	
+						<tbody id="collapseobj_cachectrl" style="{collapse[collapseobj_cachectrl]}">  
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_apc_server}</td>
+							<td align="left"><div>{apcenabled}</div></td>
+							<td class="alt1" align="left">{_memcache_server}</td>
+							<td align="left"><div>{memcacheenabled}</div></td>
+						</tr>
+                        </tbody>
+						<tr align="center" class="alt2_top">
+						  <td colspan="4" align="left"><span style="float:left; padding-right:10px"><a href="javascript:void(0)" onclick="return toggle('acp24h');"><div style="padding-right:5px; padding-top:3px"><img id="collapseimg_acp24h" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_acp24h]}.gif" border="0" alt="" /></div></a></span><strong>{_information_gathered_from_your_marketplace_today}</strong></td>
+						</tr>	
+						<tbody id="collapseobj_acp24h" style="{collapse[collapseobj_acp24h]}">  
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_registrations_today}</td>
+							<td align="left"><div>{newmembers}</div></td>
+							<td class="alt1" align="left">{_referral_leads_today}</td>
+							<td align="left"><div>{newreferrals}</div></td>
+						</tr>
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_service_auctions_today}</td>
+							<td align="left"><div>{newserviceauctions}</div></td>
+							<td class="alt1" align="left">{_service_bid_proposals_today}</td>
+							<td align="left"><div>{newservicebids}</div></td>
+						</tr>
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_service_auctions_expired_today}</td>
+							<td align="left"><div>{expiredserviceauctions}</div></td>
+							<td class="alt1" align="left">{_service_auctions_delisted_today}</td>
+							<td align="left"><div>{delistedserviceauctions}</div></td>
+						</tr>
+						<tr align="center" class="alt1">
+						  	<td class="alt1" align="left">{_product_auctions_today}</td>
+						  	<td align="left"><div>{newproductauctions}</div></td>
+						  	<td class="alt1" align="left">{_product_bids_today}</td>
+						  	<td align="left"><div>{newproductbids}</div></td>
+						</tr>
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_product_auctions_expired_today}</td>
+							<td align="left"><div>{expiredproductauctions}</div></td>
+							<td class="alt1" align="left">{_product_auctions_delisted_today}</td>
+							<td align="left"><div>{delistedproductauctions}</div></td>
+						</tr>
+						<!--
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_private_messages_today}</td>
+							<td align="left">{privatemessages}</td>
+							<td class="alt1" align="left">{_public_messages_today}</td>
+							<td align="left">{publicmessages}<a href="{ilpage[accounting]}?tab=2"></a></td>
+						</tr>
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_feedback_left_today}</td>
+							<td align="left">{feedbacktoday}</td>
+							<td class="alt1" align="left">/td>
+							<td align="left"></td>
+						</tr>-->
+						{apihook[dashboard_template_24hour]}
+						</tbody>
+						<tr class="alt2_top">
+							<td colspan="4" align="left"><span style="float:left; padding-right:10px"><a href="javascript:void(0)" onclick="return toggle('acpmod');"><div style="padding-right:5px; padding-top:3px"><img id="collapseimg_acpmod" src="{template_relativeimagepath}{template_imagesfolder}expand{collapse[collapseimg_acpmod]}.gif" border="0" alt="" /></div></a></span><strong>{_events_that_may_require_attention_or_review}</strong></td>
+						</tr>
+					  	<tbody id="collapseobj_acpmod" style="{collapse[collapseobj_acpmod]}">
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_members_to_moderate}</td>
+							<td align="left"><div class="blue"><a href="{ilpage[subscribers]}?cmd=search&amp;searchstatus=1&amp;status=moderated&amp;filterby=user_id&amp;filtervalue=0">{members}</a></div></td>
+							<td class="alt1" align="left">{_listings_to_moderate}</td>
+							<td align="left"><div class="blue"><a href="{ilpage[distribution]}">{auctions}</a></div></td>
+						</tr>
+						<tr align="center" class="alt1">
+							<td class="alt1" align="left">{_attachments_to_moderate}</td>
+							<td align="left"><div class="blue"><a href="{ilpage[distribution]}?cmd=attachments">{attach}</a></div></td>
+							<td class="alt1" align="left">{_verifications_to_moderate}</td>
+							<td align="left"><div class="blue"><a href="{ilpage[distribution]}?cmd=verifications">{verifies}</a></div></td>
+						</tr>
+						<tr align="center" class="alt1">
+						  	<td class="alt1" align="left">{_referral_payouts_pending}</td>
+						  	<td align="left"><div class="blue"><a href="{ilpage[distribution]}?cmd=referrals">{referral}</a></div></td>
+						  	<td class="alt1" align="left">{_withdrawal_requests_pending}</td>
+						  	<td align="left"><div class="blue"><a href="{ilpage[accounting]}?cmd=withdraws">{withdraws}</a></div></td>
+						</tr>
+						<tr align="center">
+							<td class="alt1" align="left">{_unpaid_invoices} </td>
+							<td align="left" class="alt1"><div class="blue"><a href="{ilpage[accounting]}?cmd=invoices&amp;status=unpaid">{unpaid}</a></div></td>
+							<td class="alt1" align="left">{_scheduled_invoices}</td>
+							<td align="left" class="alt1"><div class="blue"><a href="{ilpage[accounting]}?cmd=invoices&amp;status=scheduled">{scheduled}</a></div></td>
+						</tr>
+						<tr align="center">
+							<td align="left">{_unpaid_provider_generated_invoices} </td>
+							<td align="left"><div class="blue"><a href="{ilpage[accounting]}?cmd=invoices&amp;status=unpaid&amp;invoicetype=p2b">{unpaidp2b}</a></div></td>
+							<td align="left">{_sql_error}</td>
+							<td align="left">{sql_error}</td>
+						</tr>
+						{apihook[dashboard_template_requireattention]}
+						</tbody>
+						</loop name="dashboard">
+						</table>
+						
+					</div>
+					
+					<div class="block3-footer">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+			</div>
+		</div>
+			
+		</div>
+		
+        {apihook[dashboard_tab_start]}
+        
+		<div class="tab-page" id="motd">
+        	
+			<h2 class="tab">MOTD</h2>
+			<form action="{ilpage[dashboard]}" method="post" accept-charset="UTF-8" style="margin:0px" onsubmit="return validate_all();">
+			<input type="hidden" name="cmd" value="motd" />
+			<if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'edit'"><input type="hidden" name="subcmd" value="update" /><else /><input type="hidden" name="subcmd" value="insert" /></if>
+			<input type="hidden" name="return" value="{ilpage[dashboard]}" />
+            <div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_message_of_the_day}</div>
+                        <div class="block3-content-gray" style="padding:{table_cellpadding}px"><div class="smaller">{_here_you_can_compose_the_message_of_the_day}</div></div>
+						<div class="block3-content" style="padding:0px">
+							
+                        <table cellspacing="0" cellpadding="12" border="0" align="center" width="100%">
+                        <tr class="alt1" align="center">
+                            <td align="left"><div style="width:593px">{wysiwyg_area}</div></td>
+                        </tr>
+                        <tr class="alt2_top">
+                            <td align="left"><if condition="isset($ilance->GPC['subcmd']) AND $ilance->GPC['subcmd'] == 'edit'"><input type="submit" value=" {_save} " class="buttons" style="font-size:15px" /><else /><input type="submit" value=" {_compose} " class="buttons" style="font-size:15px" /></if></td>
+                        </tr>
+                        </table>
+                        
+						</div>
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+			</form>
+			
+            <div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header"><span style="float:right"><span class="smaller">[ <span class="blue"><a href="{ilpage[dashboard]}?cmd=motd&amp;subcmd=edit">{_edit}</a></span> ]</span>&nbsp;&nbsp;&nbsp;<span class="smaller">[ <span class="blue"><a href="{ilpage[dashboard]}?cmd=motd&amp;subcmd=remove">{_delete}</a></span> ]</span></span>{_current_message_of_the_day}</div>
+                        <div class="block3-content" style="padding:0px">
+							
+                        <table cellspacing="0" cellpadding="12" border="0" align="center" width="100%">
+                        <tr>
+                            <td align="left">{currentmotd_preview}</td>
+                        </tr>
+                        </table>
+                        
+						</div>
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="tab-page" id="search">
+			<h2 class="tab">{_search}</h2>
+			<div class="block-wrapper">
+			<div class="block3">
+			
+					<div class="block3-top">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+					<div class="block3-header">{_search}</div>
+					
+					<div class="block3-content" style="padding:0px">
+
+							<form name="sortswitch" method="post" action="{ilpage[dashboard]}" accept-charset="UTF-8" style="margin:0px">
+							<input type="hidden" name="cmd" value="search_variable" />
+							<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+								<tr>
+									<td align="right">{_keyword}</td>
+									<td><input type="text" name="var" id="var" value="" class="input" onkeyup="show_search_results()" onclick="show_search_results()" onkeypress="return noenter()" size="50" /></td>
+								</tr>
+							</table>
+							</form>
+					</div>
+					<div class="block3-footer">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+			</div>
+			
+		</div>
+		<div id="results"></div>
+		</div>
+		
+		
+		<div class="tab-page" id="popular">
+			<h2 class="tab">{_popular_searches} ({totalkeywords})</h2>
+            
+            
+            <div class="block-wrapper">
+                <div class="block3">
+                
+                        <div class="block3-top">
+                                <div class="block3-right">
+                                        <div class="block3-left"></div>
+                                </div>
+                        </div>
+                        
+                        <div class="block3-header">{_search} {_keywords}</div>
+                        
+                        <div class="block3-content" style="padding:0px">
+    
+                                <form name="searchkeyword" method="get" action="{ilpage[dashboard]}" accept-charset="UTF-8" style="margin:0px">
+                                <input type="hidden" name="cmd" value="keywords" />
+                                <table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" border="0" align="center" width="100%">
+                                    <tr>
+                                        <td align="right">{_keyword}</td>
+                                        <td><input type="text" name="q" id="q" value="{q}" class="input" size="50" style="text-transform:uppercase" /><input type="submit" value="{_search}" class="buttons" /></td>
+                                    </tr>
+                                </table>
+                                <input type="hidden" name="returnurl" value="{pageurl_urlencoded}" />
+                                </form>
+                        </div>
+                        <div class="block3-footer">
+                                <div class="block3-right">
+                                        <div class="block3-left"></div>
+                                </div>
+                        </div>
+                        
+                </div>
+                
+            </div>
+            
+            <div class="block-wrapper">
+                <div class="block3">
+                
+                        <div class="block3-top">
+                                <div class="block3-right">
+                                        <div class="block3-left"></div>
+                                </div>
+                        </div>
+                        
+                        <div class="block3-header">{_search} A to Z</div>
+                        
+                        <div class="block3-content" style="padding:{table_cellpadding}px">
+    
+                                {atoz}
+                        </div>
+                        <div class="block3-footer">
+                                <div class="block3-right">
+                                        <div class="block3-left"></div>
+                                </div>
+                        </div>
+                        
+                </div>
+                
+            </div>
+            
+			<div class="block-wrapper">
+			<div class="block3">
+			
+					<div class="block3-top">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+                    
+                    
+					<div class="block3-header"><span style="float:right;padding-right:5px">{totalkeywords} {_keywords}</span>{_popular_searches}</div>
+					
+					<div class="block3-content" style="padding:0px">
+
+							<form name="ilformpopularkeywords" id="ilformpopularkeywords" method="post" action="{ilpage[dashboard]}" accept-charset="UTF-8" style="margin:0px">
+							<input type="hidden" name="cmd" value="searchtag">
+                            <input type="hidden" name="returnurl" value="{pageurl_urlencoded}">
+							<table cellspacing="0" cellpadding="12" border="0" align="center" width="100%">
+								<tbody>
+								<tr class="alt2_top">
+										<td><strong>{_keywords}</strong></td>
+										<td align="right" nowrap="nowrap"><strong>{_hits}</strong></td>
+										<td><strong>{_action}</strong></td>
+										<td><input type="checkbox" name="checkall" onclick="check_uncheck_all('ilformpopularkeywords');" /></td>
+									</tr>
+								</tbody>
+								<if condition="isset($show['count_tags']) AND ($show['count_tags'] >= 1)">
+								<tbody>
+								<loop name="favourite_tag">
+									<tr class="alt1">
+										<td width="97%"><span style="text-transform:uppercase">{tag_name_plain}</span>{category}</td>
+										<td class="alt1" align="right" width="1%">{tag_count}</td>
+										<td class="alt2" width="1%">{action}</td>
+										<td class="alt1" width="1%"><input type="checkbox" name="bulk[]" value="{tag_name}" /></td>
+									</tr>
+								</loop name="favourite_tag">
+								</tbody>
+                                <tr> 
+                                  <td colspan="4" align="left">{prevnextkeywords}</td>
+                                </tr>
+								<else />
+								<tbody>
+									<tr class="alt1" align="center">
+										<td align="center" colspan="4">{_no_results_found}</td>
+									</tr>
+								</tbody>
+								</if>
+								<tbody>
+									<tr class="alt2_top">
+										<td align="left" colspan="4"><span style="float:right"><input type="submit" class="buttons" name="hideall" value="{_hide_all}" onclick="return confirm_js('_about_to_hide_all_items');" style="font-size:13px" /> <input type="submit" class="buttons" name="showall" value="{_show_all}" onclick="return confirm_js('{_about_to_save_all_items}');" style="font-size:13px" /></span><input class="buttons" type="submit" name="save" style="font-size:13px" value="{_save}"> <input type="submit" class="buttons" name="deleteselected" value="{_delete_selected}" onclick="return confirm_js('{_about_to_delete_selected_items}');" style="font-size:13px" /> <input type="submit" class="buttons" name="hideselected" value="{_hide_selected}" onclick="return confirm_js('{_about_to_hide_selected_items}');" style="font-size:13px" /> <input type="submit" class="buttons" name="showselected" value="{_show_selected}" onclick="return confirm_js('{_about_to_save_selected_items_visible}');" style="font-size:13px" /></td>
+									</tr>
+								</tbody>
+							</table>
+							</form>
+					</div>
+					<div class="block3-footer">
+							<div class="block3-right">
+									<div class="block3-left"></div>
+							</div>
+					</div>
+					
+			</div>
+			
+		</div>
+		<div id="results"></div>
+		</div>
+		
+        <div class="tab-page">
+			<h2 class="tab">{_hero_manager}</h2>
+			
+			
+			<div class="block-wrapper">
+				<div class="block3">
+				
+						<div class="block3-top">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+						<div class="block3-header">{_hero_picture_manager}</div>
+                        <div class="block3-content-gray" style="padding:{table_cellpadding}px">
+                          <div class="smaller">{_hero_picture_manager_lets_you}</div></div>
+						<div class="block3-content" style="padding:{table_cellpadding}px">
+							
+							<form id="img_area_form" action="{ilpage[dashboard]}" method="post">
+                            <input type="hidden" name="cmd" value="heromanage" />
+                            <fieldset>
+                                <legend>
+                                    {_active_hero_pictures}
+                                </legend>
+                                <div>
+                                    
+                                   <div class="source_url">
+                                        <select id="source_url3" name="source_url3">
+                                            {activeheropictureoptions}
+                                        </select> 
+                                        <input type="button" value="{_load}" onclick="javascript:gui_loadImage(document.getElementById('source_url3').value, 'load');" class="smaller_buttons"> <input type="submit" value="{_inactivate}" name="inactivatehero" class="smaller_buttons" onclick="return confirm_js('{_please_take_a_moment_to_confirm_your_action}')">
+                                    </div>
+                                    <div style="padding-top:4px" class="smaller gray">{_hero_pictures_active_homepage}</div>
+                                    
+                                </div>
+                            </fieldset>
+                            <if condition="isset($show['inactiveheros']) AND $show['inactiveheros']"><else /><fieldset style="margin-top:12px">
+                                <legend>
+                                    {_inactive_hero_pictures}
+                                </legend>
+                                <div>
+                                    
+                                    
+                                    <div class="source_url">
+                                        <select id="source_url4" name="source_url4">
+                                            {heropictureoptions}
+                                        </select> 
+                                        <input type="button" value="{_load}" onclick="javascript:gui_loadImage(document.getElementById('source_url4').value, 'insert');" class="smaller_buttons">
+                                        
+                                    </div>
+                                    <div style="padding-top:4px" class="smaller gray">{_please_upload_hero_pictures_into} {template_relativeimagepath}{template_imagesfolder}heros/</div>
+                                    
+                                </div>
+                            </fieldset></if>
+                            
+                            <fieldset style="margin-top:12px">
+                                <legend>
+                                    {_display_order}
+                                </legend>
+                                <div id="pic_displayorder"></div>			
+                            </fieldset>
+                            
+                            <fieldset style="margin-top:12px">
+                                <legend>
+                                    {_picture}
+                                </legend>
+                                <div id="pic_container">
+                                </div>			
+                            </fieldset>
+                            <fieldset style="margin-top:12px">
+                                <legend>
+                                    <a onClick="toggleFieldset(this.parentNode.parentNode)">{_image_map_editor}</a>
+                                </legend>
+                                <div style="border-bottom: solid 1px #fff">
+                                <div id="button_container">
+                                    
+                                    <img src="{template_relativeimagepath}{template_imagesfolder}imap/add.gif" onClick="myimgmap.addNewArea()" alt="Add new area" title="Add new area" />
+                                    <img src="{template_relativeimagepath}{template_imagesfolder}imap/delete.gif" onClick="myimgmap.removeArea(myimgmap.currentid)" alt="Delete selected area" title="Delete selected area" />
+                                    <img src="{template_relativeimagepath}{template_imagesfolder}imap/zoom.gif" id="i_preview" onClick="myimgmap.togglePreview();" alt="Preview image map" title="Preview image map" />
+                                    <img src="{template_relativeimagepath}{template_imagesfolder}imap/html.gif" onClick="gui_htmlShow()" alt="Get image map HTML" title="Get image map HTML"/>
+                                    <label for="dd_zoom">{_zoom}:</label>
+                                    <select onChange="gui_zoom(this)" id="dd_zoom">
+                                    <option value='0.25'>25%</option>
+                                    <option value='0.5'>50%</option>
+                                    <option value='1' selected="1">100%</option>
+                                    <option value='2'>200%</option>
+                                    <option value='3'>300%</option>
+                                    </select>
+                                    <label for="dd_output">{_output}:</label> 
+                                    <select id="dd_output" onChange="return gui_outputChanged(this)">
+                                    <option value='imagemap'>{_standard_image_map}</option>
+                                    <!--<option value='css'>CSS imagemap</option>-->
+                                    <!--<option value='wiki'>Wiki imagemap</option>-->
+                                    </select>
+                                    <select onChange="changelabeling(this)">
+                                    <option value='' selected='1'>{_no_labeling}</option>
+                                    <option value='%n'>{_label_with_numbers}</option>
+                                    <option value='%a'>{_label_with_alt_text}</option>
+                                    <option value='%h'>{_label_with_href}</option>
+                                    <option value='%c'>{_label_with_coords}</option>
+                                    </select>
+                                    
+                                </div>
+                                <div style="float: right; margin: 0 5px">
+                                    
+                                </div>
+                                </div>
+                                <div id="form_container" style="clear: both;">
+                                
+                                </div>
+                            </fieldset>
+                            <fieldset style="margin-top:12px">
+                                <legend>
+                                    {_status}
+                                </legend>
+                                <div id="status_container"></div>
+                            </fieldset>
+                            <fieldset id="fieldset_html" class="fieldset_off" style="margin-top:12px">
+                                <legend>
+                                    {_image_map}
+                            </legend>
+                                <div>
+                                	<!--<div id="output_help"></div>-->
+                                	<textarea id="html_container" name="html_container" style="width:820px;height:84px;margin-top:4px;border:solid 1px #ccc"></textarea>
+                                </div>
+                            </fieldset>
+                            	<div style="display:none;margin-top:12px;" id="savebutton"><input name="updatehero" type="submit" value="{_save}" style="font-size:15px" class="buttons" /></div>
+                                <div style="display:none;margin-top:12px;" id="insertbutton"><input name="activatehero" type="submit" value="Activate hero" style="font-size:15px" class="buttons" /></div>
+                        </form>
+                        <script type="text/javascript" charset="utf-8" src="{template_relativeimagepath}functions/javascript/imap/imgmap.js"></script>
+						<script type="text/javascript" charset="utf-8" src="{template_relativeimagepath}functions/javascript/imap/default_interface.js"></script>
+							
+						</div>
+						
+						<div class="block3-footer">
+								<div class="block3-right">
+										<div class="block3-left"></div>
+								</div>
+						</div>
+						
+				</div>
+			</div>
+		</div>
+        
+		{apihook[dashboard_tab_end]}
+		
+</div>
+
+{apihook[dashboard_template_end]}

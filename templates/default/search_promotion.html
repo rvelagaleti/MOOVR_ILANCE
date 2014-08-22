@@ -1,0 +1,55 @@
+<div class="bigtabs" style="padding-bottom:10px; padding-top:0px">
+    <div class="bigtabsheader">
+	<ul>
+	    <li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search">{_search}</a><else /><a href="{http_server}{ilpage[search]}">{_search}</a></if></li>
+	    <li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search-options">{_options}</a><else /><a href="{http_server}{ilpage[search]}?cmd=options">{_options}</a></if></li>
+	    <li title="" class="on"><a href="javascript:void(0)">{_search_promotion}</a></li>
+	    <if condition="isset($ilconfig['fulltextsearch']) AND $ilconfig['fulltextsearch']"><li title="" class=""><if condition="$ilconfig['globalauctionsettings_seourls']"><a href="{http_server}search-help">{_help}</a><else /><a href="{http_server}{ilpage[search]}?cmd=help">{_help}</a></if></li></if>
+	</ul>
+    </div>
+</div>
+<div style="clear:both;"></div>
+
+<h1 style="padding-bottom:12px">{_promote_your_listings_in_search}</h1>
+
+<div class="block-wrapper">
+
+    <div class="block3">
+
+	<div class="block3-top">
+	    <div class="block3-right">
+		<div class="block3-left"></div>
+	    </div>
+	</div>
+
+	<div class="block3-header">{_search_promotion}</div>
+	<div class="block3-content" style="padding:0px">
+	    <form name="global" action="{ilpage[search]}" method="get" accept-charset="UTF-8" style="margin: 0px">
+		<input type="hidden" name="mode" value="itemid" />
+		<input type="hidden" name="sort" value="01" />
+		<table cellpadding="{table_cellpadding}" cellspacing="{table_cellspacing}" width="100%">
+		    <tr class="alt3">
+			<td width="40%"><strong>{_bold}</strong></td>
+			<td width="40%"><strong>{_featured}</strong></td>
+			<td width="20%"><strong>{_highlight}</strong></td>
+		    </tr>
+		    <tr class="alt1" valign="top">
+			<td><img src="{template_relativeimagepath}{template_imagesfolder}promo-bold.png" border="0" alt="" style="border:1px solid #ccc" /></td>
+			<td><img src="{template_relativeimagepath}{template_imagesfolder}promo-featured.png" border="0" alt="" style="border:1px solid #ccc" /></td>
+			<td><img src="{template_relativeimagepath}{template_imagesfolder}promo-highlight.png" border="0" alt="" style="border:1px solid #ccc" /></td>
+		    </tr>
+		    <tr class="alt2_top">
+			<td colspan="3">{_your_item_id}: <input type="text" name="q" value="" size="20" class="input" /> <input type="submit" value="{_go}" class="buttons smaller" /></td>
+		    </tr>
+
+		</table>	
+	    </form>			
+	</div>
+
+	<div class="block3-footer">
+	    <div class="block3-right">
+		<div class="block3-left"></div>
+	    </div>
+	</div>
+    </div>
+</div>
